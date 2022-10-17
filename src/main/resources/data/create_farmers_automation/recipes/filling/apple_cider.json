@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "farmersdelight:apple_cider",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:apple_cider"
+    }
+  ]
+}

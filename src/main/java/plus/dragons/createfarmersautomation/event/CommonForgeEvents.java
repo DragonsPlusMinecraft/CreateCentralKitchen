@@ -6,12 +6,11 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import plus.dragons.createfarmersautomation.FarmersAutomation;
 import plus.dragons.createfarmersautomation.content.contraptions.components.deployer.CuttingBoardDeployingRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-@Mod.EventBusSubscriber(modid = FarmersAutomation.ID)
-public class CommonForgeEventHandler {
+@Mod.EventBusSubscriber
+public class CommonForgeEvents {
     
     @SubscribeEvent
     public static void addDeployerRecipes(DeployerRecipeSearchEvent event) {

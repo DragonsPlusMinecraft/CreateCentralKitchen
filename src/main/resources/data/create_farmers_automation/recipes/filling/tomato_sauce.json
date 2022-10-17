@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "fluid": "farmersdelight:tomato_sauce",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:tomato_sauce"
+    }
+  ]
+}

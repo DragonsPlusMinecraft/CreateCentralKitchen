@@ -5,16 +5,13 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSeria
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import plus.dragons.createfarmersautomation.FarmersAutomation;
 import plus.dragons.createfarmersautomation.content.contraptions.components.deployer.CuttingBoardDeployingRecipe;
+import plus.dragons.createfarmersautomation.foundation.utility.SafeRegistrate;
 
 import java.util.function.Supplier;
 
@@ -28,17 +25,17 @@ public enum CfaRecipeTypes implements IRecipeTypeInfo {
     CfaRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
         String name = Lang.asId(name());
         id = FarmersAutomation.genRL(name);
-        serializer =Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
+        serializer = SafeRegistrate.SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = registerType
-            ? Registers.TYPE_REGISTER.register(name, typeSupplier)
+            ? SafeRegistrate.TYPE_REGISTER.register(name, typeSupplier)
             : NonNullSupplier.lazy(typeSupplier);
     }
     
     CfaRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = Lang.asId(name());
         id = FarmersAutomation.genRL(name);
-        serializer = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
-        type = Registers.TYPE_REGISTER.register(name, () -> simpleType(id));
+        serializer = SafeRegistrate.SERIALIZER_REGISTER.register(name, serializerSupplier);
+        type = SafeRegistrate.TYPE_REGISTER.register(name, () -> simpleType(id));
     }
     
     CfaRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
@@ -70,16 +67,6 @@ public enum CfaRecipeTypes implements IRecipeTypeInfo {
                 return stringId;
             }
         };
-    }
-    
-    public static void register(IEventBus modEventBus) {
-        Registers.SERIALIZER_REGISTER.register(modEventBus);
-        Registers.TYPE_REGISTER.register(modEventBus);
-    }
-    
-    private static class Registers {
-        private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, FarmersAutomation.ID);
-        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, FarmersAutomation.ID);
     }
     
 }
