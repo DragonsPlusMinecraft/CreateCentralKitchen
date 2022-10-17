@@ -10,8 +10,9 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import java.util.function.Function;
 
 public class CfaArmInteractionPointTypes {
-    public static final CookingPotPoint.Type COOKING_POT = register("cooking_pot", CookingPotPoint.Type::new);
     public static final StovePoint.Type STOVE = register("stove", StovePoint.Type::new);
+    public static final CookingPotPoint.Type COOKING_POT = register("cooking_pot", CookingPotPoint.Type::new);
+    public static final SkilletPoint.Type SKILLET = register("skillet", SkilletPoint.Type::new);
     
     private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {
         T type = factory.apply(FarmersAutomation.genRL(id));
