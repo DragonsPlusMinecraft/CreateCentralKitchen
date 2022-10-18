@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import plus.dragons.createfarmersautomation.FarmersAutomation;
 import plus.dragons.createfarmersautomation.content.contraptions.components.deployer.CuttingBoardDeployingRecipe;
-import plus.dragons.createfarmersautomation.foundation.utility.SafeRegistrate;
 
 import java.util.function.Supplier;
 
@@ -25,17 +24,17 @@ public enum CfaRecipeTypes implements IRecipeTypeInfo {
     CfaRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
         String name = Lang.asId(name());
         id = FarmersAutomation.genRL(name);
-        serializer = SafeRegistrate.SERIALIZER_REGISTER.register(name, serializerSupplier);
+        serializer = FarmersAutomation.SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = registerType
-            ? SafeRegistrate.TYPE_REGISTER.register(name, typeSupplier)
+            ? FarmersAutomation.TYPE_REGISTER.register(name, typeSupplier)
             : NonNullSupplier.lazy(typeSupplier);
     }
     
     CfaRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = Lang.asId(name());
         id = FarmersAutomation.genRL(name);
-        serializer = SafeRegistrate.SERIALIZER_REGISTER.register(name, serializerSupplier);
-        type = SafeRegistrate.TYPE_REGISTER.register(name, () -> simpleType(id));
+        serializer = FarmersAutomation.SERIALIZER_REGISTER.register(name, serializerSupplier);
+        type = FarmersAutomation.TYPE_REGISTER.register(name, () -> simpleType(id));
     }
     
     CfaRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {

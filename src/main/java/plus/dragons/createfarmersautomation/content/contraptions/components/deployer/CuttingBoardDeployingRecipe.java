@@ -27,7 +27,7 @@ public class CuttingBoardDeployingRecipe extends ProcessingRecipe<RecipeWrapper>
             ))
             .require(recipe.getIngredients().get(0))
             .require(recipe.getTool());
-        for(var output : recipe.getRollableResults()) {
+        for (var output : recipe.getRollableResults()) {
             builder.output(output.getChance(), output.getStack());
         }
         return builder.toolNotConsumed().build();

@@ -42,7 +42,7 @@ public class StovePoint extends AllArmInteractionPointTypes.DepositOnlyArmIntera
         if (recipe.isEmpty())
             return stack;
         ItemStack remainder = stack.copy();
-        if(simulate) {
+        if (simulate) {
             remainder.shrink(1);
             return remainder;
         }

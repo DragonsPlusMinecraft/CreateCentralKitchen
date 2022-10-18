@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -36,17 +37,23 @@ public enum CfaFluids implements NonNullSupplier<Fluid> {
         this(namespace, true);
     }
     
-    public void register(RegistryEvent.Register<Fluid> event) {
-        ResourceLocation id = source.getId();
-        VirtualFluid fluid = new VirtualFluid(new ForgeFlowingFluid.Properties(
-            source, source,
-            FluidAttributes.builder(
-                new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_still"),
-                new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_flow")
-            )
-        ));
-        fluid.setRegistryName(id);
-        event.getRegistry().register(fluid);
+    public static void register(IEventBus modEventBus) {
+        modEventBus.addGenericListener(Fluid.class, CfaFluids::onRegister);
+    }
+    
+    public static void onRegister(RegistryEvent.Register<Fluid> event) {
+        for (var entry : values()) {
+            ResourceLocation id = entry.source.getId();
+            VirtualFluid fluid = new VirtualFluid(new ForgeFlowingFluid.Properties(
+                entry.source, entry.source,
+                FluidAttributes.builder(
+                    new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_still"),
+                    new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_flow")
+                )
+            ));
+            fluid.setRegistryName(id);
+            event.getRegistry().register(fluid);
+        }
     }
     
     @Override

@@ -35,12 +35,12 @@ public class SkilletPoint extends AllArmInteractionPointTypes.DepositOnlyArmInte
         if (!(blockEntity instanceof SkilletBlockEntity skillet))
             return stack;
         ItemStack cookingStack = skillet.getStoredStack();
-        if(cookingStack.isEmpty()) {
+        if (cookingStack.isEmpty()) {
             Optional<CampfireCookingRecipe> recipe = ((SkilletBlockEntityAccessor)skillet).callGetMatchingRecipe(new SimpleContainer(stack));
-            if(recipe.isEmpty()) return stack;
+            if (recipe.isEmpty()) return stack;
         }
         ItemStack remainder = stack.copy();
-        if(simulate) return skillet.getInventory().insertItem(0, remainder, true);
+        if (simulate) return skillet.getInventory().insertItem(0, remainder, true);
         return skillet.addItemToCook(remainder, null);
     }
     

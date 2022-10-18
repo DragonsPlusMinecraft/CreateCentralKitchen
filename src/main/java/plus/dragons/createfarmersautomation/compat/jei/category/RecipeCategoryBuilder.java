@@ -49,6 +49,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
 public class RecipeCategoryBuilder<T extends Recipe<?>> {
     private final String modid;
     private final Class<? extends T> recipeClass;
@@ -87,7 +88,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
     @SuppressWarnings("unchecked")
     public RecipeCategoryBuilder<T> addAllRecipesIf(Predicate<Recipe<?>> pred) {
         return addRecipeListConsumer(recipes -> CreateJEI.consumeAllRecipes(recipe -> {
-            if(pred.test(recipe)) {
+            if (pred.test(recipe)) {
                 recipes.add((T) recipe);
             }
         }));
@@ -95,7 +96,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
     
     public RecipeCategoryBuilder<T> addAllRecipesIf(Predicate<Recipe<?>> pred, Function<Recipe<?>, T> converter) {
         return addRecipeListConsumer(recipes -> CreateJEI.consumeAllRecipes(recipe -> {
-            if(pred.test(recipe)) {
+            if (pred.test(recipe)) {
                 recipes.add(converter.apply(recipe));
             }
         }));
@@ -115,7 +116,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
     
     public RecipeCategoryBuilder<T> addTypedRecipesIf(Supplier<RecipeType<? extends T>> recipeType, Predicate<Recipe<?>> pred) {
         return addRecipeListConsumer(recipes -> CreateJEI.<T>consumeTypedRecipes(recipe -> {
-            if(pred.test(recipe)) {
+            if (pred.test(recipe)) {
                 recipes.add(recipe);
             }
         }, recipeType.get()));
@@ -126,8 +127,8 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
         return addRecipeListConsumer(recipes -> {
             List<Recipe<?>> excludedRecipes = CreateJEI.getTypedRecipes(excluded.get());
             CreateJEI.<T>consumeTypedRecipes(recipe -> {
-                for(Recipe<?> excludedRecipe : excludedRecipes) {
-                    if(CreateJEI.doInputsMatch(recipe, excludedRecipe)) {
+                for (Recipe<?> excludedRecipe : excludedRecipes) {
+                    if (CreateJEI.doInputsMatch(recipe, excludedRecipe)) {
                         return;
                     }
                 }
@@ -140,8 +141,8 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
         return addRecipeListConsumer(recipes -> {
             List<Recipe<?>> excludedRecipes = CreateJEI.getTypedRecipes(recipeType.get());
             recipes.removeIf(recipe -> {
-                for(Recipe<?> excludedRecipe : excludedRecipes) {
-                    if(CreateJEI.doInputsMatch(recipe, excludedRecipe)) {
+                for (Recipe<?> excludedRecipe : excludedRecipes) {
+                    if (CreateJEI.doInputsMatch(recipe, excludedRecipe)) {
                         return true;
                     }
                 }
@@ -187,10 +188,10 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
     
     public CreateRecipeCategory<T> build(String name, CreateRecipeCategory.Factory<T> factory) {
         Supplier<List<T>> recipesSupplier;
-        if(predicate.test(AllConfigs.SERVER.recipes)) {
+        if (predicate.test(AllConfigs.SERVER.recipes)) {
             recipesSupplier = () -> {
                 List<T> recipes = new ArrayList<>();
-                for(Consumer<List<T>> consumer : recipeListConsumers)
+                for (Consumer<List<T>> consumer : recipeListConsumers)
                     consumer.accept(recipes);
                 return recipes;
             };

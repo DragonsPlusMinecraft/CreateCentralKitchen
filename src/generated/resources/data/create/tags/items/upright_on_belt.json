@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "farmersdelight:tomato_sauce",
     "farmersdelight:apple_cider",
-    "farmersdelight:melon_juice"
+    "farmersdelight:melon_juice",
+    "farmersdelight:tomato_sauce"
   ]
 }
