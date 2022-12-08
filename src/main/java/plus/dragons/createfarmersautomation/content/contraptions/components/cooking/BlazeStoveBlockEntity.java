@@ -221,6 +221,24 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
             notifyUpdate();
         }
     }
+
+    public boolean addItem(ItemStack itemStackIn, CampfireCookingRecipe recipe, int slot) {
+        if (0 <= slot && slot < this.inventory.getSlots()) {
+            ItemStack slotStack = this.inventory.getStackInSlot(slot);
+            if (slotStack.isEmpty()) {
+                this.cookingTimesTotal[slot] = recipe.getCookingTime();
+                this.cookingTimes[slot] = 0;
+                this.inventory.setStackInSlot(slot, itemStackIn.split(1));
+                this.lastRecipeIDs[slot] = recipe.getId();
+                super.setChanged();
+                if (this.level != null) {
+                    this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
     
     protected void processCooking(int speed) {
         boolean didInventoryChange = false;
