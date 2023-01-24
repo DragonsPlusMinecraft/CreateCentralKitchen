@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "create_farmers_automation.refmap.json",
   "mixins": [
+    "common.CuttingBoardBlockEntityAccessor",
     "common.DeployerTileEntityAccessor",
     "common.SkilletBlockEntityAccessor"
   ],

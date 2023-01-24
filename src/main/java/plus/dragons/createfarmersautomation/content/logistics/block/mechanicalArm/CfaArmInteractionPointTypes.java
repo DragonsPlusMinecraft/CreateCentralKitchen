@@ -15,7 +15,8 @@ public class CfaArmInteractionPointTypes {
     public static final CookingPotPoint.Type COOKING_POT = register("cooking_pot", CookingPotPoint.Type::new);
     public static final SkilletPoint.Type SKILLET = register("skillet", SkilletPoint.Type::new);
     public static final BlazeStovePoint.Type BLAZE_STOVE = register("blaze_stove", BlazeStovePoint.Type::new);
-    
+    public static final CuttingBoardPoint.Type CUTTING_BOARD = register("cutting_board", CuttingBoardPoint.Type::new);
+
     private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {
         T type = factory.apply(FarmersAutomation.genRL(id));
         ArmInteractionPointType.register(type);
@@ -26,10 +27,11 @@ public class CfaArmInteractionPointTypes {
     
     public static void registerPonderTags() {
         PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS)
-            .add(ModItems.STOVE.get())
-            .add(ModItems.COOKING_POT.get())
-            .add(ModItems.SKILLET.get());
-            //.add(CfaBlocks.BLAZE_STOVE.get()); TODO need a transform item
+                .add(ModItems.STOVE.get())
+                .add(ModItems.COOKING_POT.get())
+                .add(ModItems.SKILLET.get())
+                .add(ModItems.CUTTING_BOARD.get());
+        //.add(CfaBlocks.BLAZE_STOVE.get()); TODO need a transform item
     }
     
 }
