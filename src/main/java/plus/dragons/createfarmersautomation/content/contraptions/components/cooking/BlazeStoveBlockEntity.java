@@ -11,8 +11,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
@@ -27,6 +29,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Triple;
+import plus.dragons.createfarmersautomation.entry.CfaItems;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
@@ -134,6 +137,16 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
         return AllBlocks.BASIN.has(blockState)
             || blockState.getBlock() instanceof FluidTankBlock
             || blockState.getBlock() instanceof CookingPotBlock;
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        if (level instanceof ServerLevel) {
+            dropAll();
+            var pos = getBlockPos();
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), CfaItems.COOKING_GUIDE.asStack());
+        }
     }
     
     public boolean isBlockedAbove() {

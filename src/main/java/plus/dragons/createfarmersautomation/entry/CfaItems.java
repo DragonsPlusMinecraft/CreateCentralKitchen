@@ -1,36 +1,26 @@
 package plus.dragons.createfarmersautomation.entry;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
+import com.simibubi.create.content.AllSections;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createfarmersautomation.FarmersAutomation;
-import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
-
-import static plus.dragons.createfarmersautomation.FarmersAutomation.REGISTRATE;
+import plus.dragons.createfarmersautomation.api.FillCreateItemGroupEvent;
+import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.CookingGuideItem;
 
 public class CfaItems {
-    public static final TagKey<Item> UPRIGHT_ON_BELT = tag(Create.asResource("upright_on_belt"));
-    public static final TagKey<Item> UPRIGHT_ON_DEPLOYER = tag(FarmersAutomation.genRL("upright_on_deployer"));
-    
-    public static TagKey<Item> tag(ResourceLocation id) {
-        return TagKey.create(Registry.ITEM_REGISTRY, id);
+    private static final CreateRegistrate REGISTRATE = FarmersAutomation.REGISTRATE.startSection(AllSections.KINETICS);
+
+    public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
+            .properties(prop -> prop.stacksTo(16))
+            .register();
+
+    public static void fillCreateItemGroup(FillCreateItemGroupEvent event) {
+        if (event.getItemGroup() == Create.BASE_CREATIVE_TAB) {
+            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), COOKING_GUIDE.asStack());
+        }
     }
-    
-    public static void genTags(RegistrateItemTagsProvider prov) {
-        prov.tag(UPRIGHT_ON_BELT).add(
-            ModItems.APPLE_CIDER.get(),
-            ModItems.MELON_JUICE.get(),
-            ModItems.TOMATO_SAUCE.get());
-        prov.tag(UPRIGHT_ON_DEPLOYER).addTag(ForgeTags.TOOLS);
-    }
-    
-    public static void register() {
-        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, CfaItems::genTags);
-    }
-    
+
+    public static void register() {}
 }

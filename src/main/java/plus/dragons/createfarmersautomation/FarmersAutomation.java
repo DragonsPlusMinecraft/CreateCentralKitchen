@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -17,10 +18,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createfarmersautomation.content.logistics.block.mechanicalArm.CfaArmInteractionPointTypes;
-import plus.dragons.createfarmersautomation.entry.CfaBlockEntities;
-import plus.dragons.createfarmersautomation.entry.CfaBlocks;
-import plus.dragons.createfarmersautomation.entry.CfaFluids;
-import plus.dragons.createfarmersautomation.entry.CfaItems;
+import plus.dragons.createfarmersautomation.entry.*;
 import plus.dragons.createfarmersautomation.foundation.data.lang.LangMerger;
 import plus.dragons.createfarmersautomation.foundation.utility.SafeRegistrate;
 
@@ -38,18 +36,32 @@ public class FarmersAutomation {
     
     public FarmersAutomation() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(EventPriority.LOW, FarmersAutomation::datagen);
+        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+
         REGISTRATE.registerEventListeners(modEventBus);
+        registerEntries(modEventBus);
+        modEventBus.addListener(EventPriority.LOW, FarmersAutomation::datagen);
+
+        registerForgeEvents(forgeEventBus);
+
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> FarmersAutomationClient::new);
+    }
+
+    private void registerEntries(IEventBus modEventBus) {
         CfaBlocks.register();
         CfaBlockEntities.register();
         CfaItems.register();
         CfaFluids.register(modEventBus);
+        CfaTags.register();
         SERIALIZER_REGISTER.register(modEventBus);
         TYPE_REGISTER.register(modEventBus);
         CfaArmInteractionPointTypes.register();
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> FarmersAutomationClient::new);
     }
-    
+
+    private void registerForgeEvents(IEventBus forgeEventBus) {
+        forgeEventBus.addListener(CfaItems::fillCreateItemGroup);
+    }
+
     public static ResourceLocation genRL(String path) {
         return new ResourceLocation(ID, path);
     }

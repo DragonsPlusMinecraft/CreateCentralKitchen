@@ -9,6 +9,7 @@
     "common.SkilletBlockEntityAccessor"
   ],
   "client": [
+    "client.CreateItemGroupBaseMixin",
     "client.DeployerRendererMixin"
   ],
   "injectors": {

@@ -1,5 +1,6 @@
 package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.processing.BasinTileEntity;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.contraptions.wrench.IWrenchable;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -40,6 +42,8 @@ import plus.dragons.createfarmersautomation.entry.CfaBlockEntities;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -80,11 +84,33 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         super.setPlacedBy(level, pos, state, placer, stack);
         AdvancementBehaviour.setPlacedBy(level, pos, placer);
     }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
+        return new ItemStack(AllBlocks.BLAZE_BURNER.get());
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState pState, LootContext.Builder pBuilder) {
+        var ret = new ArrayList<ItemStack>();
+        ret.add(new ItemStack(AllBlocks.BLAZE_BURNER.get()));
+        return ret;
+    }
     
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
                                  BlockHitResult blockRayTraceResult) {
         ItemStack heldItem = player.getItemInHand(hand);
+
+        if(heldItem.isEmpty() && player.isShiftKeyDown()){
+            if(!player.level.isClientSide()){
+                world.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
+                        .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
+                        .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
+            }
+            return InteractionResult.SUCCESS;
+        }
+
         boolean noConsume = player.isCreative();
         boolean forceOverflow = !(player instanceof FakePlayer);
         
@@ -128,12 +154,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            if (level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity stove) {
-                stove.dropAll();
-            }
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
+        ITE.onRemove(state,level,pos,newState);
     }
     
     @Override

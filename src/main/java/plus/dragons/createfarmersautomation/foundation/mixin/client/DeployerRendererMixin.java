@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import plus.dragons.createfarmersautomation.entry.CfaItems;
+import plus.dragons.createfarmersautomation.entry.CfaTags;
 import plus.dragons.createfarmersautomation.foundation.mixin.common.DeployerTileEntityAccessor;
 
 @Mixin(value = DeployerRenderer.class, remap = false)
@@ -22,7 +22,7 @@ public class DeployerRendererMixin {
         remap = false
     )
     private boolean createsdelight$uprightOnDeployer(boolean original, DeployerTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        return original || ((DeployerTileEntityAccessor) te).getHeldItem().is(CfaItems.UPRIGHT_ON_DEPLOYER);
+        return original || ((DeployerTileEntityAccessor) te).getHeldItem().is(CfaTags.UPRIGHT_ON_DEPLOYER);
     }
 
 }
