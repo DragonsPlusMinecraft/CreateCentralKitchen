@@ -10,8 +10,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.DeferredRegister;
@@ -41,6 +43,7 @@ public class FarmersAutomation {
         REGISTRATE.registerEventListeners(modEventBus);
         registerEntries(modEventBus);
         modEventBus.addListener(EventPriority.LOW, FarmersAutomation::datagen);
+        modEventBus.addListener(FarmersAutomation::setup);
 
         registerForgeEvents(forgeEventBus);
 
@@ -56,10 +59,17 @@ public class FarmersAutomation {
         SERIALIZER_REGISTER.register(modEventBus);
         TYPE_REGISTER.register(modEventBus);
         CfaArmInteractionPointTypes.register();
+        CfaContainerTypes.register();
     }
 
     private void registerForgeEvents(IEventBus forgeEventBus) {
         forgeEventBus.addListener(CfaItems::fillCreateItemGroup);
+    }
+
+    public static void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            CfaPackets.registerPackets();
+        });
     }
 
     public static ResourceLocation genRL(String path) {

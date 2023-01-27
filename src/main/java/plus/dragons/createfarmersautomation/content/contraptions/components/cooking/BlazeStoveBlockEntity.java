@@ -10,12 +10,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
@@ -29,6 +34,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Triple;
+import org.jetbrains.annotations.Nullable;
+import plus.dragons.createfarmersautomation.entry.CfaContainerTypes;
 import plus.dragons.createfarmersautomation.entry.CfaItems;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
@@ -40,7 +47,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 import java.util.List;
 import java.util.Optional;
 
-public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
+public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider {
     public static final Vec2[] ITEM_OFFSET_NS = new Vec2[9];
     public static final Vec2[] ITEM_OFFSET_WE = new Vec2[9];
     private static final VoxelShape GRILLING_AREA = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D);
@@ -49,6 +56,8 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
     private final int[] cookingTimes = new int[INVENTORY_SLOT_COUNT];
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
     private final ResourceLocation[] lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
+
+    private ItemStack cookingGuide;
     
     public BlazeStoveBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -118,6 +127,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
             System.arraycopy(array, 0, cookingTimesTotal, 0, Math.min(cookingTimesTotal.length, array.length));
         }
         inventory.deserializeNBT(compound.getCompound("Inventory"));
+        cookingGuide = ItemStack.of(compound.getCompound("CookingGuide"));
         super.read(compound, clientPacket);
     }
     
@@ -128,7 +138,17 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
             compound.putIntArray("CookingTotalTimes", cookingTimesTotal);
         }
         compound.put("Inventory", inventory.serializeNBT());
+        compound.put("CookingGuide", cookingGuide.serializeNBT());
         super.write(compound, clientPacket);
+    }
+
+    public ItemStack getCookingGuide() {
+        return cookingGuide;
+    }
+
+    public void setCookingGuide(ItemStack cookingGuide) {
+        this.cookingGuide = cookingGuide;
+        // TODO Recipe.
     }
     
     @Override
@@ -372,5 +392,15 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity {
             ITEM_OFFSET_WE[i] = new Vec2(y, x);
         }
     }
-    
+
+    @Override
+    public Component getDisplayName() {
+        return cookingGuide.getDisplayName();
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new CookingGuideMenu(CfaContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, cookingGuide, getBlockPos());
+    }
 }
