@@ -1,8 +1,8 @@
 package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
 
 import com.simibubi.create.foundation.gui.container.GhostItemContainer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,9 +13,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     boolean directItemStackEdit;
@@ -39,12 +43,20 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     }
 
     private void updateResult() {
-
+        var wrapper = new RecipeWrapper(ghostInventory);
+        Optional<CookingPotRecipe> recipe = Minecraft.getInstance().level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, Minecraft.getInstance().level);
+        recipe.ifPresent(r -> ghostInventory.setStackInSlot(6, r.getResultItem()));
     }
 
     @Override
     protected ItemStackHandler createGhostInventory() {
-        return new ItemStackHandler(1);
+        return new ItemStackHandler(7){
+            @Override
+            public int getSlotLimit(int slot)
+            {
+                return 1;
+            }
+        };
     }
 
     @Override
@@ -55,12 +67,11 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     @Override
     protected void initAndReadInventory(ItemStack contentHolder) {
         super.initAndReadInventory(contentHolder);
-        var tag = contentHolder.getOrCreateTag();
-        if (tag.contains("target", Tag.TAG_COMPOUND)){
-            ItemStack target = ItemStack.of(tag.getCompound("target"));
-            ghostInventory.setStackInSlot(0, target);
-            updateResult();
+        var content = CookingGuideItem.getContent(contentHolder);
+        for(int i=0;i<6;i++){
+            ghostInventory.setStackInSlot(i, content.get(i));
         }
+        updateResult();
     }
 
     @Override
@@ -101,6 +112,11 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         @Override
         public boolean mayPlace(ItemStack pStack) {
             return pStack.is(Items.ENCHANTED_BOOK) && !EnchantmentHelper.getEnchantments(pStack).isEmpty();
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return super.getMaxStackSize();
         }
 
         @Override

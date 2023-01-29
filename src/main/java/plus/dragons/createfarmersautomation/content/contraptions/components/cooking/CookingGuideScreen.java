@@ -8,9 +8,11 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import plus.dragons.createfarmersautomation.entry.CfaPackets;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,12 +74,15 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
     @Override
     public void removed() {
         super.removed();
-        var sent = getMenu().contentHolder.copy();
-        // TODO
+        var put = new ArrayList<ItemStack>();
+        for(int i=0;i<6;i++){
+            put.add(getMenu().ghostInventory.getStackInSlot(i));
+        }
+        CookingGuideItem.saveContent(put,getMenu().contentHolder);
         if(directItemStackEdit)
-            CfaPackets.channel.sendToServer(new CookingGuideEditPacket(sent));
+            CfaPackets.channel.sendToServer(new CookingGuideEditPacket(getMenu().contentHolder));
         else
-            CfaPackets.channel.sendToServer(new BlazeStoveEditPacket(sent, blockPos));
+            CfaPackets.channel.sendToServer(new BlazeStoveEditPacket(getMenu().contentHolder, blockPos));
     }
 
     @Override

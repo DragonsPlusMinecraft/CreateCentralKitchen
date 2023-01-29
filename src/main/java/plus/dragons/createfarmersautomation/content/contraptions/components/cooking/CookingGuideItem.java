@@ -10,10 +10,15 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createfarmersautomation.entry.CfaBlocks;
 import plus.dragons.createfarmersautomation.entry.CfaItems;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CookingGuideItem extends Item implements MenuProvider {
     // TODO Texture & Lang
@@ -66,8 +71,26 @@ public class CookingGuideItem extends Item implements MenuProvider {
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+    public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
         // TODO
         return null;
+    }
+
+    public static List<ItemStack> getContent(ItemStack itemStack){
+        var ret = new ArrayList<ItemStack>();
+        var tag = itemStack.getOrCreateTag();
+        for(int i=0;i<6;i++){
+            if(tag.contains("Ingredient" + i)){
+                ret.add(ItemStack.of(tag.getCompound("Ingredient" + i)));
+            } else ret.add(ItemStack.EMPTY);
+        }
+        return ret;
+    }
+
+    public static void saveContent(List<ItemStack> content,ItemStack itemStack){
+        var tag = itemStack.getOrCreateTag();
+        for(int i=0;i<6;i++){
+            tag.put("Ingredient"+i,content.get(i).serializeNBT());
+        }
     }
 }

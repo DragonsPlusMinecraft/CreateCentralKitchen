@@ -56,7 +56,6 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     private final int[] cookingTimes = new int[INVENTORY_SLOT_COUNT];
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
     private final ResourceLocation[] lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
-
     private ItemStack cookingGuide;
     
     public BlazeStoveBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
