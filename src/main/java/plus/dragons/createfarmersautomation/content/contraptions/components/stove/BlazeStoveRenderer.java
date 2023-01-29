@@ -1,4 +1,4 @@
-package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
+package plus.dragons.createfarmersautomation.content.contraptions.components.stove;
 
 import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;

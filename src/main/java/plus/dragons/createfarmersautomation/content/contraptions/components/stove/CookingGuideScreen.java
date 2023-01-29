@@ -1,4 +1,4 @@
-package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
+package plus.dragons.createfarmersautomation.content.contraptions.components.stove;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;

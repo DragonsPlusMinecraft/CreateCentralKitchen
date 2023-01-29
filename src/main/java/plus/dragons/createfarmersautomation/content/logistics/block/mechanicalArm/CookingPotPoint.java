@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
@@ -32,6 +33,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
     
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
+        // TODO
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof CookingPotBlockEntity cookingPot)) return stack;
         IItemHandler inventory = getHandler();
@@ -81,8 +83,8 @@ public class CookingPotPoint extends ArmInteractionPoint {
         
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            var be = level.getBlockEntity(pos);
-            return be != null && be.getType() == ModBlockEntityTypes.COOKING_POT.get();
+            return level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
+                    level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove;
         }
         
         @Nullable

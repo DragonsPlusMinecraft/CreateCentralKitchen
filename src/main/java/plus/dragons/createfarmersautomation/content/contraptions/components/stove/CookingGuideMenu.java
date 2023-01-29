@@ -1,4 +1,4 @@
-package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
+package plus.dragons.createfarmersautomation.content.contraptions.components.stove;
 
 import com.simibubi.create.foundation.gui.container.GhostItemContainer;
 import net.minecraft.client.Minecraft;
@@ -45,7 +45,8 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     private void updateResult() {
         var wrapper = new RecipeWrapper(ghostInventory);
         Optional<CookingPotRecipe> recipe = Minecraft.getInstance().level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, Minecraft.getInstance().level);
-        recipe.ifPresent(r -> ghostInventory.setStackInSlot(6, r.getResultItem()));
+        recipe.ifPresentOrElse(r -> ghostInventory.setStackInSlot(6, r.getResultItem()),
+                ()->ghostInventory.setStackInSlot(6, ItemStack.EMPTY));
     }
 
     @Override
@@ -110,11 +111,6 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         }
 
         @Override
-        public boolean mayPlace(ItemStack pStack) {
-            return pStack.is(Items.ENCHANTED_BOOK) && !EnchantmentHelper.getEnchantments(pStack).isEmpty();
-        }
-
-        @Override
         public int getMaxStackSize() {
             return super.getMaxStackSize();
         }
@@ -145,7 +141,6 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
 
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
-        // TODO
         if (slotId < 36) {
             super.clicked(slotId, dragType, clickTypeIn, player);
             return;
@@ -153,28 +148,28 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         if (clickTypeIn == ClickType.THROW)
             return;
 
-        ItemStack held = getCarried();
+        ItemStack held = getCarried().copy();
+        held.setCount(1);
         if (clickTypeIn == ClickType.CLONE) {
             if (player.isCreative() && held.isEmpty()) {
-                ItemStack stackInSlot = ghostInventory.getStackInSlot(0)
-                        .copy();
+                ItemStack stackInSlot = ghostInventory.getStackInSlot(slotId-36).copy();
                 setCarried(stackInSlot);
             }
-        } else if (getSlot(36).mayPlace(held) || held.isEmpty()) {
-            ghostInventory.setStackInSlot(0, held.copy());
+        } else if (getSlot(slotId).mayPlace(held) || held.isEmpty()) {
+            ghostInventory.setStackInSlot(slotId-36, held.copy());
             getSlot(slotId).setChanged();
         }
     }
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
-        // TODO
         if (index < 36) {
-            ItemStack stackToInsert = playerInventory.getItem(index);
-            if (getSlot(36).mayPlace(stackToInsert)) {
-                ItemStack copy = stackToInsert.copy();
-                ghostInventory.insertItem(0, copy, false);
-                getSlot(36).setChanged();
+            ItemStack stackToInsert = playerInventory.getItem(index).copy();
+            stackToInsert.setCount(1);
+            for(int i = 36; i<42; i++)
+            if (getSlot(i).mayPlace(stackToInsert)) {
+                ghostInventory.insertItem(i-36, stackToInsert, false);
+                getSlot(i).setChanged();
             }
         } else {
             ghostInventory.extractItem(0, 1, false);

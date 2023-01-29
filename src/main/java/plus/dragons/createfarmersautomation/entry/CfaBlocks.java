@@ -14,7 +14,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.BlazeStoveBlock;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveBlock;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import static plus.dragons.createfarmersautomation.FarmersAutomation.REGISTRATE;

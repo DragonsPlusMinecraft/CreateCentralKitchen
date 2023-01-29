@@ -1,4 +1,4 @@
-package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
+package plus.dragons.createfarmersautomation.content.contraptions.components.stove;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.processing.BasinTileEntity;
@@ -8,6 +8,8 @@ import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.ITE;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -37,6 +40,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createfarmersautomation.entry.CfaBlockEntities;
 import vectorwing.farmersdelight.common.block.StoveBlock;
@@ -103,10 +107,15 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         ItemStack heldItem = player.getItemInHand(hand);
 
         if(heldItem.isEmpty() && player.isShiftKeyDown()){
-            if(!player.level.isClientSide()){
-                world.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
-                        .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
-                        .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
+            if(player.level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove){
+                if(!player.level.isClientSide())
+                    withTileEntityDo(player.level, pos,
+                        stove -> NetworkHooks.openGui((ServerPlayer) player,
+                                blazeStove, buf -> {
+                                    buf.writeItem(blazeStove.getCookingGuide());
+                                    buf.writeBoolean(false);
+                                    buf.writeBlockPos(pos);
+                                }));
             }
             return InteractionResult.SUCCESS;
         }
@@ -125,6 +134,20 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         }
         
         return holder.getResult() == InteractionResult.SUCCESS ? InteractionResult.SUCCESS : InteractionResult.PASS;
+    }
+
+    @Override
+    public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        Player player = context.getPlayer();
+        if (world instanceof ServerLevel) {
+            if (player != null)
+                player.level.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
+                        .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
+                        .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
+        }
+        return InteractionResult.SUCCESS;
     }
     
     public static InteractionResultHolder<ItemStack> tryInsert(Level level, BlockPos pos, ItemStack stack,

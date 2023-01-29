@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createfarmersautomation.FarmersAutomation;
 import plus.dragons.createfarmersautomation.api.FillCreateItemGroupEvent;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.CookingGuideItem;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.CookingGuideItem;
 
 public class CfaItems {
     private static final CreateRegistrate REGISTRATE = FarmersAutomation.REGISTRATE.startSection(AllSections.KINETICS);

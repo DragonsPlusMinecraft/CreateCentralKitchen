@@ -11,8 +11,8 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import plus.dragons.createfarmersautomation.FarmersAutomation;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.BlazeStoveEditPacket;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.CookingGuideEditPacket;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveEditPacket;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.CookingGuideEditPacket;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;

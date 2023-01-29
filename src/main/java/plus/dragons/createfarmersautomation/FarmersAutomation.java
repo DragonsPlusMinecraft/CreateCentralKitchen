@@ -54,12 +54,12 @@ public class FarmersAutomation {
         CfaBlocks.register();
         CfaBlockEntities.register();
         CfaItems.register();
+        CfaContainerTypes.register();
         CfaFluids.register(modEventBus);
         CfaTags.register();
         SERIALIZER_REGISTER.register(modEventBus);
         TYPE_REGISTER.register(modEventBus);
         CfaArmInteractionPointTypes.register();
-        CfaContainerTypes.register();
     }
 
     private void registerForgeEvents(IEventBus forgeEventBus) {

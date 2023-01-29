@@ -13,8 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.BlazeStoveBlockEntity;
-import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveBlockEntity;
 
 import java.util.Optional;
 

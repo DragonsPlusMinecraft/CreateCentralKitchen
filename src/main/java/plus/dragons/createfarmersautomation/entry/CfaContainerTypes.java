@@ -7,8 +7,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import plus.dragons.createfarmersautomation.FarmersAutomation;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.CookingGuideMenu;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.CookingGuideScreen;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.CookingGuideMenu;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.CookingGuideScreen;
 
 public class CfaContainerTypes {
 

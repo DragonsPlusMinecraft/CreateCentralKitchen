@@ -1,8 +1,8 @@
 package plus.dragons.createfarmersautomation.entry;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.BlazeStoveBlockEntity;
-import plus.dragons.createfarmersautomation.content.contraptions.components.cooking.BlazeStoveRenderer;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveBlockEntity;
+import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveRenderer;
 
 import static plus.dragons.createfarmersautomation.FarmersAutomation.REGISTRATE;
 

@@ -1,4 +1,4 @@
-package plus.dragons.createfarmersautomation.content.contraptions.components.cooking;
+package plus.dragons.createfarmersautomation.content.contraptions.components.stove;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.fluids.tank.FluidTankBlock;
@@ -6,8 +6,10 @@ import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlo
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,14 +35,18 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.apache.commons.lang3.tuple.Triple;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createfarmersautomation.entry.CfaContainerTypes;
 import plus.dragons.createfarmersautomation.entry.CfaItems;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -57,6 +63,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
     private final ResourceLocation[] lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
     private ItemStack cookingGuide;
+    @Nullable private CookingPotRecipe recipe = null;
     
     public BlazeStoveBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -129,6 +136,14 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         cookingGuide = ItemStack.of(compound.getCompound("CookingGuide"));
         super.read(compound, clientPacket);
     }
+
+    private void updateResult() {
+        var list = NonNullList.<ItemStack>create();
+        list.addAll(CookingGuideItem.getContent(cookingGuide));
+        var wrapper = new RecipeWrapper(new ItemStackHandler(list));
+        Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, level);
+        this.recipe = recipe.orElse(null);
+    }
     
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
@@ -138,6 +153,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         }
         compound.put("Inventory", inventory.serializeNBT());
         compound.put("CookingGuide", cookingGuide.serializeNBT());
+        updateResult();
         super.write(compound, clientPacket);
     }
 
@@ -145,9 +161,13 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         return cookingGuide;
     }
 
+    @Nullable
+    public CookingPotRecipe getRecipe() {
+        return recipe;
+    }
     public void setCookingGuide(ItemStack cookingGuide) {
         this.cookingGuide = cookingGuide;
-        // TODO Recipe.
+        updateResult();
     }
     
     @Override
@@ -393,13 +413,14 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     }
 
     @Override
+    @NotNull
     public Component getDisplayName() {
         return cookingGuide.getDisplayName();
     }
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+    public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
         return new CookingGuideMenu(CfaContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, cookingGuide, getBlockPos());
     }
 }

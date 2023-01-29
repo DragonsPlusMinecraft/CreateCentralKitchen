@@ -23,7 +23,7 @@ public class BasketPoint extends ArmInteractionPoint {
 
     @Override
     protected Vec3 getInteractionPositionVector() {
-        return Vec3.atBottomCenterOf(pos).add(0, 1, 0);
+        return Vec3.atBottomCenterOf(pos).add(0, .625, 0);
     }
 
     @Nullable
