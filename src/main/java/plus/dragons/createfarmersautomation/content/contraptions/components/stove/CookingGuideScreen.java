@@ -39,7 +39,7 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
         int guideX = getLeftOfCentered(COOKING_GUIDE_WIDTH);
         int guideY = topPos;
         extraAreas = ImmutableList.of(
-            new Rect2i(guideX + backgroundGui.WIDTH, guideY + backgroundGui.HEIGHT - 32, 48, 48),
+            new Rect2i(guideX + backgroundGui.WIDTH, guideY + backgroundGui.HEIGHT - 60, 48, 48),
             new Rect2i(guideX, guideY, imageWidth, imageHeight)
         );
     }
@@ -59,7 +59,7 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
         GuiGameElement.of(menu.contentHolder)
             .<GuiGameElement.GuiRenderBuilder>at(
                 guideX + backgroundGui.WIDTH,
-                guideY + backgroundGui.HEIGHT - 32,
+                guideY + backgroundGui.HEIGHT - 60,
                 -200
             )
             .scale(3)

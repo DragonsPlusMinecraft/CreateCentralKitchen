@@ -1,9 +1,10 @@
 {
-	"_": "Missing Localizations: 1",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
 	"block.create_farmers_automation.blaze_stove": "烈焰人炉灶",
+
+	"item.create_farmers_automation.cooking_guide": "烈焰人烹饪指南",
 
 	"fluid.farmersdelight.hot_cocoa": "热可可",
 	"fluid.farmersdelight.apple_cider": "苹果酒",

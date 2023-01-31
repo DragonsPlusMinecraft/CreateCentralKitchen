@@ -31,7 +31,7 @@ logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors="LimonBlaze" #optional
+authors="LimonBlaze, MarbleGate and Etherwood" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 An add-on for Create, providing automation support for Farmer's Delight and its add-ons.
