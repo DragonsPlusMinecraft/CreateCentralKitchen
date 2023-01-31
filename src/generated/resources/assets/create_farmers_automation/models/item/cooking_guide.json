@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "create_farmers_automation:item/cooking_guide"
+  }
+}

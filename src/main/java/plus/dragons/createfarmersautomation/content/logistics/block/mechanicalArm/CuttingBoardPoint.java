@@ -4,15 +4,15 @@ import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionP
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 
-import java.util.Optional;
 
 public class CuttingBoardPoint extends ArmInteractionPoint {
     public CuttingBoardPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
@@ -24,16 +24,15 @@ public class CuttingBoardPoint extends ArmInteractionPoint {
         return Vec3.atBottomCenterOf(pos).add(0, .25, 0);
     }
 
+    @Nullable
     @Override
-    public ItemStack insert(ItemStack stack, boolean simulate) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (!(blockEntity instanceof CuttingBoardBlockEntity cuttingBoard))
-            return stack;
-        var inv = cuttingBoard.getInventory();
-        if (!inv.getStackInSlot(0).isEmpty()) {
-            return stack;
+    protected IItemHandler getHandler() {
+        if (!cachedHandler.isPresent()) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (!(be instanceof CuttingBoardBlockEntity cuttingBoard)) return null;
+            cachedHandler = LazyOptional.of(cuttingBoard::getInventory);
         }
-        return cuttingBoard.getInventory().insertItem(0, stack.copy(), simulate);
+        return cachedHandler.resolve().orElse(null);
     }
 
     public static class Type extends ArmInteractionPointType {

@@ -78,6 +78,7 @@ public class CookingGuideItem extends Item implements MenuProvider {
             if (!world.isClientSide && player instanceof ServerPlayer)
                 NetworkHooks.openGui((ServerPlayer) player, this, buf -> {
                     buf.writeItem(heldItem);
+                    buf.writeInt(0);
                     buf.writeBoolean(true);
                 });
             return InteractionResultHolder.success(heldItem);
@@ -95,7 +96,7 @@ public class CookingGuideItem extends Item implements MenuProvider {
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
         var item = pPlayer.getMainHandItem();
-        return new CookingGuideMenu(CfaContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(),pContainerId,pPlayerInventory,item,null);
+        return new CookingGuideMenu(CfaContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(),pContainerId,pPlayerInventory,0,item,null);
     }
 
     public static List<ItemStack> getContent(ItemStack itemStack){

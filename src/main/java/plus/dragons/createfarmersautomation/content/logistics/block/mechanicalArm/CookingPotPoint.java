@@ -15,6 +15,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createfarmersautomation.content.contraptions.components.stove.BlazeStoveBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public class CookingPotPoint extends ArmInteractionPoint {
@@ -33,35 +34,61 @@ public class CookingPotPoint extends ArmInteractionPoint {
     
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
-        // TODO
-        BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof CookingPotBlockEntity cookingPot)) return stack;
+        if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity) ||
+                !(level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
+            return stack;
+        CookingPotRecipe recipe = blazeStove.getRecipe();
+        if (recipe==null) return stack;
         IItemHandler inventory = getHandler();
         if (inventory == null) return stack;
-        ItemStack currentContainer = inventory.getStackInSlot(CONTAINER_SLOT);
-        ItemStack neededContainer = cookingPot.getContainer();
-        if (ItemHandlerHelper.canItemStacksStack(neededContainer, currentContainer) &&
-            ItemHandlerHelper.canItemStacksStack(neededContainer, stack))
-            return inventory.insertItem(CONTAINER_SLOT, stack, simulate);
-        int targetSlot = -1;
-        int targetCount = Integer.MAX_VALUE;
-        for (int slot = 0; slot < MEAL_DISPLAY_SLOT; ++slot) {
-            ItemStack ingredient = inventory.getStackInSlot(slot);
-            if (ItemHandlerHelper.canItemStacksStack(ingredient, stack)) {
-                int count = ingredient.getCount();
-                if (count < targetCount) {
-                    targetSlot = slot;
-                    targetCount = count;
-                }
+        // TODO Need Test
+
+        if(!getHandler().getStackInSlot(MEAL_DISPLAY_SLOT).isEmpty()){
+            if(stack.is(blazeStove.getRecipe().getOutputContainer().getItem())){
+                return getHandler().insertItem(CONTAINER_SLOT,stack,simulate);
             }
         }
-        return targetSlot < 0 ? stack : inventory.insertItem(targetSlot, stack, simulate);
+
+        var needIngredients = blazeStove.getCookingGuideIngredients();
+        for (int slot = 0; slot < MEAL_DISPLAY_SLOT; slot++) {
+            if (inventory.getStackInSlot(slot).isEmpty() &&
+                    !needIngredients.get(slot).isEmpty() &&
+                    needIngredients.get(slot).is(stack.getItem())) {
+                return getHandler().insertItem(slot,stack,simulate);
+            }
+        }
+        return stack;
     }
     
     @Override
     public ItemStack extract(int slot, boolean simulate) {
-        if (slot != OUTPUT_SLOT) return ItemStack.EMPTY;
-        return super.extract(slot, simulate);
+        if (slot == OUTPUT_SLOT) return super.extract(slot, simulate);
+        else {
+            if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity) ||
+                    !(level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
+                return ItemStack.EMPTY;
+            else {
+                // TODO Need Test
+                CookingPotRecipe recipe = blazeStove.getRecipe();
+                if (recipe==null) return ItemStack.EMPTY;
+                IItemHandler inventory = getHandler();
+                if (inventory == null) return ItemStack.EMPTY;
+
+                if(slot < MEAL_DISPLAY_SLOT){
+                    var needIngredients = blazeStove.getCookingGuideIngredients();
+                    if (!inventory.getStackInSlot(slot).isEmpty() &&
+                            !needIngredients.get(slot).is(inventory.getStackInSlot(slot).getItem())) {
+                        return getHandler().extractItem(slot,64,simulate);
+                    }
+                } else if(slot == CONTAINER_SLOT){
+                    if(!getHandler().getStackInSlot(MEAL_DISPLAY_SLOT).isEmpty() &&
+                            !getHandler().getStackInSlot(CONTAINER_SLOT).is(blazeStove.getRecipe().getOutputContainer().getItem())){
+                            return getHandler().extractItem(slot,64,simulate);
+                    }
+                }
+            }
+        }
+        return ItemStack.EMPTY;
     }
     
     @Nullable
@@ -84,7 +111,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
             return level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
-                    level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove;
+                    level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
         }
         
         @Nullable

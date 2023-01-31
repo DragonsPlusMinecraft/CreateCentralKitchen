@@ -1,9 +1,11 @@
 {
-	"_": "Missing Localizations: 5",
+	"_": "Missing Localizations: 6",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
 	"block.create_farmers_automation.blaze_stove": "ǝʌoʇS ǝzɐןᗺ",
+
+	"item.create_farmers_automation.cooking_guide": "UNLOCALIZED: Cooking Guide",
 
 	"fluid.farmersdelight.hot_cocoa": "UNLOCALIZED: Hot Cocoa",
 	"fluid.farmersdelight.apple_cider": "UNLOCALIZED: Apple Cider",

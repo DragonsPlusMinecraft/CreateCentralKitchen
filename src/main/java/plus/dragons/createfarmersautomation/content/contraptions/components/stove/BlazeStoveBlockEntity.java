@@ -50,6 +50,7 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,7 +64,9 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
     private final ResourceLocation[] lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
     private ItemStack cookingGuide;
+    private List<ItemStack> cookingGuideIngredients;
     @Nullable private CookingPotRecipe recipe = null;
+
     
     public BlazeStoveBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -139,7 +142,8 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
 
     private void updateResult() {
         var list = NonNullList.<ItemStack>create();
-        list.addAll(CookingGuideItem.getContent(cookingGuide));
+        cookingGuideIngredients = CookingGuideItem.getContent(cookingGuide);
+        list.addAll(cookingGuideIngredients);
         var wrapper = new RecipeWrapper(new ItemStackHandler(list));
         Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, level);
         this.recipe = recipe.orElse(null);
@@ -159,6 +163,10 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
 
     public ItemStack getCookingGuide() {
         return cookingGuide;
+    }
+
+    public List<ItemStack> getCookingGuideIngredients() {
+        return cookingGuideIngredients;
     }
 
     @Nullable
@@ -421,6 +429,17 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
-        return new CookingGuideMenu(CfaContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, cookingGuide, getBlockPos());
+        return new CookingGuideMenu(CfaContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, getBlazeStatusCode() ,cookingGuide, getBlockPos());
     }
+
+    public int getBlazeStatusCode(){
+        var heat = getBlockState().getValue(BlazeBurnerBlock.HEAT_LEVEL);
+        return switch (heat){
+            case NONE -> 0;
+            case SMOULDERING -> 1;
+            case FADING, KINDLED -> 2;
+            case SEETHING -> 3;
+        };
+    }
+
 }

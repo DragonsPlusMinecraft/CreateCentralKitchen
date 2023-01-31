@@ -9,8 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -22,20 +20,23 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
+    int blazeStatus;
     boolean directItemStackEdit;
     @Nullable
     BlockPos blockPos = null;
 
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
+        blazeStatus = extraData.readInt();
         directItemStackEdit = extraData.readBoolean();
         if(!directItemStackEdit){
             blockPos = extraData.readBlockPos();
         }
     }
 
-    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, ItemStack contentHolder, @Nullable BlockPos blockPos) {
+    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv,int blazeStatus, ItemStack contentHolder, @Nullable BlockPos blockPos) {
         super(type, id, inv, contentHolder);
+        this.blazeStatus = blazeStatus;
         if(blockPos!=null){
             directItemStackEdit = false;
             this.blockPos = blockPos;
@@ -82,14 +83,14 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
 
     @Override
     protected void addSlots() {
-        addPlayerSlots(44, 70);
-        this.addSlot(new CookingIngredientSlot(0, 51, 22));
-        this.addSlot(new CookingIngredientSlot(1, 71, 22));
-        this.addSlot(new CookingIngredientSlot(2, 91, 22));
-        this.addSlot(new CookingIngredientSlot(3, 51, 42));
-        this.addSlot(new CookingIngredientSlot(4, 71, 42));
-        this.addSlot(new CookingIngredientSlot(5, 91, 42));
-        this.addSlot(new DisplaySlot(6, 51, 72));
+        addPlayerSlots(42, 97);
+        this.addSlot(new CookingIngredientSlot(0, 54, 27));
+        this.addSlot(new CookingIngredientSlot(1, 73, 27));
+        this.addSlot(new CookingIngredientSlot(2, 92, 27));
+        this.addSlot(new CookingIngredientSlot(3, 54, 45));
+        this.addSlot(new CookingIngredientSlot(4, 73, 45));
+        this.addSlot(new CookingIngredientSlot(5, 92, 45));
+        this.addSlot(new DisplaySlot(6, 177, 34));
     }
 
     @Override

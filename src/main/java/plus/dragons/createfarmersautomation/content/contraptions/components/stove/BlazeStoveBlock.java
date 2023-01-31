@@ -113,6 +113,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
                         stove -> NetworkHooks.openGui((ServerPlayer) player,
                                 blazeStove, buf -> {
                                     buf.writeItem(blazeStove.getCookingGuide());
+                                    buf.writeInt(blazeStove.getBlazeStatusCode());
                                     buf.writeBoolean(false);
                                     buf.writeBlockPos(pos);
                                 }));

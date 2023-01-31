@@ -33,6 +33,7 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof BlazeStoveBlockEntity stove))
             return stack;
+        // TODO support fuel insertion
         int slot = stove.getNextEmptySlot();
         if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isBlockedAbove()) {
             return stack;
