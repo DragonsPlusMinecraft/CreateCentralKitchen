@@ -20,8 +20,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = mod_version
-group = 'plus.dragons.createfarmersautomation' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "create-farmers-automation-${artifact_minecraft_version}-for-create-${create_version}"
+group = 'plus.dragons.createcentralkitchen' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -51,7 +51,7 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
-            arg '-mixin.config=create_farmers_automation.mixins.json'
+            arg '-mixin.config=create_central_kitchen.mixins.json'
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -69,7 +69,7 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', 'create_farmers_automation'
 
             mods {
-                create_farmers_automation {
+                create_central_kitchen {
                     source sourceSets.main
                 }
             }
@@ -78,7 +78,7 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
-            arg '-mixin.config=create_farmers_automation.mixins.json'
+            arg '-mixin.config=create_central_kitchen.mixins.json'
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -88,7 +88,7 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', 'create_farmers_automation'
 
             mods {
-                create_farmers_automation {
+                create_central_kitchen {
                     source sourceSets.main
                 }
             }
@@ -102,14 +102,14 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'create_farmers_automation',
+            args '--mod', 'create_central_kitchen',
                  '--all', '--output', file('src/generated/resources/'),
                  '--existing', file('src/main/resources/'),
                  '--existing-mod', 'create',
                  '--existing-mod', 'farmersdelight'
 
             mods {
-                create_farmers_automation {
+                create_central_kitchen {
                     source sourceSets.main
                 }
             }
@@ -187,8 +187,8 @@ dependencies {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
-    add sourceSets.main, 'create_farmers_automation.refmap.json'
-    config 'create_farmers_automation.mixins.json'
+    add sourceSets.main, 'create_central_kitchen.refmap.json'
+    config 'create_central_kitchen.mixins.json'
 
     debug.verbose = true
     debug.export = true
@@ -199,7 +199,7 @@ mixin {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "create_farmers_automation",
+                "Specification-Title"     : "create_central_kitchen",
                 "Specification-Vendor"    : "dragonsplus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,

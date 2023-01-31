@@ -1,9 +1,9 @@
 {
   "required": true,
   "priority": 1100,
-  "package": "plus.dragons.createfarmersautomation.foundation.mixin",
+  "package": "plus.dragons.createcentralkitchen.foundation.mixin",
   "compatibilityLevel": "JAVA_16",
-  "refmap": "create_farmers_automation.refmap.json",
+  "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
     "common.CuttingBoardBlockEntityAccessor",
     "common.DeployerTileEntityAccessor",

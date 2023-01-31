@@ -1,0 +1,11 @@
+{
+  "create_central_kitchen.ponder.transform.header": "Hire a cook",
+  "create_central_kitchen.ponder.transform.text_1": "",
+
+  "create_central_kitchen.ponder.stove_and_pot.header": "Expert cook",
+  "create_central_kitchen.ponder.stove_and_pot.text_1": "",
+
+
+  "create_central_kitchen.ponder.tag.kitchen": "Kitchen Automation",
+  "create_central_kitchen.ponder.tag.kitchen.description": "Items and Components related to automatic kitchen task."
+}
