@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen.foundation.ponder.content;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -12,13 +13,14 @@ public class CfaPonderIndex {
 
     public static void register() {
         HELPER.forComponents(CckItems.COOKING_GUIDE)
-                .addStoryBoard("transform",CookScenes::transformBlazeBurner, CfaPonderTag.KITCHEN)
-                .addStoryBoard("stove_and_pot",CookScenes::stoveAndPot, CfaPonderTag.KITCHEN);
+                .addStoryBoard("transform",CookScenes::transformBlazeBurner, CfaPonderTag.FARMERS_DELIGHT)
+                .addStoryBoard("stove",CookScenes::stoveAndPot, CfaPonderTag.FARMERS_DELIGHT);
     }
 
     public static void registerTags() {
-        PonderRegistry.TAGS.forTag(CfaPonderTag.KITCHEN)
+        PonderRegistry.TAGS.forTag(CfaPonderTag.FARMERS_DELIGHT)
                 .add(CckItems.COOKING_GUIDE)
+                .add(AllBlocks.MECHANICAL_ARM.get())
                 .add(ModBlocks.COOKING_POT.get())
                 .add(ModBlocks.SKILLET.get())
                 .add(ModBlocks.STOVE.get())

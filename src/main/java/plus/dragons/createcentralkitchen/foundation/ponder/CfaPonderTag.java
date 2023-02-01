@@ -7,7 +7,7 @@ import plus.dragons.createcentralkitchen.entry.CckBlocks;
 
 public class CfaPonderTag extends PonderTag {
 
-    public static final PonderTag KITCHEN = create("kitchen").item(CckBlocks.BLAZE_STOVE.get(), true, false).addToIndex();
+    public static final PonderTag FARMERS_DELIGHT = create("farmers_delight").item(CckBlocks.BLAZE_STOVE.get(), true, false).addToIndex();
 
     public CfaPonderTag(ResourceLocation id) {
         super(id);
