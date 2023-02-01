@@ -272,6 +272,11 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         
         return false;
     }
+
+    @Override
+    public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
+        return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
+    }
     
     public void dropAll() {
         if (!ItemUtils.isInventoryEmpty(inventory)) {

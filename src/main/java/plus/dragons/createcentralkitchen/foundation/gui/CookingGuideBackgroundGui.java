@@ -7,10 +7,10 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 
 public class CookingGuideBackgroundGui {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(FarmersAutomation.ID, "textures/gui/cooking_guide.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(CentralKitchen.ID, "textures/gui/cooking_guide.png");
     public static final int WIDTH = 180, HEIGHT = 75;
     private final int status;
 

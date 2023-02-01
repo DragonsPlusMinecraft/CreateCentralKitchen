@@ -4,7 +4,7 @@
 	"textures": {
 		"particle": "create:block/dark_metal_block",
 		"base": "create:block/blaze_heater_brazier",
-		"top": "create_farmers_automation:block/blaze_stove_top"
+		"top": "create_central_kitchen:block/blaze_stove_top"
 	},
 	"elements": [
 		{

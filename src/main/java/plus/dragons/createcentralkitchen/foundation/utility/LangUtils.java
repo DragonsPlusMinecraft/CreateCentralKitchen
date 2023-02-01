@@ -9,13 +9,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 
 
 public class LangUtils {
 
     public static LangBuilder builder() {
-        return new LangBuilder(FarmersAutomation.ID);
+        return new LangBuilder(CentralKitchen.ID);
     }
 
     public static LangBuilder blockName(BlockState state) {

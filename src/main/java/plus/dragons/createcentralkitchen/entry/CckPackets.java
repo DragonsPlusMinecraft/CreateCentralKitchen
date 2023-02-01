@@ -10,7 +10,7 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveEditPacket;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideEditPacket;
 
@@ -26,7 +26,7 @@ public enum CckPackets {
     CONFIGURE_COOKING_GUIDE_FOR_BLAZE(CookingGuideEditPacket.class, CookingGuideEditPacket::new, PLAY_TO_SERVER),
     CONFIGURE_BLAZE_STOVE(BlazeStoveEditPacket.class, BlazeStoveEditPacket::new, PLAY_TO_SERVER);
 
-    public static final ResourceLocation CHANNEL_NAME = FarmersAutomation.genRL("main");
+    public static final ResourceLocation CHANNEL_NAME = CentralKitchen.genRL("main");
     public static final int NETWORK_VERSION = 1;
     public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
     public static SimpleChannel channel;

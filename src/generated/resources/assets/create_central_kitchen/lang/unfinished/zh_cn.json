@@ -3,9 +3,9 @@
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
-	"block.create_farmers_automation.blaze_stove": "烈焰人炉灶",
+	"block.create_central_kitchen.blaze_stove": "烈焰人炉灶",
 
-	"item.create_farmers_automation.cooking_guide": "烈焰人烹饪指南",
+	"item.create_central_kitchen.cooking_guide": "烈焰人烹饪指南",
 
 	"fluid.farmersdelight.hot_cocoa": "热可可",
 	"fluid.farmersdelight.apple_cider": "苹果酒",
@@ -15,8 +15,8 @@
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
-	"recipe.create_farmers_automation.cutting_board_deploying": "砧板使用",
+	"recipe.create_central_kitchen.cutting_board_deploying": "砧板使用",
 
-	"_": "Thank you for translating Create: Farmer's Automation!"
+	"_": "Thank you for translating Create: Central Kitchen!"
 
 }

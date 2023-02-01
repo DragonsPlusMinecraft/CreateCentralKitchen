@@ -5,6 +5,7 @@ import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionP
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
@@ -33,7 +34,13 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof BlazeStoveBlockEntity stove))
             return stack;
-        // TODO support fuel insertion
+
+        ItemStack fuel = stack.copy();
+        if (stove.tryUpdateFuel(fuel, false, simulate)) {
+            fuel.shrink(1);
+            return fuel;
+        }
+
         int slot = stove.getNextEmptySlot();
         if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isBlockedAbove()) {
             return stack;

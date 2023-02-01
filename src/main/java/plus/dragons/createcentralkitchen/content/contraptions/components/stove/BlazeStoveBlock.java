@@ -241,5 +241,4 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     public BlockEntityType<? extends BlazeStoveBlockEntity> getTileEntityType() {
         return CckBlockEntities.BLAZE_STOVE.get();
     }
-    
 }

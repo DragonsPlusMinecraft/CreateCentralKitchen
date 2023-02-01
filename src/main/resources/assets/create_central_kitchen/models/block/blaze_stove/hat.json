@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "create_farmers_automation:block/blaze_stove_hat",
-		"hat": "create_farmers_automation:block/blaze_stove_hat"
+		"particle": "create_central_kitchen:block/blaze_stove_hat",
+		"hat": "create_central_kitchen:block/blaze_stove_hat"
 	},
 	"elements": [
 		{

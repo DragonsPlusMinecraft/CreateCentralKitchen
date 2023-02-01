@@ -17,11 +17,9 @@ import net.minecraft.world.level.material.MaterialColor;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlock;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-import static plus.dragons.createcentralkitchen.FarmersAutomation.REGISTRATE;
+import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class CckBlocks {
-    public static final TagKey<Block> FAN_TRANSPARENT = tag(Create.asResource("fan_transparent"));
-    public static final TagKey<Block> FAN_HEATERS = tag(Create.asResource("fan_heaters"));
     
     static {
         REGISTRATE.creativeModeTab(() -> Create.BASE_CREATIVE_TAB).startSection(AllSections.KINETICS);
@@ -31,15 +29,11 @@ public class CckBlocks {
         .block("blaze_stove", BlazeStoveBlock::new)
         .initialProperties(SharedProperties::softMetal)
         .properties(p -> p.color(MaterialColor.COLOR_GRAY).lightLevel(BlazeBurnerBlock::getLight))
-        .tag(BlockTags.MINEABLE_WITH_PICKAXE, FAN_TRANSPARENT, FAN_HEATERS, ModTags.HEAT_SOURCES)
+        .tag(BlockTags.MINEABLE_WITH_PICKAXE, CckTags.FAN_TRANSPARENT, CckTags.FAN_HEATERS, ModTags.HEAT_SOURCES)
         .loot((prov, block) -> prov.dropOther(block, AllBlocks.BLAZE_BURNER.get()))
         .addLayer(() -> RenderType::cutoutMipped)
         .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
         .register();
-    
-    public static TagKey<Block> tag(ResourceLocation id) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, id);
-    }
     
     public static void register() {}
     

@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.ponder;
 
 import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.resources.ResourceLocation;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckBlocks;
 
 public class CfaPonderTag extends PonderTag {
@@ -14,6 +14,6 @@ public class CfaPonderTag extends PonderTag {
     }
 
     private static PonderTag create(String id) {
-        return new PonderTag(FarmersAutomation.genRL(id));
+        return new PonderTag(CentralKitchen.genRL(id));
     }
 }

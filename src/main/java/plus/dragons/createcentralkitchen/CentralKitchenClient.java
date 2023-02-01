@@ -7,13 +7,13 @@ import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.C
 import plus.dragons.createcentralkitchen.entry.CckBlockPartials;
 import plus.dragons.createcentralkitchen.foundation.ponder.content.CfaPonderIndex;
 
-public class FarmersAutomationClient {
+public class CentralKitchenClient {
     
-    public FarmersAutomationClient() {
+    public CentralKitchenClient() {
         CckBlockPartials.register();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(FarmersAutomationClient::clientInit);
-        modEventBus.addListener(FarmersAutomationClient::setup);
+        modEventBus.addListener(CentralKitchenClient::clientInit);
+        modEventBus.addListener(CentralKitchenClient::setup);
     }
     
     public static void clientInit(final FMLClientSetupEvent event) {

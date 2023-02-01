@@ -5,10 +5,11 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.CookingPotBlockEntityMixin",
     "common.CuttingBoardBlockEntityAccessor",
     "common.DeployerTileEntityAccessor",
-    "common.HeatableBlockEntityMixin",
-    "common.SkilletBlockEntityAccessor"
+    "common.SkilletBlockEntityAccessor",
+    "common.SkilletBlockEntityMixin"
   ],
   "client": [
     "client.CreateItemGroupBaseMixin",

@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.foundation.data.lang;
 import com.google.gson.JsonElement;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.simibubi.create.foundation.utility.Lang;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 
 import java.util.function.Supplier;
 
@@ -55,7 +55,7 @@ public enum LangPartials {
     
     private JsonElement fromResource() {
         String fileName = Lang.asId(name());
-        String filepath = "assets/" + FarmersAutomation.ID + "/lang/partial/" + fileName + ".json";
+        String filepath = "assets/" + CentralKitchen.ID + "/lang/partial/" + fileName + ".json";
         JsonElement element = FilesHelper.loadJsonResource(filepath);
         if (element == null)
             throw new IllegalStateException(String.format("Could not find partial lang file: %s", filepath));

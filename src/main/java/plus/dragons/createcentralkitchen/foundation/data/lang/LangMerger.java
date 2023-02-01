@@ -17,7 +17,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.*;
@@ -94,7 +94,7 @@ public class LangMerger implements DataProvider {
     
     @Override
     public void run(HashCache cache) throws IOException {
-        Path path = this.gen.getOutputFolder().resolve("assets/" + FarmersAutomation.ID + "/lang/" + "en_us.json");
+        Path path = this.gen.getOutputFolder().resolve("assets/" + CentralKitchen.ID + "/lang/" + "en_us.json");
         
         for (Pair<String, JsonElement> pair : getAllLocalizationFiles()) {
             if (!pair.getRight()
@@ -119,7 +119,7 @@ public class LangMerger implements DataProvider {
         }
         
         JsonObject existingEntries = collectExistingEntries(path);
-        String builtinPath = "assets/" + FarmersAutomation.ID + "/lang/partial/game_elements.json";
+        String builtinPath = "assets/" + CentralKitchen.ID + "/lang/partial/game_elements.json";
         JsonElement builtinEntries = FilesHelper.loadJsonResource(builtinPath);
         if (builtinEntries instanceof JsonObject builtinEntriesObj) {
             if (existingEntries == null)
@@ -138,7 +138,7 @@ public class LangMerger implements DataProvider {
         for (Entry<String, List<Object>> localization : populatedLangData.entrySet()) {
             String key = localization.getKey();
             Path populatedLangPath = this.gen.getOutputFolder()
-                .resolve("assets/" + FarmersAutomation.ID + "/lang/unfinished/" + key);
+                .resolve("assets/" + CentralKitchen.ID + "/lang/unfinished/" + key);
             save(cache, localization.getValue(), missingTranslationTally.get(key)
                 .intValue(), populatedLangPath, "Populating " + key + " with missing entries...");
         }
@@ -222,7 +222,7 @@ public class LangMerger implements DataProvider {
     private List<Pair<String, JsonElement>> getAllLocalizationFiles() {
         ArrayList<Pair<String, JsonElement>> list = new ArrayList<>();
         
-        String filepath = "assets/" + FarmersAutomation.ID + "/lang/";
+        String filepath = "assets/" + CentralKitchen.ID + "/lang/";
         try (InputStream resourceStream = ClassLoader.getSystemResourceAsStream(filepath)) {
             assert resourceStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceStream));

@@ -23,8 +23,8 @@ import plus.dragons.createcentralkitchen.entry.*;
 import plus.dragons.createcentralkitchen.foundation.data.lang.LangMerger;
 import plus.dragons.createcentralkitchen.foundation.utility.SafeRegistrate;
 
-@Mod(FarmersAutomation.ID)
-public class FarmersAutomation {
+@Mod(CentralKitchen.ID)
+public class CentralKitchen {
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "create_central_kitchen";
     public static final String NAME = "Create: Central Kitchen";
@@ -35,18 +35,18 @@ public class FarmersAutomation {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER =
         DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
     
-    public FarmersAutomation() {
+    public CentralKitchen() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
         REGISTRATE.registerEventListeners(modEventBus);
         registerEntries(modEventBus);
-        modEventBus.addListener(EventPriority.LOW, FarmersAutomation::datagen);
-        modEventBus.addListener(FarmersAutomation::setup);
+        modEventBus.addListener(EventPriority.LOW, CentralKitchen::datagen);
+        modEventBus.addListener(CentralKitchen::setup);
 
         registerForgeEvents(forgeEventBus);
 
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> FarmersAutomationClient::new);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CentralKitchenClient::new);
     }
 
     private void registerEntries(IEventBus modEventBus) {

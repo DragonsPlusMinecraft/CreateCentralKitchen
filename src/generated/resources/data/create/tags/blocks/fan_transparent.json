@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "create_farmers_automation:blaze_stove"
+    "create_central_kitchen:blaze_stove"
   ]
 }

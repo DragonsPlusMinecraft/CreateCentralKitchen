@@ -2,9 +2,9 @@
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
-	"block.create_farmers_automation.blaze_stove": "Blaze Stove",
+	"block.create_central_kitchen.blaze_stove": "Blaze Stove",
 
-	"item.create_farmers_automation.cooking_guide": "Cooking Guide",
+	"item.create_central_kitchen.cooking_guide": "Cooking Guide",
 
 	"fluid.farmersdelight.hot_cocoa": "Hot Cocoa",
 	"fluid.farmersdelight.apple_cider": "Apple Cider",
@@ -14,8 +14,8 @@
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
-	"recipe.create_farmers_automation.cutting_board_deploying": "Cutting Board Deploying",
+	"recipe.create_central_kitchen.cutting_board_deploying": "Cutting Board Deploying",
 
-	"_": "Thank you for translating Create: Farmer's Automation!"
+	"_": "Thank you for translating Create: Central Kitchen!"
 
 }

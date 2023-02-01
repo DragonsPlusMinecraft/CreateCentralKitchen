@@ -4,7 +4,7 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveRenderer;
 
-import static plus.dragons.createcentralkitchen.FarmersAutomation.REGISTRATE;
+import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class CckBlockEntities {
     

@@ -13,7 +13,7 @@ import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.compat.jei.category.CuttingBoardDeployingCategory;
 import plus.dragons.createcentralkitchen.compat.jei.category.RecipeCategoryBuilder;
 import plus.dragons.createcentralkitchen.content.contraptions.components.deployer.CuttingBoardDeployingRecipe;
@@ -30,7 +30,7 @@ import java.util.List;
 @JeiPlugin
 public class CckJeiPlugin implements IModPlugin {
     
-    private static final ResourceLocation ID = FarmersAutomation.genRL("jei_plugin");
+    private static final ResourceLocation ID = CentralKitchen.genRL("jei_plugin");
     
     protected final List<CreateRecipeCategory<?>> allCategories = new ArrayList<>();
     protected IIngredientManager ingredientManager;
@@ -73,7 +73,7 @@ public class CckJeiPlugin implements IModPlugin {
     }
     
     private static <T extends Recipe<?>> RecipeCategoryBuilder<T> builder(Class<T> cls) {
-        return new RecipeCategoryBuilder<>(FarmersAutomation.ID, cls);
+        return new RecipeCategoryBuilder<>(CentralKitchen.ID, cls);
     }
     
 }

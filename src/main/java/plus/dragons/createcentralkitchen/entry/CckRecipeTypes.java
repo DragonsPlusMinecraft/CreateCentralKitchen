@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.content.contraptions.components.deployer.CuttingBoardDeployingRecipe;
 
 import java.util.function.Supplier;
@@ -23,18 +23,18 @@ public enum CckRecipeTypes implements IRecipeTypeInfo {
     
     CckRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
         String name = Lang.asId(name());
-        id = FarmersAutomation.genRL(name);
-        serializer = FarmersAutomation.SERIALIZER_REGISTER.register(name, serializerSupplier);
+        id = CentralKitchen.genRL(name);
+        serializer = CentralKitchen.SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = registerType
-            ? FarmersAutomation.TYPE_REGISTER.register(name, typeSupplier)
+            ? CentralKitchen.TYPE_REGISTER.register(name, typeSupplier)
             : NonNullSupplier.lazy(typeSupplier);
     }
     
     CckRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = Lang.asId(name());
-        id = FarmersAutomation.genRL(name);
-        serializer = FarmersAutomation.SERIALIZER_REGISTER.register(name, serializerSupplier);
-        type = FarmersAutomation.TYPE_REGISTER.register(name, () -> simpleType(id));
+        id = CentralKitchen.genRL(name);
+        serializer = CentralKitchen.SERIALIZER_REGISTER.register(name, serializerSupplier);
+        type = CentralKitchen.TYPE_REGISTER.register(name, () -> simpleType(id));
     }
     
     CckRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {

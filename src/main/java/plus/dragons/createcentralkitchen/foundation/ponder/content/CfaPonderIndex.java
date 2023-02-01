@@ -2,13 +2,13 @@ package plus.dragons.createcentralkitchen.foundation.ponder.content;
 
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckItems;
 import plus.dragons.createcentralkitchen.foundation.ponder.CfaPonderTag;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 public class CfaPonderIndex {
-    static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(FarmersAutomation.ID);
+    static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(CentralKitchen.ID);
 
     public static void register() {
         HELPER.forComponents(CckItems.COOKING_GUIDE)

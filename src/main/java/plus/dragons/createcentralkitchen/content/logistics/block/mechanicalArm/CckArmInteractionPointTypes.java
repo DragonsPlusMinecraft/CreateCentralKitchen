@@ -4,7 +4,7 @@ import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionP
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.resources.ResourceLocation;
-import plus.dragons.createcentralkitchen.FarmersAutomation;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -19,7 +19,7 @@ public class CckArmInteractionPointTypes {
     public static final BasketPoint.Type BASKET = register("basket", BasketPoint.Type::new);
 
     private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {
-        T type = factory.apply(FarmersAutomation.genRL(id));
+        T type = factory.apply(CentralKitchen.genRL(id));
         ArmInteractionPointType.register(type);
         return type;
     }
