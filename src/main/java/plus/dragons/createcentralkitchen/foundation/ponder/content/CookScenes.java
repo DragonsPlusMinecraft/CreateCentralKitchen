@@ -76,7 +76,7 @@ public class CookScenes {
                 .pointAt(util.vector.topOf(3, 1, 3));
 
         scene.idle(50);
-        scene.world.setBlock(util.grid.at(3,2,1), ModBlocks.SKILLET.get().defaultBlockState(),false);
+        scene.world.setBlock(util.grid.at(3,2,1), Blocks.AIR.defaultBlockState(),false);
         scene.world.setBlock(util.grid.at(1,2,2), Blocks.AIR.defaultBlockState(),false);
         scene.world.setBlock(util.grid.at(3,2,3), Blocks.AIR.defaultBlockState(),false);
 
@@ -88,6 +88,7 @@ public class CookScenes {
             be.addFuelOrIngredient(new ItemStack(Items.PORKCHOP),false,false);
             be.addFuelOrIngredient(new ItemStack(Items.PORKCHOP),false,false);
         });
+
         scene.overlay.showText(40)
                 .text("") // We do not use PonderLocalization. For registerText only
                 .attachKeyFrame()
