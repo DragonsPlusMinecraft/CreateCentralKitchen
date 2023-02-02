@@ -81,7 +81,6 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     @Override
     public void addBehaviours(List<TileEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
-        //TODO: Advancements
     }
     
     @Override

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CookingGuideItem extends Item implements MenuProvider {
-    // TODO Texture & Lang
     public CookingGuideItem(Properties pProperties) {
         super(pProperties);
     }
@@ -56,9 +55,7 @@ public class CookingGuideItem extends Item implements MenuProvider {
                             blazeStove.setCookingGuide(in);
                         }
 
-                        // TODO ADVANCEMENT
                         AdvancementBehaviour.setPlacedBy(useOnContext.getLevel(), blockPos, player);
-                        // CeiAdvancements.BLAZES_NEW_JOB.getTrigger().trigger((ServerPlayer) player);
 
                         if (!player.getAbilities().instabuild)
                             itemStack.shrink(1);
