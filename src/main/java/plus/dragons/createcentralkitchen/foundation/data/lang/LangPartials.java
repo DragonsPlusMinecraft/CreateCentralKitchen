@@ -30,6 +30,7 @@ SOFTWARE.
 public enum LangPartials {
     INTERFACE("UI & Messages"),
     //TOOLTIPS("Item Descriptions"),
+    PONDER("Ponder Content")
     ;
     
     private final String display;

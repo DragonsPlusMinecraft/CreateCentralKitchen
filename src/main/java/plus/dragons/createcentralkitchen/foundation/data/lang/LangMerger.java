@@ -232,7 +232,7 @@ public class LangMerger implements DataProvider {
                     break;
                 if (!readLine.endsWith(".json"))
                     continue;
-                if (readLine.startsWith("en_us"))
+                if (readLine.startsWith("en_us") || readLine.startsWith("en_ud"))
                     continue;
                 list.add(Pair.of(readLine, FilesHelper.loadJsonResource(filepath + readLine)));
             }

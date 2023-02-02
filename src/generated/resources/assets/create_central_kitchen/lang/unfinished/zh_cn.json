@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 0",
+	"_": "Missing Localizations: 10",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -16,6 +16,20 @@
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "砧板使用",
+
+
+	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.transform.header": "UNLOCALIZED: Hire a cook",
+	"create_central_kitchen.ponder.transform.text_1": "UNLOCALIZED: To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking",
+	"create_central_kitchen.ponder.stove_and_pot.header": "UNLOCALIZED: Expert cook",
+	"create_central_kitchen.ponder.stove_and_pot.text_1": "UNLOCALIZED: Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!",
+	"create_central_kitchen.ponder.stove_and_pot.text_2": "UNLOCALIZED: Cooking can still be done even without adding fuel to the Blaze Stove.",
+	"create_central_kitchen.ponder.stove_and_pot.text_3": "UNLOCALIZED: The hotter the fire, the faster the cooking.",
+	"create_central_kitchen.ponder.stove_and_pot.text_4": "UNLOCALIZED: Of course, you can also use Block Stove to fry things directly。",
+	"create_central_kitchen.ponder.stove_and_pot.text_5": "UNLOCALIZED: But please note that seething fire can burn your ingredients directly.",
+	"create_central_kitchen.ponder.tag.farmers_delight": "UNLOCALIZED: Farmer's Delight Automation",
+	"create_central_kitchen.ponder.tag.farmers_delight.description": "UNLOCALIZED: Items and Components related to farmer's delight automation.",
 
 	"_": "Thank you for translating Create: Central Kitchen!"
 
