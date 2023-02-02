@@ -81,12 +81,13 @@ public class CookScenes {
         scene.world.setBlock(util.grid.at(3,2,3), Blocks.AIR.defaultBlockState(),false);
 
         scene.world.modifyTileEntity(util.grid.at(1,1,2), BlazeStoveBlockEntity.class, be-> {
-            be.addFuelOrIngredient(new ItemStack(Items.BEEF),false,false);
-            be.addFuelOrIngredient(new ItemStack(Items.BEEF),false,false);
-            be.addFuelOrIngredient(new ItemStack(Items.BEEF),false,false);
-            be.addFuelOrIngredient(new ItemStack(Items.PORKCHOP),false,false);
-            be.addFuelOrIngredient(new ItemStack(Items.PORKCHOP),false,false);
-            be.addFuelOrIngredient(new ItemStack(Items.PORKCHOP),false,false);
+            var inv = be.getInventory();
+            inv.insertItem(0,new ItemStack(Items.BEEF),false);
+            inv.insertItem(1,new ItemStack(Items.BEEF),false);
+            inv.insertItem(2,new ItemStack(Items.BEEF),false);
+            inv.insertItem(3,new ItemStack(Items.PORKCHOP),false);
+            inv.insertItem(4,new ItemStack(Items.PORKCHOP),false);
+            inv.insertItem(5,new ItemStack(Items.PORKCHOP),false);
         });
 
         scene.overlay.showText(40)
@@ -96,13 +97,10 @@ public class CookScenes {
                 .pointAt(util.vector.topOf(1, 1, 2));
 
         scene.idle(70);
-        scene.world.modifyTileEntity(util.grid.at(3,1,3), BlazeStoveBlockEntity.class, be-> {
-            be.addFuelOrIngredient(new ItemStack(Items.BEEF),false,false);
-        });
         scene.overlay.showText(60)
                 .text("") // We do not use PonderLocalization. For registerText only
                 .attachKeyFrame()
                 .placeNearTarget()
-                .pointAt(util.vector.topOf(3, 2, 3));
+                .pointAt(util.vector.topOf(3, 1, 3));
     }
 }
