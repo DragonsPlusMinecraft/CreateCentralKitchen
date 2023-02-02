@@ -1,4 +1,5 @@
 {
+	"_": "Missing Localizations: 0",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -16,6 +17,21 @@
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "砧板使用",
 
-	"_": "Thank you for translating Create: Farmer's Automation!"
+
+	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.transform.header": "雇佣厨师",
+	"create_central_kitchen.ponder.transform.text_1": "潜行时，手持烈焰人烹饪指南右键烈焰人燃烧室",
+	"create_central_kitchen.ponder.transform.text_2": "潜行时，用扳手右击烈焰人炉灶以回收烈焰人烹饪指南",
+	"create_central_kitchen.ponder.stove_and_pot.header": "专业主厨",
+	"create_central_kitchen.ponder.stove_and_pot.text_1": "烈焰人炉灶可以为厨锅提供动力臂支持，就让它来主导烹饪吧!",
+	"create_central_kitchen.ponder.stove_and_pot.text_2": "即便没有燃料，烹饪依然可以完成。",
+	"create_central_kitchen.ponder.stove_and_pot.text_3": "火焰的温度越高，烹饪速度越快。",
+	"create_central_kitchen.ponder.stove_and_pot.text_4": "当然，你也可以直接用烈焰人炉灶煎制食物。",
+	"create_central_kitchen.ponder.stove_and_pot.text_5": "但务必注意超级燃烧的火焰会直接烧毁你的原料。",
+	"create_central_kitchen.ponder.tag.farmers_delight": "农夫乐事自动化",
+	"create_central_kitchen.ponder.tag.farmers_delight.description": "与农夫乐事自动化相关的物品与组合。",
+
+	"_": "Thank you for translating Create: Central Kitchen!"
 
 }
