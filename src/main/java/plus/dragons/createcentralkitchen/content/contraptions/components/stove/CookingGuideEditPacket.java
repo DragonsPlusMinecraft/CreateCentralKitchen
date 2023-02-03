@@ -12,7 +12,6 @@ import java.util.function.Supplier;
 public class CookingGuideEditPacket extends SimplePacketBase {
     private ItemStack itemStack;
 
-
     public CookingGuideEditPacket(ItemStack enchantedBook) {
         itemStack = enchantedBook;
     }

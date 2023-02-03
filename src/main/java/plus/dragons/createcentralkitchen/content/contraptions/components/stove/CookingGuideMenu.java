@@ -9,6 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
@@ -31,26 +33,27 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         super(type, id, inv, extraData);
     }
 
-    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv,int blazeStatus, ItemStack contentHolder, @Nullable BlockPos blockPos) {
+    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, int blazeStatus, ItemStack contentHolder, @Nullable BlockPos blockPos) {
         super(type, id, inv, contentHolder);
         this.blazeStatus = blazeStatus;
-        if(blockPos!=null){
+        if (blockPos != null) {
             directItemStackEdit = false;
             this.blockPos = blockPos;
         } else directItemStackEdit = true;
     }
-
-    @OnlyIn(Dist.CLIENT)
-    private void updateResult() {
+    
+    public void updateResult() {
         var wrapper = new RecipeWrapper(ghostInventory);
-        Optional<CookingPotRecipe> recipe = Minecraft.getInstance().level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, Minecraft.getInstance().level);
-        recipe.ifPresentOrElse(r -> ghostInventory.setStackInSlot(6, r.getResultItem()),
-                ()->ghostInventory.setStackInSlot(6, ItemStack.EMPTY));
+        this.player.level.getRecipeManager()
+            .getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, this.player.level)
+            .ifPresentOrElse(
+                recipe -> ghostInventory.setStackInSlot(6, recipe.getResultItem()),
+                () -> ghostInventory.setStackInSlot(6, ItemStack.EMPTY));
     }
 
     @Override
     protected ItemStackHandler createGhostInventory() {
-        return new ItemStackHandler(7){
+        return new ItemStackHandler(7) {
             @Override
             public int getSlotLimit(int slot)
             {
@@ -68,7 +71,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     protected void initAndReadInventory(ItemStack contentHolder) {
         super.initAndReadInventory(contentHolder);
         var content = CookingGuideItem.getContent(contentHolder);
-        for(int i=0;i<6;i++){
+        for (int i = 0; i < 6; i++) {
             ghostInventory.setStackInSlot(i, content.get(i));
         }
         updateResult();
@@ -79,7 +82,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         var containerItem = extraData.readItem();
         blazeStatus = extraData.readInt();
         directItemStackEdit = extraData.readBoolean();
-        if(!directItemStackEdit){
+        if (!directItemStackEdit) {
             blockPos = extraData.readBlockPos();
         }
         return containerItem;
@@ -103,13 +106,12 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
 
     @Override
     public boolean stillValid(Player player) {
-        if(!directItemStackEdit){
+        if (!directItemStackEdit) {
             return super.stillValid(player) && player.level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity;
         }
         return super.stillValid(player);
     }
-
-
+    
     class CookingIngredientSlot extends SlotItemHandler {
         public CookingIngredientSlot(int index, int xPosition, int yPosition) {
             super(ghostInventory, index, xPosition, yPosition);
@@ -125,7 +127,6 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
             super.setChanged();
             updateResult();
         }
-
     }
 
     class DisplaySlot extends SlotItemHandler {
@@ -146,6 +147,8 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
 
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
+        if (slotId == 42)
+            return;
         if (slotId < 36) {
             super.clicked(slotId, dragType, clickTypeIn, player);
             return;
@@ -157,11 +160,11 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         held.setCount(1);
         if (clickTypeIn == ClickType.CLONE) {
             if (player.isCreative() && held.isEmpty()) {
-                ItemStack stackInSlot = ghostInventory.getStackInSlot(slotId-36).copy();
+                ItemStack stackInSlot = ghostInventory.getStackInSlot(slotId - 36).copy();
                 setCarried(stackInSlot);
             }
         } else if (getSlot(slotId).mayPlace(held) || held.isEmpty()) {
-            ghostInventory.setStackInSlot(slotId-36, held.copy());
+            ghostInventory.setStackInSlot(slotId - 36, held.copy());
             getSlot(slotId).setChanged();
         }
     }
@@ -171,9 +174,9 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         if (index < 36) {
             ItemStack stackToInsert = playerInventory.getItem(index).copy();
             stackToInsert.setCount(1);
-            for(int i = 36; i<42; i++)
+            for(int i = 36; i < 42; i++)
             if (getSlot(i).mayPlace(stackToInsert)) {
-                ghostInventory.insertItem(i-36, stackToInsert, false);
+                ghostInventory.insertItem(i - 36, stackToInsert, false);
                 getSlot(i).setChanged();
             }
         } else {
@@ -182,4 +185,5 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         }
         return ItemStack.EMPTY;
     }
+    
 }

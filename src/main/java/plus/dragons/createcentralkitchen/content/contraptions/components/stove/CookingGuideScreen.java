@@ -70,11 +70,11 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
     public void removed() {
         super.removed();
         var put = new ArrayList<ItemStack>();
-        for(int i=0;i<6;i++){
+        for(int i = 0; i < 6; i++) {
             put.add(getMenu().ghostInventory.getStackInSlot(i));
         }
-        CookingGuideItem.saveContent(put,getMenu().contentHolder);
-        if(getMenu().directItemStackEdit)
+        CookingGuideItem.saveContent(put, getMenu().contentHolder);
+        if (getMenu().directItemStackEdit)
             CckPackets.channel.sendToServer(new CookingGuideEditPacket(getMenu().contentHolder));
         else
             CckPackets.channel.sendToServer(new BlazeStoveEditPacket(getMenu().contentHolder, getMenu().blockPos));

@@ -6,9 +6,7 @@ import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -17,9 +15,11 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.compat.jei.category.CuttingBoardDeployingCategory;
 import plus.dragons.createcentralkitchen.compat.jei.category.RecipeCategoryBuilder;
 import plus.dragons.createcentralkitchen.content.contraptions.components.deployer.CuttingBoardDeployingRecipe;
+import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideScreen;
 import plus.dragons.createcentralkitchen.entry.CckRecipeTypes;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
+import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -70,6 +70,16 @@ public class CckJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
+    }
+    
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addRecipeClickArea(CookingGuideScreen.class, 122, 26, 41, 26, FDRecipeTypes.COOKING);
+    }
+    
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(new CookingGuideTransferHandler(), FDRecipeTypes.COOKING);
     }
     
     private static <T extends Recipe<?>> RecipeCategoryBuilder<T> builder(Class<T> cls) {
