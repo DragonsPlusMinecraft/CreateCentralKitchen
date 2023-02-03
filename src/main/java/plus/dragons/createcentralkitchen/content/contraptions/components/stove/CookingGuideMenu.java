@@ -9,6 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -23,15 +25,10 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     int blazeStatus;
     boolean directItemStackEdit;
     @Nullable
-    BlockPos blockPos = null;
+    BlockPos blockPos;
 
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
-        blazeStatus = extraData.readInt();
-        directItemStackEdit = extraData.readBoolean();
-        if(!directItemStackEdit){
-            blockPos = extraData.readBlockPos();
-        }
     }
 
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv,int blazeStatus, ItemStack contentHolder, @Nullable BlockPos blockPos) {
@@ -43,6 +40,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         } else directItemStackEdit = true;
     }
 
+    @OnlyIn(Dist.CLIENT)
     private void updateResult() {
         var wrapper = new RecipeWrapper(ghostInventory);
         Optional<CookingPotRecipe> recipe = Minecraft.getInstance().level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, Minecraft.getInstance().level);
@@ -78,7 +76,13 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
 
     @Override
     protected ItemStack createOnClient(FriendlyByteBuf extraData) {
-        return extraData.readItem();
+        var containerItem = extraData.readItem();
+        blazeStatus = extraData.readInt();
+        directItemStackEdit = extraData.readBoolean();
+        if(!directItemStackEdit){
+            blockPos = extraData.readBlockPos();
+        }
+        return containerItem;
     }
 
     @Override

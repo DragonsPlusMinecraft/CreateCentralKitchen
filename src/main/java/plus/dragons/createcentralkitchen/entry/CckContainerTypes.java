@@ -13,7 +13,7 @@ import plus.dragons.createcentralkitchen.content.contraptions.components.stove.C
 public class CckContainerTypes {
 
     public static final MenuEntry<CookingGuideMenu> COOKING_GUIDE_FOR_BLAZE =
-            register("enchanting_guide_for_blaze", CookingGuideMenu::new, () -> CookingGuideScreen::new);
+            register("cooking_guide_for_blaze", CookingGuideMenu::new, () -> CookingGuideScreen::new);
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
             String name, MenuBuilder.ForgeMenuFactory<C> factory, NonNullSupplier<MenuBuilder.ScreenFactory<C, S>> screenFactory) {
