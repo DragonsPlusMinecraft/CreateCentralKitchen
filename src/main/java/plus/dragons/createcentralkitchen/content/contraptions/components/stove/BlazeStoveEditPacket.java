@@ -30,17 +30,18 @@ public class BlazeStoveEditPacket extends SimplePacketBase {
     }
 
     @Override
-    public void handle(Supplier<NetworkEvent.Context> context) {
-        context.get()
-                .enqueueWork(() -> {
-                    ServerPlayer sender = context.get()
-                            .getSender();
-                    if(!(sender.level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove))
-                        return;
-                    blazeStove.setCookingGuide(itemStack);
-                    blazeStove.notifyUpdate();
-                });
-        context.get()
-                .setPacketHandled(true);
+    public void handle(Supplier<NetworkEvent.Context> supplier) {
+        var context = supplier.get();
+        context.enqueueWork(() -> {
+            ServerPlayer sender = context.getSender();
+            if(sender == null)
+                return;
+            if(sender.level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove) {
+                blazeStove.setCookingGuide(itemStack);
+                blazeStove.notifyUpdate();
+            }
+        });
+        context.setPacketHandled(true);
     }
+    
 }

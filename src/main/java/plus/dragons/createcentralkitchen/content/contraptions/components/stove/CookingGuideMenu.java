@@ -1,45 +1,36 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.simibubi.create.foundation.gui.container.GhostItemContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
-    int blazeStatus;
-    boolean directItemStackEdit;
+    boolean fromItemStack = true;
     @Nullable
-    BlockPos blockPos;
+    BlazeStoveBlockEntity blazeStove;
 
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
     }
 
-    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, int blazeStatus, ItemStack contentHolder, @Nullable BlockPos blockPos) {
+    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, ItemStack contentHolder, @Nullable BlazeStoveBlockEntity stove) {
         super(type, id, inv, contentHolder);
-        this.blazeStatus = blazeStatus;
-        if (blockPos != null) {
-            directItemStackEdit = false;
-            this.blockPos = blockPos;
-        } else directItemStackEdit = true;
+        this.fromItemStack = blazeStove == null;
     }
     
     public void updateResult() {
@@ -55,8 +46,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     protected ItemStackHandler createGhostInventory() {
         return new ItemStackHandler(7) {
             @Override
-            public int getSlotLimit(int slot)
-            {
+            public int getSlotLimit(int slot) {
                 return 1;
             }
         };
@@ -70,7 +60,8 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     @Override
     protected void initAndReadInventory(ItemStack contentHolder) {
         super.initAndReadInventory(contentHolder);
-        var content = CookingGuideItem.getContent(contentHolder);
+        var content = NonNullList.withSize(6, ItemStack.EMPTY);
+        CookingGuideItem.loadContent(content, contentHolder);
         for (int i = 0; i < 6; i++) {
             ghostInventory.setStackInSlot(i, content.get(i));
         }
@@ -80,10 +71,14 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     @Override
     protected ItemStack createOnClient(FriendlyByteBuf extraData) {
         var containerItem = extraData.readItem();
-        blazeStatus = extraData.readInt();
-        directItemStackEdit = extraData.readBoolean();
-        if (!directItemStackEdit) {
-            blockPos = extraData.readBlockPos();
+        fromItemStack = extraData.readBoolean();
+        if (!fromItemStack) {
+            BlockPos blockPos = extraData.readBlockPos();
+            if (Minecraft.getInstance().level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove) {
+                this.blazeStove = blazeStove;
+            } else {
+                throw new RuntimeException("Can't open CookingGuideMenu on client: Missing BlazeStoveEntity at " + blockPos);
+            }
         }
         return containerItem;
     }
@@ -106,8 +101,8 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
 
     @Override
     public boolean stillValid(Player player) {
-        if (!directItemStackEdit) {
-            return super.stillValid(player) && player.level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity;
+        if (blazeStove != null) {
+            return super.stillValid(player) && blazeStove.stillValid(player);
         }
         return super.stillValid(player);
     }

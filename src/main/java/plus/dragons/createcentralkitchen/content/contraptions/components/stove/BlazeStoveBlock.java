@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.content.contraptions.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.processing.BasinTileEntity;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.contraptions.wrench.IWrenchable;
@@ -43,6 +44,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.entry.CckBlockEntities;
+import plus.dragons.createcentralkitchen.entry.CckItems;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -102,21 +104,29 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     }
     
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
                                  BlockHitResult blockRayTraceResult) {
         ItemStack heldItem = player.getItemInHand(hand);
-
-        if(heldItem.isEmpty() && player.isShiftKeyDown()){
-            if(player.level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove){
-                if(!player.level.isClientSide())
-                    withTileEntityDo(player.level, pos,
-                        stove -> NetworkHooks.openGui((ServerPlayer) player,
-                                blazeStove, buf -> {
-                                    buf.writeItem(blazeStove.getCookingGuide());
-                                    buf.writeInt(blazeStove.getBlazeStatusCode());
-                                    buf.writeBoolean(false);
-                                    buf.writeBlockPos(pos);
-                                }));
+    
+        if (heldItem.is(CckItems.COOKING_GUIDE.get())) {
+            if(!level.isClientSide()) {
+                withTileEntityDo(level, pos, stove -> {
+                    var original = stove.getCookingGuide();
+                    stove.setCookingGuide(heldItem.split(1));
+                    player.getInventory().placeItemBackInInventory(original);
+                });
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        
+        if (player.isSecondaryUseActive()) {
+            if(!level.isClientSide()) {
+                withTileEntityDo(level, pos, stove -> NetworkHooks.openGui(
+                    (ServerPlayer) player, stove, buf -> {
+                        buf.writeItem(stove.getCookingGuide());
+                        buf.writeBoolean(false);
+                        buf.writeBlockPos(pos);
+                    }));
             }
             return InteractionResult.SUCCESS;
         }
@@ -124,9 +134,9 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         boolean noConsume = player.isCreative();
         boolean forceOverflow = !(player instanceof FakePlayer);
         
-        InteractionResultHolder<ItemStack> holder = tryInsert(world, pos, heldItem, noConsume, forceOverflow, false);
+        InteractionResultHolder<ItemStack> holder = tryInsert(level, pos, heldItem, noConsume, forceOverflow, false);
         ItemStack leftover = holder.getObject();
-        if (!world.isClientSide && !noConsume && !leftover.isEmpty()) {
+        if (!level.isClientSide && !noConsume && !leftover.isEmpty()) {
             if (heldItem.isEmpty()) {
                 player.setItemInHand(hand, leftover);
             } else if (!player.getInventory().add(leftover)) {
@@ -134,7 +144,9 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
             }
         }
         
-        return holder.getResult() == InteractionResult.SUCCESS ? InteractionResult.SUCCESS : InteractionResult.PASS;
+        return holder.getResult().shouldAwardStats()
+            ? InteractionResult.sidedSuccess(level.isClientSide)
+            : InteractionResult.PASS;
     }
 
     @Override

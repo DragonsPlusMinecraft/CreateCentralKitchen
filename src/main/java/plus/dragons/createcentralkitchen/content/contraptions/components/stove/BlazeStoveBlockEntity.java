@@ -2,9 +2,11 @@ package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.fluids.tank.FluidTankBlock;
+import com.simibubi.create.content.contraptions.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.entry.CckContainerTypes;
 import plus.dragons.createcentralkitchen.entry.CckItems;
+import plus.dragons.createcentralkitchen.foundation.utility.LangUtils;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
@@ -52,7 +55,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 import java.util.List;
 import java.util.Optional;
 
-public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider {
+public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider, IHaveGoggleInformation {
     public static final Vec2[] ITEM_OFFSET_NS = new Vec2[9];
     public static final Vec2[] ITEM_OFFSET_WE = new Vec2[9];
     private static final VoxelShape GRILLING_AREA = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D);
@@ -61,9 +64,10 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     private final int[] cookingTimes = new int[INVENTORY_SLOT_COUNT];
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
     private final ResourceLocation[] lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
-    private ItemStack cookingGuide;
-    private List<ItemStack> cookingGuideIngredients;
-    @Nullable private CookingPotRecipe recipe = null;
+    private ItemStack cookingGuide = CckItems.COOKING_GUIDE.asStack();
+    private final NonNullList<ItemStack> cookingGuideIngredients = NonNullList.withSize(6, ItemStack.EMPTY);
+    @Nullable
+    private CookingPotRecipe recipe = null;
 
     
     public BlazeStoveBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -81,6 +85,12 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     @Override
     public void addBehaviours(List<TileEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
+    }
+    
+    @Override
+    public void initialize() {
+        super.initialize();
+        updateResult();
     }
     
     @Override
@@ -134,14 +144,14 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         }
         inventory.deserializeNBT(compound.getCompound("Inventory"));
         cookingGuide = ItemStack.of(compound.getCompound("CookingGuide"));
+        if (level != null)
+            updateResult();
         super.read(compound, clientPacket);
     }
 
     private void updateResult() {
-        var list = NonNullList.<ItemStack>create();
-        cookingGuideIngredients = CookingGuideItem.getContent(cookingGuide);
-        list.addAll(cookingGuideIngredients);
-        var wrapper = new RecipeWrapper(new ItemStackHandler(list));
+        CookingGuideItem.loadContent(cookingGuideIngredients, cookingGuide);
+        var wrapper = new RecipeWrapper(new ItemStackHandler(cookingGuideIngredients));
         Optional<CookingPotRecipe> recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, level);
         this.recipe = recipe.orElse(null);
     }
@@ -170,6 +180,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     public CookingPotRecipe getRecipe() {
         return recipe;
     }
+    
     public void setCookingGuide(ItemStack cookingGuide) {
         this.cookingGuide = cookingGuide;
         updateResult();
@@ -247,7 +258,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         if (slot < 0) return false;
         
         BlazeBurnerBlock.HeatLevel heat = getHeatLevelFromBlock();
-        if (!heat.isAtLeast(BlazeBurnerBlock.HeatLevel.FADING) || heat.isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) return false;
+        if (!heat.isAtLeast(BlazeBurnerBlock.HeatLevel.SMOULDERING) || heat.isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) return false;
         
         if (isBlockedAbove()) return false;
         
@@ -425,13 +436,21 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     @Override
     @NotNull
     public Component getDisplayName() {
-        return cookingGuide.getDisplayName();
+        return cookingGuide.getItem().getDescription();
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
-        return new CookingGuideMenu(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, getBlazeStatusCode() ,cookingGuide, getBlockPos());
+        return new CookingGuideMenu(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, cookingGuide, this);
+    }
+    
+    public boolean stillValid(Player player) {
+        if (player.level.getBlockEntity(this.worldPosition) != this) {
+            return false;
+        } else {
+            return !(player.distanceToSqr(VecHelper.getCenterOf(this.worldPosition)) > 64.0D);
+        }
     }
 
     public int getBlazeStatusCode(){
@@ -442,6 +461,19 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             case FADING, KINDLED -> 2;
             case SEETHING -> 3;
         };
+    }
+    
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        if (this.recipe == null) {
+            LangUtils.translate("gui.goggles.blaze_stove.no_result")
+                .forGoggles(tooltip);
+        } else {
+            LangUtils.translate("gui.goggles.blaze_stove.recipe_result")
+                .forGoggles(tooltip);
+            LangUtils.component(this.recipe.getResultItem().getHoverName())
+                .forGoggles(tooltip, 2);
+        }
+        return true;
     }
 
 }

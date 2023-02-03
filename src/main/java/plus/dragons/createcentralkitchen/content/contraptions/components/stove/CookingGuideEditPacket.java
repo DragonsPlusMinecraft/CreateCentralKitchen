@@ -26,19 +26,20 @@ public class CookingGuideEditPacket extends SimplePacketBase {
     }
 
     @Override
-    public void handle(Supplier<NetworkEvent.Context> context) {
-        context.get()
-                .enqueueWork(() -> {
-                    ServerPlayer sender = context.get()
-                            .getSender();
-                    ItemStack mainHandItem = sender.getMainHandItem();
-                    if (!CckItems.COOKING_GUIDE.isIn(mainHandItem))
-                        return;
-
-                    sender.setItemInHand(sender.getUsedItemHand(),itemStack);
-                    sender.getCooldowns().addCooldown(mainHandItem.getItem(), 5);
-                });
-        context.get()
-                .setPacketHandled(true);
+    public void handle(Supplier<NetworkEvent.Context> supplier) {
+        var context = supplier.get();
+        context.enqueueWork(() -> {
+            ServerPlayer sender = context.getSender();
+            if (sender == null)
+                return;
+            ItemStack mainHandItem = sender.getMainHandItem();
+            if (!CckItems.COOKING_GUIDE.isIn(mainHandItem))
+                return;
+    
+            sender.setItemInHand(sender.getUsedItemHand(),itemStack);
+            sender.getCooldowns().addCooldown(mainHandItem.getItem(), 5);
+        });
+        context.setPacketHandled(true);
     }
+    
 }

@@ -4,6 +4,8 @@ import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import com.simibubi.create.foundation.utility.LangNumberFormat;
 import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -48,6 +50,12 @@ public class LangUtils {
 
     public static LangBuilder text(String text) {
         return builder().text(text);
+    }
+    
+    public static LangBuilder component(Component component) {
+        return component instanceof MutableComponent mutable
+            ? builder().add(mutable)
+            : builder().add(Components.empty().append(component));
     }
 
 }
