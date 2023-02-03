@@ -5,7 +5,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.CckArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.entry.CckBlockPartials;
-import plus.dragons.createcentralkitchen.foundation.ponder.content.CfaPonderIndex;
+import plus.dragons.createcentralkitchen.foundation.ponder.content.CckPonderIndex;
 
 public class CentralKitchenClient {
     
@@ -21,8 +21,8 @@ public class CentralKitchenClient {
     }
 
     public static void setup(final FMLClientSetupEvent event) {
-        CfaPonderIndex.register();
-        CfaPonderIndex.registerTags();
+        CckPonderIndex.register();
+        CckPonderIndex.registerTags();
     }
     
 }

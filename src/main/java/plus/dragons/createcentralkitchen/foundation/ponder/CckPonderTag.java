@@ -4,12 +4,13 @@ import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckBlocks;
+import plus.dragons.createcentralkitchen.entry.CckItems;
 
-public class CfaPonderTag extends PonderTag {
+public class CckPonderTag extends PonderTag {
 
-    public static final PonderTag FARMERS_DELIGHT = create("farmers_delight").item(CckBlocks.BLAZE_STOVE.get(), true, false).addToIndex();
+    public static final PonderTag FARMERS_DELIGHT = create("farmers_delight").item(CckItems.COOKING_GUIDE.get(), true, false).addToIndex();
 
-    public CfaPonderTag(ResourceLocation id) {
+    public CckPonderTag(ResourceLocation id) {
         super(id);
     }
 

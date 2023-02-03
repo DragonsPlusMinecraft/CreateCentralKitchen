@@ -58,6 +58,8 @@ public enum CckRecipeTypes implements IRecipeTypeInfo {
         return (T) type.get();
     }
     
+    public static void register() {}
+    
     public static <T extends Recipe<?>> RecipeType<T> simpleType(ResourceLocation id) {
         String stringId = id.toString();
         return new RecipeType<>() {

@@ -56,6 +56,7 @@ public class CentralKitchen {
         CckContainerTypes.register();
         CckFluids.register(modEventBus);
         CckTags.register();
+        CckRecipeTypes.register();
         SERIALIZER_REGISTER.register(modEventBus);
         TYPE_REGISTER.register(modEventBus);
         CckArmInteractionPointTypes.register();

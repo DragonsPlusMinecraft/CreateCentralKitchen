@@ -1,14 +1,18 @@
 {
-  "create_central_kitchen.ponder.transform.header": "Hire a cook",
-  "create_central_kitchen.ponder.transform.text_1": "Right-click the Blaze Burner with an Cooking Guide in hand when sneaking",
-  "create_central_kitchen.ponder.transform.text_2": "To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking",
+  "create_central_kitchen.ponder.blaze_stove.intro.header": "Hire a cook",
+  "create_central_kitchen.ponder.blaze_stove.intro.text_1": "Right-click the Blaze Burner with an Cooking Guide in hand when sneaking",
+  "create_central_kitchen.ponder.blaze_stove.intro.text_2": "To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking",
 
-  "create_central_kitchen.ponder.stove_and_pot.header": "Expert chef",
-  "create_central_kitchen.ponder.stove_and_pot.text_1": "Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!",
-  "create_central_kitchen.ponder.stove_and_pot.text_2": "Cooking can still be done even without adding fuel to the Blaze Stove.",
-  "create_central_kitchen.ponder.stove_and_pot.text_3": "The hotter the fire, the faster the cooking.",
-  "create_central_kitchen.ponder.stove_and_pot.text_4": "Of course, you can also use Block Stove to fry things directly.",
-  "create_central_kitchen.ponder.stove_and_pot.text_5": "But please note that seething fire can burn your ingredients directly.",
+  "create_central_kitchen.ponder.blaze_stove.processing.header": "Expert chef",
+  "create_central_kitchen.ponder.blaze_stove.processing.text_1": "Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!",
+  "create_central_kitchen.ponder.blaze_stove.processing.text_2": "Cooking can still be done even without adding fuel to the Blaze Stove.",
+  "create_central_kitchen.ponder.blaze_stove.processing.text_3": "The hotter the fire, the faster the cooking.",
+  "create_central_kitchen.ponder.blaze_stove.processing.text_4": "Of course, you can also use Block Stove to fry things directly.",
+  "create_central_kitchen.ponder.blaze_stove.processing.text_5": "But please note that seething fire can burn your ingredients directly.",
+
+  "create_central_kitchen.ponder.basket.header": "Collecting items with Basket",
+  "create_central_kitchen.ponder.basket.text_1": "Basket can collect transported items from belt.",
+  "create_central_kitchen.ponder.basket.text_2": "Besides facing upwards, corresponding horizontal facing is also suitable.",
 
   "create_central_kitchen.ponder.tag.farmers_delight": "Farmer's Delight Automation",
   "create_central_kitchen.ponder.tag.farmers_delight.description": "Items and Components related to farmer's delight automation."
