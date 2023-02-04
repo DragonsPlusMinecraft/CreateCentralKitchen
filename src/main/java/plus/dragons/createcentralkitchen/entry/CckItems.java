@@ -13,7 +13,7 @@ public class CckItems {
     private static final CreateRegistrate REGISTRATE = CentralKitchen.REGISTRATE.startSection(AllSections.KINETICS);
 
     public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
-            .properties(prop -> prop.stacksTo(16))
+            .properties(prop -> prop.stacksTo(1))
             .register();
 
     public static void fillCreateItemGroup(FillCreateItemGroupEvent event) {

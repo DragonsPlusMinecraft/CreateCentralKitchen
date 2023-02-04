@@ -3,12 +3,16 @@ package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.*;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -38,22 +42,21 @@ public class CookingGuideItem extends Item implements MenuProvider {
         var player = useOnContext.getPlayer();
         if (player == null)
             return InteractionResult.PASS;
-        if (player.isShiftKeyDown()) {
+        if (player.isSecondaryUseActive()) {
             var itemStack = useOnContext.getItemInHand();
             if (itemStack.is(CckItems.COOKING_GUIDE.get())) {
                 var blockPos = useOnContext.getClickedPos();
                 var blockState = level.getBlockState(blockPos);
                 var blockEntity = level.getBlockEntity(blockPos);
                 if (blockState.getBlock() instanceof BlazeBurnerBlock &&
-                        blockEntity instanceof BlazeBurnerTileEntity)
+                    blockEntity instanceof BlazeBurnerTileEntity)
                 {
                     if (!level.isClientSide()) {
                         level.setBlockAndUpdate(blockPos, CckBlocks.BLAZE_STOVE.getDefaultState()
                                 .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
                         if(level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove){
-                            var in = itemStack.copy();
-                            in.setCount(1);
-                            blazeStove.setCookingGuide(in);
+                            var guide = itemStack.copy();
+                            blazeStove.setCookingGuide(guide);
                         }
 
                         AdvancementBehaviour.setPlacedBy(useOnContext.getLevel(), blockPos, player);
@@ -95,12 +98,14 @@ public class CookingGuideItem extends Item implements MenuProvider {
         ItemStack result = getResult(stack);
         if (result.isEmpty()) {
             LangUtils.translate("gui.goggles.blaze_stove.no_result")
+                .style(ChatFormatting.RED)
                 .addTo(tooltip);
         } else {
             LangUtils.translate("gui.goggles.blaze_stove.recipe_result")
                 .addTo(tooltip);
-            LangUtils.component(result.getHoverName())
-                .forGoggles(tooltip, -2);
+            LangUtils.itemName(result)
+                .style(ChatFormatting.GRAY)
+                .forGoggles(tooltip);
         }
     }
     

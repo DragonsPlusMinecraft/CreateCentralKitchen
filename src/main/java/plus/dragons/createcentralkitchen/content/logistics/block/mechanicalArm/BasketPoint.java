@@ -23,17 +23,6 @@ public class BasketPoint extends ArmInteractionPoint {
         return Vec3.atBottomCenterOf(pos).add(0, .625, 0);
     }
 
-    @Nullable
-    @Override
-    protected IItemHandler getHandler() {
-        if (!cachedHandler.isPresent()) {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (!(be instanceof BasketBlockEntity basket)) return null;
-            cachedHandler = basket.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-        }
-        return cachedHandler.resolve().orElse(null);
-    }
-
     public static class Type extends ArmInteractionPointType {
 
         public Type(ResourceLocation id) {

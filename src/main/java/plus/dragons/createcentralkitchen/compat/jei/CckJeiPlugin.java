@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.compat.jei;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.compat.jei.GhostIngredientHandler;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -72,8 +73,10 @@ public class CckJeiPlugin implements IModPlugin {
         allCategories.forEach(c -> c.registerCatalysts(registration));
     }
     
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addGhostIngredientHandler(CookingGuideScreen.class, new GhostIngredientHandler());
         registration.addRecipeClickArea(CookingGuideScreen.class, 122, 26, 41, 26, FDRecipeTypes.COOKING);
     }
     

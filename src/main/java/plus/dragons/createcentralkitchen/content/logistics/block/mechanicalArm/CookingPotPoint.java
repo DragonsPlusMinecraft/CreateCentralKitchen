@@ -89,17 +89,6 @@ public class CookingPotPoint extends ArmInteractionPoint {
         return ItemStack.EMPTY;
     }
     
-    @Nullable
-    @Override
-    protected IItemHandler getHandler() {
-        if (!cachedHandler.isPresent()) {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (!(be instanceof CookingPotBlockEntity cookingPot)) return null;
-            cachedHandler = LazyOptional.of(cookingPot::getInventory);
-        }
-        return cachedHandler.resolve().orElse(null);
-    }
-    
     public static class Type extends ArmInteractionPointType {
         
         public Type(ResourceLocation id) {

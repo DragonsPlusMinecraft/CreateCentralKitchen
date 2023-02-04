@@ -1,10 +1,12 @@
 package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
+import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.logistics.block.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlockEntity;
 
 import java.util.Optional;
@@ -31,30 +34,16 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
     
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (!(blockEntity instanceof BlazeStoveBlockEntity stove))
-            return stack;
-
-        ItemStack fuel = stack.copy();
-        if (stove.tryUpdateFuel(fuel, false, simulate)) {
-            fuel.shrink(1);
-            return fuel;
-        }
-
-        int slot = stove.getNextEmptySlot();
-        if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isBlockedAbove()) {
-            return stack;
-        }
-        Optional<CampfireCookingRecipe> recipe = stove.findRecipe(new SimpleContainer(stack), slot);
-        if (recipe.isEmpty())
-            return stack;
-        ItemStack remainder = stack.copy();
-        if (simulate) {
-            remainder.shrink(1);
+        ItemStack input = stack.copy();
+        InteractionResultHolder<ItemStack> res = BlazeStoveBlock.tryInsert(level, pos, input, false, false, simulate);
+        ItemStack remainder = res.getObject();
+        if (input.isEmpty()) {
             return remainder;
+        } else {
+            if (!simulate)
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), remainder);
+            return input;
         }
-        stove.addItem(remainder, recipe.get(), slot);
-        return remainder;
     }
     
     public static class Type extends ArmInteractionPointType {

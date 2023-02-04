@@ -3,7 +3,6 @@ package plus.dragons.createcentralkitchen.foundation.ponder;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.entry.CckBlocks;
 import plus.dragons.createcentralkitchen.entry.CckItems;
 
 public class CckPonderTag extends PonderTag {

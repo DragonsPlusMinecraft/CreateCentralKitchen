@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.contraptions.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.processing.BasinTileEntity;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.contraptions.wrench.IWrenchable;
@@ -112,8 +111,8 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
             if(!level.isClientSide()) {
                 withTileEntityDo(level, pos, stove -> {
                     var original = stove.getCookingGuide();
-                    stove.setCookingGuide(heldItem.split(1));
-                    player.getInventory().placeItemBackInInventory(original);
+                    stove.setCookingGuide(heldItem);
+                    player.setItemInHand(hand, original);
                 });
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
@@ -151,14 +150,12 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
 
     @Override
     public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
-        Level world = context.getLevel();
+        Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        Player player = context.getPlayer();
-        if (world instanceof ServerLevel) {
-            if (player != null)
-                player.level.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
-                        .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
-                        .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
+                .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
         }
         return InteractionResult.SUCCESS;
     }

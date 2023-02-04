@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.simibubi.create.foundation.gui.container.GhostItemContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
