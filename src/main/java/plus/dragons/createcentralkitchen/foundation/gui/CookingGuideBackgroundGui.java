@@ -17,13 +17,11 @@ public class CookingGuideBackgroundGui {
     public CookingGuideBackgroundGui(int status) {
         this.status = status;
     }
-
     
     @OnlyIn(Dist.CLIENT)
     public void bind() {
         RenderSystem.setShaderTexture(0, TEXTURE);
     }
-
     
     @OnlyIn(Dist.CLIENT)
     public void render(PoseStack ms, int x, int y, GuiComponent component) {

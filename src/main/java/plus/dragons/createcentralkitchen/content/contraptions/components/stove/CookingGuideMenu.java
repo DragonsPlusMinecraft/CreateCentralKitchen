@@ -14,72 +14,65 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.entry.CckPackets;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-import javax.annotation.Nullable;
-
 public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
-    boolean fromItemStack = true;
+    private CookingGuide cookingGuide;
     @Nullable
-    BlazeStoveBlockEntity blazeStove;
+    private BlazeStoveBlockEntity blazeStove;
 
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
     }
 
-    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, ItemStack contentHolder, @Nullable BlazeStoveBlockEntity stove) {
-        super(type, id, inv, contentHolder);
-        this.fromItemStack = blazeStove == null;
+    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, ItemStack cookingGuide) {
+        super(type, id, inv, cookingGuide);
     }
     
-    public void updateResult() {
-        var wrapper = new RecipeWrapper(ghostInventory);
-        this.player.level.getRecipeManager()
-            .getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, this.player.level)
-            .ifPresentOrElse(
-                recipe -> ghostInventory.setStackInSlot(6, recipe.getResultItem()),
-                () -> ghostInventory.setStackInSlot(6, ItemStack.EMPTY));
+    public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, BlazeStoveBlockEntity blazeStove) {
+        super(type, id, inv, blazeStove.getCookingGuide());
+        this.blazeStove = blazeStove;
     }
-
+    
+    public void updateRecipe() {
+        cookingGuide.updateRecipe(this.player.level);
+        this.getSlot(6).setChanged();
+    }
+    
+    public int getBlazeStatus() {
+        return blazeStove == null ? 0 : blazeStove.getBlazeStatusCode();
+    }
+    
+    @Override
+    protected void init(Inventory inv, ItemStack contentHolderIn) {
+        super.init(inv, contentHolderIn);
+        updateRecipe();
+    }
+    
     @Override
     protected ItemStackHandler createGhostInventory() {
-        return new ItemStackHandler(7) {
-            @Override
-            public int getSlotLimit(int slot) {
-                return 1;
-            }
-        };
-    }
-
-    @Override
-    protected boolean allowRepeats() {
-        return true;
+        return cookingGuide.inventory;
     }
 
     @Override
     protected void initAndReadInventory(ItemStack contentHolder) {
+        this.cookingGuide = CookingGuide.of(contentHolder);
         super.initAndReadInventory(contentHolder);
-        var content = NonNullList.withSize(6, ItemStack.EMPTY);
-        CookingGuideItem.loadContent(content, contentHolder);
-        for (int i = 0; i < 6; i++) {
-            ghostInventory.setStackInSlot(i, content.get(i));
-        }
-        updateResult();
     }
 
     @Override
     protected ItemStack createOnClient(FriendlyByteBuf extraData) {
-        var containerItem = extraData.readItem();
-        fromItemStack = extraData.readBoolean();
+        ItemStack item = extraData.readItem();
+        boolean fromItemStack = extraData.readBoolean();
         if (!fromItemStack) {
-            BlockPos blockPos = extraData.readBlockPos();
-            if (Minecraft.getInstance().level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove) {
+            BlockPos pos = extraData.readBlockPos();
+            if (player.level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove)
                 this.blazeStove = blazeStove;
-            } else {
-                throw new RuntimeException("Can't open CookingGuideMenu on client: Missing BlazeStoveEntity at " + blockPos);
-            }
+            else throw new RuntimeException("Expected Blaze Stove at " + pos + " but found none");
         }
-        return containerItem;
+        return item;
     }
 
     @Override
@@ -93,17 +86,26 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         this.addSlot(new CookingIngredientSlot(5, 92, 45));
         this.addSlot(new DisplaySlot(6, 177, 34));
     }
-
+    
     @Override
     protected void saveData(ItemStack contentHolder) {
+    
     }
 
     @Override
     public boolean stillValid(Player player) {
-        if (blazeStove != null) {
-            return super.stillValid(player) && blazeStove.stillValid(player);
-        }
-        return super.stillValid(player);
+        return super.stillValid(player) && (blazeStove == null || blazeStove.stillValid(player));
+    }
+    
+    @Override
+    public void removed(Player playerIn) {
+        super.removed(playerIn);
+        playerIn.getCooldowns().addCooldown(cookingGuide.getOwner().getItem(), 5);
+    }
+    
+    @Override
+    protected boolean allowRepeats() {
+        return true;
     }
     
     class CookingIngredientSlot extends SlotItemHandler {
@@ -119,7 +121,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         @Override
         public void setChanged() {
             super.setChanged();
-            updateResult();
+            updateRecipe();
         }
     }
 
@@ -154,8 +156,9 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         held.setCount(1);
         if (clickTypeIn == ClickType.CLONE) {
             if (player.isCreative() && held.isEmpty()) {
-                ItemStack stackInSlot = ghostInventory.getStackInSlot(slotId - 36).copy();
-                setCarried(stackInSlot);
+                ItemStack cloned = ghostInventory.getStackInSlot(slotId - 36).copy();
+                cloned.setCount(cloned.getMaxStackSize());
+                setCarried(cloned);
             }
         } else if (getSlot(slotId).mayPlace(held) || held.isEmpty()) {
             ghostInventory.setStackInSlot(slotId - 36, held.copy());
