@@ -51,9 +51,8 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
                 var items = inputs.get(i).getItems();
                 input = items.length == 0 ? ItemStack.EMPTY : items[0];
             } else input = ItemStack.EMPTY;
-            container.ghostInventory.setStackInSlot(i, input);
+            container.getSlot(i).set(input);
         }
-        container.updateResult();
         return null;
     }
     

@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.contraptions.fluids.tank.FluidTankBlock;
 import com.simibubi.create.content.contraptions.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
@@ -11,7 +10,6 @@ import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -37,7 +35,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,11 +42,11 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckContainerTypes;
 import plus.dragons.createcentralkitchen.entry.CckItems;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
+import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -66,10 +63,6 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
     private final ResourceLocation[] lastRecipeIDs = new ResourceLocation[INVENTORY_SLOT_COUNT];
     private ItemStack cookingGuide = CckItems.COOKING_GUIDE.asStack();
-    private final NonNullList<ItemStack> cookingGuideIngredients = NonNullList.withSize(6, ItemStack.EMPTY);
-    @Nullable
-    private CookingPotRecipe recipe = null;
-
     
     public BlazeStoveBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -91,7 +84,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     @Override
     public void initialize() {
         super.initialize();
-        updateResult();
+        updateCookingGuide();
     }
     
     @Override
@@ -145,19 +138,9 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             System.arraycopy(array, 0, cookingTimesTotal, 0, Math.min(cookingTimesTotal.length, array.length));
         }
         inventory.deserializeNBT(compound.getCompound("Inventory"));
-        cookingGuide = ItemStack.of(compound.getCompound("CookingGuide"));
-        if (level != null)
-            updateResult();
+        setCookingGuide(ItemStack.of(compound.getCompound("CookingGuide")));
+        updateCookingGuide();
         super.read(compound, clientPacket);
-    }
-
-    private void updateResult() {
-        CookingGuideItem.loadContent(cookingGuideIngredients, cookingGuide);
-        var wrapper = new RecipeWrapper(new ItemStackHandler(cookingGuideIngredients));
-        assert level != null;
-        Optional<CookingPotRecipe> recipeOptional = level.getRecipeManager()
-            .getRecipeFor(ModRecipeTypes.COOKING.get(), wrapper, level);
-        recipe = recipeOptional.orElse(null);
     }
     
     @Override
@@ -168,38 +151,46 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         }
         compound.put("Inventory", inventory.serializeNBT());
         compound.put("CookingGuide", cookingGuide.serializeNBT());
-        updateResult();
+        updateCookingGuide();
         super.write(compound, clientPacket);
+    }
+
+    private void updateCookingGuide() {
+        if (level != null)
+            CookingGuide.of(cookingGuide).updateRecipe(level);
     }
 
     public ItemStack getCookingGuide() {
         return cookingGuide;
     }
-
-    public List<ItemStack> getCookingGuideIngredients() {
-        return cookingGuideIngredients;
-    }
-
-    @Nullable
-    public CookingPotRecipe getRecipe() {
-        return recipe;
-    }
     
     public void setCookingGuide(ItemStack stack) {
+        if (!cookingGuide.is(CckItems.COOKING_GUIDE.get())) {
+            return;
+        }
         cookingGuide = stack;
-        assert level != null;
-        if (!level.isClientSide) {
-            updateResult();
-            notifyUpdate();
+        if (level != null) {
+            updateCookingGuide();
+            if (!level.isClientSide) {
+                notifyUpdate();
+            }
         }
     }
-    
+
+    public LerpedFloat getHeadAngle() {
+        return headAngle;
+    }
+
+    public LerpedFloat getHeadAnimation() {
+        return headAnimation;
+    }
+
     @Override
     public boolean isValidBlockAbove() {
         assert level != null;
         BlockState blockState = level.getBlockState(worldPosition.above());
         return AllBlocks.BASIN.has(blockState)
-            || blockState.getBlock() instanceof FluidTankBlock
+            || blockState.getBlock() instanceof SkilletBlock
             || blockState.getBlock() instanceof CookingPotBlock;
     }
 
@@ -209,7 +200,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         if (level instanceof ServerLevel) {
             dropAll();
             var pos = getBlockPos();
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), CckItems.COOKING_GUIDE.asStack());
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cookingGuide);
         }
     }
     
@@ -236,12 +227,11 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         return -1;
     }
     
-    public LerpedFloat getHeadAngle() {
-        return headAngle;
-    }
-    
-    public LerpedFloat getHeadAnimation() {
-        return headAnimation;
+    public void dropAll() {
+        if (!ItemUtils.isInventoryEmpty(inventory)) {
+            ItemUtils.dropItems(level, getBlockPos(), inventory);
+            notifyUpdate();
+        }
     }
     
     @Override
@@ -297,29 +287,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
         return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
     }
-    
-    public void dropAll() {
-        if (!ItemUtils.isInventoryEmpty(inventory)) {
-            ItemUtils.dropItems(level, getBlockPos(), inventory);
-            notifyUpdate();
-        }
-    }
 
-    public boolean addItem(ItemStack itemStackIn, CampfireCookingRecipe recipe, int slot) {
-        if (0 <= slot && slot < inventory.getSlots()) {
-            ItemStack slotStack = inventory.getStackInSlot(slot);
-            if (slotStack.isEmpty()) {
-                cookingTimesTotal[slot] = recipe.getCookingTime();
-                cookingTimes[slot] = 0;
-                inventory.setStackInSlot(slot, itemStackIn.split(1));
-                lastRecipeIDs[slot] = recipe.getId();
-                notifyUpdate();
-                return true;
-            }
-        }
-        return false;
-    }
-    
     protected void processCooking(int speed) {
         assert level != null;
         boolean didInventoryChange = false;
@@ -452,8 +420,8 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
-        return new CookingGuideMenu(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), pContainerId, pPlayerInventory, cookingGuide, this);
+    public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inventory, @NotNull Player pPlayer) {
+        return new CookingGuideMenu(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), syncId, inventory, this);
     }
     
     public boolean stillValid(Player player) {
@@ -475,14 +443,15 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     }
     
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        if (recipe == null) {
+        ItemStack result = CookingGuide.of(cookingGuide).getResult();
+        if (result.isEmpty()) {
             CentralKitchen.LANG.translate("gui.goggles.blaze_stove.no_result")
                 .style(ChatFormatting.RED)
                 .forGoggles(tooltip);
         } else {
             CentralKitchen.LANG.translate("gui.goggles.blaze_stove.recipe_result")
                 .forGoggles(tooltip);
-            CentralKitchen.LANG.itemName(recipe.getResultItem())
+            CentralKitchen.LANG.itemName(result)
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip, 4);
         }

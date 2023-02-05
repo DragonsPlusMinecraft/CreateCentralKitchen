@@ -7,11 +7,8 @@ import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
-import plus.dragons.createcentralkitchen.entry.CckPackets;
 import plus.dragons.createcentralkitchen.foundation.gui.CookingGuideBackgroundGui;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,8 +21,7 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
 
     public CookingGuideScreen(CookingGuideMenu container, Inventory inv, Component title) {
         super(container, inv, title);
-        backgroundGui = new CookingGuideBackgroundGui(container.blazeStove == null
-            ? 0 : container.blazeStove.getBlazeStatusCode());
+        backgroundGui = new CookingGuideBackgroundGui(container.getBlazeStatus());
     }
 
     @Override
@@ -64,20 +60,6 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
             )
             .scale(3)
             .render(ms);
-    }
-
-    @Override
-    public void removed() {
-        super.removed();
-        var content = new ArrayList<ItemStack>();
-        for(int i = 0; i < 6; i++) {
-            content.add(getMenu().ghostInventory.getStackInSlot(i));
-        }
-        CookingGuideItem.saveContent(content, getMenu().ghostInventory.getStackInSlot(6), getMenu().contentHolder);
-        if (getMenu().fromItemStack)
-            CckPackets.channel.sendToServer(new CookingGuideEditPacket(getMenu().contentHolder));
-        else if (getMenu().blazeStove != null)
-            CckPackets.channel.sendToServer(new BlazeStoveEditPacket(getMenu().contentHolder, getMenu().blazeStove.getBlockPos()));
     }
 
     @Override
