@@ -5,11 +5,8 @@ import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionP
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 

@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
-import plus.dragons.createcentralkitchen.foundation.utility.LangUtils;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -201,7 +201,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
         ResourceLocation id = new ResourceLocation(modid, name);
         CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
             new mezz.jei.api.recipe.RecipeType<>(id, recipeClass),
-            LangUtils.fromRL("recipe", id).component(),
+            CentralKitchen.LANG.fromRL("recipe", id).component(),
             background, icon, recipesSupplier, catalysts);
         return factory.create(info);
     }

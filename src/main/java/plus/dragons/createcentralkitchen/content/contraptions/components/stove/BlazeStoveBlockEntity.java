@@ -41,9 +41,9 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckContainerTypes;
 import plus.dragons.createcentralkitchen.entry.CckItems;
-import plus.dragons.createcentralkitchen.foundation.utility.LangUtils;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
@@ -476,13 +476,13 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (recipe == null) {
-            LangUtils.translate("gui.goggles.blaze_stove.no_result")
+            CentralKitchen.LANG.translate("gui.goggles.blaze_stove.no_result")
                 .style(ChatFormatting.RED)
                 .forGoggles(tooltip);
         } else {
-            LangUtils.translate("gui.goggles.blaze_stove.recipe_result")
+            CentralKitchen.LANG.translate("gui.goggles.blaze_stove.recipe_result")
                 .forGoggles(tooltip);
-            LangUtils.itemName(recipe.getResultItem())
+            CentralKitchen.LANG.itemName(recipe.getResultItem())
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip, 4);
         }

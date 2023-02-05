@@ -1,19 +1,21 @@
 package plus.dragons.createcentralkitchen.entry;
 
 import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.Locale;
+import java.util.Properties;
 
 public enum CckFluids implements NonNullSupplier<Fluid> {
     TOMATO_SAUCE(FarmersDelight.MODID),
@@ -38,22 +40,23 @@ public enum CckFluids implements NonNullSupplier<Fluid> {
     }
     
     public static void register(IEventBus modEventBus) {
-        modEventBus.addGenericListener(Fluid.class, CckFluids::onRegister);
+        modEventBus.addListener(CckFluids::onRegister);
     }
     
-    public static void onRegister(RegistryEvent.Register<Fluid> event) {
-        for (var entry : values()) {
-            ResourceLocation id = entry.source.getId();
-            VirtualFluid fluid = new VirtualFluid(new ForgeFlowingFluid.Properties(
-                entry.source, entry.source,
-                FluidAttributes.builder(
-                    new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_still"),
-                    new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_flow")
-                )
-            ));
-            fluid.setRegistryName(id);
-            event.getRegistry().register(fluid);
-        }
+    public static void onRegister(RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.FLUIDS,fluidRegisterHelper -> {
+            for (var entry : values()) {
+                ResourceLocation id = entry.source.getId();
+                VirtualFluid fluid = new VirtualFluid(new ForgeFlowingFluid.Properties(
+                        ()-> CreateRegistrate.defaultFluidType(FluidType.Properties.create(),
+                                new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_still"),
+                                new ResourceLocation(id.getNamespace(), "fluid/" + id.getPath() + "_flow")),
+                        entry.source, entry.source
+                ));
+                fluidRegisterHelper.register(id,fluid);
+            }
+        });
+
     }
     
     @Override

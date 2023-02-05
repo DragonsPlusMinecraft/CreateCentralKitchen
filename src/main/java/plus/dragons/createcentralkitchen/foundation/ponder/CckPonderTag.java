@@ -7,7 +7,9 @@ import plus.dragons.createcentralkitchen.entry.CckItems;
 
 public class CckPonderTag extends PonderTag {
 
-    public static final PonderTag FARMERS_DELIGHT = create("farmers_delight").item(CckItems.COOKING_GUIDE.get(), true, false).addToIndex();
+    public static final PonderTag FARMERS_DELIGHT = create("farmers_delight")
+            .defaultLang("Farmer's Delight Automation","Items and Components related to farmer's delight automation.")
+            .item(CckItems.COOKING_GUIDE.get(), true, false).addToIndex();
 
     public CckPonderTag(ResourceLocation id) {
         super(id);

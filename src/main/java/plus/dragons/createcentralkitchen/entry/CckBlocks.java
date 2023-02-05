@@ -7,7 +7,6 @@ import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlo
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.material.MaterialColor;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlock;
@@ -27,7 +26,6 @@ public class CckBlocks {
         .properties(p -> p.color(MaterialColor.COLOR_GRAY).lightLevel(BlazeBurnerBlock::getLight))
         .tag(BlockTags.MINEABLE_WITH_PICKAXE, CckTags.FAN_TRANSPARENT, CckTags.FAN_HEATERS, ModTags.HEAT_SOURCES)
         .loot((prov, block) -> prov.dropOther(block, AllBlocks.BLAZE_BURNER.get()))
-        .addLayer(() -> RenderType::cutoutMipped)
         .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
         .register();
     

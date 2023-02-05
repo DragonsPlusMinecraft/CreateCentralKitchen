@@ -24,14 +24,14 @@ import java.util.List;
 public class FarmersDelightScenes {
 
     public static void blazeStoveIntro(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.intro", ""); // We do not use PonderLocalization. For title only
+        scene.title("blaze_stove.intro", "Hire a cook");
         scene.configureBasePlate(0, 0, 3);
         scene.showBasePlate();
         scene.idle(5);
         scene.world.showSection(util.select.fromTo(0, 1, 0, 2, 1, 2), Direction.DOWN);
 
         scene.overlay.showText(40)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("Right-click the Blaze Burner with an Cooking Guide in hand when sneaking.")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(1, 1, 1));
@@ -44,7 +44,7 @@ public class FarmersDelightScenes {
 
         scene.idle(50);
         scene.overlay.showText(40)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking.")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(1, 1, 1));
@@ -55,28 +55,28 @@ public class FarmersDelightScenes {
     }
 
     public static void blazeStoveProcessing(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.processing", ""); // We do not use PonderLocalization. For title only
+        scene.title("blaze_stove.processing", "Expert chef"); // We do not use PonderLocalization. For title only
         scene.configureBasePlate(0, 0, 5);
         scene.world.setKineticSpeed(util.select.everywhere(), 0);
         scene.showBasePlate();
         scene.world.showSection(util.select.fromTo(0, 1, 0, 4, 2, 4), Direction.DOWN);
         scene.idle(50);
         scene.overlay.showText(40)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(3, 1, 1));
 
         scene.idle(70);
         scene.overlay.showText(60)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("Cooking can still be done even without adding fuel to the Blaze Stove.")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(1, 1, 2));
 
         scene.idle(70);
         scene.overlay.showText(60)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("The hotter the fire, the faster the cooking.")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(3, 1, 3));
@@ -97,21 +97,21 @@ public class FarmersDelightScenes {
         });
 
         scene.overlay.showText(40)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("Of course, you can also use Block Stove to fry things directly.")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(1, 1, 2));
 
         scene.idle(70);
         scene.overlay.showText(60)
-                .text("") // We do not use PonderLocalization. For registerText only
+                .text("But please note that seething fire can burn your ingredients directly.")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.topOf(3, 1, 3));
     }
     
     public static void basket(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("basket", ""); // We do not use PonderLocalization. For title only
+        scene.title("basket", "Collecting items with Basket"); // We do not use PonderLocalization. For title only
         scene.configureBasePlate(0, 1, 5);
         scene.world.showSection(util.select.layer(0), Direction.UP);
         scene.world.modifyKineticSpeed(util.select.everywhere(), f -> f / 2f);
@@ -131,7 +131,7 @@ public class FarmersDelightScenes {
         scene.world.showSection(basket, Direction.DOWN);
     
         scene.overlay.showText(40)
-            .text("") // We do not use PonderLocalization. For registerText only
+            .text("Basket can collect transported items from belt.")
             .attachKeyFrame()
             .placeNearTarget()
             .pointAt(util.vector.topOf(0, 1, 2));
@@ -141,7 +141,7 @@ public class FarmersDelightScenes {
         BlockPos basketPos = util.grid.at(0, 1, 2);
     
         scene.overlay.showText(40)
-            .text("") // We do not use PonderLocalization. For registerText only
+            .text("Besides facing upwards, corresponding horizontal facing is also suitable.")
             .attachKeyFrame()
             .placeNearTarget()
             .pointAt(util.vector.topOf(0, 1, 2));

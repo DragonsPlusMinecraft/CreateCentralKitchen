@@ -14,7 +14,6 @@
     "common.TileEntityBehaviorMixin"
   ],
   "client": [
-    "client.CreateItemGroupBaseMixin",
     "client.DeployerRendererMixin"
   ],
   "injectors": {

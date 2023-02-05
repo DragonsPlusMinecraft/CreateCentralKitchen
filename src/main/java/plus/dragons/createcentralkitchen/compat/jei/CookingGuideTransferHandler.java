@@ -1,16 +1,24 @@
 package plus.dragons.createcentralkitchen.compat.jei;
 
+import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideMenu;
+import plus.dragons.createcentralkitchen.entry.CckContainerTypes;
+import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -20,10 +28,15 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
     public Class<CookingGuideMenu> getContainerClass() {
         return CookingGuideMenu.class;
     }
-    
+
     @Override
-    public Class<CookingPotRecipe> getRecipeClass() {
-        return CookingPotRecipe.class;
+    public Optional<MenuType<CookingGuideMenu>> getMenuType() {
+        return Optional.of(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get());
+    }
+
+    @Override
+    public RecipeType<CookingPotRecipe> getRecipeType() {
+        return RecipeType.create(FarmersDelight.MODID, "cooking", CookingPotRecipe.class);
     }
     
     @Override

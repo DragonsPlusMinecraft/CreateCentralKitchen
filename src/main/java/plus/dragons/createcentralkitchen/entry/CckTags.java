@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -31,22 +32,17 @@ public class CckTags {
         return TagKey.create(Registry.BLOCK_REGISTRY, id);
     }
     
-    public static void genItemTags(RegistrateItemTagsProvider prov) {
-        prov.tag(UPRIGHT_ON_BELT).add(
+    public static void genItemTags(RegistrateTagsProvider<Item> pov) {
+        pov.tag(UPRIGHT_ON_BELT).add(
             ModItems.APPLE_CIDER.get(),
             ModItems.MELON_JUICE.get(),
             ModItems.TOMATO_SAUCE.get());
-        prov.tag(UPRIGHT_ON_DEPLOYER).addTag(ForgeTags.TOOLS);
+        pov.tag(UPRIGHT_ON_DEPLOYER).addTag(ForgeTags.TOOLS);
     }
 
-    public static void genBlockTags(RegistrateTagsProvider<Block> prov) {
-        prov.tag(ModTags.HEAT_SOURCES).add(
+    public static void genBlockTags(RegistrateTagsProvider<Block> pov) {
+        pov.tag(ModTags.HEAT_SOURCES).add(
                 AllBlocks.LIT_BLAZE_BURNER.get());
-    }
-    
-    public static void register() {
-        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, CckTags::genItemTags);
-        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, CckTags::genBlockTags);
     }
     
 }

@@ -5,12 +5,11 @@ import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckItems;
 import plus.dragons.createcentralkitchen.foundation.ponder.CckPonderTag;
-import plus.dragons.createcentralkitchen.foundation.utility.SafeRegistrate;
+import plus.dragons.createdragonlib.init.SafeRegistrate;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -23,7 +22,7 @@ public class CckPonderIndex {
      */
     private static final SafeRegistrate REGISTRATE = new SafeRegistrate("");
 
-    private static <T extends IForgeRegistryEntry<? super T> & ItemLike>
+    private static <T extends ItemLike>
     ItemProviderEntry<T> component(RegistryObject<T> object) {
         return new ItemProviderEntry<>(REGISTRATE, object);
     }

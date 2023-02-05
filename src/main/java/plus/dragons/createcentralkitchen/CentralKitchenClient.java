@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -10,19 +11,23 @@ import plus.dragons.createcentralkitchen.foundation.ponder.content.CckPonderInde
 public class CentralKitchenClient {
     
     public CentralKitchenClient() {
-        CckBlockPartials.register();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(CentralKitchenClient::clientInit);
+        //IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+
+        //Have to do this here because flywheel lied about the init timing ;(
+        //Things won't work if you try init PartialModels in FMLClientSetupEvent
+        CckBlockPartials.register();
         modEventBus.addListener(CentralKitchenClient::setup);
     }
-    
-    public static void clientInit(final FMLClientSetupEvent event) {
-        event.enqueueWork(CckArmInteractionPointTypes::registerPonderTags);
-    }
+
 
     public static void setup(final FMLClientSetupEvent event) {
-        CckPonderIndex.register();
-        CckPonderIndex.registerTags();
+        event.enqueueWork(()->{
+            CckPonderIndex.register();
+            CckPonderIndex.registerTags();
+            CckArmInteractionPointTypes.registerPonderTags();
+        });
+
     }
     
 }

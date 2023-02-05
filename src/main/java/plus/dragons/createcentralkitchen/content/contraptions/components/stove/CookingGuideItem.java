@@ -24,10 +24,10 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.CckBlocks;
 import plus.dragons.createcentralkitchen.entry.CckContainerTypes;
 import plus.dragons.createcentralkitchen.entry.CckItems;
-import plus.dragons.createcentralkitchen.foundation.utility.LangUtils;
 
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class CookingGuideItem extends Item implements MenuProvider {
         ItemStack heldItem = player.getItemInHand(hand);
         if (!player.isShiftKeyDown() && hand == InteractionHand.MAIN_HAND) {
             if (!world.isClientSide && player instanceof ServerPlayer)
-                NetworkHooks.openGui((ServerPlayer) player, this, buf -> {
+                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> {
                     buf.writeItem(heldItem);
                     buf.writeBoolean(true);
                 });
@@ -97,13 +97,13 @@ public class CookingGuideItem extends Item implements MenuProvider {
         super.appendHoverText(stack, level, tooltip, flag);
         ItemStack result = getResult(stack);
         if (result.isEmpty()) {
-            LangUtils.translate("gui.goggles.blaze_stove.no_result")
+            CentralKitchen.LANG.translate("gui.goggles.blaze_stove.no_result")
                 .style(ChatFormatting.RED)
                 .addTo(tooltip);
         } else {
-            LangUtils.translate("gui.goggles.blaze_stove.recipe_result")
+            CentralKitchen.LANG.translate("gui.goggles.blaze_stove.recipe_result")
                 .addTo(tooltip);
-            LangUtils.itemName(result)
+            CentralKitchen.LANG.itemName(result)
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
         }

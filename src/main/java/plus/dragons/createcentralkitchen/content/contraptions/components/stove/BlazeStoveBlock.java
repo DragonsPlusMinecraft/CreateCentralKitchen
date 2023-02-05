@@ -120,7 +120,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         
         if (player.isSecondaryUseActive()) {
             if(!level.isClientSide()) {
-                withTileEntityDo(level, pos, stove -> NetworkHooks.openGui(
+                withTileEntityDo(level, pos, stove -> NetworkHooks.openScreen(
                     (ServerPlayer) player, stove, buf -> {
                         buf.writeItem(stove.getCookingGuide());
                         buf.writeBoolean(false);
@@ -175,7 +175,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
             return InteractionResultHolder.fail(ItemStack.EMPTY);
         
         if (!noConsume) {
-            ItemStack container = stack.hasContainerItem() ? stack.getContainerItem() : ItemStack.EMPTY;
+            ItemStack container = stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY;
             if (!level.isClientSide) {
                 stack.shrink(1);
             }
@@ -228,8 +228,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
         return false;
     }
-    
-    @Override
+
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
         if (random.nextInt(10) != 0)

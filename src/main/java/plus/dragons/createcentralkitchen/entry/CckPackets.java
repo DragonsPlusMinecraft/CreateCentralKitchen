@@ -75,7 +75,7 @@ public enum CckPackets {
             channel.messageBuilder(type, index++, direction)
                     .encoder(encoder)
                     .decoder(decoder)
-                    .consumer(handler)
+                    .consumerMainThread(handler)
                     .add();
         }
     }

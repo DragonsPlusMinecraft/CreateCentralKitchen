@@ -6,8 +6,8 @@ import com.simibubi.create.content.AllSections;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.api.FillCreateItemGroupEvent;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideItem;
+import plus.dragons.createdragonlib.init.FillCreateItemGroupEvent;
 
 public class CckItems {
     private static final CreateRegistrate REGISTRATE = CentralKitchen.REGISTRATE.startSection(AllSections.KINETICS);

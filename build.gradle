@@ -1,23 +1,12 @@
-buildscript {
-    repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: true
-        classpath "org.parchmentmc:librarian:${librarian_version}"
-        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
-    }
+plugins {
+    id 'idea'
+    id 'net.minecraftforge.gradle'
+    id 'org.spongepowered.mixin'
+    id 'org.parchmentmc.librarian.forgegradle'
+    id 'maven-publish'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
+
 
 version = mod_version
 group = 'plus.dragons.createcentralkitchen' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -117,15 +106,10 @@ minecraft {
     }
 }
 
+jarJar.enable()
 
 repositories {
-    // Put repositories for dependencies here
-    // ForgeGradle automatically adds the Forge maven and Maven Central for you
-
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
-    // flatDir {
-    //     dir 'libs'
-    // }
+    mavenLocal()
     maven {
         name = 'tterrag maven'
         url = 'https://maven.tterrag.com/'
@@ -151,35 +135,34 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        name 'DragonsPlus Maven'
+        url "https://maven.dragons.plus/Releases"
+    }
 }
 
 dependencies {
-    // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // Real mod deobf dependency examples - these get remapped to your current mappings
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
-    // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
+    jarJar(group: 'plus.dragons.createdragonlib', name: "create_dragon_lib-${minecraft_version}", version: "${create_dragon_lib_version_range}") {
+        transitive = false
+        jarJar.pin(it, project.create_dragon_lib_version)
+    }
 
-    // Examples using mod jars from ./libs
-    // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:all") { transitive = false }
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_file}")
     compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
+    implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+
+    implementation fg.deobf("plus.dragons.createdragonlib:create_dragon_lib-${minecraft_version}:${create_dragon_lib_version}")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
 
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
@@ -197,6 +180,7 @@ mixin {
 
 // Example for how to get properties into the manifest for reading at runtime.
 jar {
+    classifier = 'slim'
     manifest {
         attributes([
                 "Specification-Title"     : "create_central_kitchen",
@@ -211,16 +195,24 @@ jar {
     }
 }
 
-// Example configuration to allow publishing using the maven-publish plugin
-// This is the preferred method to reobfuscate your jar file
+void addLicense(jarTask) {
+    jarTask.from('LICENSE')
+}
+
 jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-// publish.dependsOn('reobfJar')
+addLicense(jar)
+
+tasks.jarJar.setClassifier('')
+tasks.jarJar.finalizedBy('reobfJarJar')
+addLicense(tasks.jarJar)
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            artifactId = archivesBaseName
+
+            fg.component(it)
+            jarJar.component(it)
         }
     }
     repositories {
