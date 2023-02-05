@@ -7,11 +7,8 @@ import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
-import plus.dragons.createcentralkitchen.entry.CckPackets;
 import plus.dragons.createcentralkitchen.foundation.gui.CookingGuideBackgroundGui;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

@@ -3,7 +3,6 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -11,13 +10,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuide;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 public class CookingPotPoint extends ArmInteractionPoint {
     public static final int MEAL_DISPLAY_SLOT = 6;

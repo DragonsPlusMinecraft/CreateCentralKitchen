@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.logistics.block.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
@@ -8,18 +7,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlockEntity;
-
-import java.util.Optional;
 
 public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
 
