@@ -17,7 +17,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public enum CckPackets {
-    // Client to Server
+    // Just leave it here. Maybe in future we'll need it.
     ;
 
     public static final ResourceLocation CHANNEL_NAME = CentralKitchen.genRL("main");

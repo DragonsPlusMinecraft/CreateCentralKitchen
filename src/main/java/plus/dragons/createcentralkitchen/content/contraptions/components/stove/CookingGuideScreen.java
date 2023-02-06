@@ -27,15 +27,15 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
     @Override
     protected void init() {
         setWindowSize(
-                backgroundGui.WIDTH,
-                backgroundGui.HEIGHT + 4 + PLAYER_INVENTORY.height
+                CookingGuideBackgroundGui.WIDTH,
+                CookingGuideBackgroundGui.HEIGHT + 4 + PLAYER_INVENTORY.height
         );
         setWindowOffset(-32, 0);
         super.init();
         int guideX = getLeftOfCentered(COOKING_GUIDE_WIDTH);
         int guideY = topPos;
         extraAreas = ImmutableList.of(
-            new Rect2i(guideX + backgroundGui.WIDTH, guideY + backgroundGui.HEIGHT - 60, 48, 48),
+            new Rect2i(guideX + CookingGuideBackgroundGui.WIDTH, guideY + CookingGuideBackgroundGui.HEIGHT - 60, 48, 48),
             new Rect2i(guideX, guideY, imageWidth, imageHeight)
         );
     }
@@ -43,7 +43,7 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
     @Override
     protected void renderBg(PoseStack ms, float partialTicks, int mouseX, int mouseY) {
         int invX = getLeftOfCentered(PLAYER_INVENTORY.width);
-        int invY = topPos + backgroundGui.HEIGHT + 4;
+        int invY = topPos + CookingGuideBackgroundGui.HEIGHT + 4;
         renderPlayerInventory(ms, invX, invY);
 
         int guideX = getLeftOfCentered(COOKING_GUIDE_WIDTH);
@@ -54,8 +54,8 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
 
         GuiGameElement.of(menu.contentHolder)
             .<GuiGameElement.GuiRenderBuilder>at(
-                guideX + backgroundGui.WIDTH,
-                guideY + backgroundGui.HEIGHT - 60,
+                guideX + CookingGuideBackgroundGui.WIDTH,
+                guideY + CookingGuideBackgroundGui.HEIGHT - 60,
                 -200
             )
             .scale(3)
