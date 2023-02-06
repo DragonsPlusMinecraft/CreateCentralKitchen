@@ -88,7 +88,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     
     @Override
     protected void saveData(ItemStack contentHolder) {
-    
+
     }
 
     @Override
@@ -99,7 +99,12 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     @Override
     public void removed(Player playerIn) {
         super.removed(playerIn);
-        playerIn.getCooldowns().addCooldown(cookingGuide.getOwner().getItem(), 5);
+        if(blazeStove!=null){
+            blazeStove.updateCookingGuide();
+            blazeStove.notifyUpdate();
+        } else {
+            playerIn.getCooldowns().addCooldown(cookingGuide.getOwner().getItem(), 5);
+        }
     }
     
     @Override
