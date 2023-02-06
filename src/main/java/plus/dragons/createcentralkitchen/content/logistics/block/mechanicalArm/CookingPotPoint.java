@@ -20,8 +20,6 @@ public class CookingPotPoint extends ArmInteractionPoint {
     public static final int MEAL_DISPLAY_SLOT = 6;
     public static final int CONTAINER_SLOT = 7;
     public static final int OUTPUT_SLOT = 8;
-    
-    protected LazyOptional<IItemHandler> cachedOutputHandler = LazyOptional.empty();
 
     public CookingPotPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
@@ -43,31 +41,31 @@ public class CookingPotPoint extends ArmInteractionPoint {
         }
         return cachedHandler.orElse(null);
     }
-
+    
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
         if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
               level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
             return stack;
-
+        
         CookingGuide cookingGuide = CookingGuide.of(blazeStove.getCookingGuide());
         if (cookingGuide.getResult().isEmpty())
             return stack;
-
+        
         IItemHandler inventory = getHandler();
         if (inventory == null)
             return stack;
-
+        
         if (inventory.getStackInSlot(CONTAINER_SLOT).isEmpty() && cookingGuide.isContainer(stack))
             return inventory.insertItem(CONTAINER_SLOT, stack, simulate);
-
+        
         for (int slot = 0; slot < MEAL_DISPLAY_SLOT; slot++) {
             if (inventory.getStackInSlot(slot).isEmpty() &&
                 cookingGuide.needIngredient(slot) &&
                 cookingGuide.isIngredient(slot, stack))
                 return inventory.insertItem(slot, stack, simulate);
         }
-
+        
         return stack;
     }
     
@@ -83,7 +81,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
                 CookingGuide cookingGuide = CookingGuide.of(blazeStove.getCookingGuide());
                 if (cookingGuide.getResult().isEmpty())
                     return ItemStack.EMPTY;
-
+                
                 IItemHandler inventory = getHandler();
                 if (inventory == null)
                     return ItemStack.EMPTY;
@@ -100,7 +98,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
                 }
             }
         }
-
+        
         return ItemStack.EMPTY;
     }
     
