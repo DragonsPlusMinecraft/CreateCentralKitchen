@@ -40,15 +40,15 @@ public class CookingGuideItem extends Item implements MenuProvider {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext useOnContext) {
-        var level = useOnContext.getLevel();
-        var player = useOnContext.getPlayer();
+    public InteractionResult useOn(UseOnContext context) {
+        var level = context.getLevel();
+        var player = context.getPlayer();
         if (player == null)
             return InteractionResult.PASS;
         if (player.isSecondaryUseActive()) {
-            var itemStack = useOnContext.getItemInHand();
+            var itemStack = context.getItemInHand();
             if (itemStack.is(CckItems.COOKING_GUIDE.get())) {
-                var blockPos = useOnContext.getClickedPos();
+                var blockPos = context.getClickedPos();
                 var blockState = level.getBlockState(blockPos);
                 var blockEntity = level.getBlockEntity(blockPos);
                 if (blockState.getBlock() instanceof BlazeBurnerBlock &&
@@ -58,11 +58,11 @@ public class CookingGuideItem extends Item implements MenuProvider {
                         level.setBlockAndUpdate(blockPos, CckBlocks.BLAZE_STOVE.getDefaultState()
                                 .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
                         if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove)
-                            blazeStove.setCookingGuide(itemStack);
-                        AdvancementBehaviour.setPlacedBy(useOnContext.getLevel(), blockPos, player);
+                            blazeStove.setCookingGuide(itemStack.copy());
+                        AdvancementBehaviour.setPlacedBy(context.getLevel(), blockPos, player);
 
                         if (!player.getAbilities().instabuild)
-                            itemStack.shrink(1);
+                            player.setItemInHand(context.getHand(), ItemStack.EMPTY);
                     }
                     return InteractionResult.SUCCESS;
                 }

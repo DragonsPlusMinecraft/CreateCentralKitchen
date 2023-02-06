@@ -18,10 +18,12 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
+import plus.dragons.createcentralkitchen.content.contraptions.components.stove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.CckArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.entry.*;
 import plus.dragons.createcentralkitchen.foundation.data.lang.LangMerger;
 import plus.dragons.createcentralkitchen.foundation.utility.SafeRegistrate;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
@@ -69,6 +71,8 @@ public class CentralKitchen {
     public static void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             CckPackets.registerPackets();
+            BlazeStoveBlockEntity.registerBoostingCooker(ModBlockEntityTypes.COOKING_POT.get());
+            BlazeStoveBlockEntity.registerBoostingCooker(ModBlockEntityTypes.SKILLET.get());
         });
     }
 

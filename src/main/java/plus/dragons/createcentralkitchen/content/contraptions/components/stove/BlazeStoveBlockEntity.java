@@ -27,7 +27,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
@@ -45,18 +49,30 @@ import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.item.SkilletItem;
 import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider, IHaveGoggleInformation {
-    public static final Vec2[] ITEM_OFFSET_NS = new Vec2[9];
-    public static final Vec2[] ITEM_OFFSET_WE = new Vec2[9];
-    private static final VoxelShape GRILLING_AREA = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D);
     private static final int INVENTORY_SLOT_COUNT = 9;
+    public static final Vec2[] ITEM_OFFSET_NS = new Vec2[INVENTORY_SLOT_COUNT];
+    public static final Vec2[] ITEM_OFFSET_WE = new Vec2[INVENTORY_SLOT_COUNT];
+    private static final VoxelShape GRILLING_AREA = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D);
+    private static final Set<BlockEntityType<?>> BOOSTING_COOKER_TYPES = new HashSet<>();
+    static {
+        float scale = 5 / 16F;
+        for (int i = 0; i < INVENTORY_SLOT_COUNT; ++i) {
+            float x = (i % 3 - 1) * scale;
+            float y = (i / 3 - 1) * scale;
+            ITEM_OFFSET_NS[i] = new Vec2(x, y);
+            ITEM_OFFSET_WE[i] = new Vec2(y, x);
+        }
+    }
+    
     private final ItemStackHandler inventory = createItemHandler();
     private final int[] cookingTimes = new int[INVENTORY_SLOT_COUNT];
     private final int[] cookingTimesTotal = new int[INVENTORY_SLOT_COUNT];
@@ -73,6 +89,10 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
                 return 1;
             }
         };
+    }
+    
+    public static void registerBoostingCooker(BlockEntityType<?> type) {
+        BOOSTING_COOKER_TYPES.add(type);
     }
     
     @Override
@@ -104,13 +124,13 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             switch(heat) {
                 case SEETHING -> {
                     if (blockedAbove)
-                        boostCookingPot(4);
+                        boostCooking(4);
                     else
                         burnIngredients();
                 }
                 case KINDLED, FADING -> {
                     if (blockedAbove)
-                        boostCookingPot(2);
+                        boostCooking(2);
                     else
                         processCooking(2);
                 }
@@ -154,6 +174,37 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         super.write(compound, clientPacket);
     }
     
+    @Override
+    @NotNull
+    public Component getDisplayName() {
+        return cookingGuide.getItem().getDescription();
+    }
+    
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inventory, @NotNull Player pPlayer) {
+        return new CookingGuideMenu(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), syncId, inventory, this);
+    }
+    
+    public boolean stillValid(Player player) {
+        if (player.level.getBlockEntity(worldPosition) != this) {
+            return false;
+        } else {
+            return !(player.distanceToSqr(VecHelper.getCenterOf(worldPosition)) > 64.0D);
+        }
+    }
+    
+    public int getBlazeStatusCode(){
+        var heat = getBlockState().getValue(BlazeBurnerBlock.HEAT_LEVEL);
+        return switch (heat){
+            case NONE -> 0;
+            case SMOULDERING -> 1;
+            case FADING, KINDLED -> 2;
+            case SEETHING -> 3;
+            
+        };
+    }
+    
     private void updateCookingGuide() {
         if (level != null)
             CookingGuide.of(cookingGuide).updateRecipe(level);
@@ -184,6 +235,15 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         return headAnimation;
     }
     
+    public boolean isBlockedAbove() {
+        if (level != null) {
+            BlockState above = level.getBlockState(worldPosition.above());
+            return Shapes.joinIsNotEmpty(GRILLING_AREA, above.getShape(level, worldPosition.above()), BooleanOp.AND);
+        } else {
+            return false;
+        }
+    }
+    
     @Override
     public boolean isValidBlockAbove() {
         assert level != null;
@@ -200,15 +260,6 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             dropAll();
             var pos = getBlockPos();
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), cookingGuide);
-        }
-    }
-    
-    public boolean isBlockedAbove() {
-        if (level != null) {
-            BlockState above = level.getBlockState(worldPosition.above());
-            return Shapes.joinIsNotEmpty(GRILLING_AREA, above.getShape(level, worldPosition.above()), BooleanOp.AND);
-        } else {
-            return false;
         }
     }
     
@@ -243,6 +294,11 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             .setValue(BlazeBurnerBlock.HEAT_LEVEL, newHeat)
         );
         notifyUpdate();
+    }
+    
+    @Override
+    public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
+        return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
     }
     
     @Override
@@ -281,10 +337,14 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         
         return false;
     }
-
-    @Override
-    public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
-        return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
+    
+    protected void decrementCooking(boolean blockedAbove) {
+        if (blockedAbove) return;
+        for (int i = 0; i < INVENTORY_SLOT_COUNT; ++i) {
+            if (cookingTimes[i] > 0) {
+                cookingTimes[i] = Mth.clamp(cookingTimes[i] - 2, 0, cookingTimesTotal[i]);
+            }
+        }
     }
     
     protected void processCooking(int speed) {
@@ -355,37 +415,6 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         }
     }
     
-    protected void decrementCooking(boolean blockedAbove) {
-        if (blockedAbove) return;
-        for (int i = 0; i < INVENTORY_SLOT_COUNT; ++i) {
-            if (cookingTimes[i] > 0) {
-                cookingTimes[i] = Mth.clamp(cookingTimes[i] - 2, 0, cookingTimesTotal[i]);
-            }
-        }
-    }
-    
-    protected void boostCookingPot(int times) {
-        assert level != null;
-        Triple<BlockPos, BlockState, CookingPotBlockEntity> result = null;
-        BlockPos posAbove = getBlockPos().above();
-        BlockState stateAbove = level.getBlockState(posAbove);
-        if (level.getBlockEntity(posAbove) instanceof CookingPotBlockEntity cookingPot) {
-            result = Triple.of(posAbove, stateAbove, cookingPot);
-        } else {
-            if (stateAbove.is(ModTags.HEAT_CONDUCTORS)) {
-                BlockPos posFurtherAbove = posAbove.above();
-                if (level.getBlockEntity(posFurtherAbove) instanceof CookingPotBlockEntity cookingPot
-                && !cookingPot.requiresDirectHeat()) {
-                    result = Triple.of(posFurtherAbove, level.getBlockState(posFurtherAbove), cookingPot);
-                }
-            }
-        }
-        if (result == null) return;
-        for (int i = 0; i < times - 1; ++i) {
-            CookingPotBlockEntity.cookingTick(level, result.getLeft(), result.getMiddle(), result.getRight());
-        }
-    }
-    
     public void addSmokeAtItem(int slot, int amount) {
         assert level != null;
         Direction direction = getBlockState().getValue(StoveBlock.FACING);
@@ -401,46 +430,40 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         }
     }
     
-    static {
-        float scale = 5 / 16F;
-        for (int i = 0; i < 9; ++i) {
-            float x = (i % 3 - 1) * scale;
-            float y = (i / 3 - 1) * scale;
-            ITEM_OFFSET_NS[i] = new Vec2(x, y);
-            ITEM_OFFSET_WE[i] = new Vec2(y, x);
-        }
-    }
-
-    @Override
-    @NotNull
-    public Component getDisplayName() {
-        return cookingGuide.getItem().getDescription();
-    }
-
+    @SuppressWarnings("unchecked")
     @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inventory, @NotNull Player pPlayer) {
-        return new CookingGuideMenu(CckContainerTypes.COOKING_GUIDE_FOR_BLAZE.get(), syncId, inventory, this);
+    private <T extends BlockEntity> Runnable getCookingTicker(BlockEntity blockEntity, BlockEntityType<T> type) {
+        assert level != null;
+        BlockState state = blockEntity.getBlockState();
+        EntityBlock block = (EntityBlock) state.getBlock();
+        BlockEntityTicker<T> ticker = block.getTicker(level, state, type);
+        if (ticker == null)
+            return null;
+        return () -> ticker.tick(level, blockEntity.getBlockPos(), state, (T) blockEntity);
     }
     
-    public boolean stillValid(Player player) {
-        if (player.level.getBlockEntity(worldPosition) != this) {
-            return false;
-        } else {
-            return !(player.distanceToSqr(VecHelper.getCenterOf(worldPosition)) > 64.0D);
+    protected void boostCooking(int times) {
+        assert level != null;
+        BlockPos pos = getBlockPos().above();
+        BlockState state = level.getBlockState(pos);
+        if (state.is(ModTags.HEAT_CONDUCTORS)) {
+            pos = pos.above();
+        }
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity == null)
+            return;
+        for (var type : BOOSTING_COOKER_TYPES) {
+            Runnable ticker = getCookingTicker(blockEntity, type);
+            if (ticker != null) {
+                for (int i = 0; i < times - 1; ++i) {
+                    ticker.run();
+                }
+                return;
+            }
         }
     }
-
-    public int getBlazeStatusCode(){
-        var heat = getBlockState().getValue(BlazeBurnerBlock.HEAT_LEVEL);
-        return switch (heat){
-            case NONE -> 0;
-            case SMOULDERING -> 1;
-            case FADING, KINDLED -> 2;
-            case SEETHING -> 3;
-        };
-    }
     
+    @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         ItemStack result = CookingGuide.of(cookingGuide).getResult();
         if (result.isEmpty()) {

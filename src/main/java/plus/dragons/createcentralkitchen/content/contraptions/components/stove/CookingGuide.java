@@ -118,10 +118,15 @@ public class CookingGuide implements ICapabilitySerializable<CompoundTag> {
     public void updateRecipe(Level level) {
         level.getRecipeManager()
             .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
-            .ifPresent(recipe -> {
-                inventory.setStackInSlot(6, recipe.getResultItem());
-                container = recipe.getOutputContainer();
-            });
+            .ifPresentOrElse(
+                recipe -> {
+                    inventory.setStackInSlot(6, recipe.getResultItem());
+                    container = recipe.getOutputContainer();
+                },
+                () -> {
+                    inventory.setStackInSlot(6, ItemStack.EMPTY);
+                    container = ItemStack.EMPTY;
+                });
     }
     
 }

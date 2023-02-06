@@ -1,6 +1,8 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.stove;
 
 import com.simibubi.create.foundation.gui.container.GhostItemContainer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -63,7 +65,9 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         boolean fromItemStack = extraData.readBoolean();
         if (!fromItemStack) {
             BlockPos pos = extraData.readBlockPos();
-            if (player.level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove)
+            ClientLevel level = Minecraft.getInstance().level;
+            assert level != null;
+            if (level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove)
                 this.blazeStove = blazeStove;
             else throw new RuntimeException("Expected Blaze Stove at " + pos + " but found none");
         }
