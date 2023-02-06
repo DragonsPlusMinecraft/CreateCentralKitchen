@@ -21,8 +21,6 @@ public class CookingPotPoint extends ArmInteractionPoint {
     public static final int CONTAINER_SLOT = 7;
     public static final int OUTPUT_SLOT = 8;
     
-    protected LazyOptional<IItemHandler> cachedOutputHandler = LazyOptional.empty();
-    
     public CookingPotPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
     }
