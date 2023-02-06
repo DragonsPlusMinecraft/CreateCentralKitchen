@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
+	"render_type": "cutout_mipped",
 	"textures": {
 		"particle": "create:block/dark_metal_block",
 		"base": "create:block/blaze_heater_brazier",
