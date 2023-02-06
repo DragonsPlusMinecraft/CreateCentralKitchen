@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
@@ -77,7 +78,11 @@ public class CookingGuide implements ICapabilitySerializable<CompoundTag> {
     @Override
     public void deserializeNBT(CompoundTag tag) {
         ListTag ingredientsTag = tag.getList("Ingredients", 10);
-    
+        
+        for (int i = 0; i < 7; ++i) {
+            inventory.setStackInSlot(i, ItemStack.EMPTY);
+        }
+        
         for (int i = 0; i < ingredientsTag.size(); ++i) {
             CompoundTag ingredientTag = ingredientsTag.getCompound(i);
             int slot = ingredientTag.getByte("Slot") & 255;
