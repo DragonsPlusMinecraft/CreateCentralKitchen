@@ -203,7 +203,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         };
     }
 
-    private void updateCookingGuide() {
+    void updateCookingGuide() {
         if (level != null)
             CookingGuide.of(cookingGuide).updateRecipe(level);
     }
