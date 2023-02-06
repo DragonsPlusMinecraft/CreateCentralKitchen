@@ -29,6 +29,7 @@ public class CookingGuideSyncPacket extends SimplePacketBase {
         var player = context.getSender();
         if (player != null && player.containerMenu instanceof CookingGuideMenu menu) {
             menu.cookingGuide.deserializeNBT(nbt);
+            context.setPacketHandled(true);
         }
     }
     
