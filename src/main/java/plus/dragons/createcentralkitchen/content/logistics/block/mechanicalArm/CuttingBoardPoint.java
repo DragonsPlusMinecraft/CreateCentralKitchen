@@ -15,8 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-import java.util.List;
-
 
 public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
     private final RecipeWrapper recipeWrapper = new RecipeWrapper(new ItemStackHandler(1));

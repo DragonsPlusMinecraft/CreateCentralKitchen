@@ -2,21 +2,16 @@ package plus.dragons.createcentralkitchen.entry;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
-
-import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class CckTags {
     public static final TagKey<Item> UPRIGHT_ON_BELT = item(Create.asResource("upright_on_belt"));

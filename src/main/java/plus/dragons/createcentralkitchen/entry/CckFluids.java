@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 
 import java.util.Locale;
-import java.util.Properties;
 
 public enum CckFluids implements NonNullSupplier<Fluid> {
     TOMATO_SAUCE(FarmersDelight.MODID),
