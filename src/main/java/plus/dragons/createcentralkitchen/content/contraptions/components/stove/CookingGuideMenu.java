@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
-    private CookingGuide cookingGuide;
+    CookingGuide cookingGuide;
     @Nullable
-    private BlazeStoveBlockEntity blazeStove;
+    BlazeStoveBlockEntity blazeStove;
 
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
@@ -99,8 +99,7 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     @Override
     public void removed(Player playerIn) {
         super.removed(playerIn);
-        if(blazeStove!=null){
-            blazeStove.updateCookingGuide();
+        if (blazeStove!=null) {
             blazeStove.notifyUpdate();
         } else {
             playerIn.getCooldowns().addCooldown(cookingGuide.getOwner().getItem(), 5);
@@ -110,6 +109,50 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
     @Override
     protected boolean allowRepeats() {
         return true;
+    }
+    
+    @Override
+    public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
+        if (slotId == 42)
+            return;
+        if (slotId < 36) {
+            super.clicked(slotId, dragType, clickTypeIn, player);
+            return;
+        }
+        if (clickTypeIn == ClickType.THROW)
+            return;
+        
+        ItemStack held = getCarried().copy();
+        held.setCount(1);
+        if (clickTypeIn == ClickType.CLONE) {
+            if (player.isCreative() && held.isEmpty()) {
+                ItemStack cloned = ghostInventory.getStackInSlot(slotId - 36).copy();
+                cloned.setCount(cloned.getMaxStackSize());
+                setCarried(cloned);
+            }
+        } else if (getSlot(slotId).mayPlace(held) || held.isEmpty()) {
+            ghostInventory.setStackInSlot(slotId - 36, held.copy());
+            getSlot(slotId).setChanged();
+        }
+    }
+    
+    @Override
+    public ItemStack quickMoveStack(Player playerIn, int index) {
+        if (index < 36) {
+            ItemStack stackToInsert = playerInventory.getItem(index).copy();
+            stackToInsert.setCount(1);
+            for (int i = 36; i < 42; i++) {
+                if (getSlot(i).mayPlace(stackToInsert)) {
+                    ghostInventory.insertItem(i - 36, stackToInsert, false);
+                    getSlot(i).setChanged();
+                    break;
+                }
+            }
+        } else if (index < 42) {
+            ghostInventory.extractItem(0, 1, false);
+            getSlot(index).setChanged();
+        }
+        return ItemStack.EMPTY;
     }
     
     class CookingIngredientSlot extends SlotItemHandler {
@@ -143,48 +186,6 @@ public class CookingGuideMenu extends GhostItemContainer<ItemStack> {
         public boolean mayPickup(Player playerIn) {
             return false;
         }
-    }
-
-    @Override
-    public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
-        if (slotId == 42)
-            return;
-        if (slotId < 36) {
-            super.clicked(slotId, dragType, clickTypeIn, player);
-            return;
-        }
-        if (clickTypeIn == ClickType.THROW)
-            return;
-
-        ItemStack held = getCarried().copy();
-        held.setCount(1);
-        if (clickTypeIn == ClickType.CLONE) {
-            if (player.isCreative() && held.isEmpty()) {
-                ItemStack cloned = ghostInventory.getStackInSlot(slotId - 36).copy();
-                cloned.setCount(cloned.getMaxStackSize());
-                setCarried(cloned);
-            }
-        } else if (getSlot(slotId).mayPlace(held) || held.isEmpty()) {
-            ghostInventory.setStackInSlot(slotId - 36, held.copy());
-            getSlot(slotId).setChanged();
-        }
-    }
-
-    @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        if (index < 36) {
-            ItemStack stackToInsert = playerInventory.getItem(index).copy();
-            stackToInsert.setCount(1);
-            for(int i = 36; i < 42; i++)
-                if (getSlot(i).mayPlace(stackToInsert)) {
-                    ghostInventory.insertItem(i - 36, stackToInsert, false);
-                    getSlot(i).setChanged();
-                }
-        } else {
-            ghostInventory.extractItem(0, 1, false);
-            getSlot(index).setChanged();
-        }
-        return ItemStack.EMPTY;
     }
     
 }

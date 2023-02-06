@@ -202,8 +202,8 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
 
         };
     }
-
-    void updateCookingGuide() {
+    
+    private void updateCookingGuide() {
         if (level != null)
             CookingGuide.of(cookingGuide).updateRecipe(level);
     }
@@ -219,9 +219,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         cookingGuide = stack;
         if (level != null) {
             updateCookingGuide();
-            if (!level.isClientSide) {
-                notifyUpdate();
-            }
+            notifyUpdate();
         }
     }
     
@@ -298,7 +296,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
         return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
     }
-
+    
     @Override
     public void applyCreativeFuel() {
         super.applyCreativeFuel();
