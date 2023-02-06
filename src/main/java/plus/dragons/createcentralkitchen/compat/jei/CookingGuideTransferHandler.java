@@ -8,6 +8,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideMenu;
+import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideSyncPacket;
+import plus.dragons.createcentralkitchen.entry.CckPackets;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -38,8 +40,9 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
                 var items = inputs.get(i).getItems();
                 input = items.length == 0 ? ItemStack.EMPTY : items[0];
             } else input = ItemStack.EMPTY;
-            container.getSlot(i).set(input);
+            container.getSlot(i + 36).set(input);
         }
+        CckPackets.channel.sendToServer(new CookingGuideSyncPacket(container));
         return null;
     }
     

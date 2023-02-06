@@ -11,16 +11,18 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import plus.dragons.createcentralkitchen.CentralKitchen;
+import plus.dragons.createcentralkitchen.content.contraptions.components.stove.CookingGuideSyncPacket;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public enum CckPackets {
-    // Just leave it here. Maybe in future we'll need it.
-    ;
+    //Client to Server
+    COOKING_GUIDE_SYNC(CookingGuideSyncPacket.class, CookingGuideSyncPacket::new, NetworkDirection.PLAY_TO_SERVER);
 
     public static final ResourceLocation CHANNEL_NAME = CentralKitchen.genRL("main");
+    //Since v1.1.0
     public static final int NETWORK_VERSION = 2;
     public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
     public static SimpleChannel channel;
