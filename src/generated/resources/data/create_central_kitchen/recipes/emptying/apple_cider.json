@@ -1,0 +1,20 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "farmersdelight:apple_cider"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:apple_cider",
+      "amount": 250
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}
