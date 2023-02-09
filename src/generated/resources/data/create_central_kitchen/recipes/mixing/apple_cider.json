@@ -1,11 +1,5 @@
 {
   "type": "create:mixing",
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "farmersdelight"
-    }
-  ],
   "ingredients": [
     {
       "item": "minecraft:apple"
@@ -19,8 +13,15 @@
   ],
   "results": [
     {
-      "amount": 250,
-      "fluid": "create_central_kitchen:apple_cider"
+      "fluid": "create_central_kitchen:apple_cider",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated",
+  "conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "forge:mod_loaded"
     }
   ]
 }

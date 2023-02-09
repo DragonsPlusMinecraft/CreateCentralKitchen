@@ -1,24 +1,25 @@
 {
   "type": "create:mixing",
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "farmersdelight"
-    }
-  ],
   "ingredients": [
     {
       "item": "minecraft:cocoa_beans"
     },
     {
-      "amount": 250,
-      "fluidTag": "forge:chocolate"
+      "fluidTag": "forge:chocolate",
+      "amount": 250
     }
   ],
   "results": [
     {
-      "amount": 250,
-      "fluid": "create_central_kitchen:hot_cocoa"
+      "fluid": "create_central_kitchen:hot_cocoa",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated",
+  "conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "forge:mod_loaded"
     }
   ]
 }
