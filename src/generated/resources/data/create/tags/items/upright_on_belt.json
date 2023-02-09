@@ -1,8 +1,21 @@
 {
   "replace": false,
   "values": [
-    "farmersdelight:apple_cider",
-    "farmersdelight:melon_juice",
-    "farmersdelight:tomato_sauce"
+    {
+      "id": "farmersdelight:apple_cider",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:hot_cocoa",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:melon_juice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:tomato_sauce",
+      "required": false
+    }
   ]
 }

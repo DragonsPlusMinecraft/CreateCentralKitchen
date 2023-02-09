@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "create_central_kitchen:flowing_apple_cider",
+      "required": false
+    },
+    {
+      "id": "create_central_kitchen:apple_cider",
+      "required": false
+    }
+  ]
+}
