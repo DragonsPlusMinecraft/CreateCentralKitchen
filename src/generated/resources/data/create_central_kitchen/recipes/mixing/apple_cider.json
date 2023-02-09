@@ -17,6 +17,7 @@
       "amount": 250
     }
   ],
+  "heatRequirement": "heated",
   "conditions": [
     {
       "modid": "farmersdelight",
