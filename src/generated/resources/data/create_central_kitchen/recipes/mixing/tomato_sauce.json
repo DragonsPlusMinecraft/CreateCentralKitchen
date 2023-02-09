@@ -1,5 +1,12 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "heatRequirement": "heated",
   "ingredients": [
     {
       "item": "farmersdelight:tomato"
@@ -10,15 +17,8 @@
   ],
   "results": [
     {
-      "fluid": "create_central_kitchen:tomato_sauce",
-      "amount": 250
-    }
-  ],
-  "heatRequirement": "heated",
-  "conditions": [
-    {
-      "modid": "farmersdelight",
-      "type": "forge:mod_loaded"
+      "amount": 250,
+      "fluid": "create_central_kitchen:tomato_sauce"
     }
   ]
 }

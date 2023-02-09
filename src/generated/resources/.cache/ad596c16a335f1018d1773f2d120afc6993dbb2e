@@ -1,4 +1,4 @@
-// 1.19.2	2023-02-09T16:24:56.9990017	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-09T16:53:26.1446568	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d6d3b59b64f72c62d8cdbf1363d79327e492507c assets/create_central_kitchen/blockstates/blaze_stove.json
 13080c5d23ed3a40ec8a1b0b28150c122d7aeb5d assets/create_central_kitchen/lang/en_ud.json
 d9b9ece7757038aceb1ee629a120087e1416ddaf assets/create_central_kitchen/lang/en_us.json
@@ -17,10 +17,10 @@ cf2ab86e40580bcf2379b28bc47bdb4d2bcddf94 data/create_central_kitchen/recipes/fil
 93f25b3a1b00ea6239c62588df41d418bc8844bf data/create_central_kitchen/recipes/filling/hot_cocoa.json
 7b77ff382b8b8f3459ac82d22c7c7f304c695a2c data/create_central_kitchen/recipes/filling/melon_juice.json
 bc6b4a4cfa5b2743ba8d92745a16dd5859f8c98c data/create_central_kitchen/recipes/filling/tomato_sauce.json
-58d78b9def31084aba12a761c7c2bc68c40c9d5d data/create_central_kitchen/recipes/mixing/apple_cider.json
-cbd6e080b2af3d1ca25e8d578647b861fae3d1bc data/create_central_kitchen/recipes/mixing/hot_cocoa.json
+797c247faa8e6f06b18fbfdadb04b89a4e6e0f52 data/create_central_kitchen/recipes/mixing/apple_cider.json
+3e99f189e22ba63a45c863a5d8aab5cba7a41f37 data/create_central_kitchen/recipes/mixing/hot_cocoa.json
 7bc308f50eb6e5b754a40ce0f7b837e75424ca84 data/create_central_kitchen/recipes/mixing/melon_juice.json
-45953603e427e5249f188bd4c17b30a28a7b3107 data/create_central_kitchen/recipes/mixing/tomato_sauce.json
+a0baac6cc97bc64fdb9f140430ac9cf67bfa5363 data/create_central_kitchen/recipes/mixing/tomato_sauce.json
 1b31ef4ac79216db58ec9c632189d50e6af0f69b data/create_central_kitchen/tags/items/upright_on_deployer.json
 c54fbad3dbd5eb4c24a1df7d146ea7226e9cd133 data/farmersdelight/tags/blocks/heat_sources.json
 601667bd216ec4a89a685e9e133665d9265e50c0 data/forge/tags/fluids/apple_cider.json
