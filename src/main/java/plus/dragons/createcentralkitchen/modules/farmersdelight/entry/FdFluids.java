@@ -51,7 +51,7 @@ public class FdFluids {
             .require(ModItems.TOMATO.get()))
         .register();
     
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "NullableProblems"})
     public static FluidBuilder<VirtualFluid, CreateRegistrate> fromFluidContainer(
         RegistryObject<? extends Item> item,
         NonNullUnaryOperator<ProcessingRecipeBuilder<?>> mixingIngredients)
@@ -63,7 +63,7 @@ public class FdFluids {
                 REGISTRATE, REGISTRATE, name, callback,
                 CentralKitchen.genRL("fluid/" + name + "_still"),
                 CentralKitchen.genRL("fluid/" + name + "_flow"),
-                null,
+                CreateRegistrate::defaultFluidType,
                 VirtualFluid::new)
             )
             .defaultLang()

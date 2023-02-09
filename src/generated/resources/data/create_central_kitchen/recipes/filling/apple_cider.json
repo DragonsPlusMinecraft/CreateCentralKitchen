@@ -1,12 +1,19 @@
 {
   "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:glass_bottle"
     },
     {
-      "fluid": "farmersdelight:apple_cider",
-      "amount": 250
+      "amount": 250,
+      "fluid": "create_central_kitchen:apple_cider",
+      "nbt": {}
     }
   ],
   "results": [

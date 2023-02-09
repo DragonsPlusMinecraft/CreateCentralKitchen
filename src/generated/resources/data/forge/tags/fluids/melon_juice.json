@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "create_central_kitchen:flowing_melon_juice",
+      "required": false
+    },
+    {
+      "id": "create_central_kitchen:melon_juice",
+      "required": false
+    }
+  ]
+}

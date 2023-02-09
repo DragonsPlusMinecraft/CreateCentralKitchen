@@ -14,6 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.common.modules.ModModuleLoader;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
 import plus.dragons.createdragonlib.init.SafeRegistrate;
 import plus.dragons.createdragonlib.lang.Lang;
 import plus.dragons.createdragonlib.lang.LangFactory;
@@ -40,9 +41,11 @@ public class CentralKitchen {
         SERIALIZER_REGISTER.register(modBus);
 
         LangFactory langFactory = LangFactory.create(NAME, ID)
-                .ponders(() -> {})
-                .tooltips()
-                .merge("Game Elements: Liquid", "game_elements");
+                .ponders(() -> {
+                    FdPonderIndex.register();
+                    FdPonderIndex.registerTags();
+                })
+                .ui();
         modBus.addListener(EventPriority.LOWEST, langFactory::datagen);
     }
     

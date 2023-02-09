@@ -1,5 +1,11 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
   "ingredients": [
     {
       "item": "farmersdelight:tomato"
@@ -10,8 +16,8 @@
   ],
   "results": [
     {
-      "fluid": "farmersdelight:tomato_sauce",
-      "amount": 250
+      "amount": 250,
+      "fluid": "create_central_kitchen:tomato_sauce"
     }
   ]
 }

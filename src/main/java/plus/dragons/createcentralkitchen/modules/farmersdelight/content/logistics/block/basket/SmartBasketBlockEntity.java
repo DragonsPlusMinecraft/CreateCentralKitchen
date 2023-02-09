@@ -5,8 +5,8 @@ import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.belt.DirectBeltInputBehaviour;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import plus.dragons.createcentralkitchen.common.tileEntity.DelegatingSmartTileEntity;
@@ -40,7 +40,7 @@ public class SmartBasketBlockEntity extends DelegatingSmartTileEntity<BasketBloc
     }
     
     private ItemStack tryInsertingFromSide(TransportedItemStack inserted, Direction side, boolean simulate) {
-        LazyOptional<IItemHandler> lazy = this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+        LazyOptional<IItemHandler> lazy = this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, side);
         if (!lazy.isPresent())
             return inserted.stack;
         ItemStack ret = ItemHandlerHelper.insertItemStacked(lazy.orElse(null), inserted.stack.copy(), simulate);
