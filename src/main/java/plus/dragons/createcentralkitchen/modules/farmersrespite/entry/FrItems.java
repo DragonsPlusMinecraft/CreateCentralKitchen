@@ -1,5 +1,6 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
+package plus.dragons.createcentralkitchen.modules.farmersrespite.entry;
 
+import com.farmersrespite.core.tag.FRTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.AllSections;
@@ -9,31 +10,31 @@ import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.common.item.FillCreateItemGroupEvent;
 import plus.dragons.createcentralkitchen.data.recipe.ConditionedRecipes;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.FarmersDelightModule;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideItem;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdTags;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.FarmersRespiteModule;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
 
-public class FdItems {
+public class FrItems {
     
     private static final CreateRegistrate REGISTRATE = CentralKitchen.REGISTRATE
         .startSection(AllSections.KINETICS)
         .creativeModeTab(() -> Create.BASE_CREATIVE_TAB);
 
-    public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
+    public static final ItemEntry<BrewingGuideItem> BREWING_GUIDE = REGISTRATE.item("brewing_guide", BrewingGuideItem::new)
         .properties(prop -> prop.stacksTo(1))
         .recipe((ctx, prov) -> ConditionedRecipes.shapeless(ctx.getEntry())
-            .requires(FdTags.item(new ResourceLocation("forge", "plates/obsidian")))
+            .requires(FdTags.item(new ResourceLocation("forge", "plates/copper")))
             .requires(ModItems.CANVAS.get())
-            .requires(ForgeTags.VEGETABLES)
-            .whenModLoaded(FarmersDelightModule.ID)
+            .requires(FRTags.TEA_LEAVES)
+            .whenModLoaded(FarmersRespiteModule.ID)
             .save(prov)
         )
         .register();
 
     public static void fillCreateItemGroup(FillCreateItemGroupEvent event) {
         if (event.getItemGroup() == Create.BASE_CREATIVE_TAB) {
-            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), COOKING_GUIDE.asStack());
+            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), BREWING_GUIDE.asStack());
         }
     }
 

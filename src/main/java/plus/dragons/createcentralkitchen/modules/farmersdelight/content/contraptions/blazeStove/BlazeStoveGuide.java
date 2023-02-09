@@ -1,58 +1,39 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdCapabilities;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CookingGuide implements ICapabilitySerializable<CompoundTag> {
+public abstract class BlazeStoveGuide implements ICapabilitySerializable<CompoundTag> {
+    protected final ItemStack owner;
+    protected final int ingredientSize;
+    protected final ItemStackHandler inventory;
+    protected ItemStack container = ItemStack.EMPTY;
+    protected final RecipeWrapper recipeWrapper;
     
-    private final LazyOptional<CookingGuide> capability = LazyOptional.of(() -> this);
-    private final ItemStack owner;
-    final ItemStackHandler inventory = new ItemStackHandler(7);
-    private ItemStack container = ItemStack.EMPTY;
-    private final RecipeWrapper recipeWrapper = new RecipeWrapper(inventory);
-    
-    public CookingGuide(ItemStack owner) {
+    public BlazeStoveGuide(ItemStack owner, int ingredientSize) {
         this.owner = owner;
-    }
-    
-    public static CookingGuide of(ItemStack stack) {
-        return stack.getCapability(FdCapabilities.COOKING_GUIDE).orElseThrow(() ->
-            new UnsupportedOperationException("Requested Item " + stack.getItem() + " is not a Cooking Guide"));
-    }
-    
-    @NotNull
-    @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == FdCapabilities.COOKING_GUIDE) {
-            return capability.cast();
-        }
-        return LazyOptional.empty();
+        this.ingredientSize = ingredientSize;
+        this.inventory = new ItemStackHandler(ingredientSize + 1);
+        this.recipeWrapper = new RecipeWrapper(inventory);
     }
     
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
         ListTag ingredientsTag = new ListTag();
-    
-        for (byte i = 0; i < 6; ++i) {
+        
+        for (byte i = 0; i < ingredientSize; ++i) {
             ItemStack itemstack = inventory.getStackInSlot(i);
             if (!itemstack.isEmpty()) {
                 CompoundTag ingredientTag = new CompoundTag();
@@ -61,11 +42,11 @@ public class CookingGuide implements ICapabilitySerializable<CompoundTag> {
                 ingredientsTag.add(ingredientTag);
             }
         }
-    
+        
         if (!ingredientsTag.isEmpty())
             tag.put("Ingredients", ingredientsTag);
-        if (!inventory.getStackInSlot(6).isEmpty())
-            tag.put("Result", inventory.getStackInSlot(6).serializeNBT());
+        if (!inventory.getStackInSlot(ingredientSize).isEmpty())
+            tag.put("Result", inventory.getStackInSlot(ingredientSize).serializeNBT());
         if (!container.isEmpty())
             tag.put("Container", container.serializeNBT());
         
@@ -76,25 +57,29 @@ public class CookingGuide implements ICapabilitySerializable<CompoundTag> {
     public void deserializeNBT(CompoundTag tag) {
         ListTag ingredientsTag = tag.getList("Ingredients", 10);
         
-        for (int i = 0; i < 7; ++i) {
+        for (int i = 0; i < inventory.getSlots(); ++i) {
             inventory.setStackInSlot(i, ItemStack.EMPTY);
         }
         
         for (int i = 0; i < ingredientsTag.size(); ++i) {
             CompoundTag ingredientTag = ingredientsTag.getCompound(i);
             int slot = ingredientTag.getByte("Slot") & 255;
-            if (slot < 6) {
+            if (slot < ingredientSize) {
                 inventory.setStackInSlot(slot, ItemStack.of(ingredientTag));
             }
         }
-    
-        inventory.setStackInSlot(6, tag.contains("Result", Tag.TAG_COMPOUND)
+        
+        inventory.setStackInSlot(ingredientSize, tag.contains("Result", Tag.TAG_COMPOUND)
             ? ItemStack.of(tag.getCompound("Result"))
             : ItemStack.EMPTY);
         
         container = tag.contains("Container", Tag.TAG_COMPOUND)
             ? ItemStack.of(tag.getCompound("Container"))
             : ItemStack.EMPTY;
+    }
+    
+    public final int getIngredientSize() {
+        return ingredientSize;
     }
     
     public boolean needIngredient(int slot) {
@@ -110,25 +95,13 @@ public class CookingGuide implements ICapabilitySerializable<CompoundTag> {
     }
     
     public ItemStack getResult() {
-        return inventory.getStackInSlot(6).copy();
+        return inventory.getStackInSlot(ingredientSize).copy();
     }
     
     public ItemStack getOwner() {
         return owner;
     }
     
-    public void updateRecipe(Level level) {
-        level.getRecipeManager()
-            .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
-            .ifPresentOrElse(
-                recipe -> {
-                    inventory.setStackInSlot(6, recipe.getResultItem());
-                    container = recipe.getOutputContainer();
-                },
-                () -> {
-                    inventory.setStackInSlot(6, ItemStack.EMPTY);
-                    container = ItemStack.EMPTY;
-                });
-    }
+    public abstract void updateRecipe(Level level);
     
 }

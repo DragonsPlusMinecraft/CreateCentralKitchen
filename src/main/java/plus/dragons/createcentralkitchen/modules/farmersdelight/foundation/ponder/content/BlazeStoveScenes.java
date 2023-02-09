@@ -31,7 +31,7 @@ public class BlazeStoveScenes {
 
         scene.idle(40);
         scene.world.setBlock(util.grid.at(1,1,1), FdBlocks.BLAZE_STOVE.getDefaultState(),false);
-        scene.world.modifyTileEntity(util.grid.at(1,1,1), BlazeStoveBlockEntity.class, be-> be.setCookingGuide(new ItemStack(FdItems.COOKING_GUIDE.get())));
+        scene.world.modifyTileEntity(util.grid.at(1,1,1), BlazeStoveBlockEntity.class, be-> be.setGuide(new ItemStack(FdItems.COOKING_GUIDE.get())));
         scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(1, 1, 1), Pointing.DOWN).whileSneaking().rightClick()
                 .withItem(FdItems.COOKING_GUIDE.asStack()), 40);
 

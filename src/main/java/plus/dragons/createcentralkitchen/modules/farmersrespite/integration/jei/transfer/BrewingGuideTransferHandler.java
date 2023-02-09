@@ -1,5 +1,6 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer;
+package plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.transfer;
 
+import com.farmersrespite.common.crafting.KettleRecipe;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
@@ -9,32 +10,31 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.common.network.CentralKitchenNetwork;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
-import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideMenu;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CookingGuideTransferHandler implements IRecipeTransferHandler<CookingGuideMenu, CookingPotRecipe> {
+public class BrewingGuideTransferHandler implements IRecipeTransferHandler<BrewingGuideMenu, KettleRecipe> {
     
     @Override
-    public Class<CookingGuideMenu> getContainerClass() {
-        return CookingGuideMenu.class;
+    public Class<BrewingGuideMenu> getContainerClass() {
+        return BrewingGuideMenu.class;
     }
     
     @Override
-    public Class<CookingPotRecipe> getRecipeClass() {
-        return CookingPotRecipe.class;
+    public Class<KettleRecipe> getRecipeClass() {
+        return KettleRecipe.class;
     }
     
     @Override
     @Nullable
-    public IRecipeTransferError transferRecipe(CookingGuideMenu container, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer) {
+    public IRecipeTransferError transferRecipe(BrewingGuideMenu container, KettleRecipe recipe, IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer) {
         if (!doTransfer)
             return null;
         var inputs = recipe.getIngredients();
-        for (int i = 0; i < 6; ++i) {
+        for (int i = 0; i < 2; ++i) {
             ItemStack input;
             if (i < inputs.size()) {
                 var items = inputs.get(i).getItems();

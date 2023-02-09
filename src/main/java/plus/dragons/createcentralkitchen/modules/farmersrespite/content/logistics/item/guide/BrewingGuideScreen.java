@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove;
+package plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,12 +14,12 @@ import java.util.List;
 
 import static com.simibubi.create.foundation.gui.AllGuiTextures.PLAYER_INVENTORY;
 
-public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuideMenu> {
+public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuideMenu> {
     private static final int COOKING_GUIDE_WIDTH = 172;
     private List<Rect2i> extraAreas = Collections.emptyList();
     private final CookingGuideBackgroundGui backgroundGui;
 
-    public CookingGuideScreen(CookingGuideMenu container, Inventory inv, Component title) {
+    public BrewingGuideScreen(BrewingGuideMenu container, Inventory inv, Component title) {
         super(container, inv, title);
         backgroundGui = new CookingGuideBackgroundGui(container.getBlazeStatus());
     }

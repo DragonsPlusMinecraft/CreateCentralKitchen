@@ -1,19 +1,19 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
+package plus.dragons.createcentralkitchen.modules.farmersrespite.entry;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuide;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuide;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FdCapabilities {
+public class FrCapabilities {
     private static final List<Class<?>> CAPABILITIES = new ArrayList<>();
     
-    public static final Capability<CookingGuide> COOKING_GUIDE =
-        register(CookingGuide.class, new CapabilityToken<>() {});
+    public static final Capability<BrewingGuide> BREWING_GUIDE =
+        register(BrewingGuide.class, new CapabilityToken<>() {});
     
     private static <T> Capability<T> register(Class<T> clazz, CapabilityToken<T> token) {
         CAPABILITIES.add(clazz);

@@ -15,7 +15,6 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class AbstractJeiPlugin implements IModPlugin {
-    
     protected final List<CreateRecipeCategory<?>> categories = new ArrayList<>();
     
     protected void populateCategories(IRecipeCategoryRegistration registration) {}
@@ -24,6 +23,8 @@ public abstract class AbstractJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         categories.clear();
         populateCategories(registration);
+        if (categories.isEmpty())
+            return;
         registration.addRecipeCategories(categories.toArray(IRecipeCategory[]::new));
     }
     
