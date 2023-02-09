@@ -110,8 +110,8 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         if (heldItem.is(FdItems.COOKING_GUIDE.get())) {
             if(!level.isClientSide()) {
                 withTileEntityDo(level, pos, stove -> {
-                    var original = stove.getCookingGuide();
-                    stove.setCookingGuide(heldItem);
+                    var original = stove.getGuide();
+                    stove.setGuide(heldItem);
                     player.setItemInHand(hand, original);
                 });
             }
@@ -122,7 +122,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
             if(!level.isClientSide()) {
                 withTileEntityDo(level, pos, stove -> NetworkHooks.openScreen(
                     (ServerPlayer) player, stove, buf -> {
-                        buf.writeItem(stove.getCookingGuide());
+                        buf.writeItem(stove.getGuide());
                         buf.writeBoolean(false);
                         buf.writeBlockPos(pos);
                     }));

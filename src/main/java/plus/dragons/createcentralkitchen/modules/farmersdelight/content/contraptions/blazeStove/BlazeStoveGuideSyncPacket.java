@@ -7,14 +7,14 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class CookingGuideSyncPacket extends SimplePacketBase {
+public class BlazeStoveGuideSyncPacket extends SimplePacketBase {
     private final CompoundTag nbt;
     
-    public CookingGuideSyncPacket(CookingGuideMenu menu) {
-        this.nbt = menu.cookingGuide.serializeNBT();
+    public BlazeStoveGuideSyncPacket(BlazeStoveGuideMenu<?> menu) {
+        this.nbt = menu.writeGuideToTag();
     }
     
-    public CookingGuideSyncPacket(FriendlyByteBuf buffer) {
+    public BlazeStoveGuideSyncPacket(FriendlyByteBuf buffer) {
         this.nbt = buffer.readNbt();
     }
     
@@ -27,8 +27,8 @@ public class CookingGuideSyncPacket extends SimplePacketBase {
     public void handle(Supplier<NetworkEvent.Context> supplier) {
         var context = supplier.get();
         var player = context.getSender();
-        if (player != null && player.containerMenu instanceof CookingGuideMenu menu) {
-            menu.cookingGuide.deserializeNBT(nbt);
+        if (player != null && player.containerMenu instanceof BlazeStoveGuideMenu menu) {
+            menu.updateGuideFromTag(nbt);
             context.setPacketHandled(true);
         }
     }

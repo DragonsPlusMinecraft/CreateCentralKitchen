@@ -11,7 +11,8 @@
     "common.create.DeployerTileEntityAccessor",
     "common.farmersdelight.SkilletBlockEntityAccessor",
     "common.farmersdelight.SkilletBlockEntityMixin",
-    "common.farmersdelight.TileEntityBehaviorMixin"
+    "common.farmersdelight.TileEntityBehaviorMixin",
+    "common.jei.DynamicJeiPluginMixin"
   ],
   "client": [
     "client.create.DeployerRendererMixin"

@@ -1,14 +1,17 @@
-// 1.19.2	2023-02-09T16:53:26.1446568	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-18T08:32:38.3255025	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d6d3b59b64f72c62d8cdbf1363d79327e492507c assets/create_central_kitchen/blockstates/blaze_stove.json
-13080c5d23ed3a40ec8a1b0b28150c122d7aeb5d assets/create_central_kitchen/lang/en_ud.json
-d9b9ece7757038aceb1ee629a120087e1416ddaf assets/create_central_kitchen/lang/en_us.json
+a489cdff418ac113da4834a2976ee43c2309ac6a assets/create_central_kitchen/lang/en_ud.json
+19448ace7d4505d390ecdefd61c33afba15f4ccf assets/create_central_kitchen/lang/en_us.json
+b37fa1be6c97f4e9d2f0495ba2243f09a6088da1 assets/create_central_kitchen/models/item/brewing_guide.json
 29a87d297ebccd094f9e1e26f4acd8fcc495fb14 assets/create_central_kitchen/models/item/cooking_guide.json
 fd7019281ce662d4f93ad5f12d6845ffeedae370 data/create/tags/blocks/fan_heaters.json
 fd7019281ce662d4f93ad5f12d6845ffeedae370 data/create/tags/blocks/fan_transparent.json
 88a03919cb1b17a56b57583fa69fd8791fe6ab22 data/create/tags/items/upright_on_belt.json
+cb7f3e20f2bcad1c23b8918db48c5640a5626a6b data/create_central_kitchen/advancements/recipes/create.base/brewing_guide.json
 bf59d6cd133b2f6e6e1a04a7be7618e4d7bbb652 data/create_central_kitchen/advancements/recipes/create.base/cooking_guide.json
 b72a463128effe04661ee3e3452ada166b3196c9 data/create_central_kitchen/loot_tables/blocks/blaze_stove.json
-4356abde79bf9b3c63b69b09782ade5a8bc8c42b data/create_central_kitchen/recipes/cooking_guide.json
+4faf9edce7a5d5807d598961799d49e3edd376d8 data/create_central_kitchen/recipes/brewing_guide.json
+46f0517a72b0593e8a69eb8a5b6fd109d6d84d47 data/create_central_kitchen/recipes/cooking_guide.json
 365f714b3982b6219249ad981f39d260e8d8a550 data/create_central_kitchen/recipes/emptying/apple_cider.json
 04bfa88e62a7fe19cf59000f041e267abf41065b data/create_central_kitchen/recipes/emptying/hot_cocoa.json
 af56a286d2925c7f4264358a98652f7461d188f2 data/create_central_kitchen/recipes/emptying/melon_juice.json

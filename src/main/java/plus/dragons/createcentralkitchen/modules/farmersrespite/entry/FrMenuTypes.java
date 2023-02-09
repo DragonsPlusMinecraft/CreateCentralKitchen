@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
+package plus.dragons.createcentralkitchen.modules.farmersrespite.entry;
 
 import com.tterrag.registrate.builders.MenuBuilder;
 import com.tterrag.registrate.util.entry.MenuEntry;
@@ -7,13 +7,13 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideScreen;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideMenu;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideScreen;
 
-public class FdMenuTypes {
+public class FrMenuTypes {
 
-    public static final MenuEntry<CookingGuideMenu> COOKING_GUIDE =
-            register("cooking_guide", CookingGuideMenu::new, () -> CookingGuideScreen::new);
+    public static final MenuEntry<BrewingGuideMenu> BREWING_GUIDE =
+            register("brewing_guide", BrewingGuideMenu::new, () -> BrewingGuideScreen::new);
 
     private static <C extends AbstractContainerMenu, S extends Screen & MenuAccess<C>> MenuEntry<C> register(
             String name, MenuBuilder.ForgeMenuFactory<C> factory, NonNullSupplier<MenuBuilder.ScreenFactory<C, S>> screenFactory) {

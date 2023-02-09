@@ -5,7 +5,6 @@ import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTil
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -20,24 +19,52 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlocks;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdCapabilities;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdMenuTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CookingGuideItem extends Item implements MenuProvider {
-    public CookingGuideItem(Properties pProperties) {
-        super(pProperties);
+public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Item implements MenuProvider {
+
+    public BlazeStoveGuideItem(Properties properties) {
+        super(properties);
+    }
+
+    protected abstract Capability<G> getGuideCapability();
+
+    protected abstract BlazeStoveGuideMenu<G> createGuideMenu(int syncId, Inventory inventory, ItemStack guide);
+
+    protected abstract BlazeStoveGuideMenu<G> createGuideMenu(int syncId, Inventory inventory, BlazeStoveBlockEntity stove);
+
+    public void appendGuideTooltip(ItemStack stack, List<Component> tooltip, boolean goggle) {
+        ItemStack result = stack
+            .getCapability(getGuideCapability())
+            .map(BlazeStoveGuide::getResult)
+            .orElse(ItemStack.EMPTY);
+        if (result.isEmpty()) {
+            var text = CentralKitchen.LANG.translate("gui.goggles.blaze_stove.no_result").style(ChatFormatting.RED);
+            if (goggle)
+                text.forGoggles(tooltip);
+            else
+                text.addTo(tooltip);
+        } else {
+            var text = CentralKitchen.LANG.translate("gui.goggles.blaze_stove.recipe_result");
+            var itemName = CentralKitchen.LANG.itemName(result).style(ChatFormatting.GRAY);
+            if (goggle) {
+                text.forGoggles(tooltip);
+                itemName.forGoggles(tooltip, 4);
+            } else {
+                text.addTo(tooltip);
+                itemName.forGoggles(tooltip);
+            }
+        }
     }
 
     @Override
@@ -48,25 +75,23 @@ public class CookingGuideItem extends Item implements MenuProvider {
             return InteractionResult.PASS;
         if (player.isSecondaryUseActive()) {
             var itemStack = context.getItemInHand();
-            if (itemStack.is(FdItems.COOKING_GUIDE.get())) {
-                var blockPos = context.getClickedPos();
-                var blockState = level.getBlockState(blockPos);
-                var blockEntity = level.getBlockEntity(blockPos);
-                if (blockState.getBlock() instanceof BlazeBurnerBlock &&
-                    blockEntity instanceof BlazeBurnerTileEntity)
-                {
-                    if (!level.isClientSide()) {
-                        level.setBlockAndUpdate(blockPos, FdBlocks.BLAZE_STOVE.getDefaultState()
-                                .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
-                        if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove)
-                            blazeStove.setCookingGuide(itemStack.copy());
-                        AdvancementBehaviour.setPlacedBy(context.getLevel(), blockPos, player);
+            var blockPos = context.getClickedPos();
+            var blockState = level.getBlockState(blockPos);
+            var blockEntity = level.getBlockEntity(blockPos);
+            if (blockState.getBlock() instanceof BlazeBurnerBlock &&
+                blockEntity instanceof BlazeBurnerTileEntity)
+            {
+                if (!level.isClientSide()) {
+                    level.setBlockAndUpdate(blockPos, FdBlocks.BLAZE_STOVE.getDefaultState()
+                        .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
+                    if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove)
+                        blazeStove.setGuide(itemStack.copy());
+                    AdvancementBehaviour.setPlacedBy(context.getLevel(), blockPos, player);
 
-                        if (!player.getAbilities().instabuild)
-                            player.setItemInHand(context.getHand(), ItemStack.EMPTY);
-                    }
-                    return InteractionResult.SUCCESS;
+                    if (!player.getAbilities().instabuild)
+                        player.setItemInHand(context.getHand(), ItemStack.EMPTY);
                 }
+                return InteractionResult.SUCCESS;
             }
         }
         return InteractionResult.PASS;
@@ -96,21 +121,7 @@ public class CookingGuideItem extends Item implements MenuProvider {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
-        ItemStack result = stack
-            .getCapability(FdCapabilities.COOKING_GUIDE)
-            .map(CookingGuide::getResult)
-            .orElse(ItemStack.EMPTY);
-        if (result.isEmpty()) {
-            CentralKitchen.LANG.translate("gui.goggles.blaze_stove.no_result")
-                .style(ChatFormatting.RED)
-                .addTo(tooltip);
-        } else {
-            CentralKitchen.LANG.translate("gui.goggles.blaze_stove.recipe_result")
-                .addTo(tooltip);
-            CentralKitchen.LANG.itemName(result)
-                .style(ChatFormatting.GRAY)
-                .forGoggles(tooltip);
-        }
+        appendGuideTooltip(stack, tooltip, false);
     }
     
     @Nullable
@@ -119,13 +130,7 @@ public class CookingGuideItem extends Item implements MenuProvider {
         ItemStack cookingGuide = player.getMainHandItem();
         if (!cookingGuide.is(this))
             return null;
-        return new CookingGuideMenu(FdMenuTypes.COOKING_GUIDE_FOR_BLAZE.get(), syncId, inventory, cookingGuide);
-    }
-    
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new CookingGuide(stack);
+        return createGuideMenu(syncId, inventory, cookingGuide);
     }
     
 }

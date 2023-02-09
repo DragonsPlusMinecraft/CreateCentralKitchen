@@ -1,10 +1,14 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm;
+package plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm;
 
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,15 +18,18 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuide;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideItem;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuide;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
+import umpaz.farmersrespite.common.block.KettleBlock;
+import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
-public class CookingPotPoint extends ArmInteractionPoint {
-    public static final int MEAL_DISPLAY_SLOT = 6;
-    public static final int CONTAINER_SLOT = 7;
-    public static final int OUTPUT_SLOT = 8;
+public class KettlePoint extends ArmInteractionPoint {
+    public static final int DISPLAY_SLOT = 2;
+    public static final int CONTAINER_SLOT = 3;
+    public static final int OUTPUT_SLOT = 4;
     
-    public CookingPotPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
+    public KettlePoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
     }
     
@@ -31,29 +38,30 @@ public class CookingPotPoint extends ArmInteractionPoint {
         return Vec3.atBottomCenterOf(pos).add(0, .625, 0);
     }
     
+    @SuppressWarnings({"NullableProblems", "ConstantConditions"})
     @Nullable
     @Override
     protected IItemHandler getHandler() {
         if (!cachedHandler.isPresent()) {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (!(be instanceof CookingPotBlockEntity cookingPot))
+            BlockEntity te = level.getBlockEntity(pos);
+            if (!(te instanceof KettleBlockEntity kettle))
                 return null;
-            cachedHandler = LazyOptional.of(cookingPot::getInventory);
+            cachedHandler = LazyOptional.of(kettle::getInventory);
         }
         return cachedHandler.orElse(null);
     }
     
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
-        if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
+        if (!(level.getBlockEntity(pos) instanceof KettleBlockEntity &&
               level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
             return stack;
-        
+    
         ItemStack guideStack = blazeStove.getGuide();
-        if (!(guideStack.getItem() instanceof CookingGuideItem))
+        if (!(guideStack.getItem() instanceof BrewingGuideItem))
             return stack;
-        
-        CookingGuide guide = CookingGuide.of(guideStack);
+    
+        BrewingGuide guide = BrewingGuide.of(guideStack);
         if (guide.getResult().isEmpty())
             return stack;
         
@@ -64,11 +72,35 @@ public class CookingPotPoint extends ArmInteractionPoint {
         if (inventory.getStackInSlot(CONTAINER_SLOT).isEmpty() && guide.isContainer(stack))
             return inventory.insertItem(CONTAINER_SLOT, stack, simulate);
         
-        for (int slot = 0; slot < MEAL_DISPLAY_SLOT; slot++) {
+        for (int slot = 0; slot < DISPLAY_SLOT; slot++) {
             if (inventory.getStackInSlot(slot).isEmpty() &&
                 guide.needIngredient(slot) &&
                 guide.isIngredient(slot, stack))
                 return inventory.insertItem(slot, stack, simulate);
+        }
+    
+        if (guide.needWater()) {
+            BlockState state = level.getBlockState(pos);
+            int water = state.getValue(KettleBlock.WATER_LEVEL);
+            if (water == 3)
+                return stack;
+            ItemStack ret = stack.copy();
+            ItemStack drop = ItemStack.EMPTY;
+            if (stack.is(Items.WATER_BUCKET)) {
+                ret.shrink(1);
+                drop = Items.BUCKET.getDefaultInstance();
+                water = 3;
+            } else if (stack.is(Items.POTION) && PotionUtils.getPotion(stack) == Potions.WATER) {
+                ret.shrink(1);
+                drop = Items.GLASS_BOTTLE.getDefaultInstance();
+                water += 1;
+            }
+            if (simulate) {
+                return ret;
+            } else if (!drop.isEmpty()) {
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), drop);
+                level.setBlockAndUpdate(pos, state.setValue(KettleBlock.WATER_LEVEL, water));
+            }
         }
         
         return stack;
@@ -91,7 +123,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
                 if (inventory == null)
                     return ItemStack.EMPTY;
 
-                if (slot < MEAL_DISPLAY_SLOT) {
+                if (slot < DISPLAY_SLOT) {
                     ItemStack ingredient = inventory.getStackInSlot(slot);
                     if (!ingredient.isEmpty() && !cookingGuide.isIngredient(slot, ingredient))
                         return inventory.extractItem(slot, amount, simulate);
@@ -115,14 +147,14 @@ public class CookingPotPoint extends ArmInteractionPoint {
         
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
+            return level.getBlockEntity(pos) instanceof KettleBlockEntity &&
                     level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
         }
         
         @Nullable
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
-            return new CookingPotPoint(this, level, pos, state);
+            return new KettlePoint(this, level, pos, state);
         }
         
     }
