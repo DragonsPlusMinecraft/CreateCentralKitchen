@@ -5,38 +5,62 @@
 
 	"block.create_central_kitchen.blaze_stove": "烈焰人炉灶",
 
+	"fluid.create_central_kitchen.apple_cider": "苹果酒",
+	"fluid.create_central_kitchen.hot_cocoa": "热可可",
+	"fluid.create_central_kitchen.melon_juice": "西瓜汁",
+	"fluid.create_central_kitchen.tomato_sauce": "番茄酱",
+
 	"item.create_central_kitchen.cooking_guide": "烹饪指南",
-
-	"fluid.farmersdelight.hot_cocoa": "热可可",
-	"fluid.farmersdelight.apple_cider": "苹果酒",
-	"fluid.farmersdelight.melon_juice": "西瓜汁",
-	"fluid.farmersdelight.tomato_sauce": "番茄酱",
-
-
-	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "砧板使用",
 
 	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "未指定有效配方",
 	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "当前配方：",
 
+	"create_central_kitchen.ponder.tag.farmers_delight": "农夫乐事自动化",
+	"create_central_kitchen.ponder.tag.farmers_delight.description": "与农夫乐事自动化相关的物品与组合。",
 
-	"_": "->------------------------]  Ponder Content  [------------------------<-",
+	"create_central_kitchen.ponder.basket.header": "用篮子接收物品",
+	"create_central_kitchen.ponder.basket.text_1": "篮子可以从传送带接收物品。",
+	"create_central_kitchen.ponder.basket.text_2": "除了向上开口，对应的水平朝向也是适合的。",
 
 	"create_central_kitchen.ponder.blaze_stove.intro.header": "雇佣厨师",
 	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潜行时，手持烈焰人烹饪指南右键烈焰人燃烧室",
 	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "潜行时，用扳手右击烈焰人炉灶以回收烈焰人烹饪指南",
+
 	"create_central_kitchen.ponder.blaze_stove.processing.header": "专业主厨",
 	"create_central_kitchen.ponder.blaze_stove.processing.text_1": "烈焰人炉灶可以为厨锅提供动力臂支持，就让它来主导烹饪吧!",
 	"create_central_kitchen.ponder.blaze_stove.processing.text_2": "即便没有燃料，烹饪依然可以完成。",
 	"create_central_kitchen.ponder.blaze_stove.processing.text_3": "火焰的温度越高，烹饪速度越快。",
 	"create_central_kitchen.ponder.blaze_stove.processing.text_4": "当然，你也可以直接用烈焰人炉灶煎制食物。",
 	"create_central_kitchen.ponder.blaze_stove.processing.text_5": "但务必注意超级燃烧的火焰会直接烧毁你的原料。",
+
+
+	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.tag.farmers_delight": "农夫乐事自动化",
+	"create_central_kitchen.ponder.tag.farmers_delight.description": "与农夫乐事自动化相关的物品与组合。",
+
 	"create_central_kitchen.ponder.basket.header": "用篮子接收物品",
 	"create_central_kitchen.ponder.basket.text_1": "篮子可以从传送带接收物品。",
 	"create_central_kitchen.ponder.basket.text_2": "除了向上开口，对应的水平朝向也是适合的。",
-	"create_central_kitchen.ponder.tag.farmers_delight": "农夫乐事自动化",
-	"create_central_kitchen.ponder.tag.farmers_delight.description": "与农夫乐事自动化相关的物品与组合。",
+
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "雇佣厨师",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潜行时，手持烈焰人烹饪指南右键烈焰人燃烧室",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "潜行时，用扳手右击烈焰人炉灶以回收烈焰人烹饪指南",
+
+	"create_central_kitchen.ponder.blaze_stove.processing.header": "专业主厨",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_1": "烈焰人炉灶可以为厨锅提供动力臂支持，就让它来主导烹饪吧!",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_2": "即便没有燃料，烹饪依然可以完成。",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_3": "火焰的温度越高，烹饪速度越快。",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_4": "当然，你也可以直接用烈焰人炉灶煎制食物。",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_5": "但务必注意超级燃烧的火焰会直接烧毁你的原料。",
+
+
+	"_": "->------------------------]  UI & Messages  [------------------------<-",
+
+	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "未指定有效配方",
+	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "当前配方：",
 
 	"_": "Thank you for translating Create: Central Kitchen!"
 
