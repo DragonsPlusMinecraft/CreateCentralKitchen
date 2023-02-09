@@ -50,6 +50,12 @@ ordering="NONE"
 side="BOTH"
 # Here's another dependency
 [[dependencies.create_central_kitchen]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.create_central_kitchen]]
     modId="minecraft"
     mandatory=true
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
@@ -64,7 +70,7 @@ side="BOTH"
     side="BOTH"
 [[dependencies.create_central_kitchen]]
     modId="farmersdelight"
-    mandatory=true
+    mandatory=false
     versionRange="[1.19-1.2.0,)"
     ordering="NONE"
     side="BOTH"

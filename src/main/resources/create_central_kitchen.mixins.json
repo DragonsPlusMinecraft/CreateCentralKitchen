@@ -1,20 +1,20 @@
 {
   "required": true,
   "priority": 1100,
-  "package": "plus.dragons.createcentralkitchen.foundation.mixin",
+  "package": "plus.dragons.createcentralkitchen.mixin",
   "compatibilityLevel": "JAVA_16",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
-    "common.BasketBlockEntityMixin",
-    "common.CookingPotBlockEntityMixin",
-    "common.CuttingBoardBlockEntityAccessor",
-    "common.DeployerTileEntityAccessor",
-    "common.SkilletBlockEntityAccessor",
-    "common.SkilletBlockEntityMixin",
-    "common.TileEntityBehaviorMixin"
+    "common.farmersdelight.BasketBlockEntityMixin",
+    "common.farmersdelight.CookingPotBlockEntityMixin",
+    "common.farmersdelight.CuttingBoardBlockEntityAccessor",
+    "common.create.DeployerTileEntityAccessor",
+    "common.farmersdelight.SkilletBlockEntityAccessor",
+    "common.farmersdelight.SkilletBlockEntityMixin",
+    "common.farmersdelight.TileEntityBehaviorMixin"
   ],
   "client": [
-    "client.DeployerRendererMixin"
+    "client.create.DeployerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
