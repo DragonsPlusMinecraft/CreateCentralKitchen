@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
 
 import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
+import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.VirtualFluidBuilder;
@@ -26,14 +27,16 @@ public class FdFluids {
         mixing -> mixing
             .require(Items.APPLE)
             .require(Items.APPLE)
-            .require(Items.SUGAR))
+            .require(Items.SUGAR)
+            .requiresHeat(HeatCondition.HEATED))
         .tag()
         .register();
     
     public static final FluidEntry<VirtualFluid> HOT_COCOA = fromFluidContainer(ModItems.HOT_COCOA,
         mixing -> mixing
             .require(Items.COCOA_BEANS)
-            .require(FdTags.fluid(new ResourceLocation("forge", "chocolate")), 250))
+            .require(FdTags.fluid(new ResourceLocation("forge", "chocolate")), 250)
+            .requiresHeat(HeatCondition.HEATED))
         .register();
     
     public static final FluidEntry<VirtualFluid> MELON_JUICE = fromFluidContainer(ModItems.MELON_JUICE,
@@ -48,7 +51,8 @@ public class FdFluids {
     public static final FluidEntry<VirtualFluid> TOMATO_SAUCE = fromFluidContainer(ModItems.TOMATO_SAUCE,
         mixing -> mixing
             .require(ModItems.TOMATO.get())
-            .require(ModItems.TOMATO.get()))
+            .require(ModItems.TOMATO.get())
+            .requiresHeat(HeatCondition.HEATED))
         .register();
     
     @SuppressWarnings("deprecation")
