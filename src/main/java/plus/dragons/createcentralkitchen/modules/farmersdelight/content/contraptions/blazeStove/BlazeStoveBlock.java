@@ -149,16 +149,17 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     
     public static InteractionResultHolder<ItemStack> tryInsert(Level level, BlockPos pos, ItemStack stack,
                                                                boolean noConsume, boolean forceOverflow, boolean simulate) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof BlazeStoveBlockEntity stove))
+        if (!(level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity stove))
             return InteractionResultHolder.fail(ItemStack.EMPTY);
     
         if (stack.getItem() instanceof BlazeStoveGuideItem<?>) {
             var original = stove.getGuide();
             if(!level.isClientSide()) {
-                stove.setGuide(stack);
+                ItemStack guide = stack.split(1);
+                if (!simulate)
+                    stove.setGuide(guide);
             }
-            return InteractionResultHolder.sidedSuccess(original, level.isClientSide);
+            return InteractionResultHolder.success(original);
         }
         
         if (stove.isCreativeFuel(stack)) {
