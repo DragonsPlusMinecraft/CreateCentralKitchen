@@ -43,7 +43,6 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlockEntities;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -103,22 +102,10 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     }
     
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult blockRayTraceResult) {
-        ItemStack heldItem = player.getItemInHand(hand);
-    
-        if (heldItem.is(FdItems.COOKING_GUIDE.get())) {
-            if(!level.isClientSide()) {
-                withTileEntityDo(level, pos, stove -> {
-                    var original = stove.getGuide();
-                    stove.setGuide(heldItem);
-                    player.setItemInHand(hand, original);
-                });
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
-        
-        if (player.isSecondaryUseActive()) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+                                 InteractionHand hand, BlockHitResult blockRayTraceResult) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (stack.isEmpty()) {
             if(!level.isClientSide()) {
                 withTileEntityDo(level, pos, stove -> NetworkHooks.openGui(
                     (ServerPlayer) player, stove, buf -> {
@@ -129,14 +116,14 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
             }
             return InteractionResult.SUCCESS;
         }
-
+        
         boolean noConsume = player.isCreative();
         boolean forceOverflow = !(player instanceof FakePlayer);
         
-        InteractionResultHolder<ItemStack> holder = tryInsert(level, pos, heldItem, noConsume, forceOverflow, false);
+        InteractionResultHolder<ItemStack> holder = tryInsert(level, pos, stack, noConsume, forceOverflow, false);
         ItemStack leftover = holder.getObject();
         if (!level.isClientSide && !noConsume && !leftover.isEmpty()) {
-            if (heldItem.isEmpty()) {
+            if (stack.isEmpty()) {
                 player.setItemInHand(hand, leftover);
             } else if (!player.getInventory().add(leftover)) {
                 player.drop(leftover, false);
@@ -165,13 +152,23 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof BlazeStoveBlockEntity stove))
             return InteractionResultHolder.fail(ItemStack.EMPTY);
+    
+        if (stack.getItem() instanceof BlazeStoveGuideItem<?>) {
+            var original = stove.getGuide();
+            if(!level.isClientSide()) {
+                stove.setGuide(stack);
+            }
+            return InteractionResultHolder.sidedSuccess(original, level.isClientSide);
+        }
         
         if (stove.isCreativeFuel(stack)) {
-            if (!simulate) stove.applyCreativeFuel();
+            if (!simulate)
+                stove.applyCreativeFuel();
             return InteractionResultHolder.success(ItemStack.EMPTY);
         }
         
-        if (!stove.addFuelOrIngredient(stack, forceOverflow, simulate))
+        if (!(stove.tryUpdateFuel(stack, forceOverflow, simulate) ||
+              stove.tryAddIngredient(stack, forceOverflow, simulate)))
             return InteractionResultHolder.fail(ItemStack.EMPTY);
         
         if (!noConsume) {

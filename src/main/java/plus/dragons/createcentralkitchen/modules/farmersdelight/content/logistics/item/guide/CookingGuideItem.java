@@ -9,7 +9,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideItem;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideMenu;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdCapabilities;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdMenuTypes;
 
@@ -34,7 +33,7 @@ public class CookingGuideItem extends BlazeStoveGuideItem<CookingGuide> {
     }
     
     @Override
-    protected BlazeStoveGuideMenu<CookingGuide> createGuideMenu(int syncId, Inventory inventory, BlazeStoveBlockEntity stove) {
+    protected CookingGuideMenu createGuideMenu(int syncId, Inventory inventory, BlazeStoveBlockEntity stove) {
         return new CookingGuideMenu(FdMenuTypes.COOKING_GUIDE.get(), syncId, inventory, stove);
     }
     

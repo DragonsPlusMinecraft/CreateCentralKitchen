@@ -31,6 +31,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
         return Vec3.atBottomCenterOf(pos).add(0, .625, 0);
     }
     
+    @SuppressWarnings("ConstantConditions")
     @Nullable
     @Override
     protected IItemHandler getHandler() {
@@ -45,8 +46,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
     
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
-        if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
-              level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
+        if (!(level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
             return stack;
         
         ItemStack guideStack = blazeStove.getGuide();
@@ -78,30 +78,31 @@ public class CookingPotPoint extends ArmInteractionPoint {
     public ItemStack extract(int slot, int amount, boolean simulate) {
         if (slot == OUTPUT_SLOT) {
             return super.extract(slot, amount, simulate);
-        } else {
-            if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity) ||
-                !(level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
-                return ItemStack.EMPTY;
-            else {
-                CookingGuide cookingGuide = CookingGuide.of(blazeStove.getGuide());
-                if (cookingGuide.getResult().isEmpty())
-                    return ItemStack.EMPTY;
-                
-                IItemHandler inventory = getHandler();
-                if (inventory == null)
-                    return ItemStack.EMPTY;
-
-                if (slot < MEAL_DISPLAY_SLOT) {
-                    ItemStack ingredient = inventory.getStackInSlot(slot);
-                    if (!ingredient.isEmpty() && !cookingGuide.isIngredient(slot, ingredient))
-                        return inventory.extractItem(slot, amount, simulate);
-                } else if(slot == CONTAINER_SLOT) {
-                    ItemStack container = inventory.getStackInSlot(slot);
-                    if (!container.isEmpty() && !cookingGuide.isContainer(container)) {
-                        return inventory.extractItem(slot, amount, simulate);
-                    }
-                }
-            }
+        }
+    
+        if (!(level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity blazeStove))
+            return ItemStack.EMPTY;
+    
+        ItemStack guideStack = blazeStove.getGuide();
+        if (!(guideStack.getItem() instanceof CookingGuideItem))
+            return ItemStack.EMPTY;
+    
+        CookingGuide guide = CookingGuide.of(guideStack);
+        if (guide.getResult().isEmpty())
+            return ItemStack.EMPTY;
+        
+        IItemHandler inventory = getHandler();
+        if (inventory == null)
+            return ItemStack.EMPTY;
+    
+        if (slot < MEAL_DISPLAY_SLOT) {
+            ItemStack ingredient = inventory.getStackInSlot(slot);
+            if (!ingredient.isEmpty() && !guide.isIngredient(slot, ingredient))
+                return inventory.extractItem(slot, amount, simulate);
+        } else if(slot == CONTAINER_SLOT) {
+            ItemStack container = inventory.getStackInSlot(slot);
+            if (!container.isEmpty() && !guide.isContainer(container))
+                return inventory.extractItem(slot, amount, simulate);
         }
         
         return ItemStack.EMPTY;
@@ -116,7 +117,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
             return level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
-                    level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
+                level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
         }
         
         @Nullable

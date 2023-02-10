@@ -292,18 +292,16 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
     }
     
     @Override
-    public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
-        return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
-    }
-    
-    @Override
     public void applyCreativeFuel() {
         super.applyCreativeFuel();
     }
     
-    public boolean addFuelOrIngredient(ItemStack inStack, boolean forceOverflow, boolean simulate) {
-        if (tryUpdateFuel(inStack, forceOverflow, simulate)) return true;
-        
+    @Override
+    public boolean tryUpdateFuel(ItemStack itemStack, boolean forceOverflow, boolean simulate) {
+        return super.tryUpdateFuel(itemStack,forceOverflow,simulate);
+    }
+    
+    public boolean tryAddIngredient(ItemStack inStack, boolean forceOverflow, boolean simulate) {
         int slot = getNextEmptySlot();
         if (slot < 0) return false;
         
