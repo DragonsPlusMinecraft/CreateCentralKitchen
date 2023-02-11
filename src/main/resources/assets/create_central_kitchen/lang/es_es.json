@@ -2,7 +2,7 @@
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
-	"block.create_central_kitchen.blaze_stove": "Quemador de blaze",
+	"block.create_central_kitchen.blaze_stove": "Quemador de Blaze",
 
 	"fluid.create_central_kitchen.apple_cider": "Sidra de manzana",
 	"fluid.create_central_kitchen.hot_cocoa": "Chocolate caliente",
@@ -11,17 +11,17 @@
 
 	"item.create_central_kitchen.cooking_guide": "Guía de cocina",
 
-	"recipe.create_central_kitchen.cutting_board_deploying": "Despliegue de la tabla de cortar",
+	"recipe.create_central_kitchen.cutting_board_deploying": "Desplegador con tabla de cortar",
 
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 
-	"create_central_kitchen.ponder.tag.farmers_delight": "Farmer's Delight Automatización",
+	"create_central_kitchen.ponder.tag.farmers_delight": "Automatización de Farmer's Delight",
 	"create_central_kitchen.ponder.tag.farmers_delight.description": "Artículos y componentes relacionados con la automatización de Farmer's Delight.",
 
 	"create_central_kitchen.ponder.basket.header": "Recolección de artículos con la cesta",
 	"create_central_kitchen.ponder.basket.text_1": "La cesta puede recoger artículos transportados desde la cinta.",
-	"create_central_kitchen.ponder.basket.text_2": "Además de orientado hacia arriba, también es adecuado el correspondiente revestimiento horizontal.",
+	"create_central_kitchen.ponder.basket.text_2": "Además de orientado hacia arriba, también hacia la cinta transportadora.",
 
 	"create_central_kitchen.ponder.blaze_stove.intro.header": "Contratar a un cocinero",
 	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Haz click con el botón derecho en el quemador Blaze con una guía de cocina en la mano mientras te agachas.",
