@@ -14,8 +14,6 @@ import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.common.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.FarmersDelightModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdMenuTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FrArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrItems;

@@ -2,14 +2,12 @@ package plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei
 
 import com.farmersrespite.common.crafting.KettleRecipe;
 import com.farmersrespite.integration.jei.category.BrewingRecipeCategory;
-import com.mojang.logging.LogUtils;
 import com.simibubi.create.compat.jei.GhostIngredientHandler;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
-import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.common.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideScreen;

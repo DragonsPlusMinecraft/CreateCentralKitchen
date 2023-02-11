@@ -1,17 +1,13 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei;
 
-import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.GhostIngredientHandler;
-import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModList;
-import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.common.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.common.integration.jei.RecipeCategoryBuilder;
