@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.create.DeployerTileEntityAccessor",
+    "common.create.FarmersRespiteHarvesterMovementBehaviorMixin",
     "common.farmersdelight.BasketBlockEntityMixin",
     "common.farmersdelight.CookingPotBlockEntityMixin",
     "common.farmersdelight.CuttingBoardBlockEntityAccessor",
