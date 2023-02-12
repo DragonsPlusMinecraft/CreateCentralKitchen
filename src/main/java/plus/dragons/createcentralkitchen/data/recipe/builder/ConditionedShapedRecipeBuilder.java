@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.data.recipe;
+package plus.dragons.createcentralkitchen.data.recipe.builder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -21,8 +21,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
-import net.minecraftforge.common.crafting.conditions.NotCondition;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -34,9 +32,10 @@ import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ConditionedShapedRecipeBuilder implements RecipeBuilder {
-    private final Item result;
-    private final int count;
+public class ConditionedShapedRecipeBuilder implements RecipeBuilder, ConditionedRecipeBuilder<ConditionedShapedRecipeBuilder> {
+    private final ResourceLocation id;
+    private Item result;
+    private int count = 1;
     private final List<String> rows = Lists.newArrayList();
     private final Map<Character, Ingredient> key = Maps.newLinkedHashMap();
     private final Advancement.Builder advancement = Advancement.Builder.advancement();;
@@ -44,9 +43,8 @@ public class ConditionedShapedRecipeBuilder implements RecipeBuilder {
     private String group = null;
     private final List<ICondition> conditions = new ArrayList<>();
     
-    public ConditionedShapedRecipeBuilder(ItemLike result, int count) {
-        this.result = result.asItem();
-        this.count = count;
+    public ConditionedShapedRecipeBuilder(ResourceLocation id) {
+        this.id = id;
     }
     
     /**
@@ -89,34 +87,47 @@ public class ConditionedShapedRecipeBuilder implements RecipeBuilder {
         }
     }
     
+    public ConditionedShapedRecipeBuilder output(ItemLike item, int count) {
+        this.result = item.asItem();
+        this.count = count;
+        return this;
+    }
+    
+    public ConditionedShapedRecipeBuilder output(ItemLike item) {
+        return output(item, 1);
+    }
+    
+    @Override
     public ConditionedShapedRecipeBuilder withCondition(ICondition condition) {
         conditions.add(condition);
         return this;
     }
     
-    public ConditionedShapedRecipeBuilder whenModLoaded(String modid) {
-        return withCondition(new ModLoadedCondition(modid));
-    }
-    
-    public ConditionedShapedRecipeBuilder whenModMissing(String modid) {
-        return withCondition(new NotCondition(new ModLoadedCondition(modid)));
-    }
-    
+    @Override
     public ConditionedShapedRecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         this.advancement.addCriterion(pCriterionName, pCriterionTrigger);
         return this;
     }
     
+    @Override
     public ConditionedShapedRecipeBuilder group(@Nullable String pGroupName) {
         this.group = pGroupName;
         return this;
     }
     
+    @Override
     public Item getResult() {
         return this.result;
     }
     
+    @Override
+    public void save(Consumer<FinishedRecipe> consumer) {
+        this.save(consumer, this.id);
+    }
+    
+    @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+        id = new ResourceLocation(id.getNamespace(), "crafting/" + id.getPath());
         this.ensureValid(id);
         if (!this.advancement.getCriteria().isEmpty()) {
             this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
@@ -127,14 +138,17 @@ public class ConditionedShapedRecipeBuilder implements RecipeBuilder {
             this.rows, this.key,
             this.advancement,
             new ResourceLocation(id.getNamespace(),
-                "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + id.getPath()),
+                "recipes/" + id.getPath()),
             this.conditions));
     }
     
     /**
-     * Makes sure that this recipe is valid and obtainable.
+     * Makes sure that this recipe is valid
      */
     private void ensureValid(ResourceLocation id) {
+        if (this.result == null) {
+            throw new IllegalStateException("No result is defined for shaped recipe " + id + "!");
+        }
         if (this.rows.isEmpty()) {
             throw new IllegalStateException("No pattern is defined for shaped recipe " + id + "!");
         } else {

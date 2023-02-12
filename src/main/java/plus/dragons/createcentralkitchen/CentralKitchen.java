@@ -13,6 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.common.modules.ModModuleLoader;
+import plus.dragons.createcentralkitchen.data.CentralKitchenData;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
@@ -30,6 +31,7 @@ public class CentralKitchen {
         ModModuleLoader.loadModules();
         
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        CentralKitchenData.register(modBus);
         REGISTRATE.registerEventListeners(modBus);
         TYPE_REGISTER.register(modBus);
         SERIALIZER_REGISTER.register(modBus);

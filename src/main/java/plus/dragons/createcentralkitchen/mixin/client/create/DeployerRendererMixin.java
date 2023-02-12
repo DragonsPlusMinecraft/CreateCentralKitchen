@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 import plus.dragons.createcentralkitchen.mixin.common.create.DeployerTileEntityAccessor;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdTags;
 
 @Mixin(value = DeployerRenderer.class, remap = false)
 public class DeployerRendererMixin {
@@ -21,7 +21,7 @@ public class DeployerRendererMixin {
         name = "punching"
     )
     private boolean isUprightOnDeployer(boolean original, DeployerTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        return original || ((DeployerTileEntityAccessor) te).getHeldItem().is(FdTags.UPRIGHT_ON_DEPLOYER);
+        return original || ((DeployerTileEntityAccessor) te).getHeldItem().is(CentralKitchenTags.UPRIGHT_ON_DEPLOYER);
     }
 
 }

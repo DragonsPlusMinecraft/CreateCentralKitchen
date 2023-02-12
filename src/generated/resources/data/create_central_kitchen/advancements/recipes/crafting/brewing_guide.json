@@ -2,14 +2,14 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "create_central_kitchen:brewing_guide"
+      "create_central_kitchen:crafting/brewing_guide"
     ]
   },
   "criteria": {
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "create_central_kitchen:brewing_guide"
+        "recipe": "create_central_kitchen:crafting/brewing_guide"
       }
     }
   },

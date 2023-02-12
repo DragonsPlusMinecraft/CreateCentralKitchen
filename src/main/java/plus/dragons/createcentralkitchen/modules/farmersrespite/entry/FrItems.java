@@ -9,8 +9,8 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.common.item.FillCreateItemGroupEvent;
-import plus.dragons.createcentralkitchen.data.recipe.ConditionedRecipes;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdTags;
+import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
+import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.FarmersRespiteModule;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -23,8 +23,9 @@ public class FrItems {
 
     public static final ItemEntry<BrewingGuideItem> BREWING_GUIDE = REGISTRATE.item("brewing_guide", BrewingGuideItem::new)
         .properties(prop -> prop.stacksTo(1))
-        .recipe((ctx, prov) -> ConditionedRecipes.shapeless(ctx.getEntry())
-            .requires(FdTags.item(new ResourceLocation("forge", "plates/copper")))
+        .recipe((ctx, prov) -> RecipeGen.shapeless(ctx.getId())
+            .output(ctx.get())
+            .requires(CentralKitchenTags.item(new ResourceLocation("forge", "plates/copper")))
             .requires(ModItems.CANVAS.get())
             .requires(FRTags.TEA_LEAVES)
             .whenModLoaded(FarmersRespiteModule.ID)
