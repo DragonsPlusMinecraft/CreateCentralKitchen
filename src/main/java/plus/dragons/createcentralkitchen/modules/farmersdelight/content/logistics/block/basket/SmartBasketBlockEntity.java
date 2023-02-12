@@ -10,6 +10,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import plus.dragons.createcentralkitchen.common.tileEntity.DelegatingSmartTileEntity;
+import plus.dragons.createcentralkitchen.mixin.common.farmersdelight.BasketBlockEntityAccessor;
 import vectorwing.farmersdelight.common.block.BasketBlock;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 
@@ -36,7 +37,7 @@ public class SmartBasketBlockEntity extends DelegatingSmartTileEntity<BasketBloc
             case DOWN -> direction == Direction.UP;
             default -> direction == facing.getOpposite();
         };
-        return match && !((BasketBlockEntityAccess)this.blockEntity).cck$isOnTransferCooldown();
+        return match && !((BasketBlockEntityAccessor)this.blockEntity).invokeIsOnTransferCooldown();
     }
     
     private ItemStack tryInsertingFromSide(TransportedItemStack inserted, Direction side, boolean simulate) {

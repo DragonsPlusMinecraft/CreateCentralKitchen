@@ -20,7 +20,4 @@ public class CreateItemGroupBaseMixin {
         event.apply();
     }
 
-
-
-
 }

@@ -4,6 +4,6 @@ import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 
 public interface SmartTileEntityLike {
     
-    SmartTileEntity cck$asSmartTE();
+    SmartTileEntity asSmartTileEntity();
     
 }

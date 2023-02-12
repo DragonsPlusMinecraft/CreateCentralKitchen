@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen;
 
-import net.minecraftforge.fml.ModList;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
+import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -9,10 +10,20 @@ import java.util.List;
 import java.util.Set;
 
 public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
+    private Object2BooleanOpenHashMap<String> dependencies = new Object2BooleanOpenHashMap<>();
     
     @Override
     public void onLoad(String mixinPackage) {
-    
+        String[] modids = {
+            "create",
+            "farmersdelight",
+            "farmersrespite",
+            "jei"
+        };
+        LoadingModList mods = LoadingModList.get();
+        for (String modid : modids) {
+            dependencies.put(modid, mods.getModFileById(modid) != null);
+        }
     }
     
     @Override
@@ -22,16 +33,13 @@ public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
     
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("plus.dragons.createcentralkitchen.mixin.common.create.FarmersRespiteHarvesterMovementBehaviorMixin")) {
-            return ModList.get().isLoaded("farmersrespite");
-        }
-        return true;
+        String[] splitMixinClassName = mixinClassName.split("\\.");
+        String modid = splitMixinClassName[splitMixinClassName.length - 2];
+        return dependencies.getOrDefault(modid, true);
     }
     
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-    
-    }
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
     
     @Override
     public List<String> getMixins() {

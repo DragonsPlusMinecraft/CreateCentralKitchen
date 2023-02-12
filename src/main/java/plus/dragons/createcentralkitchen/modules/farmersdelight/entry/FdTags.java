@@ -46,7 +46,9 @@ public class FdTags {
     }
 
     public static void genBlockTags(RegistrateTagsProvider<Block> prov) {
-        prov.tag(ModTags.HEAT_SOURCES).add(AllBlocks.LIT_BLAZE_BURNER.get());
+        prov.tag(ModTags.TRAY_HEAT_SOURCES)
+            .add(AllBlocks.LIT_BLAZE_BURNER.get())
+            .add(AllBlocks.BLAZE_BURNER.get());
     }
     
     public static void register() {
