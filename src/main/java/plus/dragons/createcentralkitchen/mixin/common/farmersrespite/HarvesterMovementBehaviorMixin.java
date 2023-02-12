@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.mixin.common.create;
+package plus.dragons.createcentralkitchen.mixin.common.farmersrespite;
 
 import com.simibubi.create.content.contraptions.components.actors.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.components.structureMovement.MovementBehaviour;
@@ -26,7 +26,7 @@ import umpaz.farmersrespite.common.registry.FRBlocks;
 import umpaz.farmersrespite.common.registry.FRItems;
 
 @Mixin(value = HarvesterMovementBehaviour.class, remap = false)
-public abstract class FarmersRespiteHarvesterMovementBehaviorMixin implements MovementBehaviour {
+public abstract class HarvesterMovementBehaviorMixin implements MovementBehaviour {
     
     @Inject(method = "visitNewPosition", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/contraptions/components/actors/HarvesterMovementBehaviour;isValidCrop(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), cancellable = true)
     private void farmersrespite$visitNewPosition(MovementContext context, BlockPos pos, CallbackInfo ci) {

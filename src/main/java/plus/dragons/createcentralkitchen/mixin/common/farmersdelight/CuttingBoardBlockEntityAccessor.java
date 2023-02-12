@@ -11,9 +11,9 @@ import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-@Mixin(CuttingBoardBlockEntity.class)
+@Mixin(value = CuttingBoardBlockEntity.class, remap = false)
 public interface CuttingBoardBlockEntityAccessor {
 
-    @Invoker(value = "getMatchingRecipe", remap = false)
+    @Invoker(value = "getMatchingRecipe")
     Optional<CuttingBoardRecipe> callGetMatchingRecipe(RecipeWrapper recipeWrapper, ItemStack toolStack, @Nullable Player player);
 }

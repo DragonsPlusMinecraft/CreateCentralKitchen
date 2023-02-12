@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.mixin.client.create;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.components.deployer.DeployerRenderer;
 import com.simibubi.create.content.contraptions.components.deployer.DeployerTileEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -19,11 +18,10 @@ public class DeployerRendererMixin {
         at = @At(value = "INVOKE", target = "Lcom/simibubi/create/foundation/utility/AngleHelper;horizontalAngle(Lnet/minecraft/core/Direction;)F"),
         ordinal = 0,
         index = 10,
-        name = "punching",
-        remap = false
+        name = "punching"
     )
-    private boolean createsdelight$uprightOnDeployer(boolean original, DeployerTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        return original || ((DeployerTileEntityAccessor) te).getHeldItem().is(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag);
+    private boolean isUprightOnDeployer(boolean original, DeployerTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        return original || ((DeployerTileEntityAccessor) te).getHeldItem().is(FdTags.UPRIGHT_ON_DEPLOYER);
     }
 
 }

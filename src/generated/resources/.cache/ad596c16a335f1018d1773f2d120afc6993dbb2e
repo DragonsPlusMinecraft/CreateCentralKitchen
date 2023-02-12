@@ -1,4 +1,4 @@
-// 1.19.2	2023-02-18T08:32:38.3255025	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-18T08:50:20.3973072	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d6d3b59b64f72c62d8cdbf1363d79327e492507c assets/create_central_kitchen/blockstates/blaze_stove.json
 a489cdff418ac113da4834a2976ee43c2309ac6a assets/create_central_kitchen/lang/en_ud.json
 19448ace7d4505d390ecdefd61c33afba15f4ccf assets/create_central_kitchen/lang/en_us.json
@@ -25,7 +25,8 @@ bc6b4a4cfa5b2743ba8d92745a16dd5859f8c98c data/create_central_kitchen/recipes/fil
 7bc308f50eb6e5b754a40ce0f7b837e75424ca84 data/create_central_kitchen/recipes/mixing/melon_juice.json
 a0baac6cc97bc64fdb9f140430ac9cf67bfa5363 data/create_central_kitchen/recipes/mixing/tomato_sauce.json
 1b31ef4ac79216db58ec9c632189d50e6af0f69b data/create_central_kitchen/tags/items/upright_on_deployer.json
-c54fbad3dbd5eb4c24a1df7d146ea7226e9cd133 data/farmersdelight/tags/blocks/heat_sources.json
+fd7019281ce662d4f93ad5f12d6845ffeedae370 data/farmersdelight/tags/blocks/heat_sources.json
+be1ce287a2441241ab6b480cf9d843d4a3df6117 data/farmersdelight/tags/blocks/tray_heat_sources.json
 601667bd216ec4a89a685e9e133665d9265e50c0 data/forge/tags/fluids/apple_cider.json
 9af13f80bbe62505aed41bd80bd504c5ad977c34 data/forge/tags/fluids/hot_cocoa.json
 ba9d2a87fb4ee6b9dfcb9473385a8e84a7e9f5f5 data/forge/tags/fluids/melon_juice.json
