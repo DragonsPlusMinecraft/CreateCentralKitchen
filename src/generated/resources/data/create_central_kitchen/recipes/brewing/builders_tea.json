@@ -1,0 +1,26 @@
+{
+  "type": "farmersrespite:brewing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "container": {
+    "item": "minecraft:glass"
+  },
+  "cookingtime": 2400,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "farmersrespite:tea_leaves"
+    },
+    {
+      "item": "farmersdelight:milk_bottle"
+    }
+  ],
+  "needwater": true,
+  "result": {
+    "item": "create:builders_tea"
+  }
+}

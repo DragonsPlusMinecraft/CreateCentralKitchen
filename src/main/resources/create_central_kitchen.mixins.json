@@ -7,12 +7,12 @@
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
     "common.create.DeployerTileEntityAccessor",
+    "common.create.TileEntityBehaviorMixin",
     "common.farmersdelight.BasketBlockEntityAccessor",
     "common.farmersdelight.BasketBlockEntityMixin",
     "common.farmersdelight.CuttingBoardBlockEntityAccessor",
     "common.farmersdelight.HeatableBlockEntityMixin",
     "common.farmersdelight.SkilletBlockEntityAccessor",
-    "common.farmersdelight.TileEntityBehaviorMixin",
     "common.farmersrespite.HarvesterMovementBehaviorMixin",
     "common.jei.DynamicJeiPluginMixin"
   ],

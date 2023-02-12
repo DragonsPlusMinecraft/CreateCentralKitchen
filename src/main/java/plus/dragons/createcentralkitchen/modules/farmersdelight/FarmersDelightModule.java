@@ -39,7 +39,6 @@ public class FarmersDelightModule {
         FdItems.register();
         FdMenuTypes.register();
         FdFluids.register();
-        FdTags.register();
         FdRecipeTypes.register();
         FdArmInteractionPointTypes.register();
     }

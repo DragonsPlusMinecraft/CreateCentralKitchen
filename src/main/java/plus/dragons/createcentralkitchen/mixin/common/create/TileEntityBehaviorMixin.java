@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.mixin.common.farmersdelight;
+package plus.dragons.createcentralkitchen.mixin.common.create;
 
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.BehaviourType;

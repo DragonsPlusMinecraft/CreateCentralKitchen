@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create_central_kitchen:brewing_guide"
+        "recipe": "create_central_kitchen:crafting/brewing_guide"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "create_central_kitchen:brewing_guide"
+      "create_central_kitchen:crafting/brewing_guide"
     ]
   }
 }

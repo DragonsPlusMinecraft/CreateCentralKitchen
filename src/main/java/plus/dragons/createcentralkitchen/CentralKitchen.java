@@ -6,7 +6,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -14,10 +13,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.common.modules.ModModuleLoader;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
+import plus.dragons.createcentralkitchen.data.CentralKitchenData;
 import plus.dragons.createdragonlib.init.SafeRegistrate;
 import plus.dragons.createdragonlib.lang.Lang;
-import plus.dragons.createdragonlib.lang.LangFactory;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
@@ -36,17 +34,10 @@ public class CentralKitchen {
         ModModuleLoader.loadModules();
         
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        CentralKitchenData.register(modBus);
         REGISTRATE.registerEventListeners(modBus);
         TYPE_REGISTER.register(modBus);
         SERIALIZER_REGISTER.register(modBus);
-
-        LangFactory langFactory = LangFactory.create(NAME, ID)
-                .ponders(() -> {
-                    FdPonderIndex.register();
-                    FdPonderIndex.registerTags();
-                })
-                .ui();
-        modBus.addListener(EventPriority.LOWEST, langFactory::datagen);
     }
     
     public static ResourceLocation genRL(String path) {

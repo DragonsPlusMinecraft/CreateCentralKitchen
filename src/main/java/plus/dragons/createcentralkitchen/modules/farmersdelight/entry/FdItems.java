@@ -7,10 +7,11 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.data.recipe.ConditionedRecipes;
+import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
+import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.FarmersDelightModule;
-import plus.dragons.createdragonlib.init.FillCreateItemGroupEvent;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideItem;
+import plus.dragons.createdragonlib.init.FillCreateItemGroupEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
@@ -22,8 +23,9 @@ public class FdItems {
 
     public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
         .properties(prop -> prop.stacksTo(1))
-        .recipe((ctx, prov) -> ConditionedRecipes.shapeless(ctx.getEntry())
-            .requires(FdTags.item(new ResourceLocation("forge", "plates/obsidian")))
+        .recipe((ctx, prov) -> RecipeGen.shapeless(ctx.getId())
+            .output(ctx.get())
+            .requires(CentralKitchenTags.item(new ResourceLocation("forge", "plates/obsidian")))
             .requires(ModItems.CANVAS.get())
             .requires(ForgeTags.VEGETABLES)
             .whenModLoaded(FarmersDelightModule.ID)
