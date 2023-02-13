@@ -12,7 +12,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.common.modules.ModModule;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.FarmersDelightModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FrArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
@@ -32,7 +31,7 @@ public class FarmersRespiteModule {
         registerModEvents(modBus);
         registerForgeEvents(forgeBus);
         
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> FarmersDelightModule.Client::new);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> Client::new);
     }
     
     private void registerEntries() {
@@ -85,10 +84,7 @@ public class FarmersRespiteModule {
         }
         
         public void setup(final FMLClientSetupEvent event) {
-            event.enqueueWork(() -> {
-                //FdPonderIndex.register();
-                //FdPonderIndex.registerTags();
-            });
+        
         }
         
     }
