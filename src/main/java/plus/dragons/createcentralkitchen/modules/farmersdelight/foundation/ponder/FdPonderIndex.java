@@ -19,10 +19,11 @@ public class FdPonderIndex {
     
     public static void register() {
         HELPER.forComponents(FdItems.COOKING_GUIDE)
-                .addStoryBoard("blaze_stove/intro", BlazeStoveScenes::intro, FdPonderTag.FARMERS_DELIGHT)
-                .addStoryBoard("blaze_stove/processing", BlazeStoveScenes::processing, FdPonderTag.FARMERS_DELIGHT);
+            .addStoryBoard("blaze_stove/intro", BlazeStoveScenes::intro, FdPonderTag.FARMERS_DELIGHT)
+            .addStoryBoard("blaze_stove/configure", BlazeStoveScenes::configure, FdPonderTag.FARMERS_DELIGHT)
+            .addStoryBoard("blaze_stove/heat_source", BlazeStoveScenes::heat_source, FdPonderTag.FARMERS_DELIGHT);
         HELPER.forComponents(new ItemProviderEntry<>(CentralKitchen.REGISTRATE, ModItems.BASKET))
-                .addStoryBoard("basket", BasketScenes::intro, FdPonderTag.FARMERS_DELIGHT);
+            .addStoryBoard("basket", BasketScenes::intro, FdPonderTag.FARMERS_DELIGHT);
     }
 
     public static void registerTags() {
@@ -34,13 +35,13 @@ public class FdPonderIndex {
             .add(ModItems.CUTTING_BOARD.get())
             .add(FdBlocks.BLAZE_STOVE.get());
         PonderRegistry.TAGS.forTag(FdPonderTag.FARMERS_DELIGHT)
-                .add(FdItems.COOKING_GUIDE)
-                .add(AllBlocks.MECHANICAL_ARM.get())
-                .add(ModBlocks.COOKING_POT.get())
-                .add(ModBlocks.SKILLET.get())
-                .add(ModBlocks.STOVE.get())
-                .add(ModBlocks.BASKET.get())
-                .add(ModBlocks.CUTTING_BOARD.get());
+            .add(FdItems.COOKING_GUIDE)
+            .add(AllBlocks.MECHANICAL_ARM.get())
+            .add(ModBlocks.COOKING_POT.get())
+            .add(ModBlocks.SKILLET.get())
+            .add(ModBlocks.STOVE.get())
+            .add(ModBlocks.BASKET.get())
+            .add(ModBlocks.CUTTING_BOARD.get());
     }
 
 }

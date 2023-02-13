@@ -2,105 +2,246 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.pond
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.logistics.block.mechanicalArm.ArmTileEntity;
+import com.simibubi.create.foundation.ponder.PonderPalette;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
 import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
+import com.simibubi.create.foundation.ponder.Selection;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.Shapes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlocks;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class BlazeStoveScenes {
     
     public static void intro(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.intro", "Hire a cook"); // We do not use PonderLocalization. For title only
+        scene.title("blaze_stove.intro", "Hire a Chef");
         scene.configureBasePlate(0, 0, 3);
+        scene.world.setKineticSpeed(util.select.everywhere(), 0);
         scene.showBasePlate();
         scene.idle(5);
         scene.world.showSection(util.select.fromTo(0, 1, 0, 2, 1, 2), Direction.DOWN);
 
-        scene.overlay.showText(40)
-                .text("Right-click the Blaze Burner with an Cooking Guide in hand when sneaking.") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(1, 1, 1));
-
+        scene.overlay.showText(50)
+            .text("To create a Blaze Stove, right-click the Blaze Burner with a Cooking Guide in hand when sneaking.")
+            .attachKeyFrame()
+            .pointAt(util.vector.topOf(1, 1, 1))
+            .placeNearTarget();
+        scene.idle(60);
+        
+        ItemStack cookingGuide = FdItems.COOKING_GUIDE.asStack();
+        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(1, 1, 1), Pointing.DOWN)
+            .whileSneaking()
+            .rightClick()
+            .withItem(cookingGuide), 30);
+        scene.world.setBlock(util.grid.at(1, 1, 1), FdBlocks.BLAZE_STOVE.getDefaultState(), false);
+        scene.world.modifyTileEntity(util.grid.at(1, 1, 1), BlazeStoveBlockEntity.class,
+            stove -> stove.setGuide(cookingGuide));
         scene.idle(40);
-        scene.world.setBlock(util.grid.at(1,1,1), FdBlocks.BLAZE_STOVE.getDefaultState(),false);
-        scene.world.modifyTileEntity(util.grid.at(1,1,1), BlazeStoveBlockEntity.class, be-> be.setGuide(new ItemStack(FdItems.COOKING_GUIDE.get())));
-        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(1, 1, 1), Pointing.DOWN).whileSneaking().rightClick()
-                .withItem(FdItems.COOKING_GUIDE.asStack()), 40);
-
-        scene.idle(50);
-        scene.overlay.showText(40)
-                .text("To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking.") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(1, 1, 1));
-        scene.idle(40);
-        scene.world.setBlock(util.grid.at(1,1,1), AllBlocks.BLAZE_BURNER.getDefaultState().setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING),false);
-        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(1, 1, 1), Pointing.DOWN).rightClick().withWrench().whileSneaking(), 40);
+        
+        scene.overlay.showText(50)
+            .text("Cooking Guides are for Cooking Pots, other guides for different kitchen wares are also applicable.")
+            .attachKeyFrame()
+            .pointAt(util.vector.topOf(1, 1, 1))
+            .placeNearTarget();
+        scene.idle(60);
+        
+        scene.overlay.showText(50)
+            .text("To retrieve the Cooking Guide, right-click the Blaze Stove with wrench when sneaking.")
+            .attachKeyFrame()
+            .pointAt(util.vector.topOf(1, 1, 1))
+            .placeNearTarget();
+        scene.idle(60);
+        
+        scene.world.setBlock(util.grid.at(1, 1, 1),
+            AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING), false);
+        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(1, 1, 1), Pointing.DOWN)
+            .rightClick()
+            .withWrench()
+            .whileSneaking(), 30);
         scene.idle(40);
     }
     
-    public static void processing(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.processing", "Expert chef"); // We do not use PonderLocalization. For title only
+    public static void configure(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("blaze_stove.configure", "Control the Kitchen");
+        scene.configureBasePlate(1, 0, 5);
+        scene.world.showSection(util.select.layer(0), Direction.UP);
+        scene.world.setKineticSpeed(util.select.everywhere(), 0);
+        scene.showBasePlate();
+        scene.idle(5);
+        //Stove and Cooking Pot
+        BlockPos stovePos = util.grid.at(3, 1, 2);
+        Selection stoveSel = util.select.position(stovePos);
+        BlockPos potPos = util.grid.at(3, 2, 2);
+        Selection stoveAndPotSel = util.select.fromTo(stovePos, potPos);
+        scene.world.showSection(stoveAndPotSel, Direction.DOWN);
+        scene.idle(10);
+    
+        scene.effects.indicateRedstone(stovePos);
+        scene.overlay.showSelectionWithText(stoveSel, 70)
+            .attachKeyFrame()
+            .colored(PonderPalette.RED)
+            .text("Blaze Stove can provide mechanical arm support for the Pot, but it needs to be configured to work.")
+            .pointAt(util.vector.centerOf(stovePos))
+            .placeNearTarget();
+        scene.idle(80);
+    
+        scene.overlay.showText(50)
+            .text("Right clicking the Blaze Stove to open the Cooking Guide menu.")
+            .attachKeyFrame()
+            .pointAt(util.vector.centerOf(stovePos))
+            .placeNearTarget();
+        scene.idle(60);
+        
+        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(3, 1, 1), Pointing.DOWN).rightClick(), 30);
+        scene.idle(40);
+    
+        scene.overlay.showText(50)
+            .text("Once you assigned a valid recipe to the Cooking Guide, the Cooking Pot above will become interactive with Mechanical Arms.")
+            .attachKeyFrame()
+            .pointAt(util.vector.centerOf(stovePos))
+            .placeNearTarget();
+        scene.idle(60);
+        //Basket
+        scene.world.showSection(util.select.position(3, 1, 1), Direction.DOWN);
+        scene.idle(10);
+        //Right Mechanical Arm
+        BlockPos rightArmPos = util.grid.at(2, 1, 2);
+        Selection rightArmSel = util.select.fromTo(1, 1, 1, 2, 1, 2);
+        scene.world.showSection(rightArmSel, Direction.EAST);
+        scene.idle(10);
+        scene.world.setKineticSpeed(util.select.fromTo(0, 0, 0, 2, 1, 2), 64);
+        scene.idle(10);
+    
+        AABB basketShape = Shapes.block().move(3, 1, 1).bounds();
+        AABB cookingPotShape = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D).move(3, 2, 2).bounds();
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.INPUT, new Object(), basketShape , 80);
+        scene.idle(20);
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, new Object(), cookingPotShape, 50);
+        scene.overlay.showText(180)
+            .text("For input, the Mechanical Arm will insert containers and defined ingredients.")
+            .attachKeyFrame()
+            .pointAt(util.vector.centerOf(rightArmPos))
+            .placeNearTarget();
+        
+        ItemStack[] inputItems = {
+            Items.GLOW_BERRIES.getDefaultInstance(),
+            ModItems.MILK_BOTTLE.get().getDefaultInstance(),
+            Items.EGG.getDefaultInstance(),
+            Items.SUGAR.getDefaultInstance(),
+            Items.GLASS_BOTTLE.getDefaultInstance()
+        };
+        for (var item : inputItems) {
+            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+            scene.idle(12);
+            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.SEARCH_OUTPUTS, item, -1);
+            scene.idle(8);
+            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.MOVE_TO_OUTPUT, item, 0);
+            scene.idle(12);
+            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+            scene.idle(8);
+        }
+    
+        //Left Mechanical Arm
+        BlockPos leftArmPos = util.grid.at(4, 1, 2);
+        Selection leftArmSel = util.select.fromTo(4, 1, 1, 5, 1, 2);
+        scene.world.showSection(leftArmSel, Direction.WEST);
+        scene.idle(10);
+        scene.world.setKineticSpeed(util.select.fromTo(4, 0, 0, 6, 1, 2), 64);
+        scene.idle(10);
+        
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.INPUT, new Object(), cookingPotShape, 80);
+        scene.idle(20);
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, new Object(), basketShape, 50);
+        scene.overlay.showText(50)
+            .text("For output, the Mechanical Arm will extract result and invalid ingredients.")
+            .attachKeyFrame()
+            .pointAt(util.vector.centerOf(stovePos))
+            .placeNearTarget();
+        var result = ModItems.GLOW_BERRY_CUSTARD.get().getDefaultInstance();
+        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+        scene.idle(12);
+        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.SEARCH_OUTPUTS, result, -1);
+        scene.idle(8);
+        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.MOVE_TO_OUTPUT, result, 0);
+        scene.idle(12);
+        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+        scene.idle(28);
+    }
+    
+    public static void heat_source(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("blaze_stove.heat_source", "Blazing heat");
         scene.configureBasePlate(0, 0, 5);
         scene.world.setKineticSpeed(util.select.everywhere(), 0);
         scene.showBasePlate();
+        scene.idle(5);
         scene.world.showSection(util.select.fromTo(0, 1, 0, 4, 2, 4), Direction.DOWN);
-        scene.idle(50);
+        
         scene.overlay.showText(40)
-                .text("Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(3, 1, 1));
-
-        scene.idle(70);
-        scene.overlay.showText(60)
-                .text("Cooking can still be done even without adding fuel to the Blaze Stove.") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(1, 1, 2));
-
-        scene.idle(70);
-        scene.overlay.showText(60)
-                .text("The hotter the fire, the faster the cooking.") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(3, 1, 3));
-
+            .text("Blaze Stove is an active heat source, the hotter the fire, the faster the cooking.")
+            .placeNearTarget()
+            .pointAt(util.vector.topOf(3, 1, 3));
         scene.idle(50);
-        scene.world.setBlock(util.grid.at(3,2,1), Blocks.AIR.defaultBlockState(),false);
-        scene.world.setBlock(util.grid.at(1,2,2), Blocks.AIR.defaultBlockState(),false);
-        scene.world.setBlock(util.grid.at(3,2,3), Blocks.AIR.defaultBlockState(),false);
-
-        scene.world.modifyTileEntity(util.grid.at(1,1,2), BlazeStoveBlockEntity.class, be-> {
-            var inv = be.getInventory();
-            inv.insertItem(0,new ItemStack(Items.BEEF),false);
-            inv.insertItem(1,new ItemStack(Items.BEEF),false);
-            inv.insertItem(2,new ItemStack(Items.BEEF),false);
-            inv.insertItem(3,new ItemStack(Items.PORKCHOP),false);
-            inv.insertItem(4,new ItemStack(Items.PORKCHOP),false);
-            inv.insertItem(5,new ItemStack(Items.PORKCHOP),false);
-        });
-
+        
         scene.overlay.showText(40)
-                .text("Of course, you can also use Block Stove to fry things directly.") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(1, 1, 2));
-
-        scene.idle(70);
-        scene.overlay.showText(60)
-                .text("But please note that seething fire can burn your ingredients directly.") // We do not use PonderLocalization. For registerText only
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector.topOf(3, 1, 3));
+            .text("But cooking can still be done with passive heat.")
+            .attachKeyFrame()
+            .placeNearTarget()
+            .pointAt(util.vector.topOf(1, 1, 2));
+        scene.idle(50);
+        
+        scene.world.setBlock(util.grid.at(3, 2, 1), Blocks.AIR.defaultBlockState(), false);
+        scene.idle(5);
+        scene.world.setBlock(util.grid.at(1, 2, 2), Blocks.AIR.defaultBlockState(), false);
+        scene.idle(5);
+        scene.world.setBlock(util.grid.at(3, 2, 3), Blocks.AIR.defaultBlockState(), false);
+        scene.idle(5);
+    
+        scene.overlay.showText(40)
+            .text("Of course, you can also use Blaze Stove to fry things directly.")
+            .attachKeyFrame()
+            .placeNearTarget()
+            .pointAt(util.vector.topOf(1, 1, 2));
+        scene.idle(10);
+        
+        ItemStack[] ingredients = {
+            ModItems.MINCED_BEEF.get().getDefaultInstance(),
+            ModItems.MINCED_BEEF.get().getDefaultInstance(),
+            ModItems.MINCED_BEEF.get().getDefaultInstance(),
+            ModItems.BACON.get().getDefaultInstance(),
+            ModItems.BACON.get().getDefaultInstance(),
+            ModItems.BACON.get().getDefaultInstance(),
+            ModItems.CHICKEN_CUTS.get().getDefaultInstance(),
+            ModItems.CHICKEN_CUTS.get().getDefaultInstance(),
+            ModItems.CHICKEN_CUTS.get().getDefaultInstance(),
+        };
+        for (int i = 0; i < 9; ++i) {
+            final int index = i;
+            scene.world.modifyTileEntity(util.grid.at(1, 1, 2), BlazeStoveBlockEntity.class, be -> {
+                var inv = be.getInventory();
+                inv.insertItem(index, ingredients[index], false);
+            });
+            scene.idle(4);
+        }
+        scene.idle(4);
+        
+        scene.overlay.showText(40)
+            .text("But please note that seething fire can burn your ingredients in an instant.")
+            .attachKeyFrame()
+            .placeNearTarget()
+            .pointAt(util.vector.topOf(3, 1, 3));
+        scene.idle(50);
     }
     
 }

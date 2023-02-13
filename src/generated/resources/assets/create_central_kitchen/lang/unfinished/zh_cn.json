@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 0",
+	"_": "Missing Localizations: 6",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -22,16 +22,16 @@
 	"create_central_kitchen.ponder.basket.text_1": "篮子可以从传送带接收物品。",
 	"create_central_kitchen.ponder.basket.text_2": "除了向上开口，对应的水平朝向也是适合的。",
 
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "雇佣厨师",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潜行时，手持烈焰人烹饪指南右键烈焰人燃烧室",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "潜行时，用扳手右击烈焰人炉灶以回收烈焰人烹饪指南",
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "雇佣主厨",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潜行时，用烹饪指南右击烈焰人燃烧室以创建烈焰人炉灶",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "烹饪指南适用于厨锅，也可以使用其他厨具对应的指南",
 
-	"create_central_kitchen.ponder.blaze_stove.processing.header": "专业主厨",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_1": "烈焰人炉灶可以为厨锅提供动力臂支持，就让它来主导烹饪吧!",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_2": "即便没有燃料，烹饪依然可以完成。",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_3": "火焰的温度越高，烹饪速度越快。",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_4": "当然，你也可以直接用烈焰人炉灶煎制食物。",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_5": "但务必注意超级燃烧的火焰会直接烧毁你的原料。",
+	"create_central_kitchen.ponder.blaze_stove.processing.header": "UNLOCALIZED: Expert chef",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_1": "UNLOCALIZED: Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_2": "UNLOCALIZED: Cooking can still be done even without adding fuel to the Blaze Stove.",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_3": "UNLOCALIZED: The hotter the fire, the faster the cooking.",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_4": "UNLOCALIZED: Of course, you can also use Block Stove to fry things directly.",
+	"create_central_kitchen.ponder.blaze_stove.processing.text_5": "UNLOCALIZED: But please note that seething fire can burn your ingredients directly.",
 
 	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "未指定有效配方",
 	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "当前配方：",
@@ -46,16 +46,23 @@
 	"create_central_kitchen.ponder.basket.text_1": "篮子可以从传送带接收物品。",
 	"create_central_kitchen.ponder.basket.text_2": "除了向上开口，对应的水平朝向也是适合的。",
 
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "雇佣厨师",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潜行时，手持烈焰人烹饪指南右键烈焰人燃烧室",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "潜行时，用扳手右击烈焰人炉灶以回收烈焰人烹饪指南",
+	"create_central_kitchen.ponder.blaze_stove.configure.header": "掌控厨房",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_1": "烈焰人炉灶可以为厨锅提供动力臂支持，不过它需要经过配置才能工作！",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_2": "右击烈焰人炉灶可以打开烹饪指南的界面",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_3": "一旦你给烹饪指南设定了有效的配方，上方的厨锅就能与动力臂交互",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_4": "对于输入，动力臂会放入容器和指定的原料",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_5": "对于输出，动力臂会取出产物和无效的原料",
 
-	"create_central_kitchen.ponder.blaze_stove.processing.header": "专业主厨",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_1": "烈焰人炉灶可以为厨锅提供动力臂支持，就让它来主导烹饪吧!",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_2": "即便没有燃料，烹饪依然可以完成。",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_3": "火焰的温度越高，烹饪速度越快。",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_4": "当然，你也可以直接用烈焰人炉灶煎制食物。",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_5": "但务必注意超级燃烧的火焰会直接烧毁你的原料。",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "烈焰热能",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "烈焰人炉灶是一种主动热源，火焰越热，烹饪速度越快",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "不过烹饪依然能依靠被动热量完成",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "当然，你也可以直接使用烈焰人炉灶煎制食物",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "不过务必注意超级燃烧的火焰会立刻烧毁你的原料",
+
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "雇佣主厨",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潜行时，用烹饪指南右击烈焰人燃烧室以创建烈焰人炉灶",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "烹饪指南适用于厨锅，也可以使用其他厨具对应的指南",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "潜行时，用扳手右击烈焰人炉灶以回收烹饪指南",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",

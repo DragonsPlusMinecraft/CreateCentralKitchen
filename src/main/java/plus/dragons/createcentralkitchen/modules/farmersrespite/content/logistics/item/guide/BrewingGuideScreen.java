@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide;
 
-import com.farmersrespite.core.utility.FRTextUtils;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
+import umpaz.farmersrespite.common.utility.FRTextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

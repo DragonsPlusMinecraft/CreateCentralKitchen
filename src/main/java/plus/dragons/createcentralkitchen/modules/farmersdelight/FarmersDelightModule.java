@@ -88,10 +88,8 @@ public class FarmersDelightModule {
         }
     
         public void setup(final FMLClientSetupEvent event) {
-            event.enqueueWork(() -> {
-                FdPonderIndex.register();
-                FdPonderIndex.registerTags();
-            });
+            FdPonderIndex.register();
+            FdPonderIndex.registerTags();
         }
     
     }

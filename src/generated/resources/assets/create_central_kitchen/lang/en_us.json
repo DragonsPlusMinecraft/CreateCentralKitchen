@@ -45,16 +45,23 @@
 	"create_central_kitchen.ponder.basket.text_1": "Basket can collect transported items from belt.",
 	"create_central_kitchen.ponder.basket.text_2": "Besides facing upwards, corresponding horizontal facing is also suitable.",
 
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "Hire a cook",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Right-click the Blaze Burner with an Cooking Guide in hand when sneaking.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking.",
+	"create_central_kitchen.ponder.blaze_stove.configure.header": "Control the Kitchen",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_1": "Blaze Stove can provide mechanical arm support for the Pot, but it needs to be configured to work.",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_2": "Right clicking the Blaze Stove to open the Cooking Guide menu.",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_3": "Once you assigned a valid recipe to the Cooking Guide, the Cooking Pot above will become interactive with Mechanical Arms.",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_4": "For input, the Mechanical Arm will insert containers and defined ingredients.",
+	"create_central_kitchen.ponder.blaze_stove.configure.text_5": "For output, the Mechanical Arm will extract result and invalid ingredients.",
 
-	"create_central_kitchen.ponder.blaze_stove.processing.header": "Expert chef",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_1": "Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_2": "Cooking can still be done even without adding fuel to the Blaze Stove.",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_3": "The hotter the fire, the faster the cooking.",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_4": "Of course, you can also use Block Stove to fry things directly.",
-	"create_central_kitchen.ponder.blaze_stove.processing.text_5": "But please note that seething fire can burn your ingredients directly.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Blazing heat",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "Blaze Stove is an active heat source, the hotter the fire, the faster the cooking.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "But cooking can still be done with passive heat.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Of course, you can also use Blaze Stove to fry things directly.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "But please note that seething fire can burn your ingredients in an instant.",
+
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "Hire a Chef",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "To create a Blaze Stove, right-click the Blaze Burner with a Cooking Guide in hand when sneaking.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Cooking Guides are for Cooking Pots, other guides for different kitchen wares are also applicable.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "To retrieve the Cooking Guide, right-click the Blaze Stove with wrench when sneaking.",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
