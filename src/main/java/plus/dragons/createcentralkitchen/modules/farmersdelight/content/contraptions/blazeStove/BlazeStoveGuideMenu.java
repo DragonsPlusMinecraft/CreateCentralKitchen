@@ -46,6 +46,10 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         return blazeStove == null ? 0 : blazeStove.getBlazeStatusCode();
     }
     
+    public ItemStack getContainerItem() {
+        return guide.container;
+    }
+    
     public CompoundTag writeGuideToTag() {
         return guide.serializeNBT();
     }
