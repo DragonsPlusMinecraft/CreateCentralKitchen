@@ -28,14 +28,14 @@ public class CookingGuideMenu extends BlazeStoveGuideMenu<CookingGuide> {
     
     @Override
     protected void addSlots() {
-        addPlayerSlots(42, 97);
-        this.addSlot(new CookingIngredientSlot(0, 54, 27));
-        this.addSlot(new CookingIngredientSlot(1, 73, 27));
-        this.addSlot(new CookingIngredientSlot(2, 92, 27));
-        this.addSlot(new CookingIngredientSlot(3, 54, 45));
-        this.addSlot(new CookingIngredientSlot(4, 73, 45));
-        this.addSlot(new CookingIngredientSlot(5, 92, 45));
-        this.addSlot(new DisplaySlot(6, 177, 34));
+        addPlayerSlots(52, 96);
+        this.addSlot(new CookingIngredientSlot(0, 62, 27));
+        this.addSlot(new CookingIngredientSlot(1, 81, 27));
+        this.addSlot(new CookingIngredientSlot(2, 100, 27));
+        this.addSlot(new CookingIngredientSlot(3, 62, 45));
+        this.addSlot(new CookingIngredientSlot(4, 81, 45));
+        this.addSlot(new CookingIngredientSlot(5, 100, 45));
+        this.addSlot(new DisplaySlot(6, 184, 36));
     }
     
 }
