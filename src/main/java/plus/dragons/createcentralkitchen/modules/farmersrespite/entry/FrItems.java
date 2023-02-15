@@ -8,7 +8,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.common.item.FillCreateItemGroupEvent;
+import plus.dragons.createcentralkitchen.core.item.FillCreateItemGroupEvent;
 import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
 import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.FarmersRespiteModule;

@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.tileEntity;
+package plus.dragons.createcentralkitchen.core.tileEntity;
 
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import net.minecraft.MethodsReturnNonnullByDefault;

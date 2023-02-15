@@ -25,15 +25,14 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 public class BlazeStoveScenes {
     
     public static void intro(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.intro", "Hire a Chef");
+        scene.title("blaze_stove.intro", "Create a Blaze Stove");
         scene.configureBasePlate(0, 0, 3);
-        scene.world.setKineticSpeed(util.select.everywhere(), 0);
         scene.showBasePlate();
         scene.idle(5);
         scene.world.showSection(util.select.fromTo(0, 1, 0, 2, 1, 2), Direction.DOWN);
 
         scene.overlay.showText(50)
-            .text("To create a Blaze Stove, right-click the Blaze Burner with a Cooking Guide in hand when sneaking.")
+            .text("To create a Blaze Stove, Right-Click the Blaze Burner with a Cooking Guide in hand when sneaking.")
             .attachKeyFrame()
             .pointAt(util.vector.topOf(1, 1, 1))
             .placeNearTarget();
@@ -50,14 +49,14 @@ public class BlazeStoveScenes {
         scene.idle(40);
         
         scene.overlay.showText(50)
-            .text("Cooking Guides are for Cooking Pots, other guides for different kitchen wares are also applicable.")
+            .text("Cooking Guides are for Cooking Pots, other guides for different kitchenware are also applicable.")
             .attachKeyFrame()
             .pointAt(util.vector.topOf(1, 1, 1))
             .placeNearTarget();
         scene.idle(60);
         
         scene.overlay.showText(50)
-            .text("To retrieve the Cooking Guide, right-click the Blaze Stove with wrench when sneaking.")
+            .text("To retrieve the Cooking Guide, Right-Click the Blaze Stove with wrench when sneaking.")
             .attachKeyFrame()
             .pointAt(util.vector.topOf(1, 1, 1))
             .placeNearTarget();
@@ -74,7 +73,7 @@ public class BlazeStoveScenes {
     }
     
     public static void configure(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.configure", "Control the Kitchen");
+        scene.title("blaze_stove.automation", "Configure the Blaze Stove");
         scene.configureBasePlate(1, 0, 5);
         scene.world.showSection(util.select.layer(0), Direction.UP);
         scene.world.setKineticSpeed(util.select.everywhere(), 0);
@@ -92,19 +91,36 @@ public class BlazeStoveScenes {
         scene.overlay.showSelectionWithText(stoveSel, 70)
             .attachKeyFrame()
             .colored(PonderPalette.RED)
-            .text("Blaze Stove can provide mechanical arm support for the Pot, but it needs to be configured to work.")
+            .text("The Blaze Stove can provide mechanical arm support for kitchenware like Cooking Pot, but it needs to be configured to work.")
             .pointAt(util.vector.centerOf(stovePos))
             .placeNearTarget();
         scene.idle(80);
     
         scene.overlay.showText(50)
-            .text("Right clicking the Blaze Stove to open the Cooking Guide menu.")
+            .text("Right-Click the Blaze Stove to open the Cooking Guide menu.")
             .attachKeyFrame()
             .pointAt(util.vector.centerOf(stovePos))
             .placeNearTarget();
         scene.idle(60);
         
-        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(3, 1, 1), Pointing.DOWN).rightClick(), 30);
+        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(3, 1, 1), Pointing.DOWN)
+            .rightClick(), 30);
+        scene.idle(40);
+    
+        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(3, 1, 1), Pointing.LEFT)
+            .withItem(ModItems.GLOW_BERRY_CUSTARD.get().getDefaultInstance()), 30);
+        scene.idle(40);
+    
+        scene.overlay.showText(50)
+            .text("You may also Right-Click the Blaze Stove with any Guide to swap them.")
+            .attachKeyFrame()
+            .pointAt(util.vector.centerOf(stovePos))
+            .placeNearTarget();
+        scene.idle(60);
+    
+        scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(3, 1, 1), Pointing.DOWN)
+            .withItem(FdItems.COOKING_GUIDE.asStack())
+            .rightClick(), 30);
         scene.idle(40);
     
         scene.overlay.showText(50)
@@ -126,9 +142,10 @@ public class BlazeStoveScenes {
     
         AABB basketShape = Shapes.block().move(3, 1, 1).bounds();
         AABB cookingPotShape = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D).move(3, 2, 2).bounds();
-        scene.overlay.chaseBoundingBoxOutline(PonderPalette.INPUT, new Object(), basketShape , 80);
-        scene.idle(20);
-        scene.overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, new Object(), cookingPotShape, 50);
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.INPUT, new Object(), basketShape, 60);
+        scene.idle(10);
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, new Object(), cookingPotShape, 60);
+        scene.idle(10);
         scene.overlay.showText(180)
             .text("For input, the Mechanical Arm will insert containers and defined ingredients.")
             .attachKeyFrame()
@@ -161,10 +178,11 @@ public class BlazeStoveScenes {
         scene.world.setKineticSpeed(util.select.fromTo(4, 0, 0, 6, 1, 2), 64);
         scene.idle(10);
         
-        scene.overlay.chaseBoundingBoxOutline(PonderPalette.INPUT, new Object(), cookingPotShape, 80);
-        scene.idle(20);
-        scene.overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, new Object(), basketShape, 50);
-        scene.overlay.showText(50)
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.INPUT, new Object(), cookingPotShape, 60);
+        scene.idle(10);
+        scene.overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, new Object(), basketShape, 60);
+        scene.idle(10);
+        scene.overlay.showText(40)
             .text("For output, the Mechanical Arm will extract result and invalid ingredients.")
             .attachKeyFrame()
             .pointAt(util.vector.centerOf(stovePos))
@@ -177,11 +195,11 @@ public class BlazeStoveScenes {
         scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.MOVE_TO_OUTPUT, result, 0);
         scene.idle(12);
         scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
-        scene.idle(28);
+        scene.idle(18);
     }
     
     public static void heat_source(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.heat_source", "Blazing heat");
+        scene.title("blaze_stove.heat_source", "Use the Blaze Stove as a Heat Source");
         scene.configureBasePlate(0, 0, 5);
         scene.world.setKineticSpeed(util.select.everywhere(), 0);
         scene.showBasePlate();
@@ -189,7 +207,7 @@ public class BlazeStoveScenes {
         scene.world.showSection(util.select.fromTo(0, 1, 0, 4, 2, 4), Direction.DOWN);
         
         scene.overlay.showText(40)
-            .text("Blaze Stove is an active heat source, the hotter the fire, the faster the cooking.")
+            .text("The Blaze Stove is an active heat source, the hotter the fire, the faster the cooking.")
             .placeNearTarget()
             .pointAt(util.vector.topOf(3, 1, 3));
         scene.idle(50);
@@ -201,30 +219,28 @@ public class BlazeStoveScenes {
             .pointAt(util.vector.topOf(1, 1, 2));
         scene.idle(50);
         
-        scene.world.setBlock(util.grid.at(3, 2, 1), Blocks.AIR.defaultBlockState(), false);
-        scene.idle(5);
         scene.world.setBlock(util.grid.at(1, 2, 2), Blocks.AIR.defaultBlockState(), false);
         scene.idle(5);
         scene.world.setBlock(util.grid.at(3, 2, 3), Blocks.AIR.defaultBlockState(), false);
         scene.idle(5);
     
         scene.overlay.showText(40)
-            .text("Of course, you can also use Blaze Stove to fry things directly.")
+            .text("Of course, you can also use the Blaze Stove to fry things directly.")
             .attachKeyFrame()
             .placeNearTarget()
-            .pointAt(util.vector.topOf(1, 1, 2));
+            .pointAt(util.vector.topOf(3, 1, 1));
         scene.idle(10);
         
         ItemStack[] ingredients = {
-            ModItems.MINCED_BEEF.get().getDefaultInstance(),
-            ModItems.MINCED_BEEF.get().getDefaultInstance(),
-            ModItems.MINCED_BEEF.get().getDefaultInstance(),
-            ModItems.BACON.get().getDefaultInstance(),
-            ModItems.BACON.get().getDefaultInstance(),
-            ModItems.BACON.get().getDefaultInstance(),
-            ModItems.CHICKEN_CUTS.get().getDefaultInstance(),
-            ModItems.CHICKEN_CUTS.get().getDefaultInstance(),
-            ModItems.CHICKEN_CUTS.get().getDefaultInstance(),
+            new ItemStack(ModItems.MINCED_BEEF.get()),
+            new ItemStack(ModItems.MINCED_BEEF.get()),
+            new ItemStack(ModItems.MINCED_BEEF.get()),
+            new ItemStack(ModItems.BACON.get()),
+            new ItemStack(ModItems.BACON.get()),
+            new ItemStack(ModItems.BACON.get()),
+            new ItemStack(ModItems.CHICKEN_CUTS.get()),
+            new ItemStack(ModItems.CHICKEN_CUTS.get()),
+            new ItemStack(ModItems.CHICKEN_CUTS.get()),
         };
         for (int i = 0; i < 9; ++i) {
             final int index = i;

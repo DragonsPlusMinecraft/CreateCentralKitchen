@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import plus.dragons.createcentralkitchen.common.tileEntity.DelegatingSmartTileEntity;
+import plus.dragons.createcentralkitchen.core.tileEntity.DelegatingSmartTileEntity;
 import plus.dragons.createcentralkitchen.mixin.common.farmersdelight.BasketBlockEntityAccessor;
 import vectorwing.farmersdelight.common.block.BasketBlock;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;

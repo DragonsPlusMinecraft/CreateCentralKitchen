@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import plus.dragons.createcentralkitchen.common.tileEntity.SmartTileEntityLike;
+import plus.dragons.createcentralkitchen.core.tileEntity.SmartTileEntityLike;
 
 @Mixin(value = TileEntityBehaviour.class, remap = false)
 public class TileEntityBehaviorMixin {

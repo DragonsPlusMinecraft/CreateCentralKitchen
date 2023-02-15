@@ -10,11 +10,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.common.modules.ModModule;
+import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm.FdArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.*;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderTag;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 @ModModule(id = "farmersdelight", dependencies = "farmersdelight")
@@ -86,10 +87,10 @@ public class FarmersDelightModule {
         private void registerForgeEvents(IEventBus forgeBus) {
         
         }
-    
+        
         public void setup(final FMLClientSetupEvent event) {
-            FdPonderIndex.register();
-            FdPonderIndex.registerTags();
+            event.enqueueWork(FdPonderTag::register);
+            event.enqueueWork(FdPonderIndex::register);
         }
     
     }

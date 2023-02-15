@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.item;
+package plus.dragons.createcentralkitchen.core.item;
 
 import com.simibubi.create.foundation.item.CreateItemGroupBase;
 import net.minecraft.core.NonNullList;

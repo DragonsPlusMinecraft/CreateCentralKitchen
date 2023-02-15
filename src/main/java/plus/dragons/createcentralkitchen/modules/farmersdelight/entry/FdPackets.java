@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkDirection;
-import plus.dragons.createcentralkitchen.common.network.LoadedPacket;
+import plus.dragons.createcentralkitchen.core.network.LoadedPacket;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
 
 import java.util.function.Function;

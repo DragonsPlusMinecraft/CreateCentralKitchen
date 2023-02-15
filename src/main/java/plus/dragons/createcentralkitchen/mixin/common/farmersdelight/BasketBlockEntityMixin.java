@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import plus.dragons.createcentralkitchen.common.tileEntity.SmartTileEntityLike;
+import plus.dragons.createcentralkitchen.core.tileEntity.SmartTileEntityLike;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.basket.SmartBasketBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 

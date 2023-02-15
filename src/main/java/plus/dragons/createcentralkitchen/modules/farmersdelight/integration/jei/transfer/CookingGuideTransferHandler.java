@@ -7,7 +7,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.common.network.CentralKitchenNetwork;
+import plus.dragons.createcentralkitchen.core.network.CentralKitchenNetwork;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;

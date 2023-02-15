@@ -1,47 +1,47 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
-import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlocks;
+import plus.dragons.createcentralkitchen.core.ponder.PonderRegistryObject;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.content.BasketScenes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.content.BlazeStoveScenes;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+import static plus.dragons.createcentralkitchen.CentralKitchen.PONDER_REGISTER;
+
 public class FdPonderIndex {
-    
-    private static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(CentralKitchen.ID);
+    //Basket
+    public static final PonderRegistryObject BASKET_INTRO =
+        PONDER_REGISTER.create("basket/intro", BasketScenes::intro);
+    public static final PonderRegistryObject BASKET_BELT_INTERACTION =
+        PONDER_REGISTER.create("basket/intro", BasketScenes::intro);
+    //Blaze Stove
+    public static final PonderRegistryObject BLAZE_STOVE_INTRO =
+        PONDER_REGISTER.create("blaze_stove/intro", BlazeStoveScenes::intro);
+    public static final PonderRegistryObject BLAZE_STOVE_CONFIGURE =
+        PONDER_REGISTER.create("blaze_stove/configure", BlazeStoveScenes::configure);
+    public static final PonderRegistryObject BLAZE_STOVE_HEAT_SOURCE =
+        PONDER_REGISTER.create("blaze_stove/heat_source", BlazeStoveScenes::heat_source);
     
     public static void register() {
-        HELPER.forComponents(FdItems.COOKING_GUIDE)
-            .addStoryBoard("blaze_stove/intro", BlazeStoveScenes::intro, FdPonderTag.FARMERS_DELIGHT)
-            .addStoryBoard("blaze_stove/configure", BlazeStoveScenes::configure, FdPonderTag.FARMERS_DELIGHT)
-            .addStoryBoard("blaze_stove/heat_source", BlazeStoveScenes::heat_source, FdPonderTag.FARMERS_DELIGHT);
-        HELPER.forComponents(new ItemProviderEntry<>(CentralKitchen.REGISTRATE, ModItems.BASKET))
-            .addStoryBoard("basket", BasketScenes::intro, FdPonderTag.FARMERS_DELIGHT);
+        BASKET_INTRO
+            .addComponent(ModItems.BASKET)
+            .addTag(PonderTag.LOGISTICS);
+        BASKET_BELT_INTERACTION
+            .addComponent(ModItems.BASKET)
+            .addTag(PonderTag.LOGISTICS);
+        BLAZE_STOVE_INTRO
+            .addComponent(AllBlocks.BLAZE_BURNER, FdItems.COOKING_GUIDE)
+            .addTag(FdPonderTag.COOKING);
+        BLAZE_STOVE_CONFIGURE
+            .addComponent(AllBlocks.BLAZE_BURNER, FdItems.COOKING_GUIDE)
+            .addComponent(ModItems.COOKING_POT)
+            .addTag(FdPonderTag.COOKING);
+        BLAZE_STOVE_HEAT_SOURCE
+            .addComponent(AllBlocks.BLAZE_BURNER, FdItems.COOKING_GUIDE)
+            .addComponent(ModItems.COOKING_POT, ModItems.SKILLET)
+            .addTag(FdPonderTag.COOKING);
     }
-
-    public static void registerTags() {
-        PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS)
-            .add(ModItems.STOVE.get())
-            .add(ModItems.COOKING_POT.get())
-            .add(ModItems.SKILLET.get())
-            .add(ModItems.BASKET.get())
-            .add(ModItems.CUTTING_BOARD.get())
-            .add(FdBlocks.BLAZE_STOVE.get());
-        PonderRegistry.TAGS.forTag(FdPonderTag.FARMERS_DELIGHT)
-            .add(FdItems.COOKING_GUIDE)
-            .add(AllBlocks.MECHANICAL_ARM.get())
-            .add(ModBlocks.COOKING_POT.get())
-            .add(ModBlocks.SKILLET.get())
-            .add(ModBlocks.STOVE.get())
-            .add(ModBlocks.BASKET.get())
-            .add(ModBlocks.CUTTING_BOARD.get());
-    }
-
+    
 }
