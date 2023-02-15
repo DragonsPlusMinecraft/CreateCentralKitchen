@@ -1,0 +1,20 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    }
+  ],
+  "results": [
+    {
+      "count": 8,
+      "item": "minecraft:cookie"
+    }
+  ]
+}

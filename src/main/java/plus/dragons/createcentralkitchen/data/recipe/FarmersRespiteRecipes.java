@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.data.recipe;
 
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -38,6 +39,11 @@ public class FarmersRespiteRecipes extends RecipeGen {
         .require(ModItems.MILK_BOTTLE.get())
         .container(Items.GLASS)
         .needWater()),
+    GREEN_TEA_COOKIE_COMPACTING = modded(compacting("green_tea_cookie")
+        .output(FRItems.GREEN_TEA_COOKIE.get(), 8)
+        .require(FRItems.GREEN_TEA_LEAVES.get())
+        .require(AllTags.forgeItemTag("flour/wheat"))
+        .require(AllTags.forgeItemTag("flour/wheat"))),
     FINISH = null;
     
     public FarmersRespiteRecipes(DataGenerator datagen) {

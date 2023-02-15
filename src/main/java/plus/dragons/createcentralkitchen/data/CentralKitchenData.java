@@ -7,6 +7,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import plus.dragons.createcentralkitchen.CentralKitchen;
+import plus.dragons.createcentralkitchen.data.recipe.FarmersDelightRecipes;
 import plus.dragons.createcentralkitchen.data.recipe.FarmersRespiteRecipes;
 import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
@@ -33,6 +34,7 @@ public enum CentralKitchenData {
     @SubscribeEvent(priority = EventPriority.LOW)
     public void afterRegistrate(final GatherDataEvent event) {
         DataGenerator datagen = event.getGenerator();
+        datagen.addProvider(true,new FarmersDelightRecipes(datagen));
         datagen.addProvider(true,new FarmersRespiteRecipes(datagen));
     }
     

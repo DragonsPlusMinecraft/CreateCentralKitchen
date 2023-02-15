@@ -25,7 +25,7 @@ public class FrItems {
         .properties(prop -> prop.stacksTo(1))
         .recipe((ctx, prov) -> RecipeGen.shapeless(ctx.getId())
             .output(ctx.get())
-            .requires(CentralKitchenTags.item(new ResourceLocation("forge", "plates/copper")))
+            .requires(CentralKitchenTags.item(new ResourceLocation("forge", "plates/obsidian")))
             .requires(ModItems.CANVAS.get())
             .requires(FRTags.TEA_LEAVES)
             .whenModLoaded(FarmersRespiteModule.ID)
