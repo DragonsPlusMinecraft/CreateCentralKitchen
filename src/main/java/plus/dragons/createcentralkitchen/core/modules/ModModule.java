@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.modules;
+package plus.dragons.createcentralkitchen.core.modules;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

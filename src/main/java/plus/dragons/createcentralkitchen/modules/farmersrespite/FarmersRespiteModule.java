@@ -10,12 +10,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.common.modules.ModModule;
+import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FrArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrItems;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrMenuTypes;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FrPonderIndex;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FrPonderTag;
 import umpaz.farmersrespite.common.registry.FRBlockEntityTypes;
 
 @ModModule(id = "farmersrespite", dependencies = {"farmersdelight", "farmersrespite"}, priority = 1)
@@ -74,17 +76,18 @@ public class FarmersRespiteModule {
         private void registerEntries() {
         
         }
-        
+
         private void registerModEvents(IEventBus modBus) {
             modBus.addListener(this::setup);
         }
-        
+
         private void registerForgeEvents(IEventBus forgeBus) {
         
         }
-        
+
         public void setup(final FMLClientSetupEvent event) {
-        
+            event.enqueueWork(FrPonderTag::register);
+            event.enqueueWork(FrPonderIndex::register);
         }
         
     }

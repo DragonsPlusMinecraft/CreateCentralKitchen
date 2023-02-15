@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.modules;
+package plus.dragons.createcentralkitchen.core.modules;
 
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.fml.ModList;

@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.network;
+package plus.dragons.createcentralkitchen.core.network;
 
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.network.FriendlyByteBuf;

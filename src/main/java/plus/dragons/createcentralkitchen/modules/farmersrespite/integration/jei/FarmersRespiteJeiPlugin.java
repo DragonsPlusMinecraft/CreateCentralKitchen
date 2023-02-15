@@ -7,7 +7,7 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.common.integration.jei.AbstractJeiPlugin;
+import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideScreen;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.transfer.BrewingGuideTransferHandler;
 import umpaz.farmersrespite.common.crafting.KettleRecipe;

@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.integration.jei;
+package plus.dragons.createcentralkitchen.core.integration.jei;
 
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import mezz.jei.api.IModPlugin;

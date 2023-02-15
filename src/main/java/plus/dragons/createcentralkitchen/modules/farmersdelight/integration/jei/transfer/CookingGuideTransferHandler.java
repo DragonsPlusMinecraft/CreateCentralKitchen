@@ -10,10 +10,10 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.common.network.CentralKitchenNetwork;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdMenuTypes;
+import plus.dragons.createcentralkitchen.core.network.CentralKitchenNetwork;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdMenuTypes;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;

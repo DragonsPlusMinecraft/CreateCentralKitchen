@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.common.integration.jei;
+package plus.dragons.createcentralkitchen.core.integration.jei;
 
 /*
 MIT License

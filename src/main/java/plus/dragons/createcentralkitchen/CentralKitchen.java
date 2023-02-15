@@ -12,7 +12,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.common.modules.ModModuleLoader;
+import plus.dragons.createcentralkitchen.core.modules.ModModuleLoader;
+import plus.dragons.createcentralkitchen.core.ponder.DeferredPonderRegister;
 import plus.dragons.createcentralkitchen.data.CentralKitchenData;
 import plus.dragons.createdragonlib.init.SafeRegistrate;
 import plus.dragons.createdragonlib.lang.Lang;
@@ -29,6 +30,8 @@ public class CentralKitchen {
         DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, ID);
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER =
         DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
+    public static final DeferredPonderRegister PONDER_REGISTER =
+        DeferredPonderRegister.create(ID);
     
     public CentralKitchen() {
         ModModuleLoader.loadModules();
@@ -38,6 +41,7 @@ public class CentralKitchen {
         REGISTRATE.registerEventListeners(modBus);
         TYPE_REGISTER.register(modBus);
         SERIALIZER_REGISTER.register(modBus);
+        PONDER_REGISTER.register(modBus);
     }
     
     public static ResourceLocation genRL(String path) {
