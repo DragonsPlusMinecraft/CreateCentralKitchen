@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.mixin.common.farmersdelight;
 
 import com.farmersrespite.common.block.entity.KettleBlockEntity;
+import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -20,7 +21,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 @Mixin({
     CookingPotBlockEntity.class,
     SkilletBlockEntity.class,
-    KettleBlockEntity.class
+    KettleBlockEntity.class,
+    CopperPotBlockEntity.class
 })
 @Implements(@Interface(iface = HeatableBlockEntity.class, prefix = "override$", remap = Interface.Remap.NONE))
 public abstract class HeatableBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity {

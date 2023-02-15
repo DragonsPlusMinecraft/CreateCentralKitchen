@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.FarmersDelightJeiPlugin;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.FarmersRespiteJeiPlugin;
+import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.MinersDelightJeiPlugin;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class DynamicJeiPluginMixin {
         ModList mods = ModList.get();
         if (mods.isLoaded("farmersdelight")) list.add(new FarmersDelightJeiPlugin());
         if (mods.isLoaded("farmersrespite")) list.add(new FarmersRespiteJeiPlugin());
+        if (mods.isLoaded("miners_delight")) list.add(new MinersDelightJeiPlugin());
     }
     
 }

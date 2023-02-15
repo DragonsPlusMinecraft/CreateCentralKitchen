@@ -1,9 +1,6 @@
-package plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei;
+package plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei;
 
-import com.farmersrespite.common.crafting.KettleRecipe;
-import com.farmersrespite.integration.jei.category.BrewingRecipeCategory;
 import com.simibubi.create.compat.jei.GhostIngredientHandler;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -11,16 +8,17 @@ import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideScreen;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.transfer.BrewingGuideTransferHandler;
+import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide.MinersCookingGuideScreen;
+import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.transfer.CopperPotTransferInfo;
+import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.transfer.MinersCookingGuideTransferHandler;
+import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class FarmersRespiteJeiPlugin extends AbstractJeiPlugin {
-    private static final ResourceLocation ID = CentralKitchen.genRL("farmersrespite");
-    
-    public static final RecipeType<KettleRecipe> BREWING = new RecipeType<>(BrewingRecipeCategory.UID, KettleRecipe.class);
+public class MinersDelightJeiPlugin extends AbstractJeiPlugin {
+    private static final ResourceLocation ID = CentralKitchen.genRL("miners_delight");
     
     @Override
     public ResourceLocation getPluginUid() {
@@ -31,12 +29,14 @@ public class FarmersRespiteJeiPlugin extends AbstractJeiPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(BrewingGuideScreen.class, new GhostIngredientHandler());
-        registration.addRecipeClickArea(BrewingGuideScreen.class, 120, 24, 42, 30, BREWING);
+        registration.addRecipeClickArea(MinersCookingGuideScreen.class, 116, 24, 42, 30, FDRecipeTypes.COOKING);
     }
     
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(new BrewingGuideTransferHandler(), BREWING);
+        var helper = registration.getTransferHelper();
+        registration.addRecipeTransferHandler(new CopperPotTransferInfo(helper));
+        registration.addRecipeTransferHandler(new MinersCookingGuideTransferHandler(helper), FDRecipeTypes.COOKING);
     }
     
 }

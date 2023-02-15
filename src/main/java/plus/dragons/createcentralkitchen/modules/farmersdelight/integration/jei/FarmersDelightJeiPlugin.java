@@ -49,7 +49,7 @@ public class FarmersDelightJeiPlugin extends AbstractJeiPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(CookingGuideScreen.class, new GhostIngredientHandler());
-        registration.addRecipeClickArea(CookingGuideScreen.class, 122, 26, 41, 26, FDRecipeTypes.COOKING);
+        registration.addRecipeClickArea(CookingGuideScreen.class, 124, 24, 42, 30, FDRecipeTypes.COOKING);
     }
     
     @Override

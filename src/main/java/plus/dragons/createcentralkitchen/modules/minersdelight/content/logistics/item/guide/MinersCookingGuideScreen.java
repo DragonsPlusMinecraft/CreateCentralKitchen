@@ -1,6 +1,5 @@
-package plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide;
+package plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide;
 
-import com.farmersrespite.core.utility.FRTextUtils;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,19 +23,18 @@ import java.util.List;
 
 import static com.simibubi.create.foundation.gui.AllGuiTextures.PLAYER_INVENTORY;
 
-//TODO: Adjust render when texture available
-public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuideMenu> {
-    private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/cooking_guide.png");
-    private static final int WINDOW_WIDTH = 176;
-    private static final int BACKGROUND_WIDTH = 184;
+public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<MinersCookingGuideMenu> {
+    private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/miners_cooking_guide.png");
+    private static final int WINDOW_WIDTH = 160;
+    private static final int BACKGROUND_WIDTH = 168;
     private static final int BACKGROUND_HEIGHT = 80;
     private static final int ICON_SIZE = 48;
     private List<Rect2i> extraAreas = Collections.emptyList();
-    
-    public BrewingGuideScreen(BrewingGuideMenu container, Inventory inv, Component title) {
+
+    public MinersCookingGuideScreen(MinersCookingGuideMenu container, Inventory inv, Component title) {
         super(container, inv, title);
     }
-    
+
     @Override
     protected void init() {
         setWindowSize(BACKGROUND_WIDTH, BACKGROUND_HEIGHT + 4 + PLAYER_INVENTORY.height);
@@ -48,7 +47,7 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
             new Rect2i(guideX, guideY, imageWidth, imageHeight)
         );
     }
-    
+
     @Override
     protected void renderBg(@NotNull PoseStack pose, float partialTicks, int mouseX, int mouseY) {
         //Player Inventory
@@ -74,25 +73,25 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
         var level = Minecraft.getInstance().level;
         int status = this.getMenu().getBlazeStatus();
         if (level == null || status <= 0) {
-            this.blit(pose, x + 88, y + 24, 0, 80, 24, 24);
+            this.blit(pose, x + 72, y + 24, 0, 80, 24, 24);
         } else {
             int time = ((int) level.getGameTime() / 5 % 3) + 1;
-            this.blit(pose, x + 88, y + 24, 24 * time, 80, 24, 24);
+            this.blit(pose, x + 72, y + 24, 24 * time, 80, 24, 24);
         }
-        this.blit(pose, x + 80, y + 66, 96, 80 + status * 6, 80, 6);
+        this.blit(pose, x + 64, y + 66, 96, 80 + status * 6, 80, 6);
     }
     
     @Override
     protected void renderTooltip(@NotNull PoseStack pose, int x, int y) {
         if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
-            if (this.hoveredSlot.index == 2) {
+            if (this.hoveredSlot.index == 4) {
                 List<Component> tooltip = new ArrayList<>();
                 ItemStack mealStack = this.hoveredSlot.getItem();
                 tooltip.add(((MutableComponent)mealStack.getItem().getDescription())
                     .withStyle(mealStack.getRarity().getStyleModifier()));
-                ItemStack containerStack = this.menu.getContainerItem();
+                ItemStack containerStack = this.getMenu().getContainerItem();
                 String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
-                tooltip.add(FRTextUtils.getTranslation("container.kettle.served_on", container)
+                tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container)
                     .withStyle(ChatFormatting.GRAY));
                 this.renderComponentTooltip(pose, tooltip, x, y);
             } else {

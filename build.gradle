@@ -120,6 +120,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_file}")
     implementation fg.deobf("curse.maven:farmers-respite-551453:${farmersrespite_file}")
+    implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim")
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")

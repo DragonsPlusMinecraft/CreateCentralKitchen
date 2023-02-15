@@ -19,7 +19,7 @@ public abstract class BlazeStoveGuide implements ICapabilitySerializable<Compoun
     protected final int ingredientSize;
     protected final ItemStackHandler inventory;
     protected ItemStack container = ItemStack.EMPTY;
-    protected final RecipeWrapper recipeWrapper;
+    protected RecipeWrapper recipeWrapper;
     
     public BlazeStoveGuide(ItemStack owner, int ingredientSize) {
         this.owner = owner;
