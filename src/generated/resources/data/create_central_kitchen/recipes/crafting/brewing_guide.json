@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:plates/copper"
+      "tag": "forge:plates/obsidian"
     },
     {
       "item": "farmersdelight:canvas"

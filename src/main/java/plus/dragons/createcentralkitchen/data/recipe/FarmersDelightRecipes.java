@@ -1,5 +1,7 @@
 package plus.dragons.createcentralkitchen.data.recipe;
 
+import com.simibubi.create.AllFluids;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -35,7 +37,23 @@ public class FarmersDelightRecipes extends RecipeGen {
         .output(FdFluids.TOMATO_SAUCE.get(), 250)
         .require(ModItems.TOMATO.get())
         .require(ModItems.TOMATO.get())
-        .requiresHeat(HeatCondition.HEATED));
+        .requiresHeat(HeatCondition.HEATED)),
+    COOKIE_COMPACTING = common(compacting("cookie")
+        .output(Items.COOKIE, 8)
+        .require(Items.COCOA_BEANS)
+        .require(AllTags.forgeItemTag("flour/wheat"))
+        .require(AllTags.forgeItemTag("flour/wheat"))),
+    SWEET_BERRY_COOKIE_COMPACTING = modded(compacting("sweet_berry_cookie")
+        .output(ModItems.SWEET_BERRY_COOKIE.get(), 8)
+        .require(Items.SWEET_BERRIES)
+        .require(AllTags.forgeItemTag("flour/wheat"))
+        .require(AllTags.forgeItemTag("flour/wheat"))),
+    HONEY_COOKIE_COMPACTING = modded(compacting("honey_cookie")
+        .output(ModItems.HONEY_COOKIE.get(), 8)
+        .require(AllFluids.HONEY.get(), 250)
+        .require(AllTags.forgeItemTag("flour/wheat"))
+        .require(AllTags.forgeItemTag("flour/wheat"))),
+    FINISH = null;
     
     public FarmersDelightRecipes(DataGenerator datagen) {
         super("farmersdelight", datagen);

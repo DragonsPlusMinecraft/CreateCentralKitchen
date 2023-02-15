@@ -7,6 +7,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import plus.dragons.createcentralkitchen.data.lang.LangMerger;
+import plus.dragons.createcentralkitchen.data.recipe.FarmersDelightRecipes;
 import plus.dragons.createcentralkitchen.data.recipe.FarmersRespiteRecipes;
 import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 
@@ -24,6 +25,7 @@ public enum CentralKitchenData {
     public void afterRegistrate(final GatherDataEvent event) {
         DataGenerator datagen = event.getGenerator();
         datagen.addProvider(new LangMerger(datagen));
+        datagen.addProvider(new FarmersDelightRecipes(datagen));
         datagen.addProvider(new FarmersRespiteRecipes(datagen));
     }
     
