@@ -29,10 +29,11 @@ public class BrewingGuideMenu extends BlazeStoveGuideMenu<BrewingGuide> {
     //TODO: Adjust slots' position when texture available
     @Override
     protected void addSlots() {
-        addPlayerSlots(52, 96);
-        this.addSlot(new CookingIngredientSlot(0, 81, 27));
-        this.addSlot(new CookingIngredientSlot(1, 81, 45));
-        this.addSlot(new DisplaySlot(2, 184, 36));
+        for (int row = 0; row < 2; ++row) {
+            this.addSlot(new CookingIngredientSlot(row, 61, 31 + row * 18));
+        }
+        this.addSlot(new DisplaySlot(2, 183, 41));
+        addPlayerSlots(52, 102);
     }
     
 }

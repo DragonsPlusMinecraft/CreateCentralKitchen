@@ -28,7 +28,7 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
     private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/cooking_guide.png");
     private static final int WINDOW_WIDTH = 176;
     private static final int BACKGROUND_WIDTH = 184;
-    private static final int BACKGROUND_HEIGHT = 74;
+    private static final int BACKGROUND_HEIGHT = 80;
     private static final int ICON_SIZE = 48;
     private List<Rect2i> extraAreas = Collections.emptyList();
     
@@ -44,7 +44,7 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
         int guideX = getLeftOfCentered(WINDOW_WIDTH);
         int guideY = topPos;
         extraAreas = ImmutableList.of(
-            new Rect2i(guideX + BACKGROUND_WIDTH, guideY + BACKGROUND_HEIGHT - 60, ICON_SIZE, ICON_SIZE),
+            new Rect2i(guideX + WINDOW_WIDTH + 16, guideY + 16, ICON_SIZE, ICON_SIZE),
             new Rect2i(guideX, guideY, imageWidth, imageHeight)
         );
     }
@@ -63,11 +63,7 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
         drawCenteredString(pose, font, title, guideX + WINDOW_WIDTH / 2, guideY + 5, 0xFFFFFF);
         //Guide Icon
         GuiGameElement.of(menu.contentHolder)
-            .<GuiGameElement.GuiRenderBuilder>at(
-                guideX + BACKGROUND_WIDTH,
-                guideY + BACKGROUND_HEIGHT - 60,
-                -200
-            )
+            .<GuiGameElement.GuiRenderBuilder>at(guideX + WINDOW_WIDTH + 16, guideY + 16, -200)
             .scale(3)
             .render(pose);
     }
@@ -78,12 +74,12 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
         var level = Minecraft.getInstance().level;
         int status = this.getMenu().getBlazeStatus();
         if (level == null || status <= 0) {
-            this.blit(pose, x + 94, y + 22, 0, 80, 24, 24);
+            this.blit(pose, x + 88, y + 24, 0, 80, 24, 24);
         } else {
             int time = ((int) level.getGameTime() / 5 % 3) + 1;
-            this.blit(pose, x + 94, y + 22, 24 * time, 80, 24, 24);
+            this.blit(pose, x + 88, y + 24, 24 * time, 80, 24, 24);
         }
-        this.blit(pose, x + 87, y + 61, 96, 80 + status * 6, 72, 6);
+        this.blit(pose, x + 80, y + 66, 96, 80 + status * 6, 80, 6);
     }
     
     @Override

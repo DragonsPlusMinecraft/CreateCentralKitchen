@@ -16,13 +16,13 @@ import java.util.Collections;
 import java.util.List;
 
 public final class PonderRegistryObject {
-    private final DeferredPonderRegister owner;
+    private final PonderDeferredRegister owner;
     private final ResourceLocation schematic;
     private final PonderStoryBoardEntry.PonderStoryBoard storyBoard;
     private final List<ResourceLocation> components = new ArrayList<>();
     private final List<PonderTag> tags = new ArrayList<>();
     
-    public PonderRegistryObject(DeferredPonderRegister owner,
+    public PonderRegistryObject(PonderDeferredRegister owner,
                                 ResourceLocation schematic,
                                 PonderStoryBoardEntry.PonderStoryBoard storyBoard) {
         this.owner = owner;
@@ -36,6 +36,12 @@ public final class PonderRegistryObject {
             entry.highlightTags(tags.toArray(PonderTag[]::new));
             PonderRegistry.addStoryBoard(entry);
         }
+    }
+    
+    public PonderRegistryObject addComponent(ResourceLocation... components) {
+        Validate.isTrue(!owner.registered, "Cannot assign new components to registered PonderRegistryObject");
+        Collections.addAll(this.components, components);
+        return this;
     }
     
     @SafeVarargs

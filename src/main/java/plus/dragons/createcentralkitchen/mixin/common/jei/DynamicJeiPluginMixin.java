@@ -25,6 +25,7 @@ public class DynamicJeiPluginMixin {
         ModList mods = ModList.get();
         if (mods.isLoaded("farmersdelight")) list.add(new FarmersDelightJeiPlugin());
         if (mods.isLoaded("farmersrespite")) list.add(new FarmersRespiteJeiPlugin());
+        // if (mods.isLoaded("miners_delight")) list.add(new MinersDelightJeiPlugin()); Miner's Delight stopped at 1.18.2
     }
     
 }

@@ -20,7 +20,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 @Mixin({
     CookingPotBlockEntity.class,
     SkilletBlockEntity.class,
-    KettleBlockEntity.class
+    KettleBlockEntity.class//,
+    //CopperPotBlockEntity.class Miner's Delight stopped at 1.18.2
 })
 @Implements(@Interface(iface = HeatableBlockEntity.class, prefix = "override$", remap = Interface.Remap.NONE))
 public abstract class HeatableBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity {

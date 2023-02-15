@@ -31,7 +31,7 @@ public class FarmersRespiteJeiPlugin extends AbstractJeiPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(BrewingGuideScreen.class, new GhostIngredientHandler());
-        registration.addRecipeClickArea(BrewingGuideScreen.class, 122, 26, 41, 26, BREWING);
+        registration.addRecipeClickArea(BrewingGuideScreen.class, 120, 24, 42, 30, BREWING);
     }
     
     @Override
