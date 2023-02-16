@@ -13,7 +13,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FrArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm.MdArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdCapabilities;
 import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdItems;
 import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdMenuTypes;
@@ -40,7 +40,7 @@ public class MinersDelightModule {
         MdItems.register();
         MdMenuTypes.register();
         //MdFluids.register();
-        FrArmInteractionPointTypes.register();
+        MdArmInteractionPointTypes.register();
     }
     
     private void registerModEvents(IEventBus modBus) {

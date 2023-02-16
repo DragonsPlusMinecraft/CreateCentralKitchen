@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei;
 
+import com.sammy.minersdelight.jei.CopperPotCookingRecipeCategory;
 import com.simibubi.create.compat.jei.GhostIngredientHandler;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
@@ -9,9 +10,7 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideScreen;
 import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide.MinersCookingGuideScreen;
-import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.transfer.CopperPotTransferInfo;
 import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.transfer.MinersCookingGuideTransferHandler;
-import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -29,14 +28,13 @@ public class MinersDelightJeiPlugin extends AbstractJeiPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(BrewingGuideScreen.class, new GhostIngredientHandler());
-        registration.addRecipeClickArea(MinersCookingGuideScreen.class, 116, 24, 42, 30, FDRecipeTypes.COOKING);
+        registration.addRecipeClickArea(MinersCookingGuideScreen.class, 116, 24, 42, 30, CopperPotCookingRecipeCategory.COOKING);
     }
     
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         var helper = registration.getTransferHelper();
-        registration.addRecipeTransferHandler(new CopperPotTransferInfo(helper));
-        registration.addRecipeTransferHandler(new MinersCookingGuideTransferHandler(helper), FDRecipeTypes.COOKING);
+        registration.addRecipeTransferHandler(new MinersCookingGuideTransferHandler(helper), CopperPotCookingRecipeCategory.COOKING);
     }
     
 }

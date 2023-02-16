@@ -1,5 +1,6 @@
-package plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm;
+package plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm;
 
+import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
@@ -13,16 +14,15 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuide;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideItem;
-import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide.MinersCookingGuide;
+import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide.MinersCookingGuideItem;
 
-public class CookingPotPoint extends ArmInteractionPoint {
-    public static final int MEAL_DISPLAY_SLOT = 6;
-    public static final int CONTAINER_SLOT = 7;
-    public static final int OUTPUT_SLOT = 8;
+public class CopperPotPoint extends ArmInteractionPoint {
+    public static final int MEAL_DISPLAY_SLOT = 4;
+    public static final int CONTAINER_SLOT = 5;
+    public static final int OUTPUT_SLOT = 6;
     
-    public CookingPotPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
+    public CopperPotPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
     }
     
@@ -37,9 +37,9 @@ public class CookingPotPoint extends ArmInteractionPoint {
     protected IItemHandler getHandler() {
         if (!cachedHandler.isPresent()) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (!(be instanceof CookingPotBlockEntity cookingPot))
+            if (!(be instanceof CopperPotBlockEntity copperPot))
                 return null;
-            cachedHandler = LazyOptional.of(cookingPot::getInventory);
+            cachedHandler = LazyOptional.of(copperPot::getInventory);
         }
         return cachedHandler.orElse(null);
     }
@@ -50,10 +50,10 @@ public class CookingPotPoint extends ArmInteractionPoint {
             return stack;
         
         ItemStack guideStack = blazeStove.getGuide();
-        if (!(guideStack.getItem() instanceof CookingGuideItem))
+        if (!(guideStack.getItem() instanceof MinersCookingGuideItem))
             return stack;
         
-        CookingGuide guide = CookingGuide.of(guideStack);
+        MinersCookingGuide guide = MinersCookingGuide.of(guideStack);
         if (guide.getResult().isEmpty())
             return stack;
         
@@ -84,10 +84,10 @@ public class CookingPotPoint extends ArmInteractionPoint {
             return ItemStack.EMPTY;
     
         ItemStack guideStack = blazeStove.getGuide();
-        if (!(guideStack.getItem() instanceof CookingGuideItem))
+        if (!(guideStack.getItem() instanceof MinersCookingGuideItem))
             return ItemStack.EMPTY;
     
-        CookingGuide guide = CookingGuide.of(guideStack);
+        MinersCookingGuide guide = MinersCookingGuide.of(guideStack);
         if (guide.getResult().isEmpty())
             return ItemStack.EMPTY;
         
@@ -116,14 +116,14 @@ public class CookingPotPoint extends ArmInteractionPoint {
         
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return level.getBlockEntity(pos) instanceof CookingPotBlockEntity &&
+            return level.getBlockEntity(pos) instanceof CopperPotBlockEntity &&
                 level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
         }
         
         @Nullable
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
-            return new CookingPotPoint(this, level, pos, state);
+            return new CopperPotPoint(this, level, pos, state);
         }
         
     }

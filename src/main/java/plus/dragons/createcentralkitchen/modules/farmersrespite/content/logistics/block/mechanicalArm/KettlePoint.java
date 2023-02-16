@@ -34,7 +34,7 @@ public class KettlePoint extends ArmInteractionPoint {
     
     @Override
     protected Vec3 getInteractionPositionVector() {
-        return Vec3.atBottomCenterOf(pos).add(0, .625, 0);
+        return Vec3.upFromBottomCenterOf(pos, .625);
     }
     
     @SuppressWarnings({"NullableProblems", "ConstantConditions"})
