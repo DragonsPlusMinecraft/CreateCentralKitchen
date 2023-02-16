@@ -50,6 +50,8 @@
 	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "不过务必注意超级燃烧的火焰会立刻烧毁你的原料",
 	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "潜行时，用扳手右击烈焰人炉灶以回收烹饪指南",
 
+	"create_central_kitchen.jei.transfer.copper_pot.exceed_capacity": "原料数量超过铜锅容量上限",
+
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 

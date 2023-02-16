@@ -49,6 +49,8 @@
 	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "But please note that seething fire can burn your ingredients in an instant.",
 	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "To retrieve the Cooking Guide, right-click the Blaze Stove with wrench when sneaking.",
 
+	"create_central_kitchen.jei.transfer.copper_pot.exceed_capacity": "Amount of ingredients exceeds Copper Pot's capacity",
+
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 

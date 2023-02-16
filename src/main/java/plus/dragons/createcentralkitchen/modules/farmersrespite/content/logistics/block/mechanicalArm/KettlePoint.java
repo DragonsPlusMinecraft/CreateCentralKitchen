@@ -19,9 +19,9 @@ import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuide;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
-import vectorwing.farmersdelight.common.utility.ItemUtils;
 import umpaz.farmersrespite.common.block.KettleBlock;
 import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 public class KettlePoint extends ArmInteractionPoint {
     public static final int DISPLAY_SLOT = 2;
@@ -34,7 +34,7 @@ public class KettlePoint extends ArmInteractionPoint {
     
     @Override
     protected Vec3 getInteractionPositionVector() {
-        return Vec3.atBottomCenterOf(pos).add(0, .625, 0);
+        return Vec3.upFromBottomCenterOf(pos, .625);
     }
     
     @SuppressWarnings({"NullableProblems", "ConstantConditions"})
