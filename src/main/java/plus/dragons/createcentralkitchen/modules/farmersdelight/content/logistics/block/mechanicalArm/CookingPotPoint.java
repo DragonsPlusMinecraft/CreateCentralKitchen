@@ -18,7 +18,7 @@ import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistic
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
 public class CookingPotPoint extends ArmInteractionPoint {
-    public static final int MEAL_DISPLAY_SLOT = 6;
+    public static final int INPUT_SLOT_COUNT = 6;
     public static final int CONTAINER_SLOT = 7;
     public static final int OUTPUT_SLOT = 8;
     
@@ -63,15 +63,31 @@ public class CookingPotPoint extends ArmInteractionPoint {
         
         if (inventory.getStackInSlot(CONTAINER_SLOT).isEmpty() && guide.isContainer(stack))
             return inventory.insertItem(CONTAINER_SLOT, stack, simulate);
-        
-        for (int slot = 0; slot < MEAL_DISPLAY_SLOT; slot++) {
+    
+        boolean[] neededSlots = new boolean[INPUT_SLOT_COUNT];
+        int neededSlotCount = 0;
+        for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
             if (inventory.getStackInSlot(slot).isEmpty() &&
                 guide.needIngredient(slot) &&
                 guide.isIngredient(slot, stack))
-                return inventory.insertItem(slot, stack, simulate);
+            {
+                neededSlots[slot] = true;
+                neededSlotCount++;
+            }
         }
         
-        return stack;
+        if (neededSlotCount == 0)
+            return stack;
+        
+        int countPerSlot = stack.getCount() / neededSlotCount;
+        ItemStack ret = stack.copy();
+        for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
+            if (neededSlots[slot]) {
+                ItemStack inserted = ret.split(countPerSlot);
+                inventory.insertItem(slot, inserted, simulate);
+            }
+        }
+        return ret;
     }
     
     @Override
@@ -95,7 +111,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
         if (inventory == null)
             return ItemStack.EMPTY;
     
-        if (slot < MEAL_DISPLAY_SLOT) {
+        if (slot < INPUT_SLOT_COUNT) {
             ItemStack ingredient = inventory.getStackInSlot(slot);
             if (!ingredient.isEmpty() && !guide.isIngredient(slot, ingredient))
                 return inventory.extractItem(slot, amount, simulate);
