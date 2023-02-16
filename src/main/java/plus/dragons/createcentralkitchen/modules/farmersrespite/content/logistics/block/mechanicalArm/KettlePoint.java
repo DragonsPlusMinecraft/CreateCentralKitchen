@@ -24,7 +24,7 @@ import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 public class KettlePoint extends ArmInteractionPoint {
-    public static final int DISPLAY_SLOT = 2;
+    public static final int INPUT_SLOT_COUNT = 2;
     public static final int CONTAINER_SLOT = 3;
     public static final int OUTPUT_SLOT = 4;
     
@@ -37,7 +37,7 @@ public class KettlePoint extends ArmInteractionPoint {
         return Vec3.upFromBottomCenterOf(pos, .625);
     }
     
-    @SuppressWarnings({"NullableProblems", "ConstantConditions"})
+    @SuppressWarnings({"ConstantConditions"})
     @Nullable
     @Override
     protected IItemHandler getHandler() {
@@ -69,18 +69,35 @@ public class KettlePoint extends ArmInteractionPoint {
         
         if (inventory.getStackInSlot(CONTAINER_SLOT).isEmpty() && guide.isContainer(stack))
             return inventory.insertItem(CONTAINER_SLOT, stack, simulate);
-        
-        for (int slot = 0; slot < DISPLAY_SLOT; slot++) {
+
+        boolean[] neededSlots = new boolean[INPUT_SLOT_COUNT];
+        int neededSlotCount = 0;
+        for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
             if (inventory.getStackInSlot(slot).isEmpty() &&
                 guide.needIngredient(slot) &&
                 guide.isIngredient(slot, stack))
-                return inventory.insertItem(slot, stack, simulate);
+            {
+                neededSlots[slot] = true;
+                neededSlotCount++;
+            }
         }
-    
-        if (guide.needWater())
-            return insertWater(guide, inventory, stack, simulate);
 
-        return stack;
+        if (neededSlotCount == 0) {
+            if (guide.needWater())
+                return insertWater(guide, inventory, stack, simulate);
+            else
+                return stack;
+        }
+
+        int countPerSlot = stack.getCount() / neededSlotCount;
+        ItemStack ret = stack.copy();
+        for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
+            if (neededSlots[slot]) {
+                ItemStack inserted = ret.split(countPerSlot);
+                inventory.insertItem(slot, inserted, simulate);
+            }
+        }
+        return ret;
     }
 
     private ItemStack insertWater(BrewingGuide guide, IItemHandler inventory, ItemStack stack, boolean simulate) {
@@ -140,8 +157,8 @@ public class KettlePoint extends ArmInteractionPoint {
         IItemHandler inventory = getHandler();
         if (inventory == null)
             return ItemStack.EMPTY;
-
-        if (slot < DISPLAY_SLOT) {
+    
+        if (slot < INPUT_SLOT_COUNT) {
             ItemStack ingredient = inventory.getStackInSlot(slot);
             if (!ingredient.isEmpty() && !guide.isIngredient(slot, ingredient))
                 return inventory.extractItem(slot, amount, simulate);
