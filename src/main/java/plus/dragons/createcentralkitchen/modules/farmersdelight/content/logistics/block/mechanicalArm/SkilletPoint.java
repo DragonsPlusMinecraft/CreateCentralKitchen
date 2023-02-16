@@ -26,7 +26,7 @@ public class SkilletPoint extends AllArmInteractionPointTypes.DepositOnlyArmInte
     
     @Override
     protected Vec3 getInteractionPositionVector() {
-        return Vec3.atBottomCenterOf(pos).add(0, .25, 0);
+        return Vec3.upFromBottomCenterOf(pos, .125);
     }
     
     @Override

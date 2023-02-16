@@ -1,19 +1,32 @@
 {
-  "create_central_kitchen.ponder.blaze_stove.intro.header": "Hire a cook",
-  "create_central_kitchen.ponder.blaze_stove.intro.text_1": "Right-click the Blaze Burner with an Cooking Guide in hand when sneaking",
-  "create_central_kitchen.ponder.blaze_stove.intro.text_2": "To retrieve the cooking guide, right-click the Blaze Stove with wrench when sneaking",
+  "create_central_kitchen.ponder.blaze_stove.intro.header": "Create a Blaze Stove",
+  "create_central_kitchen.ponder.blaze_stove.intro.text_1": "To create a Blaze Stove, Right-Click the Blaze Burner with a Cooking Guide in hand when sneaking.",
+  "create_central_kitchen.ponder.blaze_stove.intro.text_2": "Cooking Guides are for Cooking Pots, other guides for different kitchenware are also applicable.",
+  "create_central_kitchen.ponder.blaze_stove.intro.text_3": "To retrieve the Cooking Guide, Right-Click the Blaze Stove with wrench when sneaking.",
 
-  "create_central_kitchen.ponder.blaze_stove.processing.header": "Expert chef",
-  "create_central_kitchen.ponder.blaze_stove.processing.text_1": "Blaze Stove can provide mechanical arm support for the Pot, so let it control the cooking!",
-  "create_central_kitchen.ponder.blaze_stove.processing.text_2": "Cooking can still be done even without adding fuel to the Blaze Stove.",
-  "create_central_kitchen.ponder.blaze_stove.processing.text_3": "The hotter the fire, the faster the cooking.",
-  "create_central_kitchen.ponder.blaze_stove.processing.text_4": "Of course, you can also use Block Stove to fry things directly.",
-  "create_central_kitchen.ponder.blaze_stove.processing.text_5": "But please note that seething fire can burn your ingredients directly.",
+  "create_central_kitchen.ponder.blaze_stove.automation.header": "Automation with the Blaze Stove",
+  "create_central_kitchen.ponder.blaze_stove.automation.text_1": "The Blaze Stove can provide mechanical arm support for kitchenware like Cooking Pot, but it needs to be configured to work.",
+  "create_central_kitchen.ponder.blaze_stove.automation.text_2": "Right-Click the Blaze Stove to open the Cooking Guide menu.",
+  "create_central_kitchen.ponder.blaze_stove.automation.text_3": "You may also Right-Click the Blaze Stove with any Guide to swap them.",
+  "create_central_kitchen.ponder.blaze_stove.automation.text_4": "Once you assigned a valid recipe to the Cooking Guide, the Cooking Pot above will become interactive with Mechanical Arms.",
+  "create_central_kitchen.ponder.blaze_stove.automation.text_5": "For input, the Mechanical Arm will insert containers and defined ingredients.",
+  "create_central_kitchen.ponder.blaze_stove.automation.text_6": "For output, the Mechanical Arm will extract result and invalid ingredients.",
 
-  "create_central_kitchen.ponder.basket.header": "Collecting items with Basket",
-  "create_central_kitchen.ponder.basket.text_1": "Basket can collect transported items from belt.",
-  "create_central_kitchen.ponder.basket.text_2": "Besides facing upwards, corresponding horizontal facing is also suitable.",
+  "create_central_kitchen.ponder.blaze_stove.heat_source.header": "Using the Blaze Stove as a Heat Source",
+  "create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "The Blaze Stove is an active heat source, the hotter the fire, the faster the cooking.",
+  "create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "But cooking can still be done with passive heat.",
+  "create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Of course, you can also use the Block Stove to fry things directly.",
+  "create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "But please note that seething fire would burn your ingredients in an instant.",
 
-  "create_central_kitchen.ponder.tag.farmers_delight": "Farmer's Delight Automation",
-  "create_central_kitchen.ponder.tag.farmers_delight.description": "Items and Components related to farmer's delight automation."
+  "create_central_kitchen.ponder.basket.intro.header": "Collecting Dropped Items using the Basket",
+  "create_central_kitchen.ponder.basket.intro.text_1": "Like the Hopper, the Basket can collect dropped items.",
+  "create_central_kitchen.ponder.basket.intro.text_2": "What's more, Baskets can have different facings.",
+  "create_central_kitchen.ponder.basket.intro.text_3": "However, the Basket can't extract items from containers.",
+
+  "create_central_kitchen.ponder.basket.belt_interaction.header": "Receiving Items from Belt using Basket",
+  "create_central_kitchen.ponder.basket.belt_interaction.text_1": "The Basket can receive transported items from belt.",
+  "create_central_kitchen.ponder.basket.belt_interaction.text_2": "Besides facing upwards, corresponding horizontal facing is also suitable.",
+
+  "create_central_kitchen.ponder.tag.cooking_automation": "Cooking Automation",
+  "create_central_kitchen.ponder.tag.cooking_automation.description": "Components which automates the cooking process"
 }

@@ -2,11 +2,12 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "minecraft:cocoa_beans"
+      "fluidTag": "forge:milk",
+      "amount": 125
     },
     {
       "fluidTag": "forge:chocolate",
-      "amount": 250
+      "amount": 125
     }
   ],
   "results": [

@@ -23,7 +23,7 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
     
     @Override
     protected Vec3 getInteractionPositionVector() {
-        return Vec3.atBottomCenterOf(pos).add(0, 1, 0);
+        return Vec3.upFromBottomCenterOf(pos, 1);
     }
     
     @Override

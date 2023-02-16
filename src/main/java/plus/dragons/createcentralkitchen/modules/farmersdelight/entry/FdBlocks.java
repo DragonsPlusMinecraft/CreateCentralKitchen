@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -22,8 +23,7 @@ public class FdBlocks {
         .properties(p -> p.color(MaterialColor.COLOR_GRAY).lightLevel(BlazeBurnerBlock::getLight))
         .transform(OptionalTags.block(
             BlockTags.MINEABLE_WITH_PICKAXE,
-            FdTags.FAN_TRANSPARENT,
-            FdTags.FAN_HEATERS,
+            AllTags.AllBlockTags.FAN_TRANSPARENT.tag,
             ModTags.HEAT_SOURCES))
         .loot((prov, block) -> prov.dropOther(block, AllBlocks.BLAZE_BURNER.get()))
         .addLayer(() -> RenderType::cutoutMipped)

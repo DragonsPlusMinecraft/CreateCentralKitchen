@@ -7,9 +7,9 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.common.network.CentralKitchenNetwork;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.CookingGuideMenu;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.CookingGuideSyncPacket;
+import plus.dragons.createcentralkitchen.core.network.CentralKitchenNetwork;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -40,9 +40,9 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
                 var items = inputs.get(i).getItems();
                 input = items.length == 0 ? ItemStack.EMPTY : items[0];
             } else input = ItemStack.EMPTY;
-            container.getSlot(i + 36).set(input);
+            container.getSlot(i).set(input);
         }
-        CentralKitchenNetwork.CHANNEL.sendToServer(new CookingGuideSyncPacket(container));
+        CentralKitchenNetwork.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;
     }
     

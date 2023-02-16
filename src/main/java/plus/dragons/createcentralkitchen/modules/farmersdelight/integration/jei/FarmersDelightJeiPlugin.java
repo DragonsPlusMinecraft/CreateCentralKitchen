@@ -3,17 +3,16 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.GhostIngredientHandler;
-import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.common.integration.jei.AbstractJeiPlugin;
-import plus.dragons.createcentralkitchen.common.integration.jei.RecipeCategoryBuilder;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.CookingGuideScreen;
+import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
+import plus.dragons.createcentralkitchen.core.integration.jei.RecipeCategoryBuilder;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideScreen;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdRecipeTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.category.CuttingBoardDeployingCategory;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer.CookingGuideTransferHandler;
@@ -25,9 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-@JeiPlugin
 public class FarmersDelightJeiPlugin extends AbstractJeiPlugin {
-    
     private static final ResourceLocation ID = CentralKitchen.genRL("farmersdelight");
     
     @Override
@@ -52,7 +49,7 @@ public class FarmersDelightJeiPlugin extends AbstractJeiPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addGhostIngredientHandler(CookingGuideScreen.class, new GhostIngredientHandler());
-        registration.addRecipeClickArea(CookingGuideScreen.class, 122, 26, 41, 26, FDRecipeTypes.COOKING);
+        registration.addRecipeClickArea(CookingGuideScreen.class, 124, 24, 42, 30, FDRecipeTypes.COOKING);
     }
     
     @Override
