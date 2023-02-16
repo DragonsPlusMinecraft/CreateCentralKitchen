@@ -15,12 +15,12 @@ public class FdPonderIndex {
     public static final PonderRegistryObject BASKET_INTRO =
         PONDER_REGISTER.create("basket/intro", BasketScenes::intro);
     public static final PonderRegistryObject BASKET_BELT_INTERACTION =
-        PONDER_REGISTER.create("basket/intro", BasketScenes::intro);
+        PONDER_REGISTER.create("basket/belt_interaction", BasketScenes::belt_interaction);
     //Blaze Stove
     public static final PonderRegistryObject BLAZE_STOVE_INTRO =
         PONDER_REGISTER.create("blaze_stove/intro", BlazeStoveScenes::intro);
     public static final PonderRegistryObject BLAZE_STOVE_CONFIGURE =
-        PONDER_REGISTER.create("blaze_stove/configure", BlazeStoveScenes::configure);
+        PONDER_REGISTER.create("blaze_stove/automation", BlazeStoveScenes::automation);
     public static final PonderRegistryObject BLAZE_STOVE_HEAT_SOURCE =
         PONDER_REGISTER.create("blaze_stove/heat_source", BlazeStoveScenes::heat_source);
     
