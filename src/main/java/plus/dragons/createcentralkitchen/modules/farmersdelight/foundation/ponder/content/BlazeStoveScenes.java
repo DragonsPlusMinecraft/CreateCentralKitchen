@@ -14,9 +14,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlocks;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
@@ -206,29 +206,28 @@ public class BlazeStoveScenes {
         scene.idle(5);
         scene.world.showSection(util.select.fromTo(0, 1, 0, 4, 2, 4), Direction.DOWN);
         
+        BlockPos superBlazePos = util.grid.at(3, 1, 3);
+        BlockPos idleBlazePos = util.grid.at(3, 1, 1);
+        BlockPos passiveBlazePos = util.grid.at(1, 1, 2);
+        
         scene.overlay.showText(40)
             .text("The Blaze Stove is an active heat source, the hotter the fire, the faster the cooking.")
             .placeNearTarget()
-            .pointAt(util.vector.topOf(3, 1, 3));
+            .pointAt(util.vector.topOf(superBlazePos));
         scene.idle(50);
         
         scene.overlay.showText(40)
             .text("But cooking can still be done with passive heat.")
             .attachKeyFrame()
             .placeNearTarget()
-            .pointAt(util.vector.topOf(1, 1, 2));
+            .pointAt(util.vector.topOf(passiveBlazePos));
         scene.idle(50);
-        
-        scene.world.setBlock(util.grid.at(1, 2, 2), Blocks.AIR.defaultBlockState(), false);
-        scene.idle(5);
-        scene.world.setBlock(util.grid.at(3, 2, 3), Blocks.AIR.defaultBlockState(), false);
-        scene.idle(5);
     
         scene.overlay.showText(40)
             .text("Of course, you can also use the Blaze Stove to fry things directly.")
             .attachKeyFrame()
             .placeNearTarget()
-            .pointAt(util.vector.topOf(3, 1, 1));
+            .pointAt(util.vector.topOf(idleBlazePos));
         scene.idle(10);
         
         ItemStack[] ingredients = {
@@ -244,7 +243,7 @@ public class BlazeStoveScenes {
         };
         for (int i = 0; i < 9; ++i) {
             final int index = i;
-            scene.world.modifyTileEntity(util.grid.at(1, 1, 2), BlazeStoveBlockEntity.class, be -> {
+            scene.world.modifyTileEntity(idleBlazePos, BlazeStoveBlockEntity.class, be -> {
                 var inv = be.getInventory();
                 inv.insertItem(index, ingredients[index], false);
             });
@@ -256,8 +255,23 @@ public class BlazeStoveScenes {
             .text("But please note that seething fire can burn your ingredients in an instant.")
             .attachKeyFrame()
             .placeNearTarget()
-            .pointAt(util.vector.topOf(3, 1, 3));
+            .pointAt(util.vector.topOf(idleBlazePos));
         scene.idle(50);
+    
+        scene.world.modifyBlock(idleBlazePos,
+            state -> state.setValue(BlazeStoveBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING),
+            false
+        );
+        scene.world.modifyTileEntity(idleBlazePos, BlazeStoveBlockEntity.class, be -> {
+            be.applyCreativeFuel();
+            var inv = be.getInventory();
+            for (int i = 0; i < inv.getSlots(); ++i) {
+                inv.setStackInSlot(i, ItemStack.EMPTY);
+                be.addSmokeAtItem(i, 5);
+            }
+        });
+        
+        scene.idle(20);
     }
     
 }
