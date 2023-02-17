@@ -1,4 +1,4 @@
-// 1.19.2	2023-02-19T07:45:31.0983697	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-19T08:15:12.8520509	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d6d3b59b64f72c62d8cdbf1363d79327e492507c assets/create_central_kitchen/blockstates/blaze_stove.json
 a489cdff418ac113da4834a2976ee43c2309ac6a assets/create_central_kitchen/lang/en_ud.json
 19448ace7d4505d390ecdefd61c33afba15f4ccf assets/create_central_kitchen/lang/en_us.json
@@ -23,4 +23,8 @@ bc6b4a4cfa5b2743ba8d92745a16dd5859f8c98c data/create_central_kitchen/recipes/fil
 1b31ef4ac79216db58ec9c632189d50e6af0f69b data/create_central_kitchen/tags/items/upright_on_deployer.json
 fd7019281ce662d4f93ad5f12d6845ffeedae370 data/farmersdelight/tags/blocks/heat_sources.json
 be1ce287a2441241ab6b480cf9d843d4a3df6117 data/farmersdelight/tags/blocks/tray_heat_sources.json
+c82096f714f97132a85aaea600a307c665879441 data/forge/tags/items/tools.json
+e1c76ab477e3648da3b2e0b66a72e1c4f99df770 data/forge/tags/items/tools/axes.json
+e68f62d579721fa3ef39acee4e1d10eb89a0b9cd data/forge/tags/items/tools/pickaxes.json
+ecf525b6525fda87455e7bd92fe724d4975d18b0 data/forge/tags/items/tools/shovels.json
 fd7019281ce662d4f93ad5f12d6845ffeedae370 data/minecraft/tags/blocks/mineable/pickaxe.json

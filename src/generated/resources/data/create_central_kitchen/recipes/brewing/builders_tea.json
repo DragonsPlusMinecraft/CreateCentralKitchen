@@ -7,7 +7,7 @@
     }
   ],
   "container": {
-    "item": "minecraft:glass"
+    "item": "minecraft:glass_bottle"
   },
   "cookingtime": 2400,
   "experience": 0.35,
@@ -16,7 +16,7 @@
       "tag": "farmersrespite:tea_leaves"
     },
     {
-      "item": "farmersdelight:milk_bottle"
+      "tag": "forge:milk"
     }
   ],
   "needwater": true,

@@ -9,10 +9,10 @@
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "item": "farmersdelight:tomato"
+      "tag": "forge:vegetables/tomato"
     },
     {
-      "item": "farmersdelight:tomato"
+      "tag": "forge:vegetables/tomato"
     }
   ],
   "results": [

@@ -15,8 +15,7 @@
     },
     {
       "amount": 250,
-      "fluid": "create:honey",
-      "nbt": {}
+      "fluidTag": "forge:honey"
     }
   ],
   "results": [
