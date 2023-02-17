@@ -32,11 +32,11 @@ public class BrewingGuideMenu extends BlazeStoveGuideMenu<BrewingGuide> {
     
     @Override
     protected void addSlots() {
+        addPlayerSlots(52, 102);
         for (int row = 0; row < 2; ++row) {
             this.addSlot(new CookingIngredientSlot(row, 79, 31 + row * 18));
         }
         this.addSlot(new DisplaySlot(2, 166, 41));
-        addPlayerSlots(52, 102);
     }
     
 }
