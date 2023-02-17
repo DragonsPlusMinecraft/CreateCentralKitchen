@@ -25,9 +25,9 @@ import static com.simibubi.create.foundation.gui.AllGuiTextures.PLAYER_INVENTORY
 
 //TODO: Adjust render when texture available
 public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuideMenu> {
-    private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/cooking_guide.png");
-    private static final int WINDOW_WIDTH = 176;
-    private static final int BACKGROUND_WIDTH = 184;
+    private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/brewing_guide.png");
+    private static final int WINDOW_WIDTH = 144;
+    private static final int BACKGROUND_WIDTH = 152;
     private static final int BACKGROUND_HEIGHT = 80;
     private static final int ICON_SIZE = 48;
     private List<Rect2i> extraAreas = Collections.emptyList();
@@ -72,14 +72,17 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
         RenderSystem.setShaderTexture(0, TEXTURE);
         this.blit(pose, x, y, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
         var level = Minecraft.getInstance().level;
+        boolean needWater = this.getMenu().needWater();
         int status = this.getMenu().getBlazeStatus();
         if (level == null || status <= 0) {
-            this.blit(pose, x + 88, y + 24, 0, 80, 24, 24);
+            this.blit(pose, x + 56, y + 24, 0, 80, 24, 24);
         } else {
             int time = ((int) level.getGameTime() / 5 % 3) + 1;
-            this.blit(pose, x + 88, y + 24, 24 * time, 80, 24, 24);
+            this.blit(pose, x + 56, y + 24, 24 * time, 80, 24, 24);
         }
-        this.blit(pose, x + 80, y + 66, 96, 80 + status * 6, 80, 6);
+        if (needWater)
+            this.blit(pose, x + 11, y + 32, 176, 80, 5, 32);
+        this.blit(pose, x + 48, y + 66, 96, 80 + status * 6, 80, 6);
     }
     
     @Override
