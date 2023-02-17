@@ -28,13 +28,13 @@ public class MinersCookingGuideMenu extends BlazeStoveGuideMenu<MinersCookingGui
     
     @Override
     protected void addSlots() {
+        addPlayerSlots(52, 102);
         for (int row = 0; row < 2; ++row) {
             for (int column = 0; column < 2; ++column) {
                 this.addSlot(new CookingIngredientSlot(row * 2 + column, 69 + column * 18, 31 + row * 18));
             }
         }
         this.addSlot(new DisplaySlot(4, 175, 41));
-        addPlayerSlots(52, 102);
     }
     
 }
