@@ -2,7 +2,6 @@ package plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei
 
 import com.farmersrespite.common.crafting.KettleRecipe;
 import com.farmersrespite.integration.jei.category.BrewingRecipeCategory;
-import com.simibubi.create.compat.jei.GhostIngredientHandler;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
@@ -10,6 +9,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer.BlazeStoveGuideGhostIngredientHandler;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideScreen;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.transfer.BrewingGuideTransferHandler;
 
@@ -27,10 +27,9 @@ public class FarmersRespiteJeiPlugin extends AbstractJeiPlugin {
         return ID;
     }
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addGhostIngredientHandler(BrewingGuideScreen.class, new GhostIngredientHandler());
+        registration.addGhostIngredientHandler(BrewingGuideScreen.class, new BlazeStoveGuideGhostIngredientHandler<>());
         registration.addRecipeClickArea(BrewingGuideScreen.class, 108, 24, 42, 30, BREWING);
     }
     

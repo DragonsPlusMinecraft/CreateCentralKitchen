@@ -20,7 +20,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     protected G guide;
     @Nullable
     protected BlazeStoveBlockEntity blazeStove;
-    protected int ghostInventorySize;
+    protected int inputSize;
     
     public BlazeStoveGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
@@ -40,6 +40,10 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     public void updateRecipe() {
         guide.updateRecipe(this.player.level);
         this.getSlot(guide.getIngredientSize()).setChanged();
+    }
+    
+    public int getInputSize() {
+        return inputSize;
     }
     
     public int getBlazeStatus() {
@@ -72,8 +76,8 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     @Override
     protected void initAndReadInventory(ItemStack contentHolder) {
         this.guide = createGuide(contentHolder);
+        this.inputSize = guide.inventory.getSlots() - 1;
         super.initAndReadInventory(contentHolder);
-        this.ghostInventorySize = ghostInventory.getSlots();
     }
     
     @Override
@@ -118,7 +122,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
-        if (slotId == 36 + ghostInventorySize)
+        if (slotId == 36 + inputSize)
             return;
         if (slotId < 36) {
             super.clicked(slotId, dragType, clickTypeIn, player);
@@ -146,14 +150,14 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         if (index < 36) {
             ItemStack stackToInsert = playerInventory.getItem(index).copy();
             stackToInsert.setCount(1);
-            for (int i = 36; i < 36 + ghostInventorySize; i++) {
+            for (int i = 36; i < 36 + inputSize; i++) {
                 if (getSlot(i).mayPlace(stackToInsert)) {
                     ghostInventory.insertItem(i - 36, stackToInsert, false);
                     getSlot(i).setChanged();
                     break;
                 }
             }
-        } else if (index < 36 + ghostInventorySize) {
+        } else if (index < 36 + inputSize) {
             ghostInventory.extractItem(0, 1, false);
             getSlot(index).setChanged();
         }
@@ -181,7 +185,12 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         public DisplaySlot(int index, int xPosition, int yPosition) {
             super(ghostInventory, index, xPosition, yPosition);
         }
-        
+    
+//        @Override
+//        public boolean isActive() {
+//            return false;
+//        }
+    
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
             return false;
