@@ -11,8 +11,6 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
-import vectorwing.farmersdelight.common.registry.ModItems;
 
 @MethodsReturnNonnullByDefault
 public class FarmersRespiteRecipes extends RecipeGen {
@@ -30,14 +28,14 @@ public class FarmersRespiteRecipes extends RecipeGen {
     BUILDERS_TEA_FROM_TEA_LEAVES_MIXING = modded(mixing("builders_tea_from_tea_leaves")
         .output(AllFluids.TEA.get(), 500)
         .require(Fluids.WATER, 250)
-        .require(Tags.Fluids.MILK, 250)
+        .require(AllTags.forgeFluidTag("milk"), 250)
         .require(FRTags.TEA_LEAVES)
         .requiresHeat(HeatCondition.HEATED)),
     BUILDERS_TEA_KETTLE = modded(kettle("builders_tea")
         .output(AllItems.BUILDERS_TEA.get())
         .require(FRTags.TEA_LEAVES)
-        .require(ModItems.MILK_BOTTLE.get())
-        .container(Items.GLASS)
+        .require(AllTags.forgeItemTag("milk"))
+        .container(Items.GLASS_BOTTLE)
         .needWater()),
     GREEN_TEA_COOKIE_COMPACTING = modded(compacting("green_tea_cookie")
         .output(FRItems.GREEN_TEA_COOKIE.get(), 8)
