@@ -21,18 +21,21 @@ public class BrewingGuideMenu extends BlazeStoveGuideMenu<BrewingGuide> {
         super(type, id, inv, blazeStove);
     }
     
+    public boolean needWater() {
+        return this.guide.needWater();
+    }
+    
     @Override
     public BrewingGuide createGuide(ItemStack contentHolder) {
         return BrewingGuide.of(contentHolder);
     }
     
-    //TODO: Adjust slots' position when texture available
     @Override
     protected void addSlots() {
         for (int row = 0; row < 2; ++row) {
-            this.addSlot(new CookingIngredientSlot(row, 61, 31 + row * 18));
+            this.addSlot(new CookingIngredientSlot(row, 79, 31 + row * 18));
         }
-        this.addSlot(new DisplaySlot(2, 183, 41));
+        this.addSlot(new DisplaySlot(2, 166, 41));
         addPlayerSlots(52, 102);
     }
     
