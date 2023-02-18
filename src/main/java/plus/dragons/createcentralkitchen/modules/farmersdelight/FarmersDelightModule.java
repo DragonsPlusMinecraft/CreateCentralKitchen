@@ -20,7 +20,7 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 @ModModule(id = "farmersdelight", dependencies = "farmersdelight")
 public class FarmersDelightModule {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "farmersdelight";
     
     public FarmersDelightModule() {
@@ -51,6 +51,7 @@ public class FarmersDelightModule {
     
     private void registerForgeEvents(IEventBus forgeBus) {
         forgeBus.addListener(FdItems::fillCreateItemGroup);
+        forgeBus.addListener(FdFluids::remap);
     }
     
     public void setup(final FMLCommonSetupEvent event) {

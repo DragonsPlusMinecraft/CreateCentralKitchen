@@ -20,7 +20,7 @@ import plus.dragons.createdragonlib.lang.Lang;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "create_central_kitchen";
     public static final String NAME = "Create: Central Kitchen";
 

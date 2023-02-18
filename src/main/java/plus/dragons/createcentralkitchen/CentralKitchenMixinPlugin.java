@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
-    private Object2BooleanOpenHashMap<String> dependencies = new Object2BooleanOpenHashMap<>();
+    private final Object2BooleanOpenHashMap<String> dependencies = new Object2BooleanOpenHashMap<>();
     
     @Override
     public void onLoad(String mixinPackage) {

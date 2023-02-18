@@ -22,7 +22,7 @@ import umpaz.farmersrespite.common.registry.FRBlockEntityTypes;
 
 @ModModule(id = "farmersrespite", dependencies = {"farmersdelight", "farmersrespite"}, priority = 1)
 public class FarmersRespiteModule {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "farmersrespite";
     
     public FarmersRespiteModule() {
