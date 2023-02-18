@@ -14,6 +14,7 @@ import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FrArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrFluids;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrItems;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrMenuTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FrPonderIndex;
@@ -39,7 +40,7 @@ public class FarmersRespiteModule {
     private void registerEntries() {
         FrItems.register();
         FrMenuTypes.register();
-        //FrFluids.register();
+        FrFluids.register();
         FrArmInteractionPointTypes.register();
     }
     
