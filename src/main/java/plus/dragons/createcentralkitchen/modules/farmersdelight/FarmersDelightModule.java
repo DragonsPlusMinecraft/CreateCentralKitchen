@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,7 +21,7 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 @ModModule(id = "farmersdelight", dependencies = "farmersdelight")
 public class FarmersDelightModule {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "farmersdelight";
     
     public FarmersDelightModule() {
@@ -51,6 +52,7 @@ public class FarmersDelightModule {
     
     private void registerForgeEvents(IEventBus forgeBus) {
         forgeBus.addListener(FdItems::fillCreateItemGroup);
+        forgeBus.addGenericListener(Fluid.class, FdFluids::remap);
     }
     
     public void setup(final FMLCommonSetupEvent event) {
