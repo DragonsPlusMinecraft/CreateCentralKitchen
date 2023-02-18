@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:dandelion_black_tea",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersrespite:long_dandelion_tea"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "farmersrespite",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

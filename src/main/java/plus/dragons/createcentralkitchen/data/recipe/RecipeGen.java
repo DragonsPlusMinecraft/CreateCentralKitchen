@@ -5,10 +5,22 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuild
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import com.tterrag.registrate.AbstractRegistrate;
+import com.tterrag.registrate.builders.FluidBuilder;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.data.recipe.builder.ConditionedKettleRecipeBuilder;
 import plus.dragons.createcentralkitchen.data.recipe.builder.ConditionedRecipeBuilder;
@@ -19,6 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 public abstract class RecipeGen extends RecipeProvider {
@@ -183,6 +196,42 @@ public abstract class RecipeGen extends RecipeProvider {
     
     public static ProcessingRecipeBuilder<?> itemApplication(String path) {
         return processing(AllRecipeTypes.ITEM_APPLICATION, CentralKitchen.genRL(path));
+    }
+    
+    @SuppressWarnings("deprecation")
+    private static <T extends ForgeFlowingFluid, P extends AbstractRegistrate<P>> NonNullUnaryOperator<FluidBuilder<T, P>>
+    fluidHandling(Supplier<? extends ItemLike> item, ResourceLocation id, int amount) {
+        String mod = id.getNamespace();
+        String name = id.getPath();
+        ResourceLocation tagId = new ResourceLocation("forge", name);
+        return builder -> builder
+            .addMiscData(ProviderType.RECIPE, prov -> {
+                var ctx = DataGenContext.from(builder, ForgeRegistries.Keys.FLUIDS);
+                Fluid source = ctx.get().getSource();
+                Item container = item.get().asItem().getCraftingRemainingItem();
+                RecipeGen.emptying(name)
+                    .require(item.get())
+                    .output(source, amount)
+                    .output(container)
+                    .whenModLoaded(mod)
+                    .build(prov);
+                RecipeGen.filling(name)
+                    .require(container)
+                    .require(source, amount)
+                    .output(item.get())
+                    .whenModLoaded(mod)
+                    .build(prov);
+            });
+    }
+    
+    public static <T extends ForgeFlowingFluid, P extends AbstractRegistrate<P>> NonNullUnaryOperator<FluidBuilder<T, P>>
+    fluidHandling(RegistryObject<? extends ItemLike> item, int amount) {
+        return fluidHandling(item, item.getId(), amount);
+    }
+    
+    public static <T extends ForgeFlowingFluid, P extends AbstractRegistrate<P>> NonNullUnaryOperator<FluidBuilder<T, P>>
+    fluidHandling(ItemProviderEntry<?> item, int amount) {
+        return fluidHandling(item, item.getId(), amount);
     }
     
 }

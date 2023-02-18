@@ -2,7 +2,7 @@
   "type": "create:emptying",
   "ingredients": [
     {
-      "item": "farmersdelight:apple_cider"
+      "item": "farmersrespite:dandelion_tea"
     }
   ],
   "results": [
@@ -10,13 +10,13 @@
       "item": "minecraft:glass_bottle"
     },
     {
-      "fluid": "create_central_kitchen:apple_cider",
+      "fluid": "create_central_kitchen:dandelion_tea",
       "amount": 250
     }
   ],
   "conditions": [
     {
-      "modid": "farmersdelight",
+      "modid": "farmersrespite",
       "type": "forge:mod_loaded"
     }
   ]

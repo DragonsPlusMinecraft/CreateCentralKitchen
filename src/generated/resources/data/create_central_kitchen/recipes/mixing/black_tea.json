@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "farmersrespite:black_tea_leaves"
+    },
+    {
+      "item": "farmersrespite:black_tea_leaves"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:black_tea",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated",
+  "conditions": [
+    {
+      "modid": "farmersrespite",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

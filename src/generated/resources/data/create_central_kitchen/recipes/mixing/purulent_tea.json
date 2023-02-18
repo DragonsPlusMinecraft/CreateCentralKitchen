@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:purulent_tea",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated",
+  "conditions": [
+    {
+      "modid": "farmersrespite",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

@@ -9,7 +9,8 @@
     }
   ],
   "result": {
-    "item": "create:builders_tea"
+    "item": "create:builders_tea",
+    "count": 2
   },
   "container": {
     "item": "minecraft:glass_bottle"
