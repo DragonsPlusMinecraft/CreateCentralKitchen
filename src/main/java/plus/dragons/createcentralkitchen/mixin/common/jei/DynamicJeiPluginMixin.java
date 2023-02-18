@@ -16,7 +16,7 @@ import java.util.List;
  *
  */
 @Pseudo
-@Mixin(targets = "mezz.jei.forge.util.AnnotatedInstanceUtil", remap = false)
+@Mixin(targets = "mezz.jei.forge.startup.ForgePluginFinder", remap = false)
 public class DynamicJeiPluginMixin {
     
     @Inject(method = "getModPlugins", at = @At("RETURN"))
