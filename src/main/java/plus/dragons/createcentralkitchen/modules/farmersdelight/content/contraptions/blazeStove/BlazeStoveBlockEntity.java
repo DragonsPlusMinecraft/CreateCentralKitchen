@@ -442,21 +442,24 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         assert level != null;
         BlockPos pos = getBlockPos().above();
         BlockState state = level.getBlockState(pos);
-        if (state.is(ModTags.HEAT_CONDUCTORS)) {
+        
+        if (state.is(ModTags.HEAT_CONDUCTORS))
             pos = pos.above();
-        }
+        
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity == null)
             return;
-        for (var type : BOOSTING_COOKER_TYPES) {
-            Runnable ticker = getCookingTicker(blockEntity, type);
-            if (ticker != null) {
-                for (int i = 0; i < times - 1; ++i) {
-                    ticker.run();
-                }
-                return;
-            }
-        }
+        
+        BlockEntityType<?> type = blockEntity.getType();
+        if (!BOOSTING_COOKER_TYPES.contains(type))
+            return;
+    
+        Runnable ticker = getCookingTicker(blockEntity, type);
+        if (ticker == null)
+            return;
+        
+        for (int i = 0; i < times - 1; ++i)
+            ticker.run();
     }
     
     @Override
