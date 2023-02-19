@@ -5,7 +5,7 @@
       "item": "minecraft:glass_bottle"
     },
     {
-      "fluid": "create_central_kitchen:dandelion_black_tea",
+      "fluid": "create_central_kitchen:long_dandelion_tea",
       "nbt": {},
       "amount": 250
     }
