@@ -21,6 +21,10 @@ public class FrFluids {
             .lang("Apple Cider").register(),
         STRONG_APPLE_CIDER = wateryDrink("strong_apple_cider", 0xc68a47, FRItems.STRONG_APPLE_CIDER)
             .lang("Apple Cider").register(),
+        STRONG_HOT_COCOA = wateryDrink("strong_hot_cocoa", 0xaf6c4c, FRItems.STRONG_HOT_COCOA)
+            .lang("Hot Cocoa").register(),
+        STRONG_MELON_JUICE = wateryDrink("strong_melon_juice", 0xe24334, FRItems.STRONG_MELON_JUICE)
+            .lang("Melon Juice").register(),
         GREEN_TEA = wateryDrink("green_tea", 0xa1a83c, FRItems.GREEN_TEA)
             .register(),
         LONG_GREEN_TEA = wateryDrink("long_green_tea", 0xa1a83c, FRItems.LONG_GREEN_TEA)
@@ -51,6 +55,12 @@ public class FrFluids {
             .register(),
         STRONG_ROSE_HIP_TEA = wateryDrink("strong_rose_hip_tea", 0x741603, FRItems.STRONG_ROSE_HIP_TEA)
             .lang("Rose Hip Tea").register(),
+        GAMBLERS_TEA = wateryDrink("gamblers_tea", 0x4b3830, FRItems.GAMBLERS_TEA)
+            .lang("Gambler's Tea").register(),
+        LONG_GAMBLERS_TEA = wateryDrink("long_gamblers_tea", 0x4b3830, FRItems.LONG_GAMBLERS_TEA)
+            .lang("Gambler's Tea").register(),
+        STRONG_GAMBLERS_TEA = wateryDrink("strong_gamblers_tea", 0x4b3830, FRItems.STRONG_GAMBLERS_TEA)
+            .lang("Gambler's Tea").register(),
         COFFEE = thickDrink("coffee", 0x321f13, FRItems.COFFEE)
             .register(),
         LONG_COFFEE = thickDrink("long_coffee", 0x321f13, FRItems.LONG_COFFEE)

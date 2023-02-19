@@ -20,6 +20,10 @@ public class FarmersRespiteRecipes extends RecipeGen {
         .output(FRItems.TEA_SEEDS.get())
         .output(Items.STICK)
         .require(FRItems.WILD_TEA_BUSH.get())),
+    WILD_COFFEE_BUSH_MILLING = modded(milling("wild_coffee_bush")
+        .output(FRItems.COFFEE_BEANS.get())
+        .output(Items.BLACK_DYE)
+        .require(FRItems.WILD_COFFEE_BUSH.get())),
     COFFEE_BERRIES_MILLING = modded(milling("coffee_berries")
         .output(FRItems.COFFEE_BEANS.get())
         .output(Items.RED_DYE)
@@ -64,6 +68,12 @@ public class FarmersRespiteRecipes extends RecipeGen {
         .output(FrFluids.ROSE_HIP_TEA.get(), 250)
         .require(FRItems.ROSE_HIPS.get())
         .require(FRItems.ROSE_HIPS.get())
+        .require(Fluids.WATER, 250)
+        .requiresHeat(HeatCondition.HEATED)),
+    GAMBLERS_TEA_MIXING = modded(mixing("gamblers_tea")
+        .output(FrFluids.GAMBLERS_TEA.get(), 250)
+        .require(FRItems.COFFEE_BERRIES.get())
+        .require(Items.GLOW_BERRIES)
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     COFFEE_MIXING = modded(mixing("coffee")

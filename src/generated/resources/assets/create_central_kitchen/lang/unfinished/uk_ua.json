@@ -9,12 +9,14 @@
 	"fluid.create_central_kitchen.black_tea": "Чорний чай",
 	"fluid.create_central_kitchen.coffee": "Кава",
 	"fluid.create_central_kitchen.dandelion_tea": "Чай із кульбаби",
+	"fluid.create_central_kitchen.gamblers_tea": "Азартний чай",
 	"fluid.create_central_kitchen.green_tea": "Зелений чай",
 	"fluid.create_central_kitchen.hot_cocoa": "Гарячий шоколад",
 	"fluid.create_central_kitchen.long_apple_cider": "Яблучний сидр",
 	"fluid.create_central_kitchen.long_black_tea": "Чорний чай",
 	"fluid.create_central_kitchen.long_coffee": "Кава",
 	"fluid.create_central_kitchen.long_dandelion_tea": "Чай із кульбаби",
+	"fluid.create_central_kitchen.long_gamblers_tea": "Азартний чай",
 	"fluid.create_central_kitchen.long_green_tea": "Зелений чай",
 	"fluid.create_central_kitchen.long_yellow_tea": "Жовтий чай",
 	"fluid.create_central_kitchen.melon_juice": "Кавуновий сік",
@@ -23,7 +25,10 @@
 	"fluid.create_central_kitchen.strong_apple_cider": "Яблучний сидр",
 	"fluid.create_central_kitchen.strong_black_tea": "Чорний чай",
 	"fluid.create_central_kitchen.strong_coffee": "Кава",
+	"fluid.create_central_kitchen.strong_gamblers_tea": "Азартний чай",
 	"fluid.create_central_kitchen.strong_green_tea": "Зелений чай",
+	"fluid.create_central_kitchen.strong_hot_cocoa": "Гарячий шоколад",
+	"fluid.create_central_kitchen.strong_melon_juice": "Кавуновий сік",
 	"fluid.create_central_kitchen.strong_purulent_tea": "Гнійний чай",
 	"fluid.create_central_kitchen.strong_rose_hip_tea": "Чай з шипшини",
 	"fluid.create_central_kitchen.strong_yellow_tea": "Жовтий чай",
@@ -32,9 +37,39 @@
 
 	"item.create_central_kitchen.brewing_guide": "Керівництво по зіллєварінню",
 	"item.create_central_kitchen.cooking_guide": "Кулінарне Керівництво",
-	"item.create_central_kitchen.miners_cooking_guide": "Шахтарське керівництво з кулінарії",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "Автоматична розділка",
+
+
+	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.basket.belt_interaction.header": "Отримання предметів з конвеєрної стрічки за допомогою кошика",
+	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Кошик може приймати пердмети, що транспортуються, з конвеєрної стрічки.",
+	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Крім лицьової сторони вгору, також працює відповідна горизонтальна конфігурація.",
+
+	"create_central_kitchen.ponder.basket.intro.header": "Збір предметів, що випали, за допомогою кошика",
+	"create_central_kitchen.ponder.basket.intro.text_1": "Кошик дозволяє збирати предмети, що випадають, так само як як і воронка.",
+	"create_central_kitchen.ponder.basket.intro.text_2": "Більш того, кошики можут бути направлені у різні сторони.",
+	"create_central_kitchen.ponder.basket.intro.text_3": "Однак кошик не може виилучати предмети з контейнерів.",
+
+	"create_central_kitchen.ponder.blaze_stove.automation.header": "Автоматизація печі пломеня",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "Піч пломеня дозволє механічний руці взаємодіяти з посудом, таким як кастрюля, але їх потрібно дял цого налаштувати.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "Натисність ПКМ по печі пломеня щоб відкрити меню кулінарного керівництва.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "Також, ви можете натиснути ПКМ по печі пломеня з будь-яким іншим керівництвом, щоб замінити одне на інше.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "Як тільки ви призначите дійсний рецепт, механічні руки почнуть взіємодіяти з каструлею нагорі.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "У якості вхідних даних механічна рука вставлятиме контейнери та визначені інгредієнти.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "На виході механічна рука витягне результат(и) та недійсні інгредієнти.",
+
+	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Використання печі пломеня як джерело тепла",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "Піч пломеня є активним джерелом тепла. Чим сильніший вогонь, тим швидше готується їжа.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "Проте готувати все ще можна за допомогою пасивного тепла.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Звичайно, ви також можете використовувати звичайну піч, щоб смажити безпосередньо.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "Але майте на увазі, що вируючий вогонь миттєво спалить ваші інгредієнти.",
+
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "Створення печі пломеня",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Щоб створити піч пломеня патисніть ПКМ в присяді по пальнику пломеня з кулінарним керівництвом у руці.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Кулінарне керівництво призначене для каструлі, інші посібники також застосовні для різного посуду.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "Щоб повернути керівництво натисніть ПКМ в присяді по печі пломеня з гайковим ключем в руці.",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
@@ -43,35 +78,6 @@
 	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "Рецепт:",
 
 	"create_central_kitchen.jei.transfer.copper_pot.exceed_capacity": "Кількість інгредієнтів перевищує ємність мідного горщика",
-
-
-	"_": "->------------------------]  Ponder Content  [------------------------<-",
-
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "Створення печі пломеня",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Щоб створити піч пломеня патисніть ПКМ в присяді по пальнику пломеня з кулінарним керівництвом у руці.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Кулінарне керівництво призначене для каструлі, інші посібники також застосовні для різного посуду.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "Щоб повернути керівництво натисніть ПКМ в присяді по печі пломеня з гайковим ключем в руці.",
-	"create_central_kitchen.ponder.blaze_stove.automation.header": "Автоматизація печі пломеня",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "Піч пломеня дозволє механічний руці взаємодіяти з посудом, таким як кастрюля, але їх потрібно дял цого налаштувати.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "Натисність ПКМ по печі пломеня щоб відкрити меню кулінарного керівництва.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "Також, ви можете натиснути ПКМ по печі пломеня з будь-яким іншим керівництвом, щоб замінити одне на інше.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "Як тільки ви призначите дійсний рецепт, механічні руки почнуть взіємодіяти з каструлею нагорі.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "У якості вхідних даних механічна рука вставлятиме контейнери та визначені інгредієнти.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "На виході механічна рука витягне результат(и) та недійсні інгредієнти.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Використання печі пломеня як джерело тепла",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "Піч пломеня є активним джерелом тепла. Чим сильніший вогонь, тим швидше готується їжа.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "Проте готувати все ще можна за допомогою пасивного тепла.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Звичайно, ви також можете використовувати звичайну піч, щоб смажити безпосередньо.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "Але майте на увазі, що вируючий вогонь миттєво спалить ваші інгредієнти.",
-	"create_central_kitchen.ponder.basket.intro.header": "Збір предметів, що випали, за допомогою кошика",
-	"create_central_kitchen.ponder.basket.intro.text_1": "Кошик дозволяє збирати предмети, що випадають, так само як як і воронка.",
-	"create_central_kitchen.ponder.basket.intro.text_2": "Більш того, кошики можут бути направлені у різні сторони.",
-	"create_central_kitchen.ponder.basket.intro.text_3": "Однак кошик не може виилучати предмети з контейнерів.",
-	"create_central_kitchen.ponder.basket.belt_interaction.header": "Отримання предметів з конвеєрної стрічки за допомогою кошика",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Кошик може приймати пердмети, що транспортуються, з конвеєрної стрічки.",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Крім лицьової сторони вгору, також працює відповідна горизонтальна конфігурація.",
-	"create_central_kitchen.ponder.tag.cooking_automation": "Автоматизація приготування їжі",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "Компоненти, які автоматизують процес приготування їжі",
 
 	"_": "Thank you for translating Create: Central Kitchen!"
 
