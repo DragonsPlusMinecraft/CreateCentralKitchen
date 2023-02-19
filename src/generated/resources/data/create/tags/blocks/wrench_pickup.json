@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "farmersdelight:cooking_pot",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:kettle",
+      "required": false
+    }
+  ]
+}

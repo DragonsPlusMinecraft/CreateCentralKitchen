@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:green_tea",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersrespite:green_tea"
+    }
+  ]
+}

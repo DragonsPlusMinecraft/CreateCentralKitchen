@@ -4,7 +4,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.CookingGuide;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuide;
 
 import java.util.ArrayList;
 import java.util.List;

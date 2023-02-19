@@ -8,10 +8,10 @@ import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 
 import java.util.Optional;
 
-@Mixin(SkilletBlockEntity.class)
+@Mixin(value = SkilletBlockEntity.class, remap = false)
 public interface SkilletBlockEntityAccessor {
     
-    @Invoker(value = "getMatchingRecipe", remap = false)
+    @Invoker(value = "getMatchingRecipe")
     Optional<CampfireCookingRecipe> callGetMatchingRecipe(Container recipeWrapper);
     
 }
