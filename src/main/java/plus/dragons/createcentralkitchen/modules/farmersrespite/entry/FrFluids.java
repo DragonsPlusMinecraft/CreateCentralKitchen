@@ -40,7 +40,7 @@ public class FrFluids {
             .lang("Black Tea").register(),
         DANDELION_TEA = wateryDrink("dandelion_tea", 0xf7c750, FRItems.DANDELION_TEA)
             .register(),
-        LONG_DANDELION_TEA = wateryDrink("dandelion_black_tea", 0xf7c750, FRItems.LONG_DANDELION_TEA)
+        LONG_DANDELION_TEA = wateryDrink("long_dandelion_tea", 0xf7c750, FRItems.LONG_DANDELION_TEA)
             .lang("Dandelion Tea").register(),
         PURULENT_TEA = wateryDrink("purulent_tea", 0x842236, FRItems.PURULENT_TEA)
             .register(),
