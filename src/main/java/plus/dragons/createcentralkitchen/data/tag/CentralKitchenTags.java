@@ -10,6 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -35,6 +36,7 @@ public class CentralKitchenTags {
         return TagKey.create(Registry.FLUID_REGISTRY, id);
     }
     
+    @SuppressWarnings("unchecked")
     public static void genItemTags(RegistrateItemTagsProvider prov) {
         prov.tag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag)
             .addOptional(ModItems.APPLE_CIDER.getId())
@@ -42,6 +44,10 @@ public class CentralKitchenTags {
             .addOptional(ModItems.MELON_JUICE.getId())
             .addOptional(ModItems.TOMATO_SAUCE.getId());
         prov.tag(UPRIGHT_ON_DEPLOYER).addTag(ForgeTags.TOOLS);
+        prov.tag(ForgeTags.TOOLS).addTags(ForgeTags.TOOLS_AXES, ForgeTags.TOOLS_PICKAXES, ForgeTags.TOOLS_SHOVELS);
+        prov.tag(ForgeTags.TOOLS_AXES).add(Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.DIAMOND_AXE, Items.GOLDEN_AXE, Items.NETHERITE_AXE);
+        prov.tag(ForgeTags.TOOLS_PICKAXES).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE, Items.NETHERITE_PICKAXE);
+        prov.tag(ForgeTags.TOOLS_SHOVELS).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL, Items.NETHERITE_SHOVEL);
     }
 
     public static void genBlockTags(RegistrateTagsProvider<Block> prov) {

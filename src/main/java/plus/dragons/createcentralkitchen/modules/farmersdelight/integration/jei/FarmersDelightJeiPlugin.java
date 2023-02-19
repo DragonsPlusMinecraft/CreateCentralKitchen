@@ -2,7 +2,6 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.compat.jei.GhostIngredientHandler;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
@@ -15,6 +14,7 @@ import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contrapt
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideScreen;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdRecipeTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.category.CuttingBoardDeployingCategory;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer.BlazeStoveGuideGhostIngredientHandler;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer.CookingGuideTransferHandler;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -45,10 +45,9 @@ public class FarmersDelightJeiPlugin extends AbstractJeiPlugin {
         );
     }
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addGhostIngredientHandler(CookingGuideScreen.class, new GhostIngredientHandler());
+        registration.addGhostIngredientHandler(CookingGuideScreen.class, new BlazeStoveGuideGhostIngredientHandler<>());
         registration.addRecipeClickArea(CookingGuideScreen.class, 124, 24, 42, 30, FDRecipeTypes.COOKING);
     }
     

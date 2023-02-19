@@ -40,7 +40,7 @@ public class BrewingGuideTransferHandler implements IRecipeTransferHandler<Brewi
                 var items = inputs.get(i).getItems();
                 input = items.length == 0 ? ItemStack.EMPTY : items[0];
             } else input = ItemStack.EMPTY;
-            container.getSlot(i).set(input);
+            container.getSlot(36 + i).set(input);
         }
         CentralKitchenNetwork.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;

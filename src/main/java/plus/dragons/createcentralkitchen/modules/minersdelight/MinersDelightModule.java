@@ -22,7 +22,7 @@ import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder
 
 @ModModule(id = "miners_delight", dependencies = {"farmersdelight", "miners_delight"}, priority = 1)
 public class MinersDelightModule {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "miners_delight";
     
     public MinersDelightModule() {

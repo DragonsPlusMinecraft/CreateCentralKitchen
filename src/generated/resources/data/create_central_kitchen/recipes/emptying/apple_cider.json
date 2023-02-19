@@ -7,6 +7,9 @@
   ],
   "results": [
     {
+      "item": "minecraft:glass_bottle"
+    },
+    {
       "fluid": "create_central_kitchen:apple_cider",
       "amount": 250
     }

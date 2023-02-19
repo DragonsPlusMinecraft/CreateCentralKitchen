@@ -5,9 +5,29 @@
 	"block.create_central_kitchen.blaze_stove": "Blaze Stove",
 
 	"fluid.create_central_kitchen.apple_cider": "Apple Cider",
+	"fluid.create_central_kitchen.black_tea": "Black Tea",
+	"fluid.create_central_kitchen.coffee": "Coffee",
+	"fluid.create_central_kitchen.dandelion_tea": "Dandelion Tea",
+	"fluid.create_central_kitchen.green_tea": "Green Tea",
 	"fluid.create_central_kitchen.hot_cocoa": "Hot Cocoa",
+	"fluid.create_central_kitchen.long_apple_cider": "Apple Cider",
+	"fluid.create_central_kitchen.long_black_tea": "Black Tea",
+	"fluid.create_central_kitchen.long_coffee": "Coffee",
+	"fluid.create_central_kitchen.long_dandelion_tea": "Dandelion Tea",
+	"fluid.create_central_kitchen.long_green_tea": "Green Tea",
+	"fluid.create_central_kitchen.long_yellow_tea": "Yellow Tea",
 	"fluid.create_central_kitchen.melon_juice": "Melon Juice",
+	"fluid.create_central_kitchen.purulent_tea": "Purulent Tea",
+	"fluid.create_central_kitchen.rose_hip_tea": "Rose Hip Tea",
+	"fluid.create_central_kitchen.strong_apple_cider": "Apple Cider",
+	"fluid.create_central_kitchen.strong_black_tea": "Black Tea",
+	"fluid.create_central_kitchen.strong_coffee": "Coffee",
+	"fluid.create_central_kitchen.strong_green_tea": "Green Tea",
+	"fluid.create_central_kitchen.strong_purulent_tea": "Purulent Tea",
+	"fluid.create_central_kitchen.strong_rose_hip_tea": "Rose Hip Tea",
+	"fluid.create_central_kitchen.strong_yellow_tea": "Yellow Tea",
 	"fluid.create_central_kitchen.tomato_sauce": "Tomato Sauce",
+	"fluid.create_central_kitchen.yellow_tea": "Yellow Tea",
 
 	"item.create_central_kitchen.brewing_guide": "Brewing Guide",
 	"item.create_central_kitchen.cooking_guide": "Cooking Guide",
@@ -50,7 +70,7 @@
 	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "The Basket can receive transported items from belt.",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Besides facing upwards, corresponding horizontal facing is also suitable.",
 	"create_central_kitchen.ponder.tag.cooking_automation": "Cooking Automation",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "Components which automates the cooking process",
+	"create_central_kitchen.ponder.tag.cooking_automation.description": "Components which automate the cooking process",
 
 	"_": "Thank you for translating Create: Central Kitchen!"
 

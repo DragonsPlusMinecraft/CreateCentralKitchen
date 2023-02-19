@@ -1,16 +1,28 @@
 package plus.dragons.createcentralkitchen;
 
-import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
-    private Object2BooleanOpenHashMap<String> dependencies = new Object2BooleanOpenHashMap<>();
+    private final Set<String> dependencies = new HashSet<>();
+    private final BiMap<String, String> modPackage = HashBiMap.create();
+    
+    private boolean isTargetClassLoaded(String targetClassName) {
+        for (var entry : modPackage.entrySet()) {
+            //Use ".<packageName>." here to match, so we can be sure that it belongs to that mod
+            if (targetClassName.contains("." + entry.getValue() + "."))
+                return dependencies.contains(entry.getKey());
+        }
+        return true;
+    }
     
     @Override
     public void onLoad(String mixinPackage) {
@@ -18,12 +30,16 @@ public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
             "create",
             "farmersdelight",
             "farmersrespite",
+            "miners_delight",
             "jei"
         };
         LoadingModList mods = LoadingModList.get();
         for (String modid : modids) {
-            dependencies.put(modid, mods.getModFileById(modid) != null);
+            modPackage.put(modid, modid);
+            if (mods.getModFileById(modid) != null)
+                dependencies.add(modid);
         }
+        modPackage.put("miners_delight", "minersdelight");
     }
     
     @Override
@@ -34,8 +50,9 @@ public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         String[] splitMixinClassName = mixinClassName.split("\\.");
-        String modid = splitMixinClassName[splitMixinClassName.length - 2];
-        return dependencies.getOrDefault(modid, true);
+        String mixinPackage = splitMixinClassName[splitMixinClassName.length - 2];
+        String modid = modPackage.inverse().getOrDefault(mixinPackage, mixinPackage);
+        return dependencies.contains(modid) && isTargetClassLoaded(targetClassName);
     }
     
     @Override

@@ -5,14 +5,15 @@
       "tag": "farmersrespite:tea_leaves"
     },
     {
-      "item": "farmersdelight:milk_bottle"
+      "tag": "forge:milk"
     }
   ],
   "result": {
-    "item": "create:builders_tea"
+    "item": "create:builders_tea",
+    "count": 2
   },
   "container": {
-    "item": "minecraft:glass"
+    "item": "minecraft:glass_bottle"
   },
   "experience": 0.35,
   "brewingtime": 2400,
