@@ -1,5 +1,12 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "heatRequirement": "heated",
   "ingredients": [
     {
       "tag": "farmersrespite:tea_leaves"
@@ -8,22 +15,15 @@
       "item": "minecraft:dandelion"
     },
     {
+      "amount": 250,
       "fluid": "minecraft:water",
-      "nbt": {},
-      "amount": 250
+      "nbt": {}
     }
   ],
   "results": [
     {
-      "fluid": "create_central_kitchen:dandelion_tea",
-      "amount": 250
-    }
-  ],
-  "heatRequirement": "heated",
-  "conditions": [
-    {
-      "modid": "farmersrespite",
-      "type": "forge:mod_loaded"
+      "amount": 250,
+      "fluid": "create_central_kitchen:dandelion_tea"
     }
   ]
 }

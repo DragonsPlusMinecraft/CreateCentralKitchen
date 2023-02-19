@@ -19,6 +19,7 @@ import plus.dragons.createdragonlib.lang.LangFactory;
 public enum CentralKitchenData {
     INSTANCE;
     
+    //TODO: Add advancements so it fixes the LangMerger, for now, manually clean up the en_us.json before every run
     public static void register(IEventBus modBus) {
         if (!DatagenModLoader.isRunningDataGen())
             return;
@@ -28,6 +29,7 @@ public enum CentralKitchenData {
                     FdPonderIndex.register();
                     FrPonderTag.register();
                     FrPonderIndex.register();
+                    CentralKitchen.PONDER_REGISTER.registerInternal();
                 })
                 .ui();
         modBus.addListener(EventPriority.LOWEST, langFactory::datagen);

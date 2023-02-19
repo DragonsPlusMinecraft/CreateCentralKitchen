@@ -73,7 +73,7 @@ public class BlazeStoveScenes {
     }
     
     public static void automation(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("blaze_stove.automation", "Configure the Blaze Stove");
+        scene.title("blaze_stove.automation", "Automation with the Blaze Stove");
         scene.configureBasePlate(1, 0, 5);
         scene.world.showSection(util.select.layer(0), Direction.UP);
         scene.world.setKineticSpeed(util.select.everywhere(), 0);

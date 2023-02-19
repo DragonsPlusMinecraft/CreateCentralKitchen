@@ -1,5 +1,12 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "heatRequirement": "heated",
   "ingredients": [
     {
       "item": "farmersrespite:rose_hips"
@@ -8,22 +15,15 @@
       "item": "farmersrespite:rose_hips"
     },
     {
+      "amount": 250,
       "fluid": "minecraft:water",
-      "nbt": {},
-      "amount": 250
+      "nbt": {}
     }
   ],
   "results": [
     {
-      "fluid": "create_central_kitchen:rose_hip_tea",
-      "amount": 250
-    }
-  ],
-  "heatRequirement": "heated",
-  "conditions": [
-    {
-      "modid": "farmersrespite",
-      "type": "forge:mod_loaded"
+      "amount": 250,
+      "fluid": "create_central_kitchen:rose_hip_tea"
     }
   ]
 }

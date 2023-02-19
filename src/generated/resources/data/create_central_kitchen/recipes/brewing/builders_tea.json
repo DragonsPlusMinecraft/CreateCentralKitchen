@@ -21,6 +21,7 @@
   ],
   "needwater": true,
   "result": {
+    "count": 2,
     "item": "create:builders_tea"
   }
 }

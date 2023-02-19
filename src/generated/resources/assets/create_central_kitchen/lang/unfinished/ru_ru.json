@@ -32,9 +32,39 @@
 
 	"item.create_central_kitchen.brewing_guide": "Руководство по варке",
 	"item.create_central_kitchen.cooking_guide": "Руководство по готовке",
-	"item.create_central_kitchen.miners_cooking_guide": "Шахтёрское руководство по готовке",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "Автономное разделывание",
+
+
+	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.basket.belt_interaction.header": "Сбор вещей при помощи корзины",
+	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Корзина позволяет коллекционировать вещи с механического ремня.",
+	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Корзина может располагаться вертикально или горизонтально.",
+
+	"create_central_kitchen.ponder.basket.intro.header": "Подборка выпавших вещей в корзину",
+	"create_central_kitchen.ponder.basket.intro.text_1": "Так же как и воронка, корзина собирает выпавшие вещи.",
+	"create_central_kitchen.ponder.basket.intro.text_2": "Так же корзины могут распологаться в разных сторонах.",
+	"create_central_kitchen.ponder.basket.intro.text_3": "Увы, корзиты не могут забирать вещи из контейнеров.",
+
+	"create_central_kitchen.ponder.blaze_stove.automation.header": "Автоматизация плиты всполоха",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "Плита всполоха позволяет механической руке взаимодействовать с блоками типа кухонного котла, но её нужно настраивать.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "Нажмите ПКМ по плите всполоха чтобы открыть руководство по готовке.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "Также можно нажать по плите всполоха с другим руководством по готовке, чтобы заменить его.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "Как только существующий рецепт появился в плите всполоха, рука сможет взаимодействовать с ним.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "Механическая рука будет класть все необходимые ингредиенты внутрь.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "Механическая рука будет забирать результат готовки а также все неправильные ингредиенты.",
+
+	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Использование плиты всполоха как источника жара",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "Плита всполоха является исчником жара для кухонного котла, чем больше нагрев, тем быстрее проходит готовка.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "Блюда могут готовится без добавления топлива в горелку.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Естественно, плита всполоха может быть использована как обычная плита.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "Но будьте внимательны! Перегретая плита заставит вашу еду сгореть!",
+
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "Создание плиты всполоха",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Для создания плиты всполоха, нажмите ПКМ в присяде по горелке всполоха руководсвом по готовке.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Руководства для готовки используются для котлов, также существуют другие руководства для других кухонных принадлежностей.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "Чтобы забрать руководство по готовке, нажмите ПКМ в присяде по плите всполоха гаечным ключом.",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
@@ -43,35 +73,6 @@
 	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "Рецепт:",
 
 	"create_central_kitchen.jei.transfer.copper_pot.exceed_capacity": "Количество ингредиентов превышает вместимость медного котла",
-
-
-	"_": "->------------------------]  Ponder Content  [------------------------<-",
-
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "Создание плиты всполоха",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Для создания плиты всполоха, нажмите ПКМ в присяде по горелке всполоха руководсвом по готовке.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Руководства для готовки используются для котлов, также существуют другие руководства для других кухонных принадлежностей.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "Чтобы забрать руководство по готовке, нажмите ПКМ в присяде по плите всполоха гаечным ключом.",
-	"create_central_kitchen.ponder.blaze_stove.automation.header": "Автоматизация плиты всполоха",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "Плита всполоха позволяет механической руке взаимодействовать с блоками типа кухонного котла, но её нужно настраивать.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "Нажмите ПКМ по плите всполоха чтобы открыть руководство по готовке.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "Также можно нажать по плите всполоха с другим руководством по готовке, чтобы заменить его.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "Как только существующий рецепт появился в плите всполоха, рука сможет взаимодействовать с ним.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "Механическая рука будет класть все необходимые ингредиенты внутрь.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "Механическая рука будет забирать результат готовки а также все неправильные ингредиенты.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Использование плиты всполоха как источника жара",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "Плита всполоха является исчником жара для кухонного котла, чем больше нагрев, тем быстрее проходит готовка.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "Блюда могут готовится без добавления топлива в горелку.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Естественно, плита всполоха может быть использована как обычная плита.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "Но будьте внимательны! Перегретая плита заставит вашу еду сгореть!",
-	"create_central_kitchen.ponder.basket.intro.header": "Подборка выпавших вещей в корзину",
-	"create_central_kitchen.ponder.basket.intro.text_1": "Так же как и воронка, корзина собирает выпавшие вещи.",
-	"create_central_kitchen.ponder.basket.intro.text_2": "Так же корзины могут распологаться в разных сторонах.",
-	"create_central_kitchen.ponder.basket.intro.text_3": "Увы, корзиты не могут забирать вещи из контейнеров.",
-	"create_central_kitchen.ponder.basket.belt_interaction.header": "Сбор вещей при помощи корзины",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Корзина позволяет коллекционировать вещи с механического ремня.",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Корзина может располагаться вертикально или горизонтально.",
-	"create_central_kitchen.ponder.tag.cooking_automation": "Автоматизация готовки",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "Компоненты для автоматизации готовки блюд",
 
 	"_": "Thank you for translating Create: Central Kitchen!"
 

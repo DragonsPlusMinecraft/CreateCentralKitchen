@@ -1,5 +1,11 @@
 {
   "type": "create:milling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
   "ingredients": [
     {
       "item": "farmersrespite:wild_tea_bush"
@@ -11,12 +17,6 @@
     },
     {
       "item": "minecraft:stick"
-    }
-  ],
-  "conditions": [
-    {
-      "modid": "farmersrespite",
-      "type": "forge:mod_loaded"
     }
   ]
 }

@@ -2,7 +2,6 @@ package plus.dragons.createcentralkitchen.core.ponder;
 
 import com.simibubi.create.foundation.ponder.PonderStoryBoardEntry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,6 +36,13 @@ public class PonderDeferredRegister {
         bus.register(new EventDispatcher(this));
     }
     
+    /**
+     * For internal use and datagen only, don't call this in production environment!
+     */
+    public void registerInternal() {
+        objects.forEach(PonderRegistryObject::register);
+    }
+    
     public static class EventDispatcher {
         private final PonderDeferredRegister register;
         
@@ -47,15 +53,7 @@ public class PonderDeferredRegister {
         //Set it to EventPriority.LOWEST so PonderRegistryObjects can be initialized before registered
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public void handleEvent(final FMLClientSetupEvent event) {
-            event.enqueueWork(() -> register.objects.forEach(PonderRegistryObject::register));
-        }
-        
-        //Set it to EventPriority.HIGHEST so PonderRegistryObjects can be registered before PonderLocalization runs
-        @SubscribeEvent(priority = EventPriority.HIGHEST)
-        public void handleEvent(final GatherDataEvent event) {
-            if (event.includeClient() && event.getModContainer().getModId().equals(register.namespace)) {
-                register.objects.forEach(PonderRegistryObject::register);
-            }
+            event.enqueueWork(register::registerInternal);
         }
         
     }

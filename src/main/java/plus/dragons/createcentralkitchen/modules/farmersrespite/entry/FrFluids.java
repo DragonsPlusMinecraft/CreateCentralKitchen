@@ -8,6 +8,7 @@ import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.RegistryObject;
+import plus.dragons.createcentralkitchen.core.fluid.SimpleTintedFluidType;
 import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
 import umpaz.farmersrespite.common.registry.FRItems;
 
@@ -63,10 +64,11 @@ public class FrFluids {
     {
         return REGISTRATE.virtualFluid(name,
                 new ResourceLocation("forge", "block/milk_still"),
-                new ResourceLocation("forge", "block/milk_flowing"))
+                new ResourceLocation("forge", "block/milk_flowing"),
+                SimpleTintedFluidType.factory(0xFF000000 | color),
+                VirtualFluid::new)
             .defaultLang()
-                // TODO
-            .attributes(b -> b.color(0xFF000000 | color))
+            //.properties(prop -> prop.descriptionId(Util.makeDescriptionId("item", drink.getId())))
             .transform(RecipeGen.fluidHandling(drink, 250));
     }
     
@@ -76,10 +78,11 @@ public class FrFluids {
     {
         return REGISTRATE.virtualFluid(name,
                 Create.asResource("fluid/milk_still"),
-                Create.asResource("fluid/milk_flow"))
+                Create.asResource("fluid/milk_flow"),
+                SimpleTintedFluidType.factory(0xFF000000 | color),
+                VirtualFluid::new)
             .defaultLang()
-                // TODO
-            .attributes(b -> b.color(0xFF000000 | color))
+            //.properties(prop -> prop.descriptionId(Util.makeDescriptionId("item", drink.getId())))
             .transform(RecipeGen.fluidHandling(drink, 250));
     }
     
