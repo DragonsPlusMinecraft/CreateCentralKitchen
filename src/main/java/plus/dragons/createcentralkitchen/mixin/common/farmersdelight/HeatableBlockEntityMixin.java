@@ -6,23 +6,25 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
-import org.spongepowered.asm.mixin.Intrinsic;
-import org.spongepowered.asm.mixin.Mixin;
-import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
+import org.spongepowered.asm.mixin.*;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SyncedBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@Mixin({
-    CookingPotBlockEntity.class,
-    SkilletBlockEntity.class,
-    KettleBlockEntity.class//,
-    //CopperPotBlockEntity.class Miner's Delight stopped at 1.18.2
-})
+@Pseudo
+@Mixin(
+    value = {
+        CookingPotBlockEntity.class,
+        SkilletBlockEntity.class,
+    },
+    targets = {
+        "umpaz.farmersrespite.common.block.entity.KettleBlockEntity",
+        "com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity"
+    },
+    remap = false
+)
 @Implements(@Interface(iface = HeatableBlockEntity.class, prefix = "override$", remap = Interface.Remap.NONE))
 public abstract class HeatableBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity {
     
