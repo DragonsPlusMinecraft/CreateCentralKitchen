@@ -12,6 +12,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm.FdArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.*;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
@@ -50,6 +51,7 @@ public class FarmersDelightModule {
     }
     
     private void registerForgeEvents(IEventBus forgeBus) {
+        forgeBus.addListener(CuttingBoardDeployingRecipe::onDeployerRecipeSearch);
         forgeBus.addListener(FdItems::fillCreateItemGroup);
         forgeBus.addListener(FdFluids::remap);
     }
