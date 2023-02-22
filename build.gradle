@@ -21,6 +21,7 @@ version = mod_version
 group = 'plus.dragons.createcentralkitchen'
 archivesBaseName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
 
+jarJar.enable()
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -107,7 +108,15 @@ repositories {
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        name 'Curse Maven'
+        name "Abnormals Maven"
+        url  "https://maven.jaackson.me"
+    }
+    maven {
+        name "JitPack"
+        url 'https://jitpack.io'
+    }
+    maven {
+        name "Curse Maven"
         url "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -117,17 +126,28 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_file}")
-    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmersrespite_file}")
-    implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
+    //embedded dependencies
+    jarJar(group: 'com.github.LlamaLad7', name: "MixinExtras", version: "[${mixin_extras_version},)") {
+        transitive = false
+        jarJar.pin(it, project.mixin_extras_version)
+    }
+    minecraftLibrary "com.github.LlamaLad7:MixinExtras:${mixin_extras_version}"
+    annotationProcessor "com.github.LlamaLad7:MixinExtras:${mixin_extras_version}"
+    //mandatory dependencies
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim")
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-
+    //integration dependencies
+    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
+    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
+    implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
+    implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
+    implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
+    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
+    implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
+    //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
-
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
 
@@ -145,21 +165,29 @@ mixin {
 }
 
 jar {
+    classifier 'slim'
+    from "LICENSE"
     manifest {
         attributes([
-                "Specification-Title"     : "create_central_kitchen",
-                "Specification-Vendor"    : "dragonsplus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "dragonsplus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs': 'create_central_kitchen.mixins.json'
+            "Specification-Title"     : "create_central_kitchen",
+            "Specification-Vendor"    : "dragonsplus",
+            "Specification-Version"   : "1", // We are version 1 of ourselves
+            "Implementation-Title"    : project.name,
+            "Implementation-Version"  : project.jar.archiveVersion,
+            "Implementation-Vendor"   : "dragonsplus",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            'MixinConfigs': 'create_central_kitchen.mixins.json'
         ])
     }
 }
 
+tasks.jarJar {
+    classifier ""
+    from "LICENSE"
+}
+
 jar.finalizedBy('reobfJar')
+tasks.jarJar.finalizedBy('reobfJarJar')
 
 publishing {
     publications {
