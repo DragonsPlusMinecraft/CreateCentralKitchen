@@ -7,8 +7,10 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.material.MaterialColor;
+import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
 import plus.dragons.createcentralkitchen.data.tag.OptionalTags;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlock;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -24,7 +26,8 @@ public class FdBlocks {
         .transform(OptionalTags.block(
             BlockTags.MINEABLE_WITH_PICKAXE,
             AllTags.AllBlockTags.FAN_TRANSPARENT.tag,
-            ModTags.HEAT_SOURCES))
+            ModTags.HEAT_SOURCES,
+            CentralKitchenTags.block(new ResourceLocation("brewinandchewin", "hot_blocks"))))
         .loot((prov, block) -> prov.dropOther(block, AllBlocks.BLAZE_BURNER.get()))
         .addLayer(() -> RenderType::cutoutMipped)
         .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))

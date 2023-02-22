@@ -31,6 +31,8 @@ public class CentralKitchenMixinPlugin implements IMixinConfigPlugin {
             "farmersdelight",
             "farmersrespite",
             "miners_delight",
+            "brewinandchewin",
+            "neapolitan",
             "jei"
         };
         LoadingModList mods = LoadingModList.get();

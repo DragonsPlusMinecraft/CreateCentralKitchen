@@ -6,6 +6,7 @@
   "plugin": "plus.dragons.createcentralkitchen.CentralKitchenMixinPlugin",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.brewinandchewin.KegBlockEntityMixin",
     "common.create.DeployerTileEntityAccessor",
     "common.create.TileEntityBehaviorMixin",
     "common.farmersdelight.BasketBlockEntityAccessor",

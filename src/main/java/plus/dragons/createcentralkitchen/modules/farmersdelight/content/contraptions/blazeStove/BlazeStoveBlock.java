@@ -142,7 +142,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         if (level instanceof ServerLevel serverLevel) {
             serverLevel.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
                 .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
-                .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
+                .setValue(HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
         }
         return InteractionResult.SUCCESS;
     }
@@ -190,7 +190,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        float damage = switch(state.getValue(BlazeBurnerBlock.HEAT_LEVEL)) {
+        float damage = switch(state.getValue(HEAT_LEVEL)) {
             case SEETHING -> 2f;
             case KINDLED, FADING -> 1f;
             case SMOULDERING -> .5f;

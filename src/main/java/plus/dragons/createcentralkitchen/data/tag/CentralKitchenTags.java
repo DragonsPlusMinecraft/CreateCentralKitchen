@@ -54,6 +54,9 @@ public class CentralKitchenTags {
         prov.tag(ModTags.TRAY_HEAT_SOURCES)
             .add(AllBlocks.LIT_BLAZE_BURNER.get())
             .add(AllBlocks.BLAZE_BURNER.get());
+        prov.tag(block(new ResourceLocation("brewinandchewin", "hot_blocks")))
+            .add(AllBlocks.LIT_BLAZE_BURNER.get())
+            .add(AllBlocks.BLAZE_BURNER.get());
         prov.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .addOptional(ModBlocks.COOKING_POT.getId())
             .addOptional(FRBlocks.KETTLE.getId());
