@@ -5,10 +5,36 @@
 	"block.create_central_kitchen.blaze_stove": "Quemador de Blaze",
 
 	"fluid.create_central_kitchen.apple_cider": "Sidra de manzana",
+	"fluid.create_central_kitchen.black_tea": "Té negro",
+	"fluid.create_central_kitchen.coffee": "Café",
+	"fluid.create_central_kitchen.dandelion_tea": "Té de diente de león",
+	"fluid.create_central_kitchen.gamblers_tea": "Té del jugador",
+	"fluid.create_central_kitchen.green_tea": "Té verde",
 	"fluid.create_central_kitchen.hot_cocoa": "Chocolate caliente",
+	"fluid.create_central_kitchen.long_apple_cider": "Sidra de manzana",
+	"fluid.create_central_kitchen.long_black_tea": "Té negro",
+	"fluid.create_central_kitchen.long_coffee": "Café",
+	"fluid.create_central_kitchen.long_dandelion_tea": "Té de diente de león",
+	"fluid.create_central_kitchen.long_gamblers_tea": "Té del jugador",
+	"fluid.create_central_kitchen.long_green_tea": "Té verde",
+	"fluid.create_central_kitchen.long_yellow_tea": "Té amarillo",
 	"fluid.create_central_kitchen.melon_juice": "Zumo de melón",
+	"fluid.create_central_kitchen.purulent_tea": "Té purulento",
+	"fluid.create_central_kitchen.rose_hip_tea": "Té de rosa mosqueta",
+	"fluid.create_central_kitchen.strong_apple_cider": "Sidra de manzana",
+	"fluid.create_central_kitchen.strong_black_tea": "Té negro",
+	"fluid.create_central_kitchen.strong_coffee": "Café",
+	"fluid.create_central_kitchen.strong_gamblers_tea": "Té del jugador",
+	"fluid.create_central_kitchen.strong_green_tea": "Té verde",
+	"fluid.create_central_kitchen.strong_hot_cocoa": "Chocolate caliente",
+	"fluid.create_central_kitchen.strong_melon_juice": "Zumo de melón",
+	"fluid.create_central_kitchen.strong_purulent_tea": "Té purulento",
+	"fluid.create_central_kitchen.strong_rose_hip_tea": "Té de rosa mosqueta",
+	"fluid.create_central_kitchen.strong_yellow_tea": "Té amarillo",
 	"fluid.create_central_kitchen.tomato_sauce": "Salsa de tomate",
+	"fluid.create_central_kitchen.yellow_tea": "Té amarillo",
 
+	"item.create_central_kitchen.brewing_guide": "Guía de cervecería",
 	"item.create_central_kitchen.cooking_guide": "Guía de cocina",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "Desplegador con tabla de cortar",
@@ -16,29 +42,41 @@
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 
-	"create_central_kitchen.ponder.tag.farmers_delight": "Automatización de Farmer's Delight",
-	"create_central_kitchen.ponder.tag.farmers_delight.description": "Artículos y componentes relacionados con la automatización de Farmer's Delight.",
+	"create_central_kitchen.ponder.basket.belt_interaction.header": "Recibir artículos de cinta transportadora usando la cesta",
+	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "La cesta puede recibir artículos transportados desde la cinta.",
+	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Además de mirar hacia arriba, puede mirar hacía la .",
 
-	"create_central_kitchen.ponder.basket.header": "Recolección de artículos con la cesta",
-	"create_central_kitchen.ponder.basket.text_1": "La cesta puede recoger artículos transportados desde la cinta.",
-	"create_central_kitchen.ponder.basket.text_2": "Además de orientado hacia arriba, también hacia la cinta transportadora.",
+	"create_central_kitchen.ponder.basket.intro.header": "Recopilación de artículos arrojados usando la cesta",
+	"create_central_kitchen.ponder.basket.intro.text_1": "Al igual que una tolva, la cesta puede recolectar elementos caídos.",
+	"create_central_kitchen.ponder.basket.intro.text_2": "Además, las cestas pueden tener diferentes caras.",
+	"create_central_kitchen.ponder.basket.intro.text_3": "Sin embargo, la cesta no puede extraer elementos de los contenedores.",
 
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "Contratar a un cocinero",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Haz click con el botón derecho en el quemador Blaze con una guía de cocina en la mano mientras te agachas.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Para recuperar la guía de cocina, haz click con el botón derecho en la quemador Blaze con una llave inglesa mientras te agachas.",
+	"create_central_kitchen.ponder.blaze_stove.automation.header": "Automatización del quemador de Blaze",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "El quemador de Blaze puede proporcionar soporte del brazo mecánico para utensilios de cocina como la olla, pero debe configurarse para que funcione.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "Haga click derecho en el quemador de Blaze para abrir el menú de la guía de cocina.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "También puede hacer click con el botón derecho en el quemador de Blaze con cualquier guía para intercambiarlos.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "Una vez que hayas asignado una receta válida a la guía de cocina, la olla de arriba se volverá interactiva con los brazos mecánicos.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "Para la entrada, el brazo mecánico insertará contenedores e ingredientes definidos.",
+	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "Para la salida, el brazo mecánico extraerá el resultado y los ingredientes no válidos.",
 
-	"create_central_kitchen.ponder.blaze_stove.processing.header": "Chef experto",
-    "create_central_kitchen.ponder.blaze_stove.processing.text_1": "El quemador de blaze puede proporcionar soporte de brazo mecánico para la olla, ¡así que deja que controle la cocción!",
-    "create_central_kitchen.ponder.blaze_stove.processing.text_2": "Todavía se puede cocinar incluso sin agregar combustible a la estufa Blaze.",
-    "create_central_kitchen.ponder.blaze_stove.processing.text_3": "Cuanto más caliente esté el fuego, más rápido se cocina.",
-    "create_central_kitchen.ponder.blaze_stove.processing.text_4": "Por supuesto, también puedes usar el quemador de blaze para freír cosas directamente.",
-    "create_central_kitchen.ponder.blaze_stove.processing.text_5": "Pero ten en cuenta que el fuego hirviente puede quemar tus ingredientes directamente.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Usar el quemador de Blaze como fuente de calor",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "El quemador de Blaze es una fuente de calor activa, cuanto más caliente el fuego, más rápido se cocina.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "Pero todavía se puede cocinar con calor pasivo.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Por supuesto, también puedes usar el quemador de Blaze para cocinar cosas directamente.",
+	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "Pero ten en cuenta que el fuego hirviente puede quemar tus ingredientes en un instante.",
+
+	"create_central_kitchen.ponder.blaze_stove.intro.header": "Crear un quemador de Blaze",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Para crear un quemador de Blaze, haz click mientras te agachas con la guía de cocina en la mano.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Las guías de cocina son para ollas, pero también se pueden aplicar otras guías para diferentes utensilios de cocina.",
+	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "Para recuperar la guía de cocina, haz click con el botón derecho en el quemador blaze con una llave mientras te agachas.",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
 	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "No se proporcionó una receta válida",
 	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "Receta actual:",
+
+	"create_central_kitchen.jei.transfer.copper_pot.exceed_capacity": "La cantidad de ingredientes supera la capacidad de la olla de cobre",
 
 	"_": "¡Gracias por traducir Create: Central Kitchen!"
 
