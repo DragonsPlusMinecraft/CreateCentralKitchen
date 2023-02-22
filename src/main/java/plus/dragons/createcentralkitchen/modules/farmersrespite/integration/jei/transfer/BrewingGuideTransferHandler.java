@@ -8,8 +8,8 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.core.network.CentralKitchenNetwork;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdPackets;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideMenu;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,7 +42,7 @@ public class BrewingGuideTransferHandler implements IRecipeTransferHandler<Brewi
             } else input = ItemStack.EMPTY;
             container.getSlot(36 + i).set(input);
         }
-        CentralKitchenNetwork.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
+        FdPackets.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;
     }
     
