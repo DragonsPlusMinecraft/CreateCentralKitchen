@@ -1,95 +1,93 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
 
+import com.simibubi.create.Create;
 import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
-import com.simibubi.create.content.contraptions.processing.HeatCondition;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.VirtualFluidBuilder;
 import com.tterrag.registrate.builders.FluidBuilder;
-import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.FluidEntry;
-import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.data.recipe.ProcessingRecipes;
-import plus.dragons.createcentralkitchen.data.tag.OptionalTags;
+import plus.dragons.createcentralkitchen.core.fluid.SimpleTintedFluidType;
+import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.FarmersDelightModule;
 import vectorwing.farmersdelight.common.registry.ModItems;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class FdFluids {
+
+    public static final FluidEntry<VirtualFluid>
+        APPLE_CIDER = wateryDrink("apple_cider", 0xc68a47, ModItems.APPLE_CIDER)
+            .register(),
+        HOT_COCOA = thickDrink("hot_cocoa", 0xaf6c4c, ModItems.HOT_COCOA)
+            .register(),
+        MELON_JUICE = wateryDrink("melon_juice", 0xe24334, ModItems.MELON_JUICE)
+            .register(),
+        TOMATO_SAUCE = customDrink("tomato_sauce", ModItems.TOMATO_SAUCE)
+            .register();
     
-    public static final FluidEntry<VirtualFluid> APPLE_CIDER = fromFluidContainer(ModItems.APPLE_CIDER,
-        mixing -> mixing
-            .require(Items.APPLE)
-            .require(Items.APPLE)
-            .require(Items.SUGAR)
-            .requiresHeat(HeatCondition.HEATED))
-        .tag()
-        .register();
-    
-    public static final FluidEntry<VirtualFluid> HOT_COCOA = fromFluidContainer(ModItems.HOT_COCOA,
-        mixing -> mixing
-            .require(Items.COCOA_BEANS)
-            .require(FdTags.fluid(new ResourceLocation("forge", "chocolate")), 250)
-            .requiresHeat(HeatCondition.HEATED))
-        .register();
-    
-    public static final FluidEntry<VirtualFluid> MELON_JUICE = fromFluidContainer(ModItems.MELON_JUICE,
-        mixing -> mixing
-            .require(Items.MELON_SLICE)
-            .require(Items.MELON_SLICE)
-            .require(Items.MELON_SLICE)
-            .require(Items.MELON_SLICE)
-            .require(Items.SUGAR))
-        .register();
-    
-    public static final FluidEntry<VirtualFluid> TOMATO_SAUCE = fromFluidContainer(ModItems.TOMATO_SAUCE,
-        mixing -> mixing
-            .require(ModItems.TOMATO.get())
-            .require(ModItems.TOMATO.get())
-            .requiresHeat(HeatCondition.HEATED))
-        .register();
-    
-    @SuppressWarnings({"deprecation", "NullableProblems"})
-    public static FluidBuilder<VirtualFluid, CreateRegistrate> fromFluidContainer(
-        RegistryObject<? extends Item> item,
-        NonNullUnaryOperator<ProcessingRecipeBuilder<?>> mixingIngredients)
+    private static FluidBuilder<VirtualFluid, CreateRegistrate> wateryDrink(String name,
+                                                                            int color,
+                                                                            RegistryObject<? extends ItemLike> drink)
     {
-        String mod = item.getId().getNamespace();
-        String name = item.getId().getPath();
-        ResourceLocation tagId = new ResourceLocation("forge", name);
-        return REGISTRATE.entry(name, callback -> new VirtualFluidBuilder<>(
-                REGISTRATE, REGISTRATE, name, callback,
-                CentralKitchen.genRL("fluid/" + name + "_still"),
-                CentralKitchen.genRL("fluid/" + name + "_flow"),
-                CreateRegistrate::defaultFluidType,
+        return REGISTRATE.virtualFluid(name,
+                new ResourceLocation("forge", "block/milk_still"),
+                new ResourceLocation("forge", "block/milk_flowing"),
+                SimpleTintedFluidType.factory(0xFF000000 | color),
                 VirtualFluid::new)
-            )
             .defaultLang()
-            .transform(OptionalTags.fluid(tagId))
-            .setData(ProviderType.RECIPE, (ctx, prov) -> {
-                Fluid source = ctx.get().getSource();
-                ProcessingRecipes.emptying(CentralKitchen.genRL(name))
-                    .require(item.get())
-                    .output(source, 250)
-                    .whenModLoaded(mod)
-                    .build(prov);
-                ProcessingRecipes.filling(CentralKitchen.genRL(name))
-                    .require(item.get().getCraftingRemainingItem())
-                    .require(source, 250)
-                    .output(item.get())
-                    .whenModLoaded(mod)
-                    .build(prov);
-                mixingIngredients.apply(ProcessingRecipes.mixing(CentralKitchen.genRL(name)))
-                    .output(source, 250)
-                    .whenModLoaded(mod)
-                    .build(prov);
-            });
+            //.properties(prop -> prop.descriptionId(Util.makeDescriptionId("item", drink.getId())))
+            .transform(RecipeGen.fluidHandling(drink, 250));
+    }
+    
+    private static FluidBuilder<VirtualFluid, CreateRegistrate> thickDrink(String name,
+                                                                           int color,
+                                                                           RegistryObject<? extends ItemLike> drink)
+    {
+        return REGISTRATE.virtualFluid(name,
+                Create.asResource("fluid/milk_still"),
+                Create.asResource("fluid/milk_flow"),
+                SimpleTintedFluidType.factory(0xFF000000 | color),
+                VirtualFluid::new)
+            .defaultLang()
+            //.properties(prop -> prop.descriptionId(Util.makeDescriptionId("item", drink.getId())))
+            .transform(RecipeGen.fluidHandling(drink, 250));
+    }
+
+    private static FluidBuilder<VirtualFluid, CreateRegistrate> customDrink(String name,
+                                                                            RegistryObject<? extends ItemLike> drink)
+    {
+        return REGISTRATE.virtualFluid(name,
+                CentralKitchen.genRL("fluid/" + name + "_still"),
+                CentralKitchen.genRL("fluid/" + name + "_flow"))
+            .defaultLang()
+            //.properties(prop -> prop.descriptionId(Util.makeDescriptionId("item", drink.getId())))
+            .transform(RecipeGen.fluidHandling(drink, 250));
+    }
+
+    private static final Map<ResourceLocation, FluidEntry<?>> REMAP = new HashMap<>();
+    static  {
+        REMAP.put(FarmersDelightModule.genRL("apple_cider"), APPLE_CIDER);
+        REMAP.put(FarmersDelightModule.genRL("hot_cocoa"), HOT_COCOA);
+        REMAP.put(FarmersDelightModule.genRL("melon_juice"), MELON_JUICE);
+        REMAP.put(FarmersDelightModule.genRL("tomato_sauce"), TOMATO_SAUCE);
+    }
+    
+    public static void remap(MissingMappingsEvent event) {
+        for (var mapping : event.getMappings(Registry.FLUID_REGISTRY,FarmersDelightModule.ID)) {
+            if (REMAP.containsKey(mapping.getKey())) {
+                var entry = REMAP.get(mapping.getKey());
+                mapping.remap(entry.get());
+                FarmersDelightModule.LOGGER.warn("Remapping fluid '{}' to '{}'...", mapping.getKey(), entry.getId());
+            }
+        }
     }
     
     public static void register() {}

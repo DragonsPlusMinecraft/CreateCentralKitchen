@@ -10,9 +10,9 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.common.network.CentralKitchenNetwork;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.CookingGuideMenu;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.CookingGuideSyncPacket;
+import plus.dragons.createcentralkitchen.core.network.CentralKitchenNetwork;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdMenuTypes;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
@@ -30,7 +30,7 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
 
     @Override
     public Optional<MenuType<CookingGuideMenu>> getMenuType() {
-        return Optional.of(FdMenuTypes.COOKING_GUIDE_FOR_BLAZE.get());
+        return Optional.of(FdMenuTypes.COOKING_GUIDE.get());
     }
 
     @Override
@@ -50,9 +50,9 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
                 var items = inputs.get(i).getItems();
                 input = items.length == 0 ? ItemStack.EMPTY : items[0];
             } else input = ItemStack.EMPTY;
-            container.getSlot(i + 36).set(input);
+            container.getSlot(36 + i).set(input);
         }
-        CentralKitchenNetwork.CHANNEL.sendToServer(new CookingGuideSyncPacket(container));
+        CentralKitchenNetwork.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;
     }
     

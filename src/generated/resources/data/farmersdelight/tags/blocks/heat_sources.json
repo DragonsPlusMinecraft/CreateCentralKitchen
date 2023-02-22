@@ -3,7 +3,6 @@
     {
       "id": "create_central_kitchen:blaze_stove",
       "required": false
-    },
-    "create:lit_blaze_burner"
+    }
   ]
 }

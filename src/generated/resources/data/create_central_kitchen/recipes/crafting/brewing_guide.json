@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersrespite"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:plates/obsidian"
+    },
+    {
+      "item": "farmersdelight:canvas"
+    },
+    {
+      "tag": "farmersrespite:tea_leaves"
+    }
+  ],
+  "result": {
+    "item": "create_central_kitchen:brewing_guide"
+  }
+}

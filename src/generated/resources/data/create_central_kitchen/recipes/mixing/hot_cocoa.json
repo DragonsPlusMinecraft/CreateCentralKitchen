@@ -9,10 +9,11 @@
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "item": "minecraft:cocoa_beans"
+      "amount": 125,
+      "fluidTag": "forge:milk"
     },
     {
-      "amount": 250,
+      "amount": 125,
       "fluidTag": "forge:chocolate"
     }
   ],

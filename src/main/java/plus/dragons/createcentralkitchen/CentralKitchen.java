@@ -6,22 +6,21 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.common.modules.ModModuleLoader;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
+import plus.dragons.createcentralkitchen.core.modules.ModModuleLoader;
+import plus.dragons.createcentralkitchen.core.ponder.PonderDeferredRegister;
+import plus.dragons.createcentralkitchen.data.CentralKitchenData;
 import plus.dragons.createdragonlib.init.SafeRegistrate;
 import plus.dragons.createdragonlib.lang.Lang;
-import plus.dragons.createdragonlib.lang.LangFactory;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "create_central_kitchen";
     public static final String NAME = "Create: Central Kitchen";
 
@@ -31,22 +30,18 @@ public class CentralKitchen {
         DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, ID);
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER =
         DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
+    public static final PonderDeferredRegister PONDER_REGISTER =
+        PonderDeferredRegister.create(ID);
     
     public CentralKitchen() {
         ModModuleLoader.loadModules();
         
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        CentralKitchenData.register(modBus);
         REGISTRATE.registerEventListeners(modBus);
         TYPE_REGISTER.register(modBus);
         SERIALIZER_REGISTER.register(modBus);
-
-        LangFactory langFactory = LangFactory.create(NAME, ID)
-                .ponders(() -> {
-                    FdPonderIndex.register();
-                    FdPonderIndex.registerTags();
-                })
-                .ui();
-        modBus.addListener(EventPriority.LOWEST, langFactory::datagen);
+        PONDER_REGISTER.register(modBus);
     }
     
     public static ResourceLocation genRL(String path) {
