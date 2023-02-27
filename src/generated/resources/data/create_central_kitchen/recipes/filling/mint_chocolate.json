@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "fluid": "create:chocolate",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:mint_chocolate"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

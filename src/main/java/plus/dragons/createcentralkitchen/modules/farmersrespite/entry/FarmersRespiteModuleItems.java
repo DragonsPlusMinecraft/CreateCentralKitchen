@@ -6,11 +6,10 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.AllSections;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.core.item.FillCreateItemGroupEvent;
 import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
-import plus.dragons.createcentralkitchen.data.tag.CentralKitchenTags;
+import plus.dragons.createcentralkitchen.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.FarmersRespiteModule;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -25,7 +24,7 @@ public class FarmersRespiteModuleItems {
         .properties(prop -> prop.stacksTo(1))
         .recipe((ctx, prov) -> RecipeGen.shapeless(ctx.getId())
             .output(ctx.get())
-            .requires(CentralKitchenTags.item(new ResourceLocation("forge", "plates/obsidian")))
+            .requires(ForgeItemTags.create("plates/obsidian"))
             .requires(ModItems.CANVAS.get())
             .requires(FRTags.TEA_LEAVES)
             .whenModLoaded(FarmersRespiteModule.ID)

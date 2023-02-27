@@ -1,0 +1,32 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "neapolitan:ice_cubes"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "fluid": "create:chocolate",
+      "nbt": {},
+      "amount": 250
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:chocolate_ice_cream",
+      "amount": 500
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

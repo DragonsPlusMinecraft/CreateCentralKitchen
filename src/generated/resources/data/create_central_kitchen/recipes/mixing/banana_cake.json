@@ -1,0 +1,41 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:fruits/banana"
+    },
+    {
+      "tag": "forge:fruits/banana"
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:banana_cake"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

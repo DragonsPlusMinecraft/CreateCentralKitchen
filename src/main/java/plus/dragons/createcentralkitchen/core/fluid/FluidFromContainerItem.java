@@ -88,6 +88,14 @@ public class FluidFromContainerItem {
         return virtual(name, stillTexture, flowTexture, container, 250);
     }
     
+    public static FluidBuilder<VirtualFluid, CreateRegistrate> virtual(RegistryObject<? extends ItemLike> container, ResourceLocation texture) {
+        return virtual(texture, texture, container);
+    }
+    
+    public static FluidBuilder<VirtualFluid, CreateRegistrate> virtual(RegistryObject<? extends ItemLike> container, ResourceLocation texture, int amount) {
+        return virtual(texture, texture, container, amount);
+    }
+    
     public static FluidBuilder<VirtualFluid, CreateRegistrate> virtual(RegistryObject<? extends ItemLike> container, int amount) {
         String name = container.getId().getPath();
         return virtual(name, CentralKitchen.genRL("fluid/" + name + "_still"), CentralKitchen.genRL("fluid/" + name + "_flow"), container, amount);

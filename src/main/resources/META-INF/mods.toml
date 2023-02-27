@@ -36,6 +36,13 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
     side="BOTH"
 
 [[dependencies.create_central_kitchen]]
+    modId="create_confectionary"
+    mandatory=false
+    versionRange="[1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
     modId="farmersdelight"
     mandatory=false
     versionRange="[1.18.2-1.2.0,)"
@@ -53,5 +60,61 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
     modId="miners_delight"
     mandatory=false
     versionRange="[1.18.2-1.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="atmospheric"
+    mandatory=false
+    versionRange="[4.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="autumnity"
+    mandatory=false
+    versionRange="[3.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="environmental"
+    mandatory=false
+    versionRange="[2.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="neapolitan"
+    mandatory=false
+    versionRange="[3.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="upgrade_aquatic"
+    mandatory=false
+    versionRange="[4.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="peculiars"
+    mandatory=false
+    versionRange="[3.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="seasonals"
+    mandatory=false
+    versionRange="[1.18.2-3.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="cookielicious"
+    mandatory=false
+    versionRange="[1.18.2-2.4.0,)"
     ordering="AFTER"
     side="BOTH"

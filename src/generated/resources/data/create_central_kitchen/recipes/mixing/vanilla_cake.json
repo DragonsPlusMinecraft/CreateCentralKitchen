@@ -1,0 +1,41 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:vanilla_cake"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

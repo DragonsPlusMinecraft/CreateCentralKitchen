@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create:chocolate",
+      "amount": 1000
+    }
+  ],
+  "heatRequirement": "heated",
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

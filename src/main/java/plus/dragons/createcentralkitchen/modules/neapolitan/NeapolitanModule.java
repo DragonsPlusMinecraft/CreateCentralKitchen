@@ -7,6 +7,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.BaseModule;
 import plus.dragons.createcentralkitchen.core.modules.Module;
+import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleFluids;
+import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleItems;
 
 @Module(id = "neapolitan", dependencies = "neapolitan")
 public class NeapolitanModule extends BaseModule {
@@ -18,7 +20,8 @@ public class NeapolitanModule extends BaseModule {
     }
     
     protected void registerEntries() {
-        
+        NeapolitanModuleItems.register();
+        NeapolitanModuleFluids.register();
     }
     
     protected void registerModEvents(IEventBus modBus) {

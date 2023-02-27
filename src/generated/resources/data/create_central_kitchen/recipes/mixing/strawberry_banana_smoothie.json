@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:fruits/strawberry"
+    },
+    {
+      "tag": "forge:fruits/strawberry"
+    },
+    {
+      "tag": "forge:fruits/banana"
+    },
+    {
+      "item": "neapolitan:ice_cubes"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:strawberry_banana_smoothie",
+      "amount": 250
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

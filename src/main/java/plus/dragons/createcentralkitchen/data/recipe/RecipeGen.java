@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.data.recipe;
 
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
@@ -23,10 +24,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.data.recipe.builder.ConditionedKettleRecipeBuilder;
-import plus.dragons.createcentralkitchen.data.recipe.builder.ConditionedRecipeBuilder;
-import plus.dragons.createcentralkitchen.data.recipe.builder.ConditionedShapedRecipeBuilder;
-import plus.dragons.createcentralkitchen.data.recipe.builder.ConditionedShapelessRecipeBuilder;
+import plus.dragons.createcentralkitchen.data.recipe.builder.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -57,6 +55,12 @@ public abstract class RecipeGen extends RecipeProvider {
     }
     
     protected GeneratedRecipe common(ProcessingRecipeBuilder<?> builder) {
+        GeneratedRecipe generated = builder::build;
+        recipes.add(generated);
+        return generated;
+    }
+    
+    protected GeneratedRecipe common(SequencedAssemblyRecipeBuilder builder) {
         GeneratedRecipe generated = builder::build;
         recipes.add(generated);
         return generated;
@@ -197,6 +201,14 @@ public abstract class RecipeGen extends RecipeProvider {
     
     public static ProcessingRecipeBuilder<?> itemApplication(String path) {
         return processing(AllRecipeTypes.ITEM_APPLICATION, CentralKitchen.genRL(path));
+    }
+    
+    public static ConditionedSequencedAssemblyRecipeBuilder sequencedAssembly(ResourceLocation id) {
+        return new ConditionedSequencedAssemblyRecipeBuilder(id);
+    }
+    
+    public static ConditionedSequencedAssemblyRecipeBuilder sequencedAssembly(String path) {
+        return new ConditionedSequencedAssemblyRecipeBuilder(CentralKitchen.genRL(path));
     }
     
     @SuppressWarnings("deprecation")

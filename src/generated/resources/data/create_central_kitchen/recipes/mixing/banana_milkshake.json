@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:fruits/banana"
+    },
+    {
+      "fluid": "create_central_kitchen:vanilla_ice_cream",
+      "nbt": {},
+      "amount": 500
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:banana_milkshake",
+      "amount": 750
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

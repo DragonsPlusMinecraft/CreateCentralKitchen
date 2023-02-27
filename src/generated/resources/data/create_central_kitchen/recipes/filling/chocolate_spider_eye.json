@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "fluid": "create:chocolate",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:chocolate_spider_eye"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

@@ -15,7 +15,9 @@
     "common.farmersdelight.HeatableBlockEntityMixin",
     "common.farmersdelight.SkilletBlockEntityAccessor",
     "common.farmersrespite.HarvesterMovementBehaviorMixin",
-    "common.jei.DynamicJeiPluginMixin"
+    "common.jei.DynamicJeiPluginMixin",
+    "common.minecraft.BowlFoodItemMixin",
+    "common.neapolitan.DrinkItemMixin"
   ],
   "client": [
     "client.create.CreateItemGroupBaseMixin",

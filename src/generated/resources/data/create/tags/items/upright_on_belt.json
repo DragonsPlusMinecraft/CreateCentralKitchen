@@ -17,6 +17,60 @@
       "id": "farmersdelight:tomato_sauce",
       "required": false
     },
+    "create_central_kitchen:incomplete_neapolitan_ice_cream_chocolate",
+    "create_central_kitchen:incomplete_neapolitan_ice_cream_strawberry",
+    {
+      "id": "neapolitan:chocolate_ice_cream",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_ice_cream",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_ice_cream",
+      "required": false
+    },
+    {
+      "id": "neapolitan:banana_ice_cream",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_ice_cream",
+      "required": false
+    },
+    {
+      "id": "neapolitan:adzuki_ice_cream",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_milkshake",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_milkshake",
+      "required": false
+    },
+    {
+      "id": "neapolitan:vanilla_milkshake",
+      "required": false
+    },
+    {
+      "id": "neapolitan:banana_milkshake",
+      "required": false
+    },
+    {
+      "id": "neapolitan:mint_milkshake",
+      "required": false
+    },
+    {
+      "id": "neapolitan:adzuki_milkshake",
+      "required": false
+    },
+    {
+      "id": "neapolitan:strawberry_banana_smoothie",
+      "required": false
+    },
     {
       "id": "farmersrespite:long_apple_cider",
       "required": false

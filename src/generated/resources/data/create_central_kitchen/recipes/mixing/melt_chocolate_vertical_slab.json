@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "quark:vertical_slabs/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create:chocolate",
+      "amount": 500
+    }
+  ],
+  "heatRequirement": "heated",
+  "conditions": [
+    {
+      "modid": "quark",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "modid": "neapolitan",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}
