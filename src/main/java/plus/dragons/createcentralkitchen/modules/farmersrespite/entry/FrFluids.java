@@ -49,10 +49,14 @@ public class FrFluids {
             .lang("Dandelion Tea").register(),
         PURULENT_TEA = wateryDrink("purulent_tea", 0x842236, FRItems.PURULENT_TEA)
             .register(),
+        LONG_PURULENT_TEA = wateryDrink("long_purulent_tea", 0x842236, FRItems.LONG_PURULENT_TEA)
+            .lang("Purulent Tea").register(),
         STRONG_PURULENT_TEA = wateryDrink("strong_purulent_tea", 0x842236, FRItems.STRONG_PURULENT_TEA)
             .lang("Purulent Tea").register(),
         ROSE_HIP_TEA = wateryDrink("rose_hip_tea", 0x741603, FRItems.ROSE_HIP_TEA)
             .register(),
+        LONG_ROSE_HIP_TEA = wateryDrink("long_rose_hip_tea", 0x741603, FRItems.LONG_ROSE_HIP_TEA)
+            .lang("Rose Hip Tea").register(),
         STRONG_ROSE_HIP_TEA = wateryDrink("strong_rose_hip_tea", 0x741603, FRItems.STRONG_ROSE_HIP_TEA)
             .lang("Rose Hip Tea").register(),
         GAMBLERS_TEA = wateryDrink("gamblers_tea", 0x4b3830, FRItems.GAMBLERS_TEA)

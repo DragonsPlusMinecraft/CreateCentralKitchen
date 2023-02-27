@@ -1,7 +1,7 @@
-// 1.19.2	2023-02-19T14:40:46.4521811	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-27T21:12:08.5337271	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d6d3b59b64f72c62d8cdbf1363d79327e492507c assets/create_central_kitchen/blockstates/blaze_stove.json
-0a5d3918f5c5f112c40046c454d6d03fb9eb6be5 assets/create_central_kitchen/lang/en_ud.json
-f5c51f6d771da44890c92a4d3052a5f1b70a6e35 assets/create_central_kitchen/lang/en_us.json
+5e395a87bfae7ed61940cc854a372097a3c6ada3 assets/create_central_kitchen/lang/en_ud.json
+ef7d12f3e5a7ddd492252b315f9417dbf5916358 assets/create_central_kitchen/lang/en_us.json
 b37fa1be6c97f4e9d2f0495ba2243f09a6088da1 assets/create_central_kitchen/models/item/brewing_guide.json
 29a87d297ebccd094f9e1e26f4acd8fcc495fb14 assets/create_central_kitchen/models/item/cooking_guide.json
 fd7019281ce662d4f93ad5f12d6845ffeedae370 data/create/tags/blocks/fan_transparent.json
@@ -25,6 +25,8 @@ e32d735fb9a787c625597c0b268a1c320927400e data/create_central_kitchen/recipes/emp
 c5c328dfab96580c85f43d6f4c79c8408f7d7238 data/create_central_kitchen/recipes/emptying/long_dandelion_tea.json
 d818a9f64786836483c3e7fc4a1262325d44e5c4 data/create_central_kitchen/recipes/emptying/long_gamblers_tea.json
 96ae3d263e8bfaa559cc8aa5f400476848ba3888 data/create_central_kitchen/recipes/emptying/long_green_tea.json
+dacc6f7e23854bad29fcd4adecb1e245b85b136f data/create_central_kitchen/recipes/emptying/long_purulent_tea.json
+3f032888d9a9cadc664b38b157583294547fd0ab data/create_central_kitchen/recipes/emptying/long_rose_hip_tea.json
 eade92778c71fd4b9dbc27c4275608becd59df09 data/create_central_kitchen/recipes/emptying/long_yellow_tea.json
 875def301a2ee0b1a1a9dccb965e0dbb88b52974 data/create_central_kitchen/recipes/emptying/melon_juice.json
 a865c082c281659a9e607ae8634efeff9e83e588 data/create_central_kitchen/recipes/emptying/purulent_tea.json
@@ -54,6 +56,8 @@ f76e89e6a648e2791832e27d7e4836a4f9dba19a data/create_central_kitchen/recipes/fil
 dbd43e51a915d6e0483c49b94cdb5273f2c2a6e7 data/create_central_kitchen/recipes/filling/long_dandelion_tea.json
 617833d94c5198b2fa3d16010f248bb00513f704 data/create_central_kitchen/recipes/filling/long_gamblers_tea.json
 9de82fd515ce82baebaa4fa36a6363abb43f224c data/create_central_kitchen/recipes/filling/long_green_tea.json
+164d63f5f8f9e62c03376a36c7680705cebcab31 data/create_central_kitchen/recipes/filling/long_purulent_tea.json
+7ef62166e5760ea6461d711f094882c19d4418ae data/create_central_kitchen/recipes/filling/long_rose_hip_tea.json
 2494c87d315dcce1ebe2d43ed3fdb0211e7cb33f data/create_central_kitchen/recipes/filling/long_yellow_tea.json
 7b77ff382b8b8f3459ac82d22c7c7f304c695a2c data/create_central_kitchen/recipes/filling/melon_juice.json
 59fdb349cdd35300298169a7f8bc2e0ad6cdc448 data/create_central_kitchen/recipes/filling/purulent_tea.json

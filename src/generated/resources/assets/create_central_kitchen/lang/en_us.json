@@ -17,6 +17,8 @@
 	"fluid.create_central_kitchen.long_dandelion_tea": "Dandelion Tea",
 	"fluid.create_central_kitchen.long_gamblers_tea": "Gambler's Tea",
 	"fluid.create_central_kitchen.long_green_tea": "Green Tea",
+	"fluid.create_central_kitchen.long_purulent_tea": "Purulent Tea",
+	"fluid.create_central_kitchen.long_rose_hip_tea": "Rose Hip Tea",
 	"fluid.create_central_kitchen.long_yellow_tea": "Yellow Tea",
 	"fluid.create_central_kitchen.melon_juice": "Melon Juice",
 	"fluid.create_central_kitchen.purulent_tea": "Purulent Tea",
@@ -41,6 +43,9 @@
 
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.tag.cooking_automation": "Cooking Automation",
+	"create_central_kitchen.ponder.tag.cooking_automation.description": "Components which automate the cooking process",
 
 	"create_central_kitchen.ponder.basket.belt_interaction.header": "Receiving Items from Belt using Basket",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "The Basket can receive transported items from belt.",

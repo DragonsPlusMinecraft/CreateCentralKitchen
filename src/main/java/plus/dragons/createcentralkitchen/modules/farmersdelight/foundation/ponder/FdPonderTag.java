@@ -10,7 +10,9 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FdPonderTag {
     public static final PonderTag COOKING = create("cooking_automation")
-        .item(FdItems.COOKING_GUIDE.get(), true, false).addToIndex();
+        .defaultLang("Cooking Automation", "Components which automate the cooking process")
+        .item(FdItems.COOKING_GUIDE.get(), true, false)
+        .addToIndex();
 
     private static PonderTag create(String id) {
         return new PonderTag(CentralKitchen.genRL(id));

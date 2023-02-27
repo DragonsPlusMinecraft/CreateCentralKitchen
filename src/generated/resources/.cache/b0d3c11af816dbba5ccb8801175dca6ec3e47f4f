@@ -1,5 +1,7 @@
-// 1.19.2	2023-02-19T14:43:35.7266914	Create: Central Kitchen Lang Merger
-e111ff41822dc3cae352dcbddc8decfaaf44a911 assets/create_central_kitchen/lang/en_us.json
-392ad3ea642c2020fbecf837a63cd0501b232386 assets/create_central_kitchen/lang/unfinished/ru_ru.json
-73888ad3d124c151f895680cfc840ecece1b2f30 assets/create_central_kitchen/lang/unfinished/uk_ua.json
-c0e68ac65e1d0cd7f20b9520992c48dba3912730 assets/create_central_kitchen/lang/unfinished/zh_cn.json
+// 1.19.2	2023-02-27T21:12:08.5180185	Create: Central Kitchen Lang Merger
+b24106e21491fe03c9a0d4905906065d379ca55d assets/create_central_kitchen/lang/en_us.json
+1cc5d371203d204c7ade2cb8dacb68c249bced12 assets/create_central_kitchen/lang/unfinished/ja_jp.json
+a331863f593e6a98eb22e502286f76ffa7ae6953 assets/create_central_kitchen/lang/unfinished/pl_pl.json
+62b9c84b86ed50cb63397a88b54e32b8a81170d0 assets/create_central_kitchen/lang/unfinished/ru_ru.json
+601cbb86002dc23f63b42a446b0547e703686fd7 assets/create_central_kitchen/lang/unfinished/uk_ua.json
+0a35cc7bb5cab21c1294723a11521530b828c270 assets/create_central_kitchen/lang/unfinished/zh_cn.json
