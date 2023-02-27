@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 4",
+	"_": "Missing Localizations: 0",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -45,8 +45,8 @@
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 
-	"create_central_kitchen.ponder.tag.cooking_automation": "UNLOCALIZED: Cooking Automation",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "UNLOCALIZED: Components which automate the cooking process",
+	"create_central_kitchen.ponder.tag.cooking_automation": "Автоматизація приготування їжі",
+	"create_central_kitchen.ponder.tag.cooking_automation.description": "Компоненти, які автоматизують процес приготування їжі",
 
 	"create_central_kitchen.ponder.basket.belt_interaction.header": "Отримання предметів з конвеєрної стрічки за допомогою кошика",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Кошик може приймати пердмети, що транспортуються, з конвеєрної стрічки.",

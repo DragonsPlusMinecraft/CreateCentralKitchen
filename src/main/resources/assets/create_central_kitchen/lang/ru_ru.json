@@ -18,6 +18,8 @@
 	"fluid.create_central_kitchen.long_dandelion_tea": "Одуванчиковый чай",
 	"fluid.create_central_kitchen.long_gamblers_tea": "Рисковый чай",
 	"fluid.create_central_kitchen.long_green_tea": "Зелёный чай",
+	"fluid.create_central_kitchen.long_purulent_tea": "UNLOCALIZED: Purulent Tea",
+	"fluid.create_central_kitchen.long_rose_hip_tea": "UNLOCALIZED: Rose Hip Tea",
 	"fluid.create_central_kitchen.long_yellow_tea": "Жёлтый чай",
 	"fluid.create_central_kitchen.melon_juice": "Арбузный сок",
 	"fluid.create_central_kitchen.purulent_tea": "Гнойный чай",
@@ -42,6 +44,9 @@
 
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+	"create_central_kitchen.ponder.tag.cooking_automation": "Автоматизация готовки",
+	"create_central_kitchen.ponder.tag.cooking_automation.description": "Компоненты для автоматизации готовки блюд",
 
 	"create_central_kitchen.ponder.basket.belt_interaction.header": "Сбор вещей при помощи корзины",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Корзина позволяет коллекционировать вещи с механического ремня.",

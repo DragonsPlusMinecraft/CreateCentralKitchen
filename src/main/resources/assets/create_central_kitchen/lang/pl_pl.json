@@ -1,4 +1,5 @@
 {
+	"_": "Missing Localizations: 2",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -17,6 +18,8 @@
 	"fluid.create_central_kitchen.long_dandelion_tea": "Mniszkowa herbata",
 	"fluid.create_central_kitchen.long_gamblers_tea": "Herbata hazardzisty",
 	"fluid.create_central_kitchen.long_green_tea": "Zielona herbata",
+	"fluid.create_central_kitchen.long_purulent_tea": "UNLOCALIZED: Purulent Tea",
+	"fluid.create_central_kitchen.long_rose_hip_tea": "UNLOCALIZED: Rose Hip Tea",
 	"fluid.create_central_kitchen.long_yellow_tea": "Żółta herbata",
 	"fluid.create_central_kitchen.melon_juice": "Sok z melona",
 	"fluid.create_central_kitchen.purulent_tea": "Ropna herbata",

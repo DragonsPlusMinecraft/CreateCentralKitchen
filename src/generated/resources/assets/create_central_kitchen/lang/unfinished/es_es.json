@@ -45,6 +45,9 @@
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 
+	"create_central_kitchen.ponder.tag.cooking_automation": "UNLOCALIZED: Cooking Automation",
+	"create_central_kitchen.ponder.tag.cooking_automation.description": "UNLOCALIZED: Components which automate the cooking process",
+
 	"create_central_kitchen.ponder.basket.belt_interaction.header": "Recibir artículos de cinta transportadora usando la cesta",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "La cesta puede recibir artículos transportados desde la cinta.",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Además de mirar hacia arriba, puede mirar hacía la .",

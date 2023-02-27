@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 4",
+	"_": "Missing Localizations: 0",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -45,8 +45,8 @@
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 
-	"create_central_kitchen.ponder.tag.cooking_automation": "UNLOCALIZED: Cooking Automation",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "UNLOCALIZED: Components which automate the cooking process",
+	"create_central_kitchen.ponder.tag.cooking_automation": "Автоматизация готовки",
+	"create_central_kitchen.ponder.tag.cooking_automation.description": "Компоненты для автоматизации готовки блюд",
 
 	"create_central_kitchen.ponder.basket.belt_interaction.header": "Сбор вещей при помощи корзины",
 	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Корзина позволяет коллекционировать вещи с механического ремня.",
