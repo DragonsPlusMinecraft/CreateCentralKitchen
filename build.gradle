@@ -138,13 +138,23 @@ dependencies {
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
+    //farmers delight series
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
     implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
     implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
     implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
+    //abnormals series
     implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
-    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
     implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
+    implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
+    implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
+    implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
+    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
+    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
+    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
+    implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
+    implementation fg.deobf("curse.maven:differentiate-450748:${differentiate_file}")
+    implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
     //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
