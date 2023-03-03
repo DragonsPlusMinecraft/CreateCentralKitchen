@@ -6,7 +6,7 @@ import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.Generated
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdFluids;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleFluids;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
@@ -14,25 +14,25 @@ import vectorwing.farmersdelight.common.tag.ForgeTags;
 public class FarmersDelightRecipes extends RecipeGen {
     private final GeneratedRecipe
     APPLE_CIDER_MIXING = modded(mixing("apple_cider")
-        .output(FdFluids.APPLE_CIDER.get(), 250)
+        .output(FarmersDelightModuleFluids.APPLE_CIDER.get(), 250)
         .require(Items.APPLE)
         .require(Items.APPLE)
         .require(Items.SUGAR)
         .requiresHeat(HeatCondition.HEATED)),
     HOT_COCOA_MIXING = modded(mixing("hot_cocoa")
-        .output(FdFluids.HOT_COCOA.get(), 250)
+        .output(FarmersDelightModuleFluids.HOT_COCOA.get(), 250)
         .require(AllTags.forgeFluidTag("milk"), 125)
         .require(AllTags.forgeFluidTag("chocolate"), 125)
         .requiresHeat(HeatCondition.HEATED)),
     MELON_JUICE_MIXING = modded(mixing("melon_juice")
-        .output(FdFluids.MELON_JUICE.get(), 250)
+        .output(FarmersDelightModuleFluids.MELON_JUICE.get(), 250)
         .require(Items.MELON_SLICE)
         .require(Items.MELON_SLICE)
         .require(Items.MELON_SLICE)
         .require(Items.MELON_SLICE)
         .require(Items.SUGAR)),
     TOMATO_SAUCE_MIXING = modded(mixing("tomato_sauce")
-        .output(FdFluids.TOMATO_SAUCE.get(), 250)
+        .output(FarmersDelightModuleFluids.TOMATO_SAUCE.get(), 250)
         .require(ForgeTags.VEGETABLES_TOMATO)
         .require(ForgeTags.VEGETABLES_TOMATO)
         .requiresHeat(HeatCondition.HEATED)),

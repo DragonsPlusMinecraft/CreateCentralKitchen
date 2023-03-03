@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideSyncPacket;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideMenu;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdPackets;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModulePackets;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,7 +42,7 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
             } else input = ItemStack.EMPTY;
             container.getSlot(36 + i).set(input);
         }
-        FdPackets.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
+        FarmersDelightModulePackets.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;
     }
     

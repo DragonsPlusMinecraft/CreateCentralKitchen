@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
 import com.jozufozu.flywheel.core.PartialModel;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 
-public class FdBlockPartials {
+public class FarmersDelightModuleBlockPartials {
     
     public static final PartialModel BLAZE_STOVE_HAT = block("blaze_stove/hat");
     

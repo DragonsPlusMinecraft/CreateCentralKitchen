@@ -3,14 +3,14 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.pond
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import plus.dragons.createcentralkitchen.core.ponder.PonderRegistryObject;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleItems;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.content.BasketScenes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.content.BlazeStoveScenes;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.PONDER_REGISTER;
 
-public class FdPonderIndex {
+public class FarmersDelightModulePonders {
     //Basket
     public static final PonderRegistryObject BASKET_INTRO =
         PONDER_REGISTER.create("basket/intro", BasketScenes::intro);
@@ -32,16 +32,16 @@ public class FdPonderIndex {
             .addComponent(ModItems.BASKET)
             .addTag(PonderTag.LOGISTICS);
         BLAZE_STOVE_INTRO
-            .addComponent(AllBlocks.BLAZE_BURNER, FdItems.COOKING_GUIDE)
-            .addTag(FdPonderTag.COOKING);
+            .addComponent(AllBlocks.BLAZE_BURNER, FarmersDelightModuleItems.COOKING_GUIDE)
+            .addTag(FarmersDelightModulePonderTags.COOKING);
         BLAZE_STOVE_CONFIGURE
-            .addComponent(AllBlocks.BLAZE_BURNER, FdItems.COOKING_GUIDE)
+            .addComponent(AllBlocks.BLAZE_BURNER, FarmersDelightModuleItems.COOKING_GUIDE)
             .addComponent(ModItems.COOKING_POT)
-            .addTag(FdPonderTag.COOKING);
+            .addTag(FarmersDelightModulePonderTags.COOKING);
         BLAZE_STOVE_HEAT_SOURCE
-            .addComponent(AllBlocks.BLAZE_BURNER, FdItems.COOKING_GUIDE)
+            .addComponent(AllBlocks.BLAZE_BURNER, FarmersDelightModuleItems.COOKING_GUIDE)
             .addComponent(ModItems.COOKING_POT, ModItems.SKILLET)
-            .addTag(FdPonderTag.COOKING);
+            .addTag(FarmersDelightModulePonderTags.COOKING);
     }
     
 }

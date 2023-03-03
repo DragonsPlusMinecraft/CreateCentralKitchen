@@ -7,9 +7,9 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.FarmersDelightJeiPlugin;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.FarmersRespiteJeiPlugin;
-import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.MinersDelightJeiPlugin;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.FarmersDelightModuleJeiPlugin;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.integration.jei.FarmersRespiteModuleJeiPlugin;
+import plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.MinersDelightModuleJeiPlugin;
 
 import java.util.List;
 
@@ -24,9 +24,9 @@ public class DynamicJeiPluginMixin {
     private static void injectDynamicModPlugins(CallbackInfoReturnable<List<IModPlugin>> cir) {
         List<IModPlugin> list = cir.getReturnValue();
         ModList mods = ModList.get();
-        if (mods.isLoaded("farmersdelight")) list.add(new FarmersDelightJeiPlugin());
-        if (mods.isLoaded("farmersrespite")) list.add(new FarmersRespiteJeiPlugin());
-        if (mods.isLoaded("miners_delight")) list.add(new MinersDelightJeiPlugin());
+        if (mods.isLoaded("farmersdelight")) list.add(new FarmersDelightModuleJeiPlugin());
+        if (mods.isLoaded("farmersrespite")) list.add(new FarmersRespiteModuleJeiPlugin());
+        if (mods.isLoaded("miners_delight")) list.add(new MinersDelightModuleJeiPlugin());
     }
     
 }

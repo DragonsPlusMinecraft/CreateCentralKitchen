@@ -9,8 +9,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideItem;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrMenuTypes;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleCapabilities;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleMenuTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -24,17 +24,17 @@ public class BrewingGuideItem extends BlazeStoveGuideItem<BrewingGuide> {
     
     @Override
     protected Capability<BrewingGuide> getGuideCapability() {
-        return FrCapabilities.BREWING_GUIDE;
+        return FarmersRespiteModuleCapabilities.BREWING_GUIDE;
     }
     
     @Override
     protected BrewingGuideMenu createGuideMenu(int syncId, Inventory inventory, ItemStack guide) {
-        return new BrewingGuideMenu(FrMenuTypes.BREWING_GUIDE.get(), syncId, inventory, guide);
+        return new BrewingGuideMenu(FarmersRespiteModuleMenuTypes.BREWING_GUIDE.get(), syncId, inventory, guide);
     }
     
     @Override
     protected BrewingGuideMenu createGuideMenu(int syncId, Inventory inventory, BlazeStoveBlockEntity stove) {
-        return new BrewingGuideMenu(FrMenuTypes.BREWING_GUIDE.get(), syncId, inventory, stove);
+        return new BrewingGuideMenu(FarmersRespiteModuleMenuTypes.BREWING_GUIDE.get(), syncId, inventory, stove);
     }
     
     @Nullable

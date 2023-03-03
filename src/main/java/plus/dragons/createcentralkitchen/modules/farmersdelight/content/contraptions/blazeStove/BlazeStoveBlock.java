@@ -42,7 +42,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlockEntities;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleBlockEntities;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -246,6 +246,6 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     
     @Override
     public BlockEntityType<? extends BlazeStoveBlockEntity> getTileEntityType() {
-        return FdBlockEntities.BLAZE_STOVE.get();
+        return FarmersDelightModuleBlockEntities.BLAZE_STOVE.get();
     }
 }

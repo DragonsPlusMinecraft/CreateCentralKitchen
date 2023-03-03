@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
-public class FdFluids {
+public class FarmersDelightModuleFluids {
     
     public static final FluidEntry<VirtualFluid>
         APPLE_CIDER = wateryDrink("apple_cider", 0xc68a47, ModItems.APPLE_CIDER)

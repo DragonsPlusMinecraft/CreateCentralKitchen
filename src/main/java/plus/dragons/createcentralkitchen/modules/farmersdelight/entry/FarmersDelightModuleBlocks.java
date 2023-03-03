@@ -17,7 +17,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
-public class FdBlocks {
+public class FarmersDelightModuleBlocks {
     
     public static final BlockEntry<BlazeStoveBlock> BLAZE_STOVE = REGISTRATE
         .block("blaze_stove", BlazeStoveBlock::new)

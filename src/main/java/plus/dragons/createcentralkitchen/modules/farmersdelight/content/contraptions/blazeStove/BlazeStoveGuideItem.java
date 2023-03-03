@@ -23,7 +23,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlocks;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleBlocks;
 import plus.dragons.createcentralkitchen.utility.Lang;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -82,7 +82,7 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
                 blockEntity instanceof BlazeBurnerTileEntity)
             {
                 if (!level.isClientSide()) {
-                    level.setBlockAndUpdate(blockPos, FdBlocks.BLAZE_STOVE.getDefaultState()
+                    level.setBlockAndUpdate(blockPos, FarmersDelightModuleBlocks.BLAZE_STOVE.getDefaultState()
                         .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
                     if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove)
                         blazeStove.setGuide(itemStack.copy());

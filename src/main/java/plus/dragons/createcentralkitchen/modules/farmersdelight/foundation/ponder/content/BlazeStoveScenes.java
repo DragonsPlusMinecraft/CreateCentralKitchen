@@ -18,8 +18,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlocks;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleBlocks;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleItems;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class BlazeStoveScenes {
@@ -38,12 +38,12 @@ public class BlazeStoveScenes {
             .placeNearTarget();
         scene.idle(60);
         
-        ItemStack cookingGuide = FdItems.COOKING_GUIDE.asStack();
+        ItemStack cookingGuide = FarmersDelightModuleItems.COOKING_GUIDE.asStack();
         scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(1, 1, 1), Pointing.DOWN)
             .whileSneaking()
             .rightClick()
             .withItem(cookingGuide), 30);
-        scene.world.setBlock(util.grid.at(1, 1, 1), FdBlocks.BLAZE_STOVE.getDefaultState(), false);
+        scene.world.setBlock(util.grid.at(1, 1, 1), FarmersDelightModuleBlocks.BLAZE_STOVE.getDefaultState(), false);
         scene.world.modifyTileEntity(util.grid.at(1, 1, 1), BlazeStoveBlockEntity.class,
             stove -> stove.setGuide(cookingGuide));
         scene.idle(40);
@@ -119,7 +119,7 @@ public class BlazeStoveScenes {
         scene.idle(60);
     
         scene.overlay.showControls(new InputWindowElement(util.vector.centerOf(3, 1, 1), Pointing.DOWN)
-            .withItem(FdItems.COOKING_GUIDE.asStack())
+            .withItem(FarmersDelightModuleItems.COOKING_GUIDE.asStack())
             .rightClick(), 30);
         scene.idle(40);
     

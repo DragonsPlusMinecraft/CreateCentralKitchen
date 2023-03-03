@@ -6,7 +6,7 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 
 import java.util.function.Function;
 
-public class FdArmInteractionPointTypes {
+public class FarmersDelightModuleArmInteractionPointTypes {
     public static final StovePoint.Type STOVE = register("stove", StovePoint.Type::new);
     public static final CookingPotPoint.Type COOKING_POT = register("cooking_pot", CookingPotPoint.Type::new);
     public static final SkilletPoint.Type SKILLET = register("skillet", SkilletPoint.Type::new);

@@ -4,13 +4,13 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdItems;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleItems;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-public class FdPonderTag {
+public class FarmersDelightModulePonderTags {
     public static final PonderTag COOKING = create("cooking_automation")
-        .item(FdItems.COOKING_GUIDE.get(), true, false).addToIndex();
+        .item(FarmersDelightModuleItems.COOKING_GUIDE.get(), true, false).addToIndex();
 
     private static PonderTag create(String id) {
         return new PonderTag(CentralKitchen.genRL(id));
@@ -25,7 +25,7 @@ public class FdPonderTag {
             .add(ModItems.COOKING_POT.get());
         PonderRegistry.TAGS.forTag(COOKING)
             .add(AllBlocks.BLAZE_BURNER)
-            .add(FdItems.COOKING_GUIDE)
+            .add(FarmersDelightModuleItems.COOKING_GUIDE)
             .add(ModBlocks.COOKING_POT.get());
     }
     

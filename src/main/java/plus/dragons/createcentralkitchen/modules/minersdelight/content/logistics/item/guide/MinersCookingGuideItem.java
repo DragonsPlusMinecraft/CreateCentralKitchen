@@ -9,8 +9,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuideItem;
-import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdCapabilities;
-import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdMenuTypes;
+import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleCapabilities;
+import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleMenuTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -24,17 +24,17 @@ public class MinersCookingGuideItem extends BlazeStoveGuideItem<MinersCookingGui
     
     @Override
     protected Capability<MinersCookingGuide> getGuideCapability() {
-        return MdCapabilities.MINERS_COOKING_GUIDE;
+        return MinersDelightModuleCapabilities.MINERS_COOKING_GUIDE;
     }
     
     @Override
     protected MinersCookingGuideMenu createGuideMenu(int syncId, Inventory inventory, ItemStack guide) {
-        return new MinersCookingGuideMenu(MdMenuTypes.MINERS_COOKING_GUIDE.get(), syncId, inventory, guide);
+        return new MinersCookingGuideMenu(MinersDelightModuleMenuTypes.MINERS_COOKING_GUIDE.get(), syncId, inventory, guide);
     }
     
     @Override
     protected MinersCookingGuideMenu createGuideMenu(int syncId, Inventory inventory, BlazeStoveBlockEntity stove) {
-        return new MinersCookingGuideMenu(MdMenuTypes.MINERS_COOKING_GUIDE.get(), syncId, inventory, stove);
+        return new MinersCookingGuideMenu(MinersDelightModuleMenuTypes.MINERS_COOKING_GUIDE.get(), syncId, inventory, stove);
     }
     
     @Nullable

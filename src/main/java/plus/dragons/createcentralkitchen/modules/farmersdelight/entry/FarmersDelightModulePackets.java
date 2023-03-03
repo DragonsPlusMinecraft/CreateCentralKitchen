@@ -12,7 +12,7 @@ import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contrapt
 
 import java.util.function.Function;
 
-public enum FdPackets {
+public enum FarmersDelightModulePackets {
     //Client to Server
     BLAZE_STOVE_GUIDE_SYNC(BlazeStoveGuideSyncPacket.class, BlazeStoveGuideSyncPacket::new, NetworkDirection.PLAY_TO_SERVER);
     
@@ -26,14 +26,14 @@ public enum FdPackets {
     
     private final LoadedPacket<?> packet;
 
-    <T extends SimplePacketBase> FdPackets(Class<T> type,
-                                           Function<FriendlyByteBuf, T> factory,
-                                           NetworkDirection direction) {
+    <T extends SimplePacketBase> FarmersDelightModulePackets(Class<T> type,
+                                                             Function<FriendlyByteBuf, T> factory,
+                                                             NetworkDirection direction) {
         packet = new LoadedPacket<>(type, factory, direction);
     }
     
     public static void register() {
-        FdPackets[] packets = FdPackets.values();
+        FarmersDelightModulePackets[] packets = FarmersDelightModulePackets.values();
         for (int i = 0; i < packets.length; ++i) {
             packets[i].packet.register(CHANNEL, i);
         }

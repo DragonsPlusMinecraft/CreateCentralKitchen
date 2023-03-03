@@ -14,10 +14,10 @@ import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm.FdArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm.FarmersDelightModuleArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.*;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderIndex;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FdPonderTag;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FarmersDelightModulePonderTags;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FarmersDelightModulePonders;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 @ModModule(id = "farmersdelight", dependencies = "farmersdelight")
@@ -37,29 +37,29 @@ public class FarmersDelightModule {
     }
     
     private void registerEntries() {
-        FdBlocks.register();
-        FdBlockEntities.register();
-        FdItems.register();
-        FdMenuTypes.register();
-        FdFluids.register();
-        FdRecipeTypes.register();
-        FdArmInteractionPointTypes.register();
+        FarmersDelightModuleBlocks.register();
+        FarmersDelightModuleBlockEntities.register();
+        FarmersDelightModuleItems.register();
+        FarmersDelightModuleMenuTypes.register();
+        FarmersDelightModuleFluids.register();
+        FarmersDelightModuleRecipeTypes.register();
+        FarmersDelightModuleArmInteractionPointTypes.register();
     }
     
     private void registerModEvents(IEventBus modBus) {
-        modBus.addListener(FdCapabilities::register);
+        modBus.addListener(FarmersDelightModuleCapabilities::register);
         modBus.addListener(this::setup);
     }
     
     private void registerForgeEvents(IEventBus forgeBus) {
         forgeBus.addListener(CuttingBoardDeployingRecipe::onDeployerRecipeSearch);
-        forgeBus.addListener(FdItems::fillCreateItemGroup);
-        forgeBus.addGenericListener(Fluid.class, FdFluids::remap);
+        forgeBus.addListener(FarmersDelightModuleItems::fillCreateItemGroup);
+        forgeBus.addGenericListener(Fluid.class, FarmersDelightModuleFluids::remap);
     }
     
     public void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            FdPackets.register();
+            FarmersDelightModulePackets.register();
             BlazeStoveBlockEntity.registerBoostingCooker(ModBlockEntityTypes.COOKING_POT.get());
             BlazeStoveBlockEntity.registerBoostingCooker(ModBlockEntityTypes.SKILLET.get());
         });
@@ -81,7 +81,7 @@ public class FarmersDelightModule {
         }
     
         private void registerEntries() {
-            FdBlockPartials.register();
+            FarmersDelightModuleBlockPartials.register();
         }
     
         private void registerModEvents(IEventBus modBus) {
@@ -93,8 +93,8 @@ public class FarmersDelightModule {
         }
         
         public void setup(final FMLClientSetupEvent event) {
-            event.enqueueWork(FdPonderTag::register);
-            event.enqueueWork(FdPonderIndex::register);
+            event.enqueueWork(FarmersDelightModulePonderTags::register);
+            event.enqueueWork(FarmersDelightModulePonders::register);
         }
     
     }

@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuide;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleCapabilities;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -26,7 +26,7 @@ public class BrewingGuide extends BlazeStoveGuide {
     }
     
     public static BrewingGuide of(ItemStack stack) {
-        return stack.getCapability(FrCapabilities.BREWING_GUIDE).orElseThrow(() ->
+        return stack.getCapability(FarmersRespiteModuleCapabilities.BREWING_GUIDE).orElseThrow(() ->
             new UnsupportedOperationException("Requested Item " + stack.getItem() + " is not a Brewing Guide"));
     }
     
@@ -50,7 +50,7 @@ public class BrewingGuide extends BlazeStoveGuide {
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == FrCapabilities.BREWING_GUIDE) {
+        if (cap == FarmersRespiteModuleCapabilities.BREWING_GUIDE) {
             return capability.cast();
         }
         return LazyOptional.empty();

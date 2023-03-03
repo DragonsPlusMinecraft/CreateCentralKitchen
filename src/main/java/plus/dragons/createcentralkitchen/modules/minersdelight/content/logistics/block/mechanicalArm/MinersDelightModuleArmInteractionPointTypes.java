@@ -6,7 +6,7 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 
 import java.util.function.Function;
 
-public class MdArmInteractionPointTypes {
+public class MinersDelightModuleArmInteractionPointTypes {
     public static final CopperPotPoint.Type STOVE = register("copper_pot", CopperPotPoint.Type::new);
 
     private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {

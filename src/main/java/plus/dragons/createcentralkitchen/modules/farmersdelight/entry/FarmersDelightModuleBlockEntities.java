@@ -6,11 +6,11 @@ import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contrapt
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
-public class FdBlockEntities {
+public class FarmersDelightModuleBlockEntities {
     
     public static final BlockEntityEntry<BlazeStoveBlockEntity> BLAZE_STOVE = REGISTRATE
         .tileEntity("blaze_stove", BlazeStoveBlockEntity::new)
-        .validBlocks(FdBlocks.BLAZE_STOVE)
+        .validBlocks(FarmersDelightModuleBlocks.BLAZE_STOVE)
         .renderer(() -> BlazeStoveRenderer::new)
         .register();
     

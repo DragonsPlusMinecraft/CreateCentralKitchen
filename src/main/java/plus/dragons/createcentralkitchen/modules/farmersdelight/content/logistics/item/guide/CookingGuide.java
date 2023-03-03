@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuide;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdCapabilities;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleCapabilities;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -24,14 +24,14 @@ public class CookingGuide extends BlazeStoveGuide {
     }
     
     public static CookingGuide of(ItemStack stack) {
-        return stack.getCapability(FdCapabilities.COOKING_GUIDE).orElseThrow(() ->
+        return stack.getCapability(FarmersDelightModuleCapabilities.COOKING_GUIDE).orElseThrow(() ->
             new UnsupportedOperationException("Requested Item " + stack.getItem() + " is not a Cooking Guide"));
     }
     
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == FdCapabilities.COOKING_GUIDE) {
+        if (cap == FarmersDelightModuleCapabilities.COOKING_GUIDE) {
             return capability.cast();
         }
         return LazyOptional.empty();

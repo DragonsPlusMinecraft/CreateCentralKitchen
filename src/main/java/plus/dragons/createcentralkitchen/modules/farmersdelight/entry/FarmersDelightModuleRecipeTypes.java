@@ -19,14 +19,14 @@ import java.util.function.Supplier;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
-public enum FdRecipeTypes implements IRecipeTypeInfo {
+public enum FarmersDelightModuleRecipeTypes implements IRecipeTypeInfo {
     CUTTING_BOARD_DEPLOYING(CuttingBoardDeployingRecipe::new);
     
     private final ResourceLocation id;
     private final Supplier<RecipeSerializer<?>> serializer;
     private final Supplier<RecipeType<?>> type;
     
-    FdRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
+    FarmersDelightModuleRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
         String name = Lang.asId(name());
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.SERIALIZER_REGISTER.register(name, serializerSupplier);
@@ -38,7 +38,7 @@ public enum FdRecipeTypes implements IRecipeTypeInfo {
             RegistrateLangProvider.toEnglishName(id.getPath())));
     }
     
-    FdRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
+    FarmersDelightModuleRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = Lang.asId(name());
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.SERIALIZER_REGISTER.register(name, serializerSupplier);
@@ -48,7 +48,7 @@ public enum FdRecipeTypes implements IRecipeTypeInfo {
             RegistrateLangProvider.toEnglishName(id.getPath())));
     }
     
-    FdRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
+    FarmersDelightModuleRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
         this(() -> new ProcessingRecipeSerializer<>(processingFactory));
     }
     

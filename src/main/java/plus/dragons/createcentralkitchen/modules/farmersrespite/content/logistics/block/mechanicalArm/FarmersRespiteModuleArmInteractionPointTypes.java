@@ -6,7 +6,7 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 
 import java.util.function.Function;
 
-public class FrArmInteractionPointTypes {
+public class FarmersRespiteModuleArmInteractionPointTypes {
     public static final KettlePoint.Type STOVE = register("kettle", KettlePoint.Type::new);
 
     private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {

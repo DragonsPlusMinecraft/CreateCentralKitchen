@@ -12,7 +12,7 @@ import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.core.integration.jei.RecipeCategoryBuilder;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideScreen;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdRecipeTypes;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleRecipeTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.category.CuttingBoardDeployingCategory;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer.BlazeStoveGuideGhostIngredientHandler;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.integration.jei.transfer.CookingGuideTransferHandler;
@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class FarmersDelightJeiPlugin extends AbstractJeiPlugin {
+public class FarmersDelightModuleJeiPlugin extends AbstractJeiPlugin {
     private static final ResourceLocation ID = CentralKitchen.genRL("farmersdelight");
     
     @Override
@@ -34,7 +34,7 @@ public class FarmersDelightJeiPlugin extends AbstractJeiPlugin {
     
     protected void populateCategories(IRecipeCategoryRegistration registration) {
         categories.add(new RecipeCategoryBuilder<>(CentralKitchen.ID, CuttingBoardDeployingRecipe.class)
-            .addTypedRecipes(FdRecipeTypes.CUTTING_BOARD_DEPLOYING)
+            .addTypedRecipes(FarmersDelightModuleRecipeTypes.CUTTING_BOARD_DEPLOYING)
             .addTransformedRecipes(ModRecipeTypes.CUTTING, CuttingBoardDeployingRecipe::fromCuttingBoard)
             .catalyst(AllBlocks.DEPLOYER::get)
             .catalyst(AllBlocks.DEPOT::get)

@@ -13,7 +13,7 @@ import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
-public class FrFluids {
+public class FarmersRespiteModuleFluids {
     
     public static final FluidEntry<VirtualFluid>
         LONG_APPLE_CIDER = wateryDrink("long_apple_cider", 0xc68a47, FRItems.LONG_APPLE_CIDER)

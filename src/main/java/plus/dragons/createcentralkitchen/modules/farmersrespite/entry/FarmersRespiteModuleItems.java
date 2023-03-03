@@ -15,7 +15,7 @@ import plus.dragons.createcentralkitchen.modules.farmersrespite.FarmersRespiteMo
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-public class FrItems {
+public class FarmersRespiteModuleItems {
     
     private static final CreateRegistrate REGISTRATE = CentralKitchen.REGISTRATE
         .startSection(AllSections.KINETICS)

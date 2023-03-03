@@ -11,7 +11,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrFluids;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleFluids;
 
 @MethodsReturnNonnullByDefault
 public class FarmersRespiteRecipes extends RecipeGen {
@@ -31,43 +31,43 @@ public class FarmersRespiteRecipes extends RecipeGen {
         .output(FRItems.BLACK_TEA_LEAVES.get())
         .require(FRItems.YELLOW_TEA_LEAVES.get())),
     GREEN_TEA_MIXING = modded(mixing("green_tea")
-        .output(FrFluids.GREEN_TEA.get(), 250)
+        .output(FarmersRespiteModuleFluids.GREEN_TEA.get(), 250)
         .require(FRItems.GREEN_TEA_LEAVES.get())
         .require(FRItems.GREEN_TEA_LEAVES.get())
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     YELLOW_TEA_MIXING = modded(mixing("yellow_tea")
-        .output(FrFluids.YELLOW_TEA.get(), 250)
+        .output(FarmersRespiteModuleFluids.YELLOW_TEA.get(), 250)
         .require(FRItems.YELLOW_TEA_LEAVES.get())
         .require(FRItems.YELLOW_TEA_LEAVES.get())
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     BLACK_TEA_MIXING = modded(mixing("black_tea")
-        .output(FrFluids.BLACK_TEA.get(), 250)
+        .output(FarmersRespiteModuleFluids.BLACK_TEA.get(), 250)
         .require(FRItems.BLACK_TEA_LEAVES.get())
         .require(FRItems.BLACK_TEA_LEAVES.get())
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     DANDELION_TEA_MIXING = modded(mixing("dandelion_tea")
-        .output(FrFluids.DANDELION_TEA.get(), 250)
+        .output(FarmersRespiteModuleFluids.DANDELION_TEA.get(), 250)
         .require(FRTags.TEA_LEAVES)
         .require(Items.DANDELION)
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     PURULENT_TEA_MIXING = modded(mixing("purulent_tea")
-        .output(FrFluids.PURULENT_TEA.get(), 250)
+        .output(FarmersRespiteModuleFluids.PURULENT_TEA.get(), 250)
         .require(Items.NETHER_WART)
         .require(Items.FERMENTED_SPIDER_EYE)
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     ROSE_HIP_TEA_MIXING = modded(mixing("rose_hip_tea")
-        .output(FrFluids.ROSE_HIP_TEA.get(), 250)
+        .output(FarmersRespiteModuleFluids.ROSE_HIP_TEA.get(), 250)
         .require(FRItems.ROSE_HIPS.get())
         .require(FRItems.ROSE_HIPS.get())
         .require(Fluids.WATER, 250)
         .requiresHeat(HeatCondition.HEATED)),
     COFFEE_MIXING = modded(mixing("coffee")
-        .output(FrFluids.COFFEE.get(), 250)
+        .output(FarmersRespiteModuleFluids.COFFEE.get(), 250)
         .require(FRItems.COFFEE_BEANS.get())
         .require(FRItems.COFFEE_BEANS.get())
         .require(Fluids.WATER, 250)

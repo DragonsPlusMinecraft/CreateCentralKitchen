@@ -27,7 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.items.ItemStackHandler;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FdBlockPartials;
+import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleBlockPartials;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 public class BlazeStoveRenderer extends SafeTileEntityRenderer<BlazeStoveBlockEntity> {
@@ -134,7 +134,7 @@ public class BlazeStoveRenderer extends SafeTileEntityRenderer<BlazeStoveBlockEn
     
         //hat
         SuperByteBuffer partial = CachedBufferer
-            .partial(FdBlockPartials.BLAZE_STOVE_HAT, blockState)
+            .partial(FarmersDelightModuleBlockPartials.BLAZE_STOVE_HAT, blockState)
             .translate(0, headY, 0);
         if (blazeModel == AllBlockPartials.BLAZE_INERT) {
             partial.translateY(0.5f)

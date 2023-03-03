@@ -13,12 +13,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
-import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm.MdArmInteractionPointTypes;
-import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdCapabilities;
-import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdItems;
-import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdMenuTypes;
-import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder.MdPonderIndex;
-import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder.MdPonderTag;
+import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm.MinersDelightModuleArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleCapabilities;
+import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleItems;
+import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleMenuTypes;
+import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder.MinersDelightModulePonderTags;
+import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder.MinersDelightModulePonders;
 
 @ModModule(id = "miners_delight", dependencies = {"farmersdelight", "miners_delight"}, priority = 1)
 public class MinersDelightModule {
@@ -37,19 +37,19 @@ public class MinersDelightModule {
     }
     
     private void registerEntries() {
-        MdItems.register();
-        MdMenuTypes.register();
+        MinersDelightModuleItems.register();
+        MinersDelightModuleMenuTypes.register();
         //MdFluids.register();
-        MdArmInteractionPointTypes.register();
+        MinersDelightModuleArmInteractionPointTypes.register();
     }
     
     private void registerModEvents(IEventBus modBus) {
-        modBus.addListener(MdCapabilities::register);
+        modBus.addListener(MinersDelightModuleCapabilities::register);
         modBus.addListener(this::setup);
     }
     
     private void registerForgeEvents(IEventBus forgeBus) {
-        forgeBus.addListener(MdItems::fillCreateItemGroup);
+        forgeBus.addListener(MinersDelightModuleItems::fillCreateItemGroup);
     }
     
     public void setup(final FMLCommonSetupEvent event) {
@@ -86,8 +86,8 @@ public class MinersDelightModule {
         }
     
         public void setup(final FMLClientSetupEvent event) {
-            event.enqueueWork(MdPonderTag::register);
-            event.enqueueWork(MdPonderIndex::register);
+            event.enqueueWork(MinersDelightModulePonderTags::register);
+            event.enqueueWork(MinersDelightModulePonders::register);
         }
         
     }

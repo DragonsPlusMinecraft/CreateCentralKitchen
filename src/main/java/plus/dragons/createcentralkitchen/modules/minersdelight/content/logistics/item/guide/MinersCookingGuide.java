@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.core.item.ItemHandlerModifiableView;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveGuide;
-import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MdCapabilities;
+import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleCapabilities;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,14 +29,14 @@ public class MinersCookingGuide extends BlazeStoveGuide {
     }
     
     public static MinersCookingGuide of(ItemStack stack) {
-        return stack.getCapability(MdCapabilities.MINERS_COOKING_GUIDE).orElseThrow(() ->
+        return stack.getCapability(MinersDelightModuleCapabilities.MINERS_COOKING_GUIDE).orElseThrow(() ->
             new UnsupportedOperationException("Requested Item " + stack.getItem() + " is not a Miner's Cooking Guide"));
     }
     
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == MdCapabilities.MINERS_COOKING_GUIDE) {
+        if (cap == MinersDelightModuleCapabilities.MINERS_COOKING_GUIDE) {
             return capability.cast();
         }
         return LazyOptional.empty();

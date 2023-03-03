@@ -13,13 +13,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.ModModule;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FrArmInteractionPointTypes;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrCapabilities;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrFluids;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrItems;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FrMenuTypes;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FrPonderIndex;
-import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FrPonderTag;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FarmersRespiteModuleArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleCapabilities;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleFluids;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleItems;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleMenuTypes;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FarmersRespiteModulePonderTags;
+import plus.dragons.createcentralkitchen.modules.farmersrespite.foundation.ponder.FarmersRespiteModulePonders;
 
 @ModModule(id = "farmersrespite", dependencies = {"farmersdelight", "farmersrespite"}, priority = 1)
 public class FarmersRespiteModule {
@@ -38,19 +38,19 @@ public class FarmersRespiteModule {
     }
     
     private void registerEntries() {
-        FrItems.register();
-        FrMenuTypes.register();
-        FrFluids.register();
-        FrArmInteractionPointTypes.register();
+        FarmersRespiteModuleItems.register();
+        FarmersRespiteModuleMenuTypes.register();
+        FarmersRespiteModuleFluids.register();
+        FarmersRespiteModuleArmInteractionPointTypes.register();
     }
     
     private void registerModEvents(IEventBus modBus) {
-        modBus.addListener(FrCapabilities::register);
+        modBus.addListener(FarmersRespiteModuleCapabilities::register);
         modBus.addListener(this::setup);
     }
     
     private void registerForgeEvents(IEventBus forgeBus) {
-        forgeBus.addListener(FrItems::fillCreateItemGroup);
+        forgeBus.addListener(FarmersRespiteModuleItems::fillCreateItemGroup);
     }
     
     public void setup(final FMLCommonSetupEvent event) {
@@ -87,8 +87,8 @@ public class FarmersRespiteModule {
         }
     
         public void setup(final FMLClientSetupEvent event) {
-            event.enqueueWork(FrPonderTag::register);
-            event.enqueueWork(FrPonderIndex::register);
+            event.enqueueWork(FarmersRespiteModulePonderTags::register);
+            event.enqueueWork(FarmersRespiteModulePonders::register);
         }
         
     }

@@ -9,7 +9,7 @@ import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics
 import java.util.ArrayList;
 import java.util.List;
 
-public class MdCapabilities {
+public class MinersDelightModuleCapabilities {
     private static final List<Class<?>> CAPABILITIES = new ArrayList<>();
     
     public static final Capability<MinersCookingGuide> MINERS_COOKING_GUIDE =
