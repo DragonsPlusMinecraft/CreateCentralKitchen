@@ -12,6 +12,7 @@ import plus.dragons.createcentralkitchen.data.recipe.FarmersDelightRecipes;
 import plus.dragons.createcentralkitchen.data.recipe.FarmersRespiteRecipes;
 import plus.dragons.createcentralkitchen.data.recipe.NeapolitanRecipes;
 import plus.dragons.createcentralkitchen.data.recipe.VanillaRecipes;
+import plus.dragons.createcentralkitchen.data.tag.ForgeBlockTags;
 import plus.dragons.createcentralkitchen.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.data.tag.IntegrationBlockTags;
 import plus.dragons.createcentralkitchen.data.tag.IntegrationItemTags;
@@ -25,9 +26,10 @@ public enum CentralKitchenData {
         if (!DatagenModLoader.isRunningDataGen())
             return;
         modBus.register(INSTANCE);
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, ForgeBlockTags::datagen);
         REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, ForgeItemTags::datagen);
-        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, IntegrationItemTags::datagen);
         REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, IntegrationBlockTags::datagen);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, IntegrationItemTags::datagen);
     }
     
     @SubscribeEvent(priority = EventPriority.LOW)
