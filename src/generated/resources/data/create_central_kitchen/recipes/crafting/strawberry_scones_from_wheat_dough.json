@@ -1,5 +1,5 @@
 {
-  "type": "create:mixing",
+  "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
       "tag": "forge:fruits/strawberry"
@@ -8,18 +8,13 @@
       "item": "minecraft:sugar"
     },
     {
-      "tag": "forge:flour/wheat"
-    },
-    {
-      "tag": "forge:flour/wheat"
+      "tag": "forge:dough/wheat"
     }
   ],
-  "results": [
-    {
-      "item": "neapolitan:strawberry_scones",
-      "count": 2
-    }
-  ],
+  "result": {
+    "item": "neapolitan:strawberry_scones",
+    "count": 2
+  },
   "conditions": [
     {
       "modid": "neapolitan",

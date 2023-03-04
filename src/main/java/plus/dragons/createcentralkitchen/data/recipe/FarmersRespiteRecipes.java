@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import plus.dragons.createcentralkitchen.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleFluids;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 @MethodsReturnNonnullByDefault
 public class FarmersRespiteRecipes extends RecipeGen {
@@ -86,11 +87,25 @@ public class FarmersRespiteRecipes extends RecipeGen {
             .require(AllTags.forgeItemTag("milk"))
             .container(Items.GLASS_BOTTLE)
             .needWater()),
-        COMPACTING_GREEN_TEA_COOKIE = modded(compacting("green_tea_cookie")
+        COMPACTING_GREEN_TEA_COOKIE_FROM_WHEAT_FLOUR = modded(compacting("green_tea_cookie_from_wheat_flour")
             .output(FRItems.GREEN_TEA_COOKIE.get(), 8)
             .require(FRItems.GREEN_TEA_LEAVES.get())
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
+        COMPACTING_GREEN_TEA_COOKIE_FROM_WHEAT_DOUGH = modded(compacting("green_tea_cookie_from_wheat_dough")
+            .output(FRItems.GREEN_TEA_COOKIE.get(), 8)
+            .require(FRItems.GREEN_TEA_LEAVES.get())
+            .require(ForgeTags.DOUGH_WHEAT)),
+        CRAFTING_COFFEE_CAKE_FROM_WHEAT_FLOUR = common(shaped("coffee_cake_from_wheat_flour")
+            .output(FRItems.COFFEE_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', FRItems.COFFEE_BEANS.get())
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("msm")
+            .pattern("cec")
+            .pattern("www")),
         MIXING_COFFEE_CAKE = modded(mixing("coffee_cake")
             .output(FRItems.COFFEE_CAKE.get())
             .require(Tags.Items.EGGS)

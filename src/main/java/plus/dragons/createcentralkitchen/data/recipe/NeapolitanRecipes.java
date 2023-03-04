@@ -15,6 +15,7 @@ import plus.dragons.createcentralkitchen.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.data.tag.IntegrationItemTags;
 import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleFluids;
 import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleItems;
+import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 public class NeapolitanRecipes extends RecipeGen {
     private final GeneratedRecipe
@@ -58,6 +59,16 @@ public class NeapolitanRecipes extends RecipeGen {
             .require(Items.SUGAR)
             .require(AllFluids.CHOCOLATE.get(), 250)
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_CHOCOLATE_CAKE_FROM_WHEAT_FLOUR = common(shaped("chocolate_cake_from_wheat_flour")
+            .output(NeapolitanItems.CHOCOLATE_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', ForgeItemTags.BARS__CHOCOLATE.tag)
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("mcm")
+            .pattern("ses")
+            .pattern("wcw")),
         MIXING_CHOCOLATE_CAKE = modded(mixing("chocolate_cake")
             .output(NeapolitanItems.CHOCOLATE_CAKE.get())
             .require(Tags.Items.EGGS)
@@ -82,28 +93,38 @@ public class NeapolitanRecipes extends RecipeGen {
             .require(ForgeItemTags.BARS__CHOCOLATE.tag)
             .require(NeapolitanModuleFluids.VANILLA_ICE_CREAM.get(), 500)
             .require(Tags.Fluids.MILK, 250)),
-        MIXING_CHOCOLATE_MILKSHAKE_FROM_FLUID_CHOCOLATE = modded(mixing("chocolate_milkshake_from_fluid_chocolate")
-            .output(NeapolitanModuleFluids.CHOCOLATE_MILKSHAKE.get(), 750)
-            .require(AllFluids.CHOCOLATE.get(), 250)
-            .require(NeapolitanModuleFluids.VANILLA_ICE_CREAM.get(), 500)
-            .require(Tags.Fluids.MILK, 250)),
         MIXING_CHOCOLATE_MILKSHAKE_FROM_ICE_CREAM = modded(mixing("chocolate_milkshake_from_ice_cream")
             .output(NeapolitanModuleFluids.CHOCOLATE_MILKSHAKE.get(), 750)
             .require(NeapolitanItems.DRIED_VANILLA_PODS.get())
             .require(NeapolitanModuleFluids.CHOCOLATE_ICE_CREAM.get(), 500)
             .require(Tags.Fluids.MILK, 250)),
-        MIXING_STRAWBERRY_SCONES = modded(mixing("strawberry_scones")
+        CRAFTING_STRAWBERRY_SCONES_FROM_WHEAT_FLOUR = modded(shapeless("strawberry_scones_from_wheat_flour")
             .output(NeapolitanItems.STRAWBERRY_SCONES.get(), 2)
             .require(NeapolitanItemTags.FRUITS_STRAWBERRY)
             .require(Items.SUGAR)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
+        CRAFTING_STRAWBERRY_SCONES_FROM_WHEAT_DOUGH = modded(shapeless("strawberry_scones_from_wheat_dough")
+            .output(NeapolitanItems.STRAWBERRY_SCONES.get(), 2)
+            .require(NeapolitanItemTags.FRUITS_STRAWBERRY)
+            .require(Items.SUGAR)
+            .require(ForgeTags.DOUGH_WHEAT)),
         MIXING_STRAWBERRY_ICE_CREAM = modded(mixing("strawberry_ice_cream")
             .output(NeapolitanModuleFluids.STRAWBERRY_ICE_CREAM.get(), 500)
             .require(NeapolitanItems.ICE_CUBES.get())
             .require(Items.SUGAR)
             .require(NeapolitanItemTags.FRUITS_STRAWBERRY)
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_STRAWBERRY_CAKE_FROM_WHEAT_FLOUR = common(shaped("strawberry_cake_from_wheat_flour")
+            .output(NeapolitanItems.STRAWBERRY_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', NeapolitanItemTags.FRUITS_STRAWBERRY)
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("mcm")
+            .pattern("ses")
+            .pattern("wcw")),
         MIXING_STRAWBERRY_CAKE = modded(mixing("strawberry_cake")
             .output(NeapolitanItems.STRAWBERRY_CAKE.get())
             .require(Tags.Items.EGGS)
@@ -136,6 +157,16 @@ public class NeapolitanRecipes extends RecipeGen {
             .require(Items.SUGAR)
             .require(NeapolitanItems.DRIED_VANILLA_PODS.get())
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_VANILLA_CAKE_FROM_WHEAT_FLOUR = common(shaped("vanilla_cake_from_wheat_flour")
+            .output(NeapolitanItems.VANILLA_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', NeapolitanItems.DRIED_VANILLA_PODS.get())
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("mcm")
+            .pattern("ses")
+            .pattern("wcw")),
         MIXING_VANILLA_CAKE = modded(mixing("vanilla_cake")
             .output(NeapolitanItems.VANILLA_CAKE.get())
             .require(Tags.Items.EGGS)
@@ -150,17 +181,32 @@ public class NeapolitanRecipes extends RecipeGen {
             .output(NeapolitanModuleFluids.VANILLA_MILKSHAKE.get(), 750)
             .require(NeapolitanModuleFluids.VANILLA_ICE_CREAM.get(), 500)
             .require(Tags.Fluids.MILK, 250)),
-        MIXING_BANANA_BREAD = modded(mixing("banana_bread")
+        CRAFTING_BANANA_BREAD_FROM_WHEAT_FLOUR = modded(mixing("banana_bread_from_wheat_flour")
             .output(NeapolitanItems.BANANA_BREAD.get())
             .require(NeapolitanItemTags.FRUITS_BANANA)
             .require(Items.SUGAR)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
+        CRAFTING_BANANA_BREAD_FROM_WHEAT_DOUGH = modded(mixing("banana_bread_from_wheat_dough")
+            .output(NeapolitanItems.BANANA_BREAD.get())
+            .require(NeapolitanItemTags.FRUITS_BANANA)
+            .require(Items.SUGAR)
+            .require(ForgeTags.DOUGH_WHEAT)),
         MIXING_BANANA_ICE_CREAM = modded(mixing("banana_ice_cream")
             .output(NeapolitanModuleFluids.BANANA_ICE_CREAM.get(), 500)
             .require(NeapolitanItems.ICE_CUBES.get())
             .require(Items.SUGAR)
             .require(NeapolitanItemTags.FRUITS_BANANA)
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_BANANA_CAKE_FROM_WHEAT_FLOUR = common(shaped("banana_cake_from_wheat_flour")
+            .output(NeapolitanItems.BANANA_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', NeapolitanItemTags.FRUITS_BANANA)
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("mcm")
+            .pattern("ses")
+            .pattern("wcw")),
         MIXING_BANANA_CAKE = modded(mixing("banana_cake")
             .output(NeapolitanItems.BANANA_CAKE.get())
             .require(Tags.Items.EGGS)
@@ -187,6 +233,16 @@ public class NeapolitanRecipes extends RecipeGen {
             .require(Items.SUGAR)
             .require(NeapolitanItems.MINT_LEAVES.get())
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_MINT_CAKE_FROM_WHEAT_FLOUR = common(shaped("mint_cake_from_wheat_flour")
+            .output(NeapolitanItems.BANANA_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', NeapolitanItems.MINT_LEAVES.get())
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("mcm")
+            .pattern("ses")
+            .pattern("wcw")),
         MIXING_MINT_CAKE = modded(mixing("mint_cake")
             .output(NeapolitanItems.MINT_CAKE.get())
             .require(Tags.Items.EGGS)
@@ -212,12 +268,31 @@ public class NeapolitanRecipes extends RecipeGen {
             .require(NeapolitanItems.ROASTED_ADZUKI_BEANS.get())
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_ADZUKI_BUN_FROM_WHEAT_FLOUR = modded(shapeless("adzuki_bun_from_wheat_flour")
+            .output(NeapolitanItems.ADZUKI_BUN.get())
+            .require(NeapolitanItems.ROASTED_ADZUKI_BEANS.get())
+            .require(ForgeItemTags.FLOUR__WHEAT.tag)
+            .require(ForgeTags.MILK)),
+        CRAFTING_ADZUKI_BUN_FROM_WHEAT_DOUGH = modded(shapeless("adzuki_bun_wheat_dough")
+            .output(NeapolitanItems.ADZUKI_BUN.get())
+            .require(NeapolitanItems.ROASTED_ADZUKI_BEANS.get())
+            .require(ForgeTags.DOUGH_WHEAT)),
         MIXING_ADZUKI_ICE_CREAM = modded(mixing("adzuki_ice_cream")
             .output(NeapolitanModuleFluids.ADZUKI_ICE_CREAM.get(), 500)
             .require(NeapolitanItems.ICE_CUBES.get())
             .require(Items.SUGAR)
             .require(NeapolitanItems.ROASTED_ADZUKI_BEANS.get())
             .require(Tags.Fluids.MILK, 250)),
+        CRAFTING_ADZUKI_CAKE_FROM_WHEAT_FLOUR = common(shaped("adzuki_cake_from_wheat_flour")
+            .output(NeapolitanItems.BANANA_CAKE.get())
+            .define('m', ForgeTags.MILK)
+            .define('s', Items.SUGAR)
+            .define('e', ForgeTags.EGGS)
+            .define('c', NeapolitanItems.ROASTED_ADZUKI_BEANS.get())
+            .define('w', ForgeItemTags.FLOUR__WHEAT.tag)
+            .pattern("mcm")
+            .pattern("ses")
+            .pattern("wcw")),
         MIXING_ADZUKI_CAKE = modded(mixing("adzuki_cake")
             .output(NeapolitanItems.ADZUKI_CAKE.get())
             .require(Tags.Items.EGGS)

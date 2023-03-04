@@ -1,0 +1,23 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "farmersrespite:green_tea_leaves"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersrespite:green_tea_cookie",
+      "count": 8
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "farmersrespite",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

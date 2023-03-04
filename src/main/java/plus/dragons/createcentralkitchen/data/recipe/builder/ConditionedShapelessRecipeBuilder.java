@@ -45,23 +45,23 @@ public class ConditionedShapelessRecipeBuilder implements RecipeBuilder, Conditi
     /**
      * Adds an ingredient that can be any item in the given tag.
      */
-    public ConditionedShapelessRecipeBuilder requires(TagKey<Item> pTag) {
-        return this.requires(Ingredient.of(pTag));
+    public ConditionedShapelessRecipeBuilder require(TagKey<Item> pTag) {
+        return this.require(Ingredient.of(pTag));
     }
     
     /**
      * Adds an ingredient of the given item.
      */
-    public ConditionedShapelessRecipeBuilder requires(ItemLike pItem) {
-        return this.requires(pItem, 1);
+    public ConditionedShapelessRecipeBuilder require(ItemLike pItem) {
+        return this.require(pItem, 1);
     }
     
     /**
      * Adds the given ingredient multiple times.
      */
-    public ConditionedShapelessRecipeBuilder requires(ItemLike pItem, int pQuantity) {
+    public ConditionedShapelessRecipeBuilder require(ItemLike pItem, int pQuantity) {
         for(int i = 0; i < pQuantity; ++i) {
-            this.requires(Ingredient.of(pItem));
+            this.require(Ingredient.of(pItem));
         }
         
         return this;
@@ -70,14 +70,14 @@ public class ConditionedShapelessRecipeBuilder implements RecipeBuilder, Conditi
     /**
      * Adds an ingredient.
      */
-    public ConditionedShapelessRecipeBuilder requires(Ingredient pIngredient) {
-        return this.requires(pIngredient, 1);
+    public ConditionedShapelessRecipeBuilder require(Ingredient pIngredient) {
+        return this.require(pIngredient, 1);
     }
     
     /**
      * Adds an ingredient multiple times.
      */
-    public ConditionedShapelessRecipeBuilder requires(Ingredient pIngredient, int pQuantity) {
+    public ConditionedShapelessRecipeBuilder require(Ingredient pIngredient, int pQuantity) {
         for(int i = 0; i < pQuantity; ++i) {
             this.ingredients.add(pIngredient);
         }

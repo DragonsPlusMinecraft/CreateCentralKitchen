@@ -37,16 +37,24 @@ public class FarmersDelightRecipes extends RecipeGen {
             .require(ForgeTags.VEGETABLES_TOMATO)
             .require(ForgeTags.VEGETABLES_TOMATO)
             .requiresHeat(HeatCondition.HEATED)),
-        COMPACTING_SWEET_BERRY_COOKIE = modded(compacting("sweet_berry_cookie")
+        COMPACTING_SWEET_BERRY_COOKIE_FROM_WHEAT_FLOUR = modded(compacting("sweet_berry_cookie_from_wheat_flour")
             .output(ModItems.SWEET_BERRY_COOKIE.get(), 8)
             .require(Items.SWEET_BERRIES)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
-        COMPACTING_HONEY_COOKIE = modded(compacting("honey_cookie")
+        COMPACTING_SWEET_BERRY_COOKIE_FROM_WHEAT_DOUGH = modded(compacting("sweet_berry_cookie_from_wheat_dough")
+            .output(ModItems.SWEET_BERRY_COOKIE.get(), 8)
+            .require(Items.SWEET_BERRIES)
+            .require(ForgeTags.DOUGH_WHEAT)),
+        COMPACTING_HONEY_COOKIE_FROM_WHEAT_FLOUR = modded(compacting("honey_cookie_from_wheat_flour")
             .output(ModItems.HONEY_COOKIE.get(), 8)
             .require(AllTags.AllFluidTags.HONEY.tag, 250)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
+        COMPACTING_HONEY_COOKIE_FROM_WHEAT_DOUGH = modded(compacting("honey_cookie_from_wheat_dough")
+            .output(ModItems.HONEY_COOKIE.get(), 8)
+            .require(AllTags.AllFluidTags.HONEY.tag, 250)
+            .require(ForgeTags.DOUGH_WHEAT)),
         END = null;
     
     public FarmersDelightRecipes(DataGenerator datagen) {
