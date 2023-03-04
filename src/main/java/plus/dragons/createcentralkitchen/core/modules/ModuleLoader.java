@@ -12,9 +12,9 @@ import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModModuleLoader {
+public class ModuleLoader {
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final Type MOD_MODULE = Type.getType(ModModule.class);
+    private static final Type MOD_MODULE = Type.getType(Module.class);
     
     @SuppressWarnings("unchecked")
     public static void loadModules() {
@@ -63,7 +63,7 @@ public class ModModuleLoader {
         }
         
         @Override
-        public int compareTo(@NotNull ModModuleLoader.ModModuleData other) {
+        public int compareTo(@NotNull ModuleLoader.ModModuleData other) {
             if (priority != other.priority) {
                 return Integer.compare(priority, other.priority);
             }

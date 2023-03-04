@@ -12,7 +12,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.core.modules.ModModuleLoader;
+import plus.dragons.createcentralkitchen.core.modules.ModuleLoader;
 import plus.dragons.createcentralkitchen.core.ponder.PonderDeferredRegister;
 import plus.dragons.createcentralkitchen.data.CentralKitchenData;
 
@@ -31,7 +31,7 @@ public class CentralKitchen {
         PonderDeferredRegister.create(ID);
     
     public CentralKitchen() {
-        ModModuleLoader.loadModules();
+        ModuleLoader.loadModules();
         
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         CentralKitchenData.register(modBus);

@@ -8,6 +8,10 @@
     {
       "id": "farmersrespite:kettle",
       "required": false
+    },
+    {
+      "id": "miners_delight:copper_pot",
+      "required": false
     }
   ]
 }

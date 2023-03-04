@@ -1,70 +1,29 @@
 package plus.dragons.createcentralkitchen.modules.farmersdelight.entry;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.registries.RegistryObject;
-import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.data.recipe.RecipeGen;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.FarmersDelightModule;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
+import static plus.dragons.createcentralkitchen.core.fluid.FluidFromContainerItem.*;
 
 public class FarmersDelightModuleFluids {
     
     public static final FluidEntry<VirtualFluid>
-        APPLE_CIDER = wateryDrink("apple_cider", 0xc68a47, ModItems.APPLE_CIDER)
+        APPLE_CIDER = wateryVirtual(ModItems.APPLE_CIDER, 0xc68a47)
             .register(),
-        HOT_COCOA = thickDrink("hot_cocoa", 0xaf6c4c, ModItems.HOT_COCOA)
+        HOT_COCOA = milkyVirtual(ModItems.HOT_COCOA, 0xaf6c4c)
             .register(),
-        MELON_JUICE = wateryDrink("melon_juice", 0xe24334, ModItems.MELON_JUICE)
+        MELON_JUICE = wateryVirtual(ModItems.MELON_JUICE, 0xe24334)
             .register(),
-        TOMATO_SAUCE = customDrink("tomato_sauce", ModItems.TOMATO_SAUCE)
+        TOMATO_SAUCE = virtual(ModItems.TOMATO_SAUCE)
             .register();
-    
-    private static FluidBuilder<VirtualFluid, CreateRegistrate> wateryDrink(String name,
-                                                                            int color,
-                                                                            RegistryObject<? extends ItemLike> drink)
-    {
-        return REGISTRATE.virtualFluid(name,
-            new ResourceLocation("forge", "block/milk_still"),
-            new ResourceLocation("forge", "block/milk_flowing"))
-            .defaultLang()
-            .attributes(b -> b.color(0xFF000000 | color))
-            .transform(RecipeGen.fluidHandling(drink, 250));
-    }
-    
-    private static FluidBuilder<VirtualFluid, CreateRegistrate> thickDrink(String name,
-                                                                           int color,
-                                                                           RegistryObject<? extends ItemLike> drink)
-    {
-        return REGISTRATE.virtualFluid(name,
-            Create.asResource("fluid/milk_still"),
-            Create.asResource("fluid/milk_flow"))
-            .defaultLang()
-            .attributes(b -> b.color(0xFF000000 | color))
-            .transform(RecipeGen.fluidHandling(drink, 250));
-    }
-    
-    private static FluidBuilder<VirtualFluid, CreateRegistrate> customDrink(String name,
-                                                                            RegistryObject<? extends ItemLike> drink)
-    {
-        return REGISTRATE.virtualFluid(name,
-            CentralKitchen.genRL("fluid/" + name + "_still"),
-            CentralKitchen.genRL("fluid/" + name + "_flow"))
-            .defaultLang()
-            .transform(RecipeGen.fluidHandling(drink, 250));
-    }
     
     private static final Map<ResourceLocation, FluidEntry<?>> REMAP = new HashMap<>();
     static  {

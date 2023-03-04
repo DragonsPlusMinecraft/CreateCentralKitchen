@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.data.recipe;
 
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
@@ -205,6 +206,7 @@ public abstract class RecipeGen extends RecipeProvider {
         String name = id.getPath();
         ResourceLocation tagId = new ResourceLocation("forge", name);
         return builder -> builder
+            .addMiscData(ProviderType.ITEM_TAGS, prov -> prov.tag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).addOptional(id))
             .addMiscData(ProviderType.RECIPE, prov -> {
                 var ctx = DataGenContext.from(builder, ForgeRegistries.Keys.FLUIDS);
                 Fluid source = ctx.get().getSource();
