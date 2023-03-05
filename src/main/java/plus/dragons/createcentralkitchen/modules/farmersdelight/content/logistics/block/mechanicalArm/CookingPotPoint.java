@@ -2,6 +2,8 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.content.logisti
 
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.foundation.ponder.PonderRegistry;
+import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -12,10 +14,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointType;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuide;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.item.guide.CookingGuideItem;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class CookingPotPoint extends ArmInteractionPoint {
     public static final int INPUT_SLOT_COUNT = 6;
@@ -124,7 +128,7 @@ public class CookingPotPoint extends ArmInteractionPoint {
         return ItemStack.EMPTY;
     }
     
-    public static class Type extends ArmInteractionPointType {
+    public static class Type extends CentralKitchenArmInteractionPointType {
         
         public Type(ResourceLocation id) {
             super(id);
@@ -140,6 +144,11 @@ public class CookingPotPoint extends ArmInteractionPoint {
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new CookingPotPoint(this, level, pos, state);
+        }
+    
+        @Override
+        public void registerPonderTag() {
+            PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS).add(ModItems.COOKING_POT.get());
         }
         
     }

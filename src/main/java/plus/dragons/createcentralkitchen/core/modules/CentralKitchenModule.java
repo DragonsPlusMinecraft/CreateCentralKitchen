@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Module {
+public @interface CentralKitchenModule {
     
     /**
      * The id of the module, should be unique for each mod.

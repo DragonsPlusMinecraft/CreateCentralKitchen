@@ -7,8 +7,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.core.modules.BaseModule;
-import plus.dragons.createcentralkitchen.core.modules.Module;
+import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModule;
+import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleBase;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm.FarmersDelightModuleArmInteractionPointTypes;
@@ -17,8 +17,8 @@ import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponde
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FarmersDelightModulePonders;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
-@Module(id = "farmersdelight", dependencies = "farmersdelight")
-public class FarmersDelightModule extends BaseModule {
+@CentralKitchenModule(id = "farmersdelight", dependencies = "farmersdelight")
+public class FarmersDelightModule extends CentralKitchenModuleBase {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "farmersdelight";
     
@@ -62,7 +62,7 @@ public class FarmersDelightModule extends BaseModule {
         return new ResourceLocation(ID, path);
     }
     
-    public static class Client extends BaseModule.Client {
+    public static class Client extends CentralKitchenModuleBase.Client {
     
         @Override
         protected void registerEntries() {

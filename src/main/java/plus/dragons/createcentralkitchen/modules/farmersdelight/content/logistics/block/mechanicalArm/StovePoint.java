@@ -3,16 +3,22 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight.content.logisti
 import com.simibubi.create.content.logistics.block.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.foundation.ponder.PonderRegistry;
+import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointType;
+import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
 import java.util.Optional;
@@ -49,7 +55,7 @@ public class StovePoint extends AllArmInteractionPointTypes.DepositOnlyArmIntera
         return remainder;
     }
     
-    public static class Type extends ArmInteractionPointType {
+    public static class Type extends CentralKitchenArmInteractionPointType {
         
         public Type(ResourceLocation id) {
             super(id);
@@ -64,6 +70,17 @@ public class StovePoint extends AllArmInteractionPointTypes.DepositOnlyArmIntera
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new StovePoint(this, level, pos, state);
+        }
+    
+        @Override
+        public void registerPonderTag() {
+            var builder = PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS);
+            ForgeRegistries.ITEMS
+                .getValues()
+                .stream()
+                .filter(item -> item instanceof BlockItem blockItem &&
+                    blockItem.getBlock() instanceof StoveBlock)
+                .forEach(builder::add);
         }
         
     }

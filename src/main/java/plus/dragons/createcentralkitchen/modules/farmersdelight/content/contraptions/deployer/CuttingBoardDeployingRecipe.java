@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import plus.dragons.createcentralkitchen.core.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.FarmersDelightModuleRecipeTypes;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -23,6 +24,8 @@ public class CuttingBoardDeployingRecipe extends ProcessingRecipe<RecipeWrapper>
     }
     
     public static void onDeployerRecipeSearch(DeployerRecipeSearchEvent event) {
+        if (!CentralKitchenConfigs.COMMON.automationConfig.enableCuttingBoardDeploying.get())
+            return;
         Level level = event.getTileEntity().getLevel();
         assert level != null;
         RecipeManager recipes = level.getRecipeManager();

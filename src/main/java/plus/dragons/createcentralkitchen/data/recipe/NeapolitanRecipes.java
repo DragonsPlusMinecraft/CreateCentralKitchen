@@ -11,6 +11,8 @@ import com.teamabnormals.neapolitan.core.registry.NeapolitanItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import plus.dragons.createcentralkitchen.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.data.tag.IntegrationItemTags;
 import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleFluids;
@@ -34,7 +36,7 @@ public class NeapolitanRecipes extends RecipeGen {
             .output(AllFluids.CHOCOLATE.get(), 500)
             .require(IntegrationItemTags.VERTICAL_SLABS__CHOCOLATE.tag)
             .requiresHeat(HeatCondition.HEATED)
-            .whenModLoaded("quark")),
+            .withCondition(new NotCondition(new TagEmptyCondition(IntegrationItemTags.VERTICAL_SLABS__CHOCOLATE.tag.location())))),
         MIXING_MELT_CHOCOLATE_STAIRS = modded(mixing("melt_chocolate_stairs")
             .output(AllFluids.CHOCOLATE.get(), 1000)
             .require(ForgeItemTags.STAIRS__CHOCOLATE.tag)
@@ -263,6 +265,9 @@ public class NeapolitanRecipes extends RecipeGen {
             .require(NeapolitanItems.DRIED_VANILLA_PODS.get())
             .require(NeapolitanModuleFluids.MINT_ICE_CREAM.get(), 500)
             .require(Tags.Fluids.MILK, 250)),
+        HAUNTING_MAGIC_BEANS = modded(haunting("magic_beans")
+            .output(NeapolitanItems.MAGIC_BEANS.get())
+            .require(NeapolitanItems.ADZUKI_BEANS.get())),
         MIXING_ADZUKI_BUN = modded(mixing("adzuki_bun")
             .output(NeapolitanItems.ADZUKI_BUN.get())
             .require(NeapolitanItems.ROASTED_ADZUKI_BEANS.get())

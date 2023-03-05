@@ -1,17 +1,18 @@
 package plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm;
 
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointType;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointTypes;
 
 import java.util.function.Function;
 
 public class MinersDelightModuleArmInteractionPointTypes {
     public static final CopperPotPoint.Type STOVE = register("copper_pot", CopperPotPoint.Type::new);
 
-    private static <T extends ArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {
+    private static <T extends CentralKitchenArmInteractionPointType> T register(String id, Function<ResourceLocation, T> factory) {
         T type = factory.apply(CentralKitchen.genRL(id));
-        ArmInteractionPointType.register(type);
+        CentralKitchenArmInteractionPointTypes.register(id, type);
         return type;
     }
     

@@ -1,9 +1,8 @@
 package plus.dragons.createcentralkitchen.core.modules;
 
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.ModLoadingStage;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 import org.slf4j.Logger;
@@ -12,37 +11,32 @@ import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleLoader {
+public class CentralKitchenModuleLoader {
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final Type MOD_MODULE = Type.getType(Module.class);
+    private static final Type MODULE_ANNOTATION = Type.getType(CentralKitchenModule.class);
     
     @SuppressWarnings("unchecked")
-    public static void loadModules() {
-        var modContainer = ModLoadingContext.get().getActiveContainer();
-        if (modContainer.getCurrentState() != ModLoadingStage.CONSTRUCT) {
-            LOGGER.error("ModModuleLoader.loadModules() should be called in mod's constructor");
-            return;
-        }
-        var modid = modContainer.getModId();
-        modContainer.getModInfo()
+    public static void loadModules(ModContainer container) {
+        var modid = container.getModId();
+        container.getModInfo()
             .getOwningFile()
             .getFile()
             .getScanResult()
             .getAnnotations()
             .stream()
-            .filter(data -> data.targetType() == ElementType.TYPE && data.annotationType().equals(MOD_MODULE))
-            .map(data -> new ModModuleData(modid,
+            .filter(data -> data.targetType() == ElementType.TYPE && data.annotationType().equals(MODULE_ANNOTATION))
+            .map(data -> new ModuleData(modid,
                 (String) data.annotationData().get("id"),
                 (List<String>) data.annotationData().getOrDefault("dependencies", new ArrayList<>()),
                 (Integer) data.annotationData().getOrDefault("priority", 0),
                 data.clazz().getClassName()))
-            .filter(ModModuleData::enabled)
+            .filter(ModuleData::enabled)
             .sorted()
-            .forEach(ModModuleData::load);
+            .forEach(ModuleData::load);
     }
     
-    private record ModModuleData(String modId, String moduleId, List<String> dependencies, int priority, String mainClass)
-        implements Comparable<ModModuleData> {
+    private record ModuleData(String modId, String moduleId, List<String> dependencies, int priority, String mainClass)
+        implements Comparable<ModuleData> {
         
         public boolean enabled() {
             ModList modList = ModList.get();
@@ -63,7 +57,7 @@ public class ModuleLoader {
         }
         
         @Override
-        public int compareTo(@NotNull ModuleLoader.ModModuleData other) {
+        public int compareTo(@NotNull CentralKitchenModuleLoader.ModuleData other) {
             if (priority != other.priority) {
                 return Integer.compare(priority, other.priority);
             }

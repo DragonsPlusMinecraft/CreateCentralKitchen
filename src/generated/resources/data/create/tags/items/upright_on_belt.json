@@ -44,10 +44,6 @@
       "required": false
     },
     {
-      "id": "neapolitan:neapolitan_ice_cream",
-      "required": false
-    },
-    {
       "id": "neapolitan:chocolate_milkshake",
       "required": false
     },
@@ -153,6 +149,10 @@
     },
     {
       "id": "farmersrespite:strong_coffee",
+      "required": false
+    },
+    {
+      "id": "neapolitan:neapolitan_ice_cream",
       "required": false
     }
   ]

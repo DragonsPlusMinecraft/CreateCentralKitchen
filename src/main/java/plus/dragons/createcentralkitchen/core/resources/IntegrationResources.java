@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.core.integration.resources;
+package plus.dragons.createcentralkitchen.core.resources;
 
 import com.google.common.collect.ImmutableMap;
 import com.simibubi.create.foundation.ModFilePackResources;

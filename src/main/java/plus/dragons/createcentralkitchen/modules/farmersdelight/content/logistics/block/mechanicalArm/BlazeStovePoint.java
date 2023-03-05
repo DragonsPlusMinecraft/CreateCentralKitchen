@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointType;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 
@@ -40,7 +41,7 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         }
     }
     
-    public static class Type extends ArmInteractionPointType {
+    public static class Type extends CentralKitchenArmInteractionPointType {
         
         public Type(ResourceLocation id) {
             super(id);
@@ -55,6 +56,11 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new BlazeStovePoint(this, level, pos, state);
+        }
+    
+        @Override
+        public void registerPonderTag() {
+        
         }
         
     }

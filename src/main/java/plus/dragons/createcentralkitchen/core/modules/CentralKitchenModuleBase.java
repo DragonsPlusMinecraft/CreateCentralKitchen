@@ -11,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class BaseModule {
+public class CentralKitchenModuleBase {
     
-    public BaseModule(@Nullable Supplier<DistExecutor.SafeRunnable> clientInit) {
+    public CentralKitchenModuleBase(@Nullable Supplier<DistExecutor.SafeRunnable> clientInit) {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         

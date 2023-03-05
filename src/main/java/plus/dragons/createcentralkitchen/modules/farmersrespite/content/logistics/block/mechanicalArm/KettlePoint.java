@@ -2,8 +2,11 @@ package plus.dragons.createcentralkitchen.modules.farmersrespite.content.logisti
 
 import com.farmersrespite.common.block.KettleBlock;
 import com.farmersrespite.common.block.entity.KettleBlockEntity;
+import com.farmersrespite.core.registry.FRItems;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.foundation.ponder.PonderRegistry;
+import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointType;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuide;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.item.guide.BrewingGuideItem;
@@ -171,7 +175,7 @@ public class KettlePoint extends ArmInteractionPoint {
         return ItemStack.EMPTY;
     }
     
-    public static class Type extends ArmInteractionPointType {
+    public static class Type extends CentralKitchenArmInteractionPointType {
         
         public Type(ResourceLocation id) {
             super(id);
@@ -187,6 +191,11 @@ public class KettlePoint extends ArmInteractionPoint {
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new KettlePoint(this, level, pos, state);
+        }
+    
+        @Override
+        public void registerPonderTag() {
+            PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS).add(FRItems.KETTLE.get());
         }
         
     }

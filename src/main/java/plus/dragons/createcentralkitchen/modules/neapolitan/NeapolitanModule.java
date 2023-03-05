@@ -5,13 +5,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.core.modules.BaseModule;
-import plus.dragons.createcentralkitchen.core.modules.Module;
+import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModule;
+import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleBase;
 import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleFluids;
 import plus.dragons.createcentralkitchen.modules.neapolitan.entry.NeapolitanModuleItems;
 
-@Module(id = "neapolitan", dependencies = "neapolitan")
-public class NeapolitanModule extends BaseModule {
+@CentralKitchenModule(id = "neapolitan", dependencies = "neapolitan")
+public class NeapolitanModule extends CentralKitchenModuleBase {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "neapolitan";
     
@@ -40,7 +40,7 @@ public class NeapolitanModule extends BaseModule {
         return new ResourceLocation(ID, path);
     }
     
-    public static class Client extends BaseModule.Client {
+    public static class Client extends CentralKitchenModuleBase.Client {
         
     }
     

@@ -14,8 +14,11 @@
   "heatRequirement": "heated",
   "conditions": [
     {
-      "modid": "quark",
-      "type": "forge:mod_loaded"
+      "value": {
+        "tag": "quark:vertical_slabs/chocolate",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
     },
     {
       "modid": "neapolitan",

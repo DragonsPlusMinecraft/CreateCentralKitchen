@@ -1,8 +1,11 @@
 package plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm;
 
 import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
+import com.sammy.minersdelight.setup.MDBlocks;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.foundation.ponder.PonderRegistry;
+import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.core.integration.create.logistics.block.mechanicalArm.CentralKitchenArmInteractionPointType;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide.MinersCookingGuide;
 import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.item.guide.MinersCookingGuideItem;
@@ -125,7 +129,7 @@ public class CopperPotPoint extends ArmInteractionPoint {
         return ItemStack.EMPTY;
     }
     
-    public static class Type extends ArmInteractionPointType {
+    public static class Type extends CentralKitchenArmInteractionPointType {
         
         public Type(ResourceLocation id) {
             super(id);
@@ -141,6 +145,11 @@ public class CopperPotPoint extends ArmInteractionPoint {
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new CopperPotPoint(this, level, pos, state);
+        }
+    
+        @Override
+        public void registerPonderTag() {
+            PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS).add(MDBlocks.COPPER_POT.get());
         }
         
     }

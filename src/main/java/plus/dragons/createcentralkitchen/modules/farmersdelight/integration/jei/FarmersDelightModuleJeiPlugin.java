@@ -8,6 +8,7 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
+import plus.dragons.createcentralkitchen.core.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.core.integration.jei.AbstractJeiPlugin;
 import plus.dragons.createcentralkitchen.core.integration.jei.RecipeCategoryBuilder;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
@@ -33,16 +34,18 @@ public class FarmersDelightModuleJeiPlugin extends AbstractJeiPlugin {
     }
     
     protected void populateCategories(IRecipeCategoryRegistration registration) {
-        categories.add(new RecipeCategoryBuilder<>(CentralKitchen.ID, CuttingBoardDeployingRecipe.class)
-            .addTypedRecipes(FarmersDelightModuleRecipeTypes.CUTTING_BOARD_DEPLOYING)
-            .addTransformedRecipes(ModRecipeTypes.CUTTING, CuttingBoardDeployingRecipe::fromCuttingBoard)
-            .catalyst(AllBlocks.DEPLOYER::get)
-            .catalyst(AllBlocks.DEPOT::get)
-            .catalyst(AllItems.BELT_CONNECTOR::get)
-            .doubleItemIcon(AllBlocks.DEPLOYER.get(), ModBlocks.CUTTING_BOARD.get())
-            .emptyBackground(177, 70)
-            .build("cutting_board_deploying", CuttingBoardDeployingCategory::new)
-        );
+        if (CentralKitchenConfigs.COMMON.automationConfig.enableCuttingBoardDeploying.get()) {
+            categories.add(new RecipeCategoryBuilder<>(CentralKitchen.ID, CuttingBoardDeployingRecipe.class)
+                .addTypedRecipes(FarmersDelightModuleRecipeTypes.CUTTING_BOARD_DEPLOYING)
+                .addTransformedRecipes(ModRecipeTypes.CUTTING, CuttingBoardDeployingRecipe::fromCuttingBoard)
+                .catalyst(AllBlocks.DEPLOYER::get)
+                .catalyst(AllBlocks.DEPOT::get)
+                .catalyst(AllItems.BELT_CONNECTOR::get)
+                .doubleItemIcon(AllBlocks.DEPLOYER.get(), ModBlocks.CUTTING_BOARD.get())
+                .emptyBackground(177, 70)
+                .build("cutting_board_deploying", CuttingBoardDeployingCategory::new)
+            );
+        }
     }
     
     @Override

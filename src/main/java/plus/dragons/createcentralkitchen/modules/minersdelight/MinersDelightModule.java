@@ -7,8 +7,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
-import plus.dragons.createcentralkitchen.core.modules.BaseModule;
-import plus.dragons.createcentralkitchen.core.modules.Module;
+import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModule;
+import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleBase;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm.MinersDelightModuleArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleCapabilities;
@@ -17,8 +17,8 @@ import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelig
 import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder.MinersDelightModulePonderTags;
 import plus.dragons.createcentralkitchen.modules.minersdelight.foundation.ponder.MinersDelightModulePonders;
 
-@Module(id = "miners_delight", dependencies = {"farmersdelight", "miners_delight"}, priority = 1)
-public class MinersDelightModule extends BaseModule {
+@CentralKitchenModule(id = "miners_delight", dependencies = {"farmersdelight", "miners_delight"}, priority = 1)
+public class MinersDelightModule extends CentralKitchenModuleBase {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "miners_delight";
     
@@ -54,7 +54,7 @@ public class MinersDelightModule extends BaseModule {
         return new ResourceLocation(ID, path);
     }
     
-    public static class Client extends BaseModule.Client {
+    public static class Client extends CentralKitchenModuleBase.Client {
         
         @Override
         public void setup(final FMLClientSetupEvent event) {
