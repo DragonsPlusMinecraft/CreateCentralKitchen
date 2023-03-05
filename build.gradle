@@ -203,7 +203,7 @@ tasks.jarJar {
 }
 
 jar.finalizedBy('reobfJar')
-tasks.jarJar.finalizedBy('reobfJarJar')
+tasks.jarJar.finalizedBy(reobf.maybeCreate('jarJar'))
 
 publishing {
     publications {
