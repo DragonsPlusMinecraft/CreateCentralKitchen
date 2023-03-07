@@ -220,6 +220,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
             this.registry = registry;
             this.setObjects(def);
             CentralKitchenConfigBase.this.reloadListeners.add(this);
+            CentralKitchenConfigBase.this.registryObjectConfigs.add(this);
         }
         
         public ConfigRegistryObjectList(String name, IForgeRegistry<V> registry, List<RegistryObject<V>> def, String... comments) {

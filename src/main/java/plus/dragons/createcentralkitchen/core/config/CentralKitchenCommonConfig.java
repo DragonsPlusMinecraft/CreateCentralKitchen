@@ -19,7 +19,7 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
         
         public final ConfigList<String> armInteractionPointBlackList = stringList(List.of(),
             "armInteractionPointBlackList",
-            "Arm Interaction Point types in this list will not be registered",
+            "Arm Interaction Point types in this list will be disabled",
             "Allowed values: [\"stove\", \"blaze_stove\", \"cooking_pot\", \"skillet\", \"cutting_board\", \"basket\", \"kettle\", \"copper_pot\"]",
             ConfigAnnotations.RequiresRestart.BOTH.asComment());
         
