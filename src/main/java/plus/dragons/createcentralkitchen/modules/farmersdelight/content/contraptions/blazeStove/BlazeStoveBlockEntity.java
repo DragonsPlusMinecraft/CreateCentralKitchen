@@ -39,6 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.core.config.CentralKitchenConfigs;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.StoveBlock;
@@ -46,17 +47,14 @@ import vectorwing.farmersdelight.common.mixin.accessor.RecipeManagerAccessor;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider, IHaveGoggleInformation {
     private static final int INVENTORY_SLOT_COUNT = 9;
     public static final Vec2[] ITEM_OFFSET_NS = new Vec2[INVENTORY_SLOT_COUNT];
     public static final Vec2[] ITEM_OFFSET_WE = new Vec2[INVENTORY_SLOT_COUNT];
     private static final VoxelShape GRILLING_AREA = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D);
-    private static final Set<BlockEntityType<?>> BOOSTING_COOKER_TYPES = new HashSet<>();
     static {
         float scale = 5 / 16F;
         for (int i = 0; i < INVENTORY_SLOT_COUNT; ++i) {
@@ -83,10 +81,6 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
                 return 1;
             }
         };
-    }
-    
-    public static void registerBoostingCooker(BlockEntityType<?> type) {
-        BOOSTING_COOKER_TYPES.add(type);
     }
     
     @Override
@@ -448,7 +442,14 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             return;
         
         BlockEntityType<?> type = blockEntity.getType();
-        if (!BOOSTING_COOKER_TYPES.contains(type))
+        boolean shouldBoost = false;
+        for (var object : CentralKitchenConfigs.COMMON.automation.boostingCookerList.getObjects(true)) {
+            if (object.get().equals(type)) {
+                shouldBoost = true;
+                break;
+            }
+        }
+        if (!shouldBoost)
             return;
     
         Runnable ticker = getCookingTicker(blockEntity, type);

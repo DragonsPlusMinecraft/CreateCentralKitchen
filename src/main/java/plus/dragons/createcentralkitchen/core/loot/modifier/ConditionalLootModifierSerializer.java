@@ -27,29 +27,29 @@ import java.util.List;
  * <p>Json format:</p>
  * <pre>
  * {
- *   "type": "create_central_kitchen:conditional_loaded",
- *   "load_conditions": [
- *     {
- *       "type": "forge:mod_loaded"
- *       "modid": "farmersdelight"
- *     }
- *   ],
- *   "modifier": {
- *     "type": "farmersdelight:pastry_slicing",
- *     "conditions": [
- *       {
- *         "condition": "minecraft:match_tool",
- *         "predicate": {
- *           "tag": "farmersdelight:tools/knives"
- *         }
- *       },
- *       {
- *         "condition": "minecraft:block_state_property",
- *         "block": "farmersdelight:chocolate_pie"
- *       }
- *     ],
- *     "slice": "farmersdelight:chocolate_pie_slice"
- *   }
+ *  "type": "create_central_kitchen:conditional",
+ *  "load_conditions": [
+ *    {
+ *      "type": "forge:mod_loaded",
+ *      "modid": "farmersdelight"
+ *    }
+ *  ],
+ *  "modifier": {
+ *    "type": "farmersdelight:pastry_slicing",
+ *    "conditions": [
+ *      {
+ *        "condition": "minecraft:match_tool",
+ *        "predicate": {
+ *          "tag": "farmersdelight:tools/knives"
+ *        }
+ *      },
+ *      {
+ *        "condition": "minecraft:block_state_property",
+ *        "block": "central_kitchen:pumpkin_pie"
+ *      }
+ *    ],
+ *    "slice": "central_kitchen:pumpkin_pie_slice"
+ *  }
  * }
  * </pre>
  * <p>Note that loot conditions outside the "modifier" object will always be loaded and combined with inner ones.</p>
@@ -58,7 +58,7 @@ import java.util.List;
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ConditionalLoadedLootModifierSerializer<M extends IGlobalLootModifier> extends GlobalLootModifierSerializer<M> {
+public class ConditionalLootModifierSerializer<M extends IGlobalLootModifier> extends GlobalLootModifierSerializer<M> {
     private static final Gson GSON = Deserializers.createFunctionSerializer().create();
     private final Class<M> clazz;
     @Nullable
@@ -66,7 +66,7 @@ public class ConditionalLoadedLootModifierSerializer<M extends IGlobalLootModifi
     private final List<ICondition> conditions;
     private ICondition.IContext context = ICondition.IContext.EMPTY;
     
-    private ConditionalLoadedLootModifierSerializer(Class<M> clazz, @Nullable GlobalLootModifierSerializer<M> serializer, ICondition... conditions) {
+    private ConditionalLootModifierSerializer(Class<M> clazz, @Nullable GlobalLootModifierSerializer<M> serializer, ICondition... conditions) {
         this.clazz = clazz;
         this.serializer = serializer;
         this.conditions = List.of(conditions);
@@ -75,8 +75,8 @@ public class ConditionalLoadedLootModifierSerializer<M extends IGlobalLootModifi
     /**
      * @return A deserialize-only instance, should be used in registry.
      */
-    public static ConditionalLoadedLootModifierSerializer<IGlobalLootModifier> deserializer() {
-        return new ConditionalLoadedLootModifierSerializer<>(IGlobalLootModifier.class, null);
+    public static ConditionalLootModifierSerializer<IGlobalLootModifier> deserializer() {
+        return new ConditionalLootModifierSerializer<>(IGlobalLootModifier.class, null);
     }
     
     /**
@@ -86,8 +86,8 @@ public class ConditionalLoadedLootModifierSerializer<M extends IGlobalLootModifi
      * @param <M> Type of the modifier
      * @return A serializer-only instance, should be used in {@link net.minecraftforge.common.data.GlobalLootModifierProvider}.
      */
-    public static <M extends IGlobalLootModifier> ConditionalLoadedLootModifierSerializer<M> serializer(Class<M> clazz, GlobalLootModifierSerializer<M> serializer, ICondition... conditions) {
-        return new ConditionalLoadedLootModifierSerializer<>(clazz, serializer, conditions);
+    public static <M extends IGlobalLootModifier> ConditionalLootModifierSerializer<M> serializer(Class<M> clazz, GlobalLootModifierSerializer<M> serializer, ICondition... conditions) {
+        return new ConditionalLootModifierSerializer<>(clazz, serializer, conditions);
     }
     
     public void updateContext(AddReloadListenerEvent event) {
@@ -97,9 +97,9 @@ public class ConditionalLoadedLootModifierSerializer<M extends IGlobalLootModifi
     @Override
     @Nullable
     public M read(ResourceLocation id, JsonObject json, LootItemCondition[] extConditions) {
-        if (serializer != null || CraftingHelper.processConditions(json, "load_conditions", context)) {
+        if (!IGlobalLootModifier.class.equals(clazz) ||
+            !CraftingHelper.processConditions(json, "load_conditions", context))
             return null;
-        }
         JsonObject modifierJson = GsonHelper.getAsJsonObject(json, "modifier");
         List<LootItemCondition> conditions = new ArrayList<>();
         Collections.addAll(conditions, extConditions);
@@ -109,13 +109,13 @@ public class ConditionalLoadedLootModifierSerializer<M extends IGlobalLootModifi
         if (serializer == null)
             return null;
         IGlobalLootModifier modifier = serializer.read(id, modifierJson, conditions.toArray(LootItemCondition[]::new));
-        return clazz.isInstance(modifier) ? clazz.cast(modifier) : null;
+        return clazz.cast(modifier);
     }
     
     @Override
     public JsonObject write(M modifier) {
         if (serializer == null)
-            throw new UnsupportedOperationException("ConditionedLootModifierSerializer without a serializer can not be used in serialization!");
+            throw new UnsupportedOperationException("ConditionalLootModifierSerializer without a serializer can not be used in serialization!");
         JsonObject json = serializer.write(modifier);
         if (!conditions.isEmpty()) {
             JsonArray conditionsJson = new JsonArray();

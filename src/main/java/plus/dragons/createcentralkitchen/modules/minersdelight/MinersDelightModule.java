@@ -1,15 +1,12 @@
 package plus.dragons.createcentralkitchen.modules.minersdelight;
 
 import com.mojang.logging.LogUtils;
-import com.sammy.minersdelight.setup.MDBlockEntities;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModule;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleBase;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.minersdelight.content.logistics.block.mechanicalArm.MinersDelightModuleArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleCapabilities;
 import plus.dragons.createcentralkitchen.modules.minersdelight.entry.MinersDelightModuleItems;
@@ -41,13 +38,6 @@ public class MinersDelightModule extends CentralKitchenModuleBase {
     @Override
     protected void registerForgeEvents(IEventBus forgeBus) {
         forgeBus.addListener(MinersDelightModuleItems::fillCreateItemGroup);
-    }
-    
-    @Override
-    public void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            BlazeStoveBlockEntity.registerBoostingCooker(MDBlockEntities.COPPER_POT.get());
-        });
     }
     
     public static ResourceLocation genRL(String path) {

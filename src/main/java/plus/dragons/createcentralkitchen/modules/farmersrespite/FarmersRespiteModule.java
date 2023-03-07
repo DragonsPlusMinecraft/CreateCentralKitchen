@@ -1,15 +1,12 @@
 package plus.dragons.createcentralkitchen.modules.farmersrespite;
 
-import com.farmersrespite.core.registry.FRBlockEntityTypes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModule;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleBase;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.content.logistics.block.mechanicalArm.FarmersRespiteModuleArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleCapabilities;
 import plus.dragons.createcentralkitchen.modules.farmersrespite.entry.FarmersRespiteModuleFluids;
@@ -43,13 +40,6 @@ public class FarmersRespiteModule extends CentralKitchenModuleBase {
     @Override
     protected void registerForgeEvents(IEventBus forgeBus) {
         forgeBus.addListener(FarmersRespiteModuleItems::fillCreateItemGroup);
-    }
-    
-    @Override
-    public void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            BlazeStoveBlockEntity.registerBoostingCooker(FRBlockEntityTypes.KETTLE.get());
-        });
     }
     
     public static ResourceLocation genRL(String path) {

@@ -4,7 +4,7 @@ import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.util.nullness.NonNullFunction;
+import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,8 +14,7 @@ import net.minecraft.world.level.block.Block;
 public class OptionalTags {
     
     @SafeVarargs
-    public static <T extends Item, R extends AbstractRegistrate<R>>
-    NonNullFunction<ItemBuilder<T, R>, ItemBuilder<T, R>> item(TagKey<Item>... tags) {
+    public static <T extends Item, R extends AbstractRegistrate<R>> NonNullUnaryOperator<ItemBuilder<T, R>> item(TagKey<Item>... tags) {
         return builder -> builder.addMiscData(ProviderType.ITEM_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var tag : tags)
@@ -23,8 +22,7 @@ public class OptionalTags {
         });
     }
     
-    public static <T extends Item, R extends AbstractRegistrate<R>>
-    NonNullFunction<ItemBuilder<T, R>, ItemBuilder<T, R>> item(ResourceLocation... ids) {
+    public static <T extends Item, R extends AbstractRegistrate<R>> NonNullUnaryOperator<ItemBuilder<T, R>> item(ResourceLocation... ids) {
         return builder -> builder.addMiscData(ProviderType.ITEM_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var id : ids) {
@@ -35,8 +33,7 @@ public class OptionalTags {
     }
     
     @SafeVarargs
-    public static <T extends Block, R extends AbstractRegistrate<R>>
-    NonNullFunction<BlockBuilder<T, R>, BlockBuilder<T, R>> block(TagKey<Block>... tags) {
+    public static <T extends Block, R extends AbstractRegistrate<R>> NonNullUnaryOperator<BlockBuilder<T, R>> block(TagKey<Block>... tags) {
         return builder -> builder.addMiscData(ProviderType.BLOCK_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var tag : tags)
@@ -44,8 +41,7 @@ public class OptionalTags {
         });
     }
     
-    public static <T extends Block, R extends AbstractRegistrate<R>>
-    NonNullFunction<BlockBuilder<T, R>, BlockBuilder<T, R>> block(ResourceLocation... ids) {
+    public static <T extends Block, R extends AbstractRegistrate<R>> NonNullUnaryOperator<BlockBuilder<T, R>> block(ResourceLocation... ids) {
         return builder -> builder.addMiscData(ProviderType.BLOCK_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var id : ids) {

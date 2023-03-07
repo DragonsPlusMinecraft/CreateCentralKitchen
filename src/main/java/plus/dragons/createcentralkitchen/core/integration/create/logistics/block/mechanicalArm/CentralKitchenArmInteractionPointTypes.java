@@ -22,19 +22,19 @@ public class CentralKitchenArmInteractionPointTypes {
     
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
-        for (var name : CentralKitchenConfigs.COMMON.automationConfig.armInteractionPointBlackList.get()) {
-            if (REGISTRY.containsKey(name)) {
-                ArmInteractionPointType.register(REGISTRY.get(name));
-            }
+        for (var entry : REGISTRY.entrySet()) {
+            if (CentralKitchenConfigs.COMMON.automation.armInteractionPointBlackList.get().contains(entry.getKey()))
+                continue;
+            ArmInteractionPointType.register(entry.getValue());
         }
     }
     
     @SubscribeEvent
     public static void registerPonderTags(FMLClientSetupEvent event) {
-        for (var name : CentralKitchenConfigs.COMMON.automationConfig.armInteractionPointBlackList.get()) {
-            if (REGISTRY.containsKey(name)) {
-                REGISTRY.get(name).registerPonderTag();
-            }
+        for (var entry : REGISTRY.entrySet()) {
+            if (CentralKitchenConfigs.COMMON.automation.armInteractionPointBlackList.get().contains(entry.getKey()))
+                continue;
+            entry.getValue().registerPonderTag();
         }
     }
     

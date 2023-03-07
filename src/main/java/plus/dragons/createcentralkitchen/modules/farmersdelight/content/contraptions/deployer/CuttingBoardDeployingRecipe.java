@@ -24,7 +24,7 @@ public class CuttingBoardDeployingRecipe extends ProcessingRecipe<RecipeWrapper>
     }
     
     public static void onDeployerRecipeSearch(DeployerRecipeSearchEvent event) {
-        if (!CentralKitchenConfigs.COMMON.automationConfig.enableCuttingBoardDeploying.get())
+        if (!CentralKitchenConfigs.COMMON.automation.enableCuttingBoardDeploying.get())
             return;
         Level level = event.getTileEntity().getLevel();
         assert level != null;

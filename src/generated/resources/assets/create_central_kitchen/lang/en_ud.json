@@ -1,5 +1,9 @@
 {
   "block.create_central_kitchen.blaze_stove": "\u01DD\u028Co\u0287S \u01DDz\u0250\u05DF\u15FA",
+  "block.create_central_kitchen.cherry_pie": "\u01DD\u0131\u0500 \u028E\u0279\u0279\u01DD\u0265\u0186",
+  "block.create_central_kitchen.mulberry_pie": "\u01DD\u0131\u0500 \u028E\u0279\u0279\u01DDq\u05DFnW",
+  "block.create_central_kitchen.pumpkin_pie": "\u01DD\u0131\u0500 u\u0131\u029Ed\u026Fn\u0500",
+  "block.create_central_kitchen.truffle_pie": "\u01DD\u0131\u0500 \u01DD\u05DF\u025F\u025Fn\u0279\u27D8",
   "fluid.create_central_kitchen.adzuki_ice_cream": "\u026F\u0250\u01DD\u0279\u0186 \u01DD\u0254I \u0131\u029Enzp\u2C6F",
   "fluid.create_central_kitchen.adzuki_milkshake": "\u01DD\u029E\u0250\u0265s\u029E\u05DF\u0131W \u0131\u029Enzp\u2C6F",
   "fluid.create_central_kitchen.apple_cider": "\u0279\u01DDp\u0131\u0186 \u01DD\u05DFdd\u2C6F",
@@ -38,9 +42,13 @@
   "fluid.create_central_kitchen.vanilla_milkshake": "\u01DD\u029E\u0250\u0265s\u029E\u05DF\u0131W \u0250\u05DF\u05DF\u0131u\u0250\u039B",
   "fluid.create_central_kitchen.yellow_tea": "\u0250\u01DD\u27D8 \u028Do\u05DF\u05DF\u01DD\u028E",
   "item.create_central_kitchen.brewing_guide": "\u01DDp\u0131n\u2141 bu\u0131\u028D\u01DD\u0279\u15FA",
+  "item.create_central_kitchen.cherry_pie_slice": "\u01DD\u0254\u0131\u05DFS \u01DD\u0131\u0500 \u028E\u0279\u0279\u01DD\u0265\u0186",
   "item.create_central_kitchen.cooking_guide": "\u01DDp\u0131n\u2141 bu\u0131\u029Eoo\u0186",
   "item.create_central_kitchen.incomplete_neapolitan_ice_cream_chocolate": "\u026F\u0250\u01DD\u0279\u0186 \u01DD\u0254I u\u0250\u0287\u0131\u05DFod\u0250\u01DDN \u01DD\u0287\u01DD\u05DFd\u026Fo\u0254uI",
   "item.create_central_kitchen.incomplete_neapolitan_ice_cream_strawberry": "\u026F\u0250\u01DD\u0279\u0186 \u01DD\u0254I u\u0250\u0287\u0131\u05DFod\u0250\u01DDN \u01DD\u0287\u01DD\u05DFd\u026Fo\u0254uI",
   "item.create_central_kitchen.miners_cooking_guide": "\u01DDp\u0131n\u2141 bu\u0131\u029Eoo\u0186 s,\u0279\u01DDu\u0131W",
+  "item.create_central_kitchen.mulberry_pie_slice": "\u01DD\u0254\u0131\u05DFS \u01DD\u0131\u0500 \u028E\u0279\u0279\u01DDq\u05DFnW",
+  "item.create_central_kitchen.pumpkin_pie_slice": "\u01DD\u0254\u0131\u05DFS \u01DD\u0131\u0500 u\u0131\u029Ed\u026Fn\u0500",
+  "item.create_central_kitchen.truffle_pie_slice": "\u01DD\u0254\u0131\u05DFS \u01DD\u0131\u0500 \u01DD\u05DF\u025F\u025Fn\u0279\u27D8",
   "recipe.create_central_kitchen.cutting_board_deploying": "bu\u0131\u028Eo\u05DFd\u01DD\u15E1 p\u0279\u0250o\u15FA bu\u0131\u0287\u0287n\u0186"
 }

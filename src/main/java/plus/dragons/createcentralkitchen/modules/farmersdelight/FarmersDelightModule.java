@@ -2,20 +2,20 @@ package plus.dragons.createcentralkitchen.modules.farmersdelight;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModule;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleBase;
-import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.contraptions.deployer.CuttingBoardDeployingRecipe;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.content.logistics.block.mechanicalArm.FarmersDelightModuleArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.entry.*;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FarmersDelightModulePonderTags;
 import plus.dragons.createcentralkitchen.modules.farmersdelight.foundation.ponder.FarmersDelightModulePonders;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 @CentralKitchenModule(id = "farmersdelight", dependencies = "farmersdelight")
 public class FarmersDelightModule extends CentralKitchenModuleBase {
@@ -39,6 +39,7 @@ public class FarmersDelightModule extends CentralKitchenModuleBase {
     
     @Override
     protected void registerModEvents(IEventBus modBus) {
+        modBus.addGenericListener(Item.class, EventPriority.LOW, FarmersDelightModuleBlocks::replacePieItems);
         modBus.addListener(FarmersDelightModuleCapabilities::register);
     }
     
@@ -51,11 +52,7 @@ public class FarmersDelightModule extends CentralKitchenModuleBase {
     
     @Override
     protected void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            FarmersDelightModulePackets.register();
-            BlazeStoveBlockEntity.registerBoostingCooker(ModBlockEntityTypes.COOKING_POT.get());
-            BlazeStoveBlockEntity.registerBoostingCooker(ModBlockEntityTypes.SKILLET.get());
-        });
+        event.enqueueWork(FarmersDelightModulePackets::register);
     }
     
     public static ResourceLocation genRL(String path) {

@@ -49,7 +49,6 @@ public class ConditionedKettleRecipeBuilder implements ConditionedRecipeBuilder<
         for(int i = 0; i < count; ++i) {
             this.require(Ingredient.of(itemIn));
         }
-        
         return this;
     }
     

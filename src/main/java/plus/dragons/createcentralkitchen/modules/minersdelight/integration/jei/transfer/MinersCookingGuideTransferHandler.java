@@ -1,10 +1,8 @@
 package plus.dragons.createcentralkitchen.modules.minersdelight.integration.jei.transfer;
 
-import com.simibubi.create.foundation.utility.Components;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
-import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,11 +17,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class MinersCookingGuideTransferHandler implements IRecipeTransferHandler<MinersCookingGuideMenu, CookingPotRecipe> {
-    private final IRecipeTransferHandlerHelper helper;
-    
-    public MinersCookingGuideTransferHandler(IRecipeTransferHandlerHelper helper) {
-        this.helper = helper;
-    }
     
     @Override
     public Class<MinersCookingGuideMenu> getContainerClass() {
@@ -39,8 +32,6 @@ public class MinersCookingGuideTransferHandler implements IRecipeTransferHandler
     @Nullable
     public IRecipeTransferError transferRecipe(MinersCookingGuideMenu container, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer) {
         var inputs = recipe.getIngredients();
-        if (inputs.size() > 4)
-            return helper.createUserErrorWithTooltip(Components.translatable("create_central_kitchen.jei.transfer.copper_pot.exceed_capacity"));
         if (!doTransfer)
             return null;
         for (int i = 0; i < 4; ++i) {

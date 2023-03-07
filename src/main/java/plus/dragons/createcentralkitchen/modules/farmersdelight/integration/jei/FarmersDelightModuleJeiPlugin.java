@@ -5,6 +5,7 @@ import com.simibubi.create.AllItems;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -34,7 +35,7 @@ public class FarmersDelightModuleJeiPlugin extends AbstractJeiPlugin {
     }
     
     protected void populateCategories(IRecipeCategoryRegistration registration) {
-        if (CentralKitchenConfigs.COMMON.automationConfig.enableCuttingBoardDeploying.get()) {
+        if (CentralKitchenConfigs.COMMON.automation.enableCuttingBoardDeploying.get()) {
             categories.add(new RecipeCategoryBuilder<>(CentralKitchen.ID, CuttingBoardDeployingRecipe.class)
                 .addTypedRecipes(FarmersDelightModuleRecipeTypes.CUTTING_BOARD_DEPLOYING)
                 .addTransformedRecipes(ModRecipeTypes.CUTTING, CuttingBoardDeployingRecipe::fromCuttingBoard)
@@ -59,4 +60,8 @@ public class FarmersDelightModuleJeiPlugin extends AbstractJeiPlugin {
         registration.addRecipeTransferHandler(new CookingGuideTransferHandler(), FDRecipeTypes.COOKING);
     }
     
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        super.onRuntimeAvailable(jeiRuntime);
+    }
 }

@@ -1,0 +1,39 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:mulberry_pie"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  },
+  "result": [
+    {
+      "item": "create_central_kitchen:mulberry_pie_slice",
+      "count": 4
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "modid": "upgrade_aquatic",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "config": "pie_overhaul",
+      "type": "create_central_kitchen:config"
+    },
+    {
+      "value": {
+        "config": "pie_overhaul_black_list",
+        "value": "upgrade_aquatic:mulberry_pie",
+        "type": "create_central_kitchen:config_list"
+      },
+      "type": "forge:not"
+    }
+  ]
+}

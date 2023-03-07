@@ -94,6 +94,14 @@ public abstract class RecipeGen extends RecipeProvider {
         return new ConditionedShapedRecipeBuilder(CentralKitchen.genRL(path));
     }
     
+    public static ConditionedCuttingBoardRecipeBuilder cuttingBoard(ResourceLocation id) {
+        return new ConditionedCuttingBoardRecipeBuilder(id);
+    }
+    
+    public static ConditionedCuttingBoardRecipeBuilder cuttingBoard(String path) {
+        return new ConditionedCuttingBoardRecipeBuilder(CentralKitchen.genRL(path));
+    }
+    
     public static ConditionedKettleRecipeBuilder kettle(ResourceLocation id) {
         return new ConditionedKettleRecipeBuilder(id);
     }

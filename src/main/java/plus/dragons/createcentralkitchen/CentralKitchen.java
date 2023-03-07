@@ -6,6 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -15,9 +16,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.core.config.CentralKitchenConfigs;
-import plus.dragons.createcentralkitchen.core.loot.modifier.ConditionalLoadedLootModifierSerializer;
+import plus.dragons.createcentralkitchen.core.loot.modifier.ConditionalLootModifierSerializer;
 import plus.dragons.createcentralkitchen.core.modules.CentralKitchenModuleLoader;
 import plus.dragons.createcentralkitchen.core.ponder.PonderDeferredRegister;
+import plus.dragons.createcentralkitchen.core.resources.condition.ConfigBoolCondition;
+import plus.dragons.createcentralkitchen.core.resources.condition.ConfigListCondition;
+import plus.dragons.createcentralkitchen.core.resources.condition.ValidatedAndCondition;
 import plus.dragons.createcentralkitchen.data.CentralKitchenData;
 
 @Mod(CentralKitchen.ID)
@@ -47,12 +51,16 @@ public class CentralKitchen {
         REGISTRATE.registerEventListeners(modBus);
         TYPE_REGISTER.register(modBus);
         SERIALIZER_REGISTER.register(modBus);
+        LOOT_MODIFIER_SERIALIZER_REGISTER.register(modBus);
         PONDER_REGISTER.register(modBus);
         CentralKitchenData.register(modBus);
     }
     
     private void registerEntries() {
-        LOOT_MODIFIER_SERIALIZER_REGISTER.register("conditional_loaded", ConditionalLoadedLootModifierSerializer::deserializer);
+        CraftingHelper.register(new ConfigBoolCondition.Serializer());
+        CraftingHelper.register(new ConfigListCondition.Serializer());
+        CraftingHelper.register(new ValidatedAndCondition.Serializer());
+        LOOT_MODIFIER_SERIALIZER_REGISTER.register("conditional", ConditionalLootModifierSerializer::deserializer);
     }
     
     public static ResourceLocation genRL(String path) {

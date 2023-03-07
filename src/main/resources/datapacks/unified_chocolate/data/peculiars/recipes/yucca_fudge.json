@@ -14,7 +14,7 @@
   },
   "conditions": [
     {
-      "type": "blueprint:and",
+      "type": "central_kitchen:and",
       "values": [
         {
           "type": "forge:mod_loaded",

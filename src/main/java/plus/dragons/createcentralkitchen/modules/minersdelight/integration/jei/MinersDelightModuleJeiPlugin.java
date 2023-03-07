@@ -32,8 +32,7 @@ public class MinersDelightModuleJeiPlugin extends AbstractJeiPlugin {
     
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-        var helper = registration.getTransferHelper();
-        registration.addRecipeTransferHandler(new MinersCookingGuideTransferHandler(helper), CopperPotCookingRecipeCategory.COOKING);
+        registration.addRecipeTransferHandler(new MinersCookingGuideTransferHandler(), CopperPotCookingRecipeCategory.COOKING);
     }
     
 }
