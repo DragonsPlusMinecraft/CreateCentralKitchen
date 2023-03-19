@@ -16,7 +16,7 @@ public class NeapolitanModule extends CentralKitchenModuleBase {
     public static final String ID = "neapolitan";
     
     public NeapolitanModule() {
-        super(() -> Client::new);
+        super(null);
     }
     
     protected void registerEntries() {
@@ -24,24 +24,8 @@ public class NeapolitanModule extends CentralKitchenModuleBase {
         NeapolitanModuleFluids.register();
     }
     
-    protected void registerModEvents(IEventBus modBus) {
-    
-    }
-    
-    protected void registerForgeEvents(IEventBus forgeBus) {
-        
-    }
-    
-    public void setup(final FMLCommonSetupEvent event) {
-        
-    }
-    
     public static ResourceLocation genRL(String path) {
         return new ResourceLocation(ID, path);
-    }
-    
-    public static class Client extends CentralKitchenModuleBase.Client {
-        
     }
     
 }

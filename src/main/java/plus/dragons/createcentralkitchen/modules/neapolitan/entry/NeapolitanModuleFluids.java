@@ -36,8 +36,8 @@ public class NeapolitanModuleFluids {
             .register(),
         ADZUKI_MILKSHAKE = milkyVirtual(NeapolitanItems.ADZUKI_MILKSHAKE, 0xfca8aE)
             .register(),
-        STRAWBERRY_BANANA_SMOOTHIE = virtual(NeapolitanItems.STRAWBERRY_BANANA_SMOOTHIE,
-            CentralKitchen.genRL("fluid/strawberry_banana_smoothie")).register();
+        STRAWBERRY_BANANA_SMOOTHIE = milkyVirtual(NeapolitanItems.STRAWBERRY_BANANA_SMOOTHIE, 0xFF87A9)
+            .register();
     
     public static void register() {}
 
