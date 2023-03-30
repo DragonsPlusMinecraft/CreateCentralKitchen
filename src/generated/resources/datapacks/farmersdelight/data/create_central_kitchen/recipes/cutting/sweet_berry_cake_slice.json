@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "seasonals:sweet_berry_cake"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  },
+  "result": [
+    {
+      "item": "create_central_kitchen:sweet_berry_cake_slice",
+      "count": 7
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "seasonals",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

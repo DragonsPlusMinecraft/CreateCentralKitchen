@@ -1,0 +1,34 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "fluid": "create:chocolate",
+      "nbt": {},
+      "amount": 500
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 1000
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:chocolate_cake"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:honey_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "createaddition:honey_cake"
+  },
+  "conditions": [
+    {
+      "modid": "createaddition",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

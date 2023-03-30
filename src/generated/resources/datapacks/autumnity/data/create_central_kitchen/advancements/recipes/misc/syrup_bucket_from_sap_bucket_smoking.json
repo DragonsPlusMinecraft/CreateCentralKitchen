@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "create_central_kitchen:syrup_bucket_from_sap_bucket_smoking"
+    ]
+  },
+  "criteria": {
+    "has_sap_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "create_central_kitchen:sap_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "create_central_kitchen:syrup_bucket_from_sap_bucket_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sap_bucket",
+      "has_the_recipe"
+    ]
+  ]
+}

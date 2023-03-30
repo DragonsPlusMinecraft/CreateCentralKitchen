@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "farmersrespite:tea_leaves"
+    },
+    {
+      "item": "minecraft:dandelion"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:dandelion_tea",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}

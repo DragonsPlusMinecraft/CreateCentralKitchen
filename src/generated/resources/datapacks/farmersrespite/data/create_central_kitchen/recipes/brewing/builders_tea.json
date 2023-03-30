@@ -1,0 +1,21 @@
+{
+  "type": "farmersrespite:brewing",
+  "ingredients": [
+    {
+      "tag": "farmersrespite:tea_leaves"
+    },
+    {
+      "tag": "forge:milk"
+    }
+  ],
+  "result": {
+    "item": "create:builders_tea",
+    "count": 2
+  },
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "experience": 0.35,
+  "brewingtime": 2400,
+  "needwater": true
+}

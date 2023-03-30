@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "autumnity:syrup_bottle"
+    },
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "result": {
+    "item": "autumnity:pumpkin_bread",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "values": [
+        {
+          "modid": "seasonals",
+          "type": "forge:mod_loaded"
+        },
+        {
+          "value": "outside_recipes",
+          "type": "seasonals:config"
+        }
+      ],
+      "type": "blueprint:and"
+    },
+    {
+      "modid": "abnormals_delight",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "peculiars:yucca_milkshake"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:yucca_milkshake",
+      "amount": 250
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "peculiars",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

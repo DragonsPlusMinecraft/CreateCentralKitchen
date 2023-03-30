@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "fluid": "create_central_kitchen:syrup",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "autumnity:pumpkin_bread",
+      "count": 2
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "abnormals_delight",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

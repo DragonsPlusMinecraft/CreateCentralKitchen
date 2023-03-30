@@ -1,0 +1,18 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "forge:dough/wheat"
+    },
+    {
+      "fluidTag": "forge:honey",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:honey_cookie",
+      "count": 8
+    }
+  ]
+}

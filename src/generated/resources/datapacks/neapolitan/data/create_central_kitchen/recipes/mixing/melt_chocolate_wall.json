@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:walls/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create:chocolate",
+      "amount": 1000
+    }
+  ],
+  "heatRequirement": "heated"
+}

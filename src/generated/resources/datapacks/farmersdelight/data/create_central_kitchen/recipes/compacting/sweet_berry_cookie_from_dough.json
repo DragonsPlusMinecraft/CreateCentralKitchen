@@ -1,0 +1,17 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:sweet_berry_cookie",
+      "count": 8
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "farmersrespite:yellow_tea_leaves"
+    },
+    {
+      "item": "farmersrespite:yellow_tea_leaves"
+    },
+    {
+      "fluid": "minecraft:water",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:yellow_tea",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}

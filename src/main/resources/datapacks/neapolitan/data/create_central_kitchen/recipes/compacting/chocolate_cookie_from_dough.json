@@ -1,0 +1,23 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "forge:bars/chocolate"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "results": [
+    {
+      "item": "cookielicious:chocolate_cookie",
+      "count": 8
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cookielicious"
+    }
+  ]
+}

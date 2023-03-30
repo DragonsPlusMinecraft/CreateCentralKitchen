@@ -2,16 +2,15 @@ modLoader="javafml"
 loaderVersion="[40,)"
 license="MIT"
 [[mods]]
-modId="create_central_kitchen" #mandatory
-version="${file.jarVersion}" #mandatory
+modId="create_central_kitchen"
+version="${file.jarVersion}"
 displayName="Create: Central Kitchen"
-#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/create-central-kitchen"
 logoFile="logo.png"
-#credits="Thanks for this example mod goes to Java"
+#credits=""
 authors="LimonBlaze, MarbleGate and Etherwood"
 description='''
-An add-on for Create, providing automation support for Farmer's Delight and its add-ons.
+An add-on for Create, providing automation support for your kitchen.
 '''
 
 [[dependencies.create_central_kitchen]]
@@ -35,86 +34,18 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.create_central_kitchen]]
-    modId="create_confectionary"
-    mandatory=false
-    versionRange="[1,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="farmersdelight"
-    mandatory=false
-    versionRange="[1.18.2-1.2.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="farmersrespite"
-    mandatory=false
-    versionRange="[1.18.1-1.3.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="miners_delight"
-    mandatory=false
-    versionRange="[1.18.2-1.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="atmospheric"
-    mandatory=false
-    versionRange="[4.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="autumnity"
-    mandatory=false
-    versionRange="[3.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
+# Must load after these optional dependencies
 
 [[dependencies.create_central_kitchen]]
     modId="environmental"
     mandatory=false
-    versionRange="[2.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="neapolitan"
-    mandatory=false
-    versionRange="[3.0.0,)"
+    versionRange="[0,)"
     ordering="AFTER"
     side="BOTH"
 
 [[dependencies.create_central_kitchen]]
     modId="upgrade_aquatic"
     mandatory=false
-    versionRange="[4.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="peculiars"
-    mandatory=false
-    versionRange="[3.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="seasonals"
-    mandatory=false
-    versionRange="[1.18.2-3.0.0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-    modId="cookielicious"
-    mandatory=false
-    versionRange="[1.18.2-2.4.0,)"
+    versionRange="[0,)"
     ordering="AFTER"
     side="BOTH"

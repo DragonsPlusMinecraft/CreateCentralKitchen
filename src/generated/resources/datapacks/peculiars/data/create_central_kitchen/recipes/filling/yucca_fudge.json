@@ -1,0 +1,28 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "atmospheric:yucca_fruit"
+    },
+    {
+      "fluid": "create:chocolate",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "peculiars:yucca_fudge"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "atmospheric",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "value": "enable_atmospheric_food",
+      "type": "peculiars:config"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "createaddition:chocolate_cake"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  },
+  "result": [
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice",
+      "count": 7
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "createaddition",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

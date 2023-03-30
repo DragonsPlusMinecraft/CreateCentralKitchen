@@ -1,0 +1,33 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:bread"
+  },
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_egg_sandwich"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_egg_sandwich"
+        },
+        {
+          "tag": "forge:cooked_eggs"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_egg_sandwich"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:egg_sandwich"
+    }
+  ],
+  "loops": 2
+}

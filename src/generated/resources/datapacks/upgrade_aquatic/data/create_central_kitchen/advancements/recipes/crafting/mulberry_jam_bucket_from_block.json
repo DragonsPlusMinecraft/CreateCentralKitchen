@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "create_central_kitchen:crafting/mulberry_jam_bucket_from_block"
+    ]
+  },
+  "criteria": {
+    "has_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_mulberry_jam_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "upgrade_aquatic:mulberry_jam_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "create_central_kitchen:crafting/mulberry_jam_bucket_from_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bucket",
+      "has_mulberry_jam_block",
+      "has_the_recipe"
+    ]
+  ]
+}

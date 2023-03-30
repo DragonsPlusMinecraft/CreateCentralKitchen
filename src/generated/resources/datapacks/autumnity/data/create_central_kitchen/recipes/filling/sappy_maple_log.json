@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "autumnity:maple_log"
+    },
+    {
+      "fluid": "create_central_kitchen:sap",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "autumnity:sappy_maple_log"
+    }
+  ]
+}

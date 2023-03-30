@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "create_central_kitchen:crafting/sappy_maple_wood_from_sap_bucket"
+    ]
+  },
+  "criteria": {
+    "has_sap_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "create_central_kitchen:sap_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_maple_wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "autumnity:maple_wood"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "create_central_kitchen:crafting/sappy_maple_wood_from_sap_bucket"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sap_bucket",
+      "has_maple_wood",
+      "has_the_recipe"
+    ]
+  ]
+}
