@@ -6,6 +6,7 @@ import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlo
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
 import com.simibubi.create.content.schematics.ItemRequirement;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.utility.IPartialSafeNBT;
 import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
@@ -51,7 +52,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 import java.util.List;
 import java.util.Optional;
 
-public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider, IHaveGoggleInformation {
+public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements MenuProvider, IHaveGoggleInformation, IPartialSafeNBT {
     private static final int INVENTORY_SLOT_COUNT = 9;
     public static final Vec2[] ITEM_OFFSET_NS = new Vec2[INVENTORY_SLOT_COUNT];
     public static final Vec2[] ITEM_OFFSET_WE = new Vec2[INVENTORY_SLOT_COUNT];
@@ -162,6 +163,12 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
         compound.put("Guide", guide.serializeNBT());
         updateGuide();
         super.write(compound, clientPacket);
+    }
+    
+    @Override
+    public void writeSafe(CompoundTag compound) {
+        compound.put("Guide", guide.serializeNBT());
+        super.writeSafe(compound);
     }
     
     @Override
@@ -449,14 +456,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerTileEntity implements Menu
             return;
         
         BlockEntityType<?> type = blockEntity.getType();
-        boolean shouldBoost = false;
-        for (var object : CentralKitchenConfigs.COMMON.automation.boostingCookerList.getObjects(true)) {
-            if (object.get().equals(type)) {
-                shouldBoost = true;
-                break;
-            }
-        }
-        if (!shouldBoost)
+        if (!CentralKitchenConfigs.COMMON.automation.boostingCookerList.contains(type))
             return;
     
         Runnable ticker = getCookingTicker(blockEntity, type);

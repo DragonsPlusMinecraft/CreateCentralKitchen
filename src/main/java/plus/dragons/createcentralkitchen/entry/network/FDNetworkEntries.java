@@ -3,6 +3,7 @@ package plus.dragons.createcentralkitchen.entry.network;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -35,11 +36,13 @@ public enum FDNetworkEntries {
         packet = new LoadedPacket<>(type, factory, direction);
     }
     
+    @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         FDNetworkEntries[] entries = FDNetworkEntries.values();
         for (int i = 0; i < entries.length; ++i) {
             entries[i].packet.register(CHANNEL, i);
         }
+        CentralKitchen.LOGGER.debug("Registered {} network messages to channel {}", entries.length, CHANNEL_NAME);
     }
     
 }

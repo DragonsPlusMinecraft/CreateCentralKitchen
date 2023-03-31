@@ -22,7 +22,6 @@ import java.util.function.Supplier;
 
 public abstract class CentralKitchenConfigBase extends ConfigBase {
     private final List<ConfigReloadListener> reloadListeners = new ArrayList<>();
-    private final List<ConfigRegistryObjectList<?>> registryObjectConfigs = new ArrayList<>();
     
     @Override
     protected void registerAll(ForgeConfigSpec.Builder builder) {
@@ -39,10 +38,6 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
     public void onReload() {
         super.onReload();
         reloadListeners.forEach(ConfigReloadListener::onReload);
-    }
-    
-    public void onCommonSetup() {
-        registryObjectConfigs.forEach(ConfigRegistryObjectList::onReload);
     }
     
     protected static boolean isValidResourceLocation(Object value) {
@@ -213,14 +208,12 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
         private static final Map<IForgeRegistry<?>, Predicate<Object>> VALIDATORS = new ConcurrentHashMap<>();
         private final IForgeRegistry<V> registry;
         private List<RegistryObject<V>> objects;
-        private List<RegistryObject<V>> existingObjects;
         
         public ConfigRegistryObjectList(String name, IForgeRegistry<V> registry, List<RegistryObject<V>> def, Predicate<Object> validator, String... comments) {
             super(name, def.stream().map(entry -> entry.getId().toString()).toList(), validator, comments);
             this.registry = registry;
             this.setObjects(def);
             CentralKitchenConfigBase.this.reloadListeners.add(this);
-            CentralKitchenConfigBase.this.registryObjectConfigs.add(this);
         }
         
         public ConfigRegistryObjectList(String name, IForgeRegistry<V> registry, List<RegistryObject<V>> def, String... comments) {
@@ -246,16 +239,24 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
                 .filter(CentralKitchenConfigBase::isValidResourceLocation)
                 .map(ResourceLocation::new)
                 .toList());
-            this.existingObjects = this.objects.stream().filter(RegistryObject::isPresent).toList();
+        }
+        
+        public boolean contains(V value) {
+            for (var object : this.objects) {
+                if (object.isPresent() && object.get().equals(value))
+                    return true;
+            }
+            return false;
         }
         
         public List<RegistryObject<V>> getObjects(boolean existing) {
-            return existing ? this.existingObjects : this.objects;
+            return existing
+                ? this.objects.stream().filter(RegistryObject::isPresent).toList()
+                : this.objects;
         }
         
         public void setObjects(List<RegistryObject<V>> objects) {
             this.objects = ImmutableList.copyOf(objects);
-            this.existingObjects = this.objects.stream().filter(RegistryObject::isPresent).toList();
         }
     
         @Override

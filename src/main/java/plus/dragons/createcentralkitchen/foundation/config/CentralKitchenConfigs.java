@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.IConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -72,11 +71,6 @@ public class CentralKitchenConfigs {
         if (CONFIGS.containsKey(spec)) {
             CONFIGS.get(spec).onReload();
         }
-    }
-    
-    @SubscribeEvent
-    public static void onCommonSetup(FMLCommonSetupEvent event) {
-        CONFIGS.values().forEach(config -> event.enqueueWork(config::onCommonSetup));
     }
 
 }
