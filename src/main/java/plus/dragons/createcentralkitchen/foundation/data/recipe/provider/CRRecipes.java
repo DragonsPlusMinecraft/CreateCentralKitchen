@@ -31,7 +31,10 @@ public class CRRecipes extends DatapackRecipes {
             .require(CRItems.LIME_SLICE.get())),
         COMPACTING_LIME_COOKIE = add(compacting("lime_cookie")
             .output(CRItems.LIME_COOKIE.get())
-            .withCondition(enabled(CRItems.LIME_COOKIE))),
+            .withCondition(enabled(CRItems.LIME_COOKIE))
+            .require(CRItemTags.FRUITS_LIME)
+            .require(ForgeItemTags.FLOUR__WHEAT.tag)
+            .require(ForgeItemTags.FLOUR__WHEAT.tag)),
         MIXING_LIMEADE = add(mixing("limeade")
             .output(CRFluidEntries.LIMEADE.get(), 250)
             .withCondition(enabled(CRItems.LIMEADE))
