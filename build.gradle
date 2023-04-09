@@ -1,21 +1,10 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: true
-        classpath "org.parchmentmc:librarian:${librarian_version}"
-        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
-    }
+plugins {
+    id 'idea'
+    id 'net.minecraftforge.gradle'
+    id 'org.spongepowered.mixin'
+    id 'org.parchmentmc.librarian.forgegradle'
+    id 'maven-publish'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 
 version = mod_version
 group = 'plus.dragons.createcentralkitchen'
@@ -142,7 +131,7 @@ dependencies {
     compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
     ////create addons
-    implementation fg.deobf("curse.maven:createaddtion-439890:${create_addition_file}")
+    implementation fg.deobf("curse.maven:createaddition-439890:${create_addition_file}")
     ////farmers delight addons
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
     implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
@@ -154,7 +143,7 @@ dependencies {
     implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
     implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
     implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
-    implementation fg.deobf("curse.maven:buzzier_bees-355458:${buzzier_bees_file}")
+    implementation fg.deobf("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
     implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
     implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
     implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
