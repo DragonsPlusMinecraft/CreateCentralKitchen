@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -44,6 +45,7 @@ public class CentralKitchenArmInterationTypes {
         }
     }
     
+    @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         ModList mods = ModList.get();
         if (Mods.isLoaded(Mods.FD)) {
@@ -57,6 +59,7 @@ public class CentralKitchenArmInterationTypes {
         }
     }
     
+    @SubscribeEvent
     public static void registerPonderTags(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             Consumer<ItemLike> consumer = PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS)::add;
