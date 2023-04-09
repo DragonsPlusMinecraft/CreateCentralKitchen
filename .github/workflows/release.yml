@@ -55,7 +55,7 @@ jobs:
           loaders: |
             forge
           game-versions: |
-            1.19.2
+            ${{ env.MINECRAFT_VERSION }}
           dependencies: |
             create | depends | *
             createaddition | suggests | *
@@ -75,6 +75,6 @@ jobs:
             seasonals | suggests | *
             cookielicious | suggests | *
           java: |
-            17
+            ${{ env.JAVA_VERSION }}
           retry-attempts: 2
           retry-delay: 10000
