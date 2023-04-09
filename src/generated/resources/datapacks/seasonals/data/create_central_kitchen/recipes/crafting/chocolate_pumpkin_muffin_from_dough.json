@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "seasonals:roasted_pumpkin"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:bars/chocolate"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "seasonals:chocolate_pumpkin_muffin"
+  }
+}

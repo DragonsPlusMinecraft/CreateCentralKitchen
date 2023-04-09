@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "create_central_kitchen:config",
+      "config": "pie_overhaul"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "create_central_kitchen:config_list",
+        "config": "pie_overhaul_black_list",
+        "value": "environmental:truffle_pie"
+      }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "environmental"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:truffle_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:truffle_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:truffle_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:truffle_pie_slice"
+    }
+  ],
+  "result": {
+    "item": "environmental:truffle_pie"
+  }
+}

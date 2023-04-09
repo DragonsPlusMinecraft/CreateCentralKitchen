@@ -1,0 +1,87 @@
+{
+  "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "portobello_burger"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:bread"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "collectorsreap:portobello_burger"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        },
+        {
+          "item": "collectorsreap:baked_portobello_cap"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        },
+        {
+          "tag": "forge:salad_ingredients"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_burger"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_portobello_burger"
+  }
+}

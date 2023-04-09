@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    },
+    {
+      "type": "peculiars:config",
+      "value": "enable_atmospheric_food"
+    }
+  ],
+  "key": {
+    "#": {
+      "item": "atmospheric:yucca_fruit"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "m": {
+      "tag": "forge:milk"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "w": {
+      "tag": "forge:dough/wheat"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "ses",
+    "#w#"
+  ],
+  "result": {
+    "item": "peculiars:yucca_cake"
+  }
+}

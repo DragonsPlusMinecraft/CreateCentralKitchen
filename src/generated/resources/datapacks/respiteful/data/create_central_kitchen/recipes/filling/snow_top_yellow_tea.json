@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "farmersrespite:yellow_tea"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:vanilla_ice_cream",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "respiteful:snow_top_yellow_tea"
+    }
+  ]
+}

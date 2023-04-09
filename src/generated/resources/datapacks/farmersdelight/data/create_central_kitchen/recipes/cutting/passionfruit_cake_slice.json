@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "peculiars"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "peculiars:passionfruit_cake"
+    }
+  ],
+  "result": [
+    {
+      "count": 7,
+      "item": "create_central_kitchen:passionfruit_cake_slice"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

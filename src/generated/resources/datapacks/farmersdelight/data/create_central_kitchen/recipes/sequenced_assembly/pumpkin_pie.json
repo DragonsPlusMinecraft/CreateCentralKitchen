@@ -1,0 +1,79 @@
+{
+  "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "create_central_kitchen:config",
+      "config": "pie_overhaul"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "create_central_kitchen:config_list",
+        "config": "pie_overhaul_black_list",
+        "value": "minecraft:pumpkin_pie"
+      }
+    }
+  ],
+  "ingredient": {
+    "item": "farmersdelight:pie_crust"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "minecraft:pumpkin_pie"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_pumpkin_pie"
+        },
+        {
+          "item": "farmersdelight:pumpkin_slice"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_pumpkin_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_pumpkin_pie"
+        },
+        {
+          "item": "farmersdelight:pumpkin_slice"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_pumpkin_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_pumpkin_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_pumpkin_pie"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_pumpkin_pie"
+  }
+}

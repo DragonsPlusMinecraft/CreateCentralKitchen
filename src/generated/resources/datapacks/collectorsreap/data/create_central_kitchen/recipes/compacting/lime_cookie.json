@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "lime_cookie"
+    }
+  ],
+  "ingredients": [],
+  "results": [
+    {
+      "item": "collectorsreap:lime_cookie"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "limeade"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:limeade"
+    }
+  ]
+}

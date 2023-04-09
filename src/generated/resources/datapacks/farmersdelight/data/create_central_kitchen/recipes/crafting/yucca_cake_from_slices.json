@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "peculiars"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:yucca_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "peculiars:yucca_cake"
+  }
+}

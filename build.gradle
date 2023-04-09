@@ -4,21 +4,20 @@ plugins {
     id 'org.spongepowered.mixin'
     id 'org.parchmentmc.librarian.forgegradle'
     id 'maven-publish'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-
 version = mod_version
-group = 'plus.dragons.createcentralkitchen' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'plus.dragons.createcentralkitchen'
 archivesBaseName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+jarJar.enable()
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-
     mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
+
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
     runs {
         client {
@@ -79,28 +78,38 @@ minecraft {
     }
 }
 
-jarJar.enable()
-
 repositories {
     mavenLocal()
     maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
+        name "Tterrag maven"
+        url "https://maven.tterrag.com/"
     }
     maven {
         name 'Progwml6 maven'
         url 'https://dvs1.progwml6.com/files/maven'
     }
     maven {
-        name 'blamejared'
-        url 'https://maven.blamejared.com'
+        name "Blamejared Maven"
+        url "https://maven.blamejared.com"
     }
     maven {
         name "Theillusivec4 Maven"
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        name 'Curse Maven'
+        name "Abnormals Maven"
+        url  "https://maven.jaackson.me"
+    }
+    maven {
+        name "Apple Skin"
+        url "https://maven.ryanliptak.com/"
+    }
+    maven {
+        name "JitPack"
+        url 'https://jitpack.io'
+    }
+    maven {
+        name "Curse Maven"
         url "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -114,32 +123,56 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    jarJar(group: 'plus.dragons.createdragonlib', name: "create_dragon_lib-${minecraft_version}", version: "${create_dragon_lib_version_range}") {
+    //embedded dependencies
+    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
         transitive = false
-        jarJar.pin(it, project.create_dragon_lib_version)
+        jarJar.ranged(it, "[${mixin_extras_version},)")
     }
-
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_file}")
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
-    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmersrespite_file}")
+    implementation(jarJar(fg.deobf("plus.dragons.createdragonlib:create_dragon_lib-${minecraft_version}:${create_dragon_lib_version}"))) {
+        transitive = false
+        jarJar.ranged(it, "${create_dragon_lib_version_range}")
+    }
+    //mandatory dependencies
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:all")
+    compileOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    //integration dependencies
+    ////create addons
+    implementation fg.deobf("curse.maven:createaddtion-439890:${create_addition_file}")
+    ////farmers delight addons
+    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
+    //implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
+    implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
+    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
     //implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-
+    implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
+    ////abnormals mods addons
+    implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
+    implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
+    implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
+    implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
+    implementation fg.deobf("curse.maven:buzzier_bees-355458:${buzzier_bees_file}")
+    implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
+    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
+    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
+    implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
+    implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")
+    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
+    //implementation fg.deobf("curse.maven:differentiate-450748:${differentiate_file}")
+    //implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
+    //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
-    implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
-
-    implementation fg.deobf("plus.dragons.createdragonlib:create_dragon_lib-${minecraft_version}:${create_dragon_lib_version}")
-
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
+    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
+    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
 
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
-// Include resources generated by data generators.
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
@@ -150,12 +183,15 @@ mixin {
     debug.export = true
 }
 
+void processJar(Jar jarTask) {
+    jarTask.configure {
+        from "LICENSE"
+        exclude ".cache"
+        exclude "assets/create_central_kitchen/lang/unfinished"
+        exclude "assets/create_central_kitchen/lang/default"
 
-// Example for how to get properties into the manifest for reading at runtime.
-jar {
-    classifier = 'slim'
-    manifest {
-        attributes([
+        manifest {
+            attributes([
                 "Specification-Title"     : "create_central_kitchen",
                 "Specification-Vendor"    : "dragonsplus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
@@ -164,28 +200,28 @@ jar {
                 "Implementation-Vendor"   : "dragonsplus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'MixinConfigs': 'create_central_kitchen.mixins.json'
-        ])
+            ])
+        }
     }
 }
 
-void addLicense(jarTask) {
-    jarTask.from('LICENSE')
+jar {
+    classifier 'slim'
+    finalizedBy 'reobfJar'
 }
 
-jar.finalizedBy('reobfJar')
-addLicense(jar)
+tasks.jarJar {
+    classifier ""
+    finalizedBy reobf.maybeCreate('jarJar')
+}
 
-tasks.jarJar.setClassifier('')
-tasks.jarJar.finalizedBy('reobfJarJar')
-addLicense(tasks.jarJar)
+processJar(jar)
+processJar(tasks.jarJar)
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = archivesBaseName
-
-            fg.component(it)
-            jarJar.component(it)
+            artifact jar
         }
     }
     repositories {
@@ -196,5 +232,5 @@ publishing {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
 }

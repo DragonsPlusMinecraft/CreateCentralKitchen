@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "seasonals"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "seasonals:pumpkin_cake"
+    }
+  ],
+  "result": [
+    {
+      "count": 7,
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

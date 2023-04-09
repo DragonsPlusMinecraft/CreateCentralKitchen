@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:chocolate_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "createaddition:chocolate_cake"
+  }
+}

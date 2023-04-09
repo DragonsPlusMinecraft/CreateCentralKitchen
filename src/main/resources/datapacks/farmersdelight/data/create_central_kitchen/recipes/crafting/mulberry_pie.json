@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www",
+    "mmm",
+    "sOs"
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "m": {
+      "item": "upgrade_aquatic:mulberry"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "O": {
+      "item": "farmersdelight:pie_crust"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:mulberry_pie"
+  },
+  "conditions": [
+    {
+      "modid": "upgrade_aquatic",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "config": "pie_overhaul",
+      "type": "create_central_kitchen:config"
+    },
+    {
+      "value": {
+        "config": "pie_overhaul_black_list",
+        "value": "upgrade_aquatic:mulberry_pie",
+        "type": "create_central_kitchen:config_list"
+      },
+      "type": "forge:not"
+    }
+  ]
+}

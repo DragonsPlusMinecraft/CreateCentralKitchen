@@ -1,0 +1,83 @@
+{
+  "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "environmental"
+    },
+    {
+      "type": "create_central_kitchen:config",
+      "config": "pie_overhaul"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "create_central_kitchen:config_list",
+        "config": "pie_overhaul_black_list",
+        "value": "environmental:cherry_pie"
+      }
+    }
+  ],
+  "ingredient": {
+    "item": "farmersdelight:pie_crust"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "environmental:cherry_pie"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_cherry_pie"
+        },
+        {
+          "item": "environmental:cherries"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_cherry_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_cherry_pie"
+        },
+        {
+          "item": "environmental:cherries"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_cherry_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_cherry_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_cherry_pie"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_cherry_pie"
+  }
+}

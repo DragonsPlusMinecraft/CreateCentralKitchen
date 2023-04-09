@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:sap_bucket"
+    },
+    {
+      "item": "autumnity:maple_log"
+    },
+    {
+      "item": "autumnity:maple_log"
+    },
+    {
+      "item": "autumnity:maple_log"
+    },
+    {
+      "item": "autumnity:maple_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "autumnity:sappy_maple_log"
+  }
+}

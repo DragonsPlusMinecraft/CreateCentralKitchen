@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "create_central_kitchen:config",
+      "config": "pie_overhaul"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "create_central_kitchen:config_list",
+        "config": "pie_overhaul_black_list",
+        "value": "upgrade_aquatic:mulberry_pie"
+      }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "upgrade_aquatic"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:mulberry_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:mulberry_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:mulberry_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:mulberry_pie_slice"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:mulberry_pie"
+  }
+}

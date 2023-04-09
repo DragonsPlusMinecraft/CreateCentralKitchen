@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mem",
+    "mtm",
+    "sOs"
+  ],
+  "key": {
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "m": {
+      "item": "minecraft:brown_mushroom"
+    },
+    "t": {
+      "item": "environmental:truffle"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "O": {
+      "item": "farmersdelight:pie_crust"
+    }
+  },
+  "result": {
+    "item": "environmental:truffle_pie"
+  },
+  "conditions": [
+    {
+      "modid": "environmental",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "config": "pie_overhaul",
+      "type": "create_central_kitchen:config"
+    },
+    {
+      "value": {
+        "config": "pie_overhaul_black_list",
+        "value": "environmental:truffle_pie",
+        "type": "create_central_kitchen:config_list"
+      },
+      "type": "forge:not"
+    }
+  ]
+}

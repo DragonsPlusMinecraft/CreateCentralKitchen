@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    },
+    {
+      "type": "peculiars:config",
+      "value": "enable_atmospheric_food"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "atmospheric:yucca_fruit"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:vanilla_ice_cream",
+      "nbt": {}
+    },
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 750,
+      "fluid": "create_central_kitchen:yucca_milkshake"
+    }
+  ]
+}

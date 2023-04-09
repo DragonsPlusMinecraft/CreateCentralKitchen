@@ -1,0 +1,41 @@
+{
+  "type": "create:compacting",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "pomegranate_cake"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:fruits/pomegranate"
+    },
+    {
+      "tag": "forge:fruits/pomegranate"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:pomegranate_cake"
+    }
+  ]
+}

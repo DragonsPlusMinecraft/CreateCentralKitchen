@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:mulberry"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:eggs"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:mulberry_pie"
+  },
+  "conditions": [
+    {
+      "modid": "upgrade_aquatic",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "values": [
+        {
+          "value": {
+            "config": "pie_overhaul",
+            "type": "create_central_kitchen:config"
+          },
+          "type": "forge:not"
+        },
+        {
+          "config": "pie_overhaul_black_list",
+          "value": "upgrade_aquatic:mulberry_pie",
+          "type": "create_central_kitchen:config_list"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ]
+}

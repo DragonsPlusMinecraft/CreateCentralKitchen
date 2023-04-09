@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "farmersdelight:egg_sandwich",
+    "farmersdelight:chicken_sandwich",
+    "farmersdelight:hamburger",
+    "farmersdelight:bacon_sandwich",
+    "farmersdelight:mutton_wrap"
+  ]
+}

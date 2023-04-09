@@ -1,0 +1,81 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:bread"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "farmersdelight:hamburger"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        },
+        {
+          "item": "farmersdelight:beef_patty"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        },
+        {
+          "tag": "forge:salad_ingredients"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_hamburger"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_hamburger"
+  }
+}

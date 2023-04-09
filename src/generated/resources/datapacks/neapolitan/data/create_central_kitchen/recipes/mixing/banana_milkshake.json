@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:fruits/banana"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:vanilla_ice_cream",
+      "nbt": {}
+    },
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 750,
+      "fluid": "create_central_kitchen:banana_milkshake"
+    }
+  ]
+}

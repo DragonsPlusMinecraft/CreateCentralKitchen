@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:mod_loaded",
+        "modid": "abnormals_delight"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "autumnity:syrup_bottle"
+    },
+    {
+      "item": "minecraft:pumpkin"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "autumnity:pumpkin_bread"
+  }
+}

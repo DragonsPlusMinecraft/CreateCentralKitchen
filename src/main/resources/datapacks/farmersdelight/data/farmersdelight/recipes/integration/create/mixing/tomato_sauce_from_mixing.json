@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "tag": "forge:crops/tomato"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersdelight:tomato_sauce",
+      "count": 1
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:false"
+    }
+  ]
+}
