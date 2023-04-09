@@ -1,4 +1,4 @@
-name: Release-1.19.2
+name: Release
 on: [workflow_dispatch]
 
 permissions:
@@ -58,7 +58,7 @@ jobs:
             1.19.2
           dependencies: |
             create | depends | *
-            createaddtion | suggests | *
+            createaddition | suggests | *
             farmers-delight | suggests | *
             farmers-respite | suggests | *
             collectors-reap | suggests | *
