@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "peculiars:aloe_cake"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  },
+  "result": [
+    {
+      "item": "create_central_kitchen:aloe_cake_slice",
+      "count": 7
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "peculiars",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

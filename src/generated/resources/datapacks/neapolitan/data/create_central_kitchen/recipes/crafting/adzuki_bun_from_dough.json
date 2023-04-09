@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "neapolitan:roasted_adzuki_beans"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "result": {
+    "item": "neapolitan:adzuki_bun"
+  }
+}

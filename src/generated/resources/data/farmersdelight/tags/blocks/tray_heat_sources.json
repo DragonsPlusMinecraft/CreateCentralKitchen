@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "create:lit_blaze_burner",
+    "create:blaze_burner"
+  ]
+}

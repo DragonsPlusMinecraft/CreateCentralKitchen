@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "fluid": "create_central_kitchen:yucca_ice_cream",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "item": "peculiars:yucca_ice_cream"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "peculiars",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:cherry_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:cherry_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:cherry_pie_slice"
+    },
+    {
+      "item": "create_central_kitchen:cherry_pie_slice"
+    }
+  ],
+  "result": {
+    "item": "environmental:cherry_pie"
+  },
+  "conditions": [
+    {
+      "config": "pie_overhaul",
+      "type": "create_central_kitchen:config"
+    },
+    {
+      "value": {
+        "config": "pie_overhaul_black_list",
+        "value": "environmental:cherry_pie",
+        "type": "create_central_kitchen:config_list"
+      },
+      "type": "forge:not"
+    },
+    {
+      "modid": "environmental",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

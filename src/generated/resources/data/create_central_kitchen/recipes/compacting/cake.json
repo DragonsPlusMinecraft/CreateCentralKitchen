@@ -1,0 +1,41 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 1000
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:cake"
+    }
+  ],
+  "conditions": [
+    {
+      "value": {
+        "modid": "createaddition",
+        "type": "forge:mod_loaded"
+      },
+      "type": "forge:not"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "ses",
+    "#w#"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:milk"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "w": {
+      "tag": "forge:dough/wheat"
+    },
+    "#": {
+      "item": "atmospheric:aloe_leaves"
+    }
+  },
+  "result": {
+    "item": "peculiars:aloe_cake"
+  },
+  "conditions": [
+    {
+      "modid": "atmospheric",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "value": "enable_atmospheric_food",
+      "type": "peculiars:config"
+    }
+  ]
+}

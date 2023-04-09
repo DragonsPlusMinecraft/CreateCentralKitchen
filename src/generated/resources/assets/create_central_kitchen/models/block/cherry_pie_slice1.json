@@ -1,0 +1,10 @@
+{
+  "parent": "create_central_kitchen:block/pie_slice1",
+  "textures": {
+    "particle": "create_central_kitchen:block/cherry_pie_top",
+    "top": "create_central_kitchen:block/cherry_pie_top",
+    "bottom": "create_central_kitchen:block/cherry_pie_bottom",
+    "side": "create_central_kitchen:block/cherry_pie_side",
+    "inner": "create_central_kitchen:block/cherry_pie_inner"
+  }
+}

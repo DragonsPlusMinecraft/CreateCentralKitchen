@@ -1,0 +1,83 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "farmersdelight:pie_crust"
+  },
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_mulberry_pie"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_mulberry_pie"
+        },
+        {
+          "item": "upgrade_aquatic:mulberry"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_mulberry_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_mulberry_pie"
+        },
+        {
+          "tag": "forge:flour/wheat"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_mulberry_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_mulberry_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_mulberry_pie"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "upgrade_aquatic:mulberry_pie"
+    }
+  ],
+  "loops": 2,
+  "conditions": [
+    {
+      "modid": "upgrade_aquatic",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "config": "pie_overhaul",
+      "type": "create_central_kitchen:config"
+    },
+    {
+      "value": {
+        "config": "pie_overhaul_black_list",
+        "value": "upgrade_aquatic:mulberry_pie",
+        "type": "create_central_kitchen:config_list"
+      },
+      "type": "forge:not"
+    }
+  ]
+}

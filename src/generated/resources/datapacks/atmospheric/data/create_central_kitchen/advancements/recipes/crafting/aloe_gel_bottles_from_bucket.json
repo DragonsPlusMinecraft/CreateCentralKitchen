@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "create_central_kitchen:crafting/aloe_gel_bottles_from_bucket"
+    ]
+  },
+  "criteria": {
+    "has_aloe_gel_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "create_central_kitchen:aloe_gel_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_glass_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:glass_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "create_central_kitchen:crafting/aloe_gel_bottles_from_bucket"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_aloe_gel_bucket",
+      "has_glass_bottle",
+      "has_the_recipe"
+    ]
+  ]
+}

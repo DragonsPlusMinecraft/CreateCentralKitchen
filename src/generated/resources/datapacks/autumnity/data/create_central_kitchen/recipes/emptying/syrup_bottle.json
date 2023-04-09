@@ -1,0 +1,23 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "autumnity:syrup_bottle"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:syrup",
+      "amount": 250
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "autumnity",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

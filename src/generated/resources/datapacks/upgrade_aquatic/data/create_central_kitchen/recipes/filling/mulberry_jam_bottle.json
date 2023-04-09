@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:mulberry_jam",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "upgrade_aquatic:mulberry_jam_bottle"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "upgrade_aquatic",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

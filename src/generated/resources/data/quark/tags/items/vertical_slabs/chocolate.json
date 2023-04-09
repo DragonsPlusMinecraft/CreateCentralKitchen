@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "neapolitan:chocolate_brick_vertical_slab",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_tile_vertical_slab",
+      "required": false
+    }
+  ]
+}

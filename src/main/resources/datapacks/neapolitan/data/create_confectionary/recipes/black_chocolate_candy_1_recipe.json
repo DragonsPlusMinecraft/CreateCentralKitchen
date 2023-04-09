@@ -1,0 +1,25 @@
+{
+  "group": "create_confectionery",
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "forge:bars/chocolate"
+    },
+    {
+      "fluid": "create_confectionery:black_chocolate",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "create_confectionery:black_chocolate_candy_1"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_confectionery"
+    }
+  ]
+}

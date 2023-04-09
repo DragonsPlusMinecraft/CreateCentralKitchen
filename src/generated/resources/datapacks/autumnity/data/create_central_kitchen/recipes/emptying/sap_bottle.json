@@ -1,0 +1,23 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "autumnity:sap_bottle"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:sap",
+      "amount": 250
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "autumnity",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

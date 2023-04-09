@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "create:bar_of_chocolate",
+    {
+      "id": "neapolitan:chocolate_bar",
+      "required": false
+    }
+  ]
+}

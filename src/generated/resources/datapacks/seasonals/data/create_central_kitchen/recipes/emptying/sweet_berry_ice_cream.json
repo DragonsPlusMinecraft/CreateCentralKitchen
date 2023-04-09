@@ -1,0 +1,23 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "seasonals:sweet_berry_ice_cream"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "fluid": "create_central_kitchen:sweet_berry_ice_cream",
+      "amount": 500
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "seasonals",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

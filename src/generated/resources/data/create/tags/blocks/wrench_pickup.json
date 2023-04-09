@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "farmersdelight:cooking_pot",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:kettle",
+      "required": false
+    },
+    {
+      "id": "miners_delight:copper_pot",
+      "required": false
+    }
+  ]
+}

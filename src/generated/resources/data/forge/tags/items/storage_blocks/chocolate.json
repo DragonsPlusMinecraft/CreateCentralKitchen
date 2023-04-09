@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "neapolitan:chocolate_block",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_bricks",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_tiles",
+      "required": false
+    },
+    {
+      "id": "create_confectionary:chocolate_bricks",
+      "required": false
+    }
+  ]
+}

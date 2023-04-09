@@ -1,0 +1,9 @@
+{
+  "parent": "create_central_kitchen:block/pie",
+  "textures": {
+    "particle": "create_central_kitchen:block/truffle_pie_top",
+    "top": "create_central_kitchen:block/truffle_pie_top",
+    "bottom": "create_central_kitchen:block/truffle_pie_bottom",
+    "side": "create_central_kitchen:block/truffle_pie_side"
+  }
+}

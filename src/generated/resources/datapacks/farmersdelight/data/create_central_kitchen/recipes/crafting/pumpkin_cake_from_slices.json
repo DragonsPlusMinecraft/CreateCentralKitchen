@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:pumpkin_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "seasonals:pumpkin_cake"
+  },
+  "conditions": [
+    {
+      "modid": "seasonals",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

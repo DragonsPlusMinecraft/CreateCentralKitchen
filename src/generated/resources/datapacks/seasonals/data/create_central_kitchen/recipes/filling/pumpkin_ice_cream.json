@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "fluid": "create_central_kitchen:pumpkin_ice_cream",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "item": "seasonals:pumpkin_ice_cream"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "seasonals",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

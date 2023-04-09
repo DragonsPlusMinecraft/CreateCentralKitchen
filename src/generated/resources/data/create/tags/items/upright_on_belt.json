@@ -1,21 +1,8 @@
 {
   "replace": false,
   "values": [
-    {
-      "id": "farmersdelight:apple_cider",
-      "required": false
-    },
-    {
-      "id": "farmersdelight:hot_cocoa",
-      "required": false
-    },
-    {
-      "id": "farmersdelight:melon_juice",
-      "required": false
-    },
-    {
-      "id": "farmersdelight:tomato_sauce",
-      "required": false
-    }
+    "minecraft:bowl",
+    "minecraft:bucket",
+    "minecraft:powder_snow_bucket"
   ]
 }

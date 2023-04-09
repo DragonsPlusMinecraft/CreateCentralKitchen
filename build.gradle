@@ -21,6 +21,7 @@ version = mod_version
 group = 'plus.dragons.createcentralkitchen'
 archivesBaseName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
 
+jarJar.enable()
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -91,7 +92,7 @@ minecraft {
 
 repositories {
     maven {
-        name "tterrag maven"
+        name "Tterrag maven"
         url "https://maven.tterrag.com/"
     }
     maven {
@@ -107,7 +108,19 @@ repositories {
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        name 'Curse Maven'
+        name "Abnormals Maven"
+        url  "https://maven.jaackson.me"
+    }
+    maven {
+        name "Apple Skin"
+        url "https://maven.ryanliptak.com/"
+    }
+    maven {
+        name "JitPack"
+        url 'https://jitpack.io'
+    }
+    maven {
+        name "Curse Maven"
         url "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -117,17 +130,46 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_file}")
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim")
+    //embedded dependencies
+    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
+        transitive = false
+        jarJar.ranged(it, "[${mixin_extras_version},)")
+    }
+    //mandatory dependencies
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:all")
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    //integration dependencies
+    ////create addons
+    implementation fg.deobf("curse.maven:createaddtion-439890:${create_addition_file}")
+    ////farmers delight addons
+    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
+    implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
+    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
+    implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
+    implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
+    ////abnormals mods addons
+    implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
+    implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
+    implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
+    implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
+    implementation fg.deobf("curse.maven:buzzier_bees-355458:${buzzier_bees_file}")
+    implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
+    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
+    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
+    implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
+    implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")
+    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
+    implementation fg.deobf("curse.maven:differentiate-450748:${differentiate_file}")
+    implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
+    //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
-
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
+    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
+    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
 
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
@@ -142,9 +184,15 @@ mixin {
     debug.export = true
 }
 
-jar {
-    manifest {
-        attributes([
+void processJar(Jar jarTask) {
+    jarTask.configure {
+        from "LICENSE"
+        exclude ".cache"
+        exclude "assets/create_central_kitchen/lang/unfinished"
+        exclude "assets/create_central_kitchen/lang/partial"
+
+        manifest {
+            attributes([
                 "Specification-Title"     : "create_central_kitchen",
                 "Specification-Vendor"    : "dragonsplus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
@@ -153,11 +201,23 @@ jar {
                 "Implementation-Vendor"   : "dragonsplus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'MixinConfigs': 'create_central_kitchen.mixins.json'
-        ])
+            ])
+        }
     }
 }
 
-jar.finalizedBy('reobfJar')
+jar {
+    classifier 'slim'
+    finalizedBy 'reobfJar'
+}
+
+tasks.jarJar {
+    classifier ""
+    finalizedBy reobf.maybeCreate('jarJar')
+}
+
+processJar(jar)
+processJar(tasks.jarJar)
 
 publishing {
     publications {

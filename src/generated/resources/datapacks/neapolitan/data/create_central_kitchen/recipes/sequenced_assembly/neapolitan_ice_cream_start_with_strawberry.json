@@ -1,0 +1,51 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "neapolitan:vanilla_ice_cream"
+  },
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_neapolitan_ice_cream_strawberry"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_neapolitan_ice_cream_strawberry"
+        },
+        {
+          "tag": "forge:fruits/strawberry"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_neapolitan_ice_cream_strawberry"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_neapolitan_ice_cream_strawberry"
+        },
+        {
+          "fluid": "create:chocolate",
+          "nbt": {},
+          "amount": 250
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_neapolitan_ice_cream_strawberry"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:neapolitan_ice_cream"
+    }
+  ],
+  "loops": 1
+}

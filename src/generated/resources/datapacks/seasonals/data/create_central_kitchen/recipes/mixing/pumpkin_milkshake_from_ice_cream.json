@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "fluid": "create_central_kitchen:pumpkin_ice_cream",
+      "nbt": {},
+      "amount": 500
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:pumpkin_milkshake",
+      "amount": 750
+    }
+  ]
+}

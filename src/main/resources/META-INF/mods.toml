@@ -2,16 +2,15 @@ modLoader="javafml"
 loaderVersion="[40,)"
 license="MIT"
 [[mods]]
-modId="create_central_kitchen" #mandatory
-version="${file.jarVersion}" #mandatory
+modId="create_central_kitchen"
+version="${file.jarVersion}"
 displayName="Create: Central Kitchen"
-#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/create-central-kitchen"
 logoFile="logo.png"
-#credits="Thanks for this example mod goes to Java"
+#credits=""
 authors="LimonBlaze, MarbleGate and Etherwood"
 description='''
-An add-on for Create, providing automation support for Farmer's Delight and its add-ons.
+An add-on for Create, providing automation support for your kitchen.
 '''
 
 [[dependencies.create_central_kitchen]]
@@ -32,12 +31,21 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
     modId="create"
     mandatory=true
     versionRange="[0.5.0.i,)"
-    ordering="NONE"
+    ordering="AFTER"
+    side="BOTH"
+
+# Must load after these optional dependencies
+
+[[dependencies.create_central_kitchen]]
+    modId="environmental"
+    mandatory=false
+    versionRange="[0,)"
+    ordering="AFTER"
     side="BOTH"
 
 [[dependencies.create_central_kitchen]]
-    modId="farmersdelight"
+    modId="upgrade_aquatic"
     mandatory=false
-    versionRange="[1.18.2-1.2.0,)"
-    ordering="NONE"
+    versionRange="[0,)"
+    ordering="AFTER"
     side="BOTH"

@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "create_central_kitchen:sap",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:syrup",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}
