@@ -4,6 +4,7 @@ import com.cosmicgelatin.seasonals.core.SeasonalsConfig;
 import com.cosmicgelatin.seasonals.core.registry.SeasonalsItems;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
+import com.teamabnormals.abnormals_delight.core.registry.ADItems;
 import com.teamabnormals.autumnity.core.registry.AutumnityBlocks;
 import com.teamabnormals.autumnity.core.registry.AutumnityItems;
 import com.teamabnormals.blueprint.core.api.conditions.BlueprintAndCondition;
@@ -33,6 +34,11 @@ public class AutumnityRecipes extends DatapackRecipes {
             .output(AutumnityBlocks.SAPPY_MAPLE_WOOD.get())
             .require(AutumnityBlocks.MAPLE_WOOD.get())
             .require(AutumnityFluidEntries.SAP.get(), 250)),
+        COMPACTING_MAPLE_COOKIE = add(compacting("maple_cookie")
+            .output(ADItems.MAPLE_COOKIE.get())
+            .require(AutumnityFluidEntries.SYRUP.get(), 250)
+            .require(ForgeItemTags.FLOUR__WHEAT.tag)
+            .require(ForgeItemTags.FLOUR__WHEAT.tag)),
         MIXING_SYRUP = add(mixing("syrup")
             .output(AutumnityFluidEntries.SYRUP.get(), 250)
             .require(AutumnityFluidEntries.SAP.get(), 250)

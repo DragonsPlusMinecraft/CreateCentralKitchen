@@ -46,24 +46,16 @@ public class FDRecipes extends DatapackRecipes {
             .output(FDFluidEntries.TOMATO_SAUCE.get(), 250)
             .require(ForgeTags.VEGETABLES_TOMATO)
             .require(ForgeTags.VEGETABLES_TOMATO)),
-        COMPACTING_SWEET_BERRY_COOKIE_FROM_FLOUR = add(compacting("sweet_berry_cookie_from_flour")
+        COMPACTING_SWEET_BERRY_COOKIE = add(compacting("sweet_berry_cookie")
             .output(ModItems.SWEET_BERRY_COOKIE.get(), 8)
             .require(Items.SWEET_BERRIES)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
-        COMPACTING_SWEET_BERRY_COOKIE_FROM_DOUGH = add(compacting("sweet_berry_cookie_from_dough")
-            .output(ModItems.SWEET_BERRY_COOKIE.get(), 8)
-            .require(Items.SWEET_BERRIES)
-            .require(ForgeTags.DOUGH_WHEAT)),
-        COMPACTING_HONEY_COOKIE_FROM_FLOUR = add(compacting("honey_cookie_from_flour")
+        COMPACTING_HONEY_COOKIE = add(compacting("honey_cookie")
             .output(ModItems.HONEY_COOKIE.get(), 8)
             .require(AllTags.AllFluidTags.HONEY.tag, 250)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
-        COMPACTING_HONEY_COOKIE_FROM_DOUGH = add(compacting("honey_cookie_from_dough")
-            .output(ModItems.HONEY_COOKIE.get(), 8)
-            .require(AllTags.AllFluidTags.HONEY.tag, 250)
-            .require(ForgeTags.DOUGH_WHEAT)),
         SEQUENCED_ASSEMBLY_EGG_SANDWICH = add(sequencedAssembly("egg_sandwich")
             .require(ForgeTags.BREAD)
             .transitionTo(FDItemEntries.INCOMPLETE_EGG_SANDWICH.get())

@@ -89,15 +89,11 @@ public class FRRecipes extends DatapackRecipes {
             .require(AllTags.forgeItemTag("milk"))
             .container(Items.GLASS_BOTTLE)
             .needWater()),
-        COMPACTING_GREEN_TEA_COOKIE_FROM_FLOUR = add(compacting("green_tea_cookie_from_flour")
+        COMPACTING_GREEN_TEA_COOKIE = add(compacting("green_tea_cookie")
             .output(FRItems.GREEN_TEA_COOKIE.get(), 8)
             .require(FRItems.GREEN_TEA_LEAVES.get())
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
-        COMPACTING_GREEN_TEA_COOKIE_FROM_DOUGH = add(compacting("green_tea_cookie_from_dough")
-            .output(FRItems.GREEN_TEA_COOKIE.get(), 8)
-            .require(FRItems.GREEN_TEA_LEAVES.get())
-            .require(ForgeTags.DOUGH_WHEAT)),
         CRAFTING_COFFEE_CAKE_FROM_DOUGH = add(shaped("coffee_cake_from_dough")
             .output(FRItems.COFFEE_CAKE.get())
             .define('m', ForgeTags.MILK)
@@ -108,7 +104,7 @@ public class FRRecipes extends DatapackRecipes {
             .pattern("mmm")
             .pattern("ses")
             .pattern("#w#")),
-        COMPACTING_COFFEE_CAKE = add(mixing("coffee_cake")
+        MIXING_COFFEE_CAKE = add(mixing("coffee_cake")
             .output(FRItems.COFFEE_CAKE.get())
             .require(Tags.Items.EGGS)
             .require(Items.SUGAR)
