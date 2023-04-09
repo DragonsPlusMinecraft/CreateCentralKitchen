@@ -152,7 +152,7 @@ dependencies {
     implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
     implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
     implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
-    implementation fg.deobf("curse.maven:buzzier_bees-355458:${buzzier_bees_file}")
+    implementation fg.deobf("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
     implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
     implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
     implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")

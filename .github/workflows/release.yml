@@ -1,0 +1,79 @@
+name: Release
+on: [workflow_dispatch]
+
+permissions:
+  contents: write
+
+env:
+  MINECRAFT_VERSION: 1.19.2
+  JAVA_VERSION: 17
+  VERSION: 1.3.0
+  CREATE_VERSION: 0.5.i
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: 17
+
+      - name: Make Gradle Wrapper Executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
+
+      - name: Build
+        run: ./gradlew clean build
+
+      - name: Publish (CurseForge/Modrinth)
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          # Modrinth
+          modrinth-id: btq68HMO
+          modrinth-featured: true
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          # CurseForge
+          curseforge-id: 820977
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          # Config
+          name: "Create: Central Kitchen ${{ env.VERSION }} for Create ${{ env.MINECRAFT_VERSION }}-${{ env.CREATE_VERSION }}"
+          version: ${{ env.VERSION }}
+          version-type: release
+          changelog-file: changelog/${{ env.VERSION }}.md
+          files-primary: build/libs/!(*-@(dev|sources|slim)).jar
+          files-secondary: ""
+
+          loaders: |
+            forge
+          game-versions: |
+            1.19.2
+          dependencies: |
+            create | depends | *
+            createaddtion | suggests | *
+            farmers-delight | suggests | *
+            farmers-respite | suggests | *
+            collectors-reap | suggests | *
+            nethers-delight | suggests | *
+            abnormals-delight | suggests | *
+            atmospheric | suggests | *
+            autumnity | suggests | *
+            buzzier-bees | suggests | *
+            environmental | suggests | *
+            neapolitan | suggests | *
+            upgrade-aquatic | suggests | *
+            peculiars | suggests | *
+            respiteful | suggests | *
+            seasonals | suggests | *
+          java: |
+            17
+          retry-attempts: 2
+          retry-delay: 10000
