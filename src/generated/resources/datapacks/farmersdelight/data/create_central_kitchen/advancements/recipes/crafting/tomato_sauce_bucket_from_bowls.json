@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "create_central_kitchen:crafting/tomato_sauce_bucket_from_bowls"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tomato_sauce": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "farmersdelight:tomato_sauce"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_bucket",
+      "has_tomato_sauce",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "create_central_kitchen:crafting/tomato_sauce_bucket_from_bowls"
+    ]
+  }
+}

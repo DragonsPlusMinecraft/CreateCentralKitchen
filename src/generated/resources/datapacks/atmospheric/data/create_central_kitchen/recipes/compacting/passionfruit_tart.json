@@ -1,0 +1,37 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "item": "atmospheric:passionfruit"
+    },
+    {
+      "tag": "forge:eggs"
+    }
+  ],
+  "results": [
+    {
+      "item": "atmospheric:passionfruit_tart"
+    }
+  ]
+}

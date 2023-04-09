@@ -1,0 +1,21 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:syrup",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "abnormals_delight:maple_cookie"
+    }
+  ]
+}

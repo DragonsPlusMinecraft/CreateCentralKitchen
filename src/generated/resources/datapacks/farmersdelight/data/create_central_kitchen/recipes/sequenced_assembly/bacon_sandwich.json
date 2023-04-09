@@ -1,0 +1,65 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:bread"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "farmersdelight:bacon_sandwich"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_bacon_sandwich"
+        },
+        {
+          "tag": "forge:cooked_bacon"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_bacon_sandwich"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_bacon_sandwich"
+        },
+        {
+          "tag": "forge:salad_ingredients"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_bacon_sandwich"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_bacon_sandwich"
+        },
+        {
+          "tag": "forge:crops/tomato"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_bacon_sandwich"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_bacon_sandwich"
+  }
+}

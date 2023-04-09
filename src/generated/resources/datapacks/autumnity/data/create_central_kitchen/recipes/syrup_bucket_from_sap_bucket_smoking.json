@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "create_central_kitchen:sap_bucket"
+  },
+  "result": "create_central_kitchen:syrup_bucket"
+}

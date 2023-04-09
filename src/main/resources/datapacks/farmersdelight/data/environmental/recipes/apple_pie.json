@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:eggs"
+    }
+  ],
+  "result": {
+    "item": "environmental:apple_pie"
+  },
+  "conditions": [
+    {
+      "modid": "environmental",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "values": [
+        {
+          "value": {
+            "config": "pie_overhaul",
+            "type": "create_central_kitchen:config"
+          },
+          "type": "forge:not"
+        },
+        {
+          "config": "pie_overhaul_black_list",
+          "value": "environmental:apple_pie",
+          "type": "create_central_kitchen:config_list"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ]
+}

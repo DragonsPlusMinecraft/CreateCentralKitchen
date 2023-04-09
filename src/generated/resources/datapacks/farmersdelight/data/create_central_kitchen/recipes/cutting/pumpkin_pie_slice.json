@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cutting",
+  "conditions": [
+    {
+      "type": "create_central_kitchen:config",
+      "config": "pie_overhaul"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "create_central_kitchen:config_list",
+        "config": "pie_overhaul_black_list",
+        "value": "minecraft:pumpkin_pie"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:pumpkin_pie"
+    }
+  ],
+  "result": [
+    {
+      "count": 4,
+      "item": "create_central_kitchen:pumpkin_pie_slice"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

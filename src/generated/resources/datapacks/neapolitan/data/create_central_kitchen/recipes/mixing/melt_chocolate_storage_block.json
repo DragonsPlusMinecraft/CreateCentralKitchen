@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "create:chocolate"
+    }
+  ]
+}

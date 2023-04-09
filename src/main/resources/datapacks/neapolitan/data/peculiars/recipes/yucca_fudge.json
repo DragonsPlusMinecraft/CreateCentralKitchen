@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:bars/chocolate"
+    },
+    {
+      "item": "atmospheric:yucca_fruit"
+    }
+  ],
+  "result": {
+    "item": "peculiars:yucca_fudge",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "peculiars"
+        },
+        {
+          "type": "peculiars:config",
+          "value": "enable_atmospheric_food"
+        }
+      ]
+    }
+  ]
+}

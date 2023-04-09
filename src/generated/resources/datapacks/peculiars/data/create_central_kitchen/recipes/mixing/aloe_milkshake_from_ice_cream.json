@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
+    },
+    {
+      "type": "peculiars:config",
+      "value": "enable_atmospheric_food"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:aloe_ice_cream",
+      "nbt": {}
+    },
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 750,
+      "fluid": "create_central_kitchen:aloe_milkshake"
+    }
+  ]
+}

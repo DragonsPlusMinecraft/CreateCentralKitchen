@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "farmersrespite:coffee_beans"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "m": {
+      "tag": "forge:milk"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "w": {
+      "tag": "forge:dough/wheat"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "ses",
+    "#w#"
+  ],
+  "result": {
+    "item": "farmersrespite:coffee_cake"
+  }
+}

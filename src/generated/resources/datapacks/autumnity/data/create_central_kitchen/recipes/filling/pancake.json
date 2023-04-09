@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "farmersdelight:pie_crust"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:syrup",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "autumnity:pancake"
+    }
+  ]
+}

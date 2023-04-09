@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "amount": 1000,
+      "fluid": "create_central_kitchen:aloe_gel",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "atmospheric:aloe_gel_block"
+    }
+  ]
+}

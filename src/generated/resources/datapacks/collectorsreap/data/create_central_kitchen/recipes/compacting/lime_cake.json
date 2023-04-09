@@ -1,0 +1,41 @@
+{
+  "type": "create:compacting",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "lime_cake"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:lime_cake"
+    }
+  ]
+}
