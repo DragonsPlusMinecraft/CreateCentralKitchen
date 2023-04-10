@@ -4,6 +4,10 @@
     {
       "type": "collectorsreap:enabled",
       "value": "berry_limeade"
+    },
+    {
+      "type": "collectorsreap:enabled",
+      "value": "limeade"
     }
   ],
   "ingredients": [

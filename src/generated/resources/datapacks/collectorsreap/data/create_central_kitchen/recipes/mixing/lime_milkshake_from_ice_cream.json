@@ -4,6 +4,14 @@
     {
       "type": "collectorsreap:enabled",
       "value": "lime_milkshake"
+    },
+    {
+      "type": "collectorsreap:enabled",
+      "value": "lime_ice_cream"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "neapolitan"
     }
   ],
   "ingredients": [

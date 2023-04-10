@@ -38,7 +38,8 @@ public class AutumnityRecipes extends DatapackRecipes {
             .output(ADItems.MAPLE_COOKIE.get())
             .require(AutumnityFluidEntries.SYRUP.get(), 250)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
-            .require(ForgeItemTags.FLOUR__WHEAT.tag)),
+            .require(ForgeItemTags.FLOUR__WHEAT.tag)
+            .whenModLoaded(Mods.AD)),
         MIXING_SYRUP = add(mixing("syrup")
             .output(AutumnityFluidEntries.SYRUP.get(), 250)
             .require(AutumnityFluidEntries.SAP.get(), 250)
@@ -102,7 +103,7 @@ public class AutumnityRecipes extends DatapackRecipes {
         CRAFTING_PUMPKIN_BREAD_FROM_DOUGH_AND_ROASTED_PUMPKIN = add(shapeless("pumpkin_bread_from_dough_and_roasted_pumpkin")
             .output(AutumnityItems.PUMPKIN_BREAD.get(), 2)
             .require(AutumnityItems.SYRUP_BOTTLE.get())
-            .require(ModItems.PUMPKIN_SLICE.get())
+            .require(SeasonalsItems.ROASTED_PUMPKIN.get())
             .require(ForgeTags.DOUGH_WHEAT)
             .withCondition(new BlueprintAndCondition(new ResourceLocation("blueprint", "and"), List.of(
                 new ModLoadedCondition(Mods.SEASONALS),
