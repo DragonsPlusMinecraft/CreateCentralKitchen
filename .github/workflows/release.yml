@@ -8,7 +8,7 @@ env:
   MINECRAFT_VERSION: 1.19.2
   JAVA_VERSION: 17
   VERSION: 1.3.1
-  CREATE_VERSION: 0.5.i
+  CREATE_VERSION: 0.5.0.i
 
 jobs:
   release:
@@ -45,7 +45,7 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
           # Config
-          name: "Create: Central Kitchen ${{ env.VERSION }} for Create ${{ env.MINECRAFT_VERSION }}-${{ env.CREATE_VERSION }}"
+          name: "CCK ${{ env.VERSION }} for Create ${{ env.MINECRAFT_VERSION }}-${{ env.CREATE_VERSION }}"
           version: ${{ env.VERSION }}
           version-type: release
           changelog-file: changelog/${{ env.VERSION }}.md
