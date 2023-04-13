@@ -41,16 +41,19 @@ public class CRHarvesterMovementBehaviorExtensions {
                                        BlockPos pos, BlockState state,
                                        boolean replant, boolean partial)
     {
+        if (!(state.getBlock() instanceof LimeBushBlock limeBush))
+            return;
         if (state.getValue(LimeBushBlock.STUNTED) || state.getValue(LimeBushBlock.HALF) == DoubleBlockHalf.LOWER)
             return;
         Level level = context.world;
         boolean destroy = partial;
-        if (state.getValue(LimeBushBlock.AGE) == LimeBushBlock.MAX_AGE) {
+        var ageProp = limeBush.getAgeProperty();
+        if (state.getValue(ageProp) == limeBush.getMaxAge()) {
             behaviour.dropItem(context, new ItemStack(CRItems.LIME.get(), 2 + level.random.nextInt(2)));
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                     1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlockAndUpdate(pos, state.setValue(LimeBushBlock.AGE, 0));
+                level.setBlockAndUpdate(pos, state.setValue(ageProp, 0));
                 return;
             }
             destroy = true;
@@ -68,16 +71,19 @@ public class CRHarvesterMovementBehaviorExtensions {
                                               BlockPos pos, BlockState state,
                                               boolean replant, boolean partial)
     {
+        if (!(state.getBlock() instanceof PomegranateBushBlock pomegranateBush))
+            return;
         if (state.getValue(PomegranateBushBlock.HALF) == DoubleBlockHalf.LOWER)
             return;
         Level level = context.world;
         boolean destroy = partial;
-        if (state.getValue(PomegranateBushBlock.AGE) == PomegranateBushBlock.MAX_AGE) {
+        var ageProp = pomegranateBush.getAgeProperty();
+        if (state.getValue(ageProp) == pomegranateBush.getMaxAge()) {
             behaviour.dropItem(context, new ItemStack(CRItems.POMEGRANATE.get(), 1 + level.random.nextInt(2)));
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                     1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlockAndUpdate(pos, state.setValue(PomegranateBushBlock.AGE, 0));
+                level.setBlockAndUpdate(pos, state.setValue(ageProp, 0));
                 return;
             }
             destroy = true;
