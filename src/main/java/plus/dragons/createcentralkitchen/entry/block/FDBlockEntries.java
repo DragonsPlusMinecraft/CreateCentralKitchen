@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegisterEvent;
@@ -37,6 +36,7 @@ import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -95,7 +95,6 @@ public class FDBlockEntries {
         
         IForgeRegistry<Item> registry = Objects.requireNonNull(event.getForgeRegistry());
         var blackList = CentralKitchenConfigs.COMMON.integration.pieOverhaulBlackList.getIdList();
-        ModList mods = ModList.get();
         
         ResourceLocation pumpkin_pie = new ResourceLocation("pumpkin_pie");
         if (!blackList.contains(pumpkin_pie)) {
@@ -115,9 +114,11 @@ public class FDBlockEntries {
                 new Item.Properties().tab(CreativeModeTab.TAB_FOOD))
             {
                 @Override
+                @ParametersAreNonnullByDefault
                 public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {}
                 
                 @Override
+                @ParametersAreNonnullByDefault
                 public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item item) {}
             };
             registry.register(apple_pie, item);
