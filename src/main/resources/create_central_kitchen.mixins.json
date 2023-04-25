@@ -17,6 +17,7 @@
     "common.farmersdelight.CookingPotBlockEntityMixin",
     "common.farmersdelight.CuttingBoardBlockEntityAccessor",
     "common.farmersdelight.HeatableBlockEntityMixin",
+    "common.farmersdelight.PieBlockMixin",
     "common.farmersdelight.SkilletBlockEntityAccessor",
     "common.farmersrespite.KettleBlockEntityMixin",
     "common.minecraft.BowlFoodItemMixin",
