@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 0",
+	"_": "Missing Localizations: 1",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -100,6 +100,7 @@
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "Незаконченный тыквенный пирог",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "Незаконченный чизкейк из сладких ягод",
 	"item.create_central_kitchen.incomplete_truffle_pie": "Незаконченный трюфельный пирог",
+	"item.create_central_kitchen.miners_cooking_guide": "Шахтёрское руководство по готовке",
 	"item.create_central_kitchen.mulberry_jam_bucket": "Ведро тутового варенья",
 	"item.create_central_kitchen.mulberry_pie_slice": "Кусок тутового пирога",
 	"item.create_central_kitchen.passionfruit_cake_slice": "Кусок торта с маракуйи",

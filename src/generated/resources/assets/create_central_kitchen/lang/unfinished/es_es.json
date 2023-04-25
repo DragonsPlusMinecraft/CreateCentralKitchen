@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 0",
+	"_": "Missing Localizations: 1",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -100,6 +100,7 @@
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "Pastel de calabaza incompleto",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "Pastel de queso con bayas dulces incompleto",
 	"item.create_central_kitchen.incomplete_truffle_pie": "Pastel de trufa incompleto",
+	"item.create_central_kitchen.miners_cooking_guide": "Guía de cocina para mineros",
 	"item.create_central_kitchen.mulberry_jam_bucket": "Cubo de mermelada de Mora",
 	"item.create_central_kitchen.mulberry_pie_slice": "Trozo de tarta de moras",
 	"item.create_central_kitchen.passionfruit_cake_slice": "Trozo de pastel de maracuyá",

@@ -85,19 +85,19 @@ public class FDBlockEntries {
             .blockstate((defaultTexture ? PieBlockStateGen.DEFAULT : PieBlockStateGen.CUSTOM)::generate);
     }
     
+    public static boolean isPieOverhaulEnabled(ResourceLocation id) {
+        return CentralKitchenConfigs.COMMON.integration.enablePieOverhaul.get()
+            && !CentralKitchenConfigs.COMMON.integration.pieOverhaulBlackList.getIdList().contains(id);
+    }
+    
     @SubscribeEvent
     public static void registerItems(RegisterEvent event) {
         if (!event.getRegistryKey().equals(ForgeRegistries.Keys.ITEMS))
             return;
         
-        if (!CentralKitchenConfigs.COMMON.integration.enablePieOverhaul.get())
-            return;
-        
         IForgeRegistry<Item> registry = Objects.requireNonNull(event.getForgeRegistry());
-        var blackList = CentralKitchenConfigs.COMMON.integration.pieOverhaulBlackList.getIdList();
-        
         ResourceLocation pumpkin_pie = new ResourceLocation("pumpkin_pie");
-        if (!blackList.contains(pumpkin_pie)) {
+        if (isPieOverhaulEnabled(pumpkin_pie)) {
             //Need to unregister and re-register compostable as vanilla data was assigned before this
             ComposterBlock.COMPOSTABLES.removeFloat(Items.PUMPKIN_PIE);
             BlockItem item = new ItemNameBlockItem(PUMPKIN_PIE.get(),
@@ -107,7 +107,7 @@ public class FDBlockEntries {
         }
         
         ResourceLocation apple_pie = Mods.environmental("apple_pie");
-        if (!blackList.contains(apple_pie) && Mods.isLoaded(Mods.ENVIRONMENTAL)) {
+        if (isPieOverhaulEnabled(apple_pie) && Mods.isLoaded(Mods.ENVIRONMENTAL)) {
             //Need to override BlockItem#registerBlocks and BlockItem#removeFromBlockToItemMap
             //So Farmer's Delight's apple pie won't get overridden
             BlockItem item = new ItemNameBlockItem(ModBlocks.APPLE_PIE.get(),
@@ -129,7 +129,7 @@ public class FDBlockEntries {
         entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());
         entries.put(Mods.ua("mulberry_pie"), MULBERRY_PIE.get());
         entries.forEach((id, block) -> {
-            if (!blackList.contains(id) && Mods.isLoaded(id.getNamespace())) {
+            if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {
                 BlockItem blockItem = new ItemNameBlockItem(block,
                     new Item.Properties().tab(CreativeModeTab.TAB_FOOD));
                 registry.register(id, blockItem);

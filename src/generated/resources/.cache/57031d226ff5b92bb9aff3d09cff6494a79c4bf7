@@ -1,4 +1,4 @@
-// 1.19.2	2023-04-10T12:59:01.2663903	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effect)]
+// 1.19.2	2023-04-25T18:13:16.986707	Registrate Provider for create_central_kitchen [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effect)]
 d6d3b59b64f72c62d8cdbf1363d79327e492507c assets/create_central_kitchen/blockstates/blaze_stove.json
 b342ecacdd5b9772926833df3779f2af871adc59 assets/create_central_kitchen/blockstates/cherry_pie.json
 e391ada7bb8e2243f1960fab575007021aad1886 assets/create_central_kitchen/blockstates/mulberry_pie.json
@@ -7,8 +7,8 @@ e391ada7bb8e2243f1960fab575007021aad1886 assets/create_central_kitchen/blockstat
 13634de84a0c9a48d86b02d4278f057cb162c8b5 assets/create_central_kitchen/blockstates/syrup.json
 af5dcbb03b10e905818edfc0f9acd2773cbc6587 assets/create_central_kitchen/blockstates/tomato_sauce.json
 43e817f033ff09ff81e96453affb68b38afb97b5 assets/create_central_kitchen/blockstates/truffle_pie.json
-0d9771c507f2399bda9564b01cf5d6a51a59d76e assets/create_central_kitchen/lang/en_ud.json
-b38832cfc56caaf56d34cdc51cff84a90743b475 assets/create_central_kitchen/lang/en_us.json
+8420fe3272d49a14dcab640ff8e81d08964128cc assets/create_central_kitchen/lang/en_ud.json
+b0603400b20e99289cda96dcc4f69fe5ae3d04b7 assets/create_central_kitchen/lang/en_us.json
 1e37b12378516c7b9a07534103989dec889b0355 assets/create_central_kitchen/models/block/cherry_pie.json
 625a03b40b446d17bb9e4fa5fa5fdd176604c42b assets/create_central_kitchen/models/block/cherry_pie_slice1.json
 0ec6f8414025cc7423d64cab7b68f11d4a7dc1c1 assets/create_central_kitchen/models/block/cherry_pie_slice2.json
@@ -51,6 +51,7 @@ c02fec6a941f19869765b4edfb588bac7ef95ed1 assets/create_central_kitchen/models/it
 24c180b61c2546e3da642058b08d40d12860643c assets/create_central_kitchen/models/item/incomplete_pumpkin_pie.json
 3233858690c2f35aeabef15f63ffb0dd5abac1ec assets/create_central_kitchen/models/item/incomplete_sweet_berry_cheesecake.json
 0e8911a15a90580e9f546a6c796d5e8769a62ed2 assets/create_central_kitchen/models/item/incomplete_truffle_pie.json
+25c840a65b0e83da43211ebe3d79466480a31c09 assets/create_central_kitchen/models/item/miners_cooking_guide.json
 172b4af430354a7c1f9971d55fd2d1546296b72a assets/create_central_kitchen/models/item/mulberry_jam_bucket.json
 ed9302593be13036ff42ac967ef86c9948b93b01 assets/create_central_kitchen/models/item/mulberry_pie_slice.json
 7385a398a6107dd4a51dee8d3496bf804057b7bd assets/create_central_kitchen/models/item/passionfruit_cake_slice.json

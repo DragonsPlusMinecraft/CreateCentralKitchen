@@ -1,8 +1,8 @@
-// 1.19.2	2023-04-10T12:59:01.2663903	Create: Central Kitchen Lang Merger
-b7a3479347aea9582d1bc03629762142ab053cea assets/create_central_kitchen/lang/en_us.json
-4457d80625dbc8b56ef3b6e29555a206ecb44b3e assets/create_central_kitchen/lang/unfinished/es_es.json
-fe91740eef51daf7225b4263ff66588bff0a1cd2 assets/create_central_kitchen/lang/unfinished/ja_jp.json
-2f5812cf518427ce22b5c361284bc8e6d7fa172b assets/create_central_kitchen/lang/unfinished/pl_pl.json
-59ce746ba9731cdb877acc6b5ddb6213791fb94a assets/create_central_kitchen/lang/unfinished/ru_ru.json
-efeac37065e0b210e2da3bf7696d4c3399113067 assets/create_central_kitchen/lang/unfinished/uk_ua.json
-d396f566cae17f6e072808671e8a7ad7cae860ff assets/create_central_kitchen/lang/unfinished/zh_cn.json
+// 1.19.2	2023-04-25T18:13:16.9897998	Create: Central Kitchen Lang Merger
+bb77bb0becece11661ea5c99a47be54e5e29a9a9 assets/create_central_kitchen/lang/en_us.json
+81a69aa409c2656920308e90e4ead0dcf3c67933 assets/create_central_kitchen/lang/unfinished/es_es.json
+f36fd2bedb0ac531295fb438a8ec156f7d9eab74 assets/create_central_kitchen/lang/unfinished/ja_jp.json
+c735747dacb9b62ebdc0ed40506a80ffab1012c0 assets/create_central_kitchen/lang/unfinished/pl_pl.json
+23cc15bcdddc73d1ef91b6fc7caa4e6e5325b9d9 assets/create_central_kitchen/lang/unfinished/ru_ru.json
+350751db8d1ace8c4868bf428f919d38e5367063 assets/create_central_kitchen/lang/unfinished/uk_ua.json
+c8d6915db3ea7c3c4240aa2f0a76a5df9b6f0477 assets/create_central_kitchen/lang/unfinished/zh_cn.json

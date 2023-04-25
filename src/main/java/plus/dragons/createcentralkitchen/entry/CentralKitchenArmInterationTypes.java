@@ -31,7 +31,7 @@ public class CentralKitchenArmInterationTypes {
     public static final CookingPotPoint.Type COOKING_POT = create("cooking_pot", CookingPotPoint.Type::new);
     public static final SkilletPoint.Type SKILLET = create("skillet", SkilletPoint.Type::new);
     public static final KettlePoint.Type KETTLE = create("kettle", KettlePoint.Type::new);
-//    public static final CopperPotPoint.Type COPPER_POT = create("copper_pot", CopperPotPoint.Type::new);
+    public static final CopperPotPoint.Type COPPER_POT = create("copper_pot", CopperPotPoint.Type::new);
     
     private static <T extends PonderArmInteractionPointType> T create(String name, Function<ResourceLocation, T> factory) {
         ResourceLocation id = CentralKitchen.genRL(name);
@@ -54,9 +54,9 @@ public class CentralKitchenArmInterationTypes {
         if (Mods.isLoaded(Mods.FR)) {
             register(KETTLE);
         }
-//        if (Mods.isLoaded(Mods.MD)) {
-//            register(COPPER_POT);
-//        }
+        if (Mods.isLoaded(Mods.MD)) {
+            register(COPPER_POT);
+        }
     }
     
     @SubscribeEvent

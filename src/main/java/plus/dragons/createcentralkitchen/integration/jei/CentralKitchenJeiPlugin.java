@@ -22,7 +22,7 @@ public class CentralKitchenJeiPlugin implements IModPlugin {
         ModList mods = ModList.get();
         if (Mods.isLoaded(Mods.FD)) plugins.add(new FDSubJeiPlugin());
         if (Mods.isLoaded(Mods.FR)) plugins.add(new FRSubJeiPlugin());
-//        if (Mods.isLoaded(Mods.MD)) plugins.add(new MDSubJeiPlugin());
+        if (Mods.isLoaded(Mods.MD)) plugins.add(new MDSubJeiPlugin());
     }
     
     @Override

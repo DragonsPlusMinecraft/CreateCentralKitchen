@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.brewinandchewin.KegBlockEntityMixin",
     "common.create.BeltHelperMixin",
     "common.create.CreateJEIMixin",
     "common.create.DeployerTileEntityAccessor",
@@ -14,8 +15,8 @@
     "common.farmersdelight.BasketBlockEntityAccessor",
     "common.farmersdelight.BasketBlockEntityMixin",
     "common.farmersdelight.CookingPotBlockEntityMixin",
-    "common.farmersdelight.CuttingBoardBlockEntityAccessor",
     "common.farmersdelight.HeatableBlockEntityMixin",
+    "common.farmersdelight.PieBlockMixin",
     "common.farmersdelight.SkilletBlockEntityAccessor",
     "common.farmersrespite.KettleBlockEntityMixin",
     "common.minecraft.BowlFoodItemMixin",

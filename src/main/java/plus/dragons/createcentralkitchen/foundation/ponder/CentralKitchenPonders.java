@@ -4,8 +4,10 @@ import com.simibubi.create.foundation.ponder.PonderStoryBoardEntry;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.ponder.entry.FDPonderEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.entry.FRPonderEntries;
+import plus.dragons.createcentralkitchen.foundation.ponder.entry.MDPonderEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.tag.FDPonderTags;
 import plus.dragons.createcentralkitchen.foundation.ponder.tag.FRPonderTags;
+import plus.dragons.createcentralkitchen.foundation.ponder.tag.MDPonderTags;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
 import java.util.ArrayList;
@@ -29,10 +31,10 @@ public class CentralKitchenPonders {
             FRPonderEntries.register();
             FRPonderTags.register();
         }
-//        if (Mods.isLoaded(Mods.MD)) {
-//            MDPonderEntries.register();
-//            MDPonderTags.register();
-//        }
+        if (Mods.isLoaded(Mods.MD)) {
+            MDPonderEntries.register();
+            MDPonderTags.register();
+        }
         ENTRIES.forEach(PonderEntry::register);
     }
     

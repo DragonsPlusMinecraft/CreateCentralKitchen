@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 15",
+	"_": "Missing Localizations: 16",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -100,6 +100,7 @@
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "Незавершений гарбузовий пиріг",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "Незавершений солодкий ягідний чізкейк",
 	"item.create_central_kitchen.incomplete_truffle_pie": "Незавершений трюфельньний пиріг",
+	"item.create_central_kitchen.miners_cooking_guide": "Шахтарське керівництво з кулінарії",
 	"item.create_central_kitchen.mulberry_jam_bucket": "Відро верення шовковиці",
 	"item.create_central_kitchen.mulberry_pie_slice": "Шматочок пирога з шовковиці",
 	"item.create_central_kitchen.passionfruit_cake_slice": "Шматочок пирога з маракуї",
