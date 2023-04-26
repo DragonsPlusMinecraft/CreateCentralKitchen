@@ -27,7 +27,7 @@ public class KegBlockEntityMixin extends SyncedBlockEntity {
         return state;
     }
     
-    @ModifyExpressionValue(method = "updateTemperature", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z", ordinal = 1))
+    @ModifyExpressionValue(method = "updateTemperature", at = @At(value = "INVOKE", remap = true, target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z", ordinal = 1))
     private boolean cck$checkHeatLevelFurtherBelow(boolean original, @Local(ordinal = 1) BlockState stateFurtherBelow) {
         return original &&
             !(stateFurtherBelow.hasProperty(BlazeBurnerBlock.HEAT_LEVEL) &&
