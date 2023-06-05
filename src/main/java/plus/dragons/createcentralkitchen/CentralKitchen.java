@@ -22,6 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.FRItemEntries;
+import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.foundation.data.CentralKitchenData;
 import plus.dragons.createcentralkitchen.foundation.ponder.CentralKitchenPonders;
@@ -80,8 +81,8 @@ public class CentralKitchen {
             event.addInsertion(AllBlocks.BLAZE_BURNER.get(), FDItemEntries.COOKING_GUIDE.asStack());
         if (Mods.isLoaded(Mods.FR))
             event.addInsertion(AllBlocks.BLAZE_BURNER.get(), FRItemEntries.BREWING_GUIDE.asStack());
-//        if (Mods.isLoaded(Mods.MD))
-//            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), MDItemEntries.MINERS_COOKING_GUIDE.asStack());
+       if (Mods.isLoaded(Mods.MD))
+            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), MDItemEntries.MINERS_COOKING_GUIDE.asStack());
     }
     
     public static ResourceLocation genRL(String path) {
