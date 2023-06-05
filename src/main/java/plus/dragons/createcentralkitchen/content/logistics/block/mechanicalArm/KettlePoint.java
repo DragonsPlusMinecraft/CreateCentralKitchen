@@ -122,7 +122,7 @@ public class KettlePoint extends ArmInteractionPoint {
             remainder.shrink(1);
             container = Items.BUCKET.getDefaultInstance();
         } else if (stack.is(Items.POTION) && PotionUtils.getPotion(stack) == Potions.WATER) {
-            waterIncrement = Math.max(stack.getCount(), 3 - waterLevel);
+            waterIncrement = Math.min(stack.getCount(), 3 - waterLevel);
             remainder.shrink(waterIncrement);
             container = new ItemStack(Items.GLASS_BOTTLE, waterIncrement);
         }
