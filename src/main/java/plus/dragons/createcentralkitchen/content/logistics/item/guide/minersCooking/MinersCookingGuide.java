@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking;
 
-import com.sammy.minersdelight.setup.CupConversionHandler;
+import com.sammy.minersdelight.logic.CupConversionReloadListener;
 import com.sammy.minersdelight.setup.MDItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -36,27 +36,27 @@ public class MinersCookingGuide extends BlazeStoveGuide {
         }
         return LazyOptional.empty();
     }
-    
+
     public void updateRecipe(Level level) {
         level.getRecipeManager()
-            .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
-            .ifPresentOrElse(
-                recipe -> {
-                    ItemStack result = recipe.getResultItem();
-                    boolean cupServed = CupConversionHandler.BOWL_TO_CUP.containsKey(result.getItem());
-                    ItemStack container = cupServed ? MDItems.COPPER_CUP.asStack() : recipe.getOutputContainer();
-                    if (cupServed) {
-                        ItemStack cupResult = new ItemStack(CupConversionHandler.BOWL_TO_CUP.get(result.getItem()), result.getCount());
-                        cupResult.setTag(result.getTag());
-                        result = cupResult;
-                    }
-                    inventory.setStackInSlot(ingredientSize, result);
-                    this.container = container;
-                },
-                () -> {
-                    inventory.setStackInSlot(ingredientSize, ItemStack.EMPTY);
-                    container = ItemStack.EMPTY;
-                });
+                .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
+                .ifPresentOrElse(
+                        recipe -> {
+                            ItemStack result = recipe.getResultItem();
+                            boolean cupServed = CupConversionReloadListener.BOWL_TO_CUP.containsKey(result.getItem());
+                            ItemStack container = cupServed ? MDItems.COPPER_CUP.asStack() : recipe.getOutputContainer();
+                            if (cupServed) {
+                                ItemStack cupResult = new ItemStack(CupConversionReloadListener.BOWL_TO_CUP.get(result.getItem()), result.getCount());
+                                cupResult.setTag(result.getTag());
+                                result = cupResult;
+                            }
+                            inventory.setStackInSlot(ingredientSize, result);
+                            this.container = container;
+                        },
+                        () -> {
+                            inventory.setStackInSlot(ingredientSize, ItemStack.EMPTY);
+                            container = ItemStack.EMPTY;
+                        });
     }
     
 }
