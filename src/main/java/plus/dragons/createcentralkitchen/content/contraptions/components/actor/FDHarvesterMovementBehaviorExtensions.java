@@ -45,13 +45,15 @@ public class FDHarvesterMovementBehaviorExtensions {
         if (!partial && age < colony.getMaxAge())
             return;
         Level level = context.world;
-        if (partial && replant) {
-            behaviour.dropItem(context, new ItemStack(colony.mushroomType.get(), age));
+        if (replant) {
             level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(pos, state.setValue(ageProp, 0), 2);
         } else {
-            BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
+            BlockHelper.destroyBlock(level, pos, 1, $ -> {});
         }
+        behaviour.dropItem(context, age < colony.getMaxAge()?
+                new ItemStack(colony.mushroomType.get(), age):
+                new ItemStack(colony.asItem()));
     }
     
 }
