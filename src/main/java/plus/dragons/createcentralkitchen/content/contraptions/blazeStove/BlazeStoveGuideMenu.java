@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
-import com.simibubi.create.foundation.gui.container.GhostItemContainer;
+import com.simibubi.create.foundation.gui.menu.GhostItemMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends GhostItemContainer<ItemStack> {
+public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends GhostItemMenu<ItemStack> {
     protected G guide;
     @Nullable
     protected BlazeStoveBlockEntity blazeStove;

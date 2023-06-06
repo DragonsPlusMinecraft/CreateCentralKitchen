@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;

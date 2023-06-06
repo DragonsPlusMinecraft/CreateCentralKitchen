@@ -1,9 +1,10 @@
 package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
-import com.simibubi.create.content.logistics.block.mechanicalArm.AllArmInteractionPointTypes;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
+import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -73,7 +74,7 @@ public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyAr
     
         @Override
         public void addToPonderTag(Consumer<ItemLike> consumer) {
-            var builder = PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS);
+            var builder = PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS);
             ForgeRegistries.ITEMS
                 .getValues()
                 .stream()

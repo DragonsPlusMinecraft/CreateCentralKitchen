@@ -59,6 +59,7 @@ public class LangMerger implements DataProvider {
     private final Map<String, List<Object>> populatedLangData;
     private final Map<String, Map<String, String>> allLocalizedEntries;
     private final Map<String, MutableInt> missingTranslationTally;
+    private final Map<String, MutableInt> existingButActuallyMissingTranslationTally;
     
     private final List<String> langIgnore;
     
@@ -69,6 +70,7 @@ public class LangMerger implements DataProvider {
         this.allLocalizedEntries = new HashMap<>();
         this.populatedLangData = new HashMap<>();
         this.missingTranslationTally = new HashMap<>();
+        this.existingButActuallyMissingTranslationTally = new HashMap<>();
         populateLangIgnore();
     }
     
@@ -99,16 +101,19 @@ public class LangMerger implements DataProvider {
             Map<String, String> localizedEntries = new HashMap<>();
             JsonObject jsonobject = pair.getRight()
                 .getAsJsonObject();
+            String key = pair.getKey();
+            existingButActuallyMissingTranslationTally.put(key, new MutableInt(0));
             jsonobject.entrySet()
                 .forEach(entry -> {
-                    String key = entry.getKey();
-                    if (key.startsWith("_"))
+                    String key2 = entry.getKey();
+                    if (key2.startsWith("_"))
                         return;
                     String value = entry.getValue()
                         .getAsString();
-                    localizedEntries.put(key, value);
+                    if(value.startsWith("UNLOCALIZED: "))
+                        existingButActuallyMissingTranslationTally.get(key).increment();
+                    localizedEntries.put(key2, value);
                 });
-            String key = pair.getKey();
             allLocalizedEntries.put(key, localizedEntries);
             populatedLangData.put(key, new ArrayList<>());
             missingTranslationTally.put(key, new MutableInt(0));

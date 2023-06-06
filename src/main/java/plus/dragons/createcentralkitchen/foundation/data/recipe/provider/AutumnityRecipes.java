@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 
 import com.cosmicgelatin.seasonals.core.SeasonalsConfig;
 import com.cosmicgelatin.seasonals.core.registry.SeasonalsItems;
-import com.simibubi.create.content.contraptions.processing.HeatCondition;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import com.teamabnormals.abnormals_delight.core.registry.ADItems;
 import com.teamabnormals.autumnity.core.registry.AutumnityBlocks;

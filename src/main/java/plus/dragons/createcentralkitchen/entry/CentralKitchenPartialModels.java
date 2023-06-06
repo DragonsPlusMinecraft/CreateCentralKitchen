@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = CentralKitchen.ID, bus = Bus.MOD)
-public class CentralKitchenBlockPartials {
+public class CentralKitchenPartialModels {
     
     public static final PartialModel BLAZE_STOVE_HAT = block("blaze_stove/hat");
     

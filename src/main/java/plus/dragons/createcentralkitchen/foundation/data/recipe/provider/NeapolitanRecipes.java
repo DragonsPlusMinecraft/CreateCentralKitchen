@@ -1,9 +1,9 @@
 package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 
 import com.simibubi.create.AllFluids;
-import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.contraptions.fluids.actors.FillingRecipe;
-import com.simibubi.create.content.contraptions.processing.HeatCondition;
+import com.simibubi.create.content.fluids.transfer.FillingRecipe;
+import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import com.teamabnormals.neapolitan.core.other.tags.NeapolitanItemTags;
 import com.teamabnormals.neapolitan.core.registry.NeapolitanBlocks;

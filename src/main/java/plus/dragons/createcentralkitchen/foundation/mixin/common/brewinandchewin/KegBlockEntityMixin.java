@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.mixin.common.brewinandchewi
 
 import com.brewinandchewin.common.block.entity.KegBlockEntity;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;

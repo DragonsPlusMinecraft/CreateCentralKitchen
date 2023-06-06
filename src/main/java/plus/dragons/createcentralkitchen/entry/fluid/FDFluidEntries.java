@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.entry.fluid;
 
-import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
+import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.resources.ResourceLocation;

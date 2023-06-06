@@ -1,11 +1,11 @@
 package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyRecipeBuilder;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
-import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;

@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.foundation.fluid;
 
-import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
+import com.simibubi.create.content.fluids.VirtualFluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SolidBucketItem;
 import net.minecraft.world.level.block.state.BlockState;

@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.entry.fluid;
 
 import com.cosmicgelatin.peculiars.core.registry.PeculiarsItems;
-import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
+import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import plus.dragons.createcentralkitchen.foundation.fluid.VirtualFluidFromItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;

@@ -24,7 +24,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
     private final List<ConfigReloadListener> reloadListeners = new ArrayList<>();
     
     @Override
-    protected void registerAll(ForgeConfigSpec.Builder builder) {
+    public void registerAll(ForgeConfigSpec.Builder builder) {
         super.registerAll(builder);
     }
     

@@ -1,8 +1,7 @@
 package plus.dragons.createcentralkitchen.entry.item;
 
 import com.sammy.minersdelight.setup.MDItems;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.AllSections;
+import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking.MinersCookingGuideItem;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;
@@ -17,7 +16,7 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 @ModLoadSubscriber(modid = Mods.MD)
 public class MDItemEntries {
     static {
-        REGISTRATE.startSection(AllSections.KINETICS).creativeModeTab(() -> Create.BASE_CREATIVE_TAB);
+        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
     }
     
     public static final ItemEntry<MinersCookingGuideItem> MINERS_COOKING_GUIDE = REGISTRATE.item("miners_cooking_guide", MinersCookingGuideItem::new)

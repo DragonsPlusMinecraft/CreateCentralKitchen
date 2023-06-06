@@ -8,10 +8,10 @@
     "common.brewinandchewin.KegBlockEntityMixin",
     "common.create.BeltHelperMixin",
     "common.create.CreateJEIMixin",
-    "common.create.DeployerTileEntityAccessor",
+    "common.create.DeployerBlockEntityAccessor",
     "common.create.HarvesterMovementBehaviorMixin",
-    "common.create.MechanicalMixerTileEntityMixin",
-    "common.create.TileEntityBehaviorMixin",
+    "common.create.MechanicalMixerBlockEntityMixin",
+    "common.create.BlockEntityBehaviourMixin",
     "common.farmersdelight.BasketBlockEntityAccessor",
     "common.farmersdelight.BasketBlockEntityMixin",
     "common.farmersdelight.CookingPotBlockEntityMixin",
@@ -25,7 +25,7 @@
     "common.neapolitan.DrinkItemMixin"
   ],
   "client": [
-    "client.create.CreateItemGroupBaseMixin",
+    "client.create.CreateCreativeModeTabMixin",
     "client.create.DeployerRendererMixin"
   ],
   "injectors": {

@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.api.event;
 
-import com.simibubi.create.foundation.item.CreateItemGroupBase;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -11,16 +11,16 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.*;
 
 public class FillCreateItemGroupEvent extends Event {
-    private final CreateItemGroupBase itemGroup;
+    private final CreativeModeTab itemGroup;
     private final NonNullList<ItemStack> items;
     private final Map<Item, List<ItemStack>> insertions = new IdentityHashMap<>();
 
-    public FillCreateItemGroupEvent(CreateItemGroupBase itemGroup, NonNullList<ItemStack> items) {
+    public FillCreateItemGroupEvent(CreativeModeTab itemGroup, NonNullList<ItemStack> items) {
         this.itemGroup = itemGroup;
         this.items = items;
     }
 
-    public CreateItemGroupBase getItemGroup() {
+    public CreativeModeTab getItemGroup() {
         return itemGroup;
     }
 

@@ -10,8 +10,8 @@ var FieldInsnNode = Java.type('org.objectweb.asm.tree.FieldInsnNode');
 var MethodInsnNode = Java.type('org.objectweb.asm.tree.MethodInsnNode');
 
 var BlockState = 'net/minecraft/world/level/block/state/BlockState';
-var BlazeBurnerBlock = 'com/simibubi/create/content/contraptions/processing/burner/BlazeBurnerBlock';
-var BlazeBurnerBlock$HeatLevel = 'com/simibubi/create/content/contraptions/processing/burner/BlazeBurnerBlock$HeatLevel';
+var BlazeBurnerBlock = 'com/simibubi/create/content/processing/burner/BlazeBurnerBlock';
+var BlazeBurnerBlock$HeatLevel = 'com/simibubi/create/content/processing/burner/BlazeBurnerBlock$HeatLevel';
 
 function BlockState_hasProperty() {
     return new MethodInsnNode(
@@ -44,7 +44,7 @@ function BlazeBurnerBlock$HeatLevel_SMOULDERING() {
         Opcodes.GETSTATIC,
         BlazeBurnerBlock$HeatLevel,
         'SMOULDERING',
-        'Lcom/simibubi/create/content/contraptions/processing/burner/BlazeBurnerBlock$HeatLevel;');
+        'Lcom/simibubi/create/content/processing/burner/BlazeBurnerBlock$HeatLevel;');
 }
 
 function BlazeBurnerBlock$HeatLevel_isAtLeast() {
@@ -52,7 +52,7 @@ function BlazeBurnerBlock$HeatLevel_isAtLeast() {
         Opcodes.INVOKEVIRTUAL,
         BlazeBurnerBlock$HeatLevel,
         'isAtLeast',
-        '(Lcom/simibubi/create/content/contraptions/processing/burner/BlazeBurnerBlock$HeatLevel;)Z',
+        '(Lcom/simibubi/create/content/processing/burner/BlazeBurnerBlock$HeatLevel;)Z',
         false);
 }
 

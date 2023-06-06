@@ -1,4 +1,5 @@
 {
+	"_": "Missing Localizations: 2",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -20,7 +21,7 @@
 	"fluid.create_central_kitchen.chocolate_ice_cream": "Шоколадне морозиво",
 	"fluid.create_central_kitchen.chocolate_milkshake": "Шоколадний молочний коктейль",
 	"fluid.create_central_kitchen.coffee": "Кава",
-	"fluid.create_central_kitchen.dandelion_black_tea": "Чорний чай із кульбаби",
+	"fluid.create_central_kitchen.coffee_ice_cream": "UNLOCALIZED: Coffee Ice Cream",
 	"fluid.create_central_kitchen.dandelion_tea": "Чай із кульбаби",
 	"fluid.create_central_kitchen.green_tea": "Зелений чай",
 	"fluid.create_central_kitchen.green_tea_ice_cream": "Морозиво із зеленого чаю",
@@ -92,6 +93,8 @@
 	"item.create_central_kitchen.truffle_pie_slice": "Щматочок трюфельного пирога",
 	"item.create_central_kitchen.yucca_cake_slice": "Шматочок юкового торта",
 
+	"recipe.create_central_kitchen.cutting_board_deploying": "UNLOCALIZED: Cutting Board Deploying",
+
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
 
@@ -126,8 +129,6 @@
 	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "Не вказано дійсного рецепта",
 	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "Рецепт:",
 
-	"create_central_kitchen.jei.transfer.copper_pot.exceed_capacity": "Кількість інгредієнтів перевищує ємність мідного горщика",
-
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
 
@@ -157,6 +158,6 @@
 	"create_central_kitchen.ponder.tag.cooking_automation": "Автоматизація приготування їжі",
 	"create_central_kitchen.ponder.tag.cooking_automation.description": "Компоненти, які автоматизують процес приготування їжі",
 
-	"_": "Ukrainian translation by V972"
+	"_": "Thank you for translating Create: Central Kitchen!"
 
 }

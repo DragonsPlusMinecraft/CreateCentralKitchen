@@ -126,7 +126,7 @@ dependencies {
         jarJar.ranged(it, "[${mixin_extras_version},)")
     }
     //mandatory dependencies
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:all")
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") {transitive = false}
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies

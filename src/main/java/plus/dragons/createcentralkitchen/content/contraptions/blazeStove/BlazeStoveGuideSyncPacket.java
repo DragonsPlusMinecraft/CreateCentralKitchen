@@ -5,8 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.function.Supplier;
-
 public class BlazeStoveGuideSyncPacket extends SimplePacketBase {
     private final CompoundTag nbt;
     
@@ -22,15 +20,15 @@ public class BlazeStoveGuideSyncPacket extends SimplePacketBase {
     public void write(FriendlyByteBuf buffer) {
         buffer.writeNbt(this.nbt);
     }
-    
+
     @Override
-    public void handle(Supplier<NetworkEvent.Context> supplier) {
-        var context = supplier.get();
-        var player = context.getSender();
-        if (player != null && player.containerMenu instanceof BlazeStoveGuideMenu menu) {
-            menu.updateGuideFromTag(nbt);
-            context.setPacketHandled(true);
-        }
+    public boolean handle(NetworkEvent.Context context) {
+        context.enqueueWork(()->{
+            var player = context.getSender();
+            if (player != null && player.containerMenu instanceof BlazeStoveGuideMenu menu) {
+                menu.updateGuideFromTag(nbt);
+            }
+        });
+        return true;
     }
-    
 }

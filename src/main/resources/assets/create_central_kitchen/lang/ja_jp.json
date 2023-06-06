@@ -1,4 +1,5 @@
 {
+	"_": "Missing Localizations: 0",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -157,6 +158,6 @@
 	"create_central_kitchen.ponder.tag.cooking_automation": "調理の自動化",
 	"create_central_kitchen.ponder.tag.cooking_automation.description": "調理工程を自動化する部品",
 
-	"_": "Thank you for the nice mod!-素敵なModをありがとう！"
+	"_": "Thank you for translating Create: Central Kitchen!"
 
 }

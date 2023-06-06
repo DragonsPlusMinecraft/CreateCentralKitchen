@@ -3,10 +3,11 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 import com.farmersrespite.common.block.KettleBlock;
 import com.farmersrespite.common.block.entity.KettleBlockEntity;
 import com.farmersrespite.core.registry.FRItems;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
+import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -198,7 +199,7 @@ public class KettlePoint extends ArmInteractionPoint {
     
         @Override
         public void addToPonderTag(Consumer<ItemLike> consumer) {
-            PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS).add(FRItems.KETTLE.get());
+            PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS).add(FRItems.KETTLE.get());
         }
         
     }

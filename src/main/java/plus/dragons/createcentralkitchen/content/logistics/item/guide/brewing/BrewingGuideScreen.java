@@ -4,8 +4,8 @@ import com.farmersrespite.core.utility.FRTextUtils;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.gui.container.AbstractSimiContainerScreen;
 import com.simibubi.create.foundation.gui.element.GuiGameElement;
+import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Rect2i;
@@ -23,7 +23,6 @@ import java.util.List;
 
 import static com.simibubi.create.foundation.gui.AllGuiTextures.PLAYER_INVENTORY;
 
-//TODO: Adjust render when texture available
 public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuideMenu> {
     private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/brewing_guide.png");
     private static final int WINDOW_WIDTH = 144;
