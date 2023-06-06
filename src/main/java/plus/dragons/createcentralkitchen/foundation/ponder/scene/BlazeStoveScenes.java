@@ -1,8 +1,8 @@
 package plus.dragons.createcentralkitchen.foundation.ponder.scene;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmTileEntity;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.ponder.PonderPalette;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
 import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
@@ -44,7 +44,7 @@ public class BlazeStoveScenes {
             .rightClick()
             .withItem(cookingGuide), 30);
         scene.world.setBlock(util.grid.at(1, 1, 1), FDBlockEntries.BLAZE_STOVE.getDefaultState(), false);
-        scene.world.modifyTileEntity(util.grid.at(1, 1, 1), BlazeStoveBlockEntity.class,
+        scene.world.modifyBlockEntity(util.grid.at(1, 1, 1), BlazeStoveBlockEntity.class,
             stove -> stove.setGuide(cookingGuide));
         scene.idle(40);
         
@@ -160,13 +160,13 @@ public class BlazeStoveScenes {
             Items.GLASS_BOTTLE.getDefaultInstance()
         };
         for (var item : inputItems) {
-            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+            scene.world.instructArm(rightArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
             scene.idle(12);
-            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.SEARCH_OUTPUTS, item, -1);
+            scene.world.instructArm(rightArmPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, item, -1);
             scene.idle(8);
-            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.MOVE_TO_OUTPUT, item, 0);
+            scene.world.instructArm(rightArmPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, item, 0);
             scene.idle(12);
-            scene.world.instructArm(rightArmPos, ArmTileEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+            scene.world.instructArm(rightArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
             scene.idle(8);
         }
     
@@ -188,13 +188,13 @@ public class BlazeStoveScenes {
             .pointAt(util.vector.centerOf(stovePos))
             .placeNearTarget();
         var result = ModItems.GLOW_BERRY_CUSTARD.get().getDefaultInstance();
-        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+        scene.world.instructArm(leftArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
         scene.idle(12);
-        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.SEARCH_OUTPUTS, result, -1);
+        scene.world.instructArm(leftArmPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, result, -1);
         scene.idle(8);
-        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.MOVE_TO_OUTPUT, result, 0);
+        scene.world.instructArm(leftArmPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, result, 0);
         scene.idle(12);
-        scene.world.instructArm(leftArmPos, ArmTileEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+        scene.world.instructArm(leftArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
         scene.idle(18);
     }
     
@@ -243,7 +243,7 @@ public class BlazeStoveScenes {
         };
         for (int i = 0; i < 9; ++i) {
             final int index = i;
-            scene.world.modifyTileEntity(idleBlazePos, BlazeStoveBlockEntity.class, be -> {
+            scene.world.modifyBlockEntity(idleBlazePos, BlazeStoveBlockEntity.class, be -> {
                 var inv = be.getInventory();
                 inv.insertItem(index, ingredients[index], false);
             });
@@ -262,7 +262,7 @@ public class BlazeStoveScenes {
             state -> state.setValue(BlazeStoveBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING),
             false
         );
-        scene.world.modifyTileEntity(idleBlazePos, BlazeStoveBlockEntity.class, be -> {
+        scene.world.modifyBlockEntity(idleBlazePos, BlazeStoveBlockEntity.class, be -> {
             be.applyCreativeFuel();
             var inv = be.getInventory();
             for (int i = 0; i < inv.getSlots(); ++i) {

@@ -1,8 +1,8 @@
 package plus.dragons.createcentralkitchen.content.contraptions.deployer;
 
-import com.simibubi.create.content.contraptions.components.deployer.DeployerRecipeSearchEvent;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
+import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -21,7 +21,7 @@ public class CuttingBoardDeployingRecipe extends ProcessingRecipe<RecipeWrapper>
     public static void onDeployerRecipeSearch(DeployerRecipeSearchEvent event) {
         if (!CentralKitchenConfigs.COMMON.automation.enableCuttingBoardDeploying.get())
             return;
-        Level level = event.getTileEntity().getLevel();
+        Level level = event.getBlockEntity().getLevel();
         assert level != null;
         RecipeManager recipes = level.getRecipeManager();
         RecipeWrapper inventory = event.getInventory();

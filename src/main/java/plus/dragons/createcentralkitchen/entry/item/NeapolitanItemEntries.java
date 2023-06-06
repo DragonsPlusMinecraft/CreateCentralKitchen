@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.entry.item;
 
-import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;

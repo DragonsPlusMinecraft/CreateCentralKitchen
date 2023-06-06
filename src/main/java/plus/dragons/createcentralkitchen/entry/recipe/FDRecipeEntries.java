@@ -1,8 +1,8 @@
 package plus.dragons.createcentralkitchen.entry.recipe;
 
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
-import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;

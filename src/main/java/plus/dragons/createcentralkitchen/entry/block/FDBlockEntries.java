@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.entry.block;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;

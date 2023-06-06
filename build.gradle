@@ -22,15 +22,10 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-
             arg '-mixin.config=create_central_kitchen.mixins.json'
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-
             mods {
                 create_central_kitchen {
                     source sourceSets.main
@@ -40,15 +35,10 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
             arg '-mixin.config=create_central_kitchen.mixins.json'
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-
             mods {
                 create_central_kitchen {
                     source sourceSets.main
@@ -58,17 +48,13 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             args '--mod', 'create_central_kitchen',
                  '--all', '--output', file('src/generated/resources/'),
                  '--existing', file('src/main/resources/'),
                  '--existing-mod', 'create',
                  '--existing-mod', 'farmersdelight'
-
             mods {
                 create_central_kitchen {
                     source sourceSets.main
@@ -83,10 +69,6 @@ repositories {
     maven {
         name "Tterrag maven"
         url "https://maven.tterrag.com/"
-    }
-    maven {
-        name 'Progwml6 maven'
-        url 'https://dvs1.progwml6.com/files/maven'
     }
     maven {
         name "Blamejared Maven"
@@ -134,8 +116,8 @@ dependencies {
         jarJar.ranged(it, "${create_dragon_lib_version_range}")
     }
     //mandatory dependencies
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:all")
-    compileOnly fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
     //create addons

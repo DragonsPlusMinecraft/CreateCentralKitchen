@@ -2,14 +2,14 @@ package plus.dragons.createcentralkitchen.foundation.mixin.common.create;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.simibubi.create.content.contraptions.components.mixer.MechanicalMixerTileEntity;
+import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import net.minecraft.world.item.crafting.Recipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.IgnoreAutomaticShapelessRecipe;
 
-@Mixin(value = MechanicalMixerTileEntity.class, priority = 900, remap = false)
-public class MechanicalMixerTileEntityMixin {
+@Mixin(value = MechanicalMixerBlockEntity.class, priority = 900, remap = false)
+public class MechanicalMixerBlockEntityMixin {
     
     /**
      * For removing recipes that has tag create:ignored_in_automatic_shapeless in their ingredients/result.

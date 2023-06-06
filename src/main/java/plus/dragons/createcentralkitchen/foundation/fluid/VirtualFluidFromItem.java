@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.fluid;
 
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.Create;
-import com.simibubi.create.content.contraptions.fluids.VirtualFluid;
+import com.simibubi.create.content.fluids.VirtualFluid;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;

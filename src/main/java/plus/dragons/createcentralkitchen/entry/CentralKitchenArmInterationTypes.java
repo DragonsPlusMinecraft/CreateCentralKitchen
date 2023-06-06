@@ -1,8 +1,9 @@
 package plus.dragons.createcentralkitchen.entry;
 
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
+import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,7 +63,7 @@ public class CentralKitchenArmInterationTypes {
     @SubscribeEvent
     public static void registerPonderTags(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            Consumer<ItemLike> consumer = PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS)::add;
+            Consumer<ItemLike> consumer = PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS)::add;
             for (var type : TYPES)
                 type.addToPonderTag(consumer);
         });

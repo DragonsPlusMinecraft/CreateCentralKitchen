@@ -1,9 +1,9 @@
 package plus.dragons.createcentralkitchen.integration.jei.transfer;
 
-import com.simibubi.create.foundation.gui.container.AbstractSimiContainerScreen;
-import com.simibubi.create.foundation.gui.container.GhostItemContainer;
-import com.simibubi.create.foundation.gui.container.GhostItemSubmitPacket;
-import com.simibubi.create.foundation.networking.AllPackets;
+import com.simibubi.create.AllPackets;
+import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
+import com.simibubi.create.foundation.gui.menu.GhostItemMenu;
+import com.simibubi.create.foundation.gui.menu.GhostItemSubmitPacket;
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.world.inventory.Slot;
@@ -62,7 +62,7 @@ public class BlazeStoveGuideGhostIngredientHandler<M extends BlazeStoveGuideMenu
 		return true;
 	}
 
-	private static class GhostTarget<I, T extends GhostItemContainer<?>> implements Target<I> {
+	private static class GhostTarget<I, T extends GhostItemMenu<?>> implements Target<I> {
 
 		private final Rect2i area;
 		private final AbstractSimiContainerScreen<T> gui;
@@ -86,7 +86,7 @@ public class BlazeStoveGuideGhostIngredientHandler<M extends BlazeStoveGuideMenu
 			stack.setCount(1);
 			gui.getMenu().ghostInventory.setStackInSlot(slotIndex, stack);
 
-			AllPackets.channel.sendToServer(new GhostItemSubmitPacket(stack, slotIndex));
+			AllPackets.getChannel().sendToServer(new GhostItemSubmitPacket(stack, slotIndex));
 		}
 	}
 	

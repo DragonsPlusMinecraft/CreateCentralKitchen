@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -76,7 +76,7 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
             var blockState = level.getBlockState(blockPos);
             var blockEntity = level.getBlockEntity(blockPos);
             if (blockState.getBlock() instanceof BlazeBurnerBlock &&
-                blockEntity instanceof BlazeBurnerTileEntity)
+                blockEntity instanceof BlazeBurnerBlockEntity)
             {
                 if (!level.isClientSide()) {
                     level.setBlockAndUpdate(blockPos, FDBlockEntries.BLAZE_STOVE.getDefaultState()

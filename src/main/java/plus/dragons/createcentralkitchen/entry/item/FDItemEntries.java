@@ -1,8 +1,7 @@
 package plus.dragons.createcentralkitchen.entry.item;
 
-import com.simibubi.create.Create;
-import com.simibubi.create.content.AllSections;
-import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
+import com.simibubi.create.AllCreativeModeTabs;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
@@ -40,7 +39,7 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 @ModLoadSubscriber(modid = Mods.FD)
 public class FDItemEntries {
     static {
-        REGISTRATE.startSection(AllSections.KINETICS).creativeModeTab(() -> Create.BASE_CREATIVE_TAB);
+        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
     }
     
     public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
@@ -54,7 +53,7 @@ public class FDItemEntries {
         .register();
     
     static {
-        REGISTRATE.startSection(AllSections.UNASSIGNED).creativeModeTab(() -> FarmersDelight.CREATIVE_TAB);
+        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
     }
     
     public static final ItemEntry<SequencedAssemblyItem>

@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.mixin.common.create;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.contraptions.relays.belt.BeltHelper;
+import com.simibubi.create.content.kinetics.belt.BeltHelper;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

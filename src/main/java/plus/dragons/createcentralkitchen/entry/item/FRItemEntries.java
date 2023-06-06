@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.entry.item;
 
-import com.simibubi.create.Create;
-import com.simibubi.create.content.AllSections;
+import com.simibubi.create.AllCreativeModeTabs;
+
 import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.brewing.BrewingGuideItem;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;
@@ -17,7 +17,7 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 @ModLoadSubscriber(modid = Mods.FR)
 public class FRItemEntries {
     static {
-        REGISTRATE.startSection(AllSections.KINETICS).creativeModeTab(() -> Create.BASE_CREATIVE_TAB);
+        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
     }
     
     public static final ItemEntry<BrewingGuideItem> BREWING_GUIDE = REGISTRATE.item("brewing_guide", BrewingGuideItem::new)

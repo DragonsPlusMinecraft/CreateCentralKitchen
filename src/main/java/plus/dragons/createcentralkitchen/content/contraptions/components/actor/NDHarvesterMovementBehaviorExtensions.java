@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.actor;
 
-import com.simibubi.create.content.contraptions.components.actors.HarvesterMovementBehaviour;
-import com.simibubi.create.content.contraptions.components.structureMovement.MovementContext;
+import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
+import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

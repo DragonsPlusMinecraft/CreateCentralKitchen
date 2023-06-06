@@ -4,13 +4,13 @@ import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
-import com.simibubi.create.AllBlockPartials;
+import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
+import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.tileEntity.renderer.SafeTileEntityRenderer;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
@@ -27,10 +27,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.items.ItemStackHandler;
-import plus.dragons.createcentralkitchen.entry.CentralKitchenBlockPartials;
+import plus.dragons.createcentralkitchen.entry.CentralKitchenPartialModels;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
-public class BlazeStoveRenderer extends SafeTileEntityRenderer<BlazeStoveBlockEntity> {
+public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockEntity> {
     
     public BlazeStoveRenderer(BlockEntityRendererProvider.Context context) {}
     
@@ -111,20 +111,20 @@ public class BlazeStoveRenderer extends SafeTileEntityRenderer<BlazeStoveBlockEn
             uScroll = uScroll * spriteWidth / 2;
         
             draw(CachedBufferer
-                    .partial(AllBlockPartials.BLAZE_BURNER_FLAME, blockState)
+                    .partial(AllPartialModels.BLAZE_BURNER_FLAME, blockState)
                     .shiftUVScrolling(spriteShift, (float) uScroll, (float) vScroll), horizontalAngle, poseStack, cutout);
         }
     
         //blaze
-        PartialModel blazeModel = AllBlockPartials.BLAZE_INERT;
+        PartialModel blazeModel = AllPartialModels.BLAZE_INERT;
         if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {
             blazeModel = blockAbove ?
-                AllBlockPartials.BLAZE_SUPER_ACTIVE :
-                AllBlockPartials.BLAZE_SUPER;
+                AllPartialModels.BLAZE_SUPER_ACTIVE :
+                AllPartialModels.BLAZE_SUPER;
         } else if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.FADING)) {
             blazeModel = blockAbove && heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.KINDLED)
-                ? AllBlockPartials.BLAZE_ACTIVE
-                : AllBlockPartials.BLAZE_IDLE;
+                ? AllPartialModels.BLAZE_ACTIVE
+                : AllPartialModels.BLAZE_IDLE;
         }
         
         float headY = offset - (animation * .75f);
@@ -134,9 +134,9 @@ public class BlazeStoveRenderer extends SafeTileEntityRenderer<BlazeStoveBlockEn
     
         //hat
         SuperByteBuffer partial = CachedBufferer
-            .partial(CentralKitchenBlockPartials.BLAZE_STOVE_HAT, blockState)
+            .partial(CentralKitchenPartialModels.BLAZE_STOVE_HAT, blockState)
             .translate(0, headY, 0);
-        if (blazeModel == AllBlockPartials.BLAZE_INERT) {
+        if (blazeModel == AllPartialModels.BLAZE_INERT) {
             partial.translateY(0.5f)
                 .centre()
                 .scale(0.75f)
@@ -153,10 +153,10 @@ public class BlazeStoveRenderer extends SafeTileEntityRenderer<BlazeStoveBlockEn
         
         //rods
         if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.FADING)) {
-            PartialModel rods = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING ? AllBlockPartials.BLAZE_BURNER_SUPER_RODS
-                : AllBlockPartials.BLAZE_BURNER_RODS;
-            PartialModel rods2 = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING ? AllBlockPartials.BLAZE_BURNER_SUPER_RODS_2
-                : AllBlockPartials.BLAZE_BURNER_RODS_2;
+            PartialModel rods = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING ? AllPartialModels.BLAZE_BURNER_SUPER_RODS
+                : AllPartialModels.BLAZE_BURNER_RODS;
+            PartialModel rods2 = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING ? AllPartialModels.BLAZE_BURNER_SUPER_RODS_2
+                : AllPartialModels.BLAZE_BURNER_RODS_2;
             draw(CachedBufferer.partial(rods, blockState)
                 .translate(0, offset1 + animation + .125f, 0), 0, poseStack, solid);
             draw(CachedBufferer.partial(rods2, blockState)

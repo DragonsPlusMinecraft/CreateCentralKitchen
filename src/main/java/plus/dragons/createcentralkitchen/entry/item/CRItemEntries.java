@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.entry.item;
 
-import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.brdle.collectorsreap.common.item.CRItems;

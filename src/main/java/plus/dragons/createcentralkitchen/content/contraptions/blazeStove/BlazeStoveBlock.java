@@ -1,11 +1,11 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.contraptions.processing.BasinTileEntity;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.contraptions.wrench.IWrenchable;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.content.processing.basin.BasinBlockEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -50,7 +50,7 @@ import plus.dragons.createcentralkitchen.entry.block.entity.FDBlockEntityEntries
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 @SuppressWarnings("deprecation")
-public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<BlazeStoveBlockEntity>, IWrenchable {
+public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<BlazeStoveBlockEntity>, IWrenchable {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final EnumProperty<BlazeBurnerBlock.HeatLevel> HEAT_LEVEL = BlazeBurnerBlock.HEAT_LEVEL;
     private static final VoxelShape SHAPE = Shapes.or(
@@ -84,7 +84,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
         ItemStack stack = player.getItemInHand(hand);
         if (stack.isEmpty()) {
             if(!level.isClientSide()) {
-                withTileEntityDo(level, pos, stove -> NetworkHooks.openScreen(
+                withBlockEntityDo(level, pos, stove -> NetworkHooks.openScreen(
                     (ServerPlayer) player, stove, buf -> {
                         buf.writeItem(stove.getGuide());
                         buf.writeBoolean(false);
@@ -224,7 +224,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (level.isClientSide) return;
         BlockEntity blockEntity = level.getBlockEntity(pos.above());
-        if (blockEntity instanceof BasinTileEntity basin) {
+        if (blockEntity instanceof BasinBlockEntity basin) {
             basin.notifyChangeOfContents();
         }
         if (!state.is(oldState.getBlock())) {
@@ -238,7 +238,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        ITE.onRemove(state,level,pos,newState);
+        IBE.onRemove(state,level,pos,newState);
         if (!state.is(newState.getBlock())) {
             if (!level.isClientSide && state.getValue(POWERED) && level.getBlockTicks().hasScheduledTick(pos, this)) {
                 this.updateNeighborsInFront(level, pos, state.setValue(POWERED, false));
@@ -288,12 +288,12 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements ITE<B
     }
     
     @Override
-    public Class<BlazeStoveBlockEntity> getTileEntityClass() {
+    public Class<BlazeStoveBlockEntity> getBlockEntityClass() {
         return BlazeStoveBlockEntity.class;
     }
     
     @Override
-    public BlockEntityType<? extends BlazeStoveBlockEntity> getTileEntityType() {
+    public BlockEntityType<? extends BlazeStoveBlockEntity> getBlockEntityType() {
         return FDBlockEntityEntries.BLAZE_STOVE.get();
     }
     

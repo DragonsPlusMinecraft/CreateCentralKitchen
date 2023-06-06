@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 import com.cosmicgelatin.peculiars.core.PeculiarsConfig;
 import com.cosmicgelatin.peculiars.core.registry.PeculiarsItems;
 import com.simibubi.create.AllFluids;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;

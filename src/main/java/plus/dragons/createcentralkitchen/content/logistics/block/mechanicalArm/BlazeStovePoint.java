@@ -1,8 +1,10 @@
 package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
-import com.simibubi.create.content.logistics.block.mechanicalArm.AllArmInteractionPointTypes;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.foundation.ponder.PonderRegistry;
+import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
@@ -15,7 +17,9 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlockEntity;
+import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.function.Consumer;
 
@@ -62,7 +66,9 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         }
     
         @Override
-        public void addToPonderTag(Consumer<ItemLike> consumer) {}
+        public void addToPonderTag(Consumer<ItemLike> consumer) {
+            PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS).add(FDBlockEntries.BLAZE_STOVE.get());
+        }
         
     }
     

@@ -2,10 +2,11 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
 import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
 import com.sammy.minersdelight.setup.MDBlocks;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPoint;
-import com.simibubi.create.content.logistics.block.mechanicalArm.ArmInteractionPointType;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
+import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -152,7 +153,7 @@ public class CopperPotPoint extends ArmInteractionPoint {
 
         @Override
         public void addToPonderTag(Consumer<ItemLike> consumer) {
-            PonderRegistry.TAGS.forTag(PonderTag.ARM_TARGETS).add(MDBlocks.COPPER_POT.get());
+            PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS).add(MDBlocks.COPPER_POT.get());
         }
 
     }

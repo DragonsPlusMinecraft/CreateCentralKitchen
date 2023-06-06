@@ -13,7 +13,7 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 public class FDBlockEntityEntries {
     
     public static final BlockEntityEntry<BlazeStoveBlockEntity> BLAZE_STOVE = REGISTRATE
-        .tileEntity("blaze_stove", BlazeStoveBlockEntity::new)
+        .blockEntity("blaze_stove", BlazeStoveBlockEntity::new)
         .validBlocks(FDBlockEntries.BLAZE_STOVE)
         .renderer(() -> BlazeStoveRenderer::new)
         .register();

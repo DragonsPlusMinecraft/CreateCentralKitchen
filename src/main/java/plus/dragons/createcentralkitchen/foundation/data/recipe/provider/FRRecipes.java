@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.contraptions.processing.HeatCondition;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
