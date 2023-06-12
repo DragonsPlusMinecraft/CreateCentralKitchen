@@ -130,8 +130,8 @@ public class LangMerger implements DataProvider {
             String key = localization.getKey();
             Path populatedLangPath = this.gen.getOutputFolder()
                 .resolve("assets/" + CentralKitchen.ID + "/lang/unfinished/" + key);
-            save(cache, localization.getValue(), missingTranslationTally.get(key)
-                .intValue(), populatedLangPath, "Populating " + key + " with missing entries...");
+            save(cache, localization.getValue(), missingTranslationTally.get(key).intValue() + existingButActuallyMissingTranslationTally.get(key).intValue(),
+                    populatedLangPath, "Populating " + key + " with missing entries...");
         }
     }
     

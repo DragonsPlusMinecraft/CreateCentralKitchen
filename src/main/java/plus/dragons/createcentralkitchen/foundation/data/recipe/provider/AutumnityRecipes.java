@@ -35,7 +35,7 @@ public class AutumnityRecipes extends DatapackRecipes {
             .require(AutumnityBlocks.MAPLE_WOOD.get())
             .require(AutumnityFluidEntries.SAP.get(), 250)),
         COMPACTING_MAPLE_COOKIE = add(compacting("maple_cookie")
-            .output(ADItems.MAPLE_COOKIE.get())
+            .output(ADItems.MAPLE_COOKIE.get(),8)
             .require(AutumnityFluidEntries.SYRUP.get(), 250)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
