@@ -87,15 +87,15 @@ public class CopperPotPoint extends ArmInteractionPoint {
         if (neededSlotCount == 0)
             return stack;
 
-        int countPerSlot = stack.getCount() / neededSlotCount;
         ItemStack ret = stack.copy();
+        ret.shrink(neededSlotCount);
         for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
             if (neededSlots[slot]) {
-                ItemStack inserted = ret.split(countPerSlot);
+                ItemStack inserted = stack.copy();
+                inserted.setCount(1);
                 inventory.insertItem(slot, inserted, simulate);
             }
         }
-
         return ret;
     }
 
