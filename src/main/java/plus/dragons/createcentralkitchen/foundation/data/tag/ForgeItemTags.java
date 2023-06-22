@@ -24,7 +24,8 @@ public enum ForgeItemTags {
     STORAGE_BLOCKS__CHOCOLATE,
     SLABS__CHOCOLATE,
     STAIRS__CHOCOLATE,
-    WALLS__CHOCOLATE;
+    WALLS__CHOCOLATE,
+    CORPS__CORN;
     
     public final TagKey<Item> tag;
     

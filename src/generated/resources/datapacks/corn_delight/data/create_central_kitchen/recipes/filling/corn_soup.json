@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "corn_delight"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:corn_soup",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "corn_delight:corn_soup"
+    }
+  ]
+}

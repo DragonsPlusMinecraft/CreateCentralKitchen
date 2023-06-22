@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "corn_delight"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:creamy_corn_drink",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "corn_delight:creamy_corn_drink"
+    }
+  ]
+}

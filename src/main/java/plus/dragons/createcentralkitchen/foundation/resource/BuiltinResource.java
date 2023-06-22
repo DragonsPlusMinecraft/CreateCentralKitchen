@@ -38,6 +38,7 @@ public enum BuiltinResource {
     SEASONALS(PackType.SERVER_DATA, true, false),
     UPGRADE_AQUATIC(PackType.SERVER_DATA, true, false),
     OVERWEIGHT_FARMING(PackType.SERVER_DATA, true, false),
+    CORN_DELIGHT(PackType.SERVER_DATA, true, false),
     ENDS_DELIGHT(PackType.SERVER_DATA, true, false);
     
     private final String path;
