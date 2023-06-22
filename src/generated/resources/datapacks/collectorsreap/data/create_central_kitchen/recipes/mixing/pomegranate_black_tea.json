@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "pomegranate_black_tea"
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "collectorsreap:pomegranate_slice"
+    },
+    {
+      "item": "farmersrespite:black_tea_leaves"
+    },
+    {
+      "amount": 250,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:pomegranate_black_tea"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "mint_limeade"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:mint_limeade"
+    }
+  ]
+}

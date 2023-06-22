@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "lime_green_tea"
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "item": "farmersrespite:green_tea_leaves"
+    },
+    {
+      "amount": 250,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:lime_green_tea"
+    }
+  ]
+}

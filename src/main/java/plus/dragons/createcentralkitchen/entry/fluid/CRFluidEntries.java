@@ -19,12 +19,20 @@ public class CRFluidEntries {
             .register(),
         PINK_LIMEADE = VirtualFluidFromItem.watery(CRItems.PINK_LIMEADE, 0xFCA997)
             .register(),
+        MINT_LIMEADE = VirtualFluidFromItem.watery(CRItems.MINT_LIMEADE, 0x53ff50)
+            .register(),
         LIME_ICE_CREAM = virtual(CRItems.LIME_ICE_CREAM,
             Mods.cr("block/lime_ice_cream_block"), 500).register(),
         POMEGRANATE_ICE_CREAM = virtual(CRItems.POMEGRANATE_ICE_CREAM,
             Mods.cr("block/pomegranate_ice_cream_block"), 500).register(),
         LIME_MILKSHAKE = VirtualFluidFromItem.milky(CRItems.LIME_MILKSHAKE, 0xD7F7AC)
             .register(),
+        LIME_GREEN_TEA = VirtualFluidFromItem.watery(CRItems.LIME_GREEN_TEA, 0xa9ba40)
+            .register(),
+        POMEGRANATE_BLACK_TEA = VirtualFluidFromItem.watery(CRItems.POMEGRANATE_BLACK_TEA, 0x750b26)
+            .register(),
+        POMEGRANATE_SMOOTHIE = VirtualFluidFromItem.milky(CRItems.POMEGRANATE_SMOOTHIE, 0xcb307b)
+                    .register(),
         POMEGRANATE_MILKSHAKE = VirtualFluidFromItem.milky(CRItems.POMEGRANATE_MILKSHAKE, 0xFB7C90)
             .register();
     

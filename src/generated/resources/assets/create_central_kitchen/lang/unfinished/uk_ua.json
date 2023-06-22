@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 25",
+	"_": "Missing Localizations: 29",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -35,6 +35,7 @@
 	"fluid.create_central_kitchen.green_tea": "Зелений чай",
 	"fluid.create_central_kitchen.green_tea_ice_cream": "Морозиво із зеленого чаю",
 	"fluid.create_central_kitchen.hot_cocoa": "Гарячий шоколад",
+	"fluid.create_central_kitchen.lime_green_tea": "UNLOCALIZED: Lime Green Tea",
 	"fluid.create_central_kitchen.lime_ice_cream": "UNLOCALIZED: Lime Ice Cream",
 	"fluid.create_central_kitchen.lime_milkshake": "UNLOCALIZED: Lime Milkshake",
 	"fluid.create_central_kitchen.limeade": "UNLOCALIZED: Limeade",
@@ -49,14 +50,17 @@
 	"fluid.create_central_kitchen.long_yellow_tea": "Жовтий чай",
 	"fluid.create_central_kitchen.melon_juice": "Кавуновий сік",
 	"fluid.create_central_kitchen.mint_ice_cream": "М'ятне морозиво",
+	"fluid.create_central_kitchen.mint_limeade": "UNLOCALIZED: Mint Limeade",
 	"fluid.create_central_kitchen.mint_milkshake": "М'ятний молочний коктейль",
 	"fluid.create_central_kitchen.mocha_coffee": "UNLOCALIZED: Mocha Coffee",
 	"fluid.create_central_kitchen.mulberry_jam": "Варення шовковиці",
 	"fluid.create_central_kitchen.passionfruit_ice_cream": "Морозиво з маракуї",
 	"fluid.create_central_kitchen.passionfruit_milkshake": "Молочний коктейль з маракуї",
 	"fluid.create_central_kitchen.pink_limeade": "UNLOCALIZED: Pink Limeade",
+	"fluid.create_central_kitchen.pomegranate_black_tea": "UNLOCALIZED: Pomegranate Black Tea",
 	"fluid.create_central_kitchen.pomegranate_ice_cream": "UNLOCALIZED: Pomegranate Ice Cream",
 	"fluid.create_central_kitchen.pomegranate_milkshake": "UNLOCALIZED: Pomegranate Milkshake",
+	"fluid.create_central_kitchen.pomegranate_smoothie": "UNLOCALIZED: Pomegranate Smoothie",
 	"fluid.create_central_kitchen.pumpkin_ice_cream": "Гарбузове морозиво",
 	"fluid.create_central_kitchen.pumpkin_milkshake": "Гарбузовий молочний коктейль",
 	"fluid.create_central_kitchen.purulent_tea": "Гнійний чай",

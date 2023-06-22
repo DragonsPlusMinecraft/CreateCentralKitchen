@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 32",
+	"_": "Missing Localizations: 36",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -35,6 +35,7 @@
 	"fluid.create_central_kitchen.green_tea": "Thé Vert",
 	"fluid.create_central_kitchen.green_tea_ice_cream": "Glâce de Thé Vert",
 	"fluid.create_central_kitchen.hot_cocoa": "Chocolat Chaud",
+	"fluid.create_central_kitchen.lime_green_tea": "UNLOCALIZED: Lime Green Tea",
 	"fluid.create_central_kitchen.lime_ice_cream": "UNLOCALIZED: Lime Ice Cream",
 	"fluid.create_central_kitchen.lime_milkshake": "UNLOCALIZED: Lime Milkshake",
 	"fluid.create_central_kitchen.limeade": "UNLOCALIZED: Limeade",
@@ -49,14 +50,17 @@
 	"fluid.create_central_kitchen.long_yellow_tea": "Thé Jaune",
 	"fluid.create_central_kitchen.melon_juice": "Jus de Pastèque",
 	"fluid.create_central_kitchen.mint_ice_cream": "Glace à la Menthe",
+	"fluid.create_central_kitchen.mint_limeade": "UNLOCALIZED: Mint Limeade",
 	"fluid.create_central_kitchen.mint_milkshake": "Milk-shake à la Menthe",
 	"fluid.create_central_kitchen.mocha_coffee": "UNLOCALIZED: Mocha Coffee",
 	"fluid.create_central_kitchen.mulberry_jam": "Confiture de Mûres",
 	"fluid.create_central_kitchen.passionfruit_ice_cream": "Glace aux Fruits de la Passion",
 	"fluid.create_central_kitchen.passionfruit_milkshake": "Milk-shake aux Fruits de la Passion",
 	"fluid.create_central_kitchen.pink_limeade": "UNLOCALIZED: Pink Limeade",
+	"fluid.create_central_kitchen.pomegranate_black_tea": "UNLOCALIZED: Pomegranate Black Tea",
 	"fluid.create_central_kitchen.pomegranate_ice_cream": "UNLOCALIZED: Pomegranate Ice Cream",
 	"fluid.create_central_kitchen.pomegranate_milkshake": "UNLOCALIZED: Pomegranate Milkshake",
+	"fluid.create_central_kitchen.pomegranate_smoothie": "UNLOCALIZED: Pomegranate Smoothie",
 	"fluid.create_central_kitchen.pumpkin_ice_cream": "Glace à la Citrouille",
 	"fluid.create_central_kitchen.pumpkin_milkshake": "Milk-shake à la Citrouille",
 	"fluid.create_central_kitchen.purulent_tea": "Thé Purulent",

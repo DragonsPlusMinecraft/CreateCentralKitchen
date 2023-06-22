@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:pomegranate_black_tea",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:pomegranate_black_tea"
+    }
+  ]
+}

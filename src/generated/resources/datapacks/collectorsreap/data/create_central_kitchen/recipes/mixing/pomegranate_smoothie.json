@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "pomegranate_smoothie"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "collectorsreap:pomegranate_slice"
+    },
+    {
+      "item": "collectorsreap:pomegranate_slice"
+    },
+    {
+      "item": "neapolitan:banana"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:pomegranate_smoothie"
+    }
+  ]
+}

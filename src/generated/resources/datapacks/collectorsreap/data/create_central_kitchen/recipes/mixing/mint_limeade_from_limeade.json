@@ -1,0 +1,32 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "mint_limeade"
+    },
+    {
+      "type": "collectorsreap:enabled",
+      "value": "limeade"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:limeade",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:mint_limeade"
+    }
+  ]
+}

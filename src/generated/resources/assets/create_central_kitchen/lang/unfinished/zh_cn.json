@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 10",
+	"_": "Missing Localizations: 14",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -35,6 +35,7 @@
 	"fluid.create_central_kitchen.green_tea": "绿茶",
 	"fluid.create_central_kitchen.green_tea_ice_cream": "绿茶冰淇淋",
 	"fluid.create_central_kitchen.hot_cocoa": "热可可",
+	"fluid.create_central_kitchen.lime_green_tea": "UNLOCALIZED: Lime Green Tea",
 	"fluid.create_central_kitchen.lime_ice_cream": "青柠冰淇淋",
 	"fluid.create_central_kitchen.lime_milkshake": "青柠奶昔",
 	"fluid.create_central_kitchen.limeade": "青柠汁",
@@ -49,14 +50,17 @@
 	"fluid.create_central_kitchen.long_yellow_tea": "黄茶",
 	"fluid.create_central_kitchen.melon_juice": "西瓜汁",
 	"fluid.create_central_kitchen.mint_ice_cream": "薄荷冰淇淋",
+	"fluid.create_central_kitchen.mint_limeade": "UNLOCALIZED: Mint Limeade",
 	"fluid.create_central_kitchen.mint_milkshake": "薄荷奶昔",
 	"fluid.create_central_kitchen.mocha_coffee": "UNLOCALIZED: Mocha Coffee",
 	"fluid.create_central_kitchen.mulberry_jam": "桑葚果酱",
 	"fluid.create_central_kitchen.passionfruit_ice_cream": "百香果冰淇淋",
 	"fluid.create_central_kitchen.passionfruit_milkshake": "百香果奶昔",
 	"fluid.create_central_kitchen.pink_limeade": "粉红青柠汁",
+	"fluid.create_central_kitchen.pomegranate_black_tea": "UNLOCALIZED: Pomegranate Black Tea",
 	"fluid.create_central_kitchen.pomegranate_ice_cream": "石榴冰淇淋",
 	"fluid.create_central_kitchen.pomegranate_milkshake": "石榴奶昔",
+	"fluid.create_central_kitchen.pomegranate_smoothie": "UNLOCALIZED: Pomegranate Smoothie",
 	"fluid.create_central_kitchen.pumpkin_ice_cream": "南瓜冰淇淋",
 	"fluid.create_central_kitchen.pumpkin_milkshake": "南瓜奶昔",
 	"fluid.create_central_kitchen.purulent_tea": "脓眼茶",

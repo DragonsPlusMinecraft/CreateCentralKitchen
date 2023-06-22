@@ -3,6 +3,7 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 import com.teamabnormals.neapolitan.core.registry.NeapolitanItems;
 import net.brdle.collectorsreap.common.crafting.EnabledCondition;
@@ -11,6 +12,7 @@ import net.brdle.collectorsreap.data.CRItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -19,6 +21,7 @@ import plus.dragons.createcentralkitchen.entry.fluid.NeapolitanFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.CRItemEntries;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
+import umpaz.farmersrespite.common.registry.FRItems;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
@@ -58,6 +61,21 @@ public class CRRecipes extends DatapackRecipes {
             .require(ForgeTags.BERRIES)
             .require(ForgeTags.BERRIES)
             .require(ForgeTags.BERRIES)),
+        MIXING_MINT_LIMEADE = add(mixing("mint_limeade")
+            .output(CRFluidEntries.MINT_LIMEADE.get(), 250)
+            .withCondition(enabled(CRItems.MINT_LIMEADE))
+            .require(CRItemTags.FRUITS_LIME)
+            .require(CRItemTags.FRUITS_LIME)
+            .require(NeapolitanItems.MINT_LEAVES.get())
+            .require(NeapolitanItems.MINT_LEAVES.get())
+            .require(Items.SUGAR)),
+        MIXING_MINT_LIMEADE_FROM_LIMEADE = add(mixing("mint_limeade_from_limeade")
+            .output(CRFluidEntries.MINT_LIMEADE.get(), 250)
+            .withCondition(enabled(CRItems.MINT_LIMEADE))
+            .withCondition(enabled(CRItems.LIMEADE))
+            .require(CRFluidEntries.LIMEADE.get(), 250)
+            .require(NeapolitanItems.MINT_LEAVES.get())
+            .require(NeapolitanItems.MINT_LEAVES.get())),
         MIXING_PINK_LIMEADE = add(mixing("pink_limeade")
             .output(CRFluidEntries.PINK_LIMEADE.get(), 250)
             .withCondition(enabled(CRItems.PINK_LIMEADE))
@@ -128,6 +146,26 @@ public class CRRecipes extends DatapackRecipes {
             .require(Items.SUGAR)
             .require(CRItemTags.FRUITS_POMEGRANATE)
             .require(Tags.Fluids.MILK, 250)),
+        MIXING_LIME_GREEN_TEA = add(mixing("lime_green_tea")
+            .output(CRFluidEntries.LIME_GREEN_TEA.get(), 250)
+            .withCondition(enabled(CRItems.LIME_GREEN_TEA))
+            .require(CRItemTags.FRUITS_LIME)
+            .require(FRItems.GREEN_TEA_LEAVES.get())
+            .require(Fluids.WATER,250)
+            .requiresHeat(HeatCondition.HEATED)),
+        MIXING_POMEGRANATE_BLACK_TEA = add(mixing("pomegranate_black_tea")
+            .output(CRFluidEntries.POMEGRANATE_BLACK_TEA.get(), 250)
+            .withCondition(enabled(CRItems.POMEGRANATE_BLACK_TEA))
+            .require(CRItems.POMEGRANATE_SLICE.get())
+            .require(FRItems.BLACK_TEA_LEAVES.get())
+            .require(Fluids.WATER,250)
+            .requiresHeat(HeatCondition.HEATED)),
+        MIXING_POMEGRANATE_SMOOTHIE = add(mixing("pomegranate_smoothie")
+            .output(CRFluidEntries.POMEGRANATE_SMOOTHIE.get(), 250)
+            .withCondition(enabled(CRItems.POMEGRANATE_SMOOTHIE))
+            .require(CRItems.POMEGRANATE_SLICE.get())
+            .require(CRItems.POMEGRANATE_SLICE.get())
+            .require(NeapolitanItems.BANANA.get())),
         CRAFTING_POMEGRANATE_CAKE_FROM_DOUGH = add(shaped("pomegranate_cake_from_dough")
             .output(CRItems.POMEGRANATE_CAKE.get())
             .withCondition(enabled(CRItems.POMEGRANATE_CAKE))
@@ -149,6 +187,13 @@ public class CRRecipes extends DatapackRecipes {
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(CRItemTags.FRUITS_POMEGRANATE)
             .require(CRItemTags.FRUITS_POMEGRANATE)
+            .require(Tags.Fluids.MILK, 1000)),
+        COMPACTING_STRAWBERRY_JAM_BUM= add(compacting("strawberry_jam_bum")
+            .output(CRItems.STRAWBERRY_JAM_BUN.get())
+            .withCondition(enabled(CRItems.STRAWBERRY_JAM_BUN))
+            .require(Items.WHEAT)
+            .require(NeapolitanItems.STRAWBERRIES.get())
+            .require(CRItemTags.LIME_OR_SLICE)
             .require(Tags.Fluids.MILK, 1000)),
         MIXING_POMEGRANATE_MILKSHAKE = add(mixing("pomegranate_milkshake")
             .output(CRFluidEntries.POMEGRANATE_MILKSHAKE.get(), 750)
