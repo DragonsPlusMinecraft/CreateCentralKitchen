@@ -1,12 +1,19 @@
 package plus.dragons.createcentralkitchen.integration.jei;
 
+import com.simibubi.create.content.fluids.VirtualFluid;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
@@ -83,6 +90,16 @@ public class CentralKitchenJeiPlugin implements IModPlugin {
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
         plugins.forEach(plugin -> plugin.onRuntimeAvailable(jeiRuntime));
+        List<FluidStack> fluidIngredients =
+        ForgeRegistries.FLUIDS.getEntries().stream()
+                .filter(entry->
+                        entry.getKey().location().getNamespace().equals(CentralKitchen.ID) &&
+                                !entry.getKey().location().getPath().startsWith("flowing_") &&
+                                entry.getValue() instanceof VirtualFluid &&
+                                entry.getValue().getBucket().equals(Items.AIR))
+                .map(entry->new FluidStack(entry.getValue(),FluidType.BUCKET_VOLUME))
+                .toList();
+        jeiRuntime.getIngredientManager().addIngredientsAtRuntime(ForgeTypes.FLUID_STACK,fluidIngredients);
     }
     
 }
