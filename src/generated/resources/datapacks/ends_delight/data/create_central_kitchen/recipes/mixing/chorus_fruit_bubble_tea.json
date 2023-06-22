@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:chorus_fruit"
+      },
+      {
+        "item": "ends_delight:chorus_fruit_grain"
+      }
+    ],
+    {
+      "item": "ends_delight:ender_pearl_grain"
+    },
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:chorus_fruit_bubble_tea"
+    }
+  ]
+}

@@ -37,26 +37,21 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 @ModLoadSubscriber(modid = Mods.ED)
 public class EDFluidEntries {
-    // TODO Dragon Breath Texture
-    private static final ResourceLocation DRAGON_BREATH_STILL = CentralKitchen.genRL("fluid/dragon_breath_still");
-    private static final ResourceLocation DRAGON_BREATH_FLOW = CentralKitchen.genRL("fluid/dragon_breath_flow");
+
+    private static final ResourceLocation BUBBLE_TEA_STILL = CentralKitchen.genRL("fluid/bubble_tea_still");
+    private static final ResourceLocation BUBBLE_TEA_FLOW = CentralKitchen.genRL("fluid/bubble_tea_flow");
     public static final FluidEntry<VirtualFluid>
-        DRAGONS_BREATH = REGISTRATE.virtualFluid("dragon_breath", DRAGON_BREATH_STILL, DRAGON_BREATH_FLOW)
-            .register(),
         DRAGONS_BREATH_SODA = VirtualFluidFromItem.watery(ItemRegistry.DragonBreathSoda, 0xd16191)
             .register(),
-        CHORUS_FLOWER_TEA = VirtualFluidFromItem.milky(ItemRegistry.ChorusFlowerTea, 0xa27da1)
+        CHORUS_FLOWER_TEA = VirtualFluidFromItem.watery(ItemRegistry.ChorusFlowerTea, 0xa27da1)
             .register(),
         CHORUS_FRUIT_WINE = VirtualFluidFromItem.watery(ItemRegistry.ChorusFruitWine, 0xd39cd3)
             .register(),
-        CHORUS_FRUIT_MILK_TEA = VirtualFluidFromItem.milky(ItemRegistry.ChorusFruitMilkTea, 0xb55db5)
+        CHORUS_FRUIT_MILK_TEA = VirtualFluidFromItem.milky(ItemRegistry.ChorusFruitMilkTea, 0xffa3ff)
             .register(),
-        CHORUS_FRUIT_BUBBLE_TEA = bubbleTea("chorus_fruit_bubble_tea",ItemRegistry.BubbleTea, 0xb55db5, 250)
+        CHORUS_FRUIT_BUBBLE_TEA = bubbleTea("chorus_fruit_bubble_tea",ItemRegistry.BubbleTea, 0xffa3ff, 250)
             .register();
 
-    // TODO Base Bubble Tea Texture
-    private static final ResourceLocation BUBBLE_TEA_STILL = CentralKitchen.genRL("fluid/bubble_milk_tea_still");
-    private static final ResourceLocation BUBBLE_TEA_FLOW = CentralKitchen.genRL("fluid/bubble_milk_tea_flow");
     public static FluidBuilder<VirtualFluid, CreateRegistrate> bubbleTea(String name, RegistryObject<? extends ItemLike> container, int colorIn, int amount) {
         final int color = 0xFF000000 | colorIn;
         return REGISTRATE.virtualFluid(name, BUBBLE_TEA_STILL, BUBBLE_TEA_FLOW, ((properties, stillTexture, flowingTexture) ->

@@ -36,7 +36,8 @@ public enum BuiltinResource {
     PECULIARS(PackType.SERVER_DATA, true, false),
     RESPITEFUL(PackType.SERVER_DATA, true, false),
     SEASONALS(PackType.SERVER_DATA, true, false),
-    UPGRADE_AQUATIC(PackType.SERVER_DATA, true, false);
+    UPGRADE_AQUATIC(PackType.SERVER_DATA, true, false),
+    ENDS_DELIGHT(PackType.SERVER_DATA, true, false);
     
     private final String path;
     private final String mod;

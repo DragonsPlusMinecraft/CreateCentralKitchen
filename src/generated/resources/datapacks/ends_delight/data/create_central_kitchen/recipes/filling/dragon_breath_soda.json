@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ends_delight"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:dragon_breath_soda",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "ends_delight:dragon_breath_soda"
+    }
+  ]
+}

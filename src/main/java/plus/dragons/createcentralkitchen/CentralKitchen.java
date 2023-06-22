@@ -20,6 +20,8 @@ import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
+import plus.dragons.createcentralkitchen.content.contraptions.fluids.OpenEndedPipeEffects;
+import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.FRItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
@@ -48,6 +50,9 @@ public class CentralKitchen {
     
     public CentralKitchen() {
         CentralKitchenConfigs.register(ModLoadingContext.get());
+
+        CckFluidEntries.register();
+
         FMLModContainer container = (FMLModContainer) ModLoadingContext.get().getActiveContainer();
         AutomaticModLoadSubscriber.load(container, CentralKitchen.class);
         
@@ -69,7 +74,7 @@ public class CentralKitchen {
     }
     
     public void commonSetup(FMLCommonSetupEvent event) {
-    
+        event.enqueueWork(OpenEndedPipeEffects::register);
     }
     
     public void clientSetup(FMLClientSetupEvent event) {

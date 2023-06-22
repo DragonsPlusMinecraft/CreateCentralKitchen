@@ -14,6 +14,7 @@ public class Mods {
     public static final String FR = "farmersrespite";
     public static final String MD = "miners_delight";
     public static final String ND = "nethersdelight";
+    public static final String ED = "ends_delight";
     //Abnormals' mods
     public static final String AD = "abnormals_delight";
     public static final String ATMOSPHERIC = "atmospheric";
