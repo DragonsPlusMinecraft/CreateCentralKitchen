@@ -73,20 +73,4 @@ public class FDFluidEntries {
         .build()
         .register();
     
-    @SubscribeEvent
-    public static void remap(RegistryEvent.MissingMappings<Fluid> event) {
-        Map<ResourceLocation, FluidEntry<?>> remap = new HashMap<>();
-        remap.put(Mods.fd("apple_cider"), APPLE_CIDER);
-        remap.put(Mods.fd("hot_cocoa"), HOT_COCOA);
-        remap.put(Mods.fd("melon_juice"), MELON_JUICE);
-        remap.put(Mods.fd("tomato_sauce"), TOMATO_SAUCE);
-        for (var mapping : event.getMappings(Mods.FD)) {
-            if (remap.containsKey(mapping.key)) {
-                var fluid = remap.get(mapping.key);
-                mapping.remap(fluid.get());
-                CentralKitchen.LOGGER.warn("Remapping fluid '{}' to '{}'...", mapping.key, fluid.getId());
-            }
-        }
-    }
-    
 }
