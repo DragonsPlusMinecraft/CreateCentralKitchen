@@ -79,21 +79,4 @@ public class FDFluidEntries {
         .build()
         .register();
     
-    @SubscribeEvent
-    public static void remap(MissingMappingsEvent event) {
-        List<MissingMappingsEvent.Mapping<Fluid>> mappings = event.getMappings(ForgeRegistries.Keys.FLUIDS, "farmersdelight");
-        Map<ResourceLocation, FluidEntry<?>> remap = new HashMap<>();
-        remap.put(Mods.fd("apple_cider"), APPLE_CIDER);
-        remap.put(Mods.fd("hot_cocoa"), HOT_COCOA);
-        remap.put(Mods.fd("melon_juice"), MELON_JUICE);
-        remap.put(Mods.fd("tomato_sauce"), TOMATO_SAUCE);
-        for (var mapping : mappings) {
-            if (remap.containsKey(mapping.getKey())) {
-                var fluid = remap.get(mapping.getKey());
-                mapping.remap(fluid.get());
-                CentralKitchen.LOGGER.warn("Remapping fluid '{}' to '{}'...", mapping.getKey(), fluid.getId());
-            }
-        }
-    }
-    
 }
