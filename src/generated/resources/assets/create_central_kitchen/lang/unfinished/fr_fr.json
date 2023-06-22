@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 30",
+	"_": "Missing Localizations: 32",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -9,6 +9,7 @@
 	"block.create_central_kitchen.tomato_sauce": "Sauce Tomate",
 
 	"fluid.create_central_kitchen.adzuki_ice_cream": "Glace aux Azuki",
+	"fluid.create_central_kitchen.adzuki_milk_tea": "UNLOCALIZED: Adzuki Milk Tea",
 	"fluid.create_central_kitchen.adzuki_milkshake": "Milk-shake aux Azuki",
 	"fluid.create_central_kitchen.aloe_gel": "Gel d'Aloe Vera",
 	"fluid.create_central_kitchen.aloe_ice_cream": "Glace à l'Aloe Vera",
@@ -49,6 +50,7 @@
 	"fluid.create_central_kitchen.melon_juice": "Jus de Pastèque",
 	"fluid.create_central_kitchen.mint_ice_cream": "Glace à la Menthe",
 	"fluid.create_central_kitchen.mint_milkshake": "Milk-shake à la Menthe",
+	"fluid.create_central_kitchen.mocha_coffee": "UNLOCALIZED: Mocha Coffee",
 	"fluid.create_central_kitchen.mulberry_jam": "Confiture de Mûres",
 	"fluid.create_central_kitchen.passionfruit_ice_cream": "Glace aux Fruits de la Passion",
 	"fluid.create_central_kitchen.passionfruit_milkshake": "Milk-shake aux Fruits de la Passion",
@@ -122,70 +124,6 @@
 	"item.create_central_kitchen.yucca_cake_slice": "Tranche de Gâteau au Yucca",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "Déploiement de la Planche à Découper",
-
-	"create_central_kitchen.ponder.tag.cooking_automation": "Automatisation de la Cuisson",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "Composants qui automatisent le processus de cuisson",
-
-	"create_central_kitchen.ponder.basket.belt_interaction.header": "Réception d'objets depuis un Tapis Roulant en utilisant un Panier",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "Le Panier peut recevoir des articles transportés à partir d'un Tapis Roulant.",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "Outre la face vers le haut, la face horizontale correspondante convient également.",
-
-	"create_central_kitchen.ponder.basket.intro.header": "Récupérer les objets jetés au sol à l'aide du Panier",
-	"create_central_kitchen.ponder.basket.intro.text_1": "Comme l'Entonnoir, le Panier peut collecter des objets jetés.",
-	"create_central_kitchen.ponder.basket.intro.text_2": "De plus, les Paniers peuvent avoir différents revêtements.",
-	"create_central_kitchen.ponder.basket.intro.text_3": "Cependant, le Panier ne peut pas extraire d'objets depuis des conteneurs.",
-
-	"create_central_kitchen.ponder.blaze_stove.automation.header": "Configurer le Blaze Marmite",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "Le Blaze Marmite peut fournir un support de Bras Mécanique pour les ustensiles de cuisine comme la Marmite, mais il doit être configuré pour fonctionner.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "Faite Clic-Droit sur un Blaze Marmite pour ouvrir le menu Guide de Cuisson.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "Vous pouvez également faire un Clique-Droit sur un Blaze Marmite avec n'importe quel guide pour les échanger.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "Une fois que vous avez attribué une recette valide au Guide de Cuisine, la Marmite ci-dessus deviendra interactive avec les Bras Mécaniques.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "Pour l'entrée, le Bras Mécanique insérera des conteneurs et des ingrédients définis.",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "Pour la sortie, le Bras Mécanique extraira le résultat et les ingrédients invalides.",
-
-	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "Utilisez un Blaze Marmite comme source de chaleur",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "Le Blaze Marmite est une source de chaleur active, plus le feu est chaud, plus la cuisson est rapide.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "Mais la cuisson peut toujours être faite avec de la chaleur passive.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "Bien sûr, vous pouvez également utiliser un Blaze Marmite pour faire frire des aliments directement.",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "Mais veuillez noter qu'un feu bouillonnant peut brûler vos ingrédients en un instant.",
-
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "Créer un Blaze Marmite",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "Pour créer un Blaze Marmite, faites Clique-Droit sur le Brûleur à Blaze avec un Guide de Cuisine en main et en étant accroup.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "Les Guides de Cuisson sont destinés aux casseroles, d'autres guides pour différents ustensiles de cuisine sont également applicables.",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "Pour récupérer le Guide de Cuisson, faites Clique-Droit sur un Blaze Marmite avec une clé en étant accroupi.",
-
-	"datapack.create_central_kitchen.atmospheric": "Create: Central Kitchen - Atmospheric",
-	"datapack.create_central_kitchen.atmospheric.desc": "Provides support for Atmospheric",
-	"datapack.create_central_kitchen.autumnity": "Create: Central Kitchen - Autumnity",
-	"datapack.create_central_kitchen.autumnity.desc": "Provides support for Autumnity",
-	"datapack.create_central_kitchen.buzzier_bees": "Create: Central Kitchen - Buzzier Bees",
-	"datapack.create_central_kitchen.buzzier_bees.desc": "Provides support for Buzzier Bees",
-	"datapack.create_central_kitchen.collectorsreap": "UNLOCALIZED: Create: Central Kitchen - Collector's Reap",
-	"datapack.create_central_kitchen.collectorsreap.desc": "UNLOCALIZED: Provides support for Collector's Reap",
-	"datapack.create_central_kitchen.farmersdelight": "Create: Central Kitchen - Farmer's Delight",
-	"datapack.create_central_kitchen.farmersdelight.desc": "Provides support for Farmer's Delight",
-	"datapack.create_central_kitchen.farmersrespite": "Create: Central Kitchen - Farmer's Respite",
-	"datapack.create_central_kitchen.farmersrespite.desc": "Provides support for Farmer's Respite",
-	"datapack.create_central_kitchen.miners_delight": "Create: Central Kitchen - Miner's Delight",
-	"datapack.create_central_kitchen.miners_delight.desc": "Provides support for Miner's Delight",
-	"datapack.create_central_kitchen.neapolitan": "Create: Central Kitchen - Neapolitan",
-	"datapack.create_central_kitchen.neapolitan.desc": "Provides support for Neapolitan",
-	"datapack.create_central_kitchen.peculiars": "Create: Central Kitchen - Peculiars",
-	"datapack.create_central_kitchen.peculiars.desc": "Provides support for Peculiars",
-	"datapack.create_central_kitchen.respiteful": "Create: Central Kitchen - Respiteful",
-	"datapack.create_central_kitchen.respiteful.desc": "Provides support for Respiteful",
-	"datapack.create_central_kitchen.seasonals": "Create: Central Kitchen - Seasonals",
-	"datapack.create_central_kitchen.seasonals.desc": "Provides support for Seasonals",
-	"datapack.create_central_kitchen.upgrade_aquatic": "Create: Central Kitchen - Upgrade Aquatic",
-	"datapack.create_central_kitchen.upgrade_aquatic.desc": "Provides support for Upgrade Aquatic",
-
-	"resourcepack.create_central_kitchen.create_styled": "Create: Central Kitchen - Create Style'd",
-	"resourcepack.create_central_kitchen.create_styled.desc": "Re-texture some mods in Create style",
-
-	"create_central_kitchen.generic.unobtainable": "Impossible à obtenir",
-
-	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "Aucune recette valide fournie",
-	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "Recette Actuelle:",
 
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
