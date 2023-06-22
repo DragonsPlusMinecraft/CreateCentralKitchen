@@ -143,8 +143,8 @@ dependencies {
     implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
     //implementation fg.deobf("curse.maven:differentiate-450748:${differentiate_file}")
     //implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
-    implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
-    implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
+    //implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}") // Remove Corn Delight due to https://github.com/0999312/Corn-Delight/issues/41
+    //implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
     implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
     implementation fg.deobf("curse.maven:cultural-delight-574622:${cultural_delight_file}")
     implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
