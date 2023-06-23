@@ -28,6 +28,8 @@ public class Mods {
     public static final String PECULIARS = "peculiars";
     public static final String SEASONALS = "seasonals";
     public static final String COOKIELICIOUS = "cookielicious";
+    // Standole mods
+    public static final String OF = "overweight_farming";
     //Utility mods
     public static final String JEI = "jei";
     public static final String CURIOS = "curios";

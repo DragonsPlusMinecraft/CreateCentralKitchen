@@ -44,6 +44,11 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
             "pieOverhaulBlackList",
             "Pie items in this list will not be included in pie overhaul",
             ConfigAnnotations.RequiresRestart.BOTH.asComment());
+
+        public final ConfigBool enableHarvesterSupportForOverweightFarming = b(true,
+                "enableHarvesterSupportForOverweightFarming",
+                "For harvester to function properly, turning on this support will cause the collision shape of the overweight crop block to disappear.",
+                ConfigAnnotations.RequiresRestart.SERVER.asComment());
     
         @Override
         public String getName() {
