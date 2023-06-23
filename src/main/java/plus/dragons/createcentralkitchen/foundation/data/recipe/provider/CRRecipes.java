@@ -239,6 +239,18 @@ public class CRRecipes extends DatapackRecipes {
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CRItemTags.FRUITS_LIME))
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.SUGAR))
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ForgeTags.EGGS))
+            .addStep(FillingRecipe::new, builder -> builder.require(Tags.Fluids.MILK, 250))),
+
+        SEQUENCED_ASSEMBLY_VEGGIE_WARP = add(sequencedAssembly("veggie_wrap")
+            .require(com.ncpbails.culturaldelights.item.ModItems.TORTILLA.get())
+            .transitionTo(CRItemEntries.INCOMPLETE_VEGGIE_WRAP.get())
+            .addOutput(CRItems.PORTOBELLO_WRAP.get(), 1)
+            .withCondition(enabled(CRItems.PORTOBELLO_WRAP))
+            .loops(1)
+            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ForgeTags.SALAD_INGREDIENTS))
+            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ModItems.ONION.get()))
+            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.CARROT))
+            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(CRItems.BAKED_PORTOBELLO_CAP.get()))
             .addStep(FillingRecipe::new, builder -> builder.require(Tags.Fluids.MILK, 250)));
     
     private static EnabledCondition enabled(RegistryObject<? extends ItemLike> item) {

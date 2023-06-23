@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 14",
+	"_": "Missing Localizations: 15",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -111,6 +111,7 @@
 	"item.create_central_kitchen.incomplete_neapolitan_ice_cream_strawberry": "Helado napolitano incompleto",
 	"item.create_central_kitchen.incomplete_portobello_burger": "Hamburguesa portobello incompleta",
 	"item.create_central_kitchen.incomplete_portobello_quiche": "Quiche portobello incompleto",
+	"item.create_central_kitchen.incomplete_portobello_wrap": "UNLOCALIZED: Incomplete Portobello Wrap",
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "Pastel de calabaza incompleto",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "Pastel de queso con bayas dulces incompleto",
 	"item.create_central_kitchen.incomplete_truffle_pie": "Pastel de trufa incompleto",

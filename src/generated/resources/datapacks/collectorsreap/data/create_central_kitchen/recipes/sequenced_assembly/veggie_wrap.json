@@ -1,0 +1,104 @@
+{
+  "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "portobello_wrap"
+    }
+  ],
+  "ingredient": {
+    "item": "culturaldelights:tortilla"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "collectorsreap:portobello_wrap"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        },
+        {
+          "tag": "forge:salad_ingredients"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        },
+        {
+          "item": "farmersdelight:onion"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        },
+        {
+          "item": "minecraft:carrot"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        },
+        {
+          "item": "collectorsreap:baked_portobello_cap"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        },
+        {
+          "amount": 250,
+          "fluidTag": "forge:milk"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_wrap"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_portobello_wrap"
+  }
+}

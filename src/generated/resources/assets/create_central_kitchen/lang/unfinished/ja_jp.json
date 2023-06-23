@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 14",
+	"_": "Missing Localizations: 15",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -111,6 +111,7 @@
 	"item.create_central_kitchen.incomplete_neapolitan_ice_cream_strawberry": "未完成のナポリのアイス",
 	"item.create_central_kitchen.incomplete_portobello_burger": "未完成のポートベローバーガー",
 	"item.create_central_kitchen.incomplete_portobello_quiche": "未完成のポートベローキッシュ",
+	"item.create_central_kitchen.incomplete_portobello_wrap": "UNLOCALIZED: Incomplete Portobello Wrap",
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "未完成のパンプキンパイ",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "未完成のスイートベリーチーズケーキ",
 	"item.create_central_kitchen.incomplete_truffle_pie": "未完成のトリュフパイ",

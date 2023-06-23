@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 14",
+	"_": "Missing Localizations: 15",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -111,6 +111,7 @@
 	"item.create_central_kitchen.incomplete_neapolitan_ice_cream_strawberry": "Незаконченное неаполитанское мороженое",
 	"item.create_central_kitchen.incomplete_portobello_burger": "Незаконченный портобелло бургер",
 	"item.create_central_kitchen.incomplete_portobello_quiche": "Незаконченный пирог с портобелло",
+	"item.create_central_kitchen.incomplete_portobello_wrap": "UNLOCALIZED: Incomplete Portobello Wrap",
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "Незаконченный тыквенный пирог",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "Незаконченный чизкейк из сладких ягод",
 	"item.create_central_kitchen.incomplete_truffle_pie": "Незаконченный трюфельный пирог",

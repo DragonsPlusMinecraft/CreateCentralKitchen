@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 14",
+	"_": "Missing Localizations: 15",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -111,6 +111,7 @@
 	"item.create_central_kitchen.incomplete_neapolitan_ice_cream_strawberry": "拿坡里風味冰淇淋（半成品）",
 	"item.create_central_kitchen.incomplete_portobello_burger": "雙胞蘑菇堡（半成品）",
 	"item.create_central_kitchen.incomplete_portobello_quiche": "雙孢蘑菇乳蛋排（半成品）",
+	"item.create_central_kitchen.incomplete_portobello_wrap": "UNLOCALIZED: Incomplete Portobello Wrap",
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "南瓜派（半成品）",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "甜莓起司派（半成品）",
 	"item.create_central_kitchen.incomplete_truffle_pie": "松露派（半成品）",

@@ -22,6 +22,7 @@ public class CRItemEntries {
     
     public static final ItemEntry<SequencedAssemblyItem>
         INCOMPLETE_PORTOBELLO_QUICHE = sequencedFood(CRItems.PORTOBELLO_QUICHE, FoodValues.PIE_CRUST),
+        INCOMPLETE_VEGGIE_WRAP = sequencedFood(CRItems.PORTOBELLO_WRAP, new FoodProperties.Builder().nutrition(10).saturationMod(0.8F).build()),
         INCOMPLETE_LIME_PIE = sequencedFood(CRItems.LIME_PIE, FoodValues.PIE_CRUST);
     
     private static ItemEntry<SequencedAssemblyItem> sequencedFood(String result, FoodProperties food) {

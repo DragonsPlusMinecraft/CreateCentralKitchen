@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 29",
+	"_": "Missing Localizations: 30",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -111,6 +111,7 @@
 	"item.create_central_kitchen.incomplete_neapolitan_ice_cream_strawberry": "Незавершений неаполітанове морозиво",
 	"item.create_central_kitchen.incomplete_portobello_burger": "UNLOCALIZED: Incomplete Portobello Burger",
 	"item.create_central_kitchen.incomplete_portobello_quiche": "UNLOCALIZED: Incomplete Portobello Quiche",
+	"item.create_central_kitchen.incomplete_portobello_wrap": "UNLOCALIZED: Incomplete Portobello Wrap",
 	"item.create_central_kitchen.incomplete_pumpkin_pie": "Незавершений гарбузовий пиріг",
 	"item.create_central_kitchen.incomplete_sweet_berry_cheesecake": "Незавершений солодкий ягідний чізкейк",
 	"item.create_central_kitchen.incomplete_truffle_pie": "Незавершений трюфельньний пиріг",
