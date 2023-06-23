@@ -90,16 +90,6 @@ public class CentralKitchenJeiPlugin implements IModPlugin {
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
         plugins.forEach(plugin -> plugin.onRuntimeAvailable(jeiRuntime));
-        List<FluidStack> fluidIngredients =
-        ForgeRegistries.FLUIDS.getEntries().stream()
-                .filter(entry->
-                        entry.getKey().location().getNamespace().equals(CentralKitchen.ID) &&
-                                !entry.getKey().location().getPath().startsWith("flowing_") &&
-                                entry.getValue() instanceof VirtualFluid &&
-                                entry.getValue().getBucket().equals(Items.AIR))
-                .map(entry->new FluidStack(entry.getValue(),FluidType.BUCKET_VOLUME))
-                .toList();
-        jeiRuntime.getIngredientManager().addIngredientsAtRuntime(ForgeTypes.FLUID_STACK,fluidIngredients);
     }
     
 }
