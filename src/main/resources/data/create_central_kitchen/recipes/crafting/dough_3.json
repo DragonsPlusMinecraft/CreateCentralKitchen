@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:water_bucket"
+    },
+    "B": {
+      "tag": "forge:flour/wheat"
+    }
+  },
+  "result": {
+    "item": "create:dough"
+  }
+}
