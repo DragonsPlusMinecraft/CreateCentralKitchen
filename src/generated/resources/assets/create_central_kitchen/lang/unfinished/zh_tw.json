@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 15",
+	"_": "Missing Localizations: 19",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -253,6 +253,10 @@
 	"datapack.create_central_kitchen.respiteful.desc": "提供對閒暇風味的支持",
 	"datapack.create_central_kitchen.seasonals": "機械動力：中央廚房 - 季節風味",
 	"datapack.create_central_kitchen.seasonals.desc": "提供對季節風味的支持",
+	"datapack.create_central_kitchen.overweight_farming": "UNLOCALIZED: Create: Central Kitchen - Overweight Farming",
+	"datapack.create_central_kitchen.overweight_farming.desc": "UNLOCALIZED: Provides support for Overweight Farming",
+	"datapack.create_central_kitchen.ends_delight": "UNLOCALIZED: Create: Central Kitchen - End's Delight",
+	"datapack.create_central_kitchen.ends_delight.desc": "UNLOCALIZED: Provides support for End's Delight",
 	"datapack.create_central_kitchen.upgrade_aquatic": "機械動力：中央廚房 - 碧海新生",
 	"datapack.create_central_kitchen.upgrade_aquatic.desc": "提供對碧海新生的支持",
 
