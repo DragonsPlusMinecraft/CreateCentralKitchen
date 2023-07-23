@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -22,7 +23,7 @@ public class VirtualFluidFromItem {
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(String name, RegistryObject<? extends ItemLike> container, int color, int amount) {
         return REGISTRATE.virtualFluid(name, WATER_STILL, WATER_FLOW)
             .defaultLang()
-            .attributes(b -> b.color(0xFF000000 | color))
+            .attributes(b -> b.color(0xFF000000 | color).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -41,7 +42,7 @@ public class VirtualFluidFromItem {
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(String name, ItemProviderEntry<?> container, int color, int amount) {
         return REGISTRATE.virtualFluid(name, WATER_STILL, WATER_FLOW)
             .defaultLang()
-            .attributes(b -> b.color(0xFF000000 | color))
+            .attributes(b -> b.color(0xFF000000 | color).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -60,7 +61,7 @@ public class VirtualFluidFromItem {
     public static FluidBuilder<VirtualFluid, CreateRegistrate> milky(String name, RegistryObject<? extends ItemLike> container, int color, int amount) {
         return REGISTRATE.virtualFluid(name, MILK_STILL, MILK_FLOW)
             .defaultLang()
-            .attributes(b -> b.color(0xFF000000 | color))
+            .attributes(b -> b.color(0xFF000000 | color).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -79,7 +80,7 @@ public class VirtualFluidFromItem {
     public static FluidBuilder<VirtualFluid, CreateRegistrate> milky(String name, ItemProviderEntry<?> container, int color, int amount) {
         return REGISTRATE.virtualFluid(name, MILK_STILL, MILK_FLOW)
             .defaultLang()
-            .attributes(b -> b.color(0xFF000000 | color))
+            .attributes(b -> b.color(0xFF000000 | color).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -102,6 +103,7 @@ public class VirtualFluidFromItem {
                                                                        int amount) {
         return REGISTRATE.virtualFluid(name, stillTexture, flowTexture)
             .defaultLang()
+            .attributes(builder -> builder.sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -152,6 +154,7 @@ public class VirtualFluidFromItem {
                                                                        int amount) {
         return REGISTRATE.virtualFluid(name, stillTexture, flowTexture)
             .defaultLang()
+            .attributes(builder -> builder.sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
             .transform(Recipes.fluidHandling(container, amount));
     }
     

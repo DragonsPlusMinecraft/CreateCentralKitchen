@@ -4,6 +4,7 @@ import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
@@ -46,7 +47,7 @@ public class FDFluidEntries {
             NoColorFluidAttributes::new)
         .lang("Tomato Sauce")
         .transform(OptionalTags.fluid(FluidTags.WATER))
-        .attributes(b -> b.viscosity(2000).density(1400))
+        .attributes(b -> b.viscosity(2000).density(1400).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
         .properties(p -> p.levelDecreasePerBlock(2)
             .tickRate(25)
             .slopeFindDistance(3)

@@ -4,6 +4,7 @@ import com.teamabnormals.autumnity.core.registry.AutumnityBlocks;
 import com.teamabnormals.autumnity.core.registry.AutumnityItems;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
@@ -28,6 +29,7 @@ public class AutumnityFluidEntries {
             NoColorFluidAttributes::new)
         .lang("Sap")
         .transform(OptionalTags.fluid(FluidTags.WATER))
+        .attributes(builder -> builder.sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
         .properties(p -> p.levelDecreasePerBlock(2)
             .tickRate(15)
             .slopeFindDistance(3)
@@ -69,7 +71,7 @@ public class AutumnityFluidEntries {
             NoColorFluidAttributes::new)
         .lang("Syrup")
         .transform(OptionalTags.fluid(FluidTags.WATER))
-        .attributes(b -> b.viscosity(2000).density(1400))
+        .attributes(b -> b.viscosity(2000).density(1400).sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
         .properties(p -> p.levelDecreasePerBlock(2)
             .tickRate(25)
             .slopeFindDistance(3)

@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.entry.fluid;
 
 import com.teamabnormals.atmospheric.core.registry.AtmosphericItems;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import net.minecraft.sounds.SoundEvents;
 import plus.dragons.createcentralkitchen.entry.item.AtmosphericItemEntries;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
 import plus.dragons.createcentralkitchen.foundation.fluid.SolidBlockFluid;
@@ -17,6 +18,7 @@ public class AtmosphericFluidEntries {
             Mods.atmospheric("block/aloe_gel_block_top"), Mods.atmospheric("block/aloe_gel_block_side"),
             null, prop -> new SolidBlockFluid(AtmosphericItemEntries.ALOE_GEL_BUCKET, prop))
         .defaultLang()
+        .attributes(builder -> builder.sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY))
         .transform(Recipes.fluidHandling(AtmosphericItems.ALOE_GEL_BOTTLE, 250))
         .register();
     
