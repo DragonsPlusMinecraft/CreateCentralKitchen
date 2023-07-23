@@ -4,9 +4,11 @@ import com.teamabnormals.autumnity.core.registry.AutumnityBlocks;
 import com.teamabnormals.autumnity.core.registry.AutumnityItems;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;
@@ -28,6 +30,7 @@ public class AutumnityFluidEntries {
             NoTintFluidType::new)
         .lang("Sap")
         .transform(OptionalTags.fluid(FluidTags.WATER))
+        .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
         .fluidProperties(p -> p.levelDecreasePerBlock(2)
             .tickRate(15)
             .slopeFindDistance(3)
@@ -69,7 +72,7 @@ public class AutumnityFluidEntries {
             NoTintFluidType::new)
         .lang("Syrup")
         .transform(OptionalTags.fluid(FluidTags.WATER))
-        .properties(b -> b.viscosity(2000).density(1400))
+        .properties(b -> b.viscosity(2000).density(1400).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
         .fluidProperties(p -> p.levelDecreasePerBlock(2)
             .tickRate(25)
             .slopeFindDistance(3)

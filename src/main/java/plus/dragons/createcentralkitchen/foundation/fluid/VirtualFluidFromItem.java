@@ -8,9 +8,11 @@ import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -39,6 +41,7 @@ public class VirtualFluidFromItem {
                 }
             }), VirtualFluid::new)
             .defaultLang()
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -57,6 +60,7 @@ public class VirtualFluidFromItem {
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(String name, ItemProviderEntry<?> container, int colorIn, int amount) {
         return REGISTRATE.virtualFluid(name, WATER_STILL, WATER_FLOW)
             .defaultLang()
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -87,6 +91,7 @@ public class VirtualFluidFromItem {
                     }
                 }), VirtualFluid::new)
             .defaultLang()
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -117,6 +122,7 @@ public class VirtualFluidFromItem {
                     }
                 }), VirtualFluid::new)
             .defaultLang()
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -139,6 +145,7 @@ public class VirtualFluidFromItem {
                                                                        int amount) {
         return REGISTRATE.virtualFluid(name, stillTexture, flowTexture)
             .defaultLang()
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
     }
     
@@ -189,6 +196,7 @@ public class VirtualFluidFromItem {
                                                                        int amount) {
         return REGISTRATE.virtualFluid(name, stillTexture, flowTexture)
             .defaultLang()
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
     }
     

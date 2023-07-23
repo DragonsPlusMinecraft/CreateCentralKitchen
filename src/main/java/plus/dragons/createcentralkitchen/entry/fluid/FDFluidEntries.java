@@ -4,10 +4,12 @@ import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -49,6 +51,7 @@ public class FDFluidEntries {
         .lang("Tomato Sauce")
         .transform(OptionalTags.fluid(FluidTags.WATER))
         .properties(b -> b
+            .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
             .viscosity(2000)
             .density(1400)
             .canExtinguish(true))
