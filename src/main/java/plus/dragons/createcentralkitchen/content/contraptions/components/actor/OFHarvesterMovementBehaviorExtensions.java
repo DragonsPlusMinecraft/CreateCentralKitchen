@@ -42,6 +42,7 @@ public class OFHarvesterMovementBehaviorExtensions {
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            FARMLAND_REVERT_MAP.put(Blocks.GRASS_BLOCK,Blocks.FARMLAND.defaultBlockState().setValue(BlockStateProperties.MOISTURE,7));
             FARMLAND_REVERT_MAP.put(Blocks.DIRT,Blocks.FARMLAND.defaultBlockState().setValue(BlockStateProperties.MOISTURE,7));
             if(ModList.get().isLoaded(Mods.FD)){
                 FARMLAND_REVERT_MAP.put(ForgeRegistries.BLOCKS.getValue(Mods.fd("rich_soil")),
@@ -87,14 +88,15 @@ public class OFHarvesterMovementBehaviorExtensions {
         if (replant) {
             if(FARMLAND_REVERT_MAP.containsKey(level.getBlockState(pos.below()).getBlock())){
                 level.setBlock(pos.below(), FARMLAND_REVERT_MAP.get(level.getBlockState(pos.below()).getBlock()),2);
-                level.playSound(null, pos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
-                level.setBlock(pos, plant,2);
             }
             if ((plant.getBlock() instanceof IPlantable iPlantable))
-                if(level.getBlockState(pos.below()).canSustainPlant(level,pos, Direction.UP,iPlantable)){
+                if(!level.getBlockState(pos.below()).canSustainPlant(level,pos,Direction.UP,iPlantable)){
                     level.playSound(null, pos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    level.setBlock(pos, plant,2);
+                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                    return;
                 }
+            level.playSound(null, pos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.setBlock(pos, plant,2);
         }
     }
 
