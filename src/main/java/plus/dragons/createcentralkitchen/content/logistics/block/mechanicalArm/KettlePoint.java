@@ -131,7 +131,7 @@ public class KettlePoint extends ArmInteractionPoint {
     
         if (waterIncrement > 0 && !simulate) {
             if (guide.isContainer(container))
-                container = inventory.insertItem(CONTAINER_SLOT, container, true);
+                container = inventory.insertItem(CONTAINER_SLOT, container, false);
             
             if (!container.isEmpty()) {
                 Direction direction = state.getValue(KettleBlock.FACING).getCounterClockWise();
