@@ -49,6 +49,11 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
                 "enableHarvesterSupportForOverweightFarming",
                 "For harvester to function properly, turning on this support will cause the collision shape of the overweight crop block to disappear.",
                 ConfigAnnotations.RequiresRestart.SERVER.asComment());
+
+        public final ConfigBool enableHarvesterSupportForFarmersRespite = b(true,
+                "enableHarvesterSupportForFarmersRespite",
+                "For harvester to function properly, turning on this support will cause the collision shape of Coffee Bush and Tea Bush block to disappear.",
+                ConfigAnnotations.RequiresRestart.SERVER.asComment());
     
         @Override
         public String getName() {
