@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
@@ -30,14 +31,16 @@ public class FRHarvesterMovementBehaviourExtensions {
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            REGISTRY.put(FRBlocks.TEA_BUSH.get(),
-                FRHarvesterMovementBehaviourExtensions::harvestTeaBush);
-            REGISTRY.put(FRBlocks.COFFEE_STEM.get(),
-                FRHarvesterMovementBehaviourExtensions::harvestCoffeeStem);
-            REGISTRY.put(FRBlocks.COFFEE_STEM_MIDDLE.get(),
-                FRHarvesterMovementBehaviourExtensions::harvestCoffeeMiddleStem);
-            REGISTRY.put(FRBlocks.COFFEE_STEM_DOUBLE.get(),
-                FRHarvesterMovementBehaviourExtensions::harvestCoffeeDoubleStem);
+            if(CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()){
+                REGISTRY.put(FRBlocks.TEA_BUSH.get(),
+                        FRHarvesterMovementBehaviourExtensions::harvestTeaBush);
+                REGISTRY.put(FRBlocks.COFFEE_STEM.get(),
+                        FRHarvesterMovementBehaviourExtensions::harvestCoffeeStem);
+                REGISTRY.put(FRBlocks.COFFEE_STEM_MIDDLE.get(),
+                        FRHarvesterMovementBehaviourExtensions::harvestCoffeeMiddleStem);
+                REGISTRY.put(FRBlocks.COFFEE_STEM_DOUBLE.get(),
+                        FRHarvesterMovementBehaviourExtensions::harvestCoffeeDoubleStem);
+            }
         });
     }
     
@@ -47,7 +50,7 @@ public class FRHarvesterMovementBehaviourExtensions {
                                       boolean replant, boolean partial) {
         Level level = context.world;
         var half = state.getValue(TeaBushBlock.HALF);
-        if (replant && half == DoubleBlockHalf.UPPER) {
+        if (replant) {
             switch (state.getValue(TeaBushBlock.AGE)) {
                 case 0 -> behaviour.dropItem(context,
                     new ItemStack(FRItems.GREEN_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
@@ -63,7 +66,7 @@ public class FRHarvesterMovementBehaviourExtensions {
                     new ItemStack(FRItems.BLACK_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
             }
             behaviour.dropItem(context, new ItemStack(Items.STICK, 2 + level.random.nextInt(2)));
-            level.setBlockAndUpdate(pos.below(), FRBlocks.SMALL_TEA_BUSH.get().defaultBlockState());
+            level.setBlockAndUpdate(half == DoubleBlockHalf.UPPER? pos.below(): pos, FRBlocks.SMALL_TEA_BUSH.get().defaultBlockState());
         } else {
             var destroyPos = half == DoubleBlockHalf.UPPER ? pos.below() : pos;
             BlockHelper.destroyBlock(level, destroyPos, 1, stack -> behaviour.dropItem(context, stack));
