@@ -32,6 +32,8 @@ public class FRHarvesterMovementBehaviourExtensions {
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             if(CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()){
+                REGISTRY.put(FRBlocks.SMALL_TEA_BUSH.get(),
+                        FRHarvesterMovementBehaviourExtensions::ignoreSmallTeaBush);
                 REGISTRY.put(FRBlocks.TEA_BUSH.get(),
                         FRHarvesterMovementBehaviourExtensions::harvestTeaBush);
                 REGISTRY.put(FRBlocks.COFFEE_STEM.get(),
@@ -42,6 +44,12 @@ public class FRHarvesterMovementBehaviourExtensions {
                         FRHarvesterMovementBehaviourExtensions::harvestCoffeeDoubleStem);
             }
         });
+    }
+
+    public static void ignoreSmallTeaBush(HarvesterMovementBehaviour behaviour,
+                                      MovementContext context,
+                                      BlockPos pos, BlockState state,
+                                      boolean replant, boolean partial) {
     }
     
     public static void harvestTeaBush(HarvesterMovementBehaviour behaviour,
