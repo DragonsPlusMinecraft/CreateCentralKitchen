@@ -7,11 +7,11 @@
   "mixins": [
     "common.brewinandchewin.KegBlockEntityMixin",
     "common.create.BeltHelperMixin",
+    "common.create.BlockEntityBehaviourMixin",
     "common.create.CreateJEIMixin",
     "common.create.DeployerBlockEntityAccessor",
     "common.create.HarvesterMovementBehaviorMixin",
     "common.create.MechanicalMixerBlockEntityMixin",
-    "common.create.BlockEntityBehaviourMixin",
     "common.farmersdelight.BasketBlockEntityAccessor",
     "common.farmersdelight.BasketBlockEntityMixin",
     "common.farmersdelight.CookingPotBlockEntityMixin",
@@ -29,7 +29,8 @@
     "common.farmersrespite.TeaBushBlockMixin",
     "common.minecraft.BowlFoodItemMixin",
     "common.minersdelight.CopperPotBlockEntityMixin",
-    "common.neapolitan.DrinkItemMixin"
+    "common.neapolitan.DrinkItemMixin",
+    "common.overweightfarming.CropFullBlockMixin"
   ],
   "client": [
     "client.create.CreateCreativeModeTabMixin",

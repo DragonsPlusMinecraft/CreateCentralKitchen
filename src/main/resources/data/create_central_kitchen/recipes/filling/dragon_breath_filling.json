@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:dragon_breath",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:dragon_breath"
+    }
+  ]
+}

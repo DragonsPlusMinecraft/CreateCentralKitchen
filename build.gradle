@@ -138,6 +138,9 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
     implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
     implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
+    implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
+    implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
+    implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
     ////abnormals mods addons
     implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
     implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
@@ -150,8 +153,10 @@ dependencies {
     implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
     implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")
     implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
+    ////other mods addons
     implementation fg.deobf("curse.maven:differentiate-450748:${differentiate_file}")
     implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
+    implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
     //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")

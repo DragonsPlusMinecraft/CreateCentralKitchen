@@ -113,6 +113,16 @@ public class RespitefulRecipes extends DatapackRecipes {
             .require(Items.SUGAR)
             .require(FRItems.COFFEE_BEANS.get())
             .require(Tags.Fluids.MILK, 250)),
+        MIXING_ADZUKI_MILK_TEA = add(mixing("adzuki_milk_tea")
+            .output(RespitefulFluidEntries.ADZUKI_MILK_TEA.get(), 250)
+            .require(NeapolitanItems.ROASTED_ADZUKI_BEANS.get())
+            .require(FRItems.BLACK_TEA_LEAVES.get())
+            .require(Tags.Fluids.MILK, 250)),
+        MIXING_MOCHA_COFFEE = add(mixing("mocha_coffee")
+             .output(RespitefulFluidEntries.COFFEE_ICE_CREAM.get(), 250)
+             .require(NeapolitanItems.CHOCOLATE_BAR.get())
+             .require(FRItems.COFFEE_BEANS.get())
+             .require(Tags.Fluids.MILK, 250)),
         FILLING_SNOW_TOP_COFFEE = add(filling("snow_top_coffee")
             .output(RespitefulItems.SNOW_TOP_COFFEE.get())
             .require(FRItems.COFFEE.get())

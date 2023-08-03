@@ -21,6 +21,12 @@
   "datapack.create_central_kitchen.seasonals.desc": "Provides support for Seasonals",
   "datapack.create_central_kitchen.upgrade_aquatic": "Create: Central Kitchen - Upgrade Aquatic",
   "datapack.create_central_kitchen.upgrade_aquatic.desc": "Provides support for Upgrade Aquatic",
+  "datapack.create_central_kitchen.overweight_farming": "Create: Central Kitchen - Overweight Farming",
+  "datapack.create_central_kitchen.overweight_farming.desc": "Provides support for Overweight Farming",
+  "datapack.create_central_kitchen.ends_delight": "Create: Central Kitchen - End's Delight",
+  "datapack.create_central_kitchen.ends_delight.desc": "Provides support for End's Delight",
+  "datapack.create_central_kitchen.corn_delight": "Create: Central Kitchen - Corn Delight",
+  "datapack.create_central_kitchen.corn_delight.desc": "Provides support for Corn Delight",
 
   "resourcepack.create_central_kitchen.create_styled": "Create: Central Kitchen - Create Style'd",
   "resourcepack.create_central_kitchen.create_styled.desc": "Re-texture some mods in Create style",

@@ -15,10 +15,10 @@ import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class VirtualFluidFromItem {
-    private static final ResourceLocation WATER_STILL = new ResourceLocation("block/water_still");
-    private static final ResourceLocation WATER_FLOW = new ResourceLocation("block/water_flow");
-    private static final ResourceLocation MILK_STILL = Create.asResource("fluid/milk_still");
-    private static final ResourceLocation MILK_FLOW = Create.asResource("fluid/milk_flow");
+    public static final ResourceLocation WATER_STILL = new ResourceLocation("block/water_still");
+    public static final ResourceLocation WATER_FLOW = new ResourceLocation("block/water_flow");
+    public static final ResourceLocation MILK_STILL = Create.asResource("fluid/milk_still");
+    public static final ResourceLocation MILK_FLOW = Create.asResource("fluid/milk_flow");
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(String name, RegistryObject<? extends ItemLike> container, int color, int amount) {
         return REGISTRATE.virtualFluid(name, WATER_STILL, WATER_FLOW)

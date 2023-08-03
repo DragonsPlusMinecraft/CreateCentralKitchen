@@ -45,6 +45,8 @@ public class CentralKitchenData {
         generator.addProvider(new PeculiarsRecipes(generator));
         generator.addProvider(new RespitefulRecipes(generator));
         generator.addProvider(new SeasonalsRecipes(generator));
+        generator.addProvider(new EDRecipes(generator));
+        generator.addProvider(new CornDelightRecipes(generator));
         DatapackRecipes.buildAll(REGISTRATE, generator);
         generator.addProvider(new BlockLootTables(generator));
         generator.addProvider(new LangMerger(generator));

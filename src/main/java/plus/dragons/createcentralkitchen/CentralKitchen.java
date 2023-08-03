@@ -21,6 +21,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.api.event.FillCreateItemGroupEvent;
+import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.FRItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
@@ -46,7 +47,9 @@ public class CentralKitchen {
     
     public CentralKitchen() {
         CentralKitchenConfigs.register(ModLoadingContext.get());
-        
+
+        CckFluidEntries.register();
+
         FMLModContainer container = (FMLModContainer) ModLoadingContext.get().getActiveContainer();
         AutomaticModLoadSubscriber.load(container, CentralKitchen.class);
         

@@ -13,6 +13,8 @@ public class Mods {
     public static final String FR = "farmersrespite";
     public static final String MD = "miners_delight";
     public static final String ND = "nethersdelight";
+    public static final String ED = "ends_delight";
+    public static final String CORN_DELIGHT = "corn_delight";
     //Abnormals' mods
     public static final String AD = "abnormals_delight";
     public static final String ATMOSPHERIC = "atmospheric";
@@ -26,6 +28,8 @@ public class Mods {
     public static final String PECULIARS = "peculiars";
     public static final String SEASONALS = "seasonals";
     public static final String COOKIELICIOUS = "cookielicious";
+    // Standole mods
+    public static final String OF = "overweight_farming";
     //Utility mods
     public static final String JEI = "jei";
     public static final String CURIOS = "curios";
