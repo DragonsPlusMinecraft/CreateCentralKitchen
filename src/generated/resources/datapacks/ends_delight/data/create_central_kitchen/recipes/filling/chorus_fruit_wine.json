@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:chorus_fruit_wine",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "ends_delight:chorus_fruit_wine"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "ends_delight",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}

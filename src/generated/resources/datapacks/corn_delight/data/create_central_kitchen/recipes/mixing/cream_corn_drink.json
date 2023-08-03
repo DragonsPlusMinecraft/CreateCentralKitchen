@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:corps/corn"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:creamy_corn_drink",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}

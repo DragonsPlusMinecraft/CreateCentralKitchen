@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "ends_delight:ender_pearl_grain"
+    },
+    {
+      "fluid": "create_central_kitchen:chorus_fruit_milk_tea",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:chorus_fruit_bubble_tea",
+      "amount": 250
+    }
+  ]
+}

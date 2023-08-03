@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "fluid": "create_central_kitchen:mocha_coffee",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "respiteful:mocha_coffee"
+    }
+  ],
+  "conditions": [
+    {
+      "modid": "respiteful",
+      "type": "forge:mod_loaded"
+    }
+  ]
+}
