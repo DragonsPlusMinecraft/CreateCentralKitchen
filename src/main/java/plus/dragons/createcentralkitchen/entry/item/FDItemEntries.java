@@ -14,6 +14,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,7 +29,6 @@ import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoo
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -48,7 +48,7 @@ public class FDItemEntries {
             .output(ctx.get())
             .require(ForgeItemTags.create("plates/obsidian"))
             .require(ModItems.CANVAS.get())
-            .require(ForgeTags.VEGETABLES)
+            .require(Items.CARROT)
             .whenModLoaded(Mods.FD))))
         .register();
     
