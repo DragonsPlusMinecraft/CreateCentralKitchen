@@ -17,7 +17,7 @@ public class CornDelightRecipes extends DatapackRecipes {
             MIXING_CORN_SOUP = add(mixing("cord_soup")
                     .output(CornDelightFluidEntries.CORN_SOUP.get(), 250)
                     .require(Tags.Fluids.MILK, 250)
-                    .require(ForgeItemTags.CORPS__CORN.tag)
+                    .require(ForgeItemTags.CROPS__CORN.tag)
                     .require(ForgeTags.CROPS_CABBAGE)
                     .require(Items.SUGAR)
                     .requiresHeat(HeatCondition.HEATED)),
@@ -25,7 +25,7 @@ public class CornDelightRecipes extends DatapackRecipes {
             MIXING_CREAM_CORN_DRINK = add(mixing("cream_corn_drink")
                     .output(CornDelightFluidEntries.CREAMY_CORN_DRINK.get(), 250)
                     .require(Tags.Fluids.MILK, 250)
-                    .require(ForgeItemTags.CORPS__CORN.tag)
+                    .require(ForgeItemTags.CROPS__CORN.tag)
                     .require(Items.SUGAR)
                     .requiresHeat(HeatCondition.HEATED));
 
