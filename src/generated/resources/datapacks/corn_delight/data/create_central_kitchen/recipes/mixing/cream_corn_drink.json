@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "tag": "forge:corps/corn"
+      "tag": "forge:crops/corn"
     },
     {
       "item": "minecraft:sugar"
