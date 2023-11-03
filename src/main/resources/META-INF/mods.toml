@@ -29,7 +29,7 @@ An add-on for Create, providing automation support for your kitchen.
 [[dependencies.create_central_kitchen]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.e,)"
+    versionRange="[0.5.1.f,)"
     ordering="AFTER"
     side="BOTH"
 

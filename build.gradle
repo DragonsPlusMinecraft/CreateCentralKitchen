@@ -4,6 +4,7 @@ plugins {
     id 'org.spongepowered.mixin'
     id 'org.parchmentmc.librarian.forgegradle'
     id 'maven-publish'
+    id "me.modmuss50.mod-publish-plugin" version "0.3.5"
 }
 
 version = mod_version
@@ -16,39 +17,25 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
-
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
-
     runs {
         client {
             workingDirectory project.file('run')
-
             arg '-mixin.config=create_central_kitchen.mixins.json'
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-
             mods {
                 create_central_kitchen {
                     source sourceSets.main
                 }
             }
         }
-
         server {
             workingDirectory project.file('run')
-
             arg '-mixin.config=create_central_kitchen.mixins.json'
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-
             mods {
                 create_central_kitchen {
                     source sourceSets.main
@@ -58,17 +45,13 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             args '--mod', 'create_central_kitchen',
                  '--all', '--output', file('src/generated/resources/'),
                  '--existing', file('src/main/resources/'),
                  '--existing-mod', 'create',
                  '--existing-mod', 'farmersdelight'
-
             mods {
                 create_central_kitchen {
                     source sourceSets.main
@@ -176,6 +159,77 @@ mixin {
 
     debug.verbose = true
     debug.export = true
+}
+
+publishMods {
+    file = tasks.jarJar.archiveFile
+    changelog = new File("changelog/${mod_version}.md").text
+    version = mod_version
+    type = STABLE
+    displayName = "CCK ${mod_version} for Create ${minecraft_version}-${create_version}"
+    modLoaders.add("forge")
+
+    curseforge {
+        projectId = "820977"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.add(minecraft_version)
+
+        requires {
+            slug = "create"
+        }
+
+        optional {
+            slug = "createaddition"
+            slug = "farmers-delight"
+            slug = "farmers-respite"
+            slug = "miners-delight-plus"
+            slug = "nethers-delight"
+            slug = "abnormals-delight"
+            slug = "atmospheric"
+            slug = "autumnity"
+            slug = "buzzier-bees"
+            slug = "environmental"
+            slug = "neapolitan"
+            slug = "upgrade-aquatic"
+            slug = "peculiars"
+            slug = "respiteful"
+            slug = "seasonals"
+            slug = "cookielicious"
+            slug = "corn-delight"
+            slug = "overweight-farming"
+        }
+    }
+
+    modrinth {
+        projectId = "btq68HMO"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.add(minecraft_version)
+
+        requires {
+            slug = "create"
+        }
+
+        optional {
+            slug = "createaddition"
+            slug = "farmers-delight"
+            slug = "farmers-respite"
+            slug = "miners-delight-plus"
+            slug = "nethers-delight"
+            slug = "abnormals-delight"
+            slug = "atmospheric"
+            slug = "autumnity"
+            slug = "buzzier-bees"
+            slug = "environmental"
+            slug = "neapolitan"
+            slug = "upgrade-aquatic"
+            slug = "peculiars"
+            slug = "respiteful"
+            slug = "seasonals"
+            slug = "cookielicious"
+            slug = "corn-delight"
+            slug = "overweight-farming"
+        }
+    }
 }
 
 void processJar(Jar jarTask) {
