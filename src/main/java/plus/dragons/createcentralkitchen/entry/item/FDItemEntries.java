@@ -38,9 +38,6 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 @ModLoadSubscriber(modid = Mods.FD)
 public class FDItemEntries {
-    static {
-        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
-    }
     
     public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
         .properties(prop -> prop.stacksTo(1))
@@ -51,10 +48,7 @@ public class FDItemEntries {
             .require(Items.CARROT)
             .whenModLoaded(Mods.FD))))
         .register();
-    
-    static {
-        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
-    }
+
     
     public static final ItemEntry<SequencedAssemblyItem>
         INCOMPLETE_EGG_SANDWICH = sequencedFood(ModItems.EGG_SANDWICH, Foods.BREAD),

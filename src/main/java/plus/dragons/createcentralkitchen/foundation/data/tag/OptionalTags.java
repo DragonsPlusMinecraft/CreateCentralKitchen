@@ -25,7 +25,7 @@ public class OptionalTags {
         return builder -> builder.addMiscData(ProviderType.ITEM_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var tag : tags)
-                prov.tag(tag).addOptional(name);
+                prov.addTag(tag).addOptional(name);
         });
     }
     
@@ -33,8 +33,8 @@ public class OptionalTags {
         return builder -> builder.addMiscData(ProviderType.ITEM_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var id : ids) {
-                var tag = TagKey.create(Registry.ITEM_REGISTRY, id);
-                prov.tag(tag).addOptional(name);
+                var tag = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), id);
+                prov.addTag(tag).addOptional(name);
             }
         });
     }
@@ -44,7 +44,7 @@ public class OptionalTags {
         return builder -> builder.addMiscData(ProviderType.BLOCK_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var tag : tags)
-                prov.tag(tag).addOptional(name);
+                prov.addTag(tag).addOptional(name);
         });
     }
     
@@ -52,8 +52,8 @@ public class OptionalTags {
         return builder -> builder.addMiscData(ProviderType.BLOCK_TAGS, prov -> {
             ResourceLocation name = new ResourceLocation(builder.getOwner().getModid(), builder.getName());
             for (var id : ids) {
-                var tag = TagKey.create(Registry.BLOCK_REGISTRY, id);
-                prov.tag(tag).addOptional(name);
+                var tag = TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), id);
+                prov.addTag(tag).addOptional(name);
             }
         });
     }
@@ -65,7 +65,7 @@ public class OptionalTags {
             ResourceLocation flowing = entry.getId();
             ResourceLocation source = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(entry.get().getSource()));
             for (var tag : tags)
-                prov.tag(tag).addOptional(flowing).addOptional(source);
+                prov.addTag(tag).addOptional(flowing).addOptional(source);
         });
     }
     
@@ -75,8 +75,8 @@ public class OptionalTags {
             ResourceLocation flowing = entry.getId();
             ResourceLocation source = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(entry.get().getSource()));
             for (var id : ids) {
-                var tag = TagKey.create(Registry.FLUID_REGISTRY, id);
-                prov.tag(tag).addOptional(flowing).addOptional(source);
+                var tag = TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), id);
+                prov.addTag(tag).addOptional(flowing).addOptional(source);
             }
         });
     }

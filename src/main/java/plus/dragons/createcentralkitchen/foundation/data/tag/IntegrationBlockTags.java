@@ -1,14 +1,13 @@
 package plus.dragons.createcentralkitchen.foundation.data.tag;
 
+import com.sammy.minersdelight.setup.MDBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
-import com.teamabnormals.neapolitan.core.registry.NeapolitanBlocks;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-import umpaz.farmersrespite.common.registry.FRBlocks;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -30,17 +29,12 @@ public enum IntegrationBlockTags {
     }
     
     public static void datagen(RegistrateTagsProvider<Block> prov) {
-        prov.tag(VERTICAL_SLABS.tag).addTag(VERTICAL_SLABS__CHOCOLATE.tag);
-        prov.tag(VERTICAL_SLABS__CHOCOLATE.tag)
-            .addOptional(NeapolitanBlocks.CHOCOLATE_BRICK_VERTICAL_SLAB.getId())
-            .addOptional(NeapolitanBlocks.CHOCOLATE_TILE_VERTICAL_SLAB.getId());
-        prov.tag(ModTags.TRAY_HEAT_SOURCES)
-            .add(AllBlocks.LIT_BLAZE_BURNER.get())
-            .add(AllBlocks.BLAZE_BURNER.get());
-        prov.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .addOptional(ModBlocks.COOKING_POT.getId())
-            .addOptional(FRBlocks.KETTLE.getId());
-//            .addOptional(MDBlocks.COPPER_POT.getId());
+        prov.addTag(VERTICAL_SLABS.tag).addTag(VERTICAL_SLABS__CHOCOLATE.tag);
+        prov.addTag(ModTags.TRAY_HEAT_SOURCES)
+            .add(AllBlocks.LIT_BLAZE_BURNER.get().builtInRegistryHolder().key())
+            .add(AllBlocks.BLAZE_BURNER.get().builtInRegistryHolder().key());
+        prov.addTag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+            .addOptional(ModBlocks.COOKING_POT.getId());
     }
     
 }

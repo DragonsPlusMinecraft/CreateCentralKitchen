@@ -60,7 +60,7 @@ public class FDFluidEntries {
             .tickRate(25)
             .slopeFindDistance(3)
             .explosionResistance(100f))
-        .source(ForgeFlowingFluid.Source::new) // TODO: remove when Registrate fixes FluidBuilder
+        .source(ForgeFlowingFluid.Source::new)
         .transform(Recipes.fluidHandling(ModItems.TOMATO_SAUCE, 250))
         .bucket(FluidBucketItem::new)
         .properties(prop -> prop.tab(CreativeModeTab.TAB_MATERIALS))

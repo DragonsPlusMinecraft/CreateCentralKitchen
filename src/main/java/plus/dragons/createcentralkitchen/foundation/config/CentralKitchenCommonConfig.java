@@ -23,7 +23,6 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
             createRegistryObjects(ForgeRegistries.BLOCK_ENTITY_TYPES, List.of(
                 new ResourceLocation("farmersdelight", "cooking_pot"),
                 new ResourceLocation("farmersdelight", "skillet"),
-                new ResourceLocation("farmersrespite", "kettle"),
                 new ResourceLocation("miners_delight", "copper_pot"))),
             "List of Block Entities that can be boosted when placed on Blaze Stove");
         
@@ -48,11 +47,6 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
         public final ConfigBool enableHarvesterSupportForOverweightFarming = b(true,
                 "enableHarvesterSupportForOverweightFarming",
                 "For harvester to function properly, turning on this support will cause the collision shape of the overweight crop block to disappear.",
-                ConfigAnnotations.RequiresRestart.SERVER.asComment());
-
-        public final ConfigBool enableHarvesterSupportForFarmersRespite = b(true,
-                "enableHarvesterSupportForFarmersRespite",
-                "For harvester to function properly, turning on this support will cause the collision shape of Coffee Bush and Tea Bush block to disappear.",
                 ConfigAnnotations.RequiresRestart.SERVER.asComment());
     
         @Override

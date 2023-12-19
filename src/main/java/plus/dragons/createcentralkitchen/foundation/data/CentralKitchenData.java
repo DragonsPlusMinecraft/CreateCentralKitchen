@@ -42,15 +42,7 @@ public class CentralKitchenData {
         boolean server = event.includeServer();
         boolean client = event.includeClient();
         generator.addProvider(server, new StandardRecipes(generator));
-        generator.addProvider(server, new AtmosphericRecipes(generator));
-        generator.addProvider(server, new AutumnityRecipes(generator));
-        generator.addProvider(server, new CRRecipes(generator));
         generator.addProvider(server, new FDRecipes(generator));
-        generator.addProvider(server, new FRRecipes(generator));
-        generator.addProvider(server, new NeapolitanRecipes(generator));
-        generator.addProvider(server, new PeculiarsRecipes(generator));
-        generator.addProvider(server, new RespitefulRecipes(generator));
-        generator.addProvider(server, new SeasonalsRecipes(generator));
         generator.addProvider(server, new EDRecipes(generator));
         generator.addProvider(server, new CornDelightRecipes(generator));
         DatapackRecipes.buildAll(REGISTRATE, generator);

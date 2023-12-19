@@ -28,9 +28,9 @@ public enum IntegrationItemTags {
     }
     
     public static void datagen(RegistrateItemTagsProvider prov) {
-        prov.tag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).add(Items.BOWL, Items.BUCKET, Items.POWDER_SNOW_BUCKET);
-        prov.tag(UPRIGHT_ON_DEPLOYER.tag).addTag(ForgeItemTags.TOOLS.tag);
-        prov.tag(IGNORED_IN_AUTOMATIC_SHAPELESS.tag).add(Items.BUCKET, Items.BOWL, Items.GLASS_BOTTLE, Items.POTION, Items.MILK_BUCKET);
+        prov.addTag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).add(Items.BOWL, Items.BUCKET, Items.POWDER_SNOW_BUCKET);
+        prov.addTag(UPRIGHT_ON_DEPLOYER.tag).addTag(ForgeItemTags.TOOLS.tag);
+        prov.addTag(IGNORED_IN_AUTOMATIC_SHAPELESS.tag).add(Items.BUCKET, Items.BOWL, Items.GLASS_BOTTLE, Items.POTION, Items.MILK_BUCKET);
         prov.copy(IntegrationBlockTags.VERTICAL_SLABS.tag, VERTICAL_SLABS.tag);
         prov.copy(IntegrationBlockTags.VERTICAL_SLABS__CHOCOLATE.tag, VERTICAL_SLABS__CHOCOLATE.tag);
     }

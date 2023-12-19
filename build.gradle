@@ -125,18 +125,18 @@ dependencies {
     implementation fg.deobf("curse.maven:createaddtion-439890:${create_addition_file}")
     //farmers delight addons
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
-    implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
+    //implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
     implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
-    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
+    //implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
     implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
     implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
     implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
     implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
     implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
-    implementation fg.deobf("curse.maven:cultural-delight-574622:${cultural_delight_file}")
-    implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
+    //implementation fg.deobf("curse.maven:cultural-delight-574622:${cultural_delight_file}")
+    //implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
     ////abnormals mods addons
-    implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
+    /*implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
     implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
     implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
     implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
@@ -146,12 +146,12 @@ dependencies {
     implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
     implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
     implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")
-    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
-    implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
+    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")*/
+    //implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
     //implementation fg.deobf("curse.maven:exquisito-859262:${exquisito_file}") // I believe the author disables 3rd party download
     //independent mods
     implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
-    implementation fg.deobf("curse.maven:snowy-spirit-566142:${snowy_spirit_file}")
+    //implementation fg.deobf("curse.maven:snowy-spirit-566142:${snowy_spirit_file}")
     //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
@@ -181,6 +181,7 @@ publishMods {
     type = STABLE
     displayName = "CCK ${mod_version} for Create ${minecraft_version}-${create_version}"
     modLoaders.add("forge")
+    modLoaders.add("neoforge")
 
     curseforge {
         projectId = "820977"
@@ -197,55 +198,16 @@ publishMods {
             slug = "farmers-delight"
         }
         optional {
-            slug = "farmers-respite"
-        }
-        optional {
             slug = "miners-delight-plus"
         }
         optional {
             slug = "nethers-delight"
         }
         optional {
-            slug = "abnormals-delight"
-        }
-        optional {
-            slug = "atmospheric"
-        }
-        optional {
-            slug = "autumnity"
-        }
-        optional {
-            slug = "buzzier-bees"
-        }
-        optional {
-            slug = "environmental"
-        }
-        optional {
-            slug = "neapolitan"
-        }
-        optional {
-            slug = "upgrade-aquatic"
-        }
-        optional {
-            slug = "peculiars"
-        }
-        optional {
-            slug = "respiteful"
-        }
-        optional {
-            slug = "seasonals"
-        }
-        optional {
-            slug = "cookielicious"
-        }
-        optional {
             slug = "corn-delight"
         }
         optional {
             slug = "overweight-farming"
-        }
-        optional {
-            slug = "collectors-reap"
         }
     }
 
@@ -264,55 +226,16 @@ publishMods {
             slug = "farmers-delight"
         }
         optional {
-            slug = "farmers-respite"
-        }
-        optional {
             slug = "miners-delight-plus"
         }
         optional {
             slug = "nethers-delight"
         }
         optional {
-            slug = "abnormals-delight"
-        }
-        optional {
-            slug = "atmospheric"
-        }
-        optional {
-            slug = "autumnity"
-        }
-        optional {
-            slug = "buzzier-bees"
-        }
-        optional {
-            slug = "environmental"
-        }
-        optional {
-            slug = "neapolitan"
-        }
-        optional {
-            slug = "upgrade-aquatic"
-        }
-        optional {
-            slug = "peculiars"
-        }
-        optional {
-            slug = "respiteful"
-        }
-        optional {
-            slug = "seasonals"
-        }
-        optional {
-            slug = "cookielicious"
-        }
-        optional {
             slug = "corn-delight"
         }
         optional {
             slug = "overweight-farming"
-        }
-        optional {
-            slug = "collectors-reap"
         }
     }
 }
@@ -339,15 +262,10 @@ void processJar(Jar jarTask) {
     }
 }
 
-jar {
-    classifier 'slim'
-    finalizedBy 'reobfJar'
-}
-
-tasks.jarJar {
-    classifier ""
-    finalizedBy reobf.maybeCreate('jarJar')
-}
+jar.finalizedBy('reobfJar')
+jar.setArchiveClassifier('slim')
+tasks.jarJar.setArchiveClassifier('')
+tasks.jarJar.finalizedBy('reobfJarJar')
 
 processJar(jar)
 processJar(tasks.jarJar)

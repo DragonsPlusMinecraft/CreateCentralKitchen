@@ -15,9 +15,6 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 @ModLoadSubscriber(modid = Mods.MD)
 public class MDItemEntries {
-    static {
-        REGISTRATE.creativeModeTab(() -> AllCreativeModeTabs.BASE_CREATIVE_TAB);
-    }
 
     public static final ItemEntry<MinersCookingGuideItem> MINERS_COOKING_GUIDE = REGISTRATE.item("miners_cooking_guide", MinersCookingGuideItem::new)
         .lang("Miner's Cooking Guide")

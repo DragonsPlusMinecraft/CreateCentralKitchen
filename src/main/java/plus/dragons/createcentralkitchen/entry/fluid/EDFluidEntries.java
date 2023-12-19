@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.entry.fluid;
 
-import cn.foggyhillside.endsdelight.registry.ItemRegistry;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.fluids.VirtualFluid;
