@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.data.tag;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -27,12 +28,13 @@ public enum IntegrationBlockTags {
         this.tag = TagKey.create(ForgeRegistries.Keys.BLOCKS, new ResourceLocation(modid, path));
     }
     
-    public static void datagen(RegistrateTagsProvider<Block> prov) {
-        prov.addTag(VERTICAL_SLABS.tag).addTag(VERTICAL_SLABS__CHOCOLATE.tag);
-        prov.addTag(ModTags.TRAY_HEAT_SOURCES)
-            .add(AllBlocks.LIT_BLAZE_BURNER.get().builtInRegistryHolder().key())
-            .add(AllBlocks.BLAZE_BURNER.get().builtInRegistryHolder().key());
-        prov.addTag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+    public static void datagen(RegistrateTagsProvider<Block> provIn) {
+        TagGen.CreateTagsProvider<Block> prov = new TagGen.CreateTagsProvider<>(provIn, Block::builtInRegistryHolder);
+        prov.tag(VERTICAL_SLABS.tag).addTag(VERTICAL_SLABS__CHOCOLATE.tag);
+        prov.tag(ModTags.TRAY_HEAT_SOURCES)
+            .add(AllBlocks.LIT_BLAZE_BURNER.get())
+            .add(AllBlocks.BLAZE_BURNER.get());
+        prov.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .addOptional(ModBlocks.COOKING_POT.getId());
     }
     

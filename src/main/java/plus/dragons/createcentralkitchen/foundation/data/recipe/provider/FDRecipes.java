@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.Generated
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.fluid.FDFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
@@ -154,8 +155,13 @@ public class FDRecipes extends DatapackRecipes {
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ForgeItemTags.FLOUR__WHEAT.tag))
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.SUGAR)));*/
     
-    public FDRecipes(DataGenerator datagen) {
-        super(Mods.FD, CentralKitchen.REGISTRATE, datagen);
+    public FDRecipes(DataGenerator output) {
+        super(Mods.FD, CentralKitchen.REGISTRATE, output);
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "Farmer's Delight Compat Recipes";
     }
     
 }

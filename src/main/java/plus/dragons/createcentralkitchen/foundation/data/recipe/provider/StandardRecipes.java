@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.Generated
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
@@ -28,6 +29,10 @@ public class StandardRecipes extends Recipes {
     
     public StandardRecipes(DataGenerator datagen) {
         super(CentralKitchen.REGISTRATE, datagen);
+    }
+    @Override
+    public final @NotNull String getName() {
+        return "CCK Built-in Standard Recipes";
     }
     
 }

@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.entry.fluid.EDFluidEntries;
@@ -84,6 +85,11 @@ public class EDRecipes extends DatapackRecipes {
 
     public EDRecipes(DataGenerator datagen) {
         super(Mods.ED, CentralKitchen.REGISTRATE, datagen);
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "End's Delight Compat Recipes";
     }
     
 }

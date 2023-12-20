@@ -2,10 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Sets;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.mojang.logging.LogUtils;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -16,7 +13,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -27,8 +23,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class DatapackRecipes extends Recipes {
-    private static final Logger LOGGER = LogUtils.getLogger();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Map<AbstractRegistrate<?>, Map<String, DatapackRecipes>> RECIPES = new HashMap<>();
     private static final Map<AbstractRegistrate<?>, ArrayListMultimap<String, Consumer<DatapackRecipes>>> EXTERNAL_RECIPES = new HashMap<>();
     protected final String name;
@@ -91,6 +85,11 @@ public class DatapackRecipes extends Recipes {
     
     private static void saveRecipe(CachedOutput pOutput, JsonObject pRecipeJson, Path pPath) {
         DataProvider.saveStable(pOutput, pRecipeJson, pPath);
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return name + "Compat Recipes";
     }
     
 }

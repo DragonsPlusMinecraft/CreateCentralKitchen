@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.fluid.CornDelightFluidEntries;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
@@ -31,5 +32,10 @@ public class CornDelightRecipes extends DatapackRecipes {
 
     public CornDelightRecipes(DataGenerator generator) {
         super(Mods.CORN_DELIGHT, CentralKitchen.REGISTRATE, generator);
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "Corn Delight Compat Recipes";
     }
 }

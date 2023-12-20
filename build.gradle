@@ -18,7 +18,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 minecraft {
     mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
     runs {
         client {
@@ -119,14 +119,14 @@ dependencies {
     //mandatory dependencies
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
     //create addons
     implementation fg.deobf("curse.maven:createaddtion-439890:${create_addition_file}")
     //farmers delight addons
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
     //implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
-    implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
+    //implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
     //implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
     implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
     implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
