@@ -27,6 +27,7 @@
     "common.farmersrespite.SmallTeaBushBlockMixin",
     "common.farmersrespite.TeaBushBlockMixin",
     "common.minecraft.BowlFoodItemMixin",
+    "common.minersdelight.CopperPotBlockEntityMixin",
     "common.neapolitan.DrinkItemMixin",
     "common.overweightfarming.CropFullBlockMixin"
   ],
