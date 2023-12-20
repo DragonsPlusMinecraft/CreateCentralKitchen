@@ -3,7 +3,6 @@ package plus.dragons.createcentralkitchen;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -23,7 +22,6 @@ import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.content.contraptions.fluids.OpenEndedPipeEffects;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
-import plus.dragons.createcentralkitchen.entry.item.FRItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.foundation.data.CentralKitchenData;
@@ -44,7 +42,7 @@ public class CentralKitchen {
     
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER =
-        DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, ID);
+        DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER_REGISTER =
         DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
     
@@ -83,11 +81,9 @@ public class CentralKitchen {
     
     public void fillItemGroup(FillCreateItemGroupEvent event) {
         if (Mods.isLoaded(Mods.FD))
-            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), FDItemEntries.COOKING_GUIDE.asStack());
-        if (Mods.isLoaded(Mods.FR))
-            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), FRItemEntries.BREWING_GUIDE.asStack());
+            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), FDItemEntries.COOKING_GUIDE);
        if (Mods.isLoaded(Mods.MD))
-            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), MDItemEntries.MINERS_COOKING_GUIDE.asStack());
+            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), MDItemEntries.MINERS_COOKING_GUIDE);
     }
     
     public static ResourceLocation genRL(String path) {

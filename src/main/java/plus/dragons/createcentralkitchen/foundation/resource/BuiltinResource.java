@@ -24,19 +24,8 @@ public enum BuiltinResource {
     //Resource Packs
     CREATE_STYLED(PackType.CLIENT_RESOURCES, CentralKitchen.ID),
     //Data Packs
-    ABNORMALS_DELIGHT(PackType.SERVER_DATA, true, false),
-    ATMOSPHERIC(PackType.SERVER_DATA, true, false),
-    AUTUMNITY(PackType.SERVER_DATA, true, false),
-    BUZZIER_BEES(PackType.SERVER_DATA, true, false),
-    COLLECTORSREAP(PackType.SERVER_DATA, true, false),
     FARMERSDELIGHT(PackType.SERVER_DATA, true, false),
-    FARMERSRESPITE(PackType.SERVER_DATA, true, false),
     MINERS_DELIGHT(PackType.SERVER_DATA, true, false),
-    NEAPOLITAN(PackType.SERVER_DATA, true, false),
-    PECULIARS(PackType.SERVER_DATA, true, false),
-    RESPITEFUL(PackType.SERVER_DATA, true, false),
-    SEASONALS(PackType.SERVER_DATA, true, false),
-    UPGRADE_AQUATIC(PackType.SERVER_DATA, true, false),
     OVERWEIGHT_FARMING(PackType.SERVER_DATA, true, false),
     CORN_DELIGHT(PackType.SERVER_DATA, true, false),
     ENDS_DELIGHT(PackType.SERVER_DATA, true, false);

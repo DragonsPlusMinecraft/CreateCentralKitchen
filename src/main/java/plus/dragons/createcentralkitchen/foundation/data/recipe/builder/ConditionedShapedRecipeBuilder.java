@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-
+// TODO
 public class ConditionedShapedRecipeBuilder implements RecipeBuilder, ConditionedRecipeBuilder<ConditionedShapedRecipeBuilder> {
     private final ResourceLocation id;
     private Item result;

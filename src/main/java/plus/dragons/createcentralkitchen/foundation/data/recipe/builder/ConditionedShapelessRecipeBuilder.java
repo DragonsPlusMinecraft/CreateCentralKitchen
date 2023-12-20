@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
+// TODO
 public class ConditionedShapelessRecipeBuilder implements RecipeBuilder, ConditionedRecipeBuilder<ConditionedShapelessRecipeBuilder> {
     private final ResourceLocation id;
     private Item result;

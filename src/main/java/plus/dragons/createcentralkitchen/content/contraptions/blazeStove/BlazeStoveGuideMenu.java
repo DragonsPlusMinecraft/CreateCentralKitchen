@@ -38,7 +38,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     public abstract G createGuide(ItemStack contentHolder);
     
     public void updateRecipe() {
-        guide.updateRecipe(this.player.level);
+        guide.updateRecipe(this.player.level());
         this.getSlot(guide.getIngredientSize()).setChanged();
     }
     

@@ -19,7 +19,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeSt
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
-import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.function.Consumer;
 

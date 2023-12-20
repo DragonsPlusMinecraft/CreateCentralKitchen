@@ -43,15 +43,14 @@ public class CornDelightMovementBehaviorExtensions {
         } else {
             if (!(state.getBlock() instanceof CornCrop crop))
                 return;
-            var ageProp = crop.getAgeProperty();
-            int age = state.getValue(ageProp);
+            int age = crop.getAge(state);
             if (age <= 0)
                 return;
             if (!partial && age < crop.getMaxAge())
                 return;
             if (replant) {
                 level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-                level.setBlock(pos, state.setValue(ageProp, 0), 2);
+                level.setBlock(pos, crop.getStateForAge(0), 2);
             } else {
                 BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
             }

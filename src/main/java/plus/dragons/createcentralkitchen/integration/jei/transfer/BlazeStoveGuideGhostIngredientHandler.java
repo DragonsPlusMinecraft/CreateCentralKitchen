@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import com.simibubi.create.foundation.gui.menu.GhostItemMenu;
 import com.simibubi.create.foundation.gui.menu.GhostItemSubmitPacket;
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
+import mezz.jei.api.ingredients.ITypedIngredient;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -42,9 +43,14 @@ public class BlazeStoveGuideGhostIngredientHandler<M extends BlazeStoveGuideMenu
 
 	@Override
 	public <I> List<Target<I>> getTargets(S gui, I ingredient, boolean doStart) {
+
+	}
+
+	@Override
+	public <I> List<Target<I>> getTargetsTyped(S gui, ITypedIngredient<I> ingredient, boolean doStart) {
 		List<Target<I>> targets = new ArrayList<>();
 
-		if (ingredient instanceof ItemStack) {
+		if (ingredient.getIngredient() instanceof ItemStack) {
 			for (int i = 36; i < 36 + gui.getMenu().getInputSize(); i++) {
 				if (gui.getMenu().slots.get(i).isActive())
 					targets.add(new GhostTarget<>(gui, i - 36));

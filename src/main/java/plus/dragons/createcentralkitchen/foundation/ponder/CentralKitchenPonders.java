@@ -3,10 +3,8 @@ package plus.dragons.createcentralkitchen.foundation.ponder;
 import com.simibubi.create.foundation.ponder.PonderStoryBoardEntry;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.ponder.entry.FDPonderEntries;
-import plus.dragons.createcentralkitchen.foundation.ponder.entry.FRPonderEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.entry.MDPonderEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.tag.FDPonderTags;
-import plus.dragons.createcentralkitchen.foundation.ponder.tag.FRPonderTags;
 import plus.dragons.createcentralkitchen.foundation.ponder.tag.MDPonderTags;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
@@ -27,10 +25,10 @@ public class CentralKitchenPonders {
             FDPonderEntries.register();
             FDPonderTags.register();
         }
-        if (Mods.isLoaded(Mods.FR)) {
+/*        if (Mods.isLoaded(Mods.FR)) {
             FRPonderEntries.register();
             FRPonderTags.register();
-        }
+        }*/
         if (Mods.isLoaded(Mods.MD)) {
             MDPonderEntries.register();
             MDPonderTags.register();

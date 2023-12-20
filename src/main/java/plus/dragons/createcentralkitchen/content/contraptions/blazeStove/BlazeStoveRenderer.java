@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
@@ -17,11 +17,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,14 +57,14 @@ public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockE
             if (!stack.isEmpty()) {
                 poseStack.pushPose();
                 float directionRot = -direction.toYRot();
-                poseStack.mulPose(Vector3f.YP.rotationDegrees(directionRot));
-                poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+                poseStack.mulPose(Axis.YP.rotationDegrees(directionRot));
+                poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 poseStack.translate(offsets[slot].x, offsets[slot].y, 0.0D);
                 poseStack.scale(0.3125F, 0.3125F, 0.3125F);
                 Minecraft.getInstance().getItemRenderer().renderStatic(
-                    stack, ItemTransforms.TransformType.FIXED,
+                    stack, ItemDisplayContext.FIXED,
                     LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
-                    poseStack, buffer, seed + slot
+                    poseStack, buffer, stove.getLevel(), seed + slot
                 );
                 poseStack.popPose();
             }

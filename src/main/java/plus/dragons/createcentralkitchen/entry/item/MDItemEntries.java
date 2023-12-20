@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.entry.item;
 
 import com.sammy.minersdelight.setup.MDItems;
-import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking.MinersCookingGuideItem;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;

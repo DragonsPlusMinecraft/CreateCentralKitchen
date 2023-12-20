@@ -2,11 +2,11 @@ package plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCoo
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import com.simibubi.create.foundation.gui.element.GuiGameElement;
+import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -49,41 +49,42 @@ public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<Miners
     }
 
     @Override
-    protected void renderBg(@NotNull PoseStack pose, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(@NotNull GuiGraphics pGuiGraphics, float partialTicks, int mouseX, int mouseY) {
         //Player Inventory
         int invX = getLeftOfCentered(PLAYER_INVENTORY.width);
         int invY = topPos + BACKGROUND_HEIGHT + 4;
-        renderPlayerInventory(pose, invX, invY);
+        renderPlayerInventory(pGuiGraphics, invX, invY);
         //Guide
         int guideX = getLeftOfCentered(WINDOW_WIDTH);
         int guideY = topPos;
-        renderGuide(pose, guideX, guideY);
+        renderGuide(pGuiGraphics, guideX, guideY);
         //Title
-        drawCenteredString(pose, font, title, guideX + WINDOW_WIDTH / 2, guideY + 5, 0xFFFFFF);
+        pGuiGraphics.drawCenteredString(font, title, guideX + WINDOW_WIDTH / 2, guideY + 5, 0xFFFFFF);
         //Guide Icon
         GuiGameElement.of(menu.contentHolder)
             .<GuiGameElement.GuiRenderBuilder>at(guideX + WINDOW_WIDTH + 16, guideY + 16, -200)
             .scale(3)
-            .render(pose);
+            .render(pGuiGraphics);
     }
 
-    private void renderGuide(@NotNull PoseStack pose, int x, int y) {
+    private void renderGuide(@NotNull GuiGraphics pGuiGraphics, int x, int y) {
         RenderSystem.setShaderTexture(0, TEXTURE);
-        this.blit(pose, x, y, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
+        pGuiGraphics.blit(TEXTURE, x, y, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
         var level = Minecraft.getInstance().level;
         int status = this.getMenu().getBlazeStatus();
         if (level == null || status <= 0) {
-            this.blit(pose, x + 72, y + 24, 0, 80, 24, 24);
+            pGuiGraphics.blit(TEXTURE, x + 72, y + 24, 0, 80, 24, 24);
         } else {
             int time = ((int) level.getGameTime() / 5 % 3) + 1;
-            this.blit(pose, x + 72, y + 24, 24 * time, 80, 24, 24);
+            pGuiGraphics.blit(TEXTURE, x + 72, y + 24, 24 * time, 80, 24, 24);
         }
-        this.blit(pose, x + 64, y + 66, 96, 80 + status * 6, 80, 6);
+        pGuiGraphics.blit(TEXTURE, x + 64, y + 66, 96, 80 + status * 6, 80, 6);
     }
 
     @Override
-    protected void renderTooltip(@NotNull PoseStack pose, int x, int y) {
+    protected void renderTooltip(@NotNull GuiGraphics pGuiGraphics, int x, int y) {
         if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+            var pose = pGuiGraphics.pose();
             if (this.hoveredSlot.index == 4) {
                 List<Component> tooltip = new ArrayList<>();
                 ItemStack mealStack = this.hoveredSlot.getItem();
@@ -93,9 +94,9 @@ public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<Miners
                 String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
                 tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container)
                     .withStyle(ChatFormatting.GRAY));
-                this.renderComponentTooltip(pose, tooltip, x, y);
+                pGuiGraphics.renderComponentTooltip(font, tooltip, x, y);
             } else {
-                this.renderTooltip(pose, this.hoveredSlot.getItem(), x, y);
+                pGuiGraphics.renderTooltip(font, this.hoveredSlot.getItem(), x, y);
             }
         }
     }

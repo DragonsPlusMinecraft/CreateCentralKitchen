@@ -1,20 +1,16 @@
 package plus.dragons.createcentralkitchen.entry.fluid;
 
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.MissingMappingsEvent;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
@@ -24,11 +20,8 @@ import plus.dragons.createcentralkitchen.foundation.item.FluidBucketItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import plus.dragons.createdragonlib.fluid.NoTintFluidType;
+import plus.dragons.createdragonlib.init.FillCreateItemGroupEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
@@ -63,7 +56,6 @@ public class FDFluidEntries {
         .source(ForgeFlowingFluid.Source::new)
         .transform(Recipes.fluidHandling(ModItems.TOMATO_SAUCE, 250))
         .bucket(FluidBucketItem::new)
-        .properties(prop -> prop.tab(CreativeModeTab.TAB_MATERIALS))
         .transform(DatapackRecipes.addRecipe(Mods.FD, (ctx, prov) -> {
             DataIngredient tomatoSauce = DataIngredient.items(ModItems.TOMATO_SAUCE.get());
             DataIngredient tomatoSauceBucket = DataIngredient.items(ctx);
@@ -81,5 +73,12 @@ public class FDFluidEntries {
         }))
         .build()
         .register();
+
+    @SubscribeEvent
+    public static void fillCreateItemGroup(FillCreateItemGroupEvent event) {
+        if (event.isBase()) {
+            event.addInsertion(AllFluids.CHOCOLATE.get().getBucket(), TOMATO_SAUCE.get().getBucket());
+        }
+    }
     
 }

@@ -15,7 +15,7 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
 import java.util.List;
 import java.util.function.Supplier;
-
+// TODO
 public class ConditionedItem extends Item {
     private final Supplier<Boolean> condition;
     

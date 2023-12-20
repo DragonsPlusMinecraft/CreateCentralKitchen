@@ -10,17 +10,19 @@ import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+import net.minecraft.Util;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -69,28 +71,26 @@ public class DatapackRecipes extends Recipes {
         return EXTERNAL_RECIPES.computeIfAbsent(registrate, it -> ArrayListMultimap.create());
     }
     
-    public void run(CachedOutput cache) {
-        Path path = this.generator.getOutputFolder().resolve("datapacks/" + name + "/data/");
+    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
+        Path path = this.generator.getPackOutput().getOutputFolder().resolve("datapacks/" + name + "/data/");
         Set<ResourceLocation> set = Sets.newHashSet();
-        buildCraftingRecipes(recipe -> {
-            if (!set.add(recipe.getId())) {
-                throw new IllegalStateException("Duplicate recipe " + recipe.getId());
-            } else {
-                DatapackRecipes.saveRecipe(cache, recipe.serializeRecipe(), path.resolve(recipe.getId().getNamespace() + "/recipes/" + recipe.getId().getPath() + ".json"));
-                JsonObject advancement = recipe.serializeAdvancement();
-                if (advancement != null) {
-                    saveAdvancement(cache, advancement, path.resolve(recipe.getId().getNamespace() + "/advancements/" + recipe.getAdvancementId().getPath() + ".json"));
+        return CompletableFuture.runAsync(() -> {
+            buildCraftingRecipes(recipe -> {
+                if (!set.add(recipe.getId())) {
+                    throw new IllegalStateException("Duplicate recipe " + recipe.getId());
+                } else {
+                    DatapackRecipes.saveRecipe(cache, recipe.serializeRecipe(), path.resolve(recipe.getId().getNamespace() + "/recipes/" + recipe.getId().getPath() + ".json"));
+                    JsonObject advancement = recipe.serializeAdvancement();
+                    if (advancement != null) {
+                        saveAdvancement(cache, recipe, advancement);
+                    }
                 }
-            }
-        });
+            });
+            }, Util.backgroundExecutor());
     }
     
     private static void saveRecipe(CachedOutput pOutput, JsonObject pRecipeJson, Path pPath) {
-        try {
-            DataProvider.saveStable(pOutput, pRecipeJson, pPath);
-        } catch (IOException var4) {
-            LOGGER.error("Couldn't save recipe {}", pPath, var4);
-        }
+        DataProvider.saveStable(pOutput, pRecipeJson, pPath);
     }
     
 }

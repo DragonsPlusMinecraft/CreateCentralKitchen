@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.foundation.data.tag;
 
-import com.sammy.minersdelight.setup.MDBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;

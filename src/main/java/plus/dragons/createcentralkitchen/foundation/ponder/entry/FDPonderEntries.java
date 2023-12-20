@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.foundation.ponder.entry;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.foundation.ponder.PonderTag;
 import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.CentralKitchenPonders;

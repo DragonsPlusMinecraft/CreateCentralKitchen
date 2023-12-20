@@ -37,7 +37,7 @@ public class CookingGuide extends BlazeStoveGuide {
             .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
             .ifPresentOrElse(
                 recipe -> {
-                    inventory.setStackInSlot(ingredientSize, recipe.getResultItem());
+                    inventory.setStackInSlot(ingredientSize, recipe.getResultItem(level.registryAccess()));
                     container = recipe.getOutputContainer();
                 },
                 () -> {

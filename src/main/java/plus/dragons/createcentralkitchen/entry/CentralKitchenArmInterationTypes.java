@@ -2,7 +2,6 @@ package plus.dragons.createcentralkitchen.entry;
 
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.foundation.ponder.PonderTag;
 import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
@@ -31,7 +30,6 @@ public class CentralKitchenArmInterationTypes {
     public static final BlazeStovePoint.Type BLAZE_STOVE = create("blaze_stove", BlazeStovePoint.Type::new);
     public static final CookingPotPoint.Type COOKING_POT = create("cooking_pot", CookingPotPoint.Type::new);
     public static final SkilletPoint.Type SKILLET = create("skillet", SkilletPoint.Type::new);
-    public static final KettlePoint.Type KETTLE = create("kettle", KettlePoint.Type::new);
     public static final CopperPotPoint.Type COPPER_POT = create("copper_pot", CopperPotPoint.Type::new);
     
     private static <T extends PonderArmInteractionPointType> T create(String name, Function<ResourceLocation, T> factory) {
@@ -51,9 +49,6 @@ public class CentralKitchenArmInterationTypes {
         ModList mods = ModList.get();
         if (Mods.isLoaded(Mods.FD)) {
             register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET);
-        }
-        if (Mods.isLoaded(Mods.FR)) {
-            register(KETTLE);
         }
         if (Mods.isLoaded(Mods.MD)) {
             register(COPPER_POT);

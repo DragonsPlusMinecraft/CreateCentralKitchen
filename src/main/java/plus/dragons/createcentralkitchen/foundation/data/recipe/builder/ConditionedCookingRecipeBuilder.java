@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
+// TODO
 public class ConditionedCookingRecipeBuilder implements ConditionedRecipeBuilder<ConditionedCookingRecipeBuilder> {
     private final Item result;
     private final DataIngredient ingredient;

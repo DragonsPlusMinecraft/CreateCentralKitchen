@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.integration.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedDeployer;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
@@ -13,6 +12,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
 import plus.dragons.createcentralkitchen.content.contraptions.deployer.CuttingBoardDeployingRecipe;
 
 import java.util.ArrayList;
@@ -50,12 +50,13 @@ public class CuttingBoardDeployingCategory extends CreateRecipeCategory<CuttingB
             .addTooltipCallback(addStochasticTooltip(layoutEntry.output()))
         );
     }
-    
+
+
     @Override
-    public void draw(CuttingBoardDeployingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-        AllGuiTextures.JEI_SHADOW.render(matrixStack, 62, 57);
-        AllGuiTextures.JEI_DOWN_ARROW.render(matrixStack, 126, 29);
-        deployer.draw(matrixStack, getBackground().getWidth() / 2 - 13, 22);
+    public void draw(CuttingBoardDeployingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        AllGuiTextures.JEI_SHADOW.render(guiGraphics, 62, 57);
+        AllGuiTextures.JEI_DOWN_ARROW.render(guiGraphics, 126, 29);
+        deployer.draw(guiGraphics, getBackground().getWidth() / 2 - 13, 22);
     }
     
     private List<LayoutEntry> layoutOutput(ProcessingRecipe<?> recipe) {

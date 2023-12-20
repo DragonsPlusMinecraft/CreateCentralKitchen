@@ -8,22 +8,24 @@ import com.mojang.logging.LogUtils;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+import net.minecraft.Util;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.data.loading.DatagenModLoader;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class BlockLootTables implements DataProvider {
@@ -37,9 +39,9 @@ public class BlockLootTables implements DataProvider {
     }
     
     @Override
-    public void run(CachedOutput cache) {
-        Path outputFolder = this.generator.getOutputFolder();
-        BLOCK_LOOTS.forEach((modid, suppliers) -> {
+    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
+        Path outputFolder = this.generator.getPackOutput().getOutputFolder();
+        return CompletableFuture.runAsync(() -> BLOCK_LOOTS.forEach((modid, suppliers) -> {
             Path datapackFolder = outputFolder.resolve("datapacks/" + modid);
             Map<ResourceLocation, LootTable> map = Maps.newHashMap();
             suppliers.forEach((id, supplier) -> {
@@ -47,8 +49,14 @@ public class BlockLootTables implements DataProvider {
                     throw new IllegalStateException("Duplicate loot table " + id);
                 }
             });
-            ValidationContext validationContext = new ValidationContext(LootContextParamSets.ALL_PARAMS, id -> null, map::get);
-            map.forEach((id, lootTable) -> LootTables.validate(validationContext, id, lootTable));
+            ValidationContext validationContext = new ValidationContext(LootContextParamSets.ALL_PARAMS, new LootDataResolver() {
+                @Nullable
+                @Override
+                public <T> T getElement(@NotNull LootDataId<T> pId) {
+                    return (T)(pId.type() == LootDataType.TABLE ? map.get(pId.location()) : null);
+                }
+            });
+            map.forEach((id, lootTable) -> lootTable.validate(validationContext));
             Multimap<String, String> problems = validationContext.getProblems();
             if (!problems.isEmpty()) {
                 problems.forEach((key, value) -> LOGGER.warn("Found validation problem in {}: {}", key, value));
@@ -56,14 +64,10 @@ public class BlockLootTables implements DataProvider {
             } else {
                 map.forEach((id, lootTable) -> {
                     Path path = createPath(datapackFolder, id);
-                    try {
-                        DataProvider.saveStable(cache, LootTables.serialize(lootTable), path);
-                    } catch (IOException ioexception) {
-                        LOGGER.error("Couldn't save loot table {}", path, ioexception);
-                    }
+                    DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(lootTable), path);
                 });
             }
-        });
+        }), Util.backgroundExecutor());
     }
     
     private static Path createPath(Path path, ResourceLocation id) {

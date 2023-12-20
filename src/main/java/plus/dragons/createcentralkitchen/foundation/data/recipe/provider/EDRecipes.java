@@ -13,10 +13,7 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.entry.fluid.EDFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.EDItemEntries;
-import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
-import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoolCondition;
-import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import vectorwing.farmersdelight.common.registry.ModItems;
 

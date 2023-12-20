@@ -62,7 +62,7 @@ public class NDHarvesterMovementBehaviorExtensions {
             BlockHelper.destroyBlock(level, pos, 1, $ -> {});
         }
         behaviour.dropItem(context, age < colony.getMaxAge()?
-                new ItemStack(colony.fungusType.get(), age):
+                new ItemStack(colony.mushroomType.get(), age):
                 new ItemStack(colony.asItem()));
     }
     

@@ -1,19 +1,12 @@
 package plus.dragons.createcentralkitchen.integration.jei;
 
-import com.simibubi.create.content.fluids.VirtualFluid;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.ForgeRegistries;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
@@ -28,7 +21,7 @@ public class CentralKitchenJeiPlugin implements IModPlugin {
     public CentralKitchenJeiPlugin() {
         ModList mods = ModList.get();
         if (Mods.isLoaded(Mods.FD)) plugins.add(new FDSubJeiPlugin());
-        if (Mods.isLoaded(Mods.FR)) plugins.add(new FRSubJeiPlugin());
+        //if (Mods.isLoaded(Mods.FR)) plugins.add(new FRSubJeiPlugin());
         if (Mods.isLoaded(Mods.MD)) plugins.add(new MDSubJeiPlugin());
     }
     

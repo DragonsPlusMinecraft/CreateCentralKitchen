@@ -12,12 +12,15 @@ import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -47,13 +50,13 @@ public class FDBlockEntries {
     public static final BlockEntry<BlazeStoveBlock> BLAZE_STOVE = REGISTRATE
         .block("blaze_stove", BlazeStoveBlock::new)
         .initialProperties(SharedProperties::softMetal)
-        .properties(p -> p.color(MaterialColor.COLOR_GRAY).lightLevel(BlazeBurnerBlock::getLight))
+        .properties(p -> p.mapColor(MapColor.COLOR_GRAY).lightLevel(BlazeBurnerBlock::getLight))
         .transform(OptionalTags.block(
             BlockTags.MINEABLE_WITH_PICKAXE,
             AllTags.AllBlockTags.FAN_TRANSPARENT.tag,
             ModTags.HEAT_SOURCES))
         .transform(BlockLootTables.add(Mods.FD, block ->
-            RegistrateBlockLootTables.createSingleItemTable(AllBlocks.BLAZE_BURNER.get())))
+                new VanillaBlockLoot().createSingleItemTable(AllBlocks.BLAZE_BURNER.get())))
         .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
         .register();
     
@@ -72,14 +75,15 @@ public class FDBlockEntries {
     public static final BlockEntry<PieBlock> MULBERRY_PIE = pie("mulberry_pie", FDItemEntries.MULBERRY_PIE_SLICE::get, false)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
         .register();
-    
+
+    public static BlockItem APPLE_PIE_ITEM;
     private static BlockBuilder<PieBlock, CreateRegistrate> pie(String name, NonNullSupplier<Item> slice, boolean defaultTexture) {
         return REGISTRATE
             .block(name, prop -> new PieBlock(prop, slice))
             .initialProperties(() -> Blocks.CAKE)
             .properties(BlockLootTables::noLootGen)
             .transform(OptionalTags.block(ModTags.MINEABLE_WITH_KNIFE))
-            .loot((loot, block) -> loot.add(block, BlockLoot.noDrop()))
+            .loot((loot, block) -> loot.add(block, RegistrateBlockLootTables.noDrop()))
             .blockstate((defaultTexture ? PieBlockStateGen.DEFAULT : PieBlockStateGen.CUSTOM)::generate);
     }
     
@@ -99,7 +103,7 @@ public class FDBlockEntries {
             //Need to unregister and re-register compostable as vanilla data was assigned before this
             ComposterBlock.COMPOSTABLES.removeFloat(Items.PUMPKIN_PIE);
             BlockItem item = new ItemNameBlockItem(PUMPKIN_PIE.get(),
-                new Item.Properties().tab(CreativeModeTab.TAB_FOOD));
+                new Item.Properties());
             registry.register(pumpkin_pie, item);
             ComposterBlock.COMPOSTABLES.put(item, 1.0F);
         }
@@ -108,8 +112,8 @@ public class FDBlockEntries {
         if (isPieOverhaulEnabled(apple_pie) && Mods.isLoaded(Mods.ENVIRONMENTAL)) {
             //Need to override BlockItem#registerBlocks and BlockItem#removeFromBlockToItemMap
             //So Farmer's Delight's apple pie won't get overridden
-            BlockItem item = new ItemNameBlockItem(ModBlocks.APPLE_PIE.get(),
-                new Item.Properties().tab(CreativeModeTab.TAB_FOOD))
+            APPLE_PIE_ITEM = new ItemNameBlockItem(ModBlocks.APPLE_PIE.get(),
+                new Item.Properties())
             {
                 @Override
                 @ParametersAreNonnullByDefault
@@ -119,7 +123,7 @@ public class FDBlockEntries {
                 @ParametersAreNonnullByDefault
                 public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item item) {}
             };
-            registry.register(apple_pie, item);
+            registry.register(apple_pie, APPLE_PIE_ITEM);
         }
         
         Map<ResourceLocation, Block> entries = new HashMap<>();
@@ -129,10 +133,33 @@ public class FDBlockEntries {
         entries.forEach((id, block) -> {
             if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {
                 BlockItem blockItem = new ItemNameBlockItem(block,
-                    new Item.Properties().tab(CreativeModeTab.TAB_FOOD));
+                    new Item.Properties());
                 registry.register(id, blockItem);
             }
         });
+    }
+
+    @SubscribeEvent
+    public void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            if (isPieOverhaulEnabled(new ResourceLocation("pumpkin_pie"))) {
+                event.accept(PUMPKIN_PIE.get());
+            }
+            if (isPieOverhaulEnabled(Mods.environmental("apple_pie")) && Mods.isLoaded(Mods.ENVIRONMENTAL) && APPLE_PIE_ITEM!=null) {
+                event.accept(APPLE_PIE_ITEM);
+            }
+            Map<ResourceLocation, Block> entries = new HashMap<>();
+            entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
+            entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());
+            entries.put(Mods.ua("mulberry_pie"), MULBERRY_PIE.get());
+            entries.forEach((id, block) -> {
+                if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {
+                    BlockItem blockItem = new ItemNameBlockItem(block,
+                            new Item.Properties());
+                    event.accept(blockItem);
+                }
+            });
+        }
     }
     
 }

@@ -3,7 +3,6 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.foundation.ponder.PonderTag;
 import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;

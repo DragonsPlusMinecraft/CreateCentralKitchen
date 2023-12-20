@@ -42,7 +42,7 @@ public class MinersCookingGuide extends BlazeStoveGuide {
             .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
             .ifPresentOrElse(
                 recipe -> {
-                    ItemStack result = recipe.getResultItem();
+                    ItemStack result = recipe.getResultItem(level.registryAccess());
                     boolean cupServed = CupConversionReloadListener.BOWL_TO_CUP.containsKey(result.getItem());
                     ItemStack container = cupServed ? MDItems.COPPER_CUP.asStack() : recipe.getOutputContainer();
                     if (cupServed) {
