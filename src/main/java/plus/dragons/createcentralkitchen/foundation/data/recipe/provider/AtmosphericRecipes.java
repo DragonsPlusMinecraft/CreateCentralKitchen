@@ -33,7 +33,7 @@ public class AtmosphericRecipes extends DatapackRecipes {
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(AtmosphericFluidEntries.ALOE_GEL.get(), 250)),
         COMPACTING_PASSIONFRUIT_TART = add(compacting("passionfruit_tart")
-            .output(AtmosphericItems.PASSIONFRUIT_TART.get())
+            .output(AtmosphericItems.PASSIONFRUIT_TART.get(),8)
             .require(AtmosphericItems.PASSIONFRUIT.get())
             .require(AtmosphericItems.PASSIONFRUIT.get())
             .require(AtmosphericItems.PASSIONFRUIT.get())
