@@ -192,7 +192,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
     }
     
     public boolean stillValid(Player player) {
-        if (player.level.getBlockEntity(worldPosition) != this) {
+        if (player.level().getBlockEntity(worldPosition) != this) {
             return false;
         } else {
             return !(player.distanceToSqr(VecHelper.getCenterOf(worldPosition)) > 64.0D);
@@ -360,7 +360,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
                 Container inventoryWrapper = new SimpleContainer(stack);
                 Optional<CampfireCookingRecipe> recipe = findRecipe(inventoryWrapper, i);
                 if (recipe.isPresent()) {
-                    ItemStack resultStack = recipe.get().getResultItem();
+                    ItemStack resultStack = recipe.get().getResultItem(level.registryAccess());
                     if (!resultStack.isEmpty()) {
                         ItemUtils.spawnItemEntity(level, resultStack.copy(),
                             worldPosition.getX() + 0.5D,

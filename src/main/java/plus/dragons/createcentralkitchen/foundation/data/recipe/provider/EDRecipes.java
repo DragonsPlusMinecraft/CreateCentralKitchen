@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.foundation.data.recipe.provider;
 
-import cn.foggyhillside.endsdelight.registry.ItemRegistry;
+import cn.foggyhillside.ends_delight.registry.ItemRegistry;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;

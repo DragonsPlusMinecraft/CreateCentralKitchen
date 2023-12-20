@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.ModFilePackResources;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.FilePackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackCompatibility;
@@ -79,15 +80,11 @@ public enum BuiltinResource {
             String path = pack.path;
             ResourceLocation packId = CentralKitchen.genRL(path);
             String titleKey = Util.makeDescriptionId(typeId, packId);
-            String descriptionKey = Util.makeDescriptionId(typeId, packId) + ".desc";
-            event.addRepositorySource((consumer, constructor) -> consumer.accept(
-                new Pack(packId.toString(), pack.required,
-                    () -> new ModFilePackResources(packId.toString(), modFile, dir + "/" + path),
-                    Components.translatable(titleKey),
-                    Components.translatable(descriptionKey),
-                    PackCompatibility.COMPATIBLE,
-                    Pack.Position.TOP, false,
-                    PackSource.DEFAULT, pack.hidden)));
+            //String descriptionKey = Util.makeDescriptionId(typeId, packId) + ".desc";
+            event.addRepositorySource(consumer -> consumer.accept(
+                Pack.readMetaAndCreate(packId.toString(), Components.translatable(titleKey), pack.required,
+                    id -> new ModFilePackResources(packId.toString(), modFile, dir + "/" + path), type,
+                    Pack.Position.TOP, PackSource.BUILT_IN)));
         }
     }
     

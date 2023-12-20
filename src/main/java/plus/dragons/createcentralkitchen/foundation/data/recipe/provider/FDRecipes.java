@@ -5,8 +5,6 @@ import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
-import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
@@ -118,8 +116,8 @@ public class FDRecipes extends DatapackRecipes {
             .loops(2)
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ModItems.PUMPKIN_SLICE.get()))
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ModItems.PUMPKIN_SLICE.get()))
-            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.SUGAR))),
-        SEQUENCED_ASSEMBLY_CHERRY_PIE = add(sequencedAssembly("cherry_pie")
+            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.SUGAR)));
+/*        SEQUENCED_ASSEMBLY_CHERRY_PIE = add(sequencedAssembly("cherry_pie")
             .require(ModItems.PIE_CRUST.get())
             .transitionTo(FDItemEntries.INCOMPLETE_CHERRY_PIE.get())
             .addOutput(EnvironmentalItems.CHERRY_PIE.get(), 1)
@@ -154,7 +152,7 @@ public class FDRecipes extends DatapackRecipes {
             .loops(2)
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(UAItems.MULBERRY.get()))
             .addStep(DeployerApplicationRecipe::new, builder -> builder.require(ForgeItemTags.FLOUR__WHEAT.tag))
-            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.SUGAR)));
+            .addStep(DeployerApplicationRecipe::new, builder -> builder.require(Items.SUGAR)));*/
     
     public FDRecipes(DataGenerator datagen) {
         super(Mods.FD, CentralKitchen.REGISTRATE, datagen);

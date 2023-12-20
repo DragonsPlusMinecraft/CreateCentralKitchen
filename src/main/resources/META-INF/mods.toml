@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[43,)"
+loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="create_central_kitchen" #mandatory
@@ -17,36 +17,20 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
 [[dependencies.create_central_kitchen]]
     modId="forge"
     mandatory=true
-    versionRange="[43,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.create_central_kitchen]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2,1.19.3)"
+    versionRange="[1.20.1,1.20.2)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.create_central_kitchen]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.0.i,)"
+    versionRange="[0.5.1.e,)"
     ordering="AFTER"
     side="BOTH"
-
-# Must load after these optional dependencies
-
-[[dependencies.create_central_kitchen]]
-modId="environmental"
-mandatory=false
-versionRange="[0,)"
-ordering="AFTER"
-side="BOTH"
-
-[[dependencies.create_central_kitchen]]
-modId="upgrade_aquatic"
-mandatory=false
-versionRange="[0,)"
-ordering="AFTER"
-side="BOTH"

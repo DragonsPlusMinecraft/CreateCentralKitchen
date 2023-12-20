@@ -3,6 +3,7 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -50,7 +51,7 @@ public class IgnoreAutomaticShapelessRecipe {
     }
     
     private static boolean shouldIgnoreShapelessRecipe(Recipe<?> recipe) {
-        if (shouldIgnoreItemInAutomation(recipe.getResultItem())) {
+        if (shouldIgnoreItemInAutomation(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()))) {
             return true;
         }
         List<Ingredient> ingredients = recipe.getIngredients();

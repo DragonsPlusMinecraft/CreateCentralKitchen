@@ -4,7 +4,6 @@ import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -15,7 +14,7 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
 import java.util.List;
 import java.util.function.Supplier;
-// TODO
+
 public class ConditionedItem extends Item {
     private final Supplier<Boolean> condition;
     
@@ -51,10 +50,4 @@ public class ConditionedItem extends Item {
             tooltip.add(Components.translatable("create_central_kitchen.generic.unobtainable").withStyle(ChatFormatting.GRAY));
         }
     }
-    
-    @Override
-    protected boolean allowedIn(CreativeModeTab category) {
-        return enabled() && super.allowedIn(category);
-    }
-    
 }

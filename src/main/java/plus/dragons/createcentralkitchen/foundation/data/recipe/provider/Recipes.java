@@ -20,6 +20,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.builder.*;
@@ -33,25 +34,20 @@ public class Recipes extends RegistrateRecipeProvider {
     protected final List<GeneratedRecipe> recipes = new ArrayList<>();
     
     public Recipes(AbstractRegistrate<?> registrate, DataGenerator generator) {
-        super(registrate, generator);
+        super(registrate, generator.getPackOutput());
     }
-    
-    @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        for (var recipe : recipes)
-            recipe.register(consumer);
-    }
-    
-    @Override
-    public String getName() {
-        return this.getClass().getSimpleName();
-    }
-    
+
     @Override
     public void accept(@Nullable FinishedRecipe recipe) {
         recipes.add(consumer -> consumer.accept(recipe));
     }
-    
+
+    @Override
+    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+        for (var recipe : recipes)
+            recipe.register(consumer);
+    }
+
     public GeneratedRecipe add(ConditionedRecipeBuilder<?> builder) {
         GeneratedRecipe generated = builder::save;
         recipes.add(generated);
@@ -132,13 +128,13 @@ public class Recipes extends RegistrateRecipeProvider {
         return new ConditionedCuttingBoardRecipeBuilder(CentralKitchen.genRL(path));
     }
     
-    public static ConditionedKettleRecipeBuilder kettle(ResourceLocation id) {
+/*    public static ConditionedKettleRecipeBuilder kettle(ResourceLocation id) {
         return new ConditionedKettleRecipeBuilder(id);
     }
     
     public static ConditionedKettleRecipeBuilder kettle(String path) {
         return new ConditionedKettleRecipeBuilder(CentralKitchen.genRL(path));
-    }
+    }*/
     
     public static ProcessingRecipeBuilder<?> processing(IRecipeTypeInfo type, ResourceLocation id) {
         ProcessingRecipeSerializer<?> serializer = type.getSerializer();

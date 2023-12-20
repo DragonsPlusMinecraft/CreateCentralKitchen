@@ -42,11 +42,6 @@ public class BlazeStoveGuideGhostIngredientHandler<M extends BlazeStoveGuideMenu
 	implements IGhostIngredientHandler<S> {
 
 	@Override
-	public <I> List<Target<I>> getTargets(S gui, I ingredient, boolean doStart) {
-
-	}
-
-	@Override
 	public <I> List<Target<I>> getTargetsTyped(S gui, ITypedIngredient<I> ingredient, boolean doStart) {
 		List<Target<I>> targets = new ArrayList<>();
 

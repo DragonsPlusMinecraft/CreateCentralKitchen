@@ -16,6 +16,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -25,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-// TODO
+
 public class ConditionedShapelessRecipeBuilder implements RecipeBuilder, ConditionedRecipeBuilder<ConditionedShapelessRecipeBuilder> {
     private final ResourceLocation id;
     private Item result;
@@ -174,7 +175,7 @@ public class ConditionedShapelessRecipeBuilder implements RecipeBuilder, Conditi
                       Advancement.Builder advancement,
                       ResourceLocation advancementId,
                       List<ICondition> conditions) {
-            super(id, result, count, group, ingredients, advancement, advancementId);
+            super(id, result, count, group, CraftingBookCategory.MISC, ingredients, advancement, advancementId);
             this.serializeAdvancement = !advancement.getCriteria().isEmpty() && conditions.isEmpty();
             this.conditions = conditions;
         }

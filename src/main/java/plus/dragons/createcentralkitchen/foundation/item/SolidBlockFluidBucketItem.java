@@ -1,9 +1,10 @@
 package plus.dragons.createcentralkitchen.foundation.item;
 
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SolidBucketItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -12,12 +13,10 @@ import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.function.Supplier;
 
 import static net.minecraftforge.fluids.FluidType.BUCKET_VOLUME;
-// TODO
 public class SolidBlockFluidBucketItem extends SolidBucketItem {
     protected final Supplier<? extends Fluid> fluidSupplier;
     
@@ -34,20 +33,6 @@ public class SolidBlockFluidBucketItem extends SolidBucketItem {
     
     public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item item) {
         blockToItemMap.remove(this.getBlock(), item);
-    }
-    
-    @Override
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (tab == this.category) {
-            ListIterator<ItemStack> item = items.listIterator();
-            while (item.hasNext()) {
-                if (item.next().is(Items.POWDER_SNOW_BUCKET)) {
-                    item.add(new ItemStack(this));
-                    return;
-                }
-            }
-        }
-        super.fillItemCategory(tab, items);
     }
     
     @Override

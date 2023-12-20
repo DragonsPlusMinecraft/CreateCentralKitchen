@@ -48,6 +48,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.entry.block.entity.FDBlockEntityEntries;
 import vectorwing.farmersdelight.common.block.StoveBlock;
+import vectorwing.farmersdelight.common.registry.ModDamageTypes;
 
 @SuppressWarnings("deprecation")
 public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<BlazeStoveBlockEntity>, IWrenchable {
@@ -268,7 +269,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
         };
         if (damage > 0 && !entity.fireImmune() &&
             entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living))
-            entity.hurt(StoveBlock.STOVE_DAMAGE, damage);
+            entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), damage);
         super.stepOn(level, pos, state, entity);
     }
     

@@ -75,7 +75,7 @@ public class DatapackRecipes extends Recipes {
         Path path = this.generator.getPackOutput().getOutputFolder().resolve("datapacks/" + name + "/data/");
         Set<ResourceLocation> set = Sets.newHashSet();
         return CompletableFuture.runAsync(() -> {
-            buildCraftingRecipes(recipe -> {
+            buildRecipes(recipe -> {
                 if (!set.add(recipe.getId())) {
                     throw new IllegalStateException("Duplicate recipe " + recipe.getId());
                 } else {

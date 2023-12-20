@@ -82,11 +82,11 @@ public abstract class BlazeStoveGuide implements ICapabilitySerializable<Compoun
     }
     
     public boolean isIngredient(int slot, ItemStack stack) {
-        return stack.sameItem(inventory.getStackInSlot(slot));
+        return ItemStack.isSameItem(stack,inventory.getStackInSlot(slot));
     }
     
     public boolean isContainer(ItemStack stack) {
-        return stack.sameItem(container);
+        return ItemStack.isSameItem(stack,container);
     }
     
     public ItemStack getResult() {

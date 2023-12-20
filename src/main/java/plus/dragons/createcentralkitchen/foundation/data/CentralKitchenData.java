@@ -2,6 +2,8 @@ package plus.dragons.createcentralkitchen.foundation.data;
 
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.server.packs.repository.Pack;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,7 +21,7 @@ import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class CentralKitchenData {
     
-    //TODO: Add advancements so it fixes the LangMerger, for now, manually clean up the en_us.json before every run
+    // Reminder: Add advancements, so it fixes the LangMerger, for now, manually clean up the en_us.json before every run
     public static void register(IEventBus modBus) {
         LangFactory langFactory = LangFactory.create(CentralKitchen.NAME, CentralKitchen.ID)
             .ponders(CentralKitchenPonders::register)
