@@ -2,15 +2,13 @@ package plus.dragons.createcentralkitchen.foundation.data;
 
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.minecraft.server.packs.repository.Pack;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.loot.BlockLootTables;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.*;
-import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeBlockTags;
+//import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeBlockTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationBlockTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationItemTags;
@@ -27,10 +25,6 @@ public class CentralKitchenData {
             .ponders(CentralKitchenPonders::register)
             .ui();
         modBus.addListener(EventPriority.LOWEST, langFactory::datagen);
-        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, ForgeBlockTags::datagen);
-        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, ForgeItemTags::datagen);
-        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, IntegrationBlockTags::datagen);
-        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, IntegrationItemTags::datagen);
         modBus.addListener(EventPriority.HIGH, CentralKitchenData::beforeRegistrate);
         modBus.addListener(EventPriority.LOW, CentralKitchenData::afterRegistrate);
     }
@@ -40,6 +34,10 @@ public class CentralKitchenData {
     }
     
     public static void afterRegistrate(final GatherDataEvent event) {
+        //REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, ForgeBlockTags::datagen);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, ForgeItemTags::datagen);
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, IntegrationBlockTags::datagen);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, IntegrationItemTags::datagen);
         DataGenerator generator = event.getGenerator();
         boolean server = event.includeServer();
         boolean client = event.includeClient();

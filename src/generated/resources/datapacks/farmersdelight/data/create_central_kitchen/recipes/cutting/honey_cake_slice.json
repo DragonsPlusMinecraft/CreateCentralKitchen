@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cutting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "createaddition:honey_cake"
+    }
+  ],
+  "result": [
+    {
+      "count": 7,
+      "item": "create_central_kitchen:honey_cake_slice"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

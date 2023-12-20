@@ -1,0 +1,23 @@
+{
+  "type": "create:emptying",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "farmersdelight:tomato_sauce"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:tomato_sauce"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.entry.fluid;
 
 import com.simibubi.create.AllFluids;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -77,7 +78,7 @@ public class FDFluidEntries {
     @SubscribeEvent
     public static void fillCreateItemGroup(FillCreateItemGroupEvent event) {
         if (event.isBase()) {
-            event.addInsertion(AllFluids.CHOCOLATE.get().getBucket(), TOMATO_SAUCE.get().getBucket());
+            event.addInsertion(AllItems.BUILDERS_TEA, TOMATO_SAUCE.get().getBucket());
         }
     }
     

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:plates/obsidian"
+    },
+    {
+      "item": "farmersdelight:canvas"
+    },
+    {
+      "item": "minecraft:carrot"
+    }
+  ],
+  "result": {
+    "item": "create_central_kitchen:cooking_guide"
+  }
+}

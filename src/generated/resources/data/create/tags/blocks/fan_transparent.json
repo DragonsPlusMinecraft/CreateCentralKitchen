@@ -1,0 +1,8 @@
+{
+  "values": [
+    {
+      "id": "create_central_kitchen:blaze_stove",
+      "required": false
+    }
+  ]
+}

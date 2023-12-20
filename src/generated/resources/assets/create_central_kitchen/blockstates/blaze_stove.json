@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_central_kitchen:block/blaze_stove/block"
+    }
+  }
+}

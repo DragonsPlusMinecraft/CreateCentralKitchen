@@ -1,0 +1,10 @@
+{
+  "parent": "create_central_kitchen:block/pie_slice3",
+  "textures": {
+    "bottom": "create_central_kitchen:block/mulberry_pie_bottom",
+    "inner": "create_central_kitchen:block/mulberry_pie_inner",
+    "particle": "create_central_kitchen:block/mulberry_pie_top",
+    "side": "create_central_kitchen:block/mulberry_pie_side",
+    "top": "create_central_kitchen:block/mulberry_pie_top"
+  }
+}
