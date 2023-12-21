@@ -7,12 +7,12 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import plus.dragons.createcentralkitchen.api.block.entity.SmartBlockEntityLike;
 import plus.dragons.createcentralkitchen.content.logistics.block.basket.SmartBasketBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.Basket;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 
 @Mixin(BasketBlockEntity.class)
-public abstract class BasketBlockEntityMixin extends RandomizableContainerBlockEntity implements SmartBlockEntityLike {
+public abstract class BasketBlockEntityMixin extends RandomizableContainerBlockEntity implements Basket {
     
     @Unique
     private final SmartBlockEntity smartBlockEntity = new SmartBasketBlockEntity((BasketBlockEntity) (Object) this);

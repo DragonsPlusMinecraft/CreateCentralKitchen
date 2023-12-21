@@ -15,21 +15,21 @@ public abstract class DelegatingSmartTileEntity<BE extends BlockEntity> extends 
         super(blockEntity.getType(), blockEntity.getBlockPos(), blockEntity.getBlockState());
         this.blockEntity = blockEntity;
     }
-    
+
     @Nullable
     @Override
     public Level getLevel() {
         return blockEntity.getLevel();
     }
-    
+
     @Override
     public BlockPos getBlockPos() {
         return blockEntity.getBlockPos();
     }
-    
+
     @Override
     public BlockState getBlockState() {
         return blockEntity.getBlockState();
     }
-    
+
 }

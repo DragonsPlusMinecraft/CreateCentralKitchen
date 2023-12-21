@@ -191,24 +191,6 @@ publishMods {
         requires {
             slug = "create"
         }
-        optional {
-            slug = "createaddition"
-        }
-        optional {
-            slug = "farmers-delight"
-        }
-        optional {
-            slug = "miners-delight-plus"
-        }
-        optional {
-            slug = "nethers-delight"
-        }
-        optional {
-            slug = "corn-delight"
-        }
-        optional {
-            slug = "overweight-farming"
-        }
     }
 
     modrinth {
@@ -218,24 +200,6 @@ publishMods {
 
         requires {
             slug = "create"
-        }
-        optional {
-            slug = "createaddition"
-        }
-        optional {
-            slug = "farmers-delight"
-        }
-        optional {
-            slug = "miners-delight-plus"
-        }
-        optional {
-            slug = "nethers-delight"
-        }
-        optional {
-            slug = "corn-delight"
-        }
-        optional {
-            slug = "overweight-farming"
         }
     }
 }
