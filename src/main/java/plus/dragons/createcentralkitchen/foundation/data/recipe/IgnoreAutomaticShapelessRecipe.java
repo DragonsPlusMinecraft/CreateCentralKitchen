@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -41,17 +42,17 @@ public class IgnoreAutomaticShapelessRecipe {
         LOGGER.debug("Invalidated IgnoreAutoShapelessRecipe's cache of size: {}", size);
     }
     
-    public static boolean get(Recipe<?> recipe) {
+    public static boolean get(Recipe<?> recipe, RegistryAccess access) {
         try {
-            return CACHED_IGNORED_RECIPES.get(recipe, () -> shouldIgnoreShapelessRecipe(recipe));
+            return CACHED_IGNORED_RECIPES.get(recipe, () -> shouldIgnoreShapelessRecipe(recipe,access));
         } catch (ExecutionException exception) {
             LOGGER.warn("Exception while computing if recipe {} should be ignored in automation", recipe.getId(), exception);
             return false;
         }
     }
     
-    private static boolean shouldIgnoreShapelessRecipe(Recipe<?> recipe) {
-        if (shouldIgnoreItemInAutomation(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()))) {
+    private static boolean shouldIgnoreShapelessRecipe(Recipe<?> recipe, RegistryAccess access) {
+        if (shouldIgnoreItemInAutomation(recipe.getResultItem(access))) {
             return true;
         }
         List<Ingredient> ingredients = recipe.getIngredients();
