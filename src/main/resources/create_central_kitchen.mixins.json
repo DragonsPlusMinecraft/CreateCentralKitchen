@@ -19,6 +19,7 @@
     "common.farmersdelight.SkilletBlockEntityAccessor",
     "common.minecraft.BowlFoodItemMixin",
     "common.minersdelight.CopperPotBlockEntityMixin",
+    "common.minersdelight.StickyBasketBlockEntityMixin",
     "common.overweightfarming.CropFullBlockMixin"
   ],
   "client": [
