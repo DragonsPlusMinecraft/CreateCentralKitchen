@@ -7,21 +7,27 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import plus.dragons.createcentralkitchen.api.block.entity.SmartBlockEntityLike;
 import plus.dragons.createcentralkitchen.content.logistics.block.basket.SmartBasketBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.Basket;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 
 @Mixin(BasketBlockEntity.class)
-public abstract class BasketBlockEntityMixin extends RandomizableContainerBlockEntity implements Basket {
+public abstract class BasketBlockEntityMixin extends RandomizableContainerBlockEntity implements Basket, SmartBlockEntityLike {
     
     @Unique
-    private final SmartBlockEntity smartBlockEntity = new SmartBasketBlockEntity((BasketBlockEntity) (Object) this);
+    private SmartBlockEntity smartBlockEntity;
     
     private BasketBlockEntityMixin(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
-    
+
+    @Override
     public SmartBlockEntity asSmartBlockEntity() {
+        // Initialize here so mods like botarium will work
+        if(smartBlockEntity == null){
+            smartBlockEntity = new SmartBasketBlockEntity((BasketBlockEntity) (Object) this);
+        }
         return smartBlockEntity;
     }
     
