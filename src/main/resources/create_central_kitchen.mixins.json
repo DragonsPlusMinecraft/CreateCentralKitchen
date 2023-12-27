@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.botarium.BotariumForgeMixin",
     "common.create.BeltHelperMixin",
     "common.create.BlockEntityBehaviourMixin",
     "common.create.CreateJEIMixin",

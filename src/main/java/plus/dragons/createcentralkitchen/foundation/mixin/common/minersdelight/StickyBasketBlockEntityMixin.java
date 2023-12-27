@@ -17,7 +17,7 @@ import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 public abstract class StickyBasketBlockEntityMixin extends RandomizableContainerBlockEntity implements Basket, SmartBlockEntityLike {
 
     @Unique
-    private SmartBlockEntity smartBlockEntity;
+    private final SmartBlockEntity smartBlockEntity = new SmartBasketBlockEntity((BasketBlockEntity) (Object) this);
 
     private StickyBasketBlockEntityMixin(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -25,10 +25,6 @@ public abstract class StickyBasketBlockEntityMixin extends RandomizableContainer
 
     @Override
     public SmartBlockEntity asSmartBlockEntity() {
-        // Initialize here so mods like botarium will work
-        if(smartBlockEntity == null){
-            smartBlockEntity = new SmartBasketBlockEntity((BasketBlockEntity) (Object) this);
-        }
         return smartBlockEntity;
     }
     
