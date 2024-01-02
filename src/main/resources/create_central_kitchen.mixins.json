@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.botarium.BotariumForgeMixin",
     "common.brewinandchewin.KegBlockEntityMixin",
     "common.create.BeltHelperMixin",
     "common.create.BlockEntityBehaviourMixin",
@@ -28,6 +29,7 @@
     "common.farmersrespite.TeaBushBlockMixin",
     "common.minecraft.BowlFoodItemMixin",
     "common.minersdelight.CopperPotBlockEntityMixin",
+    "common.minersdelight.StickyBasketBlockEntityMixin",
     "common.neapolitan.DrinkItemMixin",
     "common.overweightfarming.CropFullBlockMixin"
   ],

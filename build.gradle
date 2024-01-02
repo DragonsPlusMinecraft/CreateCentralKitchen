@@ -152,6 +152,10 @@ dependencies {
     //independent mods
     implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
     implementation fg.deobf("curse.maven:snowy-spirit-566142:${snowy_spirit_file}")
+
+    // Fix Botarium incompatible issue
+    implementation fg.deobf("curse.maven:botarium-704113:4306551")
+
     //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
