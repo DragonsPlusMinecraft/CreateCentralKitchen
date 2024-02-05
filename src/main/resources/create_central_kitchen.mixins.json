@@ -6,6 +6,7 @@
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
     "common.botarium.BotariumForgeMixin",
+    "common.computercraft.MoreRedIntegrationMixin",
     "common.create.BeltHelperMixin",
     "common.create.BlockEntityBehaviourMixin",
     "common.create.CreateJEIMixin",

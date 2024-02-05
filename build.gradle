@@ -161,8 +161,9 @@ dependencies {
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
 
-    // Fix Botarium incompatible issue
+    // Fix incompatible issue
     implementation fg.deobf("curse.maven:botarium-704113:4831434")
+    implementation fg.deobf("curse.maven:cc-tweaked-282001:5072630")
 
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
