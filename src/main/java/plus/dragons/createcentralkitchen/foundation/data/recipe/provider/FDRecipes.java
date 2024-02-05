@@ -48,6 +48,11 @@ public class FDRecipes extends DatapackRecipes {
             .require(Items.SWEET_BERRIES)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)
             .require(ForgeItemTags.FLOUR__WHEAT.tag)),
+        COMPACTING_SWEET_BERRY_COOKIE_WITH_HONEY = add(compacting("sweet_berry_cookie_with_honey")
+                    .output(ModItems.SWEET_BERRY_COOKIE.get(), 8)
+                    .require(Items.HONEY_BOTTLE)
+                    .require(ForgeItemTags.FLOUR__WHEAT.tag)
+                    .require(ForgeItemTags.FLOUR__WHEAT.tag)),
         COMPACTING_HONEY_COOKIE = add(compacting("honey_cookie")
             .output(ModItems.HONEY_COOKIE.get(), 8)
             .require(AllTags.AllFluidTags.HONEY.tag, 250)
