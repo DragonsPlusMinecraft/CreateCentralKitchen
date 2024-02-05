@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import plus.dragons.createcentralkitchen.api.block.entity.DelegatingSmartTileEntity;
 
-@Mixin(MoreRedIntegration.class)
+@Mixin(value = MoreRedIntegration.class, remap = false)
 public class MoreRedIntegrationMixin {
     @Inject(method = "attachBlockCapabilities", at = @At("HEAD"), cancellable = true)
     private static void injected(AttachCapabilitiesEvent<BlockEntity> event, CallbackInfo ci) {
