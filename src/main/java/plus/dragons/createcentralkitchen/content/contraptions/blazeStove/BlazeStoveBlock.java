@@ -81,6 +81,9 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
                                  InteractionHand hand, BlockHitResult blockRayTraceResult) {
+        if(hand==InteractionHand.OFF_HAND)
+            return InteractionResult.PASS;
+
         ItemStack stack = player.getItemInHand(hand);
         if (stack.isEmpty()) {
             if(!level.isClientSide()) {
