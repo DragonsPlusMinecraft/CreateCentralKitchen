@@ -4,7 +4,7 @@ plugins {
     id 'org.spongepowered.mixin'
     id 'org.parchmentmc.librarian.forgegradle'
     id 'maven-publish'
-    id "me.modmuss50.mod-publish-plugin" version "0.4.5"
+    id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
 
 version = mod_version
@@ -194,20 +194,14 @@ publishMods {
         projectId = "820977"
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
         minecraftVersions.add(minecraft_version)
-
-        requires {
-            slug = "create"
-        }
+        requires("create")
     }
 
     modrinth {
         projectId = "btq68HMO"
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         minecraftVersions.add(minecraft_version)
-
-        requires {
-            slug = "create"
-        }
+        requires("create")
     }
 }
 
