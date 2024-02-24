@@ -133,6 +133,9 @@ dependencies {
     implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
     implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
     implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
+    implementation fg.deobf("curse.maven:fruits-delight-943774:${fruits_delight_file}")
+    implementation fg.deobf("curse.maven:crabbers-delight-892827:${crabbers_delight_file}")
+    implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
     //implementation fg.deobf("curse.maven:cultural-delight-574622:${cultural_delight_file}")
     //implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
     ////abnormals mods addons
