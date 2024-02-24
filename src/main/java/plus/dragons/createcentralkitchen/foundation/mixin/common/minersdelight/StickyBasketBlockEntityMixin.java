@@ -33,10 +33,10 @@ public abstract class StickyBasketBlockEntityMixin extends RandomizableContainer
         return smartBlockEntity;
     }
 
-    @Shadow
+    @Shadow(remap = false)
     private int transferCooldown;
 
-    @Inject(method = "setTransferCooldown", at = @At(value = "HEAD", remap = false), cancellable = true)
+    @Inject(method = "setTransferCooldown", at = @At(value = "HEAD"), cancellable = true, remap = false)
     private void cck$triggerConsumeItem(int ticks, CallbackInfo ci) {
         if(CentralKitchenConfigs.COMMON.integration.disableTransferCooldownForFarmersDelightBasket.get()){
             transferCooldown = -1;
