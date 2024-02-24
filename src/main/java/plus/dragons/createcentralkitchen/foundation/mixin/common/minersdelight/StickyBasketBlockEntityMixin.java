@@ -7,9 +7,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import plus.dragons.createcentralkitchen.api.block.entity.SmartBlockEntityLike;
 import plus.dragons.createcentralkitchen.content.logistics.block.basket.SmartBasketBlockEntity;
+import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
 import vectorwing.farmersdelight.common.block.entity.Basket;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 
@@ -28,4 +33,14 @@ public abstract class StickyBasketBlockEntityMixin extends RandomizableContainer
         return smartBlockEntity;
     }
 
+    @Shadow
+    private int transferCooldown;
+
+    @Inject(method = "setTransferCooldown", at = @At(value = "HEAD", remap = false), cancellable = true)
+    private void cck$triggerConsumeItem(int ticks, CallbackInfo ci) {
+        if(CentralKitchenConfigs.COMMON.integration.disableTransferCooldownForFarmersDelightBasket.get()){
+            transferCooldown = -1;
+            ci.cancel();
+        }
+    }
 }
