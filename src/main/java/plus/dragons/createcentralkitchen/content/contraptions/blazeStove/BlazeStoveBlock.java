@@ -47,7 +47,6 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.entry.block.entity.FDBlockEntityEntries;
-import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
 
 @SuppressWarnings("deprecation")
