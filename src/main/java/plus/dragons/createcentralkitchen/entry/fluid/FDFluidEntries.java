@@ -21,7 +21,6 @@ import plus.dragons.createcentralkitchen.foundation.item.FluidBucketItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import plus.dragons.createdragonlib.fluid.NoTintFluidType;
-import plus.dragons.createdragonlib.init.FillCreateItemGroupEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
@@ -74,12 +73,5 @@ public class FDFluidEntries {
         }))
         .build()
         .register();
-
-    @SubscribeEvent
-    public static void fillCreateItemGroup(FillCreateItemGroupEvent event) {
-        if (event.isBase()) {
-            event.addInsertion(AllItems.BUILDERS_TEA, TOMATO_SAUCE.get().getBucket());
-        }
-    }
     
 }

@@ -20,6 +20,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.content.contraptions.fluids.OpenEndedPipeEffects;
+import plus.dragons.createcentralkitchen.entry.creativetab.CckCreativeModeTab;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
@@ -30,7 +31,6 @@ import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoo
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.AutomaticModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
-import plus.dragons.createdragonlib.init.FillCreateItemGroupEvent;
 import plus.dragons.createdragonlib.lang.Lang;
 
 @Mod(CentralKitchen.ID)
@@ -45,6 +45,8 @@ public class CentralKitchen {
         DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER_REGISTER =
         DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
+
+
     
     public CentralKitchen() {
         CentralKitchenConfigs.register(ModLoadingContext.get());
@@ -57,14 +59,12 @@ public class CentralKitchen {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::clientSetup);
+        CckCreativeModeTab.register(modBus);
         REGISTRATE.registerEventListeners(modBus);
         RECIPE_TYPE_REGISTER.register(modBus);
         RECIPE_SERIALIZER_REGISTER.register(modBus);
         CraftingHelper.register(new ConfigBoolCondition.Serializer());
         CraftingHelper.register(new ConfigListCondition.Serializer());
-        
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-        forgeBus.addListener(this::fillItemGroup);
         
         if (DatagenModLoader.isRunningDataGen()) {
             CentralKitchenData.register(modBus);
@@ -77,13 +77,6 @@ public class CentralKitchen {
     
     public void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(CentralKitchenPonders::register);
-    }
-    
-    public void fillItemGroup(FillCreateItemGroupEvent event) {
-        if (Mods.isLoaded(Mods.FD))
-            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), FDItemEntries.COOKING_GUIDE);
-       if (Mods.isLoaded(Mods.MD))
-            event.addInsertion(AllBlocks.BLAZE_BURNER.get(), MDItemEntries.MINERS_COOKING_GUIDE);
     }
     
     public static ResourceLocation genRL(String path) {
