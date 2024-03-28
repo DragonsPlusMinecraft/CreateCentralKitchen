@@ -1,5 +1,5 @@
 {
-	"_": "Missing Localizations: 29",
+	"_": "Missing Localizations: 24",
 
 	"_": "->------------------------]  Game Elements  [------------------------<-",
 
@@ -23,6 +23,7 @@
 	"item.create_central_kitchen.cherry_pie_slice": "櫻桃派切片",
 	"item.create_central_kitchen.chocolate_cake_slice": "巧克力蛋糕切片",
 	"item.create_central_kitchen.cooking_guide": "烹飪指南",
+	"item.create_central_kitchen.creative_tab_icon": "UNLOCALIZED: CreativeTabIcon",
 	"item.create_central_kitchen.honey_cake_slice": "蜂蜜蛋糕切片",
 	"item.create_central_kitchen.incomplete_apple_pie": "蘋果派（半成品）",
 	"item.create_central_kitchen.incomplete_bacon_sandwich": "培根三明治（半成品）",
@@ -48,76 +49,6 @@
 	"item.create_central_kitchen.yucca_cake_slice": "絲蘭蛋糕切片",
 
 	"recipe.create_central_kitchen.cutting_board_deploying": "砧板使用",
-
-	"create_central_kitchen.ponder.tag.cooking_automation": "烹飪自動化",
-	"create_central_kitchen.ponder.tag.cooking_automation.description": "能使得烹飪過程自動化的組件",
-
-	"create_central_kitchen.ponder.basket.belt_interaction.header": "使用籃子從傳送帶接收物品",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_1": "籃子可以從傳送帶接收物品",
-	"create_central_kitchen.ponder.basket.belt_interaction.text_2": "除了向上開口，對應的水準朝向也是適合的",
-
-	"create_central_kitchen.ponder.basket.intro.header": "使用籃子收集掉落物",
-	"create_central_kitchen.ponder.basket.intro.text_1": "與漏斗一樣，籃子可以收集掉落物",
-	"create_central_kitchen.ponder.basket.intro.text_2": "不僅如此，籃子可以擁有不同的朝向",
-	"create_central_kitchen.ponder.basket.intro.text_3": "不過，籃子不能從容器中吸取物品",
-
-	"create_central_kitchen.ponder.blaze_stove.automation.header": "基於烈焰人爐灶的廚鍋自動化",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_1": "烈焰人爐灶可以為像廚鍋這樣的廚具提供機械臂支持，不過它需要經過配置才能工作",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_2": "右擊烈焰人爐灶可以打開烹飪指南的界面",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_3": "你也可以手持任意指南右擊烈焰爐灶以交換它們",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_4": "一旦你給烹飪指南設定了有效的配方，上方的廚鍋就能與機械臂交互",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_5": "對於輸入，機械臂會放入容器和指定的原料",
-	"create_central_kitchen.ponder.blaze_stove.automation.text_6": "對於輸出，機械臂會取出產物和無效的原料",
-
-	"create_central_kitchen.ponder.blaze_stove.heat_source.header": "使用烈焰人爐灶作為熱源",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_1": "烈焰人爐灶是一種主動熱源，火焰越熱，烹飪速度越快",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_2": "不過烹飪依然能依靠被動熱量完成",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_3": "當然，你也可以直接使用烈焰人爐灶煎製食物",
-	"create_central_kitchen.ponder.blaze_stove.heat_source.text_4": "不過務必注意超級燃燒的火焰會立刻燒毀你的原料",
-
-	"create_central_kitchen.ponder.blaze_stove.intro.header": "創建烈焰人爐灶",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_1": "潛行時，用烹飪指南右擊烈焰人燃燒室以創建烈焰人爐灶",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_2": "烹飪指南適用於廚鍋，也可以使用其他廚具對應的指南",
-	"create_central_kitchen.ponder.blaze_stove.intro.text_3": "潛行時，用扳手右擊烈焰人爐灶以回收烹飪指南",
-
-	"datapack.create_central_kitchen.atmospheric": "機械動力：中央廚房 - 悠然一派",
-	"datapack.create_central_kitchen.atmospheric.desc": "提供對悠然一派的支持",
-	"datapack.create_central_kitchen.autumnity": "機械動力：中央廚房 - 秋原",
-	"datapack.create_central_kitchen.autumnity.desc": "提供對秋原的支持",
-	"datapack.create_central_kitchen.buzzier_bees": "機械動力：中央廚房 - Buzzier Bees",
-	"datapack.create_central_kitchen.buzzier_bees.desc": "提供對 Buzzier Bees 的支持",
-	"datapack.create_central_kitchen.collectorsreap": "機械動力：中央廚房 - Collector's Reap",
-	"datapack.create_central_kitchen.collectorsreap.desc": "提供對 Collector's Reap 的支持",
-	"datapack.create_central_kitchen.farmersdelight": "機械動力：中央廚房 - 農夫樂事",
-	"datapack.create_central_kitchen.farmersdelight.desc": "提供對農夫樂事的支持",
-	"datapack.create_central_kitchen.farmersrespite": "機械動力：中央廚房 - 農夫暇事",
-	"datapack.create_central_kitchen.farmersrespite.desc": "提供對農夫暇事的支持",
-	"datapack.create_central_kitchen.miners_delight": "機械動力：中央廚房 - 礦工樂事",
-	"datapack.create_central_kitchen.miners_delight.desc": "提供對礦工樂事的支持",
-	"datapack.create_central_kitchen.corn_delight": "UNLOCALIZED: Create: Central Kitchen - Corn Delight",
-	"datapack.create_central_kitchen.corn_delight.desc": "UNLOCALIZED: Provides support for Corn Delight",
-	"datapack.create_central_kitchen.neapolitan": "機械動力：中央廚房 - 拿坡里風味",
-	"datapack.create_central_kitchen.neapolitan.desc": "提供對拿坡里風味的支持",
-	"datapack.create_central_kitchen.peculiars": "機械動力：中央廚房 - 獨特風味",
-	"datapack.create_central_kitchen.peculiars.desc": "提供對獨特風味的支持",
-	"datapack.create_central_kitchen.respiteful": "機械動力：中央廚房 - 閒暇風味",
-	"datapack.create_central_kitchen.respiteful.desc": "提供對閒暇風味的支持",
-	"datapack.create_central_kitchen.seasonals": "機械動力：中央廚房 - 季節風味",
-	"datapack.create_central_kitchen.seasonals.desc": "提供對季節風味的支持",
-	"datapack.create_central_kitchen.overweight_farming": "UNLOCALIZED: Create: Central Kitchen - Overweight Farming",
-	"datapack.create_central_kitchen.overweight_farming.desc": "UNLOCALIZED: Provides support for Overweight Farming",
-	"datapack.create_central_kitchen.ends_delight": "UNLOCALIZED: Create: Central Kitchen - End's Delight",
-	"datapack.create_central_kitchen.ends_delight.desc": "UNLOCALIZED: Provides support for End's Delight",
-	"datapack.create_central_kitchen.upgrade_aquatic": "機械動力：中央廚房 - 碧海新生",
-	"datapack.create_central_kitchen.upgrade_aquatic.desc": "提供對碧海新生的支持",
-
-	"resourcepack.create_central_kitchen.create_styled": "機械動力：中央廚房 - 機械動力風格",
-	"resourcepack.create_central_kitchen.create_styled.desc": "用機械動力的風格重繪部分模組的紋理",
-
-	"create_central_kitchen.generic.unobtainable": "不可獲得",
-
-	"create_central_kitchen.gui.goggles.blaze_stove.no_result": "未指定有效配方",
-	"create_central_kitchen.gui.goggles.blaze_stove.recipe_result": "當前配方：",
 
 
 	"_": "->------------------------]  Ponder Content  [------------------------<-",
