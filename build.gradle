@@ -1,11 +1,26 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
+        maven { url = 'https://maven.parchmentmc.org' }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:${forgegradle_version}"
+        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
+        classpath "org.parchmentmc:librarian:${librarian_version}"
+    }
+}
+
+
 plugins {
-    id 'idea'
-    id 'net.minecraftforge.gradle'
-    id 'org.spongepowered.mixin'
-    id 'org.parchmentmc.librarian.forgegradle'
-    id 'maven-publish'
     id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 
 version = mod_version
 group = 'plus.dragons.createcentralkitchen'
@@ -99,6 +114,11 @@ repositories {
         }
     }
     maven {
+        // location of maven for CC: Tweaked
+        name = "squiddev"
+        url = "https://squiddev.cc/maven/"
+    }
+    maven {
         name 'DragonsPlus Maven'
         url "https://maven.dragons.plus/releases"
     }
@@ -117,7 +137,7 @@ dependencies {
         jarJar.ranged(it, "${create_dragon_lib_version_range}")
     }
     //mandatory dependencies
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim")
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
@@ -133,7 +153,7 @@ dependencies {
     implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
     implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
     implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
-    implementation fg.deobf("curse.maven:fruits-delight-943774:${fruits_delight_file}")
+    implementation fg.deobf("curse.maven:geckolib-388172:5188427") // needed by crabbers delight
     implementation fg.deobf("curse.maven:crabbers-delight-892827:${crabbers_delight_file}")
     implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
     //implementation fg.deobf("curse.maven:cultural-delight-574622:${cultural_delight_file}")
@@ -163,11 +183,9 @@ dependencies {
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
-
     // Fix incompatible issue
     implementation fg.deobf("curse.maven:botarium-704113:4831434")
     implementation fg.deobf("curse.maven:cc-tweaked-282001:5072630")
-
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
