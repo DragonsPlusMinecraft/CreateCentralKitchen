@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.entry.creativetab;
 
 import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
@@ -59,7 +58,7 @@ public class CckCreativeModeTab {
 
         private List<Item> collectBlocks() {
             List<Item> items = new ReferenceArrayList();
-            Iterator var3 = Create.REGISTRATE.getAll(Registries.BLOCK).iterator();
+            Iterator var3 = REGISTRATE.getAll(Registries.BLOCK).iterator();
 
             while(var3.hasNext()) {
                 RegistryEntry<Block> entry = (RegistryEntry)var3.next();
@@ -75,7 +74,7 @@ public class CckCreativeModeTab {
 
         private List<Item> collectItems() {
             List<Item> items = new ReferenceArrayList();
-            Iterator var3 = Create.REGISTRATE.getAll(Registries.ITEM).iterator();
+            Iterator var3 = REGISTRATE.getAll(Registries.ITEM).iterator();
 
             while(var3.hasNext()) {
                 RegistryEntry<Item> entry = (RegistryEntry)var3.next();
