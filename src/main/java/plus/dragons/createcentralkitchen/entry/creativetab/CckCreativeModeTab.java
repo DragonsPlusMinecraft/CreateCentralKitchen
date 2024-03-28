@@ -53,7 +53,7 @@ public class CckCreativeModeTab {
             List<Item> items = new LinkedList();
             items.addAll(this.collectItems());
             items.addAll(this.collectBlocks());
-            outputAll(output, items);
+            filterAndOutput(output, items);
         }
 
         private List<Item> collectBlocks() {
@@ -87,10 +87,13 @@ public class CckCreativeModeTab {
             return items;
         }
 
-        private static void outputAll(CreativeModeTab.Output output, List<Item> items) {
+        private static void filterAndOutput(CreativeModeTab.Output output, List<Item> items) {
             Iterator var4 = items.iterator();
             while(var4.hasNext()) {
                 Item item = (Item)var4.next();
+                if(item.toString().contains("incomplete")) continue;
+                if(item.toString().equals("create:blaze_burner")) continue;
+                if(item.toString().equals("create_central_kitchen:create_tab_icon")) continue;
                 output.accept(item);
             }
 
