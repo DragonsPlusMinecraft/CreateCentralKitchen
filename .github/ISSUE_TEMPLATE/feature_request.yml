@@ -8,6 +8,3 @@ body:
         description: A clear and concise description of feature request
       validations:
         required: true
-  -   type: markdown
-      attributes:
-        value: "Thank you for taking the time to make this feature request and help improve this mod!"
