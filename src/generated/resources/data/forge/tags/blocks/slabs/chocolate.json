@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "neapolitan:chocolate_brick_slab",
+      "required": false
+    },
+    {
+      "id": "neapolitan:chocolate_tile_slab",
+      "required": false
+    },
+    {
+      "id": "create_confectionary:chocolate_bricks_slab",
+      "required": false
+    }
+  ]
+}

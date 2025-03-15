@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.loot.BlockLootTables;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.*;
-//import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeBlockTags;
+import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeBlockTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationBlockTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationItemTags;
@@ -34,7 +34,7 @@ public class CentralKitchenData {
     }
     
     public static void afterRegistrate(final GatherDataEvent event) {
-        //REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, ForgeBlockTags::datagen);
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, ForgeBlockTags::datagen);
         REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, ForgeItemTags::datagen);
         REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, IntegrationBlockTags::datagen);
         REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, IntegrationItemTags::datagen);
@@ -46,6 +46,13 @@ public class CentralKitchenData {
         generator.addProvider(server, new EDRecipes(generator));
         generator.addProvider(server, new CornDelightRecipes(generator));
         generator.addProvider(server, new AutumnityRecipes(generator));
+        generator.addProvider(server, new AtmosphericRecipes(generator));
+        generator.addProvider(server, new CRRecipes(generator));
+        generator.addProvider(server, new FRRecipes(generator));
+        generator.addProvider(server, new NeapolitanRecipes(generator));
+        generator.addProvider(server, new PeculiarsRecipes(generator));
+        //generator.addProvider(server, new RespitefulRecipes(generator));
+        generator.addProvider(server, new SeasonalsRecipes(generator));
         DatapackRecipes.buildAll(REGISTRATE, generator);
         generator.addProvider(server, new BlockLootTables(generator));
     }

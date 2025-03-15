@@ -6,7 +6,6 @@ import com.simibubi.create.infrastructure.ponder.AllPonderTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -31,6 +30,7 @@ public class CentralKitchenArmInterationTypes {
     public static final CookingPotPoint.Type COOKING_POT = create("cooking_pot", CookingPotPoint.Type::new);
     public static final SkilletPoint.Type SKILLET = create("skillet", SkilletPoint.Type::new);
     public static final CopperPotPoint.Type COPPER_POT = create("copper_pot", CopperPotPoint.Type::new);
+    // TODO public static final KettlePoint.Type KETTLE = create("kettel", KettlePoint.Type::new);
     
     private static <T extends PonderArmInteractionPointType> T create(String name, Function<ResourceLocation, T> factory) {
         ResourceLocation id = CentralKitchen.genRL(name);
@@ -46,9 +46,8 @@ public class CentralKitchenArmInterationTypes {
     
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
-        ModList mods = ModList.get();
         if (Mods.isLoaded(Mods.FD)) {
-            register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET);
+            register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET/*, KETTLE TODO*/);
         }
         if (Mods.isLoaded(Mods.MD)) {
             register(COPPER_POT);

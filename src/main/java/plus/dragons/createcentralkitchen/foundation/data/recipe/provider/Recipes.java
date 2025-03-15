@@ -244,6 +244,14 @@ public class Recipes extends RegistrateRecipeProvider {
     public static ConditionedSequencedAssemblyRecipeBuilder sequencedAssembly(String path) {
         return new ConditionedSequencedAssemblyRecipeBuilder(CentralKitchen.genRL(path));
     }
+
+    public static ConditionedKettleRecipeBuilder kettle(ResourceLocation id) {
+        return new ConditionedKettleRecipeBuilder(id);
+    }
+
+    public static ConditionedKettleRecipeBuilder kettle(String path) {
+        return new ConditionedKettleRecipeBuilder(CentralKitchen.genRL(path));
+    }
     
     @SuppressWarnings("deprecation")
     private static <T extends ForgeFlowingFluid, P extends AbstractRegistrate<P>> NonNullUnaryOperator<FluidBuilder<T, P>> fluidHandling(Supplier<? extends ItemLike> item, ResourceLocation id, int amount) {

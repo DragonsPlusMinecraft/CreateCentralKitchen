@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:bars/chocolate"
+    },
+    {
+      "item": "neapolitan:mint_leaves"
+    }
+  ],
+  "result": {
+    "item": "neapolitan:mint_chocolate",
+    "count": 1
+  }
+}

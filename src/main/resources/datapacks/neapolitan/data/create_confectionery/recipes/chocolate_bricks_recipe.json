@@ -1,0 +1,23 @@
+{
+  "group": "create_confectionery",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "00",
+    "00"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:bars/chocolate"
+    }
+  },
+  "result": {
+    "item": "create_confectionery:chocolate_bricks",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_confectionery"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w#w"
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "#": {
+      "item": "upgrade_aquatic:mulberry"
+    }
+  },
+  "result": {
+    "item": "abnormals_delight:mulberry_cookie",
+    "count": 8
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "upgrade_aquatic"
+    }
+  ]
+}

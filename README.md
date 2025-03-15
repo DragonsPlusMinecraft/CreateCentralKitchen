@@ -1,4 +1,4 @@
-## Welcome to **Create Central Kitchen**
+## Welcome to **Create Central: Kitchen**
 Welcome to Create Central Kitchen, a mod offering more tools and methods to automate food processing for other mods in Create.
 ## Contribute
 Feel free to open a PR to either translate the mod or to add another feature! All help is appreciated!

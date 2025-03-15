@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.foundation.data.tag;
 
-import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.FluidBuilder;

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w#w"
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "#": {
+      "item": "environmental:cherries"
+    }
+  },
+  "result": {
+    "item": "abnormals_delight:cherry_cookie",
+    "count": 8
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "environmental"
+    }
+  ]
+}

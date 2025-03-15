@@ -1,7 +1,5 @@
 package plus.dragons.createcentralkitchen.entry.fluid;
 
-import com.simibubi.create.AllFluids;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -9,7 +7,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.SoundActions;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import plus.dragons.createcentralkitchen.CentralKitchen;

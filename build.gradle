@@ -1,26 +1,11 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
-        maven { url = 'https://maven.parchmentmc.org' }
-    }
-    dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:${forgegradle_version}"
-        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
-        classpath "org.parchmentmc:librarian:${librarian_version}"
-    }
-}
-
-
 plugins {
-    id "me.modmuss50.mod-publish-plugin" version "0.5.1"
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.38'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 
 version = mod_version
 group = 'plus.dragons.createcentralkitchen'
@@ -137,7 +122,7 @@ dependencies {
         jarJar.ranged(it, "${create_dragon_lib_version_range}")
     }
     //mandatory dependencies
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim")
+    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
@@ -145,36 +130,28 @@ dependencies {
     implementation fg.deobf("curse.maven:createaddtion-439890:${create_addition_file}")
     //farmers delight addons
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
-    //implementation fg.deobf("curse.maven:brewin-and-chewin-637808:${brewin_and_chewin_file}")
-    //implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
-    //implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
+    implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
+    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
     implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
     implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
     implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
     implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
     implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
-    implementation fg.deobf("curse.maven:geckolib-388172:5188427") // needed by crabbers delight
-    implementation fg.deobf("curse.maven:crabbers-delight-892827:${crabbers_delight_file}")
-    implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
-    //implementation fg.deobf("curse.maven:cultural-delight-574622:${cultural_delight_file}")
-    //implementation fg.deobf("curse.maven:pineapple-delight-687974:${pineapple_delight_file}")
     ////abnormals mods addons
     implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
-    //implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
-    //implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
+    implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
+    implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
     implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
     implementation fg.deobf("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
-    //implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
-    //implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
-    //implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
-    //implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
-    //implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")
-    //implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
-    //implementation fg.deobf("curse.maven:cookielicious-409577:${cookielicious_file}")
-    //implementation fg.deobf("curse.maven:exquisito-859262:${exquisito_file}") // I believe the author disables 3rd party download
+    implementation fg.deobf("curse.maven:gallery-1173553:6133771") // buzzier-bees dependencies
+    implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
+    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
+    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
+    implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
+    //implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")  TODO REGISTRATE PROBLEM
+    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
     //independent mods
     implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
-    //implementation fg.deobf("curse.maven:snowy-spirit-566142:${snowy_spirit_file}")
     //utility dependencies
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
@@ -185,7 +162,7 @@ dependencies {
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
     // Fix incompatible issue
     implementation fg.deobf("curse.maven:botarium-704113:4831434")
-    implementation fg.deobf("curse.maven:cc-tweaked-282001:5072630")
+    implementation fg.deobf("curse.maven:cc-tweaked-282001:5714507")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 

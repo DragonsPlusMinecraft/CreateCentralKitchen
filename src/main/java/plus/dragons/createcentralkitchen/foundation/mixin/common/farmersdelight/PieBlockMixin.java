@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -22,6 +23,7 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 @Mixin(value = PieBlock.class, remap = false)
 public class PieBlockMixin extends Block {
+    @Unique
     private static final RegistryObject<Item> ENVIRONMENTAL_APPLE_PIE = RegistryObject
         .create(Mods.environmental("apple_pie"), ForgeRegistries.ITEMS);
     

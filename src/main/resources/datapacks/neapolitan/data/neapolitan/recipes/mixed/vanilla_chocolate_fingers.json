@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:bars/chocolate"
+    },
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    }
+  ],
+  "result": {
+    "item": "neapolitan:vanilla_chocolate_fingers",
+    "count": 1
+  }
+}

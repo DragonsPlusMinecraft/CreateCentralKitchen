@@ -7,7 +7,7 @@ version="${file.jarVersion}" #mandatory
 displayName="Create: Central Kitchen"
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
-logoFile="logo.png"
+#logoFile="logo.png"
 #credits="Thanks for this example mod goes to Java"
 authors="LimonBlaze, MarbleGate and Etherwood"
 description='''
@@ -31,6 +31,6 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
 [[dependencies.create_central_kitchen]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.e,)"
+    versionRange="[0.5.1.j,)"
     ordering="AFTER"
     side="BOTH"

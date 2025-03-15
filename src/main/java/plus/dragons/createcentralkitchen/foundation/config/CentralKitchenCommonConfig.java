@@ -53,6 +53,11 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
                 "disableTransferCooldownForFarmersDelightBasket",
                 "Basket of Farmers Delight has a 8 ticks transfer cooldown. Disable the cooldown for better automation.",
                 ConfigAnnotations.RequiresRestart.SERVER.asComment());
+
+        public final ConfigBool enableHarvesterSupportForFarmersRespite = b(true,
+                "enableHarvesterSupportForFarmersRespite",
+                "For harvester to function properly, turning on this support will cause the collision shape of Coffee Bush and Tea Bush block to disappear.",
+                ConfigAnnotations.RequiresRestart.SERVER.asComment());
     
         @Override
         public String getName() {

@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.foundation.data.tag;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.core.Holder;

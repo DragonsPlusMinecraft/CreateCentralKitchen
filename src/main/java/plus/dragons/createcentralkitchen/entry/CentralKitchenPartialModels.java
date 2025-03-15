@@ -16,7 +16,7 @@ public class CentralKitchenPartialModels {
     }
     
     private static PartialModel entity(String path) {
-        return new PartialModel(CentralKitchen.genRL("entity/" + path));
+        return new  PartialModel(CentralKitchen.genRL("entity/" + path));
     }
     
 }

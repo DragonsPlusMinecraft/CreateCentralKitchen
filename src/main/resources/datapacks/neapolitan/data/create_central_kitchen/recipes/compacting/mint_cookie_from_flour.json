@@ -1,0 +1,26 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "neapolitan:mint_leaves"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    }
+  ],
+  "results": [
+    {
+      "item": "cookielicious:mint_cookie",
+      "count": 8
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cookielicious"
+    }
+  ]
+}

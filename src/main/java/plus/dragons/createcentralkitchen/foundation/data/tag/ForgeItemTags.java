@@ -4,9 +4,11 @@ import com.simibubi.create.AllItems;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 
 import java.util.Locale;
 
@@ -18,7 +20,11 @@ public enum ForgeItemTags {
     TOOLS__SHOVELS,
     FLOUR__WHEAT,
     BARS__CHOCOLATE,
-    CROPS__CORN;
+    CROPS__CORN,
+    STORAGE_BLOCKS__CHOCOLATE,
+    SLABS__CHOCOLATE,
+    STAIRS__CHOCOLATE,
+    WALLS__CHOCOLATE;
     
     public final TagKey<Item> tag;
     
@@ -39,6 +45,14 @@ public enum ForgeItemTags {
         prov.tag(TOOLS__PICKAXES.tag).add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.GOLDEN_PICKAXE, Items.NETHERITE_PICKAXE);
         prov.tag(TOOLS__SHOVELS.tag).add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.DIAMOND_SHOVEL, Items.GOLDEN_SHOVEL, Items.NETHERITE_SHOVEL);
         prov.tag(BARS__CHOCOLATE.tag).add(AllItems.BAR_OF_CHOCOLATE.get());
+        prov.tag(Tags.Items.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS__CHOCOLATE.tag);
+        prov.tag(ItemTags.SLABS).addTag(SLABS__CHOCOLATE.tag);
+        prov.tag(ItemTags.STAIRS).addTag(STAIRS__CHOCOLATE.tag);
+        prov.tag(ItemTags.WALLS).addTag(WALLS__CHOCOLATE.tag);
+        provIn.copy(ForgeBlockTags.STORAGE_BLOCKS__CHOCOLATE.tag, STORAGE_BLOCKS__CHOCOLATE.tag);
+        provIn.copy(ForgeBlockTags.SLABS__CHOCOLATE.tag, SLABS__CHOCOLATE.tag);
+        provIn.copy(ForgeBlockTags.STAIRS__CHOCOLATE.tag, STAIRS__CHOCOLATE.tag);
+        provIn.copy(ForgeBlockTags.WALLS__CHOCOLATE.tag, WALLS__CHOCOLATE.tag);
     }
     
 }

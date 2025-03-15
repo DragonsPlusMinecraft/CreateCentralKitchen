@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:mulberry"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create_central_kitchen:mulberry_jam",
+      "amount": 250
+    }
+  ]
+}

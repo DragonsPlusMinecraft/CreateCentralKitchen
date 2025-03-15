@@ -168,10 +168,7 @@ public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockE
     
     private static void draw(SuperByteBuffer blazeBuffer, float horizontalAngle,
                              PoseStack ms, VertexConsumer vb) {
-        blazeBuffer
-            .rotateCentered(Direction.UP, horizontalAngle)
-            .light(LightTexture.FULL_BRIGHT)
-            .renderInto(ms, vb);
+        blazeBuffer.rotateCentered(Direction.UP,horizontalAngle).light(LightTexture.FULL_BRIGHT).renderInto(ms, vb);
     }
     
 }

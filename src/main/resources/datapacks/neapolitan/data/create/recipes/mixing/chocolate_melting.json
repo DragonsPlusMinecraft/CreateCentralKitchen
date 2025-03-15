@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:bars/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "create:chocolate",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}

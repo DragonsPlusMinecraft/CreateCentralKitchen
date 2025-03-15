@@ -1,0 +1,23 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "neapolitan:dried_vanilla_pods"
+    },
+    {
+      "tag": "forge:dough/wheat"
+    }
+  ],
+  "results": [
+    {
+      "item": "cookielicious:vanilla_cookie",
+      "count": 8
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cookielicious"
+    }
+  ]
+}
