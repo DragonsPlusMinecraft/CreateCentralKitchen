@@ -31,6 +31,6 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
 [[dependencies.create_central_kitchen]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.j,)"
+    versionRange="[6.0.0,6.1.0)"
     ordering="AFTER"
     side="BOTH"
