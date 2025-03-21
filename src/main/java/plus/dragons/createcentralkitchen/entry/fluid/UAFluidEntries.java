@@ -21,7 +21,8 @@ public class UAFluidEntries {
             Mods.ua("block/mulberry_jam_block_top"),
             Mods.ua("block/mulberry_jam_block_side"),
             CreateRegistrate::defaultFluidType,
-            prop -> new SolidBlockFluid(UAItemEntries.MULBERRY_JAM_BUCKET, prop))
+            prop -> new SolidBlockFluid(UAItemEntries.MULBERRY_JAM_BUCKET, prop, true),
+            prop -> new SolidBlockFluid(UAItemEntries.MULBERRY_JAM_BUCKET, prop, false))
         .defaultLang()
         .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
         .transform(Recipes.fluidHandling(UAItems.MULBERRY_JAM_BOTTLE, 250))

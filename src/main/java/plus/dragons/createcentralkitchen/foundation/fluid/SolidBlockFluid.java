@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 public class SolidBlockFluid extends VirtualFluid {
     private final Supplier<? extends SolidBucketItem> bucket;
     
-    public SolidBlockFluid(Supplier<? extends SolidBucketItem> bucket, Properties properties) {
-        super(properties);
+    public SolidBlockFluid(Supplier<? extends SolidBucketItem> bucket, Properties properties, boolean source) {
+        super(properties, source);
         this.bucket = bucket;
     }
     

@@ -39,7 +39,7 @@ public class VirtualFluidFromItem {
                 protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
                     return color;
                 }
-            }), VirtualFluid::new)
+            }), VirtualFluid::createSource, VirtualFluid::createFlowing)
             .defaultLang()
             .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
@@ -89,7 +89,7 @@ public class VirtualFluidFromItem {
                     protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
                         return color;
                     }
-                }), VirtualFluid::new)
+                }), VirtualFluid::createSource, VirtualFluid::createFlowing)
             .defaultLang()
             .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
@@ -120,7 +120,7 @@ public class VirtualFluidFromItem {
                     protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
                         return color;
                     }
-                }), VirtualFluid::new)
+                }), VirtualFluid::createSource, VirtualFluid::createFlowing)
             .defaultLang()
             .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
             .transform(Recipes.fluidHandling(container, amount));
