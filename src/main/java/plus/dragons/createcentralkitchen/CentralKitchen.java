@@ -28,7 +28,7 @@ import plus.dragons.createcentralkitchen.foundation.data.CentralKitchenData;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoolCondition;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.AutomaticModLoadSubscriber;
-import plus.dragons.createdragonlib.lang.Lang;
+import plus.dragons.createcentralkitchen.ponder.CckPonderPlugin;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
@@ -72,7 +72,8 @@ public class CentralKitchen {
     }
     
     public void clientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(CentralKitchenPonders::register);
+//        event.enqueueWork(CentralKitchenPonders::register);
+        PonderIndex.addPlugin(new CckPonderPlugin());
     }
     
     public static ResourceLocation genRL(String path) {

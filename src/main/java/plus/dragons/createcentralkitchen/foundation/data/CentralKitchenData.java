@@ -12,7 +12,6 @@ import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeBlockTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationBlockTags;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationItemTags;
-import plus.dragons.createcentralkitchen.foundation.ponder.CentralKitchenPonders;
 import plus.dragons.createdragonlib.lang.LangFactory;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
@@ -22,15 +21,10 @@ public class CentralKitchenData {
     // Reminder: Add advancements, so it fixes the LangMerger, for now, manually clean up the en_us.json before every run
     public static void register(IEventBus modBus) {
         LangFactory langFactory = LangFactory.create(CentralKitchen.NAME, CentralKitchen.ID)
-            .ponders(CentralKitchenPonders::register)
+//            .ponders(CentralKitchenPonders::register) REVIEW: I am not familiar with dragonlib. temporarily disabled.
             .ui();
         modBus.addListener(EventPriority.LOWEST, langFactory::datagen);
-        modBus.addListener(EventPriority.HIGH, CentralKitchenData::beforeRegistrate);
         modBus.addListener(EventPriority.LOW, CentralKitchenData::afterRegistrate);
-    }
-    
-    public static void beforeRegistrate(final GatherDataEvent event) {
-        CentralKitchenPonders.register();
     }
     
     public static void afterRegistrate(final GatherDataEvent event) {

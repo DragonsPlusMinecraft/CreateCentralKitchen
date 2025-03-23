@@ -42,11 +42,6 @@ import java.util.Optional;
 @Mod.EventBusSubscriber(modid = CentralKitchen.ID, bus = Bus.MOD)
 public class CentralKitchenArmInterationTypes {
     
-//    private static <T extends PonderArmInteractionPointType> T create(String name, Function<ResourceLocation, T> factory) {
-//        ResourceLocation id = CentralKitchen.genRL(name);
-//        return factory.apply(id);
-//    }
-    
     private static <T extends ArmInteractionPointType> void register(String name, T type) {
             Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, CentralKitchen.genRL(name), type);
     }

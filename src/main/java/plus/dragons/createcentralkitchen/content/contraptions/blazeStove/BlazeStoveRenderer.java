@@ -1,18 +1,18 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
-import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AngleHelper;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.math.AngleHelper;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SpriteShiftEntry;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -109,12 +109,12 @@ public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockE
             double uScroll = speed * time / 2;
             uScroll = uScroll - Math.floor(uScroll);
             uScroll = uScroll * spriteWidth / 2;
-        
-            draw(CachedBufferer
+
+            draw(CachedBuffers
                     .partial(AllPartialModels.BLAZE_BURNER_FLAME, blockState)
                     .shiftUVScrolling(spriteShift, (float) uScroll, (float) vScroll), horizontalAngle, poseStack, cutout);
         }
-    
+
         //blaze
         PartialModel blazeModel = AllPartialModels.BLAZE_INERT;
         if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {
@@ -126,27 +126,27 @@ public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockE
                 ? AllPartialModels.BLAZE_ACTIVE
                 : AllPartialModels.BLAZE_IDLE;
         }
-        
+
         float headY = offset - (animation * .75f);
-    
-        draw(CachedBufferer.partial(blazeModel, blockState)
-            .translate(0, headY, 0), horizontalAngle, poseStack, solid);
-    
+
+        draw(CachedBuffers.partial(blazeModel, blockState)
+                .translate(0, headY, 0), horizontalAngle, poseStack, solid);
+
         //hat
-        SuperByteBuffer partial = CachedBufferer
-            .partial(CentralKitchenPartialModels.BLAZE_STOVE_HAT, blockState)
-            .translate(0, headY, 0);
+        SuperByteBuffer partial = CachedBuffers
+                .partial(CentralKitchenPartialModels.BLAZE_STOVE_HAT, blockState)
+                .translate(0, headY, 0);
         if (blazeModel == AllPartialModels.BLAZE_INERT) {
             partial.translateY(0.5f)
-                .centre()
-                .scale(0.75f)
-                .unCentre();
+                    .center()
+                    .scale(0.75f)
+                    .uncenter();
         } else {
             //chef hat is slightly bigger than the train hat, so we have to move down half a pixel
             partial.translateY(0.71875f);
         }
         partial
-            .rotateCentered(Direction.UP, horizontalAngle + Mth.PI)
+            .rotateCentered(horizontalAngle + Mth.PI, Direction.UP)
             .translate(0.5f, 0, 0.5f)
             .light(LightTexture.FULL_BRIGHT)
             .renderInto(poseStack, solid);
@@ -156,11 +156,11 @@ public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockE
             PartialModel rods = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING ? AllPartialModels.BLAZE_BURNER_SUPER_RODS
                 : AllPartialModels.BLAZE_BURNER_RODS;
             PartialModel rods2 = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING ? AllPartialModels.BLAZE_BURNER_SUPER_RODS_2
-                : AllPartialModels.BLAZE_BURNER_RODS_2;
-            draw(CachedBufferer.partial(rods, blockState)
-                .translate(0, offset1 + animation + .125f, 0), 0, poseStack, solid);
-            draw(CachedBufferer.partial(rods2, blockState)
-                .translate(0, offset2 + animation - 3 / 16f, 0), 0, poseStack, solid);
+                    : AllPartialModels.BLAZE_BURNER_RODS_2;
+            draw(CachedBuffers.partial(rods, blockState)
+                    .translate(0, offset1 + animation + .125f, 0), 0, poseStack, solid);
+            draw(CachedBuffers.partial(rods2, blockState)
+                    .translate(0, offset2 + animation - 3 / 16f, 0), 0, poseStack, solid);
         }
     
         poseStack.popPose();
@@ -168,7 +168,7 @@ public class BlazeStoveRenderer extends SafeBlockEntityRenderer<BlazeStoveBlockE
     
     private static void draw(SuperByteBuffer blazeBuffer, float horizontalAngle,
                              PoseStack ms, VertexConsumer vb) {
-        blazeBuffer.rotateCentered(Direction.UP,horizontalAngle).light(LightTexture.FULL_BRIGHT).renderInto(ms, vb);
+        blazeBuffer.rotateCentered(horizontalAngle, Direction.UP).light(LightTexture.FULL_BRIGHT).renderInto(ms, vb);
     }
     
 }
