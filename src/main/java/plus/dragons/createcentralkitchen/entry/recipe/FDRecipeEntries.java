@@ -17,9 +17,9 @@ import plus.dragons.createcentralkitchen.content.contraptions.deployer.CuttingBo
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
+import java.util.Locale;
 import java.util.function.Supplier;
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.LANG;
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 @ModLoadSubscriber(modid = Mods.FD)
@@ -34,7 +34,7 @@ public enum FDRecipeEntries implements IRecipeTypeInfo {
     private final Supplier<RecipeType<?>> type;
     
     FDRecipeEntries(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
-        String name = LANG.asId(name());
+        String name = name().toLowerCase(Locale.ROOT);
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.RECIPE_SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = registerType
@@ -46,7 +46,7 @@ public enum FDRecipeEntries implements IRecipeTypeInfo {
     }
     
     FDRecipeEntries(Supplier<RecipeSerializer<?>> serializerSupplier) {
-        String name = LANG.asId(name());
+        String name = name().toLowerCase(Locale.ROOT);
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.RECIPE_SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = CentralKitchen.RECIPE_TYPE_REGISTER.register(name, () -> simpleType(id));

@@ -3,6 +3,7 @@ package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,7 +27,7 @@ import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 
 import java.util.List;
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.LANG;
+import static plus.dragons.createcentralkitchen.CentralKitchen.ID;
 
 public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Item implements MenuProvider {
     
@@ -46,14 +47,14 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
             .map(BlazeStoveGuide::getResult)
             .orElse(ItemStack.EMPTY);
         if (result.isEmpty()) {
-            var text = LANG.translate("gui.goggles.blaze_stove.no_result").style(ChatFormatting.RED);
+            var text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.no_result").style(ChatFormatting.RED);
             if (goggle)
                 text.forGoggles(tooltip);
             else
                 text.addTo(tooltip);
         } else {
-            var text = LANG.translate("gui.goggles.blaze_stove.recipe_result");
-            var itemName = LANG.itemName(result).style(ChatFormatting.GRAY);
+            var text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.recipe_result");
+            var itemName = new LangBuilder(ID).add(result.getDisplayName().copy()).style(ChatFormatting.GRAY);
             if (goggle) {
                 text.forGoggles(tooltip);
                 itemName.forGoggles(tooltip, 4);

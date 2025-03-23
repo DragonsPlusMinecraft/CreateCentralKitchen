@@ -29,11 +29,13 @@ import com.simibubi.create.compat.jei.DoubleItemIcon;
 import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import mezz.jei.api.gui.drawable.IDrawable;
+import net.createmod.catnip.config.ConfigBase;
+import net.createmod.catnip.lang.LangBuilder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -49,7 +51,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.LANG;
 
 public class RecipeCategoryBuilder<T extends Recipe<?>> {
     private final String modid;
@@ -202,7 +203,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
         ResourceLocation id = new ResourceLocation(modid, name);
         CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
             new mezz.jei.api.recipe.RecipeType<>(id, recipeClass),
-            LANG.fromRL("recipe", id).component(),
+            new LangBuilder(modid).add(Component.translatable("recipe", id)).component(),
             background, icon, recipesSupplier, catalysts);
         return factory.create(info);
     }

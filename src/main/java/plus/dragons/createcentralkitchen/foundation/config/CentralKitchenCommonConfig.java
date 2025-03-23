@@ -1,6 +1,8 @@
 package plus.dragons.createcentralkitchen.foundation.config;
 
-import com.simibubi.create.foundation.config.ui.ConfigAnnotations;
+import net.createmod.catnip.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase.ConfigBool;
+import net.createmod.catnip.config.ui.ConfigAnnotations;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.ForgeRegistries;

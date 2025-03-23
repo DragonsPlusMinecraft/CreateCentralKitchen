@@ -15,7 +15,7 @@ public class DeployerRendererMixin {
     
     @ModifyVariable(
         method = "renderItem",
-        at = @At(value = "INVOKE", target = "Lcom/simibubi/create/foundation/utility/AngleHelper;horizontalAngle(Lnet/minecraft/core/Direction;)F"),
+        at = @At(value = "INVOKE", target = "Lnet/createmod/catnip/math/AngleHelper;horizontalAngle(Lnet/minecraft/core/Direction;)F"),
         ordinal = 0,
         index = 10,
         name = "punching"

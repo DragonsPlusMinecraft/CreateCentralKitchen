@@ -22,7 +22,8 @@ public class MDItemEntries {
             .output(ctx.get())
             .require(ForgeItemTags.create("plates/obsidian"))
             .require(ModItems.CANVAS.get())
-            .require(MDItems.CAVE_CARROT.get()))))
+            .require(MDItems.CAVE_CARROT.get())
+            .whenModLoaded(Mods.MD))))
         .register();
 
 }

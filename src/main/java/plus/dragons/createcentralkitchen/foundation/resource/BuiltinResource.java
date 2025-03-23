@@ -1,8 +1,8 @@
 package plus.dragons.createcentralkitchen.foundation.resource;
 
-import com.simibubi.create.foundation.ModFilePackResources;
-import com.simibubi.create.foundation.utility.Components;
+import com.simibubi.create.foundation.pack.ModFilePackResources;
 import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
@@ -80,7 +80,7 @@ public enum BuiltinResource {
             String titleKey = Util.makeDescriptionId(typeId, packId);
             //String descriptionKey = Util.makeDescriptionId(typeId, packId) + ".desc";
             event.addRepositorySource(consumer -> consumer.accept(
-                Pack.readMetaAndCreate(packId.toString(), Components.translatable(titleKey), pack.required,
+                Pack.readMetaAndCreate(packId.toString(), Component.translatable(titleKey), pack.required,
                     id -> new ModFilePackResources(packId.toString(), modFile, dir + "/" + path), type,
                     Pack.Position.TOP, PackSource.BUILT_IN)));
         }

@@ -1,7 +1,7 @@
 package plus.dragons.createcentralkitchen.foundation.mixin.common.create;
 
+import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
-import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;

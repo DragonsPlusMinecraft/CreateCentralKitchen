@@ -7,6 +7,7 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -139,7 +140,7 @@ public class FDItemEntries {
         String pieName = pieId.getPath();
         String sliceName = pieName + "_slice";
         boolean minecraft = "minecraft".equals(mod);
-        var config = CentralKitchenConfigs.COMMON.integration.enablePieOverhaul;
+        ConfigBase.ConfigBool config = CentralKitchenConfigs.COMMON.integration.enablePieOverhaul;
         return REGISTRATE.item(sliceName, prop -> minecraft
                 ? new ConditionedItem(prop, config)
                 : new ConditionedItem(prop, config, mod))

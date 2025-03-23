@@ -1,12 +1,12 @@
 package plus.dragons.createcentralkitchen.entry.creativetab;
 
 import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -42,7 +42,7 @@ public class CckCreativeModeTab {
     static {
         REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CentralKitchen.ID);
         CREATIVE_TAB = REGISTER.register("base", () -> {
-            return CreativeModeTab.builder().title(Components.literal("CCK"))
+            return CreativeModeTab.builder().title(Component.literal("CCK"))
                     .withTabsBefore(AllCreativeModeTabs.BASE_CREATIVE_TAB.getKey(),AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                     .icon(ICON::asStack)
                     .displayItems(new DisplayItemsGenerator())

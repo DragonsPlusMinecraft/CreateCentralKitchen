@@ -2,6 +2,9 @@ package plus.dragons.createcentralkitchen;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -22,7 +25,6 @@ import plus.dragons.createcentralkitchen.entry.creativetab.CckCreativeModeTab;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.foundation.data.CentralKitchenData;
-import plus.dragons.createcentralkitchen.foundation.ponder.CentralKitchenPonders;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoolCondition;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.AutomaticModLoadSubscriber;
@@ -33,7 +35,6 @@ public class CentralKitchen {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "create_central_kitchen";
     public static final String NAME = "Create: Central Kitchen";
-    public static final Lang LANG = new Lang(ID);
     
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER =

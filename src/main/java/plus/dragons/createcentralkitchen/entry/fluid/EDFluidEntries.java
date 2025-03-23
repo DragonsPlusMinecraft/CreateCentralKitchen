@@ -42,8 +42,10 @@ public class EDFluidEntries {
 
     public static FluidBuilder<VirtualFluid, CreateRegistrate> bubbleTea(String name, RegistryObject<? extends ItemLike> container, int colorIn, int amount) {
         final int color = 0xFF000000 | colorIn;
-        return REGISTRATE.virtualFluid(name, BUBBLE_TEA_STILL, BUBBLE_TEA_FLOW, ((properties, stillTexture, flowingTexture) ->
-                        new AllFluids.TintedFluidType(properties, stillTexture, flowingTexture) {
+        return REGISTRATE.virtualFluid(name,
+                        BUBBLE_TEA_STILL,
+                        BUBBLE_TEA_FLOW,
+                        ((properties, stillTexture, flowingTexture) -> new AllFluids.TintedFluidType(properties, stillTexture, flowingTexture) {
                             @Override
                             protected int getTintColor(FluidStack stack) {
                                 return color;
@@ -53,7 +55,7 @@ public class EDFluidEntries {
                             protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
                                 return color;
                             }
-                        }), VirtualFluid::new)
+                        }), VirtualFluid::createSource, VirtualFluid::createFlowing)
                 .defaultLang()
                 .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
                 .transform(Recipes.fluidHandling(container, amount));

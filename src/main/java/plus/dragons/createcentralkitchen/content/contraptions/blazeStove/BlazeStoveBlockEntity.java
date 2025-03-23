@@ -1,14 +1,13 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.utility.IPartialSafeNBT;
-import com.simibubi.create.foundation.utility.VecHelper;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -52,7 +51,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 import java.util.List;
 import java.util.Optional;
 
-public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements MenuProvider, IHaveGoggleInformation, IPartialSafeNBT {
+public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements MenuProvider, IHaveGoggleInformation {
     private static final int INVENTORY_SLOT_COUNT = 9;
     public static final Vec2[] ITEM_OFFSET_NS = new Vec2[INVENTORY_SLOT_COUNT];
     public static final Vec2[] ITEM_OFFSET_WE = new Vec2[INVENTORY_SLOT_COUNT];

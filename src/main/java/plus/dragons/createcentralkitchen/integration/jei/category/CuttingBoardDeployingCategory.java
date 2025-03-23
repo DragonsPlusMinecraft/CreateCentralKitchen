@@ -5,12 +5,12 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedDeployer;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import com.simibubi.create.foundation.ponder.ui.LayoutHelper;
-import com.simibubi.create.foundation.utility.Lang;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.layout.LayoutHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import plus.dragons.createcentralkitchen.content.contraptions.deployer.CuttingBoardDeployingRecipe;
@@ -36,7 +36,7 @@ public class CuttingBoardDeployingCategory extends CreateRecipeCategory<CuttingB
             .setBackground(getRenderedSlot(), -1, -1)
             .addIngredients(recipe.getIngredients().get(1))
             .addRichTooltipCallback((view, tooltip) ->
-                tooltip.add(Lang
+                tooltip.add(Lang.builder("createcentralkitchen")
                     .translate("recipe.deploying.not_consumed")
                     .component()
                     .withStyle(ChatFormatting.GOLD)
@@ -47,7 +47,7 @@ public class CuttingBoardDeployingCategory extends CreateRecipeCategory<CuttingB
             .addSlot(RecipeIngredientRole.OUTPUT, 139 + layoutEntry.posX() + 1, 54 + layoutEntry.posY() + 1)
             .setBackground(getRenderedSlot(layoutEntry.output()), -1, -1)
             .addItemStack(layoutEntry.output().getStack())
-            .addTooltipCallback(addStochasticTooltip(layoutEntry.output()))
+            .addRichTooltipCallback(addStochasticTooltip(layoutEntry.output()))
         );
     }
 
