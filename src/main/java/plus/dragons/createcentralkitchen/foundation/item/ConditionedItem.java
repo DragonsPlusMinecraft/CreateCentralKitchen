@@ -1,7 +1,6 @@
 package plus.dragons.createcentralkitchen.foundation.item;
 
-import com.simibubi.create.foundation.config.ConfigBase;
-import com.simibubi.create.foundation.utility.Components;
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -47,7 +46,7 @@ public class ConditionedItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag advanced) {
         super.appendHoverText(stack, level, tooltip, advanced);
         if (!enabled()) {
-            tooltip.add(Components.translatable("create_central_kitchen.generic.unobtainable").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("create_central_kitchen.generic.unobtainable").withStyle(ChatFormatting.GRAY));
         }
     }
 }

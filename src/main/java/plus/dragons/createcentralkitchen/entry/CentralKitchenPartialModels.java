@@ -1,6 +1,6 @@
 package plus.dragons.createcentralkitchen.entry;
 
-import com.jozufozu.flywheel.core.PartialModel;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -12,11 +12,11 @@ public class CentralKitchenPartialModels {
     public static final PartialModel BLAZE_STOVE_HAT = block("blaze_stove/hat");
     
     private static PartialModel block(String path) {
-        return new PartialModel(CentralKitchen.genRL("block/" + path));
+        return PartialModel.of(CentralKitchen.genRL("block/" + path));
     }
     
     private static PartialModel entity(String path) {
-        return new  PartialModel(CentralKitchen.genRL("entity/" + path));
+        return PartialModel.of(CentralKitchen.genRL("entity/" + path));
     }
     
 }

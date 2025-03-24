@@ -1,6 +1,9 @@
 package plus.dragons.createcentralkitchen.foundation.ponder;
 
-import com.simibubi.create.foundation.ponder.PonderStoryBoardEntry;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.createmod.ponder.api.scene.PonderStoryBoard;
+import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.ponder.entry.FDPonderEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.entry.MDPonderEntries;
@@ -14,16 +17,28 @@ import java.util.List;
 public class CentralKitchenPonders {
     private static final List<PonderEntry> ENTRIES = new ArrayList<>();
     
-    public static PonderEntry create(String schematic, PonderStoryBoardEntry.PonderStoryBoard storyBoard) {
+    public static PonderEntry create(String schematic, PonderStoryBoard storyBoard) {
         var entry = new PonderEntry(CentralKitchen.genRL(schematic), storyBoard);
         ENTRIES.add(entry);
         return entry;
     }
     
-    public static void register() {
+    public static void registerTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
+        if (Mods.isLoaded(Mods.FD)) {
+            FDPonderTags.register(helper);
+        }
+/*        if (Mods.isLoaded(Mods.FR)) {
+            FRPonderEntries.register();
+            FRPonderTags.register();
+        }*/
+        if (Mods.isLoaded(Mods.MD)) {
+            MDPonderTags.register(helper);
+        }
+
+	}
+    public static void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         if (Mods.isLoaded(Mods.FD)) {
             FDPonderEntries.register();
-            FDPonderTags.register();
         }
 /*        if (Mods.isLoaded(Mods.FR)) {
             FRPonderEntries.register();
@@ -31,9 +46,11 @@ public class CentralKitchenPonders {
         }*/
         if (Mods.isLoaded(Mods.MD)) {
             MDPonderEntries.register();
-            MDPonderTags.register();
         }
-        ENTRIES.forEach(PonderEntry::register);
-    }
-    
+		for (PonderEntry ENTRY : ENTRIES) {
+			ENTRY.register(helper);
+		}
+
+	}
+
 }

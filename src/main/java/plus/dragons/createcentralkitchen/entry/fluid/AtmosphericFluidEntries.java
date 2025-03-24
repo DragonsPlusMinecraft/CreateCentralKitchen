@@ -20,7 +20,8 @@ public class AtmosphericFluidEntries {
             Mods.atmospheric("block/aloe_gel_block_top"),
             Mods.atmospheric("block/aloe_gel_block_side"),
             CreateRegistrate::defaultFluidType,
-            prop -> new SolidBlockFluid(AtmosphericItemEntries.ALOE_GEL_BUCKET, prop))
+            props -> new SolidBlockFluid(AtmosphericItemEntries.ALOE_GEL_BUCKET, props, true),
+                    propf -> new SolidBlockFluid(AtmosphericItemEntries.ALOE_GEL_BUCKET, propf, false))
         .defaultLang()
         .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
         .transform(Recipes.fluidHandling(AtmosphericItems.ALOE_GEL_BOTTLE, 250))
