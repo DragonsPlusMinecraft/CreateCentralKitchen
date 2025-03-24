@@ -3,7 +3,7 @@ package plus.dragons.createcentralkitchen.content.logistics.item.guide.brewing;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.gui.element.GuiGameElement;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -40,7 +40,7 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
     
     @Override
     protected void init() {
-        setWindowSize(BACKGROUND_WIDTH, BACKGROUND_HEIGHT + 4 + PLAYER_INVENTORY.height);
+        setWindowSize(BACKGROUND_WIDTH, BACKGROUND_HEIGHT + 4 + PLAYER_INVENTORY.getHeight());
         setWindowOffset((WINDOW_WIDTH - 256) / 2, 0);
         super.init();
         int guideX = getLeftOfCentered(WINDOW_WIDTH);
@@ -54,7 +54,7 @@ public class BrewingGuideScreen extends AbstractSimiContainerScreen<BrewingGuide
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1) {
         //Player Inventory
-        int invX = getLeftOfCentered(PLAYER_INVENTORY.width);
+        int invX = getLeftOfCentered(PLAYER_INVENTORY.getWidth());
         int invY = topPos + BACKGROUND_HEIGHT + 4;
         renderPlayerInventory(guiGraphics, invX, invY);
         //Guide

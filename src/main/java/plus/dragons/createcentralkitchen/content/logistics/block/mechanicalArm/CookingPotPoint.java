@@ -2,12 +2,11 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,8 +20,6 @@ import plus.dragons.createcentralkitchen.content.logistics.item.guide.cooking.Co
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModItems;
-
-import java.util.function.Consumer;
 
 public class CookingPotPoint extends ArmInteractionPoint {
     public static final int INPUT_SLOT_COUNT = 6;
@@ -151,8 +148,9 @@ public class CookingPotPoint extends ArmInteractionPoint {
         }
     
         @Override
-        public void addToPonderTag(Consumer<ItemLike> consumer) {
-            PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS).add(ModItems.COOKING_POT.get());
+        public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
+            helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(ModItems.COOKING_POT.getId());
+//            PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS).add(ModItems.COOKING_POT.get());
         }
         
     }

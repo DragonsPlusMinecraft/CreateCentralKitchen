@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.foundation.resource.condition;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.simibubi.create.foundation.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
