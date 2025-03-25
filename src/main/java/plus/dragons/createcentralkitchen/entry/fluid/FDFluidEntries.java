@@ -17,7 +17,7 @@ import plus.dragons.createcentralkitchen.foundation.fluid.VirtualFluidFromItem;
 import plus.dragons.createcentralkitchen.foundation.item.FluidBucketItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
-import plus.dragons.createdragonlib.fluid.NoTintFluidType;
+import plus.dragons.createcentralkitchen.dragonLibLegacy.fluid.NoTintFluidType;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;

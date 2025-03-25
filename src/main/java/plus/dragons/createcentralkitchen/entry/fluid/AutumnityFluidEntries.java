@@ -16,7 +16,7 @@ import plus.dragons.createcentralkitchen.foundation.data.tag.OptionalTags;
 import plus.dragons.createcentralkitchen.foundation.item.FluidBucketItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
-import plus.dragons.createdragonlib.fluid.NoTintFluidType;
+import plus.dragons.createcentralkitchen.dragonLibLegacy.fluid.NoTintFluidType;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 

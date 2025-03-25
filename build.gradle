@@ -102,11 +102,11 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-    maven {
+/*    maven {
         // location of maven for CC: Tweaked
         name = "squiddev"
         url = "https://squiddev.cc/maven/"
-    }
+    }*/
     maven {
         name 'DragonsPlus Maven'
         url "https://maven.dragons.plus/releases"
@@ -124,10 +124,6 @@ dependencies {
     implementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
         transitive = false
         jarJar.ranged(it, "[${mixin_extras_version},)")
-    }
-    implementation(jarJar(fg.deobf("plus.dragons.createdragonlib:create_dragon_lib-${minecraft_version}:${create_dragon_lib_version}"))) {
-        transitive = false
-        jarJar.ranged(it, "${create_dragon_lib_version_range}")
     }
     //mandatory dependencies
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
@@ -165,14 +161,13 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
     // Fix incompatible issue
     implementation fg.deobf("curse.maven:botarium-704113:4831434")
-    // cc-tweaked 暂不支持 create 6.0
-    // cc-tweaked create 6.0 is not supported yet.  (Translated by AI)
+    // cc-tweaked create 6.0 is not supported yet.
     compileOnly fg.deobf("curse.maven:cc-tweaked-282001:5714507")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }

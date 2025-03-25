@@ -1,8 +1,6 @@
 package plus.dragons.createcentralkitchen;
 
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -25,12 +23,11 @@ import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
 import plus.dragons.createcentralkitchen.foundation.data.CentralKitchenData;
 import plus.dragons.createcentralkitchen.foundation.ponder.CCKPonderPlugin;
-import plus.dragons.createcentralkitchen.foundation.ponder.CentralKitchenPonders;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoolCondition;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.AutomaticModLoadSubscriber;
-import plus.dragons.createdragonlib.init.SafeRegistrate;
-import plus.dragons.createdragonlib.lang.Lang;
+import plus.dragons.createcentralkitchen.dragonLibLegacy.init.SafeRegistrate;
+import plus.dragons.createcentralkitchen.dragonLibLegacy.lang.Lang;
 
 @Mod(CentralKitchen.ID)
 public class CentralKitchen {
@@ -75,7 +72,6 @@ public class CentralKitchen {
     }
     
     public void clientSetup(FMLClientSetupEvent event) {
-        //event.enqueueWork(CentralKitchenPonders::register);
         PonderIndex.addPlugin(new CCKPonderPlugin());
     }
     
