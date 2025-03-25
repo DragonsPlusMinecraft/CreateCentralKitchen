@@ -1,17 +1,15 @@
 package plus.dragons.createcentralkitchen.foundation.ponder;
 
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.ItemLike;
-
-import java.util.function.Consumer;
 
 public abstract class PonderArmInteractionPointType extends ArmInteractionPointType {
     
     public PonderArmInteractionPointType(ResourceLocation id) {
-        super(id);
+        super();
     }
     
-    public abstract void addToPonderTag(Consumer<ItemLike> consumer);
+    public abstract void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper);
     
 }

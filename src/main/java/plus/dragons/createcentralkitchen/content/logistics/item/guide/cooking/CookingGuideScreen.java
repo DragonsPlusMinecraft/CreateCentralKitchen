@@ -2,7 +2,7 @@ package plus.dragons.createcentralkitchen.content.logistics.item.guide.cooking;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.simibubi.create.foundation.gui.element.GuiGameElement;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,7 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
     
     @Override
     protected void init() {
-        setWindowSize(BACKGROUND_WIDTH, BACKGROUND_HEIGHT + 4 + PLAYER_INVENTORY.height);
+        setWindowSize(BACKGROUND_WIDTH, BACKGROUND_HEIGHT + 4 + PLAYER_INVENTORY.getHeight());
         setWindowOffset((WINDOW_WIDTH - 256) / 2, 0);
         super.init();
         int guideX = getLeftOfCentered(WINDOW_WIDTH);
@@ -52,7 +52,7 @@ public class CookingGuideScreen extends AbstractSimiContainerScreen<CookingGuide
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         var pose = pGuiGraphics.pose();
         //Player Inventory
-        int invX = getLeftOfCentered(PLAYER_INVENTORY.width);
+        int invX = getLeftOfCentered(PLAYER_INVENTORY.getWidth());
         int invY = topPos + BACKGROUND_HEIGHT + 4;
         renderPlayerInventory(pGuiGraphics, invX, invY);
         //Guide

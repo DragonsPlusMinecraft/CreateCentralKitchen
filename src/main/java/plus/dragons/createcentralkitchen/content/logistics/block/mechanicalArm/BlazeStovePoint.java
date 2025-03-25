@@ -3,14 +3,13 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -19,8 +18,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeSt
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
-
-import java.util.function.Consumer;
 
 public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
 
@@ -65,8 +62,9 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         }
     
         @Override
-        public void addToPonderTag(Consumer<ItemLike> consumer) {
-            PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS).add(FDBlockEntries.BLAZE_STOVE.get());
+        public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
+            helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(FDBlockEntries.BLAZE_STOVE.getId());
+//            PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS).add(FDBlockEntries.BLAZE_STOVE.get());
         }
         
     }

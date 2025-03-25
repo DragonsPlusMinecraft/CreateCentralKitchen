@@ -4,12 +4,11 @@ import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
 import com.sammy.minersdelight.setup.MDBlocks;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,8 +20,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeSt
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking.MinersCookingGuide;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking.MinersCookingGuideItem;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
-
-import java.util.function.Consumer;
 
 public class CopperPotPoint extends ArmInteractionPoint {
     public static final int INPUT_SLOT_COUNT = 4;
@@ -151,8 +148,8 @@ public class CopperPotPoint extends ArmInteractionPoint {
         }
 
         @Override
-        public void addToPonderTag(Consumer<ItemLike> consumer) {
-            PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS).add(MDBlocks.COPPER_POT.get());
+        public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
+            helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(MDBlocks.COPPER_POT.getId());
         }
 
     }

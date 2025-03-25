@@ -2,13 +2,15 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 
 import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import net.createmod.catnip.platform.ForgeRegisteredObjectsHelper;
+import net.createmod.ponder.api.registration.MultiTagBuilder;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,8 +23,6 @@ import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionP
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
-
-import java.util.function.Consumer;
 
 
 public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
@@ -72,8 +72,10 @@ public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyAr
         }
     
         @Override
-        public void addToPonderTag(Consumer<ItemLike> consumer) {
-            var builder = PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS);
+        public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
+            ForgeRegisteredObjectsHelper forgeRegisteredObjectsHelper = new ForgeRegisteredObjectsHelper();
+            MultiTagBuilder.Tag<Item> builder = helper.withKeyFunction((Item s) -> forgeRegisteredObjectsHelper.getKeyOrThrow(s)).addToTag(AllCreatePonderTags.ARM_TARGETS);
+            //var builder = PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS);
             ForgeRegistries.ITEMS
                 .getValues()
                 .stream()

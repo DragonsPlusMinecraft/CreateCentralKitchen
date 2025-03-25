@@ -1,6 +1,9 @@
 package plus.dragons.createcentralkitchen.foundation.ponder.entry;
 
 import com.sammy.minersdelight.setup.MDBlocks;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
 
 public class MDPonderEntries {

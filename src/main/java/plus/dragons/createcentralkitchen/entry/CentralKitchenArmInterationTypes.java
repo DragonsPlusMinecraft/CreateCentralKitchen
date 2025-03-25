@@ -1,8 +1,11 @@
 package plus.dragons.createcentralkitchen.entry;
 
+import com.simibubi.create.Create;
+import com.simibubi.create.api.registry.CreateBuiltInRegistries;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,12 +42,14 @@ public class CentralKitchenArmInterationTypes {
     
     private static void register(PonderArmInteractionPointType... types) {
         for (var type : types) {
-            ArmInteractionPointType.register(type);
+            register(type);
             TYPES.add(type);
         }
     }
+    private static <T extends ArmInteractionPointType> void register(String name, T type) {
+        Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, Create.asResource(name), type);
+    }
     
-    @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         if (Mods.isLoaded(Mods.FD)) {
             register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET/*, KETTLE TODO*/);
@@ -54,13 +59,10 @@ public class CentralKitchenArmInterationTypes {
         }
     }
     
-    @SubscribeEvent
-    public static void registerPonderTags(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            Consumer<ItemLike> consumer = PonderRegistry.TAGS.forTag(AllPonderTags.ARM_TARGETS)::add;
-            for (var type : TYPES)
-                type.addToPonderTag(consumer);
-        });
+    public static void registerPonderTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
+        //Consumer<ItemLike> consumer = PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS)::add;
+        for (PonderArmInteractionPointType type : TYPES)
+            type.addToPonderTag(helper);
     }
     
 }

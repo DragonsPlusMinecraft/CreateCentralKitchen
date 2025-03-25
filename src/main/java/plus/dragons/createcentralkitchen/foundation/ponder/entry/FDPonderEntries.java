@@ -1,7 +1,11 @@
 package plus.dragons.createcentralkitchen.foundation.ponder.entry;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.CentralKitchenPonders;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderEntry;
@@ -28,15 +32,19 @@ public class FDPonderEntries {
         CentralKitchenPonders.create("blaze_stove/heat_source", BlazeStoveScenes::heat_source);
 
     public static void register() {
+        //ok
         BASKET_INTRO
             .addComponent(ModItems.BASKET)
-            .addTag(AllPonderTags.LOGISTICS);
+            .addTag(AllCreatePonderTags.LOGISTICS);
+        //ok
         BASKET_BELT_INTERACTION
             .addComponent(ModItems.BASKET)
-            .addTag(AllPonderTags.LOGISTICS);
+            .addTag(AllCreatePonderTags.LOGISTICS);
+        //ok
         BLAZE_STOVE_INTRO
             .addComponent(AllBlocks.BLAZE_BURNER, FDItemEntries.COOKING_GUIDE)
             .addTag(FDPonderTags.COOKING);
+        //ok
         BLAZE_STOVE_CONFIGURE
             .addComponent(AllBlocks.BLAZE_BURNER, FDItemEntries.COOKING_GUIDE)
             .addComponent(ModItems.COOKING_POT)
@@ -46,5 +54,5 @@ public class FDPonderEntries {
             .addComponent(ModItems.COOKING_POT, ModItems.SKILLET)
             .addTag(FDPonderTags.COOKING);
     }
-    
+
 }

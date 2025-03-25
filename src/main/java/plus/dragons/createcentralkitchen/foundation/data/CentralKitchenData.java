@@ -22,7 +22,7 @@ public class CentralKitchenData {
     // Reminder: Add advancements, so it fixes the LangMerger, for now, manually clean up the en_us.json before every run
     public static void register(IEventBus modBus) {
         LangFactory langFactory = LangFactory.create(CentralKitchen.NAME, CentralKitchen.ID)
-            .ponders(CentralKitchenPonders::register)
+            //.ponders(CentralKitchenPonders::register)
             .ui();
         modBus.addListener(EventPriority.LOWEST, langFactory::datagen);
         modBus.addListener(EventPriority.HIGH, CentralKitchenData::beforeRegistrate);
@@ -30,7 +30,7 @@ public class CentralKitchenData {
     }
     
     public static void beforeRegistrate(final GatherDataEvent event) {
-        CentralKitchenPonders.register();
+        //CentralKitchenPonders.register();
     }
     
     public static void afterRegistrate(final GatherDataEvent event) {
