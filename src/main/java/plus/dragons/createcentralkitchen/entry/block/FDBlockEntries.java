@@ -63,14 +63,15 @@ public class FDBlockEntries {
     public static final BlockEntry<PieBlock> PUMPKIN_PIE = pie("pumpkin_pie", FDItemEntries.PUMPKIN_PIE_SLICE::get, true)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
         .register();
-    
-    public static final BlockEntry<PieBlock> CHERRY_PIE = pie("cherry_pie", FDItemEntries.CHERRY_PIE_SLICE::get, false)
+
+    // Removed due to Environmental no longer has them
+/*    public static final BlockEntry<PieBlock> CHERRY_PIE = pie("cherry_pie", FDItemEntries.CHERRY_PIE_SLICE::get, false)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
         .register();
     
     public static final BlockEntry<PieBlock> TRUFFLE_PIE = pie("truffle_pie", FDItemEntries.TRUFFLE_PIE_SLICE::get, false)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
-        .register();
+        .register();*/
     
     public static final BlockEntry<PieBlock> MULBERRY_PIE = pie("mulberry_pie", FDItemEntries.MULBERRY_PIE_SLICE::get, false)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
@@ -127,8 +128,9 @@ public class FDBlockEntries {
         }
         
         Map<ResourceLocation, Block> entries = new HashMap<>();
-        entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
-        entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());
+        // Removed due to Environmental no longer has them
+/*        entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
+        entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());*/
         entries.put(Mods.ua("mulberry_pie"), MULBERRY_PIE.get());
         entries.forEach((id, block) -> {
             if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {
@@ -149,8 +151,9 @@ public class FDBlockEntries {
                 event.accept(APPLE_PIE_ITEM);
             }
             Map<ResourceLocation, Block> entries = new HashMap<>();
-            entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
-            entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());
+            // Removed due to Environmental no longer has them
+/*            entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
+            entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());*/
             entries.put(Mods.ua("mulberry_pie"), MULBERRY_PIE.get());
             entries.forEach((id, block) -> {
                 if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {

@@ -70,13 +70,14 @@ public class FDItemEntries {
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", Mods.fd("item/" + ctx.getName())))
             .register(),
-        CHERRY_PIE_SLICE = pieSlice(Mods.environmental("cherry_pie")).register(),
+    // Removed due to Environmental no longer has them
+/*        CHERRY_PIE_SLICE = pieSlice(Mods.environmental("cherry_pie")).register(),
         TRUFFLE_PIE_SLICE = pieSlice(Mods.environmental("truffle_pie"))
             .properties(prop -> prop.food(new FoodProperties.Builder()
                 .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200), 1.0F)
                 .nutrition(4).saturationMod(0.6F).fast().build()))
-            .register(),
+            .register(),*/
         MULBERRY_PIE_SLICE = pieSlice(Mods.ua("mulberry_pie")).register();
     
     public static final ItemEntry<ConditionedItem>
