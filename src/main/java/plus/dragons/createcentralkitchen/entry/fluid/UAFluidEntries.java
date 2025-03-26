@@ -5,7 +5,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.SoundActions;
-import plus.dragons.createcentralkitchen.entry.item.AtmosphericItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.UAItemEntries;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
 import plus.dragons.createcentralkitchen.foundation.fluid.SolidBlockFluid;
@@ -22,8 +21,8 @@ public class UAFluidEntries {
             Mods.ua("block/mulberry_jam_block_top"),
             Mods.ua("block/mulberry_jam_block_side"),
             CreateRegistrate::defaultFluidType,
-                    props -> new SolidBlockFluid(AtmosphericItemEntries.ALOE_GEL_BUCKET, props, true),
-                    propf -> new SolidBlockFluid(AtmosphericItemEntries.ALOE_GEL_BUCKET, propf, false))
+                    props -> new SolidBlockFluid(UAItemEntries.MULBERRY_JAM_BUCKET, props, true),
+                    propf -> new SolidBlockFluid(UAItemEntries.MULBERRY_JAM_BUCKET, propf, false))
         .defaultLang()
         .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
         .transform(Recipes.fluidHandling(UAItems.MULBERRY_JAM_BOTTLE, 250))

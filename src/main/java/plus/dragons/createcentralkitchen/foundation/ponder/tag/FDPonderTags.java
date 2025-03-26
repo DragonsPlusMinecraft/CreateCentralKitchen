@@ -24,7 +24,8 @@ public class FDPonderTags {
                 .item(FDItemEntries.COOKING_GUIDE.get(), true, false)
                 .title("Cooking Automation")
                 .description("Components which automate the cooking process")
-                .addToIndex();
+                .addToIndex()
+                .register();
 //        COOKING.item(FDItemEntries.COOKING_GUIDE.get(), true, false)
 //            .defaultLang("Cooking Automation", "Components which automate the cooking process")
 //            .addToIndex();
