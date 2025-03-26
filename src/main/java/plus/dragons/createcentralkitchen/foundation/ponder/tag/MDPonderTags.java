@@ -13,7 +13,7 @@ public class MDPonderTags {
 
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
         helper.addToTag(FDPonderTags.COOKING)
-                .add(MDBlocks.COPPER_POT.get().getLootTable());
+                .add(MDBlocks.COPPER_POT.getId());
         PonderTagRegistrationHelper<RegistryEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
         HELPER.addToTag(FDPonderTags.COOKING)
             .add(MDItemEntries.MINERS_COOKING_GUIDE);
