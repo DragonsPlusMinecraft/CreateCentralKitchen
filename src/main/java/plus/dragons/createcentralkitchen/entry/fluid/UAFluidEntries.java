@@ -5,7 +5,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.SoundActions;
-import plus.dragons.createcentralkitchen.entry.item.AtmosphericItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.UAItemEntries;
 import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
 import plus.dragons.createcentralkitchen.foundation.fluid.SolidBlockFluid;
