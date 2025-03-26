@@ -27,8 +27,11 @@ public enum BuiltinResource {
     MINERS_DELIGHT(PackType.SERVER_DATA, true, false),
     OVERWEIGHT_FARMING(PackType.SERVER_DATA, true, false),
     CORN_DELIGHT(PackType.SERVER_DATA, true, false),
-    ENDS_DELIGHT(PackType.SERVER_DATA, true, false);
-    
+    ENDS_DELIGHT(PackType.SERVER_DATA, true, false),
+    UPGRADE_AQUATIC(PackType.SERVER_DATA, true, false),
+    BUILTIN_RESOURCE(PackType.SERVER_DATA, true, false);
+
+
     private final String path;
     private final String mod;
     private final PackType type;
