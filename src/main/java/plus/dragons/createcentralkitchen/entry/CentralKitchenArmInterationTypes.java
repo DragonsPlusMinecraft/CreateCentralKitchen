@@ -1,17 +1,12 @@
 package plus.dragons.createcentralkitchen.entry;
 
-import com.simibubi.create.Create;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
-import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.*;
@@ -20,7 +15,6 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = CentralKitchen.ID, bus = Bus.MOD)
@@ -39,17 +33,19 @@ public class CentralKitchenArmInterationTypes {
         ResourceLocation id = CentralKitchen.genRL(name);
         return factory.apply(id);
     }
-    
+
+
     private static void register(PonderArmInteractionPointType... types) {
         for (var type : types) {
-            register(type);
+            pRegister(type);
             TYPES.add(type);
         }
     }
-    private static <T extends ArmInteractionPointType> void register(String name, T type) {
-        Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, Create.asResource(name), type);
+    private static <T extends PonderArmInteractionPointType> void pRegister(T type) {
+        Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, type.getID(), type);
     }
-    
+
+    @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         if (Mods.isLoaded(Mods.FD)) {
             register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET/*, KETTLE TODO*/);
