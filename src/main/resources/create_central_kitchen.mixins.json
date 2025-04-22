@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "BlazeBurnerBlockEntityMixin",
+    "BlockHelperMixin",
+    "CookingPotBlockEntityMixin",
+    "HeatableBlockEntityMixin"
   ],
   "client": [
   ],
