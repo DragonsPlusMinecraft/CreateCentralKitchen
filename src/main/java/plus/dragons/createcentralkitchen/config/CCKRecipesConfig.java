@@ -20,15 +20,21 @@ package plus.dragons.createcentralkitchen.config;
 
 import net.createmod.catnip.config.ConfigBase;
 
-public class CCKServerConfig extends ConfigBase {
-    public final CCKRecipesConfig recipes = nested(1, CCKRecipesConfig::new, Comments.recipes);
+public class CCKRecipesConfig extends ConfigBase {
+    public final ConfigBool convertCuttingBoardRecipesToSawingRecipes = b(true,
+            "convertCuttingBoardRecipesToSawingRecipes",
+            Comments.convertCuttingBoardRecipesToSawingRecipes);
+    public final ConfigBool convertCuttingBoardRecipesToDeployingRecipes = b(true,
+            "convertCuttingBoardRecipesToDeployingRecipes",
+            Comments.convertCuttingBoardRecipesToDeployingRecipes);
 
     @Override
     public String getName() {
-        return "server";
+        return "recipes";
     }
 
     static class Comments {
-        static final String recipes = "Packmakers' control panel for internal recipe compat";
+        static final String convertCuttingBoardRecipesToSawingRecipes = "If Cutting Board Recipes that uses knife can be converted to Sawing Recipes";
+        static final String convertCuttingBoardRecipesToDeployingRecipes = "If Cutting Board Recipes can be converted to Deploying Recipes";
     }
 }

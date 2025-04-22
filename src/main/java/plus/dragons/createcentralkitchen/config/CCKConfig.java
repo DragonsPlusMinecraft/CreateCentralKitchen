@@ -43,6 +43,10 @@ public class CCKConfig {
         return SERVER_CONFIG;
     }
 
+    public static CCKRecipesConfig recipes() {
+        return SERVER_CONFIG.recipes;
+    }
+
     @SubscribeEvent
     public void onLoad(ModConfigEvent.Loading event) {
         var spec = event.getConfig().getSpec();

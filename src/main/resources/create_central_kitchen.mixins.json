@@ -8,7 +8,8 @@
     "BlazeBurnerBlockEntityMixin",
     "BlockHelperMixin",
     "CookingPotBlockEntityMixin",
-    "HeatableBlockEntityMixin"
+    "HeatableBlockEntityMixin",
+    "SawBlockEntityMixin"
   ],
   "client": [
   ],

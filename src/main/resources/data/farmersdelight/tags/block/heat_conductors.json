@@ -1,0 +1,8 @@
+{
+  "values": [
+    "create:chute",
+    "create:smart_chute",
+    "create:packager",
+    "create:repackager"
+  ]
+}

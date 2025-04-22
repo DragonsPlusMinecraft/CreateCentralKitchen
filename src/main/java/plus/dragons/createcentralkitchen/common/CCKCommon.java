@@ -29,8 +29,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import plus.dragons.createcentralkitchen.common.registry.CCKUnpackingHandlers;
-import plus.dragons.createdragonsplus.common.CDPRegistrate;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createdragonsplus.common.CDPRegistrate;
 
 @Mod(CCKCommon.ID)
 public class CCKCommon {
