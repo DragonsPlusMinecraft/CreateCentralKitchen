@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "Translation Resources",
+    "pack_format": 48,
+    "supported_formats": [
+      0,
+      2147483647
+    ]
+  }
+}

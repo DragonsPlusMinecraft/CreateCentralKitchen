@@ -1,254 +1,194 @@
 plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '1.0.21'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.38'
+    id "com.diffplug.spotless" version "7.0.2"
 }
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
 
 version = mod_version
-group = 'plus.dragons.createcentralkitchen'
-archivesBaseName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
+group = mod_group_id
 
-jarJar.enable()
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+base {
+    archivesName = mod_artifact_id
+}
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
-            workingDirectory project.file('run')
-            arg '-mixin.config=create_central_kitchen.mixins.json'
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-            mods {
-                create_central_kitchen {
-                    source sourceSets.main
-                }
-            }
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
-            workingDirectory project.file('run')
-            arg '-mixin.config=create_central_kitchen.mixins.json'
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-            mods {
-                create_central_kitchen {
-                    source sourceSets.main
-                }
-            }
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'create_central_kitchen',
-                 '--all', '--output', file('src/generated/resources/'),
-                 '--existing', file('src/main/resources/'),
-                 '--existing-mod', 'create',
-                 '--existing-mod', 'farmersdelight'
-            mods {
-                create_central_kitchen {
-                    source sourceSets.main
-                }
-            }
+            data()
+            programArguments.addAll '--mod', project.mod_id,
+                    '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/translations/').getAbsolutePath(),
+                    "--existing-mod", "create",
+                    "--existing-mod", "create_dragons_plus",
+                    "--existing-mod", "farmersdelight"
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+configurations {
+    localImplementation
+    compileClasspath.extendsFrom localImplementation
+    runtimeClasspath.extendsFrom localImplementation
+    runtimeClasspath.extendsFrom localRuntime
 }
 
 repositories {
-    mavenLocal()
-    maven {
-        name "create maven"
-        url "https://maven.createmod.net"
-    }
-    maven {
-        name "Tterrag maven"
-        url "https://maven.tterrag.com/"
-    }
-    maven {
-        name "Blamejared Maven"
-        url "https://maven.blamejared.com"
-    }
-    maven {
-        name "Theillusivec4 Maven"
-        url "https://maven.theillusivec4.top/"
-    }
-    maven {
-        name "Abnormals Maven"
-        url  "https://maven.jaackson.me"
-    }
-    maven {
-        name "Apple Skin"
-        url "https://maven.ryanliptak.com/"
-    }
-    maven {
-        name "JitPack"
-        url 'https://jitpack.io'
-    }
-    maven {
-        name "Curse Maven"
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-/*    maven {
-        // location of maven for CC: Tweaked
-        name = "squiddev"
-        url = "https://squiddev.cc/maven/"
-    }*/
-    maven {
-        name 'DragonsPlus Maven'
-        url "https://maven.dragons.plus/releases"
-    }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-    }
+    maven { url "https://maven.dragons.plus/releases" } // Ponder, Flywheel
+    maven { url "https://maven.createmod.net" } // Ponder, Flywheel
+    maven { url "https://mvn.devos.one/snapshots" } // Registrate
+    maven { url "https://maven.blamejared.com" } // JEI
+    maven { url "https://maven.theillusivec4.top/" } // Curios API
+    maven { url "https://www.cursemaven.com" }
+    maven { url "https://api.modrinth.com/maven" }
+    maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // NeoForge config api port, needed by ponder
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    //embedded dependencies
-    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
-    implementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
-        transitive = false
-        jarJar.ranged(it, "[${mixin_extras_version},)")
-    }
-    //mandatory dependencies
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
-    implementation fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") { transitive = false }
-    implementation fg.deobf("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-    //integration dependencies
-    //create addons
-    implementation fg.deobf("maven.modrinth:createaddition:${create_addition_file}")
-    //farmers delight addons
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
-    implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
-    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
-    implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
-    implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
-    implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
-    implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
-    implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
-    ////abnormals mods addons
-    implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
-    implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
-    implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
-    implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
-    implementation fg.deobf("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
-    implementation fg.deobf("curse.maven:gallery-1173553:6133771") // buzzier-bees dependencies
-    implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
-    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
-    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
-    implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
-    //implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")  TODO REGISTRATE PROBLEM
-    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
-    //independent mods
-    implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
-    //utility dependencies
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
-    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
-    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
-    // Fix incompatible issue
-    implementation fg.deobf("curse.maven:botarium-704113:4831434")
-    // cc-tweaked create 6.0 is not supported yet.
-    compileOnly fg.deobf("curse.maven:cc-tweaked-282001:5714507")
-    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${flywheel_minecraft_version}:${flywheel_version}")
+    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${flywheel_minecraft_version}:${flywheel_version}")
+    runtimeOnly("dev.engine-room.vanillin:vanillin-neoforge-${flywheel_minecraft_version}:${vanillin_version}")
+    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}") { transitive false }
+    implementation("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
+
+    compileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
+    compileOnly("mezz.jei:jei-${jei_minecraft_version}-neoforge-api:${jei_version}")
+    localRuntime("mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}")
+
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}+${curios_minecraft_version}:api")
+    localRuntime("top.theillusivec4.curios:curios-neoforge:${curios_version}+${curios_minecraft_version}")
+
+    localImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-mixin {
-    add sourceSets.main, 'create_central_kitchen.refmap.json'
-    config 'create_central_kitchen.mixins.json'
-
-    debug.verbose = true
-    debug.export = true
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    var replaceProperties = [
+            minecraft_version                   : minecraft_version,
+            minecraft_version_range             : minecraft_version_range,
+            neo_version                         : neo_version,
+            neo_version_range                   : neo_version_range,
+            loader_version_range                : loader_version_range,
+            mod_id                              : mod_id,
+            mod_name                            : mod_name,
+            mod_license                         : mod_license,
+            mod_version                         : mod_version,
+            mod_authors                         : mod_authors,
+            mod_description                     : mod_description,
+            mod_github                          : mod_github,
+            mod_logo                            : mod_logo,
+            create_version_range                : create_version_range,
+            create_dragons_plus_version_range   : create_dragons_plus_version_range,
+            farmers_delight_version_range       : farmers_delight_version_range
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
 }
 
-publishMods {
-    file = tasks.jarJar.archiveFile
-    changelog = new File("changelog/${mod_version}.md").text
-    version = mod_version
-    type = STABLE
-    displayName = "CCK ${mod_version} for Create ${minecraft_version}-${create_version}"
-    modLoaders.add("forge")
-    modLoaders.add("neoforge")
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+    srcDir generateModMetadata
+}
+neoForge.ideSyncTask generateModMetadata
 
-    curseforge {
-        projectId = "820977"
-        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        minecraftVersions.add(minecraft_version)
-        requires("create")
-    }
+tasks.withType(Jar) {
+    from "LICENSE.txt"
+    exclude ".cache"
+}
 
-    modrinth {
-        projectId = "btq68HMO"
-        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-        minecraftVersions.add(minecraft_version)
-        requires("create")
+spotless {
+    java {
+        endWithNewline()
+        leadingTabsToSpaces()
+        removeUnusedImports()
+        toggleOffOn()
+        importOrder()
+        eclipse().configFile "codeformat/formatter-config.xml"
+        licenseHeaderFile "codeformat/HEADER.txt"
     }
 }
 
-void processJar(Jar jarTask) {
-    jarTask.configure {
-        from "LICENSE"
-        exclude ".cache"
-        exclude "assets/create_central_kitchen/lang/unfinished"
-        exclude "assets/create_central_kitchen/lang/default"
+build.dependsOn(spotlessApply)
 
-        manifest {
-            attributes([
-                "Specification-Title"     : "create_central_kitchen",
-                "Specification-Vendor"    : "dragonsplus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "dragonsplus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs': 'create_central_kitchen.mixins.json'
-            ])
-        }
-    }
+java {
+    withSourcesJar()
 }
-
-jar.finalizedBy('reobfJar')
-jar.setArchiveClassifier('slim')
-tasks.jarJar.setArchiveClassifier('')
-tasks.jarJar.finalizedBy('reobfJarJar')
-
-processJar(jar)
-processJar(tasks.jarJar)
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+        register('mavenJava', MavenPublication) {
+            artifactId = mod_artifact_id + "-" + minecraft_version
+            from components.java
         }
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            name "DragonsPlus"
+            url "https://maven.dragons.plus/releases"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
         }
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }
