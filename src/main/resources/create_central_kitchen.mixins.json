@@ -4,12 +4,14 @@
   "package": "plus.dragons.createcentralkitchen.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "create_central_kitchen.refmap.json",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.CCKMixinConfigPlugin",
   "mixins": [
-    "BlazeBurnerBlockEntityMixin",
-    "BlockHelperMixin",
-    "CookingPotBlockEntityMixin",
-    "HeatableBlockEntityMixin",
-    "SawBlockEntityMixin"
+    "BeltHelperMixin",
+    "farmersdelight.BlazeBurnerBlockEntityMixin",
+    "farmersdelight.BlockHelperMixin",
+    "farmersdelight.CookingPotBlockEntityMixin",
+    "farmersdelight.HeatableBlockEntityMixin",
+    "farmersdelight.SawBlockEntityMixin"
   ],
   "client": [
   ],

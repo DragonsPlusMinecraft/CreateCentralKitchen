@@ -34,7 +34,7 @@ public class CCKRecipesConfig extends ConfigBase {
     }
 
     static class Comments {
-        static final String convertCuttingBoardRecipesToSawingRecipes = "If Cutting Board Recipes that uses knife can be converted to Sawing Recipes";
-        static final String convertCuttingBoardRecipesToDeployingRecipes = "If Cutting Board Recipes can be converted to Deploying Recipes";
+        static final String convertCuttingBoardRecipesToSawingRecipes = "If Farmer's Delight's Cutting Board Recipes that uses knife can be converted to Sawing Recipes";
+        static final String convertCuttingBoardRecipesToDeployingRecipes = "If Farmer's Delight's Cutting Board Recipes can be converted to Deploying Recipes";
     }
 }

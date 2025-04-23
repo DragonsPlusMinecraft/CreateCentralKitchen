@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.common.cutting;
+package plus.dragons.createcentralkitchen.integration.farmersdelight;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -33,13 +33,11 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-@EventBusSubscriber
 public class CuttingBoardRecipeConverter {
     private static final LoadingCache<Object, CachedCheck<CuttingBoardRecipeInput, CuttingBoardRecipe>> CHECK_CACHE = CacheBuilder
             .newBuilder()

@@ -16,16 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin;
+package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.foundation.utility.BlockHelper;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+@Restriction(require = @Condition("farmersdelight"))
 @Mixin(BlockHelper.class)
 public class BlockHelperMixin {
     @ModifyReturnValue(method = "isNotUnheated", at = @At("RETURN"))

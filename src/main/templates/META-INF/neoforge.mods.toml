@@ -51,7 +51,8 @@ issueTrackerURL="${mod_github}/issues"
 
 [[dependencies.${mod_id}]]
     modId="farmersdelight"
-    type="required"
+    type="optional"
+    reason="integration"
     versionRange="${farmers_delight_version_range}"
     ordering="AFTER"
     side="BOTH"

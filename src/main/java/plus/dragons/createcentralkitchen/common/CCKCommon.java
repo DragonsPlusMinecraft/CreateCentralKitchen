@@ -19,17 +19,29 @@
 package plus.dragons.createcentralkitchen.common;
 
 import com.simibubi.create.foundation.item.ItemDescription;
+import java.util.concurrent.CompletableFuture;
 import net.createmod.catnip.lang.FontHelper;
+import net.minecraft.Util;
+import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.data.tags.TagsProvider.TagLookup;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack.Position;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import plus.dragons.createcentralkitchen.common.registry.CCKUnpackingHandlers;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.data.RuntimePackResources;
+import plus.dragons.createcentralkitchen.data.tags.CCKRuntimeItemTags;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
 
 @Mod(CCKCommon.ID)
@@ -38,16 +50,54 @@ public class CCKCommon {
     public static final Logger LOGGER = LoggerFactory.getLogger("Create: Central Kitchen");
     public static final CDPRegistrate REGISTRATE = new CDPRegistrate(ID)
             .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE));
+    private final ModContainer modContainer;
 
     public CCKCommon(IEventBus modBus, ModContainer modContainer) {
+        this.modContainer = modContainer;
         REGISTRATE.registerEventListeners(modBus);
         modBus.register(this);
         modBus.register(new CCKConfig(modContainer));
     }
 
     @SubscribeEvent
-    public void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(CCKUnpackingHandlers::register);
+    public void onConstructMod(final FMLConstructModEvent event) {
+        for (ModIntegration integration : ModIntegration.values()) {
+            if (integration.enabled())
+                event.enqueueWork(integration::onConstructMod);
+        }
+    }
+
+    @SubscribeEvent
+    public void onCommonSetup(final FMLCommonSetupEvent event) {
+        for (ModIntegration integration : ModIntegration.values()) {
+            if (integration.enabled())
+                event.enqueueWork(integration::onCommonSetup);
+        }
+    }
+
+    @SubscribeEvent
+    public void onClientSetup(final FMLClientSetupEvent event) {
+        for (ModIntegration integration : ModIntegration.values()) {
+            if (integration.enabled())
+                event.enqueueWork(integration::onClientSetup);
+        }
+    }
+
+    @SubscribeEvent
+    public void addPackFinders(final AddPackFindersEvent event) {
+        var type = event.getPackType();
+        var lookupProvider = CompletableFuture.supplyAsync(VanillaRegistries::createLookup, Util.backgroundExecutor());
+        if (type == PackType.SERVER_DATA) {
+            var data = new RuntimePackResources(
+                    asResource("runtime"),
+                    modContainer.getModInfo().getOwningFile().getFile(),
+                    type,
+                    Position.TOP);
+            event.addRepositorySource(data);
+            var output = data.getPackOutput();
+            var blockTags = CompletableFuture.completedFuture(TagLookup.<Block>empty());
+            data.addDataProvider(new CCKRuntimeItemTags(output, lookupProvider, blockTags));
+        }
     }
 
     public static ResourceLocation asResource(String path) {

@@ -30,11 +30,11 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class ShapelessUnpackingHandler implements UnpackingHandler {
-    protected final int slotOffset;
+    protected final int slotStart;
     protected final int slotCount;
 
-    protected ShapelessUnpackingHandler(int slotOffset, int slotCount) {
-        this.slotOffset = slotOffset;
+    protected ShapelessUnpackingHandler(int slotStart, int slotCount) {
+        this.slotStart = slotStart;
         this.slotCount = slotCount;
     }
 
@@ -43,7 +43,7 @@ public abstract class ShapelessUnpackingHandler implements UnpackingHandler {
         var inventory = getInventory(level, pos, side);
         if (inventory == null)
             return false;
-        for (int slot = slotOffset; slot < slotOffset + slotCount; slot++) {
+        for (int slot = slotStart; slot < slotStart + slotCount; slot++) {
             var item = items.getFirst();
             if (inventory.getStackInSlot(slot).isEmpty() && inventory.insertItem(slot, item.split(1), simulate).isEmpty()) {
                 if (item.isEmpty()) {

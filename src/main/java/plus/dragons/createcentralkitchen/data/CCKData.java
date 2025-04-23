@@ -20,30 +20,19 @@ package plus.dragons.createcentralkitchen.data;
 
 import static plus.dragons.createcentralkitchen.common.CCKCommon.REGISTRATE;
 
+import com.tterrag.registrate.providers.ProviderType;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
+import plus.dragons.createcentralkitchen.data.tags.CCKRegistrateTags;
 
 @Mod(CCKCommon.ID)
 public class CCKData {
     public CCKData(IEventBus modBus) {
         if (!DatagenModLoader.isRunningDataGen())
             return;
-        REGISTRATE.registerForeignLocalization();
-        modBus.register(this);
-    }
-
-    @SubscribeEvent
-    public void generate(final GatherDataEvent event) {
-        var generator = event.getGenerator();
-        var existingFileHelper = event.getExistingFileHelper();
-        var lookupProvider = event.getLookupProvider();
-        var output = generator.getPackOutput();
-        var client = event.includeClient();
-        var server = event.includeServer();
-        generator.addProvider(server, new CCKRecipeProvider(output, lookupProvider));
+        //REGISTRATE.registerForeignLocalization();
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, CCKRegistrateTags::addBlockTags);
     }
 }

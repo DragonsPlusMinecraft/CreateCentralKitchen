@@ -16,14 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.common.registry;
+package plus.dragons.createcentralkitchen.mixin;
 
-import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
-import plus.dragons.createcentralkitchen.common.packager.CookingPotUnpackingHandler;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
+import java.util.List;
+import java.util.Set;
+import me.fallenbreath.conditionalmixin.api.mixin.RestrictiveMixinConfigPlugin;
 
-public class CCKUnpackingHandlers {
-    public static void register() {
-        UnpackingHandler.REGISTRY.register(ModBlocks.COOKING_POT.get(), new CookingPotUnpackingHandler());
+public class CCKMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
+    @Override
+    public String getRefMapperConfig() {
+        return null;
+    }
+
+    @Override
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
+
+    @Override
+    public List<String> getMixins() {
+        return null;
     }
 }

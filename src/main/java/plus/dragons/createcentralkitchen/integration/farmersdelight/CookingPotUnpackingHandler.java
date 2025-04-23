@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.common.packager;
+package plus.dragons.createcentralkitchen.integration.farmersdelight;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
+import plus.dragons.createcentralkitchen.common.packager.ShapelessUnpackingHandler;
 
 public class CookingPotUnpackingHandler extends ShapelessUnpackingHandler {
     public CookingPotUnpackingHandler() {

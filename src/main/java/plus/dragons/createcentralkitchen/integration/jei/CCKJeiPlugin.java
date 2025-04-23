@@ -37,8 +37,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
-import plus.dragons.createcentralkitchen.common.cutting.CuttingBoardRecipeConverter;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverter;
 import plus.dragons.createdragonsplus.util.ErrorMessages;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -58,23 +59,25 @@ public class CCKJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        var cuttingBoardRecipes = getRecipeManager()
-                .getAllRecipesFor(ModRecipeTypes.CUTTING.get());
-        if (CCKConfig.recipes().convertCuttingBoardRecipesToSawingRecipes.get()) {
-            ItemStack knife = new ItemStack(ModItems.IRON_KNIFE.get());
-            registration.addRecipes(SAWING, cuttingBoardRecipes.stream()
-                    .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                    .filter(holder -> holder.value().getTool().test(knife))
-                    .map(CuttingBoardRecipeConverter::asSawing)
-                    .map(RecipeHolder::value)
-                    .toList());
-        }
-        if (CCKConfig.recipes().convertCuttingBoardRecipesToDeployingRecipes.get()) {
-            registration.addRecipes(DEPLOYING, cuttingBoardRecipes.stream()
-                    .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                    .map(CuttingBoardRecipeConverter::asDeploying)
-                    .map(RecipeHolder::value)
-                    .toList());
+        var recipeManager = getRecipeManager();
+        if (ModIntegration.FARMERSDELIGHT.enabled()) {
+            var cuttingBoardRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
+            if (CCKConfig.recipes().convertCuttingBoardRecipesToSawingRecipes.get()) {
+                ItemStack knife = new ItemStack(ModItems.IRON_KNIFE.get());
+                registration.addRecipes(SAWING, cuttingBoardRecipes.stream()
+                        .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
+                        .filter(holder -> holder.value().getTool().test(knife))
+                        .map(CuttingBoardRecipeConverter::asSawing)
+                        .map(RecipeHolder::value)
+                        .toList());
+            }
+            if (CCKConfig.recipes().convertCuttingBoardRecipesToDeployingRecipes.get()) {
+                registration.addRecipes(DEPLOYING, cuttingBoardRecipes.stream()
+                        .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
+                        .map(CuttingBoardRecipeConverter::asDeploying)
+                        .map(RecipeHolder::value)
+                        .toList());
+            }
         }
     }
 

@@ -16,10 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin;
+package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.api.boiler.BoilerHeater;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,6 +30,7 @@ import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+@Restriction(require = @Condition("farmersdelight"))
 @Mixin(CookingPotBlockEntity.class)
 public class CookingPotBlockEntityMixin {
     @ModifyExpressionValue(method = "processCooking", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/block/entity/CookingPotBlockEntity;cookTime:I", ordinal = 0))
