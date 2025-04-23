@@ -50,6 +50,8 @@ import net.minecraft.server.packs.repository.Pack.ResourcesSupplier;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.RepositorySource;
 import net.minecraft.server.packs.resources.IoSupplier;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.neoforge.resource.ResourcePackLoader;
 import net.neoforged.neoforgespi.locating.IModFile;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -65,17 +67,29 @@ public final class RuntimePackResources implements PackResources, RepositorySour
     private final PackOutput output;
     private final Map<Path, IoSupplier<InputStream>> resources = new HashMap<>();
 
-    public RuntimePackResources(ResourceLocation id, IModFile file, PackType type, Pack.Position position) {
-        this.file = file;
+    public RuntimePackResources(String name, ModContainer modContainer, PackType type, Pack.Position position, Component title, Component description) {
+        var modInfo = modContainer.getModInfo();
+        var modId = modInfo.getModId();
+        var packId = ResourceLocation.fromNamespaceAndPath(modId, name);
+        this.file = modInfo.getOwningFile().getFile();
         this.type = type;
         this.position = position;
-        this.metadata = new PackMetadataSection(Component.empty(), SharedConstants.getCurrentVersion().getPackVersion(type));
+        this.metadata = new PackMetadataSection(description, SharedConstants.getCurrentVersion().getPackVersion(type));
         this.location = new PackLocationInfo(
-                id.toString(),
-                Component.literal(id.toString()),
+                packId.toString(),
+                title,
                 PackSource.BUILT_IN,
                 Optional.empty());
         this.output = new PackOutput(file.findResource(""));
+        var logoFile = modInfo.getLogoFile();
+        var modResources = ResourcePackLoader.getPackFor(modInfo.getModId());
+        if (logoFile.isPresent() && modResources.isPresent()) {
+            var location = new PackLocationInfo("mod/" + modId, Component.empty(), PackSource.BUILT_IN, Optional.empty());
+            try (PackResources packResources = modResources.get().openPrimary(location)) {
+                IoSupplier<InputStream> logoResource = packResources.getRootResource(logoFile.get().split("[/\\\\]"));
+                resources.put(file.findResource("pack.png"), logoResource);
+            }
+        }
     }
 
     public PackOutput getPackOutput() {

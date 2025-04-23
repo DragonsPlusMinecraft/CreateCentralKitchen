@@ -16,13 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.util;
+package plus.dragons.createcentralkitchen.data.lang;
 
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.lang.LangNumberFormat;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,8 +31,19 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 
+import static plus.dragons.createcentralkitchen.common.CCKCommon.REGISTRATE;
+
 @Internal
 public class CCKLang {
+    public static final MutableComponent RUNTIME_RESOUCE_PACK_TITLE = REGISTRATE.addLang(
+            "pack", CCKCommon.asResource("runtime"),
+            CCKCommon.NAME + " Dynamic Resources");
+    public static final MutableComponent RUNTIME_RESOUCE_PACK_DESCRIPTION = REGISTRATE.addLang(
+            "pack", CCKCommon.asResource("runtime"), "description",
+            "Runtime dynamic generated resources");
+
+    public static void register() {}
+
     public static LangBuilder builder() {
         return new LangBuilder(CCKCommon.ID);
     }

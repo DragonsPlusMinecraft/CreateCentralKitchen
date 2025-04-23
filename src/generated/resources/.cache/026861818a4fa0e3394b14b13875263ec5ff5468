@@ -1,0 +1,6 @@
+// 1.21.1	2025-04-24T02:26:05.7154062	Registrate Provider for create_central_kitchen [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (enchantments), Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+b0408a3a2f3477df9b83063c9c90d1f1880a2d4a assets/create_central_kitchen/lang/en_ud.json
+c44b8b93fe382fb75f1fcf778e9a3e2de3b98fb5 assets/create_central_kitchen/lang/en_us.json
+19991e057758e0ff005b5948afaaf4addfcf4953 data/create/tags/block/passive_boiler_heaters.json
+89ceb8376d0aa2dda89c90d69af1835dfa053cb8 data/farmersdelight/tags/block/heat_conductors.json
+264171f38bc32abc376f19150bd68f7da8e0a915 data/farmersdelight/tags/block/tray_heat_sources.json

@@ -24,6 +24,7 @@ import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.Util;
 import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.data.tags.TagsProvider.TagLookup;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack.Position;
@@ -40,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.data.RuntimePackResources;
+import plus.dragons.createcentralkitchen.data.lang.CCKLang;
 import plus.dragons.createcentralkitchen.data.tags.CCKRuntimeItemTags;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
@@ -47,7 +49,8 @@ import plus.dragons.createdragonsplus.common.CDPRegistrate;
 @Mod(CCKCommon.ID)
 public class CCKCommon {
     public static final String ID = "create_central_kitchen";
-    public static final Logger LOGGER = LoggerFactory.getLogger("Create: Central Kitchen");
+    public static final String NAME = "Create: Central Kitchen";
+    public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     public static final CDPRegistrate REGISTRATE = new CDPRegistrate(ID)
             .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE));
     private final ModContainer modContainer;
@@ -89,10 +92,12 @@ public class CCKCommon {
         var lookupProvider = CompletableFuture.supplyAsync(VanillaRegistries::createLookup, Util.backgroundExecutor());
         if (type == PackType.SERVER_DATA) {
             var data = new RuntimePackResources(
-                    asResource("runtime"),
-                    modContainer.getModInfo().getOwningFile().getFile(),
+                    "runtime",
+                    modContainer,
                     type,
-                    Position.TOP);
+                    Position.TOP,
+                    CCKLang.RUNTIME_RESOUCE_PACK_TITLE,
+                    CCKLang.RUNTIME_RESOUCE_PACK_DESCRIPTION);
             event.addRepositorySource(data);
             var output = data.getPackOutput();
             var blockTags = CompletableFuture.completedFuture(TagLookup.<Block>empty());
