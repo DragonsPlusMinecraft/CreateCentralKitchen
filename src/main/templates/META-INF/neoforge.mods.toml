@@ -58,6 +58,14 @@ issueTrackerURL="${mod_github}/issues"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
+    modId="trailandtales_delight"
+    type="optional"
+    reason="integration"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
     modId="brewinandchewin"
     type="optional"
     reason="integration"

@@ -32,13 +32,15 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.CookingPotUn
 import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverters;
 import umpaz.brewinandchewin.common.registry.BnCBlocks;
 import umpaz.brewinandchewin.common.tag.BnCTags;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public enum ModIntegration {
     FARMERSDELIGHT(Constants.FARMERSDELIGHT) {
         @Override
         public void onCommonSetup() {
-            UnpackingHandler.REGISTRY.register(ModBlocks.COOKING_POT.get(), new CookingPotUnpackingHandler());
+            ModBlockEntityTypes.COOKING_POT.get()
+                    .getValidBlocks()
+                    .forEach(block -> UnpackingHandler.REGISTRY.register(block, new CookingPotUnpackingHandler()));
             NeoForge.EVENT_BUS.register(CuttingBoardRecipeConverters.class);
         }
     },
