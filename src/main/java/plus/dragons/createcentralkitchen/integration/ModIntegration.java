@@ -24,16 +24,24 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
+import plus.dragons.createcentralkitchen.integration.brewinandchewin.KegUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.CookingPotUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverter;
+import umpaz.brewinandchewin.common.registry.BnCBlocks;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 public enum ModIntegration {
-    FARMERSDELIGHT("farmersdelight") {
+    FARMERSDELIGHT(Constants.FARMERSDELIGHT) {
         @Override
         public void onCommonSetup() {
             UnpackingHandler.REGISTRY.register(ModBlocks.COOKING_POT.get(), new CookingPotUnpackingHandler());
             NeoForge.EVENT_BUS.register(CuttingBoardRecipeConverter.class);
+        }
+    },
+    BREWINANDCHEWIN(Constants.BREWINANDCHEWIN) {
+        @Override
+        public void onCommonSetup() {
+            UnpackingHandler.REGISTRY.register(BnCBlocks.KEG, new KegUnpackingHandler());
         }
     };
 
@@ -56,5 +64,10 @@ public enum ModIntegration {
 
     public ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(id, path);
+    }
+
+    public static class Constants {
+        public static final String FARMERSDELIGHT = "farmersdelight";
+        public static final String BREWINANDCHEWIN = "brewinandchewin";
     }
 }

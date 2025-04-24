@@ -56,3 +56,11 @@ issueTrackerURL="${mod_github}/issues"
     versionRange="${farmers_delight_version_range}"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="brewinandchewin"
+    type="optional"
+    reason="integration"
+    versionRange="${brewin_and_chewin_version_range}"
+    ordering="AFTER"
+    side="BOTH"

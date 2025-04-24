@@ -18,6 +18,8 @@
 
 package plus.dragons.createcentralkitchen.data.lang;
 
+import static plus.dragons.createcentralkitchen.common.CCKCommon.REGISTRATE;
+
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.lang.LangNumberFormat;
 import net.minecraft.Util;
@@ -30,8 +32,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
-
-import static plus.dragons.createcentralkitchen.common.CCKCommon.REGISTRATE;
 
 @Internal
 public class CCKLang {

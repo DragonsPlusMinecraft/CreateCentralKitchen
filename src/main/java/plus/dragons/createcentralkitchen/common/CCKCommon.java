@@ -24,7 +24,6 @@ import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.Util;
 import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.data.tags.TagsProvider.TagLookup;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack.Position;

@@ -29,10 +29,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@Restriction(require = @Condition("farmersdelight"))
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(BlazeBurnerBlockEntity.class)
 public abstract class BlazeBurnerBlockEntityMixin extends SmartBlockEntity {
     private BlazeBurnerBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {

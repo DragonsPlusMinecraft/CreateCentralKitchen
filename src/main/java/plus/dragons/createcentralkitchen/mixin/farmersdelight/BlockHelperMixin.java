@@ -26,9 +26,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@Restriction(require = @Condition("farmersdelight"))
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(BlockHelper.class)
 public class BlockHelperMixin {
     @ModifyReturnValue(method = "isNotUnheated", at = @At("RETURN"))

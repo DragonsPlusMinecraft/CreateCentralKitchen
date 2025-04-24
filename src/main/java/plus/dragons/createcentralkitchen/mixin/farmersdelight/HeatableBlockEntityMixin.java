@@ -29,9 +29,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 
-@Restriction(require = @Condition("farmersdelight"))
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(HeatableBlockEntity.class)
 public interface HeatableBlockEntityMixin {
     @Inject(method = "isHeated", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z", ordinal = 0), cancellable = true)

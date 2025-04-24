@@ -22,15 +22,15 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.api.boiler.BoilerHeater;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@Restriction(require = @Condition("farmersdelight"))
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(CookingPotBlockEntity.class)
 public class CookingPotBlockEntityMixin {
     @ModifyExpressionValue(method = "processCooking", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/block/entity/CookingPotBlockEntity;cookTime:I", ordinal = 0))
@@ -49,7 +49,7 @@ public class CookingPotBlockEntityMixin {
         if (heater != null) {
             float heat = heater.getHeat(level, heaterPos, heaterState);
             if (heat > 0)
-                cookTime = cookTime + Mth.floor(Math.pow(2, heat)) - 1;
+                cookTime = cookTime + (int) heat;
         }
         return cookTime;
     }
