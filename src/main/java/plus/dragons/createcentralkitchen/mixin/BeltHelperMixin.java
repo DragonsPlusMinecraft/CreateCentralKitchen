@@ -24,10 +24,8 @@ import com.simibubi.create.content.kinetics.belt.BeltHelper;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Debug(export = true)
 @Mixin(value = BeltHelper.class, priority = 2000)
 public abstract class BeltHelperMixin {
     @WrapMethod(method = "lambda$isItemUpright$1")
