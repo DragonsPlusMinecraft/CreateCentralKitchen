@@ -19,15 +19,19 @@
 package plus.dragons.createcentralkitchen.integration;
 
 import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
+import com.simibubi.create.api.registry.SimpleRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
+import plus.dragons.createcentralkitchen.api.freezer.BlockFreezer;
 import plus.dragons.createcentralkitchen.integration.brewinandchewin.KegUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.CookingPotUnpackingHandler;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverter;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverters;
 import umpaz.brewinandchewin.common.registry.BnCBlocks;
+import umpaz.brewinandchewin.common.tag.BnCTags;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 public enum ModIntegration {
@@ -35,13 +39,20 @@ public enum ModIntegration {
         @Override
         public void onCommonSetup() {
             UnpackingHandler.REGISTRY.register(ModBlocks.COOKING_POT.get(), new CookingPotUnpackingHandler());
-            NeoForge.EVENT_BUS.register(CuttingBoardRecipeConverter.class);
+            NeoForge.EVENT_BUS.register(CuttingBoardRecipeConverters.class);
         }
     },
     BREWINANDCHEWIN(Constants.BREWINANDCHEWIN) {
         @Override
         public void onCommonSetup() {
             UnpackingHandler.REGISTRY.register(BnCBlocks.KEG, new KegUnpackingHandler());
+            BlockFreezer.REGISTRY.registerProvider(SimpleRegistry.Provider.forBlockTag(
+                    BnCTags.Blocks.FREEZE_SOURCES,
+                    (level, pos, state) -> {
+                        if (state.hasProperty(BlockStateProperties.LIT) && !state.getValue(BlockStateProperties.LIT))
+                            return BlockFreezer.NO_FREEZE;
+                        return BlockFreezer.PASSIVE_FREEZE;
+                    }));
         }
     };
 

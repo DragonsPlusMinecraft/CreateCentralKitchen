@@ -32,8 +32,8 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 @Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(BlockHelper.class)
 public class BlockHelperMixin {
-    @ModifyReturnValue(method = "isNotUnheated", at = @At("RETURN"))
-    private static boolean checkForFDHeatSources(boolean original, BlockState state) {
+    @ModifyReturnValue(method = "isNotUnheated", at = @At("TAIL"))
+    private static boolean checkForHeatSources(boolean original, BlockState state) {
         if (state.is(ModTags.HEAT_SOURCES) && state.hasProperty(BlockStateProperties.LIT)) {
             return state.getValue(BlockStateProperties.LIT);
         }

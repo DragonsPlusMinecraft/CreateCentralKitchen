@@ -27,6 +27,12 @@ public class CCKRecipesConfig extends ConfigBase {
     public final ConfigBool convertCuttingBoardRecipesToDeployingRecipes = b(true,
             "convertCuttingBoardRecipesToDeployingRecipes",
             Comments.convertCuttingBoardRecipesToDeployingRecipes);
+    public final ConfigBool convertKegPouringRecipesToFillingRecipes = b(true,
+            "convertKegPouringRecipesToFillingRecipes",
+            Comments.convertKegPouringRecipesToFillingRecipes);
+    public final ConfigBool convertKegPouringRecipesToEmptyingRecipes = b(true,
+            "convertKegPouringRecipesToEmptyingRecipes",
+            Comments.convertKegPouringRecipesToEmptyingRecipes);
 
     @Override
     public String getName() {
@@ -36,5 +42,7 @@ public class CCKRecipesConfig extends ConfigBase {
     static class Comments {
         static final String convertCuttingBoardRecipesToSawingRecipes = "If Farmer's Delight's Cutting Board Recipes that uses knife can be converted to Sawing Recipes";
         static final String convertCuttingBoardRecipesToDeployingRecipes = "If Farmer's Delight's Cutting Board Recipes can be converted to Deploying Recipes";
+        static final String convertKegPouringRecipesToFillingRecipes = "If Brewin' and Chewin's Keg Pouring Recipes can be converted to Filling Recipes";
+        static final String convertKegPouringRecipesToEmptyingRecipes = "If Brewin' and Chewin's Keg Pouring Recipes can be converted to Emptying Recipes";
     }
 }

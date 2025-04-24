@@ -7,6 +7,8 @@
   "plugin": "plus.dragons.createcentralkitchen.mixin.CCKMixinConfigPlugin",
   "mixins": [
     "BeltHelperMixin",
+    "brewinandchewin.GenericItemEmptyingMixin",
+    "brewinandchewin.GenericItemFillingMixin",
     "brewinandchewin.KegBlockEntityMixin",
     "farmersdelight.BlazeBurnerBlockEntityMixin",
     "farmersdelight.BlockHelperMixin",

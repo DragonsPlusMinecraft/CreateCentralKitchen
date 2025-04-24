@@ -18,12 +18,15 @@
 
 package plus.dragons.createcentralkitchen.mixin.brewinandchewin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.simibubi.create.api.boiler.BoilerHeater;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
@@ -32,9 +35,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import plus.dragons.createcentralkitchen.api.freezer.BlockFreezer;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
+import umpaz.brewinandchewin.common.tag.BnCTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 @Restriction(require = @Condition(ModIntegration.Constants.BREWINANDCHEWIN))
@@ -42,21 +46,38 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 @Mixin(KegBlockEntity.class)
 public class KegBlockEntityMixin {
     @WrapOperation(method = "updateTemperature", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"))
-    private BlockState computeBoilerHeat(Level level, BlockPos pos, Operation<BlockState> original, @Share("passiveHeat") LocalIntRef passiveHeat, @Share("activeHeat") LocalFloatRef activeHeat) {
+    private BlockState computeBoilerHeatAndBlockFreeze(Level level, BlockPos pos, Operation<BlockState> original,
+            @Share("passiveHeat") LocalIntRef passiveHeat, @Share("activeHeat") LocalIntRef activeHeat,
+            @Share("passiveFreeze") LocalIntRef passiveFreeze, @Share("activeFreeze") LocalIntRef activeFreeze) {
         var state = original.call(level, pos);
-        var heater = BoilerHeater.REGISTRY.get(state);
-        if (heater != null) {
-            float heat = heater.getHeat(level, pos, state);
-            if (heat >= 0 && !state.is(ModTags.HEAT_SOURCES))
-                passiveHeat.set(passiveHeat.get() + 1);
-            if (heat > 0)
-                activeHeat.set(activeHeat.get() + heat);
-        }
+        float heat = BoilerHeater.findHeat(level, pos, state);
+        if (heat >= 0 && !state.is(ModTags.HEAT_SOURCES))
+            passiveHeat.set(passiveHeat.get() + 1);
+        if (heat > 0)
+            activeHeat.set(activeHeat.get() + (int) heat);
+        float freeze = BlockFreezer.findFreeze(level, pos, state);
+        if (freeze >= 0 && !state.is(BnCTags.Blocks.FREEZE_SOURCES))
+            passiveFreeze.set(passiveFreeze.get() + 1);
+        if (freeze > 0)
+            activeFreeze.set(activeFreeze.get() + (int) freeze);
         return state;
     }
 
-    @ModifyVariable(method = "updateTemperature", at = @At(value = "INVOKE", target = "Ljava/util/ArrayList;stream()Ljava/util/stream/Stream;", ordinal = 2), ordinal = 0)
-    private int addBoilerHeat(int heat, @Share("passiveHeat") LocalIntRef passiveHeat, @Share("activeHeat") LocalFloatRef activeHeat) {
-        return heat + passiveHeat.get() + (int) activeHeat.get();
+    @ModifyExpressionValue(method = "updateTemperature", at = @At(value = "INVOKE", target = "Ljava/util/stream/IntStream;sum()I", ordinal = 1))
+    private int addBoilerHeat(int heat, @Share("passiveHeat") LocalIntRef passiveHeat, @Share("activeHeat") LocalIntRef activeHeat) {
+        return heat + passiveHeat.get() + activeHeat.get();
+    }
+
+    @ModifyExpressionValue(method = "updateTemperature", at = @At(value = "INVOKE", target = "Ljava/util/stream/IntStream;sum()I", ordinal = 3))
+    private int addBlockFreeze(int freeze, @Share("passiveFreeze") LocalIntRef passiveFreeze, @Share("activeFreeze") LocalIntRef activeFreeze) {
+        return freeze + passiveFreeze.get() + activeFreeze.get();
+    }
+
+    @ModifyReturnValue(method = "lambda$updateTemperature$10", at = @At("RETURN"))
+    private static boolean checkEmptyBlazeBurner(boolean original, BlockState state) {
+        if (original && state.hasProperty(BlazeBurnerBlock.HEAT_LEVEL)) {
+            return state.getValue(BlazeBurnerBlock.HEAT_LEVEL) != HeatLevel.NONE;
+        }
+        return original;
     }
 }

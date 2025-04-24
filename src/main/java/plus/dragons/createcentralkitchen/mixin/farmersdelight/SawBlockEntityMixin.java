@@ -37,9 +37,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverter;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverters;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 @Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(SawBlockEntity.class)
@@ -51,13 +52,15 @@ public abstract class SawBlockEntityMixin extends BlockBreakingKineticBlockEntit
         super(type, pos, state);
     }
 
-    @ModifyReturnValue(method = "getRecipes", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getRecipes", at = @At("TAIL"))
     private List<RecipeHolder<? extends Recipe<?>>> addCuttingBoardRecipe(List<RecipeHolder<? extends Recipe<?>>> recipes) {
         if (CCKConfig.recipes().convertCuttingBoardRecipesToSawingRecipes.get()) {
             var input = new CuttingBoardRecipeInput(inventory.getStackInSlot(0), new ItemStack(ModItems.IRON_KNIFE.get()));
-            CuttingBoardRecipeConverter.findRecipe(this, input)
+            assert level != null;
+            level.getRecipeManager()
+                    .getRecipeFor(ModRecipeTypes.CUTTING.get(), input, level)
                     .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                    .map(CuttingBoardRecipeConverter::asSawing)
+                    .map(CuttingBoardRecipeConverters.SAWING)
                     .ifPresent(recipes::add);
         }
         return recipes;

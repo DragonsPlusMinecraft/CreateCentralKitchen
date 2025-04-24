@@ -21,6 +21,8 @@ package plus.dragons.createcentralkitchen.integration.jei;
 import com.google.common.base.Preconditions;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
+import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
+import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import mezz.jei.api.IModPlugin;
@@ -39,7 +41,8 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverter;
+import plus.dragons.createcentralkitchen.integration.brewinandchewin.KegPouringRecipeConverters;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.CuttingBoardRecipeConverters;
 import plus.dragons.createdragonsplus.util.ErrorMessages;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -51,6 +54,10 @@ public class CCKJeiPlugin implements IModPlugin {
             .create(Create.ID, "sawing", CuttingRecipe.class);
     public static final RecipeType<DeployerApplicationRecipe> DEPLOYING = RecipeType
             .create(Create.ID, "deploying", DeployerApplicationRecipe.class);
+    public static final RecipeType<FillingRecipe> SPOUT_FILLING = RecipeType
+            .create(Create.ID, "spout_filling", FillingRecipe.class);
+    public static final RecipeType<EmptyingRecipe> DRAINING = RecipeType
+            .create(Create.ID, "draining", EmptyingRecipe.class);
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -59,6 +66,7 @@ public class CCKJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        var level = getLevel();
         var recipeManager = getRecipeManager();
         if (ModIntegration.FARMERSDELIGHT.enabled()) {
             var cuttingBoardRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
@@ -67,14 +75,28 @@ public class CCKJeiPlugin implements IModPlugin {
                 registration.addRecipes(SAWING, cuttingBoardRecipes.stream()
                         .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
                         .filter(holder -> holder.value().getTool().test(knife))
-                        .map(CuttingBoardRecipeConverter::asSawing)
+                        .map(CuttingBoardRecipeConverters.SAWING)
                         .map(RecipeHolder::value)
                         .toList());
             }
             if (CCKConfig.recipes().convertCuttingBoardRecipesToDeployingRecipes.get()) {
                 registration.addRecipes(DEPLOYING, cuttingBoardRecipes.stream()
                         .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                        .map(CuttingBoardRecipeConverter::asDeploying)
+                        .map(CuttingBoardRecipeConverters.DEPLOYING)
+                        .map(RecipeHolder::value)
+                        .toList());
+            }
+        }
+        if (ModIntegration.BREWINANDCHEWIN.enabled()) {
+            if (CCKConfig.recipes().convertKegPouringRecipesToFillingRecipes.get()) {
+                registration.addRecipes(SPOUT_FILLING, KegPouringRecipeConverters
+                        .getKegFillingRecipes(level)
+                        .map(RecipeHolder::value)
+                        .toList());
+            }
+            if (CCKConfig.recipes().convertKegPouringRecipesToEmptyingRecipes.get()) {
+                registration.addRecipes(DRAINING, KegPouringRecipeConverters
+                        .getKegEmptyingRecipes(level)
                         .map(RecipeHolder::value)
                         .toList());
             }
