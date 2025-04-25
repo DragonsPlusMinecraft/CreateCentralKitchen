@@ -44,6 +44,7 @@ public enum ModIntegration {
             NeoForge.EVENT_BUS.register(CuttingBoardRecipeConverters.class);
         }
     },
+    MYNETHERSDELIGHT(Constants.MYNETHERSDELIGHT),
     BREWINANDCHEWIN(Constants.BREWINANDCHEWIN) {
         @Override
         public void onCommonSetup() {
@@ -81,6 +82,7 @@ public enum ModIntegration {
 
     public static class Constants {
         public static final String FARMERSDELIGHT = "farmersdelight";
+        public static final String MYNETHERSDELIGHT = "mynethersdelight";
         public static final String BREWINANDCHEWIN = "brewinandchewin";
     }
 }

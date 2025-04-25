@@ -16,30 +16,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin;
+package plus.dragons.createcentralkitchen.mixin.create.client;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
-import net.minecraft.world.food.FoodProperties;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.config.CCKConfig;
 
-@Mixin(value = BeltHelper.class, priority = 2000)
+@Mixin(value = BeltHelper.class)
 public abstract class BeltHelperMixin {
-    @WrapMethod(method = "lambda$isItemUpright$1")
-    private static Boolean isItemUprightForRemainder(ItemStack stack, Item item, Operation<Boolean> original) {
-        if (original.call(stack, item))
+    @ModifyReturnValue(method = "lambda$isItemUpright$1", at = @At("RETURN"))
+    private static Boolean isItemUprightForBlockItemWithoutGui3d(Boolean original, ItemStack stack, Item item) {
+        if (original)
             return true;
-        ItemStack remainder;
-        remainder = stack.getCraftingRemainingItem();
-        if (!remainder.isEmpty())
-            return original.call(remainder, remainder.getItem());
-        FoodProperties food = stack.getFoodProperties(null);
-        if (food != null && food.usingConvertsTo().isPresent()) {
-            remainder = food.usingConvertsTo().get();
-            return !remainder.isEmpty() && original.call(remainder, remainder.getItem());
+        if (CCKConfig.client().renderBlockItemWithNonGui3dModelUprightOnBelt.get() && item instanceof BlockItem) {
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            BakedModel bakedModel = itemRenderer.getModel(stack, null, null, 0);
+            return !bakedModel.isGui3d();
         }
         return false;
     }

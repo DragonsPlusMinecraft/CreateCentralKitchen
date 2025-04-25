@@ -6,10 +6,10 @@
   "refmap": "create_central_kitchen.refmap.json",
   "plugin": "plus.dragons.createcentralkitchen.mixin.CCKMixinConfigPlugin",
   "mixins": [
-    "BeltHelperMixin",
     "brewinandchewin.GenericItemEmptyingMixin",
     "brewinandchewin.GenericItemFillingMixin",
     "brewinandchewin.KegBlockEntityMixin",
+    "create.BeltHelperMixin",
     "farmersdelight.BlazeBurnerBlockEntityMixin",
     "farmersdelight.BlockHelperMixin",
     "farmersdelight.CookingPotBlockEntityMixin",
@@ -17,6 +17,9 @@
     "farmersdelight.SawBlockEntityMixin"
   ],
   "client": [
+    "create.client.BeltHelperMixin",
+    "create.client.DeployerRenderMixin",
+    "create.client.DeployerBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

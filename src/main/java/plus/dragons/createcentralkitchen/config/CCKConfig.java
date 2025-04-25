@@ -29,14 +29,24 @@ import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
 
 @FieldsNullabilityUnknownByDefault
 public class CCKConfig {
+    private static final CCKClientConfig CLIENT_CONFIG = new CCKClientConfig();
+    private static ModConfigSpec CLIENT_SPEC;
     private static final CCKServerConfig SERVER_CONFIG = new CCKServerConfig();
     private static ModConfigSpec SERVER_SPEC;
 
     public CCKConfig(ModContainer modContainer) {
+        CLIENT_SPEC = Util.make(new ModConfigSpec.Builder().configure(builder -> {
+            CLIENT_CONFIG.registerAll(builder);
+            return Unit.INSTANCE;
+        }).getValue(), spec -> modContainer.registerConfig(Type.CLIENT, spec));
         SERVER_SPEC = Util.make(new ModConfigSpec.Builder().configure(builder -> {
             SERVER_CONFIG.registerAll(builder);
             return Unit.INSTANCE;
         }).getValue(), spec -> modContainer.registerConfig(Type.SERVER, spec));
+    }
+
+    public static CCKClientConfig client() {
+        return CLIENT_CONFIG;
     }
 
     public static CCKServerConfig server() {
@@ -50,6 +60,8 @@ public class CCKConfig {
     @SubscribeEvent
     public void onLoad(ModConfigEvent.Loading event) {
         var spec = event.getConfig().getSpec();
+        if (spec == CLIENT_SPEC)
+            CLIENT_CONFIG.onLoad();
         if (spec == SERVER_SPEC)
             SERVER_CONFIG.onLoad();
     }
@@ -57,6 +69,8 @@ public class CCKConfig {
     @SubscribeEvent
     public void onReload(ModConfigEvent.Reloading event) {
         var spec = event.getConfig().getSpec();
+        if (spec == CLIENT_SPEC)
+            CLIENT_CONFIG.onReload();
         if (spec == SERVER_SPEC)
             SERVER_CONFIG.onReload();
     }
