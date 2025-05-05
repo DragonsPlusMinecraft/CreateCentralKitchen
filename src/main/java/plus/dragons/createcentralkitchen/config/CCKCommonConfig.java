@@ -20,12 +20,12 @@ package plus.dragons.createcentralkitchen.config;
 
 import net.createmod.catnip.config.ConfigBase;
 
-public class CCKServerConfig extends ConfigBase {
+public class CCKCommonConfig extends ConfigBase {
     public final CCKRecipesConfig recipes = nested(1, CCKRecipesConfig::new, Comments.recipes);
 
     @Override
     public String getName() {
-        return "server";
+        return "common";
     }
 
     static class Comments {

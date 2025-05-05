@@ -29,49 +29,49 @@ import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
 
 @FieldsNullabilityUnknownByDefault
 public class CCKConfig {
+    private static final CCKCommonConfig COMMON_CONFIG = new CCKCommonConfig();
     private static final CCKClientConfig CLIENT_CONFIG = new CCKClientConfig();
-    private static final CCKServerConfig SERVER_CONFIG = new CCKServerConfig();
+    private static ModConfigSpec COMMON_SPEC;
     private static ModConfigSpec CLIENT_SPEC;
-    private static ModConfigSpec SERVER_SPEC;
 
     public CCKConfig(ModContainer modContainer) {
+        COMMON_SPEC = Util.make(new ModConfigSpec.Builder().configure(builder -> {
+            COMMON_CONFIG.registerAll(builder);
+            return Unit.INSTANCE;
+        }).getValue(), spec -> modContainer.registerConfig(Type.COMMON, spec));
         CLIENT_SPEC = Util.make(new ModConfigSpec.Builder().configure(builder -> {
             CLIENT_CONFIG.registerAll(builder);
             return Unit.INSTANCE;
         }).getValue(), spec -> modContainer.registerConfig(Type.CLIENT, spec));
-        SERVER_SPEC = Util.make(new ModConfigSpec.Builder().configure(builder -> {
-            SERVER_CONFIG.registerAll(builder);
-            return Unit.INSTANCE;
-        }).getValue(), spec -> modContainer.registerConfig(Type.SERVER, spec));
+    }
+
+    public static CCKCommonConfig common() {
+        return COMMON_CONFIG;
     }
 
     public static CCKClientConfig client() {
         return CLIENT_CONFIG;
     }
 
-    public static CCKServerConfig server() {
-        return SERVER_CONFIG;
-    }
-
     public static CCKRecipesConfig recipes() {
-        return SERVER_CONFIG.recipes;
+        return COMMON_CONFIG.recipes;
     }
 
     @SubscribeEvent
     public void onLoad(ModConfigEvent.Loading event) {
         var spec = event.getConfig().getSpec();
-        if (spec == CLIENT_SPEC)
+        if (spec == COMMON_SPEC)
+            COMMON_CONFIG.onLoad();
+        else if (spec == CLIENT_SPEC)
             CLIENT_CONFIG.onLoad();
-        if (spec == SERVER_SPEC)
-            SERVER_CONFIG.onLoad();
     }
 
     @SubscribeEvent
     public void onReload(ModConfigEvent.Reloading event) {
         var spec = event.getConfig().getSpec();
-        if (spec == CLIENT_SPEC)
+        if (spec == COMMON_SPEC)
+            COMMON_CONFIG.onReload();
+        else if (spec == CLIENT_SPEC)
             CLIENT_CONFIG.onReload();
-        if (spec == SERVER_SPEC)
-            SERVER_CONFIG.onReload();
     }
 }

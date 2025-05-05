@@ -14,6 +14,7 @@
     "farmersdelight.BlockHelperMixin",
     "farmersdelight.CookingPotBlockEntityMixin",
     "farmersdelight.HeatableBlockEntityMixin",
+    "farmersdelight.RuntimeDataGeneratorMixin",
     "farmersdelight.SawBlockEntityMixin",
     "farmersdelight.SkilletBlockEntityMixin"
   ],
