@@ -10,6 +10,8 @@ import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.data.RuntimeDataGenerator;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.createmod.catnip.codecs.CatnipCodecUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,10 +22,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.Optional;
 
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(RuntimeDataGenerator.class)
 public class RuntimeDataGeneratorMixin {
     @Shadow @Final private static Object2ObjectOpenHashMap<ResourceLocation, JsonElement> JSON_FILES;

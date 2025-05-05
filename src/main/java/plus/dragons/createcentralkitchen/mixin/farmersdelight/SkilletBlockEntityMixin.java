@@ -19,6 +19,9 @@
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
 import java.util.Optional;
+
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +33,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
@@ -37,6 +41,7 @@ import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SyncedBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(SkilletBlockEntity.class)
 public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity, SkilletArmInteractionPoint.Interaction {
     public SkilletBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
