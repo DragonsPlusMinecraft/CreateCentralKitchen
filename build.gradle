@@ -115,6 +115,7 @@ dependencies {
     localRuntime("top.theillusivec4.curios:curios-neoforge:${curios_version}+${curios_minecraft_version}")
 
     localImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
+    localImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}")
     localImplementation("maven.modrinth:brewin-and-chewin:${brewin_and_chewin_version}")
 }
 
@@ -134,9 +135,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_github                          : mod_github,
             mod_logo                            : mod_logo,
             create_version_range                : create_version_range,
-            create_dragons_plus_version_range   : create_dragons_plus_version_range,
-            farmers_delight_version_range       : farmers_delight_version_range,
-            brewin_and_chewin_version_range     : brewin_and_chewin_version_range
+            create_dragons_plus_version_range   : create_dragons_plus_version_range
     ]
     inputs.properties replaceProperties
     expand replaceProperties

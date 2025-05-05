@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createcentralkitchen.integration.brewinandchewin.KegPouringRecipeConverters;
+import plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe.KegPouringRecipeConverters;
 
 @Restriction(require = @Condition(ModIntegration.Constants.BREWINANDCHEWIN))
 @Mixin(GenericItemEmptying.class)

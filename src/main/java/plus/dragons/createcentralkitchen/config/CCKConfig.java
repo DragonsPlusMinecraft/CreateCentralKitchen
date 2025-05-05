@@ -30,8 +30,8 @@ import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
 @FieldsNullabilityUnknownByDefault
 public class CCKConfig {
     private static final CCKClientConfig CLIENT_CONFIG = new CCKClientConfig();
-    private static ModConfigSpec CLIENT_SPEC;
     private static final CCKServerConfig SERVER_CONFIG = new CCKServerConfig();
+    private static ModConfigSpec CLIENT_SPEC;
     private static ModConfigSpec SERVER_SPEC;
 
     public CCKConfig(ModContainer modContainer) {

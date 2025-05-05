@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.integration.brewinandchewin;
+package plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe;
 
 import com.google.common.cache.CacheBuilder;
 import com.simibubi.create.AllRecipeTypes;
@@ -32,7 +32,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
-import plus.dragons.createcentralkitchen.common.recipe.RecipeConverter;
+import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 import umpaz.brewinandchewin.common.crafting.CreatePotionPouringRecipe;
 import umpaz.brewinandchewin.common.crafting.KegPouringRecipe;
 

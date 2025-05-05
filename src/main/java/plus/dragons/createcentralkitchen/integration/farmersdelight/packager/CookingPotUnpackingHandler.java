@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.integration.brewinandchewin;
+package plus.dragons.createcentralkitchen.integration.farmersdelight.packager;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,9 +26,9 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.common.packager.ShapelessUnpackingHandler;
 
-public class KegUnpackingHandler extends ShapelessUnpackingHandler {
-    public KegUnpackingHandler() {
-        super(0, 4);
+public class CookingPotUnpackingHandler extends ShapelessUnpackingHandler {
+    public CookingPotUnpackingHandler() {
+        super(0, 6);
     }
 
     @Override

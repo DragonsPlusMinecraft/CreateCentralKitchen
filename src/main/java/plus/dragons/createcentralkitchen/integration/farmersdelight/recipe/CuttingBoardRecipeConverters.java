@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.integration.farmersdelight;
+package plus.dragons.createcentralkitchen.integration.farmersdelight.recipe;
 
 import com.google.common.cache.CacheBuilder;
 import com.simibubi.create.AllRecipeTypes;
@@ -26,8 +26,8 @@ import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.bus.api.SubscribeEvent;
-import plus.dragons.createcentralkitchen.common.recipe.RecipeConverter;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 

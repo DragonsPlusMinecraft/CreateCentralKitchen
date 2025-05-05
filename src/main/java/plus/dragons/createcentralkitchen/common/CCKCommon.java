@@ -30,6 +30,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
@@ -44,6 +45,7 @@ public class CCKCommon {
 
     public CCKCommon(IEventBus modBus, ModContainer modContainer) {
         REGISTRATE.registerEventListeners(modBus);
+        CCKArmInteractionPointTypes.register(modBus);
         modBus.register(this);
         modBus.register(new CCKConfig(modContainer));
     }

@@ -14,12 +14,13 @@
     "farmersdelight.BlockHelperMixin",
     "farmersdelight.CookingPotBlockEntityMixin",
     "farmersdelight.HeatableBlockEntityMixin",
-    "farmersdelight.SawBlockEntityMixin"
+    "farmersdelight.SawBlockEntityMixin",
+    "farmersdelight.SkilletBlockEntityMixin"
   ],
   "client": [
     "create.client.BeltHelperMixin",
-    "create.client.DeployerRenderMixin",
-    "create.client.DeployerBlockEntityMixin"
+    "create.client.DeployerBlockEntityMixin",
+    "create.client.DeployerRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

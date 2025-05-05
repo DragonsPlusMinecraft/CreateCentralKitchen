@@ -19,56 +19,32 @@ issueTrackerURL="${mod_github}/issues"
 #[[accessTransformers]]
     file="META-INF/accesstransformer.cfg"
 
-#[modproperties.${mod_id}]
+#[modproperties."${mod_id}"]
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
     modId="neoforge"
     type="required"
     versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
     modId="minecraft"
     type="required"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
     modId="create"
     type="required"
     versionRange="${create_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
     modId="create_dragons_plus"
     type="required"
     versionRange="${create_dragons_plus_version_range}"
     ordering="NONE"
-    side="BOTH"
-
-[[dependencies.${mod_id}]]
-    modId="farmersdelight"
-    type="optional"
-    reason="integration"
-    versionRange="${farmers_delight_version_range}"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.${mod_id}]]
-    modId="trailandtales_delight"
-    type="optional"
-    reason="integration"
-    versionRange="[0,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.${mod_id}]]
-    modId="brewinandchewin"
-    type="optional"
-    reason="integration"
-    versionRange="${brewin_and_chewin_version_range}"
-    ordering="AFTER"
     side="BOTH"
