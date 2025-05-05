@@ -19,7 +19,6 @@
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
 import java.util.Optional;
-
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;

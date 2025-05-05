@@ -25,7 +25,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
-import plus.dragons.createcentralkitchen.data.lang.CCKLang;
 import plus.dragons.createcentralkitchen.data.tags.CCKRegistrateTags;
 
 @Mod(CCKCommon.ID)
@@ -33,8 +32,7 @@ public class CCKData {
     public CCKData(IEventBus modBus) {
         if (!DatagenModLoader.isRunningDataGen())
             return;
-        CCKLang.register();
-        REGISTRATE.registerForeignLocalization();
+        //REGISTRATE.registerForeignLocalization();
         REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, CCKRegistrateTags::addBlockTags);
     }
 }

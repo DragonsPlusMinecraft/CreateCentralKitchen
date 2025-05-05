@@ -18,14 +18,11 @@
 
 package plus.dragons.createcentralkitchen.data.lang;
 
-import static plus.dragons.createcentralkitchen.common.CCKCommon.REGISTRATE;
-
 import net.createmod.catnip.lang.LangBuilder;
 import net.createmod.catnip.lang.LangNumberFormat;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,15 +32,6 @@ import plus.dragons.createcentralkitchen.common.CCKCommon;
 
 @Internal
 public class CCKLang {
-    public static final MutableComponent RUNTIME_RESOUCE_PACK_TITLE = REGISTRATE.addLang(
-            "pack", CCKCommon.asResource("runtime"),
-            CCKCommon.NAME + " Dynamic Resources");
-    public static final MutableComponent RUNTIME_RESOUCE_PACK_DESCRIPTION = REGISTRATE.addLang(
-            "pack", CCKCommon.asResource("runtime"), "description",
-            "Runtime dynamic generated resources");
-
-    public static void register() {}
-
     public static LangBuilder builder() {
         return new LangBuilder(CCKCommon.ID);
     }

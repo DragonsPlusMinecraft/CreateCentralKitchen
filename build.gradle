@@ -191,6 +191,38 @@ publishing {
     }
 }
 
+publishMods {
+    file = jar.archiveFile
+    additionalFiles.from sourcesJar.archiveFile
+    changelog = project.file("CHANGELOG.md").text
+    version = mod_version
+    type = ALPHA
+    displayName = "Create: Central Kitchen ${mod_version} for Create ${minecraft_version}-${create_version_production}"
+    modLoaders.add("neoforge")
+
+    curseforge {
+        projectId = "820977"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.add(minecraft_version)
+
+        requires {
+            slug = "create"
+            slug = "create-dragons-plus"
+        }
+    }
+
+    modrinth {
+        projectId = "btq68HMO"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.add(minecraft_version)
+
+        requires {
+            slug = "create"
+            slug = "create-dragons-plus"
+        }
+    }
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
