@@ -10,18 +10,20 @@
     "brewinandchewin.GenericItemFillingMixin",
     "brewinandchewin.KegBlockEntityMixin",
     "create.BeltHelperMixin",
-    "farmersdelight.BlazeBurnerBlockEntityMixin",
     "farmersdelight.BlockHelperMixin",
     "farmersdelight.CookingPotBlockEntityMixin",
     "farmersdelight.HeatableBlockEntityMixin",
     "farmersdelight.RuntimeDataGeneratorMixin",
     "farmersdelight.SawBlockEntityMixin",
-    "farmersdelight.SkilletBlockEntityMixin"
+    "farmersdelight.SkilletBlockEntityMixin",
+    "farmersdelight.client.BlazeBurnerRendererMixin"
   ],
   "client": [
     "create.client.BeltHelperMixin",
     "create.client.DeployerBlockEntityMixin",
-    "create.client.DeployerRenderMixin"
+    "create.client.DeployerRenderMixin",
+    "farmersdelight.client.BlazeBurnerBlockEntityMixin",
+    "farmersdelight.client.BlazeBurnerVisualMixin"
   ],
   "injectors": {
     "defaultRequire": 1

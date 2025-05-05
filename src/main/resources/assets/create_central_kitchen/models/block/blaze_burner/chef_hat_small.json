@@ -1,0 +1,31 @@
+{
+  "credit": "By RaymondBlaze, made with Blockbench",
+  "textures": {
+    "hat": "create_central_kitchen:block/chef_hat_small"
+  },
+  "elements": [
+    {
+      "from": [-4, 0, -4],
+      "to": [4, 2, 4],
+      "faces": {
+        "north": {"uv": [0, 8, 8, 10], "texture": "#hat"},
+        "east": {"uv": [0, 8, 8, 10], "texture": "#hat"},
+        "south": {"uv": [0, 8, 8, 10], "texture": "#hat"},
+        "west": {"uv": [0, 8, 8, 10], "texture": "#hat"},
+        "up": {"uv": [0, 0, 8, 8], "texture": "#hat"},
+        "down": {"uv": [0, 0, 8, 8], "texture": "#hat"}
+      }
+    },
+    {
+      "from": [-3.1, -2, -3.1],
+      "to": [3.1, 0, 3.1],
+      "faces": {
+        "north": {"uv": [1, 10, 7, 12], "texture": "#hat"},
+        "east": {"uv": [1, 10, 7, 12], "texture": "#hat"},
+        "south": {"uv": [1, 10, 7, 12], "texture": "#hat"},
+        "west": {"uv": [1, 10, 7, 12], "texture": "#hat"},
+        "down": {"uv": [1, 1, 7, 7], "texture": "#hat"}
+      }
+    }
+  ]
+}

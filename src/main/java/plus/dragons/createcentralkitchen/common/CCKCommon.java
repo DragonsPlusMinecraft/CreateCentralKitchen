@@ -25,7 +25,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import org.slf4j.Logger;
@@ -63,14 +62,6 @@ public class CCKCommon {
         for (ModIntegration integration : ModIntegration.values()) {
             if (integration.enabled())
                 event.enqueueWork(integration::onCommonSetup);
-        }
-    }
-
-    @SubscribeEvent
-    public void onClientSetup(final FMLClientSetupEvent event) {
-        for (ModIntegration integration : ModIntegration.values()) {
-            if (integration.enabled())
-                event.enqueueWork(integration::onClientSetup);
         }
     }
 

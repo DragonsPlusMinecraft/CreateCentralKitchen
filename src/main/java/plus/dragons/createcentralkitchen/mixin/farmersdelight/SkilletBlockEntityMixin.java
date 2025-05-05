@@ -18,6 +18,8 @@
 
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.simibubi.create.api.boiler.BoilerHeater;
 import java.util.Optional;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -26,12 +28,14 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
@@ -39,11 +43,22 @@ import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SyncedBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModSounds;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 @Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
 @Mixin(SkilletBlockEntity.class)
 public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity, SkilletArmInteractionPoint.Interaction {
-    public SkilletBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+    @Shadow
+    @Final
+    private ItemStackHandler inventory;
+    @Shadow
+    private int cookingTime;
+    @Shadow
+    private int cookingTimeTotal;
+    @Shadow
+    private int fireAspectLevel;
+
+    private SkilletBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn, pos, state);
     }
 
@@ -53,26 +68,12 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
     @Shadow
     public abstract ItemStack getStoredStack();
 
-    @Shadow
-    @Final
-    private ItemStackHandler inventory;
-
-    @Shadow
-    private int cookingTime;
-
-    @Shadow
-    private int cookingTimeTotal;
-
-    @Shadow
-    private int fireAspectLevel;
-
     @Override
     public ItemStack addItemToCook(ItemStack stack, boolean simulate) {
         Optional<RecipeHolder<CampfireCookingRecipe>> recipe = this.getMatchingRecipe(stack);
         if (recipe.isPresent() && this.getStoredStack().isEmpty()) {
             if (this.getBlockState().getValue(SkilletBlock.WATERLOGGED))
                 return stack;
-
             boolean wasEmpty = this.getStoredStack().isEmpty();
             ItemStack remainder = this.inventory.insertItem(0, stack.copy(), simulate);
             if (!simulate && !ItemStack.matches(remainder, stack)) {
@@ -85,5 +86,24 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
             }
         }
         return stack;
+    }
+
+    @ModifyExpressionValue(method = "cookAndOutputItems", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/block/entity/SkilletBlockEntity;cookingTime:I", ordinal = 0))
+    private int speedUpCooking(int cookTime, ItemStack cookingStack, Level level) {
+        var pos = this.getBlockPos();
+        var heaterPos = pos.below();
+        var heaterState = level.getBlockState(heaterPos);
+        BoilerHeater heater = BoilerHeater.REGISTRY.get(heaterState);
+        if (heater == null && !this.requiresDirectHeat() && heaterState.is(ModTags.HEAT_CONDUCTORS)) {
+            heaterPos = pos.below(2);
+            heaterState = level.getBlockState(pos.below(2));
+            heater = BoilerHeater.REGISTRY.get(heaterState);
+        }
+        if (heater != null) {
+            float heat = heater.getHeat(level, heaterPos, heaterState);
+            if (heat > 0)
+                cookTime = cookTime + (int) heat;
+        }
+        return cookTime;
     }
 }

@@ -14,7 +14,7 @@ see the **Features** section below.
   + Mechanical Arm insertion for Cooking Pot is for container slot only, 
   as the ingredient slots is properly handled by Packager unpacking.
 - Add Heat Source support for all Boiler Heaters.
-- Active Boiler Heaters now speeds up Cooking Pot's cooking.
+- Active Boiler Heaters now speeds up Cooking Pot and Skillet cooking.
 - Automatically transform Cutting Board recipes (Farmer's Delight) that uses knife into Sawing recipes.
 - Automatically transform Cutting Board recipes (Farmer's Delight) into Deploying recipes.
 - Automatically transform Keg Pouring recipes (Brewin' and Chewin') into Filling and Draining recipes.

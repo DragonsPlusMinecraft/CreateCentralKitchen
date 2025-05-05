@@ -34,7 +34,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 @Mixin(CookingPotBlockEntity.class)
 public class CookingPotBlockEntityMixin {
     @ModifyExpressionValue(method = "processCooking", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/block/entity/CookingPotBlockEntity;cookTime:I", ordinal = 0))
-    private int addBoilerHeaterBonus(int cookTime, RecipeHolder<CookingPotRecipe> recipe, CookingPotBlockEntity cookingPot) {
+    private int speedUpCooking(int cookTime, RecipeHolder<CookingPotRecipe> recipe, CookingPotBlockEntity cookingPot) {
         var level = cookingPot.getLevel();
         assert level != null;
         var pos = cookingPot.getBlockPos();
