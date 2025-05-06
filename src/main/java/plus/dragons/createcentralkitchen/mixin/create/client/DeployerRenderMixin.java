@@ -19,17 +19,28 @@
 package plus.dragons.createcentralkitchen.mixin.create.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import com.simibubi.create.AllPartialModels;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import com.simibubi.create.content.kinetics.deployer.DeployerRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import plus.dragons.createcentralkitchen.common.registry.CCKTags;
+import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.mixin.create.DeployerBlockEntityAccessor;
 
 @Mixin(DeployerRenderer.class)
 public class DeployerRenderMixin {
-    @ModifyVariable(method = "renderItem", ordinal = 0, at = @At(value = "STORE", ordinal = 0))
-    private boolean alwaysRenderToolAsPunching(boolean punching, @Local(argsOnly = true) DeployerBlockEntity deployer) {
-        return punching || deployer.getHandPose() == AllPartialModels.DEPLOYER_HAND_PUNCHING;
+    @ModifyVariable(method = "renderItem", ordinal = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;getInstance()Lnet/minecraft/client/Minecraft;"))
+    private boolean modifyToolOffset(boolean punching, @Local(name = "displayMode") boolean displayMode, @Local(argsOnly = true) DeployerBlockEntity deployer, @Local(argsOnly = true) PoseStack ms) {
+        if (punching || displayMode || !CCKConfig.client().renderDeployerUsingItemWithCustomTransform.get())
+            return punching;
+        if (((DeployerBlockEntityAccessor) deployer).getHeldItem().is(CCKTags.HANDHELD_IN_DEPLOYER_USE)) {
+            ms.translate(0, -1 / 8f, 0);
+            ms.mulPose(Axis.XP.rotationDegrees(-22.5f));
+            return true;
+        }
+        return false;
     }
 }

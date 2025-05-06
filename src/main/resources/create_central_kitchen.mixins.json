@@ -10,6 +10,7 @@
     "brewinandchewin.GenericItemFillingMixin",
     "brewinandchewin.KegBlockEntityMixin",
     "create.BeltHelperMixin",
+    "create.DeployerBlockEntityAccessor",
     "farmersdelight.BlockHelperMixin",
     "farmersdelight.CookingPotBlockEntityMixin",
     "farmersdelight.HeatableBlockEntityMixin",
@@ -20,7 +21,6 @@
   ],
   "client": [
     "create.client.BeltHelperMixin",
-    "create.client.DeployerBlockEntityMixin",
     "create.client.DeployerRenderMixin",
     "farmersdelight.client.BlazeBurnerBlockEntityMixin",
     "farmersdelight.client.BlazeBurnerVisualMixin"

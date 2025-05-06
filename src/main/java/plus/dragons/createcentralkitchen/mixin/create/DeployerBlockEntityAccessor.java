@@ -16,25 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin.create.client;
+package plus.dragons.createcentralkitchen.mixin.create;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.Tags;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(DeployerBlockEntity.class)
-public class DeployerBlockEntityMixin {
-    @Shadow
-    protected ItemStack heldItem;
-
-    @ModifyExpressionValue(method = "getHandPose", at = @At(value = "FIELD", target = "Lcom/simibubi/create/AllPartialModels;DEPLOYER_HAND_HOLDING:Ldev/engine_room/flywheel/lib/model/baked/PartialModel;"))
-    private PartialModel alwaysRenderToolAsPunching(PartialModel original) {
-        return heldItem.is(Tags.Items.TOOLS) ? AllPartialModels.DEPLOYER_HAND_PUNCHING : original;
-    }
+public interface DeployerBlockEntityAccessor {
+    @Accessor
+    ItemStack getHeldItem();
 }
