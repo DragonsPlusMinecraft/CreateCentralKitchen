@@ -22,6 +22,9 @@ import com.simibubi.create.content.kinetics.belt.BeltHelper;
 import net.createmod.catnip.config.ConfigBase;
 
 public class CCKClientConfig extends ConfigBase {
+    public final ConfigBool renderDeployerUsingItemWithCustomTransform = b(true,
+            "renderDeployerUsingItemWithCustomTransform",
+            Comments.renderDeployerUsingItemWithCustomTransform);
     public final ConfigBool renderBlockItemWithNonGui3dModelUprightOnBelt = b(true,
             "renderBlockItemWithNonGui3dModelUprightOnBelt",
             Comments.renderBlockItemWithNonGui3dModelUprightOnBelt);
@@ -37,6 +40,7 @@ public class CCKClientConfig extends ConfigBase {
     }
 
     static class Comments {
+        static final String renderDeployerUsingItemWithCustomTransform = "If Deployer held items in #create:handheld_in_deployer_use should have custom transform at Use mode";
         static final String renderBlockItemWithNonGui3dModelUprightOnBelt = "If Block Item without GUI 3D Model should be rendered upright on Belt";
     }
 }

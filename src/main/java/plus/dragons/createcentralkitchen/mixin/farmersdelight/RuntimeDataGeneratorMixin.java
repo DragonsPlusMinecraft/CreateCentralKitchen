@@ -52,7 +52,7 @@ public class RuntimeDataGeneratorMixin {
     private static Object2ObjectOpenHashMap<ResourceLocation, JsonElement> JSON_FILES;
 
     @WrapOperation(method = "cuttingRecipes", at = @At(value = "INVOKE", ordinal = 0, target = "Lcom/simibubi/create/foundation/data/RuntimeDataGenerator;simpleWoodRecipe(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;)V"))
-    private static void addTreeBarkToStripCuttingRecipes(ResourceLocation unstripped, ResourceLocation stripped, Operation<Void> original, @Local(ordinal = 3) String type) {
+    private static void addTreeBarkToStripCuttingRecipes(ResourceLocation unstripped, ResourceLocation stripped, Operation<Void> original, @Local(name = "type") String type) {
         if (CCKConfig.recipes().addTreeBarkToStripSawingRecipes.get()) {
             if (BuiltInRegistries.ITEM.containsKey(stripped)) {
                 var id = Create.asResource("cutting/runtime_generated/compat/" + unstripped.getNamespace() +

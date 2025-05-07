@@ -1,0 +1,10 @@
+{
+  "remove": [
+    "#c:tools/bow",
+    "#c:tools/crossbow",
+    "#c:tools/shield"
+  ],
+  "values": [
+    "#c:tools"
+  ]
+}

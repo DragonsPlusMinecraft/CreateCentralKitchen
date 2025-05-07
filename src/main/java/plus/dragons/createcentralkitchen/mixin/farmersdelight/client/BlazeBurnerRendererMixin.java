@@ -56,13 +56,13 @@ public class BlazeBurnerRendererMixin {
     @SuppressWarnings("UnresolvedLocalCapture")
     @ModifyVariable(method = "renderShared", at = @At(value = "LOAD", ordinal = 0), argsOnly = true)
     private static PartialModel renderChefHat(PartialModel drawHat,
-            @Local(ordinal = 0, argsOnly = true) PoseStack ms,
-            @Local(ordinal = 1, argsOnly = true) @Nullable PoseStack modelTransform,
+            @Local(argsOnly = true, ordinal = 0) PoseStack ms,
+            @Local(argsOnly = true, ordinal = 1) @Nullable PoseStack modelTransform,
             @Local(argsOnly = true) BlockState blockState,
             @Local(argsOnly = true) MultiBufferSource bufferSource,
             @Local(argsOnly = true, ordinal = 1) float horizontalAngle,
-            @Local(ordinal = 8) float headY,
-            @Local(ordinal = 1) PartialModel blazeModel) {
+            @Local(name = "headY") float headY,
+            @Local(name = "blazeModel") PartialModel blazeModel) {
         if (drawHat == CCKPartialModels.CHEF_HAT) {
             if (blazeModel == AllPartialModels.BLAZE_INERT)
                 drawHat = CCKPartialModels.CHEF_HAT_SMALL;
