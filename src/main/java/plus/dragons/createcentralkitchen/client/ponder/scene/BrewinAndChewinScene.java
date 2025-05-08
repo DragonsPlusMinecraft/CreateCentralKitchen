@@ -37,7 +37,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
 import umpaz.brewinandchewin.common.registry.BnCFluids;
 
-public class KegScene {
+public class BrewinAndChewinScene {
     public static void part1(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("keg.automate.part_one", "Automating with Create: Part One");
@@ -125,14 +125,12 @@ public class KegScene {
                 .attachKeyFrame()
                 .placeNearTarget();
         var outFG = util.grid().at(4, 2, 1);
-        var inFG1 = util.grid().at(5, 2, 1);
-        var inFG2 = util.grid().at(5, 3, 1);
         builder.world().modifyBlockEntity(outFG, FactoryPanelBlockEntity.class, be -> {
             var panel = be.panels.get(FactoryPanelBlock.PanelSlot.TOP_RIGHT);
-            panel.addConnection(new FactoryPanelPosition(inFG1, FactoryPanelBlock.PanelSlot.TOP_RIGHT));
-            panel.addConnection(new FactoryPanelPosition(inFG1, FactoryPanelBlock.PanelSlot.BOTTOM_RIGHT));
-            panel.addConnection(new FactoryPanelPosition(inFG2, FactoryPanelBlock.PanelSlot.TOP_RIGHT));
-            panel.addConnection(new FactoryPanelPosition(inFG2, FactoryPanelBlock.PanelSlot.BOTTOM_RIGHT));
+            panel.addConnection(new FactoryPanelPosition(util.grid().at(5, 2, 1), FactoryPanelBlock.PanelSlot.BOTTOM_RIGHT));
+            panel.addConnection(new FactoryPanelPosition(util.grid().at(5, 3, 1), FactoryPanelBlock.PanelSlot.BOTTOM_RIGHT));
+            panel.addConnection(new FactoryPanelPosition(util.grid().at(6, 2, 1), FactoryPanelBlock.PanelSlot.TOP_RIGHT));
+            panel.addConnection(new FactoryPanelPosition(util.grid().at(6, 3, 1), FactoryPanelBlock.PanelSlot.TOP_RIGHT));
         });
         scene.idle(40);
         builder.world().modifyBlockEntity(outFG, FactoryPanelBlockEntity.class, be -> {

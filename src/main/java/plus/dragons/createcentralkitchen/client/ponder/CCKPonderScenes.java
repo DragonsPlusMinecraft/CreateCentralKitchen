@@ -23,14 +23,18 @@ import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
-import plus.dragons.createcentralkitchen.client.ponder.scene.KegScene;
+import plus.dragons.createcentralkitchen.client.ponder.scene.BrewinAndChewinScene;
+import plus.dragons.createcentralkitchen.client.ponder.scene.FarmersDelightScene;
 
 public class CCKPonderScenes {
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> sceneHelper = helper.withKeyFunction(RegistryEntry::getId);
 
         CCKPonderPlugin.KEG.asOptional().ifPresent(block -> sceneHelper.forComponents(CCKPonderPlugin.KEG)
-                .addStoryBoard("keg/fluid", KegScene::part1, AllCreatePonderTags.FLUIDS)
-                .addStoryBoard("keg/ingredient", KegScene::part2, AllCreatePonderTags.HIGH_LOGISTICS));
+                .addStoryBoard("brewinandchewin/keg_fluid", BrewinAndChewinScene::part1, AllCreatePonderTags.FLUIDS)
+                .addStoryBoard("brewinandchewin/keg_ingredient", BrewinAndChewinScene::part2, AllCreatePonderTags.HIGH_LOGISTICS));
+
+        CCKPonderPlugin.COOKING_POT.asOptional().ifPresent(block -> sceneHelper.forComponents(CCKPonderPlugin.COOKING_POT)
+                .addStoryBoard("farmersdelight/cooking_pot_automate", FarmersDelightScene::automate, AllCreatePonderTags.ARM_TARGETS, AllCreatePonderTags.HIGH_LOGISTICS));
     }
 }
