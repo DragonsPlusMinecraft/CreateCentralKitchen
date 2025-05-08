@@ -31,6 +31,7 @@ import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointT
 import plus.dragons.createcentralkitchen.integration.brewinandchewin.packager.KegUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CookingPotArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CuttingBoardArmInteractionPoint;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.StoveArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.packager.CookingPotUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
@@ -47,6 +48,7 @@ public enum ModIntegration {
             CCKArmInteractionPointTypes.TYPES.register("cooking_pot", CookingPotArmInteractionPoint.Type::new);
             CCKArmInteractionPointTypes.TYPES.register("cutting_board", CuttingBoardArmInteractionPoint.Type::new);
             CCKArmInteractionPointTypes.TYPES.register("stove", StoveArmInteractionPoint.Type::new);
+            CCKArmInteractionPointTypes.TYPES.register("skillet", SkilletArmInteractionPoint.Type::new);
         }
 
         @Override
