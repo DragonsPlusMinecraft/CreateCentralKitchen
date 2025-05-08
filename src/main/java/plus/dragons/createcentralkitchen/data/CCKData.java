@@ -24,6 +24,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.data.tags.CCKRegistrateTags;
 
@@ -32,7 +33,8 @@ public class CCKData {
     public CCKData(IEventBus modBus) {
         if (!DatagenModLoader.isRunningDataGen())
             return;
-        //REGISTRATE.registerForeignLocalization();
+        REGISTRATE.registerPonderLocalization(CCKPonderPlugin::new);
+        REGISTRATE.registerForeignLocalization();
         REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, CCKRegistrateTags::addBlockTags);
     }
 }

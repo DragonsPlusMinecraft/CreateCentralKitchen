@@ -18,6 +18,7 @@
 
 package plus.dragons.createcentralkitchen.client;
 
+import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -25,6 +26,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import plus.dragons.createcentralkitchen.client.model.CCKPartialModels;
+import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
@@ -37,6 +39,7 @@ public class CCKClient {
 
     @SubscribeEvent
     public void onClientSetup(final FMLClientSetupEvent event) {
+        PonderIndex.addPlugin(new CCKPonderPlugin());
         for (ModIntegration integration : ModIntegration.values()) {
             if (integration.enabled())
                 event.enqueueWork(integration::onClientSetup);
