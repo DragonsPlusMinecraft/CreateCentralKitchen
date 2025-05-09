@@ -44,7 +44,7 @@ public class BrewinAndChewinScene {
     public static void kegAutomate1(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("keg.automate.part_one", "Automating with Create: Keg - Part One");
-        scene.configureBasePlate(0, 0, 6);
+        scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
         scene.idle(10);
 

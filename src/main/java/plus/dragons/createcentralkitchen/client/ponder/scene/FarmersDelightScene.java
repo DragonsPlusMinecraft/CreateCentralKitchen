@@ -152,11 +152,11 @@ public class FarmersDelightScene {
         scene.idle(40);
         scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
         scene.idle(20);
-        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.SEARCH_OUTPUTS, ModItems.COOKED_RICE.get().getDefaultInstance(), -1);
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.SEARCH_OUTPUTS, ModItems.CHICKEN_SOUP.get().getDefaultInstance(), -1);
         scene.idle(20);
-        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, ModItems.COOKED_RICE.get().getDefaultInstance(), 0);
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, ModItems.CHICKEN_SOUP.get().getDefaultInstance(), 0);
         scene.idle(20);
-        scene.world().modifyBlockEntity(util.grid().at(1, 1, 0), DepotBlockEntity.class, depot -> depot.setHeldItem(ModItems.COOKED_RICE.get().getDefaultInstance()));
+        scene.world().modifyBlockEntity(util.grid().at(1, 1, 0), DepotBlockEntity.class, depot -> depot.setHeldItem(ModItems.CHICKEN_SOUP.get().getDefaultInstance()));
         scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, -1);
         scene.idle(10);
 
@@ -345,7 +345,7 @@ public class FarmersDelightScene {
         scene.world().showSection(belt2,Direction.DOWN);
         scene.overlay().showText(60)
                 .text("Mechanical Saw also can cut raw ingredient")
-                .pointAt(util.vector().centerOf(5, 2, 3))
+                .pointAt(util.vector().centerOf(1, 0, 3))
                 .attachKeyFrame()
                 .placeNearTarget();
         scene.idle(10);
