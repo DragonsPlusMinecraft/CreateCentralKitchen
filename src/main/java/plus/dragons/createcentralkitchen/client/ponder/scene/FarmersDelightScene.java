@@ -41,7 +41,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
-import umpaz.brewinandchewin.common.registry.BnCItems;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
@@ -171,26 +170,33 @@ public class FarmersDelightScene {
 
     public static void heatSource(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("cooking_pot_and_skillet.heat_source", "Heat Source for Cooking Pot and Skillet");
-        scene.configureBasePlate(0, 0, 7);
-        scene.scaleSceneView(0.85f);
+        scene.title("cooking_pot_and_skillet.heat_source", "Heat source for Cooking Pot and Skillet");
+        scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
         scene.idle(10);
 
-        var blazeBurner1 = scene.world().showIndependentSection(util.select().position(5,3,1), Direction.DOWN);
-        var blazeBurner2 = scene.world().showIndependentSection(util.select().position(1,3,1), Direction.DOWN);
+        var boiler = scene.world().showIndependentSection(util.select().fromTo(3,4,1,3,5,1).add(util.select().position(2,5,1)).add(util.select().position(0,5,1)), Direction.DOWN);
+        var blazeBurner1 = scene.world().showIndependentSection(util.select().position(3,3,1), Direction.DOWN);
         scene.world().moveSection(blazeBurner1,new Vec3(0,-2,0),0);
+        scene.world().moveSection(boiler,new Vec3(0,-2,0),0);
+        scene.overlay().showText(60)
+                .text("This is a Blaze Burner, a common boiler heater")
+                .pointAt(util.vector().centerOf(3, 1, 1))
+                .placeNearTarget();
+        scene.idle(70);
+
+        scene.world().hideIndependentSection(boiler,Direction.UP);
+        var blazeBurner2 = scene.world().showIndependentSection(util.select().position(1,3,1), Direction.DOWN);
         scene.world().moveSection(blazeBurner2,new Vec3(0,-2,0),0);
         scene.overlay().showText(60)
-                .text("Blaze Burners are valid heat source for Cooking Pot and Skillet")
+                .text("Boiler heaters are valid heat sources of Cooking Pot and Skillet")
                 .pointAt(util.vector().centerOf(1, 1, 1))
-                .placeNearTarget();
-
+                .attachKeyFrame();
         scene.idle(10);
-        scene.overlay().showControls(util.vector().blockSurface(util.grid().at(5,2,1),Direction.UP), Pointing.DOWN, 20).rightClick().withItem(ModBlocks.COOKING_POT.get().asItem().getDefaultInstance());
+        scene.overlay().showControls(util.vector().blockSurface(util.grid().at(3,2,1),Direction.UP), Pointing.DOWN, 20).rightClick().withItem(ModBlocks.COOKING_POT.get().asItem().getDefaultInstance());
         scene.idle(10);
         scene.addInstruction(new FadeOutOfSceneInstruction<>(0, Direction.DOWN, blazeBurner1));
-        scene.addInstruction(new DisplayWorldSectionInstruction(0,  Direction.DOWN, util.select().fromTo(5,1,1,5,2,1), scene.getScene()::getBaseWorldSection));
+        scene.addInstruction(new DisplayWorldSectionInstruction(0,  Direction.DOWN, util.select().fromTo(3,1,1,3,2,1), scene.getScene()::getBaseWorldSection));
         scene.idle(20);
         scene.overlay().showControls(util.vector().blockSurface(util.grid().at(1,2,1),Direction.UP), Pointing.DOWN, 20).whileCTRL().rightClick().withItem(ModBlocks.SKILLET.get().asItem().getDefaultInstance());
         scene.idle(10);
@@ -198,14 +204,27 @@ public class FarmersDelightScene {
         scene.addInstruction(new DisplayWorldSectionInstruction(0,  Direction.DOWN, util.select().fromTo(1,1,1,1,2,1), scene.getScene()::getBaseWorldSection));
         scene.idle(20);
 
-        scene.world().showSection(util.select().fromTo(1,1,3,6,4,5), Direction.DOWN);
+        scene.world().showSection(util.select().fromTo(1,1,3,1,2,3), Direction.DOWN);
+        scene.world().hideSection(util.select().fromTo(3,1,1,3,2,1), Direction.UP);
+        scene.idle(10);
+        scene.world().showSection(util.select().fromTo(3,1,2,3,2,2), Direction.DOWN);
         scene.overlay().showText(120)
-                .text("Boiler Heater is valid heat source for Cooking Pot and Skillet. And it accelerate cooking according to its heat-level")
+                .text("Boiler heaters accelerate cooking according to its heat-level")
                 .attachKeyFrame()
-                .pointAt(util.vector().centerOf(3, 2, 3));
+                .pointAt(util.vector().centerOf(1, 1, 3));
+        scene.idle(10);
+        scene.world().modifyBlockEntity(util.grid().at(1,2,1), SkilletBlockEntity.class, be -> be.getInventory().insertItem(0,Items.PORKCHOP.getDefaultInstance(),false));
+        scene.world().modifyBlockEntity(util.grid().at(1,2,3), SkilletBlockEntity.class, be -> be.getInventory().insertItem(0,Items.PORKCHOP.getDefaultInstance(),false));
+        scene.world().modifyBlockEntity(util.grid().at(3,2,2), SkilletBlockEntity.class, be -> be.getInventory().insertItem(0,Items.PORKCHOP.getDefaultInstance(),false));
+        scene.idle(20);
+        scene.world().createItemEntity(util.vector().of(1.5,2.3,3.5), new Vec3(0,0.25,-0.08F), Items.COOKED_PORKCHOP.getDefaultInstance());
+        scene.world().modifyBlockEntity(util.grid().at(1,2,3), SkilletBlockEntity.class, SkilletBlockEntity::removeItem);
+        scene.idle(20);
+        scene.world().createItemEntity(util.vector().of(3.5,2.3,2.5), new Vec3(0,0.25,-0.08F), Items.COOKED_PORKCHOP.getDefaultInstance());
+        scene.world().modifyBlockEntity(util.grid().at(3,2,2), SkilletBlockEntity.class, SkilletBlockEntity::removeItem);
         scene.idle(40);
-        scene.world().showSection(util.select().layer(5), Direction.DOWN);
-        scene.idle(80);
+        scene.world().createItemEntity(util.vector().of(1.5,2.3,1.5), new Vec3(0,0.25,-0.08F), Items.COOKED_PORKCHOP.getDefaultInstance());
+        scene.world().modifyBlockEntity(util.grid().at(1,2,1), SkilletBlockEntity.class, SkilletBlockEntity::removeItem);
     }
 
     public static void skilletAndStove(SceneBuilder builder, SceneBuildingUtil util) {
@@ -280,7 +299,7 @@ public class FarmersDelightScene {
                 .pointAt(util.vector().centerOf(3, 1, 3))
                 .placeNearTarget();
         scene.idle(40);
-        scene.world().hideIndependentSection(tempBoard, Direction.UP);
+        scene.addInstruction(new FadeOutOfSceneInstruction<>(0, Direction.UP, tempBoard));
         scene.idle(10);
 
         scene.world().showSection(util.select().fromTo(3,1,1,3,1,5).substract(belt),Direction.DOWN);
