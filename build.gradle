@@ -196,7 +196,7 @@ publishMods {
     additionalFiles.from sourcesJar.archiveFile
     changelog = project.file("CHANGELOG.md").text
     version = mod_version
-    type = ALPHA
+    type = BETA
     displayName = "Create: Central Kitchen ${mod_version} for Create ${minecraft_version}-${create_version_production}"
     modLoaders.add("neoforge")
 
