@@ -18,6 +18,8 @@
 
 package plus.dragons.createcentralkitchen.client.ponder.scene;
 
+import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
+import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.depot.DepotBlockEntity;
@@ -27,19 +29,31 @@ import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelPosition;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.scenes.highLogistics.PonderHilo;
 import java.util.List;
+
+import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
+import net.createmod.ponder.foundation.instruction.DisplayWorldSectionInstruction;
+import net.createmod.ponder.foundation.instruction.FadeOutOfSceneInstruction;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import umpaz.brewinandchewin.common.registry.BnCItems;
+import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
+import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FarmersDelightScene {
     public static void automate(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("cooking_pot.automate", "Automating with Create: Part One");
+        scene.title("cooking_pot.automate", "Automating with Create: Cooking Pot");
         scene.configureBasePlate(0, 0, 8);
+        scene.scaleSceneView(0.77f);
         scene.showBasePlate();
         scene.idle(10);
 
@@ -68,7 +82,7 @@ public class FarmersDelightScene {
 
         scene.world().showSection(util.select().fromTo(4, 1, 1, 6, 3, 2).add(util.select().position(3, 3, 5)), Direction.DOWN);
         scene.overlay().showText(80)
-                .text("Factory gauges provide auto-filling for Cooking Pot ingredients")
+                .text("Factory gauges are very useful in the packaging process")
                 .pointAt(util.vector().centerOf(1, 2, 3))
                 .attachKeyFrame()
                 .placeNearTarget();
@@ -152,6 +166,192 @@ public class FarmersDelightScene {
                 .pointAt(util.vector().centerOf(0, 2, 2))
                 .attachKeyFrame()
                 .placeNearTarget();
+        scene.idle(60);
+    }
+
+    public static void heatSource(SceneBuilder builder, SceneBuildingUtil util) {
+        CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+        scene.title("cooking_pot_and_skillet.heat_source", "Heat Source for Cooking Pot and Skillet");
+        scene.configureBasePlate(0, 0, 7);
+        scene.scaleSceneView(0.85f);
+        scene.showBasePlate();
+        scene.idle(10);
+
+        var blazeBurner1 = scene.world().showIndependentSection(util.select().position(5,3,1), Direction.DOWN);
+        var blazeBurner2 = scene.world().showIndependentSection(util.select().position(1,3,1), Direction.DOWN);
+        scene.world().moveSection(blazeBurner1,new Vec3(0,-2,0),0);
+        scene.world().moveSection(blazeBurner2,new Vec3(0,-2,0),0);
+        scene.overlay().showText(60)
+                .text("Blaze Burners are valid heat source for Cooking Pot and Skillet")
+                .pointAt(util.vector().centerOf(1, 1, 1))
+                .placeNearTarget();
+
+        scene.idle(10);
+        scene.overlay().showControls(util.vector().blockSurface(util.grid().at(5,2,1),Direction.UP), Pointing.DOWN, 20).rightClick().withItem(ModBlocks.COOKING_POT.get().asItem().getDefaultInstance());
+        scene.idle(10);
+        scene.addInstruction(new FadeOutOfSceneInstruction<>(0, Direction.DOWN, blazeBurner1));
+        scene.addInstruction(new DisplayWorldSectionInstruction(0,  Direction.DOWN, util.select().fromTo(5,1,1,5,2,1), scene.getScene()::getBaseWorldSection));
+        scene.idle(20);
+        scene.overlay().showControls(util.vector().blockSurface(util.grid().at(1,2,1),Direction.UP), Pointing.DOWN, 20).whileCTRL().rightClick().withItem(ModBlocks.SKILLET.get().asItem().getDefaultInstance());
+        scene.idle(10);
+        scene.addInstruction(new FadeOutOfSceneInstruction<>(0, Direction.DOWN, blazeBurner2));
+        scene.addInstruction(new DisplayWorldSectionInstruction(0,  Direction.DOWN, util.select().fromTo(1,1,1,1,2,1), scene.getScene()::getBaseWorldSection));
+        scene.idle(20);
+
+        scene.world().showSection(util.select().fromTo(1,1,3,6,4,5), Direction.DOWN);
+        scene.overlay().showText(120)
+                .text("Boiler Heater is valid heat source for Cooking Pot and Skillet. And it accelerate cooking according to its heat-level")
+                .attachKeyFrame()
+                .pointAt(util.vector().centerOf(3, 2, 3));
+        scene.idle(40);
+        scene.world().showSection(util.select().layer(5), Direction.DOWN);
+        scene.idle(80);
+    }
+
+    public static void skilletAndStove(SceneBuilder builder, SceneBuildingUtil util) {
+        CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+        scene.title("skillet_and_stove.automate", "Automating with Create: Skillet and Stove");
+        scene.configureBasePlate(0, 0, 5);
+        scene.showBasePlate();
+        scene.idle(10);
+
+        var armPos = util.grid().at(3,1,1);
+        var arm = util.select().position(3,1,1);
+        var depot = util.select().position(2,1,1);
+        var depotPos = util.grid().at(2,1,1);
+        var stove = util.select().position(3,1,3);
+        var stovePos = util.grid().at(3,1,3);
+        var skillet = util.select().position(1,2,3);
+        var skilletPos = util.grid().at(1,2,3);
+        scene.world().showSection(stove.add(util.select().fromTo(1,1,3,1,2,3).add(arm)), Direction.DOWN);
+        scene.overlay().showText(60)
+                .text("Mechanical Arm can put raw ingredient onto Stove and Skillet")
+                .pointAt(util.vector().centerOf(3, 1, 1))
+                .placeNearTarget();
+        scene.idle(10);
+        scene.world().showSection(depot,Direction.DOWN);
+        scene.world().setKineticSpeed(arm,64);
+        scene.overlay().showOutline(PonderPalette.INPUT, depot, depot, 40);
+        scene.overlay().showOutline(PonderPalette.OUTPUT, stove, stove.add(skillet), 40);
+        scene.idle(40);
+        scene.world().modifyBlockEntity(depotPos, DepotBlockEntity.class, be -> be.setHeldItem(Items.BEEF.getDefaultInstance()));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+        scene.idle(20);
+        scene.world().modifyBlockEntity(depotPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, Items.BEEF.getDefaultInstance(), -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, Items.BEEF.getDefaultInstance(), 0);
+        scene.idle(20);
+        scene.world().modifyBlockEntity(skilletPos, SkilletBlockEntity.class, be -> be.getInventory().insertItem(0,Items.BEEF.getDefaultInstance(),false));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, -1);
+        scene.idle(10);
+        scene.world().modifyBlockEntity(depotPos, DepotBlockEntity.class, be -> be.setHeldItem(Items.BEEF.getDefaultInstance()));
+        scene.idle(10);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+        scene.idle(20);
+        scene.world().modifyBlockEntity(depotPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, Items.BEEF.getDefaultInstance(), -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, Items.BEEF.getDefaultInstance(), 1);
+        scene.idle(20);
+        scene.world().modifyBlockEntity(stovePos, StoveBlockEntity.class, be -> be.getInventory().insertItem(0,Items.BEEF.getDefaultInstance(),false));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, -1);
+        scene.idle(10);
+    }
+
+    public static void cuttingBoard(SceneBuilder builder, SceneBuildingUtil util) {
+        CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+        scene.title("cutting", "Automating with Create: Cutting");
+        scene.configureBasePlate(0, 0, 7);
+        scene.scaleSceneView(0.85f);
+        var belt = util.select().fromTo(5,0,0,5,0,6);
+        var belt2 = util.select().fromTo(1,0,0,1,0,6);
+        scene.world().showSection(util.select().layer(0).substract(belt).substract(belt2),Direction.DOWN);
+        var tempGround = scene.world().showIndependentSection(util.select().fromTo(5,3,0,5,3,6), Direction.DOWN);
+        var tempGround2 = scene.world().showIndependentSection(util.select().fromTo(1,3,0,1,3,6), Direction.DOWN);
+        scene.world().moveSection(tempGround,new Vec3(0,-3,0),0);
+        scene.world().moveSection(tempGround2,new Vec3(0,-3,0),0);
+        var tempBoard = scene.world().showIndependentSection(util.select().position(3,3,3), Direction.DOWN);
+        scene.world().moveSection(tempBoard,new Vec3(0,-2,0),0);
+        scene.idle(10);
+
+        scene.overlay().showText(40)
+                .text("This is a Cutting Board. Previously, it could semi-automated with Deployer")
+                .pointAt(util.vector().centerOf(3, 1, 3))
+                .placeNearTarget();
+        scene.idle(40);
+        scene.world().hideIndependentSection(tempBoard, Direction.UP);
+        scene.idle(10);
+
+        scene.world().showSection(util.select().fromTo(3,1,1,3,1,5).substract(belt),Direction.DOWN);
+        scene.overlay().showText(40)
+                .text("Now, Mechanical Arm can put raw ingredient on Cutting Board")
+                .pointAt(util.vector().centerOf(3, 1, 3))
+                .attachKeyFrame()
+                .placeNearTarget();
+        var armPos = util.grid().at(3,1,5);
+        var arm = util.select().position(3,1,5);
+        var depot = util.select().position(3,1,1);
+        var depotPos = util.grid().at(3,1,1);
+        var cuttingBoard = util.select().position(3,1,3);
+        var cuttingBoardPos = util.grid().at(3,1,3);
+        scene.world().setKineticSpeed(arm,64);
+        scene.overlay().showOutline(PonderPalette.INPUT, depot, depot, 40);
+        scene.overlay().showOutline(PonderPalette.OUTPUT, cuttingBoard, cuttingBoard, 40);
+        scene.idle(40);
+        scene.world().modifyBlockEntity(depotPos, DepotBlockEntity.class, be -> be.setHeldItem(Items.CHICKEN.getDefaultInstance()));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+        scene.idle(20);
+        scene.world().modifyBlockEntity(depotPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, Items.CHICKEN.getDefaultInstance(), -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, Items.CHICKEN.getDefaultInstance(), 0);
+        scene.idle(20);
+        scene.world().modifyBlockEntity(cuttingBoardPos, CuttingBoardBlockEntity.class, be -> be.getInventory().insertItem(0,Items.CHICKEN.getDefaultInstance(),false));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, -1);
+        scene.idle(10);
+
+        var deployer = util.select().position(5,2,3);
+        var deployerPos = util.grid().at(5,2,3);
+        scene.world().hideIndependentSection(tempGround,Direction.DOWN);
+        scene.world().showSection(belt.add(deployer),Direction.DOWN);
+        var tool = ModItems.IRON_KNIFE.get().getDefaultInstance();
+        if (!DatagenModLoader.isRunningDataGen()) {
+            scene.world().modifyBlockEntityNBT(deployer, DeployerBlockEntity.class, nbt -> {
+                nbt.put("HeldItem", tool.saveOptional(scene.world().getHolderLookupProvider())); // null in datagen
+                nbt.putString("Mode", "USE");
+            });
+        }
+        scene.overlay().showText(60)
+                .text("Deployer with a knife in Use Mode can cut raw ingredient")
+                .pointAt(util.vector().centerOf(5, 2, 3))
+                .attachKeyFrame()
+                .placeNearTarget();
+        scene.idle(10);
+        scene.world().setKineticSpeed(belt.add(deployer),32);
+        var chicken = scene.world().createItemOnBelt(util.grid().at(5,0,1), Direction.DOWN, ModItems.CABBAGE.get().getDefaultInstance());
+        scene.idle(30);
+        scene.world().stallBeltItem(chicken, true);
+        scene.world().moveDeployer(deployerPos, 1, 30);
+        scene.idle(30);
+        scene.world().changeBeltItemTo(chicken, new ItemStack(ModItems.CABBAGE_LEAF.get(),2));
+        scene.world().moveDeployer(deployerPos, -1, 30);
+        scene.idle(10);
+        scene.world().stallBeltItem(chicken, false);
+        scene.idle(10);
+
+        var saw = util.select().position(1,0,3);
+        scene.world().hideIndependentSection(tempGround2,Direction.DOWN);
+        scene.world().showSection(belt2,Direction.DOWN);
+        scene.overlay().showText(60)
+                .text("Mechanical Saw also can cut raw ingredient")
+                .pointAt(util.vector().centerOf(5, 2, 3))
+                .attachKeyFrame()
+                .placeNearTarget();
+        scene.idle(10);
+        scene.world().setKineticSpeed(belt2.substract(saw),32);
+        scene.world().setKineticSpeed(saw,-128);
+        scene.world().createItemOnBelt(util.grid().at(1,0,1), Direction.DOWN, Items.CHICKEN.getDefaultInstance());
         scene.idle(60);
     }
 }

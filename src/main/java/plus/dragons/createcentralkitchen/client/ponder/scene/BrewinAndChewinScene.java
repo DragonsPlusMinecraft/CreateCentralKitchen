@@ -18,6 +18,7 @@
 
 package plus.dragons.createcentralkitchen.client.ponder.scene;
 
+import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBlock;
 import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelBlockEntity;
@@ -25,6 +26,7 @@ import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelPosition;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.scenes.highLogistics.PonderHilo;
 import java.util.List;
+
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.Direction;
@@ -36,11 +38,12 @@ import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.fluids.FluidStack;
 import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
 import umpaz.brewinandchewin.common.registry.BnCFluids;
+import umpaz.brewinandchewin.common.registry.BnCItems;
 
 public class BrewinAndChewinScene {
-    public static void part1(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void kegAutomate1(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("keg.automate.part_one", "Automating with Create: Part One");
+        scene.title("keg.automate.part_one", "Automating with Create: Keg - Part One");
         scene.configureBasePlate(0, 0, 6);
         scene.showBasePlate();
         scene.idle(10);
@@ -88,10 +91,11 @@ public class BrewinAndChewinScene {
         scene.idle(60);
     }
 
-    public static void part2(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void kegAutomate2(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("keg.automate.part_two", "Automating with Create: Part Two");
+        scene.title("keg.automate.part_two", "Automating with Create: Keg - Part Two");
         scene.configureBasePlate(0, 0, 8);
+        scene.scaleSceneView(0.77f);
         scene.showBasePlate();
         scene.idle(10);
 
@@ -120,7 +124,7 @@ public class BrewinAndChewinScene {
 
         scene.world().showSection(util.select().fromTo(4, 1, 1, 6, 3, 2).add(util.select().position(3, 3, 5)), Direction.DOWN);
         scene.overlay().showText(80)
-                .text("Factory gauges provide auto-filling for Keg ingredients")
+                .text("Factory gauges are very useful in the packaging process")
                 .pointAt(util.vector().centerOf(1, 2, 1))
                 .attachKeyFrame()
                 .placeNearTarget();
@@ -161,5 +165,39 @@ public class BrewinAndChewinScene {
                 .attachKeyFrame()
                 .placeNearTarget();
         scene.idle(60);
+    }
+
+    public static void spoutAndItemDrain(SceneBuilder builder, SceneBuildingUtil util) {
+        CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+        scene.title("alcohol.spout_and_item_drain", "Automating with Create: Drinks Production");
+        scene.configureBasePlate(0, 0, 7);
+        scene.scaleSceneView(0.8f);
+        scene.world().showSection(util.select().everywhere(),Direction.DOWN);
+        scene.world().setKineticSpeed(util.select().fromTo(1,1,2,1,1,6).add(util.select().fromTo(1,1,1,6,1,1)),-32);
+        scene.idle(10);
+
+        scene.world().setKineticSpeed(util.select().position(2,3,4),128);
+        scene.overlay().showText(60)
+                .text("Use spout to fill Tankard with drink")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(util.vector().centerOf(1, 3, 4));
+        scene.idle(10);
+        var tankard = scene.world().createItemOnBelt(util.grid().at(1, 1, 6), Direction.DOWN, BnCItems.TANKARD.getDefaultInstance());
+        scene.idle(30);
+        scene.world().stallBeltItem(tankard, true);
+        scene.world().modifyBlockEntityNBT(util.select().position(1,3,4), SpoutBlockEntity.class, nbt -> nbt.putInt("ProcessingTicks", 20));
+        scene.idle(20);
+        scene.world().changeBeltItemTo(tankard, BnCItems.DREAD_NOG.getDefaultInstance());
+        scene.world().stallBeltItem(tankard, false);
+        scene.idle(25);
+
+        scene.world().setKineticSpeed(util.select().position(4,1,2),-128);
+        scene.overlay().showText(60)
+                .text("Pour drink out of Tankard with Item Drain")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(util.vector().centerOf(4, 1, 2));
+        scene.idle(70);
     }
 }

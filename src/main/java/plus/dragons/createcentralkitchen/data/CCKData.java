@@ -36,5 +36,6 @@ public class CCKData {
         REGISTRATE.registerPonderLocalization(CCKPonderPlugin::new);
         REGISTRATE.registerForeignLocalization();
         REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, CCKRegistrateTags::addBlockTags);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, CCKRegistrateTags::addItemTags);
     }
 }

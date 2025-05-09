@@ -26,6 +26,7 @@ import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
 public class CCKPonderTags {
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
@@ -34,9 +35,15 @@ public class CCKPonderTags {
         PonderTagRegistrationHelper<ItemLike> itemHelper = helper.withKeyFunction(
                 RegisteredObjectsHelper::getKeyOrThrow);
 
-        CCKPonderPlugin.COOKING_POT.asOptional().ifPresent(block -> itemHelper.addToTag(ARM_TARGETS).add(block));
+        if(ModIntegration.FARMERSDELIGHT.enabled()){
+            entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.COOKING_POT);
+            entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.STOVE);
+            entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.SKILLET);
+            entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.CUTTING_BOARD);
+        }
 
-        CCKPonderPlugin.KEG.asOptional().ifPresent(
-                block -> itemHelper.addToTag(FLUIDS).add(block));
+        if(ModIntegration.BREWINANDCHEWIN.enabled()){
+            entryHelper.addToTag(FLUIDS).add(CCKPonderPlugin.KEG);
+        }
     }
 }

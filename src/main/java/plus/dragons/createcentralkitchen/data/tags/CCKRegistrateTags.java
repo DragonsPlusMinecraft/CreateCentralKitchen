@@ -19,9 +19,14 @@
 package plus.dragons.createcentralkitchen.data.tags;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.AllTags.AllBlockTags;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import plus.dragons.createcentralkitchen.common.registry.CCKTags;
+import umpaz.brewinandchewin.common.registry.BnCItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 public class CCKRegistrateTags {
@@ -36,5 +41,10 @@ public class CCKRegistrateTags {
         provider.addTag(ModTags.TRAY_HEAT_SOURCES).add(
                 AllBlocks.BLAZE_BURNER.get(),
                 AllBlocks.LIT_BLAZE_BURNER.get());
+    }
+
+    public static void addItemTags(RegistrateTagsProvider.IntrinsicImpl<Item> provider) {
+        provider.addTag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).addOptional(
+                ResourceLocation.fromNamespaceAndPath("brewinandchewin", "tankard"));
     }
 }

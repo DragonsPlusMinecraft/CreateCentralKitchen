@@ -33,9 +33,15 @@ import plus.dragons.createcentralkitchen.common.CCKCommon;
 public class CCKPonderPlugin implements PonderPlugin {
     static final BlockEntry<Block> COOKING_POT = new BlockEntry<>(REGISTRATE,
             DeferredHolder.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "cooking_pot")));
-
+    static final BlockEntry<Block> STOVE = new BlockEntry<>(REGISTRATE,
+            DeferredHolder.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "stove")));
+    static final BlockEntry<Block> CUTTING_BOARD = new BlockEntry<>(REGISTRATE,
+            DeferredHolder.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "cutting_board")));
+    static final BlockEntry<Block> SKILLET = new BlockEntry<>(REGISTRATE,
+            DeferredHolder.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "skillet")));
     static final BlockEntry<Block> KEG = new BlockEntry<>(REGISTRATE,
             DeferredHolder.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("brewinandchewin", "keg")));
+
 
     @Override
     public String getModId() {

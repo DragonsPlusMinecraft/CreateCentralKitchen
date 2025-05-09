@@ -45,7 +45,7 @@ public class SkilletArmInteractionPoint extends DepositOnlyArmInteractionPoint {
 
     @Override
     protected Vec3 getInteractionPositionVector() {
-        return Vec3.upFromBottomCenterOf(pos, 1f);
+        return Vec3.upFromBottomCenterOf(pos, 1 / 16f);
     }
 
     public interface Interaction {
