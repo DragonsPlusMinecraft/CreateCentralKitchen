@@ -42,7 +42,6 @@ public class CCKPonderPlugin implements PonderPlugin {
     static final BlockEntry<Block> KEG = new BlockEntry<>(REGISTRATE,
             DeferredHolder.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("brewinandchewin", "keg")));
 
-
     @Override
     public String getModId() {
         return CCKCommon.ID;

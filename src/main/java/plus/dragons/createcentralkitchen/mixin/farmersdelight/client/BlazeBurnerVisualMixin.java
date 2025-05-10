@@ -47,7 +47,7 @@ public abstract class BlazeBurnerVisualMixin extends AbstractBlockEntityVisual<B
     @Shadow
     private @Nullable TransformedInstance hat;
     @Unique
-    private PartialModel chefHatModel;
+    private @Nullable PartialModel chefHatModel;
 
     private BlazeBurnerVisualMixin(VisualizationContext ctx, BlazeBurnerBlockEntity blockEntity, float partialTick) {
         super(ctx, blockEntity, partialTick);

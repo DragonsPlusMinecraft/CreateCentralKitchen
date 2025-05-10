@@ -26,7 +26,6 @@ import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelPosition;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.scenes.highLogistics.PonderHilo;
 import java.util.List;
-
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.Direction;
@@ -172,11 +171,11 @@ public class BrewinAndChewinScene {
         scene.title("alcohol.spout_and_item_drain", "Automating with Create: Drinks Production");
         scene.configureBasePlate(0, 0, 7);
         scene.scaleSceneView(0.8f);
-        scene.world().showSection(util.select().everywhere(),Direction.DOWN);
-        scene.world().setKineticSpeed(util.select().fromTo(1,1,2,1,1,6).add(util.select().fromTo(1,1,1,6,1,1)),-32);
+        scene.world().showSection(util.select().everywhere(), Direction.DOWN);
+        scene.world().setKineticSpeed(util.select().fromTo(1, 1, 2, 1, 1, 6).add(util.select().fromTo(1, 1, 1, 6, 1, 1)), -32);
         scene.idle(10);
 
-        scene.world().setKineticSpeed(util.select().position(2,3,4),128);
+        scene.world().setKineticSpeed(util.select().position(2, 3, 4), 128);
         scene.overlay().showText(60)
                 .text("Use spout to fill Tankard with drink")
                 .attachKeyFrame()
@@ -186,13 +185,13 @@ public class BrewinAndChewinScene {
         var tankard = scene.world().createItemOnBelt(util.grid().at(1, 1, 6), Direction.DOWN, BnCItems.TANKARD.getDefaultInstance());
         scene.idle(30);
         scene.world().stallBeltItem(tankard, true);
-        scene.world().modifyBlockEntityNBT(util.select().position(1,3,4), SpoutBlockEntity.class, nbt -> nbt.putInt("ProcessingTicks", 20));
+        scene.world().modifyBlockEntityNBT(util.select().position(1, 3, 4), SpoutBlockEntity.class, nbt -> nbt.putInt("ProcessingTicks", 20));
         scene.idle(20);
         scene.world().changeBeltItemTo(tankard, BnCItems.DREAD_NOG.getDefaultInstance());
         scene.world().stallBeltItem(tankard, false);
         scene.idle(25);
 
-        scene.world().setKineticSpeed(util.select().position(4,1,2),-128);
+        scene.world().setKineticSpeed(util.select().position(4, 1, 2), -128);
         scene.overlay().showText(60)
                 .text("Pour drink out of Tankard with Item Drain")
                 .attachKeyFrame()

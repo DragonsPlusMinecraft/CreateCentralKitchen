@@ -50,7 +50,7 @@ public class CCKCommon {
     }
 
     @SubscribeEvent
-    public void onConstructMod(final FMLConstructModEvent event) {
+    public void construct(final FMLConstructModEvent event) {
         for (ModIntegration integration : ModIntegration.values()) {
             if (integration.enabled())
                 event.enqueueWork(integration::onConstructMod);
@@ -58,7 +58,7 @@ public class CCKCommon {
     }
 
     @SubscribeEvent
-    public void onCommonSetup(final FMLCommonSetupEvent event) {
+    public void setup(final FMLCommonSetupEvent event) {
         for (ModIntegration integration : ModIntegration.values()) {
             if (integration.enabled())
                 event.enqueueWork(integration::onCommonSetup);

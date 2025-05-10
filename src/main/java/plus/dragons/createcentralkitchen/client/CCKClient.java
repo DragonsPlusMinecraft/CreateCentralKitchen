@@ -38,7 +38,7 @@ public class CCKClient {
     }
 
     @SubscribeEvent
-    public void onClientSetup(final FMLClientSetupEvent event) {
+    public void setup(final FMLClientSetupEvent event) {
         PonderIndex.addPlugin(new CCKPonderPlugin());
         for (ModIntegration integration : ModIntegration.values()) {
             if (integration.enabled())

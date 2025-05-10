@@ -18,6 +18,7 @@
 
 package plus.dragons.createcentralkitchen.mixin.brewinandchewin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -54,6 +55,20 @@ public class GenericItemFillingMixin {
                     .filter(recipe -> recipe.getFluidIngredients().getFirst().test(availableFluid))
                     .filter(recipe -> recipe.getIngredients().getFirst().test(stack))
                     .findFirst()
-                    .ifPresent(recipe -> cir.setReturnValue(recipe.getFluidResults().getFirst().getAmount()));
+                    .ifPresent(recipe -> cir.setReturnValue(recipe.getFluidIngredients().getFirst().getRequiredAmount()));
+    }
+
+    @Inject(method = "fillItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getCapability(Lnet/neoforged/neoforge/capabilities/ItemCapability;)Ljava/lang/Object;"), cancellable = true)
+    private static void fillItemByKegPouring(Level level, int requiredAmount, ItemStack stack, FluidStack availableFluid, CallbackInfoReturnable<ItemStack> cir, @Local(ordinal = 1) FluidStack toFill) {
+        if (CCKConfig.recipes().convertKegPouringRecipesToFillingRecipes.get())
+            KegPouringRecipeConverters.getKegFillingRecipes(level)
+                    .map(RecipeHolder::value)
+                    .filter(recipe -> recipe.getFluidIngredients().getFirst().test(toFill))
+                    .filter(recipe -> recipe.getIngredients().getFirst().test(stack))
+                    .findFirst()
+                    .ifPresent(recipe -> {
+                        stack.shrink(1);
+                        cir.setReturnValue(recipe.getRollableResultsAsItemStacks().getFirst());
+                    });
     }
 }

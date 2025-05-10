@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
-import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
 public class SkilletArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     public SkilletArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {

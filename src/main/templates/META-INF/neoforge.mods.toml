@@ -17,7 +17,7 @@ issueTrackerURL="${mod_github}/issues"
     config="${mod_id}.mixins.json"
 
 #[[accessTransformers]]
-    file="META-INF/accesstransformer.cfg"
+#    file="META-INF/accesstransformer.cfg"
 
 #[modproperties."${mod_id}"]
 
@@ -39,12 +39,12 @@ issueTrackerURL="${mod_github}/issues"
     modId="create"
     type="required"
     versionRange="${create_version_range}"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
 
 [[dependencies."${mod_id}"]]
     modId="create_dragons_plus"
     type="required"
     versionRange="${create_dragons_plus_version_range}"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"

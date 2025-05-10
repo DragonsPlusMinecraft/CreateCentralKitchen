@@ -47,7 +47,7 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.burner.ChefB
 @Mixin(BlazeBurnerRenderer.class)
 public class BlazeBurnerRendererMixin {
     @ModifyVariable(method = "renderSafe(Lcom/simibubi/create/content/processing/burner/BlazeBurnerBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V", at = @At(value = "STORE", ordinal = 0))
-    private PartialModel updateChefHat(PartialModel drawHat, @Local(argsOnly = true) BlazeBurnerBlockEntity burner) {
+    private @Nullable PartialModel updateChefHat(@Nullable PartialModel drawHat, @Local(argsOnly = true) BlazeBurnerBlockEntity burner) {
         if (drawHat == null && ((ChefBlazeBurnerBlockEntity) burner).isChef())
             return CCKPartialModels.CHEF_HAT;
         return drawHat;
@@ -55,7 +55,7 @@ public class BlazeBurnerRendererMixin {
 
     @SuppressWarnings("UnresolvedLocalCapture")
     @ModifyVariable(method = "renderShared", at = @At(value = "LOAD", ordinal = 0), argsOnly = true)
-    private static PartialModel renderChefHat(PartialModel drawHat,
+    private static @Nullable PartialModel renderChefHat(PartialModel drawHat,
             @Local(argsOnly = true, ordinal = 0) PoseStack ms,
             @Local(argsOnly = true, ordinal = 1) @Nullable PoseStack modelTransform,
             @Local(argsOnly = true) BlockState blockState,

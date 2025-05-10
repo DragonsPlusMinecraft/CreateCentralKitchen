@@ -31,7 +31,7 @@ public class CCKPonderScenes {
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> sceneHelper = helper.withKeyFunction(RegistryEntry::getId);
 
-        if(ModIntegration.FARMERSDELIGHT.enabled()){
+        if (ModIntegration.FARMERSDELIGHT.enabled()) {
             sceneHelper.forComponents(CCKPonderPlugin.COOKING_POT)
                     .addStoryBoard("farmersdelight/cooking_pot_automate", FarmersDelightScene::automate, AllCreatePonderTags.ARM_TARGETS, AllCreatePonderTags.HIGH_LOGISTICS)
                     .addStoryBoard("farmersdelight/heat_source", FarmersDelightScene::heatSource);
@@ -47,7 +47,7 @@ public class CCKPonderScenes {
                     .addStoryBoard("farmersdelight/cutting_board", FarmersDelightScene::cuttingBoard, AllCreatePonderTags.ARM_TARGETS);
         }
 
-        if(ModIntegration.BREWINANDCHEWIN.enabled()){
+        if (ModIntegration.BREWINANDCHEWIN.enabled()) {
             sceneHelper.forComponents(CCKPonderPlugin.KEG)
                     .addStoryBoard("brewinandchewin/keg_fluid", BrewinAndChewinScene::kegAutomate1, AllCreatePonderTags.FLUIDS)
                     .addStoryBoard("brewinandchewin/keg_ingredient", BrewinAndChewinScene::kegAutomate2, AllCreatePonderTags.HIGH_LOGISTICS)

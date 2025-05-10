@@ -25,8 +25,6 @@ import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import plus.dragons.createcentralkitchen.common.registry.CCKTags;
-import umpaz.brewinandchewin.common.registry.BnCItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 public class CCKRegistrateTags {

@@ -35,14 +35,14 @@ public class CCKPonderTags {
         PonderTagRegistrationHelper<ItemLike> itemHelper = helper.withKeyFunction(
                 RegisteredObjectsHelper::getKeyOrThrow);
 
-        if(ModIntegration.FARMERSDELIGHT.enabled()){
+        if (ModIntegration.FARMERSDELIGHT.enabled()) {
             entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.COOKING_POT);
             entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.STOVE);
             entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.SKILLET);
             entryHelper.addToTag(ARM_TARGETS).add(CCKPonderPlugin.CUTTING_BOARD);
         }
 
-        if(ModIntegration.BREWINANDCHEWIN.enabled()){
+        if (ModIntegration.BREWINANDCHEWIN.enabled()) {
             entryHelper.addToTag(FLUIDS).add(CCKPonderPlugin.KEG);
         }
     }
