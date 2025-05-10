@@ -36,7 +36,7 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalAr
 import plus.dragons.createcentralkitchen.integration.farmersdelight.packager.CookingPotUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
 import plus.dragons.createcentralkitchen.integration.mynethersdelight.mechanicalArm.NetherStoveArmInteractionPoint;
-import plus.dragons.createdragonsplus.common.recipe.freeze.BlockFreezer;
+import plus.dragons.createdragonsplus.common.processing.freeze.BlockFreezer;
 import umpaz.brewinandchewin.common.registry.BnCBlocks;
 import umpaz.brewinandchewin.common.tag.BnCTags;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;

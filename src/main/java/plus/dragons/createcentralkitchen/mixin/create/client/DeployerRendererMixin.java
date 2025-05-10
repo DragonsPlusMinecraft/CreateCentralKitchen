@@ -31,7 +31,7 @@ import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.mixin.create.DeployerBlockEntityAccessor;
 
 @Mixin(DeployerRenderer.class)
-public class DeployerRenderMixin {
+public class DeployerRendererMixin {
     @ModifyVariable(method = "renderItem", ordinal = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;getInstance()Lnet/minecraft/client/Minecraft;"))
     private boolean modifyToolOffset(boolean punching, @Local(name = "displayMode") boolean displayMode, @Local(argsOnly = true) DeployerBlockEntity deployer, @Local(argsOnly = true) PoseStack ms) {
         if (punching || displayMode || !CCKConfig.client().renderDeployerUsingItemWithCustomTransform.get())

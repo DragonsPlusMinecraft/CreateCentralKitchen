@@ -22,7 +22,7 @@
     "minecraft.EdibleWhenPlacedMixin"
   ],
   "client": [
-    "create.client.DeployerRenderMixin",
+    "create.client.DeployerRendererMixin",
     "farmersdelight.client.BlazeBurnerBlockEntityMixin",
     "farmersdelight.client.BlazeBurnerVisualMixin"
   ],

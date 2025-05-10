@@ -35,7 +35,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createdragonsplus.common.recipe.freeze.BlockFreezer;
+import plus.dragons.createdragonsplus.common.processing.freeze.BlockFreezer;
 import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
 import umpaz.brewinandchewin.common.tag.BnCTags;
 import vectorwing.farmersdelight.common.tag.ModTags;

@@ -92,19 +92,7 @@ repositories {
 }
 
 dependencies {
-    jarJar(implementation("me.fallenbreath:conditional-mixin-neoforge")) {
-        version {
-            strictly "[${conditional_mixin_version},)"
-            prefer conditional_mixin_version
-        }
-    }
-
-    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${flywheel_minecraft_version}:${flywheel_version}")
-    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${flywheel_minecraft_version}:${flywheel_version}")
-    runtimeOnly("dev.engine-room.vanillin:vanillin-neoforge-${flywheel_minecraft_version}:${vanillin_version}")
-    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
-    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
-    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}") { transitive false }
+    compileOnly("me.fallenbreath:conditional-mixin-neoforge:${conditional_mixin_version}")
     implementation("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
 
     compileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
