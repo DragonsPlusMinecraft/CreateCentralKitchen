@@ -16,21 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.config;
+package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
-import net.createmod.catnip.config.ConfigBase;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import org.spongepowered.asm.mixin.Mixin;
+import plus.dragons.createcentralkitchen.data.tags.CCKRuntimeTags.ItemTags.EdibleWhenPlaced;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
 
-public class CCKClientConfig extends ConfigBase {
-    public final ConfigBool renderDeployerUsingItemWithCustomTransform = b(true,
-            "renderDeployerUsingItemWithCustomTransform",
-            Comments.renderDeployerUsingItemWithCustomTransform);
-
-    @Override
-    public String getName() {
-        return "client";
-    }
-
-    static class Comments {
-        static final String renderDeployerUsingItemWithCustomTransform = "If Deployer held items in #create:handheld_in_deployer_use should have custom transform at Use mode";
-    }
-}
+@Restriction(require = @Condition(ModIntegration.Constants.FARMERSDELIGHT))
+@Mixin({ FeastBlock.class, PieBlock.class })
+public class EdibleWhenPlacedMixin implements EdibleWhenPlaced {}

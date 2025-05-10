@@ -24,7 +24,10 @@ import com.simibubi.create.AllTags.AllBlockTags;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 public class CCKRegistrateTags {
@@ -42,7 +45,12 @@ public class CCKRegistrateTags {
     }
 
     public static void addItemTags(RegistrateTagsProvider.IntrinsicImpl<Item> provider) {
-        provider.addTag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).addOptional(
-                ResourceLocation.fromNamespaceAndPath("brewinandchewin", "tankard"));
+        provider.addTag(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag)
+                .addTag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED)
+                .add(Items.PUMPKIN_PIE)
+                .addOptional(ModIntegration.BREWINANDCHEWIN.asResource("tankard"))
+                .addOptionalTag(ModIntegration.BREWINANDCHEWIN.asResource("cheese_wheels/unripe"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("trailsandtails_delight", "pottery_bowl"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("trailsandtails_delight", "sniffer_eggshell"));
     }
 }

@@ -16,21 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.config;
+package plus.dragons.createcentralkitchen.mixin.minecraft;
 
-import net.createmod.catnip.config.ConfigBase;
+import net.minecraft.world.level.block.CakeBlock;
+import org.spongepowered.asm.mixin.Mixin;
+import plus.dragons.createcentralkitchen.data.tags.CCKRuntimeTags.ItemTags.EdibleWhenPlaced;
 
-public class CCKClientConfig extends ConfigBase {
-    public final ConfigBool renderDeployerUsingItemWithCustomTransform = b(true,
-            "renderDeployerUsingItemWithCustomTransform",
-            Comments.renderDeployerUsingItemWithCustomTransform);
-
-    @Override
-    public String getName() {
-        return "client";
-    }
-
-    static class Comments {
-        static final String renderDeployerUsingItemWithCustomTransform = "If Deployer held items in #create:handheld_in_deployer_use should have custom transform at Use mode";
-    }
-}
+@Mixin(CakeBlock.class)
+public class EdibleWhenPlacedMixin implements EdibleWhenPlaced {}

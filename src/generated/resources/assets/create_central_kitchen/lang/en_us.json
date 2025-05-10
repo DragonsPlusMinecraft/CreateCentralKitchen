@@ -26,5 +26,7 @@
   "create_central_kitchen.ponder.keg.automate.part_two.text_2": "Factory gauges are very useful in the packaging process",
   "create_central_kitchen.ponder.keg.automate.part_two.text_3": "Use pipe to input liquid ingredient",
   "create_central_kitchen.ponder.skillet_and_stove.automate.header": "Automating with Create: Skillet and Stove",
-  "create_central_kitchen.ponder.skillet_and_stove.automate.text_1": "Mechanical Arm can put raw ingredient onto Stove and Skillet"
+  "create_central_kitchen.ponder.skillet_and_stove.automate.text_1": "Mechanical Arm can put raw ingredient onto Stove and Skillet",
+  "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
+  "pack.create_central_kitchen.runtime.description": "Create: Central Kitchen Runtime Generated Resources"
 }

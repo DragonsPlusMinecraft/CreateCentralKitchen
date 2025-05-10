@@ -13,14 +13,15 @@
     "create.DeployerBlockEntityAccessor",
     "farmersdelight.BlockHelperMixin",
     "farmersdelight.CookingPotBlockEntityMixin",
+    "farmersdelight.EdibleWhenPlacedMixin",
     "farmersdelight.HeatableBlockEntityMixin",
     "farmersdelight.RuntimeDataGeneratorMixin",
     "farmersdelight.SawBlockEntityMixin",
     "farmersdelight.SkilletBlockEntityMixin",
-    "farmersdelight.client.BlazeBurnerRendererMixin"
+    "farmersdelight.client.BlazeBurnerRendererMixin",
+    "minecraft.EdibleWhenPlacedMixin"
   ],
   "client": [
-    "create.client.BeltHelperMixin",
     "create.client.DeployerRenderMixin",
     "farmersdelight.client.BlazeBurnerBlockEntityMixin",
     "farmersdelight.client.BlazeBurnerVisualMixin"
