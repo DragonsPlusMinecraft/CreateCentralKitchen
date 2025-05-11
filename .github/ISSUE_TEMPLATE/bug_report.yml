@@ -1,0 +1,39 @@
+name: Report Bug
+description: Create a bug report
+labels: [ "bug", "triage" ]
+body:
+  -   type: input
+      attributes:
+        label: Minecraft Version
+        description: The version of Minecraft you were using when the incompatibility occurred
+      validations:
+        required: true
+  -   type: textarea
+      attributes:
+        label: Describe the Bug
+        description: A clear and concise description of what the bug is
+      validations:
+        required: true
+  -   type: textarea
+      attributes:
+        label: Reproduction Steps
+        description: Tell us about the steps to reproduce the bug.
+        value: |
+          1.
+          2.
+          3.
+          ...
+      validations:
+        required: true
+  -   type: textarea
+      attributes:
+        label: Expected Result
+        description: A clear and concise description of what you expected to happen
+      validations:
+        required: true
+  -   type: input
+      attributes:
+        label: Debug Log
+        description: If applicable, please add a **link** to the  log that was created when this issue occured. Please add a **link** to the crash report or log that was created when this issue occured. You can upload the [mclo.gs](https://mclo.gs/) or GitHub Gist.
+      validations:
+        required: false

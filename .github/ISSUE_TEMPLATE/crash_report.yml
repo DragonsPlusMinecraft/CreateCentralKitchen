@@ -1,0 +1,27 @@
+name: Report Game-Crashing Issue
+description: Create a crash report
+labels: [ "crash", "triage" ]
+body:
+  -   type: input
+      attributes:
+        label: Minecraft Version
+        description: The version of Minecraft you were using when the incompatibility occurred
+      validations:
+        required: true
+  -   type: textarea
+      attributes:
+        label: Crash Reproduction Steps
+        description: Tell us how it happened.
+        value: |
+          1.
+          2.
+          3.
+          ...
+      validations:
+        required: true
+  -   type: input
+      attributes:
+        label: Crash Report or Log
+        description: Please add a **link** to the crash report or log that was created when this issue occured. You can upload the [mclo.gs](https://mclo.gs/) or GitHub Gist.
+      validations:
+        required: true
