@@ -89,7 +89,7 @@ public class KegPouringRecipeConverters {
         if (!AllRecipeTypes.CAN_BE_AUTOMATED.test(holder))
             return false;
         var recipe = holder.value();
-        if (recipe instanceof CreatePotionPouringRecipe || !recipe.canFill())
+        if (recipe instanceof CreatePotionPouringRecipe)
             return false;
         var filled = recipe.getOutput();
         if (filled.getCapability(FluidHandler.ITEM) != null)
@@ -103,7 +103,7 @@ public class KegPouringRecipeConverters {
         if (!AllRecipeTypes.CAN_BE_AUTOMATED.test(holder))
             return false;
         KegPouringRecipe recipe = holder.value();
-        if (recipe instanceof CreatePotionPouringRecipe)
+        if (recipe instanceof CreatePotionPouringRecipe || !recipe.canFill())
             return false;
         var filled = recipe.getOutput();
         if (filled.getCapability(FluidHandler.ITEM) != null)
