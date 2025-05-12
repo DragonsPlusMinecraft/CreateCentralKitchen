@@ -1,0 +1,65 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:bread"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "farmersdelight:mutton_wrap"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_mutton_wrap"
+        },
+        {
+          "tag": "forge:cooked_mutton"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_mutton_wrap"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_mutton_wrap"
+        },
+        {
+          "tag": "forge:salad_ingredients"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_mutton_wrap"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_mutton_wrap"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_mutton_wrap"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_mutton_wrap"
+  }
+}
