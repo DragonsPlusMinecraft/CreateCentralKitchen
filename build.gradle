@@ -46,22 +46,6 @@ minecraft {
                 }
             }
         }
-
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'create_central_kitchen',
-                 '--all', '--output', file('src/generated/resources/'),
-                 '--existing', file('src/main/resources/'),
-                 '--existing-mod', 'create',
-                 '--existing-mod', 'farmersdelight'
-            mods {
-                create_central_kitchen {
-                    source sourceSets.main
-                }
-            }
-        }
     }
 }
 
@@ -102,11 +86,6 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-/*    maven {
-        // location of maven for CC: Tweaked
-        name = "squiddev"
-        url = "https://squiddev.cc/maven/"
-    }*/
     maven {
         name 'DragonsPlus Maven'
         url "https://maven.dragons.plus/releases"
@@ -184,7 +163,7 @@ mixin {
 
 publishMods {
     file = tasks.jarJar.archiveFile
-    changelog = new File("changelog/${mod_version}.md").text
+    changelog = new File("CHANGELOG.md").text
     version = mod_version
     type = STABLE
     displayName = "CCK ${mod_version} for Create ${minecraft_version}-${create_version}"

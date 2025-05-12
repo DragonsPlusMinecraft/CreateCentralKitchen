@@ -16,7 +16,6 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
@@ -41,8 +40,7 @@ public class VirtualFluidFromItem {
                 }
             }), VirtualFluid::createSource, VirtualFluid::createFlowing)
             .defaultLang()
-            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-            .transform(Recipes.fluidHandling(container, amount));
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(RegistryObject<? extends ItemLike> container, int colorIn, int amount) {
@@ -60,8 +58,7 @@ public class VirtualFluidFromItem {
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(String name, ItemProviderEntry<?> container, int colorIn, int amount) {
         return REGISTRATE.virtualFluid(name, WATER_STILL, WATER_FLOW)
             .defaultLang()
-            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-            .transform(Recipes.fluidHandling(container, amount));
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> watery(ItemProviderEntry<?> container, int colorIn, int amount) {
@@ -91,8 +88,7 @@ public class VirtualFluidFromItem {
                     }
                 }), VirtualFluid::createSource, VirtualFluid::createFlowing)
             .defaultLang()
-            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-            .transform(Recipes.fluidHandling(container, amount));
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> milky(RegistryObject<? extends ItemLike> container, int colorIn, int amount) {
@@ -122,8 +118,7 @@ public class VirtualFluidFromItem {
                     }
                 }),  VirtualFluid::createSource, VirtualFluid::createFlowing)
             .defaultLang()
-            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-            .transform(Recipes.fluidHandling(container, amount));
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> milky(ItemProviderEntry<?> container, int colorIn, int amount) {
@@ -145,8 +140,7 @@ public class VirtualFluidFromItem {
                                                                        int amount) {
         return REGISTRATE.virtualFluid(name, stillTexture, flowTexture)
             .defaultLang()
-            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-            .transform(Recipes.fluidHandling(container, amount));
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> virtual(String name,
@@ -196,8 +190,7 @@ public class VirtualFluidFromItem {
                                                                        int amount) {
         return REGISTRATE.virtualFluid(name, stillTexture, flowTexture)
             .defaultLang()
-            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-            .transform(Recipes.fluidHandling(container, amount));
+            .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
     public static FluidBuilder<VirtualFluid, CreateRegistrate> virtual(String name,

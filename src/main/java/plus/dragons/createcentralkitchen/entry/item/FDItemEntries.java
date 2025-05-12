@@ -13,25 +13,18 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.cooking.CookingGuideItem;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
-import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;
-import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
-import plus.dragons.createcentralkitchen.foundation.data.tag.ForgeItemTags;
 import plus.dragons.createcentralkitchen.foundation.item.ConditionedItem;
-import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoolCondition;
-import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
@@ -40,12 +33,6 @@ public class FDItemEntries {
     
     public static final ItemEntry<CookingGuideItem> COOKING_GUIDE = REGISTRATE.item("cooking_guide", CookingGuideItem::new)
         .properties(prop -> prop.stacksTo(1))
-        .transform(DatapackRecipes.addRecipe(Mods.FD, (ctx, prov) -> prov.add(Recipes.shapeless(ctx.getId())
-            .output(ctx.get())
-            .require(ForgeItemTags.create("plates/obsidian"))
-            .require(ModItems.CANVAS.get())
-            .require(Items.CARROT)
-            .whenModLoaded(Mods.FD))))
         .register();
 
     
@@ -60,8 +47,6 @@ public class FDItemEntries {
         INCOMPLETE_APPLE_PIE = sequencedFood(ModItems.APPLE_PIE, FoodValues.PIE_CRUST),
         INCOMPLETE_SWEET_BERRY_CHEESECAKE = sequencedFood(ModItems.SWEET_BERRY_CHEESECAKE, FoodValues.PIE_CRUST),
         INCOMPLETE_PUMPKIN_PIE = sequencedFood("pumpkin_pie", FoodValues.PIE_CRUST),
-        INCOMPLETE_CHERRY_PIE = sequencedFood("cherry_pie", FoodValues.PIE_CRUST),
-        INCOMPLETE_TRUFFLE_PIE = sequencedFood("truffle_pie", FoodValues.PIE_CRUST),
         INCOMPLETE_MULBERRY_PIE = sequencedFood("mulberry_pie", FoodValues.PIE_CRUST);
     
     public static final ItemEntry<ConditionedItem>
@@ -102,7 +87,7 @@ public class FDItemEntries {
                     .create(Mods.atmospheric("relief"), ForgeRegistries.MOB_EFFECTS)
                     .orElse(MobEffects.DAMAGE_RESISTANCE), 200), 1F).build()))
             .register(),
-        PASSIONFRUIT_CAKE_SLICE = cakeSlice(Mods.peculiars("passionfruit_cake"))
+        PASSION_FRUIT_CAKE_SLICE = cakeSlice(Mods.peculiars("passion_fruit_cake"))
             .properties(prop -> prop.food(cakeSliceFood().nutrition(1)
                 .effect(() -> new MobEffectInstance(RegistryObject
                     .create(Mods.atmospheric("spitting"), ForgeRegistries.MOB_EFFECTS)
@@ -146,29 +131,7 @@ public class FDItemEntries {
                 : new ConditionedItem(prop, config, mod))
             .lang("Slice of " + RegistrateLangProvider.toEnglishName(pieName))
             .properties(prop -> prop.food(FoodValues.PIE_SLICE))
-            .onRegister(item -> ComposterBlock.COMPOSTABLES.putIfAbsent(item, 0.85F))
-            .transform(DatapackRecipes.addRecipe(Mods.FD, (ctx, prov) -> {
-                RegistryObject<Item> pie = RegistryObject.create(pieId, ForgeRegistries.ITEMS);
-                if (!pie.isPresent())
-                    return;
-                var cutting = Recipes.cuttingBoard(ctx.getId())
-                    .require(pie.get())
-                    .tool(ForgeTags.TOOLS_KNIVES)
-                    .output(ctx.get(), 4)
-                    .withCondition(ConfigBoolCondition.PIE_OVERHAUL)
-                    .withCondition(new ConfigListCondition("pie_overhaul_black_list", pieId.toString()).blackList());
-                var crafting = Recipes.shapeless(pieName + "_from_slices")
-                    .requiredToUnlock(prov, DataIngredient.items(ctx), 4)
-                    .output(pie.get())
-                    .withCondition(ConfigBoolCondition.PIE_OVERHAUL)
-                    .withCondition(new ConfigListCondition("pie_overhaul_black_list", pieId.toString()).blackList());
-                if (!minecraft) {
-                    cutting.whenModLoaded(mod);
-                    crafting.whenModLoaded(mod);
-                }
-                prov.add(cutting);
-                prov.add(crafting);
-            }));
+            .onRegister(item -> ComposterBlock.COMPOSTABLES.putIfAbsent(item, 0.85F));
     }
     
     private static FoodProperties.Builder cakeSliceFood() {
@@ -183,21 +146,7 @@ public class FDItemEntries {
         return REGISTRATE.item(sliceName, prop -> new ConditionedItem(prop, mod))
             .lang("Slice of " + RegistrateLangProvider.toEnglishName(cakeName))
             .properties(prop -> prop.food(FoodValues.CAKE_SLICE))
-            .onRegister(item -> ComposterBlock.COMPOSTABLES.putIfAbsent(item, 0.85F))
-            .transform(DatapackRecipes.addRecipe(Mods.FD, (ctx, prov) -> {
-                RegistryObject<Item> cake = RegistryObject.create(cakeId, ForgeRegistries.ITEMS);
-                if (!cake.isPresent())
-                    return;
-                prov.add(Recipes.cuttingBoard(ctx.getId())
-                    .require(cake.get())
-                    .tool(ForgeTags.TOOLS_KNIVES)
-                    .output(ctx.get(), 7)
-                    .whenModLoaded(mod));
-                prov.add(Recipes.shapeless(cakeName + "_from_slices")
-                    .requiredToUnlock(prov, DataIngredient.items(ctx), 7)
-                    .output(cake.get())
-                    .whenModLoaded(mod));
-            }));
+            .onRegister(item -> ComposterBlock.COMPOSTABLES.putIfAbsent(item, 0.85F));
     }
     
 }

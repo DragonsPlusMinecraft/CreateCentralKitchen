@@ -16,7 +16,6 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
 import plus.dragons.createcentralkitchen.foundation.fluid.VirtualFluidFromItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
@@ -55,8 +54,7 @@ public class EDFluidEntries {
                             }
                         }),  VirtualFluid::createSource, VirtualFluid::createFlowing)
                 .defaultLang()
-                .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
-                .transform(Recipes.fluidHandling(container, amount));
+                .properties(builder -> builder.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL));
     }
     
 }

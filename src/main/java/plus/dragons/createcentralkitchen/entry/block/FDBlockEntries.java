@@ -1,20 +1,14 @@
 package plus.dragons.createcentralkitchen.entry.block;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -28,14 +22,10 @@ import net.minecraftforge.registries.RegisterEvent;
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
-import plus.dragons.createcentralkitchen.foundation.data.loot.BlockLootTables;
-import plus.dragons.createcentralkitchen.foundation.data.model.block.PieBlockStateGen;
-import plus.dragons.createcentralkitchen.foundation.data.tag.OptionalTags;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
@@ -51,27 +41,11 @@ public class FDBlockEntries {
         .block("blaze_stove", BlazeStoveBlock::new)
         .initialProperties(SharedProperties::softMetal)
         .properties(p -> p.mapColor(MapColor.COLOR_GRAY).lightLevel(BlazeBurnerBlock::getLight))
-        .transform(OptionalTags.block(
-            BlockTags.MINEABLE_WITH_PICKAXE,
-            AllTags.AllBlockTags.FAN_TRANSPARENT.tag,
-            ModTags.HEAT_SOURCES))
-        .transform(BlockLootTables.add(Mods.FD, block ->
-                new VanillaBlockLoot().createSingleItemTable(AllBlocks.BLAZE_BURNER.get())))
-        .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
         .register();
     
     public static final BlockEntry<PieBlock> PUMPKIN_PIE = pie("pumpkin_pie", FDItemEntries.PUMPKIN_PIE_SLICE::get, true)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
         .register();
-
-    // Removed due to Environmental no longer has them
-/*    public static final BlockEntry<PieBlock> CHERRY_PIE = pie("cherry_pie", FDItemEntries.CHERRY_PIE_SLICE::get, false)
-        .setData(ProviderType.LANG, NonNullBiConsumer.noop())
-        .register();
-    
-    public static final BlockEntry<PieBlock> TRUFFLE_PIE = pie("truffle_pie", FDItemEntries.TRUFFLE_PIE_SLICE::get, false)
-        .setData(ProviderType.LANG, NonNullBiConsumer.noop())
-        .register();*/
     
     public static final BlockEntry<PieBlock> MULBERRY_PIE = pie("mulberry_pie", FDItemEntries.MULBERRY_PIE_SLICE::get, false)
         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
@@ -81,11 +55,7 @@ public class FDBlockEntries {
     private static BlockBuilder<PieBlock, CreateRegistrate> pie(String name, NonNullSupplier<Item> slice, boolean defaultTexture) {
         return REGISTRATE
             .block(name, prop -> new PieBlock(prop, slice))
-            .initialProperties(() -> Blocks.CAKE)
-            .properties(BlockLootTables::noLootGen)
-            .transform(OptionalTags.block(ModTags.MINEABLE_WITH_KNIFE))
-            .loot((loot, block) -> loot.add(block, RegistrateBlockLootTables.noDrop()))
-            .blockstate((defaultTexture ? PieBlockStateGen.DEFAULT : PieBlockStateGen.CUSTOM)::generate);
+            .initialProperties(() -> Blocks.CAKE);
     }
     
     public static boolean isPieOverhaulEnabled(ResourceLocation id) {

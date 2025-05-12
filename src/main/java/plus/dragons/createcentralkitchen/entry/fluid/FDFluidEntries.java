@@ -10,9 +10,6 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import plus.dragons.createcentralkitchen.CentralKitchen;
-import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.DatapackRecipes;
-import plus.dragons.createcentralkitchen.foundation.data.recipe.provider.Recipes;
-import plus.dragons.createcentralkitchen.foundation.data.tag.OptionalTags;
 import plus.dragons.createcentralkitchen.foundation.fluid.VirtualFluidFromItem;
 import plus.dragons.createcentralkitchen.foundation.item.FluidBucketItem;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
@@ -39,7 +36,6 @@ public class FDFluidEntries {
             CentralKitchen.genRL("fluid/tomato_sauce_flow"),
             NoTintFluidType::new)
         .lang("Tomato Sauce")
-        .transform(OptionalTags.fluid(FluidTags.WATER))
         .properties(b -> b
             .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
             .viscosity(2000)
@@ -51,23 +47,7 @@ public class FDFluidEntries {
             .slopeFindDistance(3)
             .explosionResistance(100f))
         .source(ForgeFlowingFluid.Source::new)
-        .transform(Recipes.fluidHandling(ModItems.TOMATO_SAUCE, 250))
         .bucket(FluidBucketItem::new)
-        .transform(DatapackRecipes.addRecipe(Mods.FD, (ctx, prov) -> {
-            DataIngredient tomatoSauce = DataIngredient.items(ModItems.TOMATO_SAUCE.get());
-            DataIngredient tomatoSauceBucket = DataIngredient.items(ctx);
-            DataIngredient bowl = DataIngredient.items(Items.BOWL);
-            DataIngredient bucket = DataIngredient.items(Items.BUCKET);
-            prov.add(Recipes.shapeless("tomato_sauce_bucket_from_bowls")
-                .output(ctx.getEntry(), 1)
-                .requiredToUnlock(prov, bucket)
-                .requiredToUnlock(prov, tomatoSauce, 4));
-            prov.add(Recipes.shapeless("tomato_sauce_from_bucket")
-                .output(ModItems.TOMATO_SAUCE.get(), 4)
-                .requiredToUnlock(prov, tomatoSauceBucket)
-                .requiredToUnlock(prov, bowl, 4)
-                .whenModLoaded(Mods.FD));
-        }))
         .build()
         .register();
     

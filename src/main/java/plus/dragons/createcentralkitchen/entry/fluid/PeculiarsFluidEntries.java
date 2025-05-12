@@ -18,7 +18,7 @@ public class PeculiarsFluidEntries {
         ALOE_ICE_CREAM = virtual(PeculiarsItems.ALOE_ICE_CREAM,
             Mods.peculiars("block/aloe/aloe_ice_cream_block"), 500).register(),
         PASSIONFRUIT_ICE_CREAM = virtual(PeculiarsItems.PASSIONFRUIT_ICE_CREAM,
-            Mods.peculiars("block/passionfruit/passionfruit_ice_cream_block"), 500).register(),
+            Mods.peculiars("block/passion_fruit/passion_fruit_ice_cream_block"), 500).register(),
         YUCCA_MILKSHAKE = VirtualFluidFromItem.milky(PeculiarsItems.YUCCA_MILKSHAKE, 0xC4DD44)
             .register(),
         ALOE_MILKSHAKE = VirtualFluidFromItem.milky(PeculiarsItems.ALOE_MILKSHAKE, 0xBFE29C)

@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +20,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.fluids.OpenEndedPi
 import plus.dragons.createcentralkitchen.entry.creativetab.CckCreativeModeTab;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
-import plus.dragons.createcentralkitchen.foundation.data.CentralKitchenData;
 import plus.dragons.createcentralkitchen.foundation.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigBoolCondition;
 import plus.dragons.createcentralkitchen.foundation.resource.condition.ConfigListCondition;
@@ -61,10 +59,6 @@ public class CentralKitchen {
         RECIPE_SERIALIZER_REGISTER.register(modBus);
         CraftingHelper.register(new ConfigBoolCondition.Serializer());
         CraftingHelper.register(new ConfigListCondition.Serializer());
-        
-        if (DatagenModLoader.isRunningDataGen()) {
-            CentralKitchenData.register(modBus);
-        }
     }
     
     public void commonSetup(FMLCommonSetupEvent event) {
