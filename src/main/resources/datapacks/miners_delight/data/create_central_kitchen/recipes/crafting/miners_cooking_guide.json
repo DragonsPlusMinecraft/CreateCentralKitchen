@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:plates/obsidian"
+    },
+    {
+      "item": "farmersdelight:canvas"
+    },
+    {
+      "item": "miners_delight:cave_carrot"
+    }
+  ],
+  "result": {
+    "item": "create_central_kitchen:miners_cooking_guide"
+  }
+}
