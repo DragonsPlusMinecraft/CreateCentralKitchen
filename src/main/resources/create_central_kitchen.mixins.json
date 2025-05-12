@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
+    "common.arsbotania.CapEventMixin",
     "common.botarium.BotariumForgeMixin",
     "common.computercraft.MoreRedIntegrationMixin",
     "common.create.BeltHelperMixin",

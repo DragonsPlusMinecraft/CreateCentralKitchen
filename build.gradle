@@ -146,6 +146,11 @@ dependencies {
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
     // Fix incompatible issue
     implementation fg.deobf("curse.maven:botarium-704113:4831434")
+
+    implementation fg.deobf("curse.maven:patchouli-306770:6164575")
+    implementation fg.deobf("curse.maven:botania-225643:6366547")
+    implementation fg.deobf("curse.maven:ars-nouveau-401955:5894609")
+    implementation fg.deobf("curse.maven:ars-botania-1194681:6453459")
     // cc-tweaked create 6.0 is not supported yet.
     compileOnly fg.deobf("curse.maven:cc-tweaked-282001:5714507")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"

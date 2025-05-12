@@ -9,3 +9,4 @@
 * Fix missing lang file for knife "not consumed" message in jei tabs.
 * Fix no sequenced assembly recipes for hamburgers or mutton wraps
 * Fix Cooking Guide and Miner's Cooking Guide lack proper tooltip sync #97.
+* Fix incompatible with Ars Botania.
