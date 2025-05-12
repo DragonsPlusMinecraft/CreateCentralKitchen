@@ -58,13 +58,8 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
         } else {
 			LangBuilder text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.recipe_result");
 			LangBuilder itemName = new LangBuilder(ID).add(result.getDisplayName()).style(ChatFormatting.GRAY);
-            if (goggle) {
-                text.forGoggles(tooltip);
-                itemName.forGoggles(tooltip, 4);
-            } else {
-                text.addTo(tooltip);
-                itemName.forGoggles(tooltip);
-            }
+            text.forGoggles(tooltip);
+            itemName.forGoggles(tooltip);
         }
     }
     
