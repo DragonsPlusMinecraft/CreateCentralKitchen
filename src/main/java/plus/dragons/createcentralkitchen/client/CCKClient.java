@@ -25,8 +25,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import plus.dragons.createcentralkitchen.client.model.CCKPartialModels;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
+import plus.dragons.createcentralkitchen.client.registry.CCKPartialModels;
+import plus.dragons.createcentralkitchen.client.registry.CCKSpriteShifts;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
@@ -34,6 +35,7 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 public class CCKClient {
     public CCKClient(IEventBus modBus, ModContainer modContainer) {
         CCKPartialModels.register();
+        CCKSpriteShifts.register();
         modBus.register(this);
     }
 

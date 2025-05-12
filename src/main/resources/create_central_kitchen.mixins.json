@@ -18,13 +18,14 @@
     "farmersdelight.RuntimeDataGeneratorMixin",
     "farmersdelight.SawBlockEntityMixin",
     "farmersdelight.SkilletBlockEntityMixin",
-    "farmersdelight.client.BlazeBurnerRendererMixin",
     "minecraft.EdibleWhenPlacedMixin"
   ],
   "client": [
+    "create.client.BlazeBurnerBlockEntityMixin",
+    "create.client.BlazeBurnerRendererMixin",
+    "create.client.BlazeBurnerVisualMixin",
     "create.client.DeployerRendererMixin",
-    "farmersdelight.client.BlazeBurnerBlockEntityMixin",
-    "farmersdelight.client.BlazeBurnerVisualMixin"
+    "farmersdelight.client.BlazeBurnerBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -16,18 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.client.model;
+package plus.dragons.createcentralkitchen.client.burner;
 
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
-import plus.dragons.createcentralkitchen.common.CCKCommon;
+import org.jetbrains.annotations.Nullable;
 
-public class CCKPartialModels {
-    public static final PartialModel CHEF_HAT = block("blaze_burner/chef_hat");
-    public static final PartialModel CHEF_HAT_SMALL = block("blaze_burner/chef_hat_small");
+public interface BlazeBurnerClientExtension {
+    @Nullable
+    BlazeBurnerRenderOverride getRenderOverride();
 
-    public static void register() {}
-
-    private static PartialModel block(String path) {
-        return PartialModel.of(CCKCommon.asResource("block/" + path));
-    }
+    void setRenderOverride(@Nullable BlazeBurnerRenderOverride renderOverride);
 }

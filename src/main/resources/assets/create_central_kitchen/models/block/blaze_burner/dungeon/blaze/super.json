@@ -1,0 +1,7 @@
+{
+	"parent": "create:block/blaze_burner/blaze/super",
+	"textures": {
+		"1": "create_central_kitchen:block/dungeon_blaze_super",
+		"particle": "create_central_kitchen:block/dungeon_blaze_super"
+	}
+}

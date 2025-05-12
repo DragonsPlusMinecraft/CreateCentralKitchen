@@ -1,0 +1,7 @@
+{
+	"parent": "create:block/blaze_burner/blaze/super_active",
+	"textures": {
+		"1": "create_central_kitchen:block/dungeon_blaze_super_active",
+		"particle": "create_central_kitchen:block/dungeon_blaze_super_active"
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "create:block/blaze_burner/blaze/inert",
+	"textures": {
+		"2": "create_central_kitchen:block/dungeon_blaze_inert",
+		"particle": "create_central_kitchen:block/dungeon_blaze_inert"
+	}
+}
