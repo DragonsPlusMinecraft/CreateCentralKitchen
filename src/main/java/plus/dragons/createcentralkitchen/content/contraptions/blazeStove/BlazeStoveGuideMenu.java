@@ -97,7 +97,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     
     @Override
     protected void saveData(ItemStack contentHolder) {
-    
+        contentHolder.setTag(guide.serializeNBT());
     }
     
     @Override
