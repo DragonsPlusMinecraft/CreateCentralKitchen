@@ -36,7 +36,7 @@ public class CuttingBoardDeployingCategory extends CreateRecipeCategory<CuttingB
             .setBackground(getRenderedSlot(), -1, -1)
             .addIngredients(recipe.getIngredients().get(1))
             .addRichTooltipCallback((view, tooltip) ->
-                tooltip.add(Lang.builder("createcentralkitchen")
+                tooltip.add(Lang.builder("create")
                     .translate("recipe.deploying.not_consumed")
                     .component()
                     .withStyle(ChatFormatting.GOLD)
