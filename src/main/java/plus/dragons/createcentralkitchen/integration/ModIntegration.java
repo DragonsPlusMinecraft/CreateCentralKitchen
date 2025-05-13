@@ -18,67 +18,18 @@
 
 package plus.dragons.createcentralkitchen.integration;
 
-import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
-import com.simibubi.create.api.registry.SimpleRegistry;
+import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
-import plus.dragons.createcentralkitchen.integration.brewinandchewin.packager.KegUnpackingHandler;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CookingPotArmInteractionPoint;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CuttingBoardArmInteractionPoint;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.StoveArmInteractionPoint;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.packager.CookingPotUnpackingHandler;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
-import plus.dragons.createcentralkitchen.integration.mynethersdelight.mechanicalArm.NetherStoveArmInteractionPoint;
-import plus.dragons.createdragonsplus.common.processing.freeze.BlockFreezer;
-import umpaz.brewinandchewin.common.registry.BnCBlocks;
-import umpaz.brewinandchewin.common.tag.BnCTags;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import org.slf4j.Logger;
 
 public enum ModIntegration {
-    FARMERSDELIGHT(Constants.FARMERSDELIGHT) {
-        @Override
-        public void onConstructMod() {
-            CCKArmInteractionPointTypes.TYPES.register("cooking_pot", CookingPotArmInteractionPoint.Type::new);
-            CCKArmInteractionPointTypes.TYPES.register("cutting_board", CuttingBoardArmInteractionPoint.Type::new);
-            CCKArmInteractionPointTypes.TYPES.register("stove", StoveArmInteractionPoint.Type::new);
-            CCKArmInteractionPointTypes.TYPES.register("skillet", SkilletArmInteractionPoint.Type::new);
-        }
+    FARMERSDELIGHT(Mods.FARMERSDELIGHT),
+    MYNETHERSDELIGHT(Mods.MYNETHERSDELIGHT),
+    BREWINANDCHEWIN(Mods.BREWINANDCHEWIN);
 
-        @Override
-        public void onCommonSetup() {
-            ModBlockEntityTypes.COOKING_POT.get()
-                    .getValidBlocks()
-                    .forEach(block -> UnpackingHandler.REGISTRY.register(block, new CookingPotUnpackingHandler()));
-            NeoForge.EVENT_BUS.register(CuttingBoardRecipeConverters.class);
-        }
-    },
-    MYNETHERSDELIGHT(Constants.MYNETHERSDELIGHT) {
-        @Override
-        public void onConstructMod() {
-            CCKArmInteractionPointTypes.TYPES.register("nether_stove", NetherStoveArmInteractionPoint.Type::new);
-        }
-    },
-    BREWINANDCHEWIN(Constants.BREWINANDCHEWIN) {
-        @Override
-        public void onCommonSetup() {
-            UnpackingHandler.REGISTRY.register(BnCBlocks.KEG, new KegUnpackingHandler());
-            BlockFreezer.REGISTRY.registerProvider(SimpleRegistry.Provider.forBlockTag(
-                    BnCTags.Blocks.FREEZE_SOURCES,
-                    (level, pos, state) -> {
-                        if (state.hasProperty(BlockStateProperties.LIT) && !state.getValue(BlockStateProperties.LIT))
-                            return BlockFreezer.NO_FREEZE;
-                        return BlockFreezer.PASSIVE_FREEZE;
-                    }));
-        }
-    };
-
+    private static final Logger LOGGER = LogUtils.getLogger();
     private final String id;
 
     ModIntegration(String id) {
@@ -101,16 +52,9 @@ public enum ModIntegration {
         return new ModLoadedCondition(id);
     }
 
-    public void onConstructMod() {}
-
-    public void onCommonSetup() {}
-
-    @OnlyIn(Dist.CLIENT)
-    public void onClientSetup() {}
-
-    public static class Constants {
-        public static final String FARMERSDELIGHT = "farmersdelight";
-        public static final String MYNETHERSDELIGHT = "mynethersdelight";
-        public static final String BREWINANDCHEWIN = "brewinandchewin";
+    static class Mods {
+        static final String FARMERSDELIGHT = "farmersdelight";
+        static final String MYNETHERSDELIGHT = "mynethersdelight";
+        static final String BREWINANDCHEWIN = "brewinandchewin";
     }
 }

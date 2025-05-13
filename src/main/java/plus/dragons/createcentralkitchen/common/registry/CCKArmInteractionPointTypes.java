@@ -20,17 +20,33 @@ package plus.dragons.createcentralkitchen.common.registry;
 
 import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
+import java.util.function.Supplier;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
-import plus.dragons.createdragonsplus.util.FieldsNullabilityUnknownByDefault;
 
-@FieldsNullabilityUnknownByDefault
 public class CCKArmInteractionPointTypes {
-    public static final DeferredRegister<ArmInteractionPointType> TYPES = DeferredRegister
+    private static final DeferredRegister<ArmInteractionPointType> REGISTER = DeferredRegister
             .create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.ID);
+    //spotless:off
+    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType>
+            COOKING_POT = holder("cooking_pot"),
+            CUTTING_BOARD = holder("cutting_board"),
+            SKILLET = holder("skillet"),
+            STOVE = holder("stove"),
+            NETHER_STOVE = holder("nether_stove");
+    //spotless:on
 
     public static void register(IEventBus modBus) {
-        TYPES.register(modBus);
+        REGISTER.register(modBus);
+    }
+
+    public static void registerHolder(DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder, Supplier<? extends ArmInteractionPointType> supplier) {
+        REGISTER.register(holder.getId().getPath(), supplier);
+    }
+
+    private static DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder(String name) {
+        return DeferredHolder.create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.asResource(name));
     }
 }

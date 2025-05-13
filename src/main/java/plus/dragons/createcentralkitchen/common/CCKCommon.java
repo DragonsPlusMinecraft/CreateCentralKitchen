@@ -19,10 +19,10 @@
 package plus.dragons.createcentralkitchen.common;
 
 import com.simibubi.create.foundation.item.ItemDescription;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.RegistryLayer;
 import net.minecraft.server.packs.PackType;
@@ -31,15 +31,15 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
-import plus.dragons.createcentralkitchen.data.tags.CCKRuntimeTags;
-import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.data.CCKBlockTags;
+import plus.dragons.createcentralkitchen.data.CCKItemTags;
+import plus.dragons.createcentralkitchen.data.CCKLang;
 import plus.dragons.createdragonsplus.common.CDPRegistrate;
 import plus.dragons.createdragonsplus.data.runtime.RuntimePackResources;
 
@@ -49,45 +49,37 @@ public class CCKCommon {
     public static final String NAME = "Create: Central Kitchen";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     public static final CDPRegistrate REGISTRATE = new CDPRegistrate(ID)
-            .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE));
+            .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE))
+            .registerForeignLocalization();
     private final ModContainer modContainer;
-    private final Component runtimePackTitle = REGISTRATE
-            .addLang("pack", asResource("runtime"), NAME);
-    private final Component runtimePackDescription = REGISTRATE
-            .addLang("pack", asResource("runtime"), "description", NAME + " Runtime Generated Resources");
 
     public CCKCommon(IEventBus modBus, ModContainer modContainer) {
         this.modContainer = modContainer;
         REGISTRATE.registerEventListeners(modBus);
         CCKArmInteractionPointTypes.register(modBus);
+
         modBus.register(this);
         modBus.register(new CCKConfig(modContainer));
     }
 
     @SubscribeEvent
-    public void construct(final FMLConstructModEvent event) {
-        for (ModIntegration integration : ModIntegration.values()) {
-            if (integration.enabled())
-                event.enqueueWork(integration::onConstructMod);
-        }
-    }
-
-    @SubscribeEvent
-    public void setup(final FMLCommonSetupEvent event) {
-        for (ModIntegration integration : ModIntegration.values()) {
-            if (integration.enabled())
-                event.enqueueWork(integration::onCommonSetup);
-        }
-    }
-
-    @SubscribeEvent
     public void addPackFinders(final AddPackFindersEvent event) {
         var type = event.getPackType();
+        var registries = CompletableFuture.<HolderLookup.Provider>completedFuture(RegistryLayer.createRegistryAccess().compositeAccess());
         if (type == PackType.SERVER_DATA) {
-            var pack = new RuntimePackResources("runtime", modContainer, type, Position.TOP, runtimePackTitle, runtimePackDescription);
-            var registries = CompletableFuture.<HolderLookup.Provider>completedFuture(RegistryLayer
-                    .createRegistryAccess().compositeAccess());
-            CCKRuntimeTags.register(pack, registries);
+            var pack = new RuntimePackResources(
+                    "runtime",
+                    modContainer,
+                    type,
+                    Position.TOP,
+                    CCKLang.RUNTIME_PACK_TITLE,
+                    CCKLang.RUNTIME_PACK_DESCRIPTION);
+            var output = pack.getPackOutput();
+            var existingFileHelper = new ExistingFileHelper(Set.of(), Set.of(), false, null, null);
+            var blockTags = new CCKBlockTags(output, registries, existingFileHelper);
+            var itemTags = new CCKItemTags(output, registries, blockTags.contentsGetter(), existingFileHelper);
+            pack.addDataProvider(blockTags);
+            pack.addDataProvider(itemTags);
             event.addRepositorySource(pack);
         }
     }

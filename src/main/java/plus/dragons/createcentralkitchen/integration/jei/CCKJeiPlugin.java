@@ -19,7 +19,6 @@
 package plus.dragons.createcentralkitchen.integration.jei;
 
 import com.google.common.base.Preconditions;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
@@ -31,21 +30,13 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
-import plus.dragons.createcentralkitchen.config.CCKConfig;
-import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe.KegPouringRecipeConverters;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
 import plus.dragons.createdragonsplus.util.ErrorMessages;
-import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 @JeiPlugin
 public class CCKJeiPlugin implements IModPlugin {
@@ -65,43 +56,7 @@ public class CCKJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {
-        var level = getLevel();
-        var recipeManager = getRecipeManager();
-        if (ModIntegration.FARMERSDELIGHT.enabled()) {
-            var cuttingBoardRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
-            if (CCKConfig.recipes().convertCuttingBoardRecipesToSawingRecipes.get()) {
-                ItemStack knife = new ItemStack(ModItems.IRON_KNIFE.get());
-                registration.addRecipes(SAWING, cuttingBoardRecipes.stream()
-                        .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                        .filter(holder -> holder.value().getTool().test(knife))
-                        .map(CuttingBoardRecipeConverters.SAWING)
-                        .map(RecipeHolder::value)
-                        .toList());
-            }
-            if (CCKConfig.recipes().convertCuttingBoardRecipesToDeployingRecipes.get()) {
-                registration.addRecipes(DEPLOYING, cuttingBoardRecipes.stream()
-                        .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                        .map(CuttingBoardRecipeConverters.DEPLOYING)
-                        .map(RecipeHolder::value)
-                        .toList());
-            }
-        }
-        if (ModIntegration.BREWINANDCHEWIN.enabled()) {
-            if (CCKConfig.recipes().convertKegPouringRecipesToFillingRecipes.get()) {
-                registration.addRecipes(SPOUT_FILLING, KegPouringRecipeConverters
-                        .getKegFillingRecipes(level)
-                        .map(RecipeHolder::value)
-                        .toList());
-            }
-            if (CCKConfig.recipes().convertKegPouringRecipesToEmptyingRecipes.get()) {
-                registration.addRecipes(DRAINING, KegPouringRecipeConverters
-                        .getKegEmptyingRecipes(level)
-                        .map(RecipeHolder::value)
-                        .toList());
-            }
-        }
-    }
+    public void registerRecipes(IRecipeRegistration registration) {}
 
     @Internal
     public static Level getLevel() {

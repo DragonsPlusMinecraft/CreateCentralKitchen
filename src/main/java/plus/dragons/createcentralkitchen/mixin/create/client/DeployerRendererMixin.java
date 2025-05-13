@@ -26,8 +26,8 @@ import com.simibubi.create.content.kinetics.deployer.DeployerRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import plus.dragons.createcentralkitchen.common.registry.CCKTags;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.data.CCKItemTags;
 import plus.dragons.createcentralkitchen.mixin.create.DeployerBlockEntityAccessor;
 
 @Mixin(DeployerRenderer.class)
@@ -36,7 +36,7 @@ public class DeployerRendererMixin {
     private boolean modifyToolOffset(boolean punching, @Local(name = "displayMode") boolean displayMode, @Local(argsOnly = true) DeployerBlockEntity deployer, @Local(argsOnly = true) PoseStack ms) {
         if (punching || displayMode || !CCKConfig.client().renderDeployerUsingItemWithCustomTransform.get())
             return punching;
-        if (((DeployerBlockEntityAccessor) deployer).getHeldItem().is(CCKTags.HANDHELD_IN_DEPLOYER_USE)) {
+        if (((DeployerBlockEntityAccessor) deployer).getHeldItem().is(CCKItemTags.HANDHELD_IN_DEPLOYER_USE)) {
             ms.translate(0, -1 / 8f, 0);
             ms.mulPose(Axis.XP.rotationDegrees(-22.5f));
             return true;

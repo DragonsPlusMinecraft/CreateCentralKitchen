@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "plus.dragons.createcentralkitchen.mixin.brewinandchewin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CCKJeiPluginMixin",
+    "GenericItemEmptyingMixin",
+    "GenericItemFillingMixin",
+    "KegBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

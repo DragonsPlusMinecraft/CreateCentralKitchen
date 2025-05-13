@@ -16,6 +16,12 @@ issueTrackerURL="${mod_github}/issues"
 [[mixins]]
     config="${mod_id}.mixins.json"
 
+[[mixins]]
+    config="${mod_id}.brewinandchewin.mixins.json"
+
+[[mixins]]
+    config="${mod_id}.farmersdelight.mixins.json"
+
 #[[accessTransformers]]
 #    file="META-INF/accesstransformer.cfg"
 

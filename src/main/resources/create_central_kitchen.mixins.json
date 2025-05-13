@@ -4,28 +4,15 @@
   "package": "plus.dragons.createcentralkitchen.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "create_central_kitchen.refmap.json",
-  "plugin": "plus.dragons.createcentralkitchen.mixin.CCKMixinConfigPlugin",
   "mixins": [
-    "brewinandchewin.GenericItemEmptyingMixin",
-    "brewinandchewin.GenericItemFillingMixin",
-    "brewinandchewin.KegBlockEntityMixin",
     "create.BeltHelperMixin",
-    "create.DeployerBlockEntityAccessor",
-    "farmersdelight.BlockHelperMixin",
-    "farmersdelight.CookingPotBlockEntityMixin",
-    "farmersdelight.EdibleWhenPlacedMixin",
-    "farmersdelight.HeatableBlockEntityMixin",
-    "farmersdelight.RuntimeDataGeneratorMixin",
-    "farmersdelight.SawBlockEntityMixin",
-    "farmersdelight.SkilletBlockEntityMixin",
-    "minecraft.EdibleWhenPlacedMixin"
+    "create.DeployerBlockEntityAccessor"
   ],
   "client": [
     "create.client.BlazeBurnerBlockEntityMixin",
     "create.client.BlazeBurnerRendererMixin",
     "create.client.BlazeBurnerVisualMixin",
-    "create.client.DeployerRendererMixin",
-    "farmersdelight.client.BlazeBurnerBlockEntityMixin"
+    "create.client.DeployerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

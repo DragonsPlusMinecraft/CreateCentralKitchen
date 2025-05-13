@@ -17,7 +17,53 @@ base {
     archivesName = mod_artifact_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+var integrationMods = [
+        "farmersdelight",
+        "brewinandchewin",
+        "mynethersdelight"
+]
+
+integrationMods.forEach {integrationMod ->
+    sourceSets {
+        "${integrationMod}" {
+            java {
+                srcDir "src/integration/${integrationMod}/java"
+            }
+            resources {
+                srcDir "src/integration/${integrationMod}/resources"
+            }
+            compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        }
+        main {
+            runtimeClasspath += sourceSets."${integrationMod}".output
+        }
+    }
+
+    classes {
+        finalizedBy(tasks."${integrationMod}Classes")
+    }
+
+    jar {
+        from sourceSets."${integrationMod}".output
+    }
+
+    tasks.sourcesJar {
+        from sourceSets."${integrationMod}".allJava
+    }
+
+    neoForge {
+        mods {
+            "${mod_id}" {
+                sourceSet(sourceSets."${integrationMod}")
+            }
+        }
+    }
+}
 
 neoForge {
     version = project.neo_version
@@ -54,8 +100,7 @@ neoForge {
                     '--existing', file('src/main/resources/').getAbsolutePath(),
                     '--existing', file('src/main/translations/').getAbsolutePath(),
                     "--existing-mod", "create",
-                    "--existing-mod", "create_dragons_plus",
-                    "--existing-mod", "farmersdelight"
+                    "--existing-mod", "create_dragons_plus"
         }
 
         configureEach {
@@ -155,10 +200,6 @@ spotless {
 }
 
 build.dependsOn(spotlessApply)
-
-java {
-    withSourcesJar()
-}
 
 publishing {
     publications {
