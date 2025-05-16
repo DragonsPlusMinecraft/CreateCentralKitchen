@@ -26,8 +26,10 @@ import org.slf4j.Logger;
 
 public enum ModIntegration {
     FARMERSDELIGHT(Mods.FARMERSDELIGHT),
+    BREWINANDCHEWIN(Mods.BREWINANDCHEWIN),
     MYNETHERSDELIGHT(Mods.MYNETHERSDELIGHT),
-    BREWINANDCHEWIN(Mods.BREWINANDCHEWIN);
+    ENDSDELIGHT(Mods.ENDSDELIGHT),
+    TWILIGHTDELIGHT(Mods.TWILIGHTDELIGHT);
 
     private static final Logger LOGGER = LogUtils.getLogger();
     private final String id;
@@ -54,7 +56,9 @@ public enum ModIntegration {
 
     static class Mods {
         static final String FARMERSDELIGHT = "farmersdelight";
-        static final String MYNETHERSDELIGHT = "mynethersdelight";
         static final String BREWINANDCHEWIN = "brewinandchewin";
+        static final String MYNETHERSDELIGHT = "mynethersdelight";
+        static final String ENDSDELIGHT = "ends_delight";
+        static final String TWILIGHTDELIGHT = "twightdelight";
     }
 }

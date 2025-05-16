@@ -30,6 +30,10 @@ public class FDPonderPlugin {
     private static final ResourceLocation COOKING_POT = ModIntegration.FARMERSDELIGHT.asResource("cooking_pot");
     private static final ResourceLocation SKILLET = ModIntegration.FARMERSDELIGHT.asResource("skillet");
     private static final ResourceLocation STOVE = ModIntegration.FARMERSDELIGHT.asResource("stove");
+    private static final ResourceLocation NETHER_BRICKS_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_stove");
+    private static final ResourceLocation NETHER_BRICKS_SOUL_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_soul_stove");
+    private static final ResourceLocation END_STOVE = ModIntegration.ENDSDELIGHT.asResource("end_stove");
+    private static final ResourceLocation MAZE_STOVE = ModIntegration.TWILIGHTDELIGHT.asResource("maze_stove");
 
     public static void register() {
         CCKPonderPlugin.SCENES.add(FDPonderPlugin::registerScenes);
@@ -41,16 +45,16 @@ public class FDPonderPlugin {
                 .addStoryBoard("farmersdelight/cutting_board", FDPonderScenes::cuttingBoard,
                         AllCreatePonderTags.ARM_TARGETS);
         helper.forComponents(COOKING_POT)
-                .addStoryBoard("farmersdelight/cooking_pot_automate", FDPonderScenes::automate,
+                .addStoryBoard("farmersdelight/cooking_pot", FDPonderScenes::cookingPot,
                         AllCreatePonderTags.ARM_TARGETS,
                         AllCreatePonderTags.HIGH_LOGISTICS)
                 .addStoryBoard("farmersdelight/heat_source", FDPonderScenes::heatSource);
         helper.forComponents(SKILLET)
-                .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::skilletAndStove,
+                .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS)
                 .addStoryBoard("farmersdelight/heat_source", FDPonderScenes::heatSource);
-        helper.forComponents(STOVE)
-                .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::skilletAndStove,
+        helper.forComponents(STOVE, NETHER_BRICKS_STOVE, NETHER_BRICKS_SOUL_STOVE, END_STOVE, MAZE_STOVE)
+                .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS);
     }
 
@@ -59,6 +63,10 @@ public class FDPonderPlugin {
                 .add(CUTTING_BOARD)
                 .add(COOKING_POT)
                 .add(SKILLET)
-                .add(STOVE);
+                .add(STOVE)
+                .add(NETHER_BRICKS_STOVE)
+                .add(NETHER_BRICKS_SOUL_STOVE)
+                .add(END_STOVE)
+                .add(MAZE_STOVE);
     }
 }

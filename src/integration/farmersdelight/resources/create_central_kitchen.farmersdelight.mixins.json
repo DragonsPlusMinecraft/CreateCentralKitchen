@@ -11,7 +11,8 @@
     "HeatableBlockEntityMixin",
     "RuntimeDataGeneratorMixin",
     "SawBlockEntityMixin",
-    "SkilletBlockEntityMixin"
+    "SkilletBlockEntityMixin",
+    "StoveBlockEntityMixin"
   ],
   "client": [
     "client.BlazeBurnerBlockEntityMixin"

@@ -24,8 +24,7 @@ java {
 
 var integrationMods = [
         "farmersdelight",
-        "brewinandchewin",
-        "mynethersdelight"
+        "brewinandchewin"
 ]
 
 integrationMods.forEach {integrationMod ->
@@ -148,7 +147,6 @@ dependencies {
     localRuntime("top.theillusivec4.curios:curios-neoforge:${curios_version}+${curios_minecraft_version}")
 
     localImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
-    localImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}")
     localImplementation("maven.modrinth:brewin-and-chewin:${brewin_and_chewin_version}")
 }
 

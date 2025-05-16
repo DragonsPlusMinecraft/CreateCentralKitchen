@@ -39,7 +39,7 @@ public class BnCPonderPlugin {
                         AllCreatePonderTags.FLUIDS)
                 .addStoryBoard("brewinandchewin/keg_ingredient", BnCPonderScenes::kegAutomate2,
                         AllCreatePonderTags.HIGH_LOGISTICS)
-                .addStoryBoard("brewinandchewin/spout_and_item_drain", BnCPonderScenes::spoutAndItemDrain,
+                .addStoryBoard("brewinandchewin/keg_pouring", BnCPonderScenes::kegPouring,
                         AllCreatePonderTags.FLUIDS);
     }
 

@@ -42,7 +42,7 @@ import umpaz.brewinandchewin.common.registry.BnCItems;
 public class BnCPonderScenes {
     public static void kegAutomate1(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("keg.automate.part_one", "Automating with Create: Keg - Part One");
+        scene.title("keg.part_one", "Automating with Create: Keg - Part One");
         scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
         scene.idle(10);
@@ -92,7 +92,7 @@ public class BnCPonderScenes {
 
     public static void kegAutomate2(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("keg.automate.part_two", "Automating with Create: Keg - Part Two");
+        scene.title("keg.part_two", "Automating with Create: Keg - Part Two");
         scene.configureBasePlate(0, 0, 8);
         scene.scaleSceneView(0.77f);
         scene.showBasePlate();
@@ -166,9 +166,9 @@ public class BnCPonderScenes {
         scene.idle(60);
     }
 
-    public static void spoutAndItemDrain(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void kegPouring(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("alcohol.spout_and_item_drain", "Automating with Create: Drinks Production");
+        scene.title("keg.pouring", "Automating with Create: Drinks Production");
         scene.configureBasePlate(0, 0, 7);
         scene.scaleSceneView(0.8f);
         scene.world().showSection(util.select().everywhere(), Direction.DOWN);

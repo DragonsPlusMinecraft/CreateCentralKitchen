@@ -27,7 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
+import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 
 public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     public StoveArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
@@ -36,7 +36,7 @@ public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
 
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
-        if (level.getBlockEntity(pos) instanceof StoveBlockEntity stove) {
+        if (level.getBlockEntity(pos) instanceof StoveBlockEntityAccess stove) {
             int slot = stove.getNextEmptySlot();
             if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isStoveBlockedAbove()) {
                 return stack;
@@ -63,7 +63,7 @@ public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     public static class Type extends ArmInteractionPointType {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return level.getBlockEntity(pos) instanceof StoveBlockEntity;
+            return level.getBlockEntity(pos) instanceof StoveBlockEntityAccess;
         }
 
         @Nullable

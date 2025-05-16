@@ -46,9 +46,9 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FDPonderScenes {
-    public static void automate(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void cookingPot(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("cooking_pot.automate", "Automating with Create: Cooking Pot");
+        scene.title("cooking_pot", "Automating with Create: Cooking Pot");
         scene.configureBasePlate(0, 0, 8);
         scene.scaleSceneView(0.77f);
         scene.showBasePlate();
@@ -168,7 +168,7 @@ public class FDPonderScenes {
 
     public static void heatSource(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("cooking_pot_and_skillet.heat_source", "Heat source for Cooking Pot and Skillet");
+        scene.title("heat_source", "Heat sources for Cooking");
         scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
         scene.idle(10);
@@ -187,7 +187,7 @@ public class FDPonderScenes {
         var blazeBurner2 = scene.world().showIndependentSection(util.select().position(1, 3, 1), Direction.DOWN);
         scene.world().moveSection(blazeBurner2, new Vec3(0, -2, 0), 0);
         scene.overlay().showText(60)
-                .text("Boiler heaters are valid heat sources of Cooking Pot and Skillet")
+                .text("Boiler heaters are valid heat sources for cooking utensils")
                 .pointAt(util.vector().centerOf(1, 1, 1))
                 .attachKeyFrame();
         scene.idle(10);
@@ -207,7 +207,7 @@ public class FDPonderScenes {
         scene.idle(10);
         scene.world().showSection(util.select().fromTo(3, 1, 2, 3, 2, 2), Direction.DOWN);
         scene.overlay().showText(120)
-                .text("Boiler heaters accelerate cooking according to its heat-level")
+                .text("Boiler heaters accelerate some cooking utensils according to its heat-level")
                 .attachKeyFrame()
                 .pointAt(util.vector().centerOf(1, 1, 3));
         scene.idle(10);
@@ -225,9 +225,9 @@ public class FDPonderScenes {
         scene.world().modifyBlockEntity(util.grid().at(1, 2, 1), SkilletBlockEntity.class, SkilletBlockEntity::removeItem);
     }
 
-    public static void skilletAndStove(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void stoveAndSkillet(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("skillet_and_stove.automate", "Automating with Create: Skillet and Stove");
+        scene.title("skillet_and_stove", "Automating with Create: Skillet and Stove");
         scene.configureBasePlate(0, 0, 5);
         scene.showBasePlate();
         scene.idle(10);
@@ -278,7 +278,7 @@ public class FDPonderScenes {
 
     public static void cuttingBoard(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("cutting", "Automating with Create: Cutting");
+        scene.title("cutting_board", "Automating with Create: Cutting");
         scene.configureBasePlate(0, 0, 7);
         scene.scaleSceneView(0.85f);
         var belt = util.select().fromTo(5, 0, 0, 5, 0, 6);

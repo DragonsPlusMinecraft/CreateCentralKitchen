@@ -34,15 +34,14 @@ public class CCKArmInteractionPointTypes {
             COOKING_POT = holder("cooking_pot"),
             CUTTING_BOARD = holder("cutting_board"),
             SKILLET = holder("skillet"),
-            STOVE = holder("stove"),
-            NETHER_STOVE = holder("nether_stove");
+            STOVE = holder("stove");
     //spotless:on
 
     public static void register(IEventBus modBus) {
         REGISTER.register(modBus);
     }
 
-    public static void registerHolder(DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder, Supplier<? extends ArmInteractionPointType> supplier) {
+    public static void register(DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder, Supplier<? extends ArmInteractionPointType> supplier) {
         REGISTER.register(holder.getId().getPath(), supplier);
     }
 

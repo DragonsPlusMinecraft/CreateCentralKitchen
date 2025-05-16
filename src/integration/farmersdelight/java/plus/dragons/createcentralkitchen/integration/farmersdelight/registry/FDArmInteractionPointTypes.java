@@ -20,6 +20,7 @@ package plus.dragons.createcentralkitchen.integration.farmersdelight.registry;
 
 import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
 
+import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CookingPotArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CuttingBoardArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
@@ -27,9 +28,9 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalAr
 
 public class FDArmInteractionPointTypes {
     public static void register() {
-        registerHolder(COOKING_POT, CookingPotArmInteractionPoint.Type::new);
-        registerHolder(CUTTING_BOARD, CuttingBoardArmInteractionPoint.Type::new);
-        registerHolder(SKILLET, SkilletArmInteractionPoint.Type::new);
-        registerHolder(STOVE, StoveArmInteractionPoint.Type::new);
+        CCKArmInteractionPointTypes.register(COOKING_POT, CookingPotArmInteractionPoint.Type::new);
+        CCKArmInteractionPointTypes.register(CUTTING_BOARD, CuttingBoardArmInteractionPoint.Type::new);
+        CCKArmInteractionPointTypes.register(SKILLET, SkilletArmInteractionPoint.Type::new);
+        CCKArmInteractionPointTypes.register(STOVE, StoveArmInteractionPoint.Type::new);
     }
 }

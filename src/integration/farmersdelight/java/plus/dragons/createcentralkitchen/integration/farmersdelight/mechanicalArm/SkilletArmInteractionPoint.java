@@ -27,7 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
+import plus.dragons.createcentralkitchen.access.farmersdelight.SkilletBlockEntityAccess;
 
 public class SkilletArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     public SkilletArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
@@ -36,7 +36,7 @@ public class SkilletArmInteractionPoint extends DepositOnlyArmInteractionPoint {
 
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
-        if (level.getBlockEntity(pos) instanceof Interaction interaction) {
+        if (level.getBlockEntity(pos) instanceof SkilletBlockEntityAccess interaction) {
             return interaction.addItemToCook(stack, simulate);
         }
         return stack;
@@ -47,14 +47,10 @@ public class SkilletArmInteractionPoint extends DepositOnlyArmInteractionPoint {
         return Vec3.upFromBottomCenterOf(pos, 1 / 16f);
     }
 
-    public interface Interaction {
-        ItemStack addItemToCook(ItemStack stack, boolean simulate);
-    }
-
     public static class Type extends ArmInteractionPointType {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return level.getBlockEntity(pos) instanceof SkilletBlockEntity;
+            return level.getBlockEntity(pos) instanceof SkilletBlockEntityAccess;
         }
 
         @Nullable

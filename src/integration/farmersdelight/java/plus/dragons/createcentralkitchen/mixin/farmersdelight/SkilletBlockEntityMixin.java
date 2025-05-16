@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
+import plus.dragons.createcentralkitchen.access.farmersdelight.SkilletBlockEntityAccess;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
@@ -43,7 +43,8 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 @Mixin(SkilletBlockEntity.class)
-public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity, SkilletArmInteractionPoint.Interaction {
+public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implements HeatableBlockEntity,
+        SkilletBlockEntityAccess {
     @Shadow
     @Final
     private ItemStackHandler inventory;

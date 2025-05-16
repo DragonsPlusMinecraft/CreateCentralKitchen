@@ -16,14 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.integration.mynethersdelight.registry;
+package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
-import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
+import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 
-import plus.dragons.createcentralkitchen.integration.mynethersdelight.mechanicalArm.NetherStoveArmInteractionPoint;
-
-public class MNDArmInteractionPoints {
-    public static void register() {
-        registerHolder(NETHER_STOVE, NetherStoveArmInteractionPoint.Type::new);
-    }
-}
+@Pseudo
+@Mixin(targets = {
+        "vectorwing.farmersdelight.common.block.entity.StoveBlockEntity",
+        "com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity",
+        "cn.foggyhillside.ends_delight.block.entity.EndStoveBlockEntity"
+})
+public abstract class StoveBlockEntityMixin implements StoveBlockEntityAccess {}
