@@ -54,11 +54,11 @@ public enum ModIntegration {
         return new ModLoadedCondition(id);
     }
 
-    static class Mods {
-        static final String FARMERSDELIGHT = "farmersdelight";
-        static final String BREWINANDCHEWIN = "brewinandchewin";
-        static final String MYNETHERSDELIGHT = "mynethersdelight";
-        static final String ENDSDELIGHT = "ends_delight";
-        static final String TWILIGHTDELIGHT = "twightdelight";
+    public static class Mods {
+        public static final String FARMERSDELIGHT = "farmersdelight";
+        public static final String BREWINANDCHEWIN = "brewinandchewin";
+        public static final String MYNETHERSDELIGHT = "mynethersdelight";
+        public static final String ENDSDELIGHT = "ends_delight";
+        public static final String TWILIGHTDELIGHT = "twightdelight";
     }
 }
