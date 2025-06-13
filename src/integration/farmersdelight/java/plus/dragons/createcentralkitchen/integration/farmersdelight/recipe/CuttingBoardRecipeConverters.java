@@ -22,8 +22,9 @@ import com.google.common.cache.CacheBuilder;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
+import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.bus.api.SubscribeEvent;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
@@ -36,7 +37,7 @@ public class CuttingBoardRecipeConverters {
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_saw");
-                var builder = new ProcessingRecipeBuilder<>(CuttingRecipe::new, id)
+                var builder = new StandardProcessingRecipe.Builder<>(CuttingRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
                 for (var result : recipe.getRollableResults())
                     builder.output(result.chance(), result.stack());
@@ -46,7 +47,7 @@ public class CuttingBoardRecipeConverters {
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_deployer");
-                var builder = new ProcessingRecipeBuilder<>(DeployerApplicationRecipe::new, id)
+                var builder = new ItemApplicationRecipe.Builder<>(DeployerApplicationRecipe::new, id)
                         .require(recipe.getIngredients().getFirst())
                         .require(recipe.getTool());
                 for (var result : recipe.getRollableResults())

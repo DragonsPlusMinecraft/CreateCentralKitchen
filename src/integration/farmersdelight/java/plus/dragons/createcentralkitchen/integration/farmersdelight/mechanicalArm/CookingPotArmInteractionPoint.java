@@ -18,6 +18,7 @@
 
 package plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm;
 
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
@@ -33,7 +34,7 @@ public class CookingPotArmInteractionPoint extends ArmInteractionPoint {
     }
 
     @Override
-    public ItemStack insert(ItemStack stack, boolean simulate) {
+    public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
             var inventory = cookingPot.getInventory();
             return inventory.insertItem(7, stack, simulate);
@@ -42,7 +43,7 @@ public class CookingPotArmInteractionPoint extends ArmInteractionPoint {
     }
 
     @Override
-    public ItemStack extract(int slot, int amount, boolean simulate) {
+    public ItemStack extract(ArmBlockEntity armBlockEntity, int slot, int amount, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot) {
             var inventory = cookingPot.getInventory();
             return inventory.extractItem(8, amount, simulate);
@@ -51,7 +52,7 @@ public class CookingPotArmInteractionPoint extends ArmInteractionPoint {
     }
 
     @Override
-    public int getSlotCount() {
+    public int getSlotCount(ArmBlockEntity armBlockEntity) {
         return 1;
     }
 

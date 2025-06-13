@@ -19,6 +19,7 @@
 package plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm;
 
 import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
@@ -35,7 +36,7 @@ public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     }
 
     @Override
-    public ItemStack insert(ItemStack stack, boolean simulate) {
+    public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof StoveBlockEntityAccess stove) {
             int slot = stove.getNextEmptySlot();
             if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isStoveBlockedAbove()) {

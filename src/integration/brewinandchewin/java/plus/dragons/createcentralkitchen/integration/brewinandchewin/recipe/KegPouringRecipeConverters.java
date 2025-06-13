@@ -22,7 +22,7 @@ import com.google.common.cache.CacheBuilder;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import java.util.stream.Stream;
@@ -44,7 +44,7 @@ public class KegPouringRecipeConverters {
                 var container = recipe.getContainer();
                 var output = recipe.getOutput();
                 var fluid = (FluidStack) recipe.getFluid(output).loaderSpecific();
-                var builder = new ProcessingRecipeBuilder<>(FillingRecipe::new, id)
+                var builder = new StandardProcessingRecipe.Builder<>(FillingRecipe::new, id)
                         .require(Ingredient.of(container))
                         .require(FluidIngredient.fromFluidStack(fluid))
                         .output(output);
@@ -57,7 +57,7 @@ public class KegPouringRecipeConverters {
                 var container = recipe.getContainer();
                 var output = recipe.getOutput();
                 var fluid = (FluidStack) recipe.getFluid(output).loaderSpecific();
-                var builder = new ProcessingRecipeBuilder<>(EmptyingRecipe::new, id)
+                var builder = new StandardProcessingRecipe.Builder<>(EmptyingRecipe::new, id)
                         .require(Ingredient.of(output))
                         .output(fluid);
                 if (!container.isEmpty())
