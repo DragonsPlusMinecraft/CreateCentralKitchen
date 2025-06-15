@@ -25,7 +25,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.serialization.JsonOps;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.data.RuntimeDataGenerator;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.Optional;
@@ -53,7 +53,7 @@ public class RuntimeDataGeneratorMixin {
             if (BuiltInRegistries.ITEM.containsKey(stripped)) {
                 var id = Create.asResource("cutting/runtime_generated/compat/" + unstripped.getNamespace() +
                         "/" + unstripped.getPath() + "_to_" + stripped.getPath());
-                var recipe = new ProcessingRecipeBuilder<>(CuttingRecipe::new, id)
+                var recipe = new StandardProcessingRecipe.Builder<>(CuttingRecipe::new, id)
                         .require(BuiltInRegistries.ITEM.get(unstripped))
                         .output(BuiltInRegistries.ITEM.get(stripped))
                         .output(type.contains("block") ? ModItems.STRAW.get() : ModItems.TREE_BARK.get())
