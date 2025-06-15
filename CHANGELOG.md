@@ -1,4 +1,3 @@
-### Create: Central Kitchen 2.1.2
+### Create: Central Kitchen 2.1.3
 
-#### Fixes
-- Fix crash when Brewin' and Chewin' is not installed
+Update for Create 6.0.6 (Thanks for help from @Robonyantame)
