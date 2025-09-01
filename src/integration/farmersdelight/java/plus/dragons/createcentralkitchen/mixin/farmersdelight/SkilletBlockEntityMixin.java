@@ -73,11 +73,13 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
                 return stack;
             boolean wasEmpty = this.getStoredStack().isEmpty();
             ItemStack remainder = this.inventory.insertItem(0, stack.copy(), simulate);
-            if (!simulate && !ItemStack.matches(remainder, stack)) {
-                this.cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().getCookingTime(), this.fireAspectLevel);
-                this.cookingTime = 0;
-                if (wasEmpty && this.level != null && this.isHeated(this.level, this.worldPosition)) {
-                    this.level.playSound(null, this.worldPosition.getX() + 0.5F, this.worldPosition.getY() + 0.5F, this.worldPosition.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+            if (!ItemStack.matches(remainder, stack)) {
+                if(!simulate){
+                    this.cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().getCookingTime(), this.fireAspectLevel);
+                    this.cookingTime = 0;
+                    if (wasEmpty && this.level != null && this.isHeated(this.level, this.worldPosition)) {
+                        this.level.playSound(null, this.worldPosition.getX() + 0.5F, this.worldPosition.getY() + 0.5F, this.worldPosition.getZ() + 0.5F, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.BLOCKS, 0.8F, 1.0F);
+                    }
                 }
                 return remainder;
             }
