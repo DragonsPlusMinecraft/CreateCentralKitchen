@@ -3,7 +3,6 @@
   "priority": 1000,
   "package": "plus.dragons.createcentralkitchen.mixin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
     "create.BeltHelperMixin",
     "create.DeployerBlockEntityAccessor"

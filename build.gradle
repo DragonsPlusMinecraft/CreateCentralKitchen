@@ -23,42 +23,51 @@ java {
 }
 
 var integrationMods = [
-        "farmersdelight",
-        "brewinandchewin"
+        ["farmersdelight"],
+        ["brewinandchewin","farmersdelight"],
+        ["mynethersdelight","farmersdelight"],
+        ["endsdelight","farmersdelight"],
+        ["kelaidoscopecookery"]
 ]
 
 integrationMods.forEach {integrationMod ->
     sourceSets {
-        "${integrationMod}" {
+        "${integrationMod.getFirst()}" {
             java {
-                srcDir "src/integration/${integrationMod}/java"
+                srcDir "src/integration/${integrationMod.getFirst()}/java"
             }
             resources {
-                srcDir "src/integration/${integrationMod}/resources"
+                srcDir "src/integration/${integrationMod.getFirst()}/resources"
             }
             compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+            if(integrationMod.size()>1){
+                integrationMod.forEach {dependencyMod ->
+                    if(dependencyMod == integrationMod.getFirst()) return
+                    compileClasspath += sourceSets."${dependencyMod}".output + sourceSets."${dependencyMod}".compileClasspath
+                }
+            }
         }
         main {
-            runtimeClasspath += sourceSets."${integrationMod}".output
+            runtimeClasspath += sourceSets."${integrationMod.getFirst()}".output
         }
     }
 
     classes {
-        finalizedBy(tasks."${integrationMod}Classes")
+        finalizedBy(tasks."${integrationMod.getFirst()}Classes")
     }
 
     jar {
-        from sourceSets."${integrationMod}".output
+        from sourceSets."${integrationMod.getFirst()}".output
     }
 
     tasks.sourcesJar {
-        from sourceSets."${integrationMod}".allJava
+        from sourceSets."${integrationMod.getFirst()}".allJava
     }
 
     neoForge {
         mods {
             "${mod_id}" {
-                sourceSet(sourceSets."${integrationMod}")
+                sourceSet(sourceSets."${integrationMod.getFirst()}")
             }
         }
     }
@@ -148,6 +157,9 @@ dependencies {
 
     localImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
     localImplementation("maven.modrinth:brewin-and-chewin:${brewin_and_chewin_version}")
+    localImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}")
+    localImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
+    localImplementation("maven.modrinth:kaleidoscope-cookery:${kaleidoscope_cookery_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

@@ -65,6 +65,7 @@ public class CCKCommon {
     @SubscribeEvent
     public void addPackFinders(final AddPackFindersEvent event) {
         var type = event.getPackType();
+
         var registries = CompletableFuture.<HolderLookup.Provider>completedFuture(RegistryLayer.createRegistryAccess().compositeAccess());
         if (type == PackType.SERVER_DATA) {
             var pack = new RuntimePackResources(

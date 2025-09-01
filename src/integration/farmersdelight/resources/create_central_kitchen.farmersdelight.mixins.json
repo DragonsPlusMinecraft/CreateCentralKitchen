@@ -4,7 +4,6 @@
   "package": "plus.dragons.createcentralkitchen.mixin.farmersdelight",
   "plugin": "plus.dragons.createcentralkitchen.mixin.farmersdelight.FDIntegrationMixinConfigPlugin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "create_central_kitchen.refmap.json",
   "mixins": [
     "BlockHelperMixin",
     "CCKJeiPluginMixin",

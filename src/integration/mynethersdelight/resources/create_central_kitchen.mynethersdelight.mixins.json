@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "plus.dragons.createcentralkitchen.mixin.mynethersdelight",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.mynethersdelight.MNDIntegrationMixinConfigPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "NetherStoveBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

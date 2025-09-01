@@ -16,12 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin.farmersdelight;
+package plus.dragons.createcentralkitchen.mixin.mynethersdelight;
 
+import com.soytutta.mynethersdelight.common.block.NetherStoveBlock;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
-import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
-@Mixin(StoveBlockEntity.class) // TO RaymondBlaze: 我把这玩意儿拆了是因为在log里刷一堆WARNING真的好难看 = =
-public abstract class StoveBlockEntityMixin implements StoveBlockEntityAccess {}
+@Mixin(NetherStoveBlock.class)
+public abstract class NetherStoveBlockEntityMixin implements StoveBlockEntityAccess {}
