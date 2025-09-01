@@ -21,24 +21,44 @@ package plus.dragons.createcentralkitchen.integration.farmersdelight.burner;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import plus.dragons.createcentralkitchen.client.burner.BlazeBurnerRenderOverride;
 import plus.dragons.createcentralkitchen.client.registry.CCKPartialModels;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+import javax.annotation.Nullable;
+
 public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
-    INSTANCE;
+    FIERY_COOKING_POT(ModIntegration.TWILIGHTDELIGHT.asResource("fiery_cooking_pot"), CCKPartialModels.FIERY_CHEF_HAT, CCKPartialModels.FIERY_CHEF_HAT_SMALL),
+    DEFAULT(null, CCKPartialModels.CHEF_HAT, CCKPartialModels.CHEF_HAT_SMALL);
+
+    @Nullable final ResourceLocation specialHatRenderHeatable;
+    final PartialModel hat;
+    final PartialModel smallHat;
+
+    BlazeChefRenderOverride(@Nullable ResourceLocation specialHatRenderHeatable, PartialModel hat, PartialModel smallHat) {
+        this.specialHatRenderHeatable = specialHatRenderHeatable;
+        this.hat = hat;
+        this.smallHat = smallHat;
+    }
 
     @Override
     public boolean isValid(Level level, BlockPos pos, BlazeBurnerBlockEntity burner) {
-        if (level.getBlockEntity(pos.above()) instanceof HeatableBlockEntity)
-            return true;
-        if (level.getBlockState(pos.above()).is(ModTags.HEAT_CONDUCTORS) &&
-                level.getBlockEntity(pos.above(2)) instanceof HeatableBlockEntity heatable &&
-                !heatable.requiresDirectHeat())
-            return true;
-        return false;
+        if (specialHatRenderHeatable == null) {
+            if (level.getBlockEntity(pos.above()) instanceof HeatableBlockEntity)
+                return true;
+            if (level.getBlockState(pos.above()).is(ModTags.HEAT_CONDUCTORS) &&
+                    level.getBlockEntity(pos.above(2)) instanceof HeatableBlockEntity heatable &&
+                    !heatable.requiresDirectHeat())
+                return true;
+            return false;
+        } else {
+            return BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos.above()).getBlock()).equals(specialHatRenderHeatable);
+        }
     }
 
     @Override
@@ -48,6 +68,6 @@ public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
 
     @Override
     public PartialModel getHatModel(boolean small) {
-        return small ? CCKPartialModels.CHEF_HAT_SMALL : CCKPartialModels.CHEF_HAT;
+        return small ? hat : smallHat;
     }
 }

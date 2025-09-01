@@ -30,6 +30,7 @@ public enum ModIntegration {
     MYNETHERSDELIGHT(Mods.MYNETHERSDELIGHT),
     ENDSDELIGHT(Mods.ENDSDELIGHT),
     TWILIGHTDELIGHT(Mods.TWILIGHTDELIGHT),
+    TRAILANDTALESDELIGHT(Mods.TRAILANDTALESDELIGHT),
     KALEIDOSCOPECOOKERY(Mods.KALEIDOSCOPECOOKERY);
 
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -60,7 +61,8 @@ public enum ModIntegration {
         public static final String BREWINANDCHEWIN = "brewinandchewin";
         public static final String MYNETHERSDELIGHT = "mynethersdelight";
         public static final String ENDSDELIGHT = "ends_delight";
-        public static final String TWILIGHTDELIGHT = "twightdelight";
+        public static final String TWILIGHTDELIGHT = "twilightdelight";
+        public static final String TRAILANDTALESDELIGHT = "trailandtales_delight";
         public static final String KALEIDOSCOPECOOKERY = "kaleidoscope_cookery";
     }
 }

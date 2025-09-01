@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "plus.dragons.createcentralkitchen.mixin.trailandtalesdelight",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.trailandtalesdelight.TrailAndTailsDelightIntegrationMixinConfigPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MudStoveBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

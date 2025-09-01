@@ -39,9 +39,14 @@ public abstract class BlazeBurnerBlockEntityMixin extends SmartBlockEntity imple
     @Inject(method = "tickAnimation", at = @At("HEAD"))
     private void tickAnimation$updateRenderOverride(CallbackInfo ci) {
         assert level != null;
-        if (BlazeChefRenderOverride.INSTANCE.isValid(level, worldPosition, (BlazeBurnerBlockEntity) (Object) this))
-            this.setRenderOverride(BlazeChefRenderOverride.INSTANCE);
-        else if (this.getRenderOverride() == BlazeChefRenderOverride.INSTANCE)
-            this.setRenderOverride(null);
+        boolean overriden = false;
+        for(BlazeChefRenderOverride override: BlazeChefRenderOverride.values()) {
+            if (override.isValid(level, worldPosition, (BlazeBurnerBlockEntity) (Object) this)){
+                this.setRenderOverride(override);
+                overriden = true;
+                break;
+            }
+        }
+        if (!overriden) this.setRenderOverride(null);
     }
 }

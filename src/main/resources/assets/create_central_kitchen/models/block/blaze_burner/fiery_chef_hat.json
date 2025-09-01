@@ -1,0 +1,6 @@
+{
+  "parent": "create_central_kitchen:block/blaze_burner/chef_hat",
+  "textures": {
+    "hat": "create_central_kitchen:block/fiery_chef_hat"
+  }
+}

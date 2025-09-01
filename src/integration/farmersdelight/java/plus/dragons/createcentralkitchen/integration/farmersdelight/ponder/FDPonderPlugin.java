@@ -28,12 +28,15 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 public class FDPonderPlugin {
     private static final ResourceLocation CUTTING_BOARD = ModIntegration.FARMERSDELIGHT.asResource("cutting_board");
     private static final ResourceLocation COOKING_POT = ModIntegration.FARMERSDELIGHT.asResource("cooking_pot");
+    private static final ResourceLocation FIERY_COOKING_POT = ModIntegration.TWILIGHTDELIGHT.asResource("fiery_cooking_pot");
+    private static final ResourceLocation POTTERY_COOKING_POT = ModIntegration.TRAILANDTALESDELIGHT.asResource("pottery_cooking_pot");
     private static final ResourceLocation SKILLET = ModIntegration.FARMERSDELIGHT.asResource("skillet");
     private static final ResourceLocation STOVE = ModIntegration.FARMERSDELIGHT.asResource("stove");
     private static final ResourceLocation NETHER_BRICKS_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_stove");
     private static final ResourceLocation NETHER_BRICKS_SOUL_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_soul_stove");
     private static final ResourceLocation END_STOVE = ModIntegration.ENDSDELIGHT.asResource("end_stove");
     private static final ResourceLocation MAZE_STOVE = ModIntegration.TWILIGHTDELIGHT.asResource("maze_stove");
+    private static final ResourceLocation MUD_STOVE = ModIntegration.TRAILANDTALESDELIGHT.asResource("mud_stove");
 
     public static void register() {
         CCKPonderPlugin.SCENES.add(FDPonderPlugin::registerScenes);
@@ -44,7 +47,7 @@ public class FDPonderPlugin {
         helper.forComponents(CUTTING_BOARD)
                 .addStoryBoard("farmersdelight/cutting_board", FDPonderScenes::cuttingBoard,
                         AllCreatePonderTags.ARM_TARGETS);
-        helper.forComponents(COOKING_POT)
+        helper.forComponents(COOKING_POT, FIERY_COOKING_POT, POTTERY_COOKING_POT)
                 .addStoryBoard("farmersdelight/cooking_pot", FDPonderScenes::cookingPot,
                         AllCreatePonderTags.ARM_TARGETS,
                         AllCreatePonderTags.HIGH_LOGISTICS)
@@ -53,7 +56,7 @@ public class FDPonderPlugin {
                 .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS)
                 .addStoryBoard("farmersdelight/heat_source", FDPonderScenes::heatSource);
-        helper.forComponents(STOVE, NETHER_BRICKS_STOVE, NETHER_BRICKS_SOUL_STOVE, END_STOVE, MAZE_STOVE)
+        helper.forComponents(STOVE, NETHER_BRICKS_STOVE, NETHER_BRICKS_SOUL_STOVE, END_STOVE, MAZE_STOVE, MUD_STOVE)
                 .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS);
     }
@@ -62,11 +65,14 @@ public class FDPonderPlugin {
         helper.addToTag(AllCreatePonderTags.ARM_TARGETS)
                 .add(CUTTING_BOARD)
                 .add(COOKING_POT)
+                .add(FIERY_COOKING_POT)
+                .add(POTTERY_COOKING_POT)
                 .add(SKILLET)
                 .add(STOVE)
                 .add(NETHER_BRICKS_STOVE)
                 .add(NETHER_BRICKS_SOUL_STOVE)
                 .add(END_STOVE)
-                .add(MAZE_STOVE);
+                .add(MAZE_STOVE)
+                .add(MUD_STOVE);
     }
 }

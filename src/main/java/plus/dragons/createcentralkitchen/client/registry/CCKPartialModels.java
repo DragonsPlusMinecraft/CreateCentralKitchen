@@ -24,6 +24,8 @@ import plus.dragons.createcentralkitchen.common.CCKCommon;
 public class CCKPartialModels {
     public static final PartialModel CHEF_HAT = block("blaze_burner/chef_hat");
     public static final PartialModel CHEF_HAT_SMALL = block("blaze_burner/chef_hat_small");
+    public static final PartialModel FIERY_CHEF_HAT = block("blaze_burner/fiery_chef_hat");
+    public static final PartialModel FIERY_CHEF_HAT_SMALL = block("blaze_burner/fiery_chef_hat_small");
     public static final PartialModel DUNGEON_BLAZE_INERT = block("blaze_burner/dungeon/blaze/inert");
     public static final PartialModel DUNGEON_BLAZE_IDLE = block("blaze_burner/dungeon/blaze/idle");
     public static final PartialModel DUNGEON_BLAZE_ACTIVE = block("blaze_burner/dungeon/blaze/active");
