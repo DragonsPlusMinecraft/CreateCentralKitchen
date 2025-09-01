@@ -18,8 +18,10 @@
 
 package plus.dragons.createcentralkitchen.access.farmersdelight;
 
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public interface SkilletBlockEntityAccess {
-    ItemStack addItemToCook(ItemStack stack, boolean simulate);
+    void setSimulate(boolean simulate);
+    ItemStack addItemToCook(ItemStack stack, Player player);
 }
