@@ -38,9 +38,7 @@ public class SkilletArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     @Override
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof SkilletBlockEntityAccess interaction) {
-            // @note: The console output "simulate" is always true, but just in case, I created a Setter function.
-            interaction.setSimulate(simulate);
-            return interaction.addItemToCook(stack, null);
+            return interaction.addItemToCook(stack, simulate);
         }
         return stack;
     }

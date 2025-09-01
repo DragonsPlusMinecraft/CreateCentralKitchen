@@ -23,7 +23,6 @@ import com.simibubi.create.api.boiler.BoilerHeater;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -56,14 +55,8 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
     @Shadow
     private int fireAspectLevel;
 
-    private boolean simulate;
-
     private SkilletBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn, pos, state);
-    }
-
-    public void setSimulate(boolean simulate) {
-        this.simulate = simulate;
     }
 
     @Shadow
@@ -73,14 +66,14 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
     public abstract ItemStack getStoredStack();
 
     @Override
-    public ItemStack addItemToCook(ItemStack stack, Player player) {
+    public ItemStack addItemToCook(ItemStack stack, boolean simulate) {
         Optional<RecipeHolder<CampfireCookingRecipe>> recipe = this.getMatchingRecipe(stack);
         if (recipe.isPresent() && this.getStoredStack().isEmpty()) {
             if (this.getBlockState().getValue(SkilletBlock.WATERLOGGED))
                 return stack;
             boolean wasEmpty = this.getStoredStack().isEmpty();
-            ItemStack remainder = this.inventory.insertItem(0, stack.copy(), this.simulate);
-            if (!ItemStack.matches(remainder, stack)) {
+            ItemStack remainder = this.inventory.insertItem(0, stack.copy(), simulate);
+            if (!simulate && !ItemStack.matches(remainder, stack)) {
                 this.cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().getCookingTime(), this.fireAspectLevel);
                 this.cookingTime = 0;
                 if (wasEmpty && this.level != null && this.isHeated(this.level, this.worldPosition)) {
