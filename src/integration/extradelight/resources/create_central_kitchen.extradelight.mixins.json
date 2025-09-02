@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "plus.dragons.createcentralkitchen.mixin.extradelight",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.extradelight.ExtraDelightIntegrationMixinConfigPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CCKJeiPluginMixin",
+    "BasinOperatingBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

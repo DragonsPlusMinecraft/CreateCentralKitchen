@@ -36,6 +36,9 @@ public class CCKRecipesConfig extends ConfigBase {
     public final ConfigBool convertKegPouringRecipesToEmptyingRecipes = b(true,
             "convertKegPouringRecipesToEmptyingRecipes",
             Comments.convertKegPouringRecipesToEmptyingRecipes);
+    public final ConfigBool convertMortarGrindingRecipesToCompactingRecipes = b(true,
+            "convertMortarGrindingRecipesToCompactingRecipes",
+            Comments.convertMortarGrindingRecipesToCompactingRecipes);
 
     @Override
     public String getName() {
@@ -48,5 +51,6 @@ public class CCKRecipesConfig extends ConfigBase {
         static final String convertCuttingBoardRecipesToDeployingRecipes = "If Farmer's Delight's Cutting Board Recipes can be converted to Deploying Recipes";
         static final String convertKegPouringRecipesToFillingRecipes = "If Brewin' and Chewin's Keg Pouring Recipes can be converted to Filling Recipes";
         static final String convertKegPouringRecipesToEmptyingRecipes = "If Brewin' and Chewin's Keg Pouring Recipes can be converted to Emptying Recipes";
+        static final String convertMortarGrindingRecipesToCompactingRecipes = "If Extra Delight Mortar Grinding Recipes can be converted to Compacting Recipes";
     }
 }

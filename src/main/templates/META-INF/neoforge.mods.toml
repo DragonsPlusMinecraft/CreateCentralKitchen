@@ -27,6 +27,8 @@ issueTrackerURL="${mod_github}/issues"
     config="${mod_id}.trailandtalesdelight.mixins.json"
 [[mixins]]
     config="${mod_id}.twilightdelight.mixins.json"
+[[mixins]]
+    config="${mod_id}.extradelight.mixins.json"
 
 #[[accessTransformers]]
 #    file="META-INF/accesstransformer.cfg"

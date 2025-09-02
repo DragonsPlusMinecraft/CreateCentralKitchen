@@ -23,7 +23,9 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
@@ -50,6 +52,8 @@ public class CCKJeiPlugin implements IModPlugin {
             .createRecipeHolderType(Create.asResource("spout_filling"));
     public static final RecipeType<RecipeHolder<EmptyingRecipe>> DRAINING = RecipeType
             .createRecipeHolderType(Create.asResource("draining"));
+    public static final RecipeType<RecipeHolder<BasinRecipe>> COMPACTING = RecipeType
+            .createRecipeHolderType(Create.asResource("packing"));
 
     @Override
     public ResourceLocation getPluginUid() {
