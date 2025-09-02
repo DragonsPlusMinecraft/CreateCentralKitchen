@@ -18,6 +18,7 @@
 
 package plus.dragons.createcentralkitchen.mixin.brewinandchewin;
 
+import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import mezz.jei.api.recipe.RecipeType;
@@ -38,11 +39,11 @@ import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 public abstract class CCKJeiPluginMixin {
     @Shadow
     @Final
-    public static RecipeType<FillingRecipe> SPOUT_FILLING;
+    public static RecipeType<RecipeHolder<FillingRecipe>> SPOUT_FILLING;
 
     @Shadow
     @Final
-    public static RecipeType<EmptyingRecipe> DRAINING;
+    public static RecipeType<RecipeHolder<EmptyingRecipe>> DRAINING;
 
     @Shadow
     public static Level getLevel() {
@@ -55,13 +56,11 @@ public abstract class CCKJeiPluginMixin {
         if (CCKConfig.recipes().convertKegPouringRecipesToFillingRecipes.get()) {
             registration.addRecipes(SPOUT_FILLING, KegPouringRecipeConverters
                     .getKegFillingRecipes(level)
-                    .map(RecipeHolder::value)
                     .toList());
         }
         if (CCKConfig.recipes().convertKegPouringRecipesToEmptyingRecipes.get()) {
             registration.addRecipes(DRAINING, KegPouringRecipeConverters
                     .getKegEmptyingRecipes(level)
-                    .map(RecipeHolder::value)
                     .toList());
         }
     }

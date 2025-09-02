@@ -53,11 +53,11 @@ public abstract class CCKJeiPluginMixin {
 
     @Shadow
     @Final
-    public static RecipeType<CuttingRecipe> SAWING;
+    public static RecipeType<RecipeHolder<CuttingRecipe>> SAWING;
 
     @Shadow
     @Final
-    public static RecipeType<DeployerApplicationRecipe> DEPLOYING;
+    public static RecipeType<RecipeHolder<DeployerApplicationRecipe>> DEPLOYING;
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
     private void registerRecipes$farmersdelight(IRecipeRegistration registration, CallbackInfo ci) {
@@ -70,14 +70,12 @@ public abstract class CCKJeiPluginMixin {
                     .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
                     .filter(holder -> holder.value().getTool().test(knife))
                     .map(CuttingBoardRecipeConverters.SAWING)
-                    .map(RecipeHolder::value)
                     .toList());
         }
         if (CCKConfig.recipes().convertCuttingBoardRecipesToDeployingRecipes.get()) {
             registration.addRecipes(DEPLOYING, cuttingBoardRecipes.stream()
                     .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
                     .map(CuttingBoardRecipeConverters.DEPLOYING)
-                    .map(RecipeHolder::value)
                     .toList());
         }
     }

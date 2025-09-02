@@ -30,6 +30,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
@@ -41,14 +42,14 @@ import plus.dragons.createdragonsplus.util.ErrorMessages;
 @JeiPlugin
 public class CCKJeiPlugin implements IModPlugin {
     public static final ResourceLocation ID = CCKCommon.asResource("jei");
-    public static final RecipeType<CuttingRecipe> SAWING = RecipeType
-            .create(Create.ID, "sawing", CuttingRecipe.class);
-    public static final RecipeType<DeployerApplicationRecipe> DEPLOYING = RecipeType
-            .create(Create.ID, "deploying", DeployerApplicationRecipe.class);
-    public static final RecipeType<FillingRecipe> SPOUT_FILLING = RecipeType
-            .create(Create.ID, "spout_filling", FillingRecipe.class);
-    public static final RecipeType<EmptyingRecipe> DRAINING = RecipeType
-            .create(Create.ID, "draining", EmptyingRecipe.class);
+    public static final RecipeType<RecipeHolder<CuttingRecipe>> SAWING = RecipeType
+            .createRecipeHolderType(Create.asResource("sawing"));
+    public static final RecipeType<RecipeHolder<DeployerApplicationRecipe>> DEPLOYING = RecipeType
+            .createRecipeHolderType(Create.asResource("deploying"));
+    public static final RecipeType<RecipeHolder<FillingRecipe>> SPOUT_FILLING = RecipeType
+            .createRecipeHolderType(Create.asResource("spout_filling"));
+    public static final RecipeType<RecipeHolder<EmptyingRecipe>> DRAINING = RecipeType
+            .createRecipeHolderType(Create.asResource("draining"));
 
     @Override
     public ResourceLocation getPluginUid() {
