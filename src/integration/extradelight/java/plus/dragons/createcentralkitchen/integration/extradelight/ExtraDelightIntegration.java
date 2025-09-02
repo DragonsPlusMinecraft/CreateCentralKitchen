@@ -28,7 +28,7 @@ import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
+import plus.dragons.createcentralkitchen.integration.extradelight.registry.ExtraDelightArmInteractionPointTypes;
 
 @Mod(CCKCommon.ID)
 public class ExtraDelightIntegration {
@@ -43,8 +43,7 @@ public class ExtraDelightIntegration {
     public static class Common {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
-            //FDArmInteractionPointTypes.register();
-            //FDTagsProvider.register();
+            ExtraDelightArmInteractionPointTypes.register();
 
             // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do the conversion.
         }

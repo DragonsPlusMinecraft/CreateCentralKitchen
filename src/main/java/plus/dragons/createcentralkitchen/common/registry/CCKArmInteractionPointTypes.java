@@ -35,7 +35,8 @@ public class CCKArmInteractionPointTypes {
             CUTTING_BOARD = holder("cutting_board"),
             SKILLET = holder("skillet"),
             STOVE = holder("stove"),
-            COPPER_POT = holder("copper_pot");
+            COPPER_POT = holder("copper_pot"),
+            DRYING_RACK = holder("drying_rack");
     //spotless:on
 
     public static void register(IEventBus modBus) {

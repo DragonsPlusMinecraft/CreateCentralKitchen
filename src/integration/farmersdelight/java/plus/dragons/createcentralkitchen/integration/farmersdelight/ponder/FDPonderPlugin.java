@@ -38,6 +38,8 @@ public class FDPonderPlugin {
     private static final ResourceLocation END_STOVE = ModIntegration.ENDSDELIGHT.asResource("end_stove");
     private static final ResourceLocation MAZE_STOVE = ModIntegration.TWILIGHTDELIGHT.asResource("maze_stove");
     private static final ResourceLocation MUD_STOVE = ModIntegration.TRAILANDTALESDELIGHT.asResource("mud_stove");
+    private static final ResourceLocation DRYING_RACK = ModIntegration.EXTRADELIGHT.asResource("drying_rack");
+
 
     public static void register() {
         CCKPonderPlugin.SCENES.add(FDPonderPlugin::registerScenes);
@@ -75,6 +77,7 @@ public class FDPonderPlugin {
                 .add(NETHER_BRICKS_SOUL_STOVE)
                 .add(END_STOVE)
                 .add(MAZE_STOVE)
-                .add(MUD_STOVE);
+                .add(MUD_STOVE)
+                .add(DRYING_RACK);
     }
 }
