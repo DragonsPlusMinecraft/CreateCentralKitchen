@@ -34,6 +34,7 @@ import javax.annotation.Nullable;
 
 public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
     FIERY_COOKING_POT(ModIntegration.TWILIGHTDELIGHT.asResource("fiery_cooking_pot"), CCKPartialModels.FIERY_CHEF_HAT, CCKPartialModels.FIERY_CHEF_HAT_SMALL),
+    POTTERY_COOKING_OIT(ModIntegration.TRAILANDTALESDELIGHT.asResource("pottery_cooking_pot"), CCKPartialModels.POTTERY_CHEF_HAT, CCKPartialModels.POTTERY_CHEF_HAT_SMALL),
     DEFAULT(null, CCKPartialModels.CHEF_HAT, CCKPartialModels.CHEF_HAT_SMALL);
 
     @Nullable final ResourceLocation specialHatRenderHeatable;
@@ -51,11 +52,9 @@ public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
         if (specialHatRenderHeatable == null) {
             if (level.getBlockEntity(pos.above()) instanceof HeatableBlockEntity)
                 return true;
-            if (level.getBlockState(pos.above()).is(ModTags.HEAT_CONDUCTORS) &&
+            return level.getBlockState(pos.above()).is(ModTags.HEAT_CONDUCTORS) &&
                     level.getBlockEntity(pos.above(2)) instanceof HeatableBlockEntity heatable &&
-                    !heatable.requiresDirectHeat())
-                return true;
-            return false;
+                    !heatable.requiresDirectHeat();
         } else {
             return BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos.above()).getBlock()).equals(specialHatRenderHeatable);
         }
