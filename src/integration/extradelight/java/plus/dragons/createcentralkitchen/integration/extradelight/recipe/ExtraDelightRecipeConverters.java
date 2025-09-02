@@ -19,6 +19,7 @@
 package plus.dragons.createcentralkitchen.integration.extradelight.recipe;
 
 import com.google.common.cache.CacheBuilder;
+import com.lance5057.extradelight.workstations.juicer.JuicerRecipe;
 import com.lance5057.extradelight.workstations.mortar.recipes.MortarRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
@@ -29,10 +30,26 @@ import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 import java.util.function.Function;
 
 public class ExtraDelightRecipeConverters {
-    public static final Function<HolderLookup.Provider, RecipeConverter<MortarRecipe, BasinRecipe>> GRINDING = registry -> RecipeConverter.cached(
+    public static final Function<HolderLookup.Provider, RecipeConverter<MortarRecipe, BasinRecipe>> AUTOMATIC_MORTAR_GRINDING = registry -> RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
-                var id = holder.id().withSuffix("_using_press_in_basin");
+                var id = holder.id().withSuffix("_using_press");
+                var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
+                        .require(recipe.getIngredients().getFirst());
+                var result = recipe.getResultItem(registry);
+                if(!result.isEmpty())
+                    builder.output(result);
+                var fluid = recipe.getFluid();
+                if(!fluid.isEmpty())
+                    builder.output(fluid);
+                return new RecipeHolder<>(id, builder.build());
+            });
+
+    // WIP TODO
+    public static final Function<HolderLookup.Provider, RecipeConverter<JuicerRecipe, BasinRecipe>> JUICING = registry -> RecipeConverter.cached(
+            CacheBuilder.newBuilder(), holder -> {
+                var recipe = holder.value();
+                var id = holder.id().withSuffix("_using_press");
                 var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
                 var result = recipe.getResultItem(registry);

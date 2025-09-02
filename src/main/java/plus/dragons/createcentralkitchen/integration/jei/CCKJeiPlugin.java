@@ -20,40 +20,47 @@ package plus.dragons.createcentralkitchen.integration.jei;
 
 import com.google.common.base.Preconditions;
 import com.simibubi.create.Create;
+import com.simibubi.create.compat.jei.CreateJEI;
+import com.simibubi.create.compat.jei.ToolboxColoringRecipeMaker;
+import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
+import plus.dragons.createdragonsplus.util.CodeReference;
 import plus.dragons.createdragonsplus.util.ErrorMessages;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JeiPlugin
 public class CCKJeiPlugin implements IModPlugin {
     public static final ResourceLocation ID = CCKCommon.asResource("jei");
-    public static final RecipeType<RecipeHolder<CuttingRecipe>> SAWING = RecipeType
-            .createRecipeHolderType(Create.asResource("sawing"));
-    public static final RecipeType<RecipeHolder<DeployerApplicationRecipe>> DEPLOYING = RecipeType
-            .createRecipeHolderType(Create.asResource("deploying"));
+    public final List<CreateRecipeCategory<?>> allCategories = new ArrayList<>();
+
     public static final RecipeType<RecipeHolder<FillingRecipe>> SPOUT_FILLING = RecipeType
             .createRecipeHolderType(Create.asResource("spout_filling"));
     public static final RecipeType<RecipeHolder<EmptyingRecipe>> DRAINING = RecipeType
             .createRecipeHolderType(Create.asResource("draining"));
-    public static final RecipeType<RecipeHolder<BasinRecipe>> COMPACTING = RecipeType
-            .createRecipeHolderType(Create.asResource("packing"));
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -61,7 +68,14 @@ public class CCKJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {}
+    public void registerRecipes(IRecipeRegistration registration) {
+        // Mixin area
+    }
+
+    private void loadCategories() {
+        allCategories.clear();
+        // Mixin area
+    }
 
     @Internal
     public static Level getLevel() {
@@ -83,5 +97,37 @@ public class CCKJeiPlugin implements IModPlugin {
         var level = minecraft.level;
         Preconditions.checkNotNull(level, ErrorMessages.notNull("level"));
         return level.getRecipeManager();
+    }
+
+    @Override
+    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    public void registerCategories(IRecipeCategoryRegistration registration) {
+        loadCategories();
+        registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
+    }
+
+    @Override
+    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        allCategories.forEach(c -> c.registerCatalysts(registration));
+    }
+
+    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    public <T extends Recipe<? extends RecipeInput>> CCKJeiPlugin.CategoryBuilder<T> builder(Class<T> recipeClass) {
+        return new CCKJeiPlugin.CategoryBuilder<>(recipeClass);
+    }
+
+    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    public class CategoryBuilder<T extends Recipe<?>> extends CreateRecipeCategory.Builder<T> {
+        public CategoryBuilder(Class<? extends T> recipeClass) {
+            super(recipeClass);
+        }
+
+        @Override
+        public CreateRecipeCategory<T> build(ResourceLocation id, CreateRecipeCategory.Factory<T> factory) {
+            CreateRecipeCategory<T> category = super.build(id, factory);
+            allCategories.add(category);
+            return category;
+        }
     }
 }

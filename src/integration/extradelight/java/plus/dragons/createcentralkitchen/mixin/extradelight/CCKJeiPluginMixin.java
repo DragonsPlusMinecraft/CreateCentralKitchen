@@ -18,28 +18,37 @@
 
 package plus.dragons.createcentralkitchen.mixin.extradelight;
 
+import com.lance5057.extradelight.ExtraDelightBlocks;
 import com.lance5057.extradelight.ExtraDelightRecipes;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import com.simibubi.create.compat.jei.category.MixingCategory;
+import com.simibubi.create.compat.jei.category.PackingCategory;
+import com.simibubi.create.compat.jei.category.PressingCategory;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.extradelight.recipe.ExtraDelightRecipeConverters;
 import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 
 @Mixin(CCKJeiPlugin.class)
 public abstract class CCKJeiPluginMixin {
-    @Shadow
-    @Final
-    public static RecipeType<RecipeHolder<BasinRecipe>> COMPACTING;
+
+    @Unique
+    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MORTAR_GRINDING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("automatic_mortar_grinding"));
 
     @Shadow
     public static Level getLevel() {
@@ -52,6 +61,16 @@ public abstract class CCKJeiPluginMixin {
     }
 
 
+    @Inject(method = "loadCategories", at = @At("RETURN"))
+    private void loadCategories$extradelight(CallbackInfo ci) {
+        CreateRecipeCategory<?> automaticMortarGrinding = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
+                .addTypedRecipes(AllRecipeTypes.PRESSING)
+                .catalyst(AllBlocks.MECHANICAL_PRESS::get)
+                .catalyst(AllBlocks.BASIN::get)
+                .doubleItemIcon(AllBlocks.MECHANICAL_PRESS.get(), ExtraDelightBlocks.MORTAR_STONE.get())
+                .emptyBackground(177, 103)
+                .build(CCKCommon.asResource("automatic_mortar_grinding"), PackingCategory::standard);
+    }
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
     private void registerRecipes$extradelight(IRecipeRegistration registration, CallbackInfo ci) {
@@ -59,8 +78,8 @@ public abstract class CCKJeiPluginMixin {
         RecipeManager recipeManager = getRecipeManager();
         var mortarRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MORTAR.get());
         if (CCKConfig.recipes().convertMortarGrindingRecipesToCompactingRecipes.get()) {
-            registration.addRecipes(COMPACTING, mortarRecipes.stream()
-                    .map(ExtraDelightRecipeConverters.GRINDING.apply(level.registryAccess()))
+            registration.addRecipes(AUTOMATIC_MORTAR_GRINDING, mortarRecipes.stream()
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_MORTAR_GRINDING.apply(level.registryAccess()))
                     .toList());
         }
     }

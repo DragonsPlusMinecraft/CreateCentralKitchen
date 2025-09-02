@@ -165,6 +165,8 @@ dependencies {
     localImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
 
     localImplementation("maven.modrinth:trailtales-delight:${trailtales_delight_version}")
+
+    localImplementation("xyz.brassgoggledcoders:PatchouliProvider:1.21.1-1.0.11-Snapshot.5") // NoClassDefFoundError at extradelight@2.6.1/com.lance5057.extradelight.data.DataGen.gatherData(DataGen.java:49)
     localImplementation("maven.modrinth:extradelight:${extra_delight_version}")
 
     localImplementation("maven.modrinth:lodestonelib:1.7.1") // Requirement of Miner's Delight

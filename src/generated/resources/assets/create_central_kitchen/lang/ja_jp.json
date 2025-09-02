@@ -1,4 +1,5 @@
 {
+  "_comment.unlocalized": "Remove this line after finishing localization.",
   "create_central_kitchen.ponder.cooking_pot.header": "Createによる自動化：鍋料理",
   "create_central_kitchen.ponder.cooking_pot.text_1": "梱包機を使用して材料の搬入を自動化出来ます",
   "create_central_kitchen.ponder.cooking_pot.text_2": "ファクトリーゲージは梱包工程で非常に役立ちます",
@@ -27,6 +28,9 @@
   "create_central_kitchen.ponder.keg.pouring.text_2": "アイテム排液口でタンカードから飲み物を回収出来ます",
   "create_central_kitchen.ponder.skillet_and_stove.header": "Createで自動化：フライパンとコンロ",
   "create_central_kitchen.ponder.skillet_and_stove.text_1": "メカニカルアームは生の材料をコンロやフライパンに置くことができます",
+  "create_central_kitchen.recipe.automatic_food_cutting": "Automatic Food Cutting",
+  "create_central_kitchen.recipe.automatic_food_sawing": "Automatic Food Sawing",
+  "create_central_kitchen.recipe.automatic_mortar_grinding": "Automatic Mortar Grinding",
   "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
   "pack.create_central_kitchen.runtime.description": "Create: Central Kitchen Runtime Generated Resources"
 }

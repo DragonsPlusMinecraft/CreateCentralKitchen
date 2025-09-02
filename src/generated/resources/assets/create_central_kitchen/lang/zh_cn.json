@@ -1,4 +1,5 @@
 {
+  "_comment.unlocalized": "Remove this line after finishing localization.",
   "create_central_kitchen.ponder.cooking_pot.header": "自动化：厨锅",
   "create_central_kitchen.ponder.cooking_pot.text_1": "用打包机完成食材的自动输入",
   "create_central_kitchen.ponder.cooking_pot.text_2": "工厂仪表在打包过程中很有用",
@@ -27,6 +28,9 @@
   "create_central_kitchen.ponder.keg.pouring.text_2": "通过分液池倒出酒杯中的饮品",
   "create_central_kitchen.ponder.skillet_and_stove.header": "自动化：煎锅和炉灶",
   "create_central_kitchen.ponder.skillet_and_stove.text_1": "动力臂能向煎锅和炉灶放入食材",
+  "create_central_kitchen.recipe.automatic_food_cutting": "Automatic Food Cutting",
+  "create_central_kitchen.recipe.automatic_food_sawing": "Automatic Food Sawing",
+  "create_central_kitchen.recipe.automatic_mortar_grinding": "Automatic Mortar Grinding",
   "pack.create_central_kitchen.runtime": "机械动力：中央厨房",
   "pack.create_central_kitchen.runtime.description": "机械动力：中央厨房 - 运行时资源"
 }

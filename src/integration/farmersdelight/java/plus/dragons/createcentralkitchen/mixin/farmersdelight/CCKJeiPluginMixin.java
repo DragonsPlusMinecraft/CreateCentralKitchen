@@ -18,21 +18,34 @@
 
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
+import com.lance5057.extradelight.ExtraDelightBlocks;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.Create;
+import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import com.simibubi.create.compat.jei.category.DeployingCategory;
+import com.simibubi.create.compat.jei.category.PackingCategory;
+import com.simibubi.create.compat.jei.category.SawingCategory;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
 import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
@@ -51,13 +64,35 @@ public abstract class CCKJeiPluginMixin {
         throw new AssertionError();
     }
 
-    @Shadow
-    @Final
-    public static RecipeType<RecipeHolder<CuttingRecipe>> SAWING;
+    @Unique
+    private final static RecipeType<RecipeHolder<CuttingRecipe>> SAWING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("automatic_food_sawing"));
 
-    @Shadow
-    @Final
-    public static RecipeType<RecipeHolder<DeployerApplicationRecipe>> DEPLOYING;
+    @Unique
+    private final static RecipeType<RecipeHolder<DeployerApplicationRecipe>> DEPLOYING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("automatic_food_cutting"));
+
+    @Inject(method = "loadCategories", at = @At("RETURN"))
+    private void loadCategories$extradelight(CallbackInfo ci) {
+        CreateRecipeCategory<?> automaticFoodSawing = ((CCKJeiPlugin) (Object) this).builder(CuttingRecipe.class)
+                .addTypedRecipes(AllRecipeTypes.CUTTING)
+                .catalyst(AllBlocks.MECHANICAL_SAW::get)
+                .doubleItemIcon(AllBlocks.MECHANICAL_SAW.get(), Items.BEEF)
+                .emptyBackground(177, 70)
+                .build(CCKCommon.asResource("automatic_food_sawing"), SawingCategory::new);
+
+        CreateRecipeCategory<?> automaticMortarGrinding = ((CCKJeiPlugin) (Object) this).builder(DeployerApplicationRecipe.class)
+                .addTypedRecipes(AllRecipeTypes.DEPLOYING)
+                .addTypedRecipes(AllRecipeTypes.SANDPAPER_POLISHING::getType, DeployerApplicationRecipe::convert)
+                .addTypedRecipes(AllRecipeTypes.ITEM_APPLICATION::getType, ManualApplicationRecipe::asDeploying)
+                .removeNonAutomation()
+                .catalyst(AllBlocks.DEPLOYER::get)
+                .catalyst(AllBlocks.DEPOT::get)
+                .catalyst(AllItems.BELT_CONNECTOR::get)
+                .doubleItemIcon(AllBlocks.DEPLOYER.get(), ModItems.IRON_KNIFE.get())
+                .emptyBackground(177, 70)
+                .build(CCKCommon.asResource("automatic_food_cutting"), DeployingCategory::new);
+    }
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
     private void registerRecipes$farmersdelight(IRecipeRegistration registration, CallbackInfo ci) {

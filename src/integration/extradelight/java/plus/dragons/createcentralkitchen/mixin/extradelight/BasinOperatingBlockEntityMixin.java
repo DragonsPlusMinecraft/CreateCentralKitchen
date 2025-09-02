@@ -29,7 +29,7 @@ public abstract class BasinOperatingBlockEntityMixin  extends KineticBlockEntity
             assert level != null;
             var r = level.getRecipeManager()
                     .getAllRecipesFor(ExtraDelightRecipes.MORTAR.get())
-                    .stream().map(ExtraDelightRecipeConverters.GRINDING.apply(level.registryAccess())).map(RecipeHolder::value).collect(Collectors.toSet());
+                    .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_MORTAR_GRINDING.apply(level.registryAccess())).map(RecipeHolder::value).collect(Collectors.toSet());
             original.addAll(r);
         }
         return original;
