@@ -16,37 +16,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.common.registry;
+package plus.dragons.createcentralkitchen.integration.minersdelight.registry;
 
 import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import java.util.function.Supplier;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
+import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.integration.minersdelight.mechanicalArm.CopperPotArmInteractionPoint;
 
-public class CCKArmInteractionPointTypes {
+import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
+
+public class MDArmInteractionPointTypes {
     private static final DeferredRegister<ArmInteractionPointType> REGISTER = DeferredRegister
             .create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.ID);
-    //spotless:off
-    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType>
-            COOKING_POT = holder("cooking_pot"),
-            CUTTING_BOARD = holder("cutting_board"),
-            SKILLET = holder("skillet"),
-            STOVE = holder("stove"),
-            COPPER_POT = holder("copper_pot");
-    //spotless:on
 
-    public static void register(IEventBus modBus) {
-        REGISTER.register(modBus);
-    }
-
-    public static void register(DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder, Supplier<? extends ArmInteractionPointType> supplier) {
-        REGISTER.register(holder.getId().getPath(), supplier);
-    }
-
-    private static DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder(String name) {
-        return DeferredHolder.create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.asResource(name));
+    public static void register() {
+        CCKArmInteractionPointTypes.register(COPPER_POT, CopperPotArmInteractionPoint.Type::new);
     }
 }

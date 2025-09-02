@@ -67,6 +67,6 @@ public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
 
     @Override
     public PartialModel getHatModel(boolean small) {
-        return small ? hat : smallHat;
+        return small ? smallHat : hat;
     }
 }

@@ -30,6 +30,8 @@ var integrationMods = [
         ["kelaidoscopecookery"],
         ["twilightdelight","farmersdelight"],
         ["trailandtalesdelight","farmersdelight"],
+        ["extradelight","farmersdelight"],
+        ["minersdelight","farmersdelight"]
 ]
 
 integrationMods.forEach {integrationMod ->
@@ -161,10 +163,17 @@ dependencies {
     localImplementation("maven.modrinth:brewin-and-chewin:${brewin_and_chewin_version}")
     localImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}")
     localImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
-    localImplementation("maven.modrinth:kaleidoscope-cookery:${kaleidoscope_cookery_version}")
+
     localImplementation("maven.modrinth:trailtales-delight:${trailtales_delight_version}")
+    localImplementation("maven.modrinth:extradelight:${extra_delight_version}")
+
+    localImplementation("maven.modrinth:lodestonelib:1.7.1") // Requirement of Miner's Delight
+    localImplementation("maven.modrinth:miners-delight:${miners_delight_version}")
+
     //localRuntime("curse.maven:the-twilight-forest-227639:6472889") // MC 1.21.1 - 4.7.3196
     //localRuntime("maven.modrinth:twilight-delight:${twilight_delight_version}")  // Well its Registrate is still on MC1.21-1.3.0+55 when Create is on 63
+
+    localImplementation("maven.modrinth:kaleidoscope-cookery:${kaleidoscope_cookery_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

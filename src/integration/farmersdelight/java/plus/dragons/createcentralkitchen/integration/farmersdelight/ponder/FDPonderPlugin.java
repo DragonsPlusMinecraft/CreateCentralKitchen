@@ -30,6 +30,7 @@ public class FDPonderPlugin {
     private static final ResourceLocation COOKING_POT = ModIntegration.FARMERSDELIGHT.asResource("cooking_pot");
     private static final ResourceLocation FIERY_COOKING_POT = ModIntegration.TWILIGHTDELIGHT.asResource("fiery_cooking_pot");
     private static final ResourceLocation POTTERY_COOKING_POT = ModIntegration.TRAILANDTALESDELIGHT.asResource("pottery_cooking_pot");
+    private static final ResourceLocation COPPER_POT = ModIntegration.MINERSDELIGHT.asResource("copper_pot");
     private static final ResourceLocation SKILLET = ModIntegration.FARMERSDELIGHT.asResource("skillet");
     private static final ResourceLocation STOVE = ModIntegration.FARMERSDELIGHT.asResource("stove");
     private static final ResourceLocation NETHER_BRICKS_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_stove");
@@ -47,7 +48,7 @@ public class FDPonderPlugin {
         helper.forComponents(CUTTING_BOARD)
                 .addStoryBoard("farmersdelight/cutting_board", FDPonderScenes::cuttingBoard,
                         AllCreatePonderTags.ARM_TARGETS);
-        helper.forComponents(COOKING_POT, FIERY_COOKING_POT, POTTERY_COOKING_POT)
+        helper.forComponents(COOKING_POT, FIERY_COOKING_POT, POTTERY_COOKING_POT, COPPER_POT)
                 .addStoryBoard("farmersdelight/cooking_pot", FDPonderScenes::cookingPot,
                         AllCreatePonderTags.ARM_TARGETS,
                         AllCreatePonderTags.HIGH_LOGISTICS)
@@ -67,6 +68,7 @@ public class FDPonderPlugin {
                 .add(COOKING_POT)
                 .add(FIERY_COOKING_POT)
                 .add(POTTERY_COOKING_POT)
+                .add(COPPER_POT)
                 .add(SKILLET)
                 .add(STOVE)
                 .add(NETHER_BRICKS_STOVE)
