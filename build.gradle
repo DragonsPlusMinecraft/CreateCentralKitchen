@@ -161,10 +161,10 @@ dependencies {
 
     localImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
     localImplementation("maven.modrinth:brewin-and-chewin:${brewin_and_chewin_version}")
-    //localImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}") // Stove only
+    localImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}") // Stove only
     localImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
 
-    //localImplementation("maven.modrinth:trailtales-delight:${trailtales_delight_version}") // Stove only
+    localImplementation("maven.modrinth:trailtales-delight:${trailtales_delight_version}") // Stove only
 
     localImplementation("xyz.brassgoggledcoders:PatchouliProvider:1.21.1-1.0.11-Snapshot.5") // NoClassDefFoundError at extradelight@2.6.1/com.lance5057.extradelight.data.DataGen.gatherData(DataGen.java:49)
     localImplementation("maven.modrinth:extradelight:${extra_delight_version}")

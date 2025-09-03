@@ -16,27 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.integration.extradelight;
+package plus.dragons.createcentralkitchen.integration.kelaidoscopecookery;
 
-import com.lance5057.extradelight.ExtraDelightBlockEntities;
-import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createcentralkitchen.integration.extradelight.packager.OvenUnpackingHandler;
-import plus.dragons.createcentralkitchen.integration.extradelight.ponder.ExtraDelightPonderPlugin;
-import plus.dragons.createcentralkitchen.integration.extradelight.registry.ExtraDelightArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.integration.kelaidoscopecookery.ponder.KelaidoscopeCookeryPonderPlugin;
+import plus.dragons.createcentralkitchen.integration.kelaidoscopecookery.registry.KelaidoscopeCookeryArmInteractionPointTypes;
 
 @Mod(CCKCommon.ID)
-public class ExtraDelightIntegration {
-    public ExtraDelightIntegration(IEventBus modBus) {
-        if (ModIntegration.EXTRADELIGHT.enabled()) {
+public class KelaidoscopeCookeryIntegration {
+    public KelaidoscopeCookeryIntegration(IEventBus modBus) {
+        if (ModIntegration.KALEIDOSCOPECOOKERY.enabled()) {
             modBus.register(new Common());
             if (FMLLoader.getDist() == Dist.CLIENT)
                 modBus.register(new Client());
@@ -46,26 +42,14 @@ public class ExtraDelightIntegration {
     public static class Common {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
-            ExtraDelightArmInteractionPointTypes.register();
-            // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
-        }
-
-        @SubscribeEvent
-        public void setup(final FMLCommonSetupEvent event) {
-            event.enqueueWork(this::registerUnpackingHandlers);
-        }
-
-        private void registerUnpackingHandlers() {
-            ExtraDelightBlockEntities.OVEN.get()
-                    .getValidBlocks()
-                    .forEach(block -> UnpackingHandler.REGISTRY.register(block, new OvenUnpackingHandler()));
+            KelaidoscopeCookeryArmInteractionPointTypes.register();
         }
     }
 
     public static class Client {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
-            ExtraDelightPonderPlugin.register();
+            KelaidoscopeCookeryPonderPlugin.register();
         }
     }
 }
