@@ -20,14 +20,11 @@ package plus.dragons.createcentralkitchen.integration.jei;
 
 import com.google.common.base.Preconditions;
 import com.simibubi.create.Create;
-import com.simibubi.create.compat.jei.CreateJEI;
-import com.simibubi.create.compat.jei.ToolboxColoringRecipeMaker;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
-import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
+import java.util.ArrayList;
+import java.util.List;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
@@ -48,9 +45,6 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createdragonsplus.util.CodeReference;
 import plus.dragons.createdragonsplus.util.ErrorMessages;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @JeiPlugin
 public class CCKJeiPlugin implements IModPlugin {
@@ -100,24 +94,24 @@ public class CCKJeiPlugin implements IModPlugin {
     }
 
     @Override
-    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    @CodeReference(source = "com.simibubi.create.compat.jei.CreateJEI", license = "mit")
     public void registerCategories(IRecipeCategoryRegistration registration) {
         loadCategories();
         registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
     }
 
     @Override
-    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    @CodeReference(source = "com.simibubi.create.compat.jei.CreateJEI", license = "mit")
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
     }
 
-    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    @CodeReference(source = "com.simibubi.create.compat.jei.CreateJEI", license = "mit")
     public <T extends Recipe<? extends RecipeInput>> CCKJeiPlugin.CategoryBuilder<T> builder(Class<T> recipeClass) {
         return new CCKJeiPlugin.CategoryBuilder<>(recipeClass);
     }
 
-    @CodeReference(source="com.simibubi.create.compat.jei.CreateJEI", license = "mit")
+    @CodeReference(source = "com.simibubi.create.compat.jei.CreateJEI", license = "mit")
     public class CategoryBuilder<T extends Recipe<?>> extends CreateRecipeCategory.Builder<T> {
         public CategoryBuilder(Class<? extends T> recipeClass) {
             super(recipeClass);

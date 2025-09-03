@@ -24,8 +24,7 @@ import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointT
 import plus.dragons.createcentralkitchen.integration.kelaidoscopecookery.mechanicalArm.ShawarmaSpitArmInteractionPoint;
 
 public class KelaidoscopeCookeryArmInteractionPointTypes {
-    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType>
-            SHAWARMA_SPIT = CCKArmInteractionPointTypes.holder("shawarma_spit");
+    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> SHAWARMA_SPIT = CCKArmInteractionPointTypes.holder("shawarma_spit");
 
     public static void register() {
         CCKArmInteractionPointTypes.register(SHAWARMA_SPIT, ShawarmaSpitArmInteractionPoint.Type::new);

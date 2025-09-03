@@ -25,7 +25,6 @@ import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.DeployingCategory;
 import com.simibubi.create.compat.jei.category.SawingCategory;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -72,19 +71,17 @@ public abstract class CCKJeiPluginMixin {
         CreateRecipeCategory<?> automaticFoodSawing = ((CCKJeiPlugin) (Object) this).builder(CuttingRecipe.class)
                 .addTypedRecipes(AllRecipeTypes.CUTTING)
                 .catalyst(AllBlocks.MECHANICAL_SAW::get)
-                .doubleItemIcon(AllBlocks.MECHANICAL_SAW.get(), Items.BEEF)
+                .doubleItemIcon(AllBlocks.MECHANICAL_SAW.get(), ModItems.CUTTING_BOARD.get())
                 .emptyBackground(177, 70)
                 .build(CCKCommon.asResource("farmersdelight.automatic_food_sawing"), SawingCategory::new);
 
-        CreateRecipeCategory<?> automaticMortarGrinding = ((CCKJeiPlugin) (Object) this).builder(DeployerApplicationRecipe.class)
+        CreateRecipeCategory<?> automaticFoodCutting = ((CCKJeiPlugin) (Object) this).builder(DeployerApplicationRecipe.class)
                 .addTypedRecipes(AllRecipeTypes.DEPLOYING)
-                .addTypedRecipes(AllRecipeTypes.SANDPAPER_POLISHING::getType, DeployerApplicationRecipe::convert)
-                .addTypedRecipes(AllRecipeTypes.ITEM_APPLICATION::getType, ManualApplicationRecipe::asDeploying)
                 .removeNonAutomation()
                 .catalyst(AllBlocks.DEPLOYER::get)
                 .catalyst(AllBlocks.DEPOT::get)
                 .catalyst(AllItems.BELT_CONNECTOR::get)
-                .doubleItemIcon(AllBlocks.DEPLOYER.get(), Items.BEEF)
+                .doubleItemIcon(AllBlocks.DEPLOYER.get(), ModItems.CUTTING_BOARD.get())
                 .emptyBackground(177, 70)
                 .build(CCKCommon.asResource("farmersdelight.automatic_food_cutting"), DeployingCategory::new);
     }

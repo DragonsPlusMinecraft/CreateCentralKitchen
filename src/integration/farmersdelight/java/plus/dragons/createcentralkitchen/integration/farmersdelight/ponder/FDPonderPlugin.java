@@ -40,7 +40,6 @@ public class FDPonderPlugin {
     private static final ResourceLocation MUD_STOVE = ModIntegration.TRAILANDTALESDELIGHT.asResource("mud_stove");
     private static final ResourceLocation DRYING_RACK = ModIntegration.EXTRADELIGHT.asResource("drying_rack");
 
-
     public static void register() {
         CCKPonderPlugin.SCENES.add(FDPonderPlugin::registerScenes);
         CCKPonderPlugin.TAGS.add(FDPonderPlugin::registerTags);

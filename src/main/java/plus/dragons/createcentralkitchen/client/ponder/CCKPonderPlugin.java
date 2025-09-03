@@ -51,9 +51,10 @@ public class CCKPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerSharedText(SharedTextRegistrationHelper helper) {
-        helper.registerSharedText("package_automate_ingredient_insertion", "Use Packager to automate ingredient insertion");
-        helper.registerSharedText("useful_factory_gauges", "Factory gauges are very useful in the packaging process");
-        helper.registerSharedText("arm_automate_container_insertion", "Use Mechanical Arm to insert food container");
-        helper.registerSharedText("arm_take_out_food", "Mechanical Arm can take out cooked food");
+        helper.registerSharedText("package_automate_ingredient_insertion", "Use Packager to automate ingredient insertion.");
+        helper.registerSharedText("useful_factory_gauges", "Factory gauges are very useful in the packaging process.");
+        helper.registerSharedText("arm_automate_container_insertion", "Use Mechanical Arm to insert food container.");
+        helper.registerSharedText("arm_take_out_food", "Mechanical Arm can take out cooked food.");
+        helper.registerSharedText("pipe_insert_liquid_ingredient", "Use Pipe to insert liquid ingredient.");
     }
 }

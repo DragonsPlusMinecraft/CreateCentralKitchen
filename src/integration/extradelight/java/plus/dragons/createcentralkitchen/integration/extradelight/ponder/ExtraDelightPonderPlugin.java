@@ -27,7 +27,7 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
 public class ExtraDelightPonderPlugin {
     private static final ResourceLocation OVEN = ModIntegration.EXTRADELIGHT.asResource("oven");
-
+    private static final ResourceLocation CHILLER = ModIntegration.EXTRADELIGHT.asResource("chiller");
 
     public static void register() {
         CCKPonderPlugin.SCENES.add(ExtraDelightPonderPlugin::registerScenes);
@@ -39,10 +39,15 @@ public class ExtraDelightPonderPlugin {
                 .addStoryBoard("extradelight/oven", ExtraDelightPonderScenes::oven,
                         AllCreatePonderTags.ARM_TARGETS,
                         AllCreatePonderTags.HIGH_LOGISTICS);
+        helper.forComponents(CHILLER)
+                .addStoryBoard("extradelight/chiller", ExtraDelightPonderScenes::chiller,
+                        AllCreatePonderTags.ARM_TARGETS,
+                        AllCreatePonderTags.HIGH_LOGISTICS);
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
         helper.addToTag(AllCreatePonderTags.ARM_TARGETS)
-                .add(OVEN);
+                .add(OVEN)
+                .add(CHILLER);
     }
 }

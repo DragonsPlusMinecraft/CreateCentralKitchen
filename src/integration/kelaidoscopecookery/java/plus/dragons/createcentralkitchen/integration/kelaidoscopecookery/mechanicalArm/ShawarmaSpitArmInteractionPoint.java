@@ -35,15 +35,15 @@ public class ShawarmaSpitArmInteractionPoint extends ArmInteractionPoint {
 
     public ShawarmaSpitArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
-        if(QUICK_CHECK == null) QUICK_CHECK = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
+        if (QUICK_CHECK == null) QUICK_CHECK = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
     }
 
     @Override
     public ItemStack extract(ArmBlockEntity armBlockEntity, int slot, int amount, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof ShawarmaSpitBlockEntity interaction) {
-            if(interaction.cookTime == 0 && !interaction.cookedItem.isEmpty()){
+            if (interaction.cookTime == 0 && !interaction.cookedItem.isEmpty()) {
                 var result = interaction.cookedItem.copy();
-                if(!simulate){
+                if (!simulate) {
                     interaction.cookingItem = ItemStack.EMPTY;
                     interaction.cookedItem = ItemStack.EMPTY;
                     interaction.cookTime = 0;
@@ -63,9 +63,9 @@ public class ShawarmaSpitArmInteractionPoint extends ArmInteractionPoint {
     @Override
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof ShawarmaSpitBlockEntity interaction) {
-            if(interaction.cookingItem.isEmpty() && interaction.cookedItem.isEmpty()){
-                if(QUICK_CHECK.getRecipeFor(new SingleRecipeInput(stack),armBlockEntity.getLevel()).isPresent()){
-                    if(simulate){
+            if (interaction.cookingItem.isEmpty() && interaction.cookedItem.isEmpty()) {
+                if (QUICK_CHECK.getRecipeFor(new SingleRecipeInput(stack), armBlockEntity.getLevel()).isPresent()) {
+                    if (simulate) {
                         var result = stack.copy();
                         result.shrink(8);
                         return result;

@@ -21,10 +21,13 @@ package plus.dragons.createcentralkitchen.mixin.extradelight;
 import com.lance5057.extradelight.ExtraDelightBlocks;
 import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import com.simibubi.create.compat.jei.category.DeployingCategory;
 import com.simibubi.create.compat.jei.category.MixingCategory;
 import com.simibubi.create.compat.jei.category.PackingCategory;
+import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -44,7 +47,6 @@ import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 
 @Mixin(CCKJeiPlugin.class)
 public abstract class CCKJeiPluginMixin {
-
     @Unique
     private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_GRINDING = RecipeType
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_grinding"));
@@ -55,6 +57,8 @@ public abstract class CCKJeiPluginMixin {
     // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
     /*private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MIXING = RecipeType
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_mixing"));*/
+    private static final RecipeType<RecipeHolder<DeployerApplicationRecipe>> AUTOMATIC_GINGERBREAD_DECORATING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_gingerbread_decorating"));
 
     @Shadow
     public static Level getLevel() {
@@ -65,7 +69,6 @@ public abstract class CCKJeiPluginMixin {
     public static RecipeManager getRecipeManager() {
         throw new AssertionError();
     }
-
 
     @Inject(method = "loadCategories", at = @At("RETURN"))
     private void loadCategories$extradelight(CallbackInfo ci) {
@@ -99,6 +102,15 @@ public abstract class CCKJeiPluginMixin {
                 .doubleItemIcon(AllBlocks.MECHANICAL_MIXER.get(), ExtraDelightBlocks.MIXING_BOWL.get())
                 .emptyBackground(177, 103)
                 .build(CCKCommon.asResource("extradelight.automatic_mixing"), MixingCategory::standard);*/
+
+        CreateRecipeCategory<?> automaticGingerbreadDecorating = ((CCKJeiPlugin) (Object) this).builder(DeployerApplicationRecipe.class)
+                .addTypedRecipes(AllRecipeTypes.DEPLOYING)
+                .catalyst(AllBlocks.DEPLOYER::get)
+                .catalyst(AllBlocks.DEPOT::get)
+                .catalyst(AllItems.BELT_CONNECTOR::get)
+                .doubleItemIcon(AllBlocks.DEPLOYER.get(), ExtraDelightBlocks.GINGERBREAD_COOKIE_BLOCK)
+                .emptyBackground(177, 70)
+                .build(CCKCommon.asResource("extradelight.automatic_gingerbread_decorating"), DeployingCategory::new);
     }
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
@@ -130,5 +142,12 @@ public abstract class CCKJeiPluginMixin {
                     .map(ExtraDelightRecipeConverters.AUTOMATIC_MIXING.apply(level.registryAccess()))
                     .toList());
         }*/
+        var toolOnBlockRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.TOOL_ON_BLOCK.get());
+        if (CCKConfig.recipes().convertToolOnBlockRecipesToDeployingRecipes.get()) {
+            registration.addRecipes(AUTOMATIC_GINGERBREAD_DECORATING, toolOnBlockRecipes.stream()
+                    .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GINGERBREAD_DECORATING.apply(level.registryAccess()))
+                    .toList());
+        }
     }
 }

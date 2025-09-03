@@ -19,27 +19,25 @@
 package plus.dragons.createcentralkitchen.integration.extradelight.recipe;
 
 import com.google.common.cache.CacheBuilder;
+import com.lance5057.extradelight.ExtraDelightRecipes;
+import com.lance5057.extradelight.recipe.ToolOnBlockRecipe;
 import com.lance5057.extradelight.workstations.juicer.JuicerRecipe;
 import com.lance5057.extradelight.workstations.meltingpot.MeltingPotRecipe;
-import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.lance5057.extradelight.workstations.mortar.recipes.MortarRecipe;
+import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
+import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.neoforged.neoforge.fluids.crafting.CompoundFluidIngredient;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
-import net.neoforged.neoforge.fluids.crafting.SingleFluidIngredient;
-import net.neoforged.neoforge.fluids.crafting.TagFluidIngredient;
-import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
-
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.function.Function;
-import java.util.stream.Stream;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.bus.api.SubscribeEvent;
+import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 
 public class ExtraDelightRecipeConverters {
     public static final Function<HolderLookup.Provider, RecipeConverter<MortarRecipe, BasinRecipe>> AUTOMATIC_GRINDING = registry -> RecipeConverter.cached(
@@ -49,10 +47,10 @@ public class ExtraDelightRecipeConverters {
                 var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
                 var result = recipe.getResultItem(registry);
-                if(!result.isEmpty())
+                if (!result.isEmpty())
                     builder.output(result);
                 var fluid = recipe.getFluid();
-                if(!fluid.isEmpty())
+                if (!fluid.isEmpty())
                     builder.output(fluid);
                 return new RecipeHolder<>(id, builder.build());
             });
@@ -63,7 +61,7 @@ public class ExtraDelightRecipeConverters {
                 var id = holder.id().withSuffix("_using_press");
                 var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
-                builder.output(recipe.getChance(),recipe.getResultItem(registry));
+                builder.output(recipe.getChance(), recipe.getResultItem(registry));
                 builder.output(recipe.getFluid());
                 return new RecipeHolder<>(id, builder.build());
             });
@@ -76,6 +74,17 @@ public class ExtraDelightRecipeConverters {
                         .require(recipe.input);
                 builder.output(recipe.result);
                 builder.requiresHeat(HeatCondition.HEATED);
+                return new RecipeHolder<>(id, builder.build());
+            });
+
+    public static final Function<HolderLookup.Provider, RecipeConverter<ToolOnBlockRecipe, DeployerApplicationRecipe>> AUTOMATIC_GINGERBREAD_DECORATING = registry -> RecipeConverter.cached(
+            CacheBuilder.newBuilder(), holder -> {
+                var recipe = holder.value();
+                var id = holder.id().withSuffix("_using_deployer");
+                var builder = new ItemApplicationRecipe.Builder<>(DeployerApplicationRecipe::new, id)
+                        .require(recipe.getIn())
+                        .require(recipe.getTool())
+                        .output(recipe.getOut());
                 return new RecipeHolder<>(id, builder.build());
             });
 
@@ -95,7 +104,7 @@ public class ExtraDelightRecipeConverters {
                 builder.output(recipe.getResultItem(registry));
                 return new RecipeHolder<>(id, builder.build());
             });
-
+    
     private static Stream<? extends com.simibubi.create.foundation.fluid.FluidIngredient> convertBadDesignSizedFluidIngredient(FluidIngredient s, int amount) {
         ArrayList<com.simibubi.create.foundation.fluid.FluidIngredient> r = new ArrayList<>();
         if(s instanceof SingleFluidIngredient singleFluidIngredient){
@@ -108,4 +117,20 @@ public class ExtraDelightRecipeConverters {
         }
         return r.stream();
     }*/
+
+    @SubscribeEvent
+    public static void onDeployerRecipeSearch(final DeployerRecipeSearchEvent event) {
+        if (CCKConfig.recipes().convertToolOnBlockRecipesToDeployingRecipes.get()) {
+            var deployer = event.getBlockEntity();
+            var inventory = event.getInventory();
+            var level = deployer.getLevel();
+            assert level != null;
+            event.addRecipe(() -> level.getRecipeManager()
+                    .getAllRecipesFor(ExtraDelightRecipes.TOOL_ON_BLOCK.get())
+                    .stream()
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GINGERBREAD_DECORATING.apply(level.registryAccess()))
+                    .filter(holder -> holder.value().matches(inventory, level))
+                    .findFirst(), 50);
+        }
+    }
 }

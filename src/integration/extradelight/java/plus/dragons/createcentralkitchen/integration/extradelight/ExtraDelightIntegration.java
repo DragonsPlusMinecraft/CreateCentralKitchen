@@ -27,10 +27,13 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.NeoForge;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.extradelight.packager.ChillerUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.extradelight.packager.OvenUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.extradelight.ponder.ExtraDelightPonderPlugin;
+import plus.dragons.createcentralkitchen.integration.extradelight.recipe.ExtraDelightRecipeConverters;
 import plus.dragons.createcentralkitchen.integration.extradelight.registry.ExtraDelightArmInteractionPointTypes;
 
 @Mod(CCKCommon.ID)
@@ -48,6 +51,7 @@ public class ExtraDelightIntegration {
         public void construct(final FMLConstructModEvent event) {
             ExtraDelightArmInteractionPointTypes.register();
             // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
+            NeoForge.EVENT_BUS.register(ExtraDelightRecipeConverters.class);
         }
 
         @SubscribeEvent
@@ -59,6 +63,9 @@ public class ExtraDelightIntegration {
             ExtraDelightBlockEntities.OVEN.get()
                     .getValidBlocks()
                     .forEach(block -> UnpackingHandler.REGISTRY.register(block, new OvenUnpackingHandler()));
+            ExtraDelightBlockEntities.CHILLER.get()
+                    .getValidBlocks()
+                    .forEach(block -> UnpackingHandler.REGISTRY.register(block, new ChillerUnpackingHandler()));
         }
     }
 

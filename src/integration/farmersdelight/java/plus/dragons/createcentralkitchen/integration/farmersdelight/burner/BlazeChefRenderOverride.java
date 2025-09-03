@@ -20,6 +20,7 @@ package plus.dragons.createcentralkitchen.integration.farmersdelight.burner;
 
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -30,14 +31,13 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-import javax.annotation.Nullable;
-
 public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
     FIERY_COOKING_POT(ModIntegration.TWILIGHTDELIGHT.asResource("fiery_cooking_pot"), CCKPartialModels.FIERY_CHEF_HAT, CCKPartialModels.FIERY_CHEF_HAT_SMALL),
     POTTERY_COOKING_OIT(ModIntegration.TRAILANDTALESDELIGHT.asResource("pottery_cooking_pot"), CCKPartialModels.POTTERY_CHEF_HAT, CCKPartialModels.POTTERY_CHEF_HAT_SMALL),
     DEFAULT(null, CCKPartialModels.CHEF_HAT, CCKPartialModels.CHEF_HAT_SMALL);
 
-    @Nullable final ResourceLocation specialHatRenderHeatable;
+    @Nullable
+    final ResourceLocation specialHatRenderHeatable;
     final PartialModel hat;
     final PartialModel smallHat;
 

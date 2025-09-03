@@ -20,6 +20,8 @@ package plus.dragons.createcentralkitchen.integration.farmersdelight.registry;
 
 import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
 
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CookingPotArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CuttingBoardArmInteractionPoint;
@@ -27,6 +29,14 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalAr
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.StoveArmInteractionPoint;
 
 public class FDArmInteractionPointTypes {
+    //spotless:off
+    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType>
+            COOKING_POT = holder("cooking_pot"),
+            CUTTING_BOARD = holder("cutting_board"),
+            SKILLET = holder("skillet"),
+            STOVE = holder("stove");
+    //spotless:on
+
     public static void register() {
         CCKArmInteractionPointTypes.register(COOKING_POT, CookingPotArmInteractionPoint.Type::new);
         CCKArmInteractionPointTypes.register(CUTTING_BOARD, CuttingBoardArmInteractionPoint.Type::new);

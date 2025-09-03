@@ -160,7 +160,7 @@ public class BnCPonderScenes {
         scene.world().moveSection(through, new Vec3(0, -5, 0), 0);
         scene.world().setKineticSpeed(util.select().position(2, 1, 1), 128);
         scene.overlay().showText(60)
-                .text("Use pipe to input liquid ingredient")
+                .sharedText(CCKCommon.asResource("pipe_insert_liquid_ingredient"))
                 .pointAt(util.vector().centerOf(2, 1, 1))
                 .attachKeyFrame()
                 .placeNearTarget();

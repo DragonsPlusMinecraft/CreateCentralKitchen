@@ -21,5 +21,5 @@ package plus.dragons.createcentralkitchen.mixin.mynethersdelight;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 
-@Mixin(targets="com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity")
+@Mixin(targets = "com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity")
 public abstract class NetherStoveBlockEntityMixin implements StoveBlockEntityAccess {}

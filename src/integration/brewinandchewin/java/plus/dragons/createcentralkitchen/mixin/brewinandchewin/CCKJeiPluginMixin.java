@@ -18,7 +18,6 @@
 
 package plus.dragons.createcentralkitchen.mixin.brewinandchewin;
 
-import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import mezz.jei.api.recipe.RecipeType;

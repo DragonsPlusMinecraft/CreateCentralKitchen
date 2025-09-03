@@ -18,15 +18,14 @@
 
 package plus.dragons.createcentralkitchen.mixin.extradelight;
 
+import java.util.List;
+import java.util.Set;
 import net.neoforged.fml.loading.LoadingModList;
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import plus.dragons.createcentralkitchen.integration.ModIntegration.Mods;
-
-import java.util.List;
-import java.util.Set;
 
 public class ExtraDelightIntegrationMixinConfigPlugin implements IMixinConfigPlugin {
     private boolean enabled;

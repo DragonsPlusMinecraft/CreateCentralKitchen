@@ -18,12 +18,12 @@
 
 package plus.dragons.createcentralkitchen.integration.minersdelight.registry;
 
+import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
+
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.minersdelight.mechanicalArm.CopperPotArmInteractionPoint;
-
-import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
 
 public class MDArmInteractionPointTypes {
     public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> COPPER_POT = holder("copper_pot");

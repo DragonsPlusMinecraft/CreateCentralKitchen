@@ -28,7 +28,6 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 public class KelaidoscopeCookeryPonderPlugin {
     private static final ResourceLocation SHAWARMA_SPIT = ModIntegration.KALEIDOSCOPECOOKERY.asResource("shawarma_spit");
 
-
     public static void register() {
         CCKPonderPlugin.SCENES.add(KelaidoscopeCookeryPonderPlugin::registerScenes);
         CCKPonderPlugin.TAGS.add(KelaidoscopeCookeryPonderPlugin::registerTags);

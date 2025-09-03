@@ -74,7 +74,7 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
             boolean wasEmpty = this.getStoredStack().isEmpty();
             ItemStack remainder = this.inventory.insertItem(0, stack.copy(), simulate);
             if (!ItemStack.matches(remainder, stack)) {
-                if(!simulate){
+                if (!simulate) {
                     this.cookingTimeTotal = SkilletBlock.getSkilletCookingTime(recipe.get().value().getCookingTime(), this.fireAspectLevel);
                     this.cookingTime = 0;
                     if (wasEmpty && this.level != null && this.isHeated(this.level, this.worldPosition)) {

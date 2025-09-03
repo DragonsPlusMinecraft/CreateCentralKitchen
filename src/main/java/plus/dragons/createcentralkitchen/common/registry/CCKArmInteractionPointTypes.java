@@ -29,13 +29,6 @@ import plus.dragons.createcentralkitchen.common.CCKCommon;
 public class CCKArmInteractionPointTypes {
     private static final DeferredRegister<ArmInteractionPointType> REGISTER = DeferredRegister
             .create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.ID);
-    //spotless:off
-    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType>
-            COOKING_POT = holder("cooking_pot"),
-            CUTTING_BOARD = holder("cutting_board"),
-            SKILLET = holder("skillet"),
-            STOVE = holder("stove");
-    //spotless:on
 
     public static void register(IEventBus modBus) {
         REGISTER.register(modBus);

@@ -23,6 +23,7 @@ import com.lance5057.extradelight.workstations.dryingrack.DryingRackRecipe;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
+import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -30,8 +31,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 public class DryingRackArmInteractionPoint extends ArmInteractionPoint {
     public DryingRackArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
@@ -42,11 +41,11 @@ public class DryingRackArmInteractionPoint extends ArmInteractionPoint {
     public ItemStack extract(ArmBlockEntity armBlockEntity, int slot, int amount, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof DryingRackBlockEntity interaction) {
             var inv = interaction.getItemHandler();
-            for(int i = 0; i < inv.getSlots(); i++) {
+            for (int i = 0; i < inv.getSlots(); i++) {
                 var result = interaction.getItemHandler().extractItem(i, amount, true);
-                if(!result.isEmpty()){
+                if (!result.isEmpty()) {
                     Optional<RecipeHolder<DryingRackRecipe>> r = interaction.matchRecipe(result);
-                    if(r.isEmpty()) return interaction.getItemHandler().extractItem(i,amount, simulate);
+                    if (r.isEmpty()) return interaction.getItemHandler().extractItem(i, amount, simulate);
                 }
             }
         }
@@ -57,9 +56,9 @@ public class DryingRackArmInteractionPoint extends ArmInteractionPoint {
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof DryingRackBlockEntity interaction) {
             var inv = interaction.getItemHandler();
-            for(int i = 0; i < inv.getSlots(); i++) {
-                if(!ItemStack.matches(inv.insertItem(i,stack, true),stack)){
-                    return inv.insertItem(i,stack, simulate);
+            for (int i = 0; i < inv.getSlots(); i++) {
+                if (!ItemStack.matches(inv.insertItem(i, stack, true), stack)) {
+                    return inv.insertItem(i, stack, simulate);
                 }
             }
         }

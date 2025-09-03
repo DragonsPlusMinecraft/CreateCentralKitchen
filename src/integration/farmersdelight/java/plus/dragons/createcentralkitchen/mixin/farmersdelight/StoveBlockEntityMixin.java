@@ -19,7 +19,6 @@
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
