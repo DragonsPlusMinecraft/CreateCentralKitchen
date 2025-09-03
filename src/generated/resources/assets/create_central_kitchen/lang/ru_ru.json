@@ -28,9 +28,12 @@
   "create_central_kitchen.ponder.keg.pouring.text_2": "Слейте напиток из кружки через осушитель предметов",
   "create_central_kitchen.ponder.skillet_and_stove.header": "Автоматизацией с Create для сковороды и кухонной плиты",
   "create_central_kitchen.ponder.skillet_and_stove.text_1": "Механическая рука может класть ингредиенты на плиту и сковороду",
-  "create_central_kitchen.recipe.automatic_food_cutting": "Automatic Food Cutting",
-  "create_central_kitchen.recipe.automatic_food_sawing": "Automatic Food Sawing",
-  "create_central_kitchen.recipe.automatic_mortar_grinding": "Automatic Mortar Grinding",
+  "create_central_kitchen.recipe.extradelight.automatic_grinding": "Automatic Grinding",
+  "create_central_kitchen.recipe.extradelight.automatic_juicing": "Automatic Juicing",
+  "create_central_kitchen.recipe.extradelight.automatic_melting": "Automatic Melting",
+  "create_central_kitchen.recipe.extradelight.automatic_mixing": "Automatic Mixing",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Automatic Food Cutting",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing",
   "pack.create_central_kitchen.runtime": "Create: Центральная Кухня",
   "pack.create_central_kitchen.runtime.description": "Динамически сгенерированные ресурсы Create: Центральная Кухня"
 }

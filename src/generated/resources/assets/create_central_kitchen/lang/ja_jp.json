@@ -28,9 +28,12 @@
   "create_central_kitchen.ponder.keg.pouring.text_2": "アイテム排液口でタンカードから飲み物を回収出来ます",
   "create_central_kitchen.ponder.skillet_and_stove.header": "Createで自動化：フライパンとコンロ",
   "create_central_kitchen.ponder.skillet_and_stove.text_1": "メカニカルアームは生の材料をコンロやフライパンに置くことができます",
-  "create_central_kitchen.recipe.automatic_food_cutting": "Automatic Food Cutting",
-  "create_central_kitchen.recipe.automatic_food_sawing": "Automatic Food Sawing",
-  "create_central_kitchen.recipe.automatic_mortar_grinding": "Automatic Mortar Grinding",
+  "create_central_kitchen.recipe.extradelight.automatic_grinding": "Automatic Grinding",
+  "create_central_kitchen.recipe.extradelight.automatic_juicing": "Automatic Juicing",
+  "create_central_kitchen.recipe.extradelight.automatic_melting": "Automatic Melting",
+  "create_central_kitchen.recipe.extradelight.automatic_mixing": "Automatic Mixing",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Automatic Food Cutting",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing",
   "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
   "pack.create_central_kitchen.runtime.description": "Create: Central Kitchen Runtime Generated Resources"
 }

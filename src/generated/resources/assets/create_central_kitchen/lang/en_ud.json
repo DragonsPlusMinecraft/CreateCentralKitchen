@@ -27,9 +27,12 @@
   "create_central_kitchen.ponder.keg.pouring.text_2": "uıɐɹᗡ ɯǝʇI ɥʇıʍ pɹɐʞuɐ⟘ ɟo ʇno ʞuıɹp ɹnoԀ",
   "create_central_kitchen.ponder.skillet_and_stove.header": "ǝʌoʇS puɐ ʇǝןןıʞS :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
   "create_central_kitchen.ponder.skillet_and_stove.text_1": "ʇǝןןıʞS puɐ ǝʌoʇS oʇuo ʇuǝıpǝɹbuı ʍɐɹ ʇnd uɐɔ ɯɹⱯ ןɐɔıuɐɥɔǝW",
-  "create_central_kitchen.recipe.automatic_food_cutting": "buıʇʇnƆ pooℲ ɔıʇɐɯoʇnⱯ",
-  "create_central_kitchen.recipe.automatic_food_sawing": "buıʍɐS pooℲ ɔıʇɐɯoʇnⱯ",
-  "create_central_kitchen.recipe.automatic_mortar_grinding": "buıpuıɹ⅁ ɹɐʇɹoW ɔıʇɐɯoʇnⱯ",
+  "create_central_kitchen.recipe.extradelight.automatic_grinding": "buıpuıɹ⅁ ɔıʇɐɯoʇnⱯ",
+  "create_central_kitchen.recipe.extradelight.automatic_juicing": "buıɔınſ ɔıʇɐɯoʇnⱯ",
+  "create_central_kitchen.recipe.extradelight.automatic_melting": "buıʇןǝW ɔıʇɐɯoʇnⱯ",
+  "create_central_kitchen.recipe.extradelight.automatic_mixing": "buıxıW ɔıʇɐɯoʇnⱯ",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "buıʇʇnƆ pooℲ ɔıʇɐɯoʇnⱯ",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "buıʍɐS pooℲ ɔıʇɐɯoʇnⱯ",
   "pack.create_central_kitchen.runtime": "uǝɥɔʇıʞ ןɐɹʇuǝƆ :ǝʇɐǝɹƆ",
   "pack.create_central_kitchen.runtime.description": "sǝɔɹnosǝᴚ pǝʇɐɹǝuǝ⅁ ǝɯıʇunᴚ uǝɥɔʇıʞ ןɐɹʇuǝƆ :ǝʇɐǝɹƆ"
 }

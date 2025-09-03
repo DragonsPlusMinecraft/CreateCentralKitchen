@@ -20,17 +20,29 @@ package plus.dragons.createcentralkitchen.integration.extradelight.recipe;
 
 import com.google.common.cache.CacheBuilder;
 import com.lance5057.extradelight.workstations.juicer.JuicerRecipe;
+import com.lance5057.extradelight.workstations.meltingpot.MeltingPotRecipe;
+import com.lance5057.extradelight.workstations.mixingbowl.recipes.MixingBowlRecipe;
 import com.lance5057.extradelight.workstations.mortar.recipes.MortarRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.neoforge.fluids.crafting.CompoundFluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SingleFluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.TagFluidIngredient;
 import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class ExtraDelightRecipeConverters {
-    public static final Function<HolderLookup.Provider, RecipeConverter<MortarRecipe, BasinRecipe>> AUTOMATIC_MORTAR_GRINDING = registry -> RecipeConverter.cached(
+    public static final Function<HolderLookup.Provider, RecipeConverter<MortarRecipe, BasinRecipe>> AUTOMATIC_GRINDING = registry -> RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_press");
@@ -45,19 +57,52 @@ public class ExtraDelightRecipeConverters {
                 return new RecipeHolder<>(id, builder.build());
             });
 
-    // WIP TODO
-    public static final Function<HolderLookup.Provider, RecipeConverter<JuicerRecipe, BasinRecipe>> JUICING = registry -> RecipeConverter.cached(
+    public static final Function<HolderLookup.Provider, RecipeConverter<JuicerRecipe, BasinRecipe>> AUTOMATIC_JUICING = registry -> RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_press");
                 var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
-                var result = recipe.getResultItem(registry);
-                if(!result.isEmpty())
-                    builder.output(result);
-                var fluid = recipe.getFluid();
-                if(!fluid.isEmpty())
-                    builder.output(fluid);
+                builder.output(recipe.getChance(),recipe.getResultItem(registry));
+                builder.output(recipe.getFluid());
                 return new RecipeHolder<>(id, builder.build());
             });
+
+    public static final Function<HolderLookup.Provider, RecipeConverter<MeltingPotRecipe, BasinRecipe>> AUTOMATIC_MELTING = registry -> RecipeConverter.cached(
+            CacheBuilder.newBuilder(), holder -> {
+                var recipe = holder.value();
+                var id = holder.id().withSuffix("_using_mixer");
+                var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
+                        .require(recipe.input);
+                builder.output(recipe.result);
+                builder.requiresHeat(HeatCondition.HEATED);
+                return new RecipeHolder<>(id, builder.build());
+            });
+
+    public static final Function<HolderLookup.Provider, RecipeConverter<MixingBowlRecipe, BasinRecipe>> AUTOMATIC_MIXING = registry -> RecipeConverter.cached(
+            CacheBuilder.newBuilder(), holder -> {
+                var recipe = holder.value();
+                var id = holder.id().withSuffix("_using_mixer");
+                var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id);
+                ArrayList<Ingredient> itemIngredients = new ArrayList<>(recipe.getIngredients());
+                if(!recipe.getContainer().isEmpty()) itemIngredients.add(Ingredient.of(recipe.getContainer()));
+                if(!itemIngredients.isEmpty()) builder.withItemIngredients(NonNullList.copyOf(itemIngredients));
+                var fluidIngredients = recipe.getFluids();
+                if(!fluidIngredients.isEmpty()) builder.withFluidIngredients(NonNullList.copyOf(fluidIngredients.stream()
+                        .flatMap(sizedFluidIngredient -> convertBadDesignSizedFluidIngredient(sizedFluidIngredient.ingredient(),sizedFluidIngredient.amount())).toList()));
+                return new RecipeHolder<>(id, builder.build());
+            });
+
+    private static Stream<? extends com.simibubi.create.foundation.fluid.FluidIngredient> convertBadDesignSizedFluidIngredient(FluidIngredient s, int amount) {
+        ArrayList<com.simibubi.create.foundation.fluid.FluidIngredient> r = new ArrayList<>();
+        if(s instanceof SingleFluidIngredient singleFluidIngredient){
+            r.add(com.simibubi.create.foundation.fluid.FluidIngredient.fromFluid(singleFluidIngredient.fluid().value(), amount));
+        } else if(s instanceof TagFluidIngredient tagFluidIngredient){
+            r.add(com.simibubi.create.foundation.fluid.FluidIngredient.fromTag(tagFluidIngredient.tag(),amount));
+        } else if(s instanceof CompoundFluidIngredient compoundFluidIngredient){
+            r.addAll(compoundFluidIngredient.children().stream()
+                    .flatMap(fluidIngredient -> convertBadDesignSizedFluidIngredient(fluidIngredient, amount)).toList());
+        }
+        return r.stream();
+    }
 }

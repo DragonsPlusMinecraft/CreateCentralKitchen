@@ -18,19 +18,15 @@
 
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
-import com.lance5057.extradelight.ExtraDelightBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.Create;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.DeployingCategory;
-import com.simibubi.create.compat.jei.category.PackingCategory;
 import com.simibubi.create.compat.jei.category.SawingCategory;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.world.item.ItemStack;
@@ -38,7 +34,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -66,11 +61,11 @@ public abstract class CCKJeiPluginMixin {
 
     @Unique
     private final static RecipeType<RecipeHolder<CuttingRecipe>> SAWING = RecipeType
-            .createRecipeHolderType(CCKCommon.asResource("automatic_food_sawing"));
+            .createRecipeHolderType(CCKCommon.asResource("farmersdelight.automatic_food_sawing"));
 
     @Unique
     private final static RecipeType<RecipeHolder<DeployerApplicationRecipe>> DEPLOYING = RecipeType
-            .createRecipeHolderType(CCKCommon.asResource("automatic_food_cutting"));
+            .createRecipeHolderType(CCKCommon.asResource("farmersdelight.automatic_food_cutting"));
 
     @Inject(method = "loadCategories", at = @At("RETURN"))
     private void loadCategories$extradelight(CallbackInfo ci) {
@@ -79,7 +74,7 @@ public abstract class CCKJeiPluginMixin {
                 .catalyst(AllBlocks.MECHANICAL_SAW::get)
                 .doubleItemIcon(AllBlocks.MECHANICAL_SAW.get(), Items.BEEF)
                 .emptyBackground(177, 70)
-                .build(CCKCommon.asResource("automatic_food_sawing"), SawingCategory::new);
+                .build(CCKCommon.asResource("farmersdelight.automatic_food_sawing"), SawingCategory::new);
 
         CreateRecipeCategory<?> automaticMortarGrinding = ((CCKJeiPlugin) (Object) this).builder(DeployerApplicationRecipe.class)
                 .addTypedRecipes(AllRecipeTypes.DEPLOYING)
@@ -89,9 +84,9 @@ public abstract class CCKJeiPluginMixin {
                 .catalyst(AllBlocks.DEPLOYER::get)
                 .catalyst(AllBlocks.DEPOT::get)
                 .catalyst(AllItems.BELT_CONNECTOR::get)
-                .doubleItemIcon(AllBlocks.DEPLOYER.get(), ModItems.IRON_KNIFE.get())
+                .doubleItemIcon(AllBlocks.DEPLOYER.get(), Items.BEEF)
                 .emptyBackground(177, 70)
-                .build(CCKCommon.asResource("automatic_food_cutting"), DeployingCategory::new);
+                .build(CCKCommon.asResource("farmersdelight.automatic_food_cutting"), DeployingCategory::new);
     }
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))

@@ -25,13 +25,17 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.MixingCategory;
 import com.simibubi.create.compat.jei.category.PackingCategory;
-import com.simibubi.create.compat.jei.category.PressingCategory;
+import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.foundation.utility.RecipeGenericsUtil;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -47,8 +51,14 @@ import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 public abstract class CCKJeiPluginMixin {
 
     @Unique
-    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MORTAR_GRINDING = RecipeType
-            .createRecipeHolderType(CCKCommon.asResource("automatic_mortar_grinding"));
+    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_GRINDING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_grinding"));
+    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_JUICING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_juicing"));
+    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MELTING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_melting"));
+    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MIXING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_mixing"));
 
     @Shadow
     public static Level getLevel() {
@@ -63,13 +73,35 @@ public abstract class CCKJeiPluginMixin {
 
     @Inject(method = "loadCategories", at = @At("RETURN"))
     private void loadCategories$extradelight(CallbackInfo ci) {
-        CreateRecipeCategory<?> automaticMortarGrinding = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
+        CreateRecipeCategory<?> grinding = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
                 .addTypedRecipes(AllRecipeTypes.PRESSING)
                 .catalyst(AllBlocks.MECHANICAL_PRESS::get)
                 .catalyst(AllBlocks.BASIN::get)
                 .doubleItemIcon(AllBlocks.MECHANICAL_PRESS.get(), ExtraDelightBlocks.MORTAR_STONE.get())
                 .emptyBackground(177, 103)
-                .build(CCKCommon.asResource("automatic_mortar_grinding"), PackingCategory::standard);
+                .build(CCKCommon.asResource("extradelight.automatic_grinding"), PackingCategory::standard);
+
+        CreateRecipeCategory<?> juicing = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
+                .addTypedRecipes(AllRecipeTypes.PRESSING)
+                .catalyst(AllBlocks.MECHANICAL_PRESS::get)
+                .catalyst(AllBlocks.BASIN::get)
+                .doubleItemIcon(AllBlocks.MECHANICAL_PRESS.get(), ExtraDelightBlocks.JUICER.get())
+                .emptyBackground(177, 103)
+                .build(CCKCommon.asResource("extradelight.automatic_juicing"), PackingCategory::standard);
+
+        CreateRecipeCategory<?> melting = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
+                .catalyst(AllBlocks.MECHANICAL_MIXER::get)
+                .catalyst(AllBlocks.BASIN::get)
+                .doubleItemIcon(AllBlocks.MECHANICAL_MIXER.get(), ExtraDelightBlocks.MELTING_POT.get())
+                .emptyBackground(177, 103)
+                .build(CCKCommon.asResource("extradelight.automatic_melting"), MixingCategory::standard);
+
+        CreateRecipeCategory<?> mixing = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
+                .catalyst(AllBlocks.MECHANICAL_MIXER::get)
+                .catalyst(AllBlocks.BASIN::get)
+                .doubleItemIcon(AllBlocks.MECHANICAL_MIXER.get(), ExtraDelightBlocks.MIXING_BOWL.get())
+                .emptyBackground(177, 103)
+                .build(CCKCommon.asResource("extradelight.automatic_mixing"), MixingCategory::standard);
     }
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
@@ -78,8 +110,26 @@ public abstract class CCKJeiPluginMixin {
         RecipeManager recipeManager = getRecipeManager();
         var mortarRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MORTAR.get());
         if (CCKConfig.recipes().convertMortarGrindingRecipesToCompactingRecipes.get()) {
-            registration.addRecipes(AUTOMATIC_MORTAR_GRINDING, mortarRecipes.stream()
-                    .map(ExtraDelightRecipeConverters.AUTOMATIC_MORTAR_GRINDING.apply(level.registryAccess()))
+            registration.addRecipes(AUTOMATIC_GRINDING, mortarRecipes.stream()
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GRINDING.apply(level.registryAccess()))
+                    .toList());
+        }
+        var juicerRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.JUICER.get());
+        if (CCKConfig.recipes().convertJuicerRecipesToCompactingRecipes.get()) {
+            registration.addRecipes(AUTOMATIC_JUICING, juicerRecipes.stream()
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_JUICING.apply(level.registryAccess()))
+                    .toList());
+        }
+        var meltingPotRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MELTING_POT.get());
+        if (CCKConfig.recipes().convertMeltingPotRecipesToMixingRecipes.get()) {
+            registration.addRecipes(AUTOMATIC_MELTING, meltingPotRecipes.stream()
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING.apply(level.registryAccess()))
+                    .toList());
+        }
+        var mixingBowlRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MIXING_BOWL.get());
+        if (CCKConfig.recipes().convertMixingBowlRecipesToMixingRecipes.get()) {
+            registration.addRecipes(AUTOMATIC_MIXING, mixingBowlRecipes.stream()
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_MIXING.apply(level.registryAccess()))
                     .toList());
         }
     }

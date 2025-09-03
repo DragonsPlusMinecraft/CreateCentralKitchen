@@ -27,9 +27,12 @@
   "create_central_kitchen.ponder.keg.pouring.text_2": "Pour drink out of Tankard with Item Drain",
   "create_central_kitchen.ponder.skillet_and_stove.header": "Automating with Create: Skillet and Stove",
   "create_central_kitchen.ponder.skillet_and_stove.text_1": "Mechanical Arm can put raw ingredient onto Stove and Skillet",
-  "create_central_kitchen.recipe.automatic_food_cutting": "Automatic Food Cutting",
-  "create_central_kitchen.recipe.automatic_food_sawing": "Automatic Food Sawing",
-  "create_central_kitchen.recipe.automatic_mortar_grinding": "Automatic Mortar Grinding",
+  "create_central_kitchen.recipe.extradelight.automatic_grinding": "Automatic Grinding",
+  "create_central_kitchen.recipe.extradelight.automatic_juicing": "Automatic Juicing",
+  "create_central_kitchen.recipe.extradelight.automatic_melting": "Automatic Melting",
+  "create_central_kitchen.recipe.extradelight.automatic_mixing": "Automatic Mixing",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Automatic Food Cutting",
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing",
   "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
   "pack.create_central_kitchen.runtime.description": "Create: Central Kitchen Runtime Generated Resources"
 }
