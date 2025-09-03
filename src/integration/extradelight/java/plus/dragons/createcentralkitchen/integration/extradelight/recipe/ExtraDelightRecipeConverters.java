@@ -90,6 +90,7 @@ public class ExtraDelightRecipeConverters {
                 var fluidIngredients = recipe.getFluids();
                 if(!fluidIngredients.isEmpty()) builder.withFluidIngredients(NonNullList.copyOf(fluidIngredients.stream()
                         .flatMap(sizedFluidIngredient -> convertBadDesignSizedFluidIngredient(sizedFluidIngredient.ingredient(),sizedFluidIngredient.amount())).toList()));
+                builder.output(recipe.getResultItem(registry));
                 return new RecipeHolder<>(id, builder.build());
             });
 
