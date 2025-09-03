@@ -42,11 +42,12 @@ public abstract class BasinOperatingBlockEntityMixin extends KineticBlockEntity 
                     .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING.apply(level.registryAccess())).map(RecipeHolder::value).collect(Collectors.toSet());
             original.addAll(r);
         }
-        if (CCKConfig.recipes().convertMixingBowlRecipesToMixingRecipes.get()) {;
+        // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
+        /*if (CCKConfig.recipes().convertMixingBowlRecipesToMixingRecipes.get()) {;
             var r = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MIXING_BOWL.get())
                     .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_MIXING.apply(level.registryAccess())).map(RecipeHolder::value).collect(Collectors.toSet());
             original.addAll(r);
-        }
+        }*/
         return original;
     }
 }

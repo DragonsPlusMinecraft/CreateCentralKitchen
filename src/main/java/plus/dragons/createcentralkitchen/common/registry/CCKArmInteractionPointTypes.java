@@ -34,9 +34,7 @@ public class CCKArmInteractionPointTypes {
             COOKING_POT = holder("cooking_pot"),
             CUTTING_BOARD = holder("cutting_board"),
             SKILLET = holder("skillet"),
-            STOVE = holder("stove"),
-            COPPER_POT = holder("copper_pot"),
-            DRYING_RACK = holder("drying_rack");
+            STOVE = holder("stove");
     //spotless:on
 
     public static void register(IEventBus modBus) {
@@ -47,7 +45,7 @@ public class CCKArmInteractionPointTypes {
         REGISTER.register(holder.getId().getPath(), supplier);
     }
 
-    private static DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder(String name) {
+    public static DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> holder(String name) {
         return DeferredHolder.create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.asResource(name));
     }
 }

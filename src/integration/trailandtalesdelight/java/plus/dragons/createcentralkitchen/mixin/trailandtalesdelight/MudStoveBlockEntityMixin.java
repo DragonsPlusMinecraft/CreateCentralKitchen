@@ -18,7 +18,6 @@ package plus.dragons.createcentralkitchen.mixin.trailandtalesdelight;/*
 
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
-import show.tatd.mod.block.MudStoveBlock;
 
-@Mixin(MudStoveBlock.class)
+@Mixin(targets = "show.tatd.mod.block.MudStoveBlock")
 public abstract class MudStoveBlockEntityMixin implements StoveBlockEntityAccess {}

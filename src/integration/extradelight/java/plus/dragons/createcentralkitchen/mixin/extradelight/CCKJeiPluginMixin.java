@@ -25,17 +25,12 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.compat.jei.category.MixingCategory;
 import com.simibubi.create.compat.jei.category.PackingCategory;
-import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import com.simibubi.create.foundation.utility.RecipeGenericsUtil;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -57,8 +52,9 @@ public abstract class CCKJeiPluginMixin {
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_juicing"));
     private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MELTING = RecipeType
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_melting"));
-    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MIXING = RecipeType
-            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_mixing"));
+    // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
+    /*private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MIXING = RecipeType
+            .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_mixing"));*/
 
     @Shadow
     public static Level getLevel() {
@@ -96,12 +92,13 @@ public abstract class CCKJeiPluginMixin {
                 .emptyBackground(177, 103)
                 .build(CCKCommon.asResource("extradelight.automatic_melting"), MixingCategory::standard);
 
-        CreateRecipeCategory<?> mixing = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
+        // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
+        /*CreateRecipeCategory<?> mixing = ((CCKJeiPlugin) (Object) this).builder(BasinRecipe.class)
                 .catalyst(AllBlocks.MECHANICAL_MIXER::get)
                 .catalyst(AllBlocks.BASIN::get)
                 .doubleItemIcon(AllBlocks.MECHANICAL_MIXER.get(), ExtraDelightBlocks.MIXING_BOWL.get())
                 .emptyBackground(177, 103)
-                .build(CCKCommon.asResource("extradelight.automatic_mixing"), MixingCategory::standard);
+                .build(CCKCommon.asResource("extradelight.automatic_mixing"), MixingCategory::standard);*/
     }
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
@@ -126,11 +123,12 @@ public abstract class CCKJeiPluginMixin {
                     .map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING.apply(level.registryAccess()))
                     .toList());
         }
-        var mixingBowlRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MIXING_BOWL.get());
+        // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
+        /*var mixingBowlRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MIXING_BOWL.get());
         if (CCKConfig.recipes().convertMixingBowlRecipesToMixingRecipes.get()) {
             registration.addRecipes(AUTOMATIC_MIXING, mixingBowlRecipes.stream()
                     .map(ExtraDelightRecipeConverters.AUTOMATIC_MIXING.apply(level.registryAccess()))
                     .toList());
-        }
+        }*/
     }
 }

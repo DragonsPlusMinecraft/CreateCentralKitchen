@@ -18,18 +18,15 @@
 
 package plus.dragons.createcentralkitchen.integration.minersdelight.registry;
 
-import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import plus.dragons.createcentralkitchen.common.CCKCommon;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.minersdelight.mechanicalArm.CopperPotArmInteractionPoint;
 
 import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
 
 public class MDArmInteractionPointTypes {
-    private static final DeferredRegister<ArmInteractionPointType> REGISTER = DeferredRegister
-            .create(CreateRegistries.ARM_INTERACTION_POINT_TYPE, CCKCommon.ID);
+    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> COPPER_POT = holder("copper_pot");
 
     public static void register() {
         CCKArmInteractionPointTypes.register(COPPER_POT, CopperPotArmInteractionPoint.Type::new);

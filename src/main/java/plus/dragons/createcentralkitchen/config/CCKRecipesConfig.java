@@ -45,9 +45,6 @@ public class CCKRecipesConfig extends ConfigBase {
     public final ConfigBool convertMeltingPotRecipesToMixingRecipes = b(true,
             "convertMeltingPotRecipesToMixingRecipes",
             Comments.convertMeltingPotRecipesToMixingRecipes);
-    public final ConfigBool convertMixingBowlRecipesToMixingRecipes = b(true,
-            "convertMixingBowlRecipesToMixingRecipes",
-            Comments.convertMixingBowlRecipesToMixingRecipes);
 
     @Override
     public String getName() {
@@ -63,6 +60,5 @@ public class CCKRecipesConfig extends ConfigBase {
         static final String convertMortarGrindingRecipesToCompactingRecipes = "If Extra Delight Mortar Grinding Recipes can be converted to Compacting Recipes";
         static final String convertJuicerRecipesToCompactingRecipes = "If Extra Delight Juicer Recipes can be converted to Compacting Recipes";
         static final String convertMeltingPotRecipesToMixingRecipes = "If Extra Delight Melting Pot Recipes can be converted to Mixing Recipes";
-        static final String convertMixingBowlRecipesToMixingRecipes = "If Extra Delight Mixing Bowl Recipes can be converted to Mixing Recipes";
     }
 }

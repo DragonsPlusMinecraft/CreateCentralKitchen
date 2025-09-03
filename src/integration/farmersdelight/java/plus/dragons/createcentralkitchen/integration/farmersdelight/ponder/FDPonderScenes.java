@@ -39,6 +39,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
@@ -56,7 +57,7 @@ public class FDPonderScenes {
 
         scene.world().showSection(util.select().fromTo(1, 1, 2, 1, 2, 2).add(util.select().fromTo(0, 2, 3, 1, 2, 3)), Direction.DOWN);
         scene.overlay().showText(60)
-                .text("Use Packager to automate ingredient insertion")
+                .sharedText(CCKCommon.asResource("package_automate_ingredient_insertion"))
                 .pointAt(util.vector().centerOf(1, 2, 3))
                 .placeNearTarget();
         scene.idle(40);
@@ -79,7 +80,7 @@ public class FDPonderScenes {
 
         scene.world().showSection(util.select().fromTo(4, 1, 1, 6, 3, 2).add(util.select().position(3, 3, 5)), Direction.DOWN);
         scene.overlay().showText(80)
-                .text("Factory gauges are very useful in the packaging process")
+                .sharedText(CCKCommon.asResource("useful_factory_gauges"))
                 .pointAt(util.vector().centerOf(1, 2, 3))
                 .attachKeyFrame()
                 .placeNearTarget();
@@ -115,7 +116,7 @@ public class FDPonderScenes {
         scene.world().setKineticSpeed(util.select().position(2, 1, 2), 128);
         scene.world().modifyBlockEntity(util.grid().at(3, 1, 4), DepotBlockEntity.class, depot -> depot.setHeldItem(Items.BOWL.getDefaultInstance()));
         scene.overlay().showText(60)
-                .text("Use Mechanical Arm to insert food container")
+                .sharedText(CCKCommon.asResource("arm_automate_container_insertion"))
                 .pointAt(util.vector().centerOf(2, 1, 2))
                 .attachKeyFrame()
                 .placeNearTarget();
@@ -138,7 +139,7 @@ public class FDPonderScenes {
         scene.world().showSection(util.select().fromTo(0, 1, 0, 1, 1, 0), Direction.DOWN);
         scene.world().setKineticSpeed(util.select().position(0, 1, 0), 128);
         scene.overlay().showText(60)
-                .text("Mechanical Arm can take out cooked food")
+                .sharedText(CCKCommon.asResource("arm_take_out_food"))
                 .pointAt(util.vector().centerOf(2, 1, 1))
                 .attachKeyFrame()
                 .placeNearTarget();

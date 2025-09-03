@@ -18,8 +18,11 @@
 
 package plus.dragons.createcentralkitchen.integration.extradelight.registry;
 
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.extradelight.mechanicalArm.DryingRackArmInteractionPoint;
+import plus.dragons.createcentralkitchen.integration.extradelight.mechanicalArm.OvenArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CookingPotArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.CuttingBoardArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalArm.SkilletArmInteractionPoint;
@@ -28,7 +31,12 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.mechanicalAr
 import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.*;
 
 public class ExtraDelightArmInteractionPointTypes {
+    public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType>
+            DRYING_RACK = CCKArmInteractionPointTypes.holder("drying_rack"),
+            OVEN = CCKArmInteractionPointTypes.holder("oven");
+
     public static void register() {
         CCKArmInteractionPointTypes.register(DRYING_RACK, DryingRackArmInteractionPoint.Type::new);
+        CCKArmInteractionPointTypes.register(OVEN, OvenArmInteractionPoint.Type::new);
     }
 }

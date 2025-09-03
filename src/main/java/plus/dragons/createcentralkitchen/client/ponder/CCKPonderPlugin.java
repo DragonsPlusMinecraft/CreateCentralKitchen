@@ -24,6 +24,7 @@ import java.util.function.Consumer;
 import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.createmod.ponder.api.registration.SharedTextRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 
@@ -46,5 +47,13 @@ public class CCKPonderPlugin implements PonderPlugin {
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
         for (var tag : TAGS)
             tag.accept(helper);
+    }
+
+    @Override
+    public void registerSharedText(SharedTextRegistrationHelper helper) {
+        helper.registerSharedText("package_automate_ingredient_insertion", "Use Packager to automate ingredient insertion");
+        helper.registerSharedText("useful_factory_gauges", "Factory gauges are very useful in the packaging process");
+        helper.registerSharedText("arm_automate_container_insertion", "Use Mechanical Arm to insert food container");
+        helper.registerSharedText("arm_take_out_food", "Mechanical Arm can take out cooked food");
     }
 }

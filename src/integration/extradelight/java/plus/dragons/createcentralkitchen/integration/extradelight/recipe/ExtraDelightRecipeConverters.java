@@ -79,7 +79,9 @@ public class ExtraDelightRecipeConverters {
                 return new RecipeHolder<>(id, builder.build());
             });
 
-    public static final Function<HolderLookup.Provider, RecipeConverter<MixingBowlRecipe, BasinRecipe>> AUTOMATIC_MIXING = registry -> RecipeConverter.cached(
+    // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
+
+    /*public static final Function<HolderLookup.Provider, RecipeConverter<MixingBowlRecipe, BasinRecipe>> AUTOMATIC_MIXING = registry -> RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_mixer");
@@ -105,5 +107,5 @@ public class ExtraDelightRecipeConverters {
                     .flatMap(fluidIngredient -> convertBadDesignSizedFluidIngredient(fluidIngredient, amount)).toList());
         }
         return r.stream();
-    }
+    }*/
 }

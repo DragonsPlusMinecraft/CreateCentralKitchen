@@ -18,6 +18,7 @@
 
 package plus.dragons.createcentralkitchen.integration.extradelight;
 
+import com.lance5057.extradelight.ExtraDelightBlockEntities;
 import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +29,8 @@ import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.extradelight.packager.OvenUnpackingHandler;
+import plus.dragons.createcentralkitchen.integration.extradelight.ponder.ExtraDelightPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.extradelight.registry.ExtraDelightArmInteractionPointTypes;
 
 @Mod(CCKCommon.ID)
@@ -44,8 +47,7 @@ public class ExtraDelightIntegration {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
             ExtraDelightArmInteractionPointTypes.register();
-
-            // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do the conversion.
+            // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
         }
 
         @SubscribeEvent
@@ -54,16 +56,16 @@ public class ExtraDelightIntegration {
         }
 
         private void registerUnpackingHandlers() {
-            /*ModBlockEntityTypes.COOKING_POT.get()
+            ExtraDelightBlockEntities.OVEN.get()
                     .getValidBlocks()
-                    .forEach(block -> UnpackingHandler.REGISTRY.register(block, new CookingPotUnpackingHandler()));*/
+                    .forEach(block -> UnpackingHandler.REGISTRY.register(block, new OvenUnpackingHandler()));
         }
     }
 
     public static class Client {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
-            //FDPonderPlugin.register();
+            ExtraDelightPonderPlugin.register();
         }
     }
 }

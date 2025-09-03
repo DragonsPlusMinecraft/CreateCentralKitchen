@@ -35,6 +35,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.fluids.FluidStack;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
 import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
 import umpaz.brewinandchewin.common.registry.BnCFluids;
 import umpaz.brewinandchewin.common.registry.BnCItems;
@@ -100,7 +101,7 @@ public class BnCPonderScenes {
 
         scene.world().showSection(util.select().fromTo(0, 1, 1, 1, 2, 1).add(util.select().position(1, 2, 2)), Direction.DOWN);
         scene.overlay().showText(60)
-                .text("Use Packager to automate ingredient insertion")
+                .sharedText(CCKCommon.asResource("package_automate_ingredient_insertion"))
                 .pointAt(util.vector().centerOf(1, 2, 2))
                 .placeNearTarget();
         scene.idle(40);
@@ -123,7 +124,7 @@ public class BnCPonderScenes {
 
         scene.world().showSection(util.select().fromTo(4, 1, 1, 6, 3, 2).add(util.select().position(3, 3, 5)), Direction.DOWN);
         scene.overlay().showText(80)
-                .text("Factory gauges are very useful in the packaging process")
+                .sharedText(CCKCommon.asResource("useful_factory_gauges"))
                 .pointAt(util.vector().centerOf(1, 2, 1))
                 .attachKeyFrame()
                 .placeNearTarget();
