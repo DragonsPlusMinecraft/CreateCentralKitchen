@@ -26,7 +26,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.client.registry.CCKPartialModels;
 import plus.dragons.createcentralkitchen.client.registry.CCKSpriteShifts;
@@ -43,8 +42,5 @@ public class CCKClient {
         REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> PonderIndex
                 .getLangAccess()
                 .provideLang(CCKCommon.ID, prov::add));
-        if (!DatagenModLoader.isRunningDataGen())
-            return;
-        REGISTRATE.registerBuiltinLocalization("interface");
     }
 }

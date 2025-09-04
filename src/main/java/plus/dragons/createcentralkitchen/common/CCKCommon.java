@@ -50,7 +50,8 @@ public class CCKCommon {
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     public static final CDPRegistrate REGISTRATE = new CDPRegistrate(ID)
             .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE))
-            .registerForeignLocalization();
+            .registerForeignLocalization()
+            .registerBuiltinLocalization("interface");
     private final ModContainer modContainer;
 
     public CCKCommon(IEventBus modBus, ModContainer modContainer) {
