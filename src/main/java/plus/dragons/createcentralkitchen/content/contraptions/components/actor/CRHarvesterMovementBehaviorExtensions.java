@@ -45,25 +45,25 @@ public class CRHarvesterMovementBehaviorExtensions {
     {
         if (!(state.getBlock() instanceof LimeBushBlock))
             return;
-        if (state.getValue(LimeBushBlock.STUNTED) || state.getValue(LimeBushBlock.HALF) == DoubleBlockHalf.LOWER)
+        if (state.getValue(LimeBushBlock.STUNTED))
             return;
         Level level = context.world;
         boolean destroy = partial;
+        boolean isLowerHalf = state.getValue(LimeBushBlock.HALF) == DoubleBlockHalf.LOWER;
         if (state.getValue(AGE) == MAX_AGE) {
             behaviour.dropItem(context, new ItemStack(CRItems.LIME.get(), 2 + level.random.nextInt(2)));
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                     1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlockAndUpdate(pos, state.setValue(AGE, 0));
+                level.setBlockAndUpdate(pos, state.setValue(AGE, 2));
+                level.setBlockAndUpdate(isLowerHalf ? pos.above() : pos.below(), state.setValue(AGE, 2));
                 return;
             }
             destroy = true;
         }
-        BlockPos posBelow = pos.below();
-        BlockState stateBelow = level.getBlockState(posBelow);
-        if (destroy && stateBelow.is(state.getBlock()) && stateBelow.getValue(LimeBushBlock.HALF) == DoubleBlockHalf.LOWER) {
-            BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
-            BlockHelper.destroyBlock(level, posBelow, 1, stack -> behaviour.dropItem(context, stack));
+        if (destroy) {
+            BlockHelper.destroyBlock(level, isLowerHalf ? pos.above() : pos, 1, stack -> behaviour.dropItem(context, stack));
+            BlockHelper.destroyBlock(level, isLowerHalf ? pos : pos.below(), 1, stack -> behaviour.dropItem(context, stack));
         }
     }
     
@@ -74,25 +74,25 @@ public class CRHarvesterMovementBehaviorExtensions {
     {
         if (!(state.getBlock() instanceof PomegranateBushBlock))
             return;
-        if (state.getValue(PomegranateBushBlock.HALF) == DoubleBlockHalf.LOWER)
+        if (state.getValue(PomegranateBushBlock.STUNTED))
             return;
         Level level = context.world;
         boolean destroy = partial;
+        boolean isLowerHalf = state.getValue(PomegranateBushBlock.HALF) == DoubleBlockHalf.LOWER;
         if (state.getValue(AGE) == MAX_AGE) {
             behaviour.dropItem(context, new ItemStack(CRItems.POMEGRANATE.get(), 1 + level.random.nextInt(2)));
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                     1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlockAndUpdate(pos, state.setValue(AGE, 0));
+                level.setBlockAndUpdate(pos, state.setValue(AGE, 2));
+                level.setBlockAndUpdate(isLowerHalf ? pos.above() : pos.below(), state.setValue(AGE, 2));
                 return;
             }
             destroy = true;
         }
-        BlockPos posBelow = pos.below();
-        BlockState stateBelow = level.getBlockState(posBelow);
-        if (destroy && stateBelow.is(state.getBlock()) && stateBelow.getValue(PomegranateBushBlock.HALF) == DoubleBlockHalf.LOWER) {
-            BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
-            BlockHelper.destroyBlock(level, posBelow, 1, stack -> behaviour.dropItem(context, stack));
+        if (destroy) {
+            BlockHelper.destroyBlock(level, isLowerHalf ? pos.above() : pos, 1, stack -> behaviour.dropItem(context, stack));
+            BlockHelper.destroyBlock(level, isLowerHalf ? pos : pos.below(), 1, stack -> behaviour.dropItem(context, stack));
         }
     }
     
