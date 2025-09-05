@@ -33,7 +33,6 @@ public class ExtraDelightArmInteractionPointTypes {
             CHILLER = CCKArmInteractionPointTypes.holder("chiller");
     // spotless:on
 
-
     public static void register() {
         CCKArmInteractionPointTypes.register(DRYING_RACK, DryingRackArmInteractionPoint.Type::new);
         CCKArmInteractionPointTypes.register(OVEN, OvenArmInteractionPoint.Type::new);

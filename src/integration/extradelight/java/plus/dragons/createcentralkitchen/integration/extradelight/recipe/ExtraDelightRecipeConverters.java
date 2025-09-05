@@ -24,7 +24,6 @@ import com.lance5057.extradelight.recipe.ToolOnBlockRecipe;
 import com.lance5057.extradelight.workstations.juicer.JuicerRecipe;
 import com.lance5057.extradelight.workstations.meltingpot.MeltingPotRecipe;
 import com.lance5057.extradelight.workstations.mortar.recipes.MortarRecipe;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
 import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;

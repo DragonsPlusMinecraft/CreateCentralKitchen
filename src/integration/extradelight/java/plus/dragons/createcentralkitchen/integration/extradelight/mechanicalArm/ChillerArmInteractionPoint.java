@@ -38,7 +38,7 @@ public class ChillerArmInteractionPoint extends ArmInteractionPoint {
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         if (level.getBlockEntity(pos) instanceof ChillerBlockEntity interaction) {
             var inventory = interaction.getInventory();
-            return inventory.insertItem(stack.is(ExtraDelightTags.CHILLING_ITEMS)? 10: 5, stack, simulate);
+            return inventory.insertItem(stack.is(ExtraDelightTags.CHILLING_ITEMS) ? 10 : 5, stack, simulate);
         }
         return stack;
     }

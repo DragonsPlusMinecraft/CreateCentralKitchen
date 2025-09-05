@@ -22,9 +22,10 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import net.createmod.catnip.lang.FontHelper;
+import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.RegistryLayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack.Position;
 import net.neoforged.bus.api.IEventBus;
@@ -67,7 +68,8 @@ public class CCKCommon {
     public void addPackFinders(final AddPackFindersEvent event) {
         var type = event.getPackType();
 
-        var registries = CompletableFuture.<HolderLookup.Provider>completedFuture(RegistryLayer.createRegistryAccess().compositeAccess());
+        CompletableFuture<HolderLookup.Provider> registries = CompletableFuture.supplyAsync(VanillaRegistries::createLookup, Util.backgroundExecutor());
+        //var registries = CompletableFuture.<HolderLookup.Provider>completedFuture(RegistryLayer.createRegistryAccess().compositeAccess());
         if (type == PackType.SERVER_DATA) {
             var pack = new RuntimePackResources(
                     "runtime",
