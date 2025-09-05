@@ -67,10 +67,10 @@ repositories {
         name "Theillusivec4 Maven"
         url "https://maven.theillusivec4.top/"
     }
-    maven {
+/*    maven {
         name "Abnormals Maven"
-        url  "https://maven.jaackson.me"
-    }
+        url  "https://maven.jaackson.me" // it's gone
+    }*/
     maven {
         name "Apple Skin"
         url "https://maven.ryanliptak.com/"
@@ -122,7 +122,7 @@ dependencies {
     implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
     implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
     ////abnormals mods addons
-    implementation fg.deobf("com.teamabnormals:blueprint:${blueprint_version}")
+    implementation fg.deobf("maven.modrinth:blueprint:${blueprint_version}")
     implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
     implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
     implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
