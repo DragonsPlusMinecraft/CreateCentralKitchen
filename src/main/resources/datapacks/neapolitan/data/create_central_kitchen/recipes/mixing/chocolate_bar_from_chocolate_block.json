@@ -1,0 +1,14 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "neapolitan:chocolate_block"
+    }
+  ],
+  "results": [
+    {
+      "count": 9,
+      "item": "neapolitan:chocolate_bar"
+    }
+  ]
+}

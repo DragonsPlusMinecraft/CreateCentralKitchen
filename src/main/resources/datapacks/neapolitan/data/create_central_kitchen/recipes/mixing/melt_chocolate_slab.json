@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "forge:slabs/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "create:chocolate"
+    }
+  ]
+}

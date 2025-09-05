@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "quark:vertical_slabs/chocolate"
+      }
+    }
+  ],
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "tag": "quark:vertical_slabs/chocolate"
+    }
+  ],
+  "results": [
+    {
+      "amount": 500,
+      "fluid": "create:chocolate"
+    }
+  ]
+}

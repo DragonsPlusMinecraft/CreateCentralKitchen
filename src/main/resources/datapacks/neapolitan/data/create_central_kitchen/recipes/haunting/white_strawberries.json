@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "tag": "forge:fruits/strawberry"
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:white_strawberries"
+    }
+  ]
+}

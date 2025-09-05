@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "neapolitan:adzuki_beans"
+    }
+  ],
+  "results": [
+    {
+      "item": "neapolitan:magic_beans"
+    }
+  ]
+}
