@@ -33,7 +33,8 @@
     "common.minersdelight.StickyBasketBlockEntityAccessor",
     "common.minersdelight.StickyBasketBlockEntityMixin",
     "common.neapolitan.DrinkItemMixin",
-    "common.overweightfarming.CropFullBlockMixin"
+    "common.overweightfarming.CropFullBlockMixin",
+    "common.sleeptight.ModEventsMixin"
   ],
   "client": [
     "client.create.DeployerRendererMixin"
