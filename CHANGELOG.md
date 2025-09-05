@@ -1,12 +1,7 @@
-### Create Central Kitchen 1.4.1
+## Create Central Kitchen 1.4.2
 
-#### Bugfix
-* FIx Central Kitchen Fluids use minecraft:water tag, causing it to be treated as water by certain mods.
-* Fix Passion Fruit Ice Cream liquid has no texture.
-* Fix Passion Fruit Cake Slice has no recipe.
-* Fix Miner's Cooking Guide has no recipe.
-* Fix indent in Blaze Cooker's google tooltip.
-* Fix missing lang file for knife "not consumed" message in jei tabs.
-* Fix no sequenced assembly recipes for hamburgers or mutton wraps
-* Fix Cooking Guide and Miner's Cooking Guide lack proper tooltip sync #97.
-* Fix incompatible with Ars Botania.
+### Bugfix
+* Fix Incorrect harvester interaction with Collector's reap
+* Remove Duplicated Fluid and Recipe for Farmer's Respite
+* Add Missing Neapolitan Ice Cream and milkshake mixing/spouting/compacting/haunting/assembly recipes and compat crafting recipes
+* Fix crash with Sleep Tight
