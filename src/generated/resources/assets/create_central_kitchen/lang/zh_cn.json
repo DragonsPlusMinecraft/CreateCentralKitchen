@@ -1,4 +1,6 @@
 {
+  "create_central_kitchen.ponder.chiller.header": "自动化：冷凝机",
+  "create_central_kitchen.ponder.chiller.text_1": "同样的，使用动力臂为冷凝机提供冷凝物",
   "create_central_kitchen.ponder.cooking_pot.header": "自动化：厨锅",
   "create_central_kitchen.ponder.cooking_pot.text_1": "烹饪好的食物也可以通过漏斗取出",
   "create_central_kitchen.ponder.cutting_board.header": "自动化：切菜",
@@ -19,7 +21,6 @@
   "create_central_kitchen.ponder.keg.pouring.text_1": "使用注液器向酒杯灌装饮品",
   "create_central_kitchen.ponder.keg.pouring.text_2": "通过分液池倒出酒杯中的饮品",
   "create_central_kitchen.ponder.oven.header": "自动化：烤炉",
-  "create_central_kitchen.ponder.oven.text_1": "同样的，使用动力臂为冷凝机提供冷凝物",
   "create_central_kitchen.ponder.shared.arm_automate_container_insertion": "使用动力臂提供装食物的容器",
   "create_central_kitchen.ponder.shared.arm_take_out_food": "动力臂可取出烹饪好的食物",
   "create_central_kitchen.ponder.shared.package_automate_ingredient_insertion": "用打包机完成食材的自动输入",

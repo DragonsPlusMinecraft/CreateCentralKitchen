@@ -1,4 +1,6 @@
 {
+  "create_central_kitchen.ponder.chiller.header": "Automating with Create: Chiller",
+  "create_central_kitchen.ponder.chiller.text_1": "Also, Use Mechanical Arm to insert ice or snow into Chiller",
   "create_central_kitchen.ponder.cooking_pot.header": "Automating with Create: Cooking Pot",
   "create_central_kitchen.ponder.cooking_pot.text_1": "Funnel also can take out cooked food",
   "create_central_kitchen.ponder.cutting_board.header": "Automating with Create: Cutting",
@@ -18,8 +20,7 @@
   "create_central_kitchen.ponder.keg.pouring.header": "Automating with Create: Drinks Production",
   "create_central_kitchen.ponder.keg.pouring.text_1": "Use spout to fill Tankard with drink",
   "create_central_kitchen.ponder.keg.pouring.text_2": "Pour drink out of Tankard with Item Drain",
-  "create_central_kitchen.ponder.oven.header": "Automating with Create: Chiller",
-  "create_central_kitchen.ponder.oven.text_1": "Also, Use Mechanical Arm to insert ice or snow into Chiller",
+  "create_central_kitchen.ponder.oven.header": "Automating with Create: Oven",
   "create_central_kitchen.ponder.shared.arm_automate_container_insertion": "Use Mechanical Arm to insert food container.",
   "create_central_kitchen.ponder.shared.arm_take_out_food": "Mechanical Arm can take out cooked food.",
   "create_central_kitchen.ponder.shared.package_automate_ingredient_insertion": "Use Packager to automate ingredient insertion.",

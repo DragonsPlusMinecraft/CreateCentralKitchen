@@ -155,7 +155,7 @@ public class ExtraDelightPonderScenes {
 
     public static void chiller(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
-        scene.title("oven", "Automating with Create: Chiller");
+        scene.title("chiller", "Automating with Create: Chiller");
         scene.configureBasePlate(0, 0, 8);
         scene.scaleSceneView(0.77f);
         scene.showBasePlate();

@@ -1,4 +1,6 @@
 {
+  "create_central_kitchen.ponder.chiller.header": "ɹǝןןıɥƆ :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
+  "create_central_kitchen.ponder.chiller.text_1": "ɹǝןןıɥƆ oʇuı ʍous ɹo ǝɔı ʇɹǝsuı oʇ ɯɹⱯ ןɐɔıuɐɥɔǝW ǝs∩ 'osןⱯ",
   "create_central_kitchen.ponder.cooking_pot.header": "ʇoԀ buıʞooƆ :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
   "create_central_kitchen.ponder.cooking_pot.text_1": "pooɟ pǝʞooɔ ʇno ǝʞɐʇ uɐɔ osןɐ ןǝuunℲ",
   "create_central_kitchen.ponder.cutting_board.header": "buıʇʇnƆ :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
@@ -18,8 +20,7 @@
   "create_central_kitchen.ponder.keg.pouring.header": "uoıʇɔnpoɹԀ sʞuıɹᗡ :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
   "create_central_kitchen.ponder.keg.pouring.text_1": "ʞuıɹp ɥʇıʍ pɹɐʞuɐ⟘ ןןıɟ oʇ ʇnods ǝs∩",
   "create_central_kitchen.ponder.keg.pouring.text_2": "uıɐɹᗡ ɯǝʇI ɥʇıʍ pɹɐʞuɐ⟘ ɟo ʇno ʞuıɹp ɹnoԀ",
-  "create_central_kitchen.ponder.oven.header": "ɹǝןןıɥƆ :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
-  "create_central_kitchen.ponder.oven.text_1": "ɹǝןןıɥƆ oʇuı ʍous ɹo ǝɔı ʇɹǝsuı oʇ ɯɹⱯ ןɐɔıuɐɥɔǝW ǝs∩ 'osןⱯ",
+  "create_central_kitchen.ponder.oven.header": "uǝʌO :ǝʇɐǝɹƆ ɥʇıʍ buıʇɐɯoʇnⱯ",
   "create_central_kitchen.ponder.shared.arm_automate_container_insertion": "˙ɹǝuıɐʇuoɔ pooɟ ʇɹǝsuı oʇ ɯɹⱯ ןɐɔıuɐɥɔǝW ǝs∩",
   "create_central_kitchen.ponder.shared.arm_take_out_food": "˙pooɟ pǝʞooɔ ʇno ǝʞɐʇ uɐɔ ɯɹⱯ ןɐɔıuɐɥɔǝW",
   "create_central_kitchen.ponder.shared.package_automate_ingredient_insertion": "˙uoıʇɹǝsuı ʇuǝıpǝɹbuı ǝʇɐɯoʇnɐ oʇ ɹǝbɐʞɔɐԀ ǝs∩",
