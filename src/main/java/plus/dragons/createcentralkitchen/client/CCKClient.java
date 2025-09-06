@@ -44,7 +44,6 @@ public class CCKClient {
     }
 
     public static void clientInit(final FMLClientSetupEvent event) {
-
         CCKPartialModels.register();
         CCKSpriteShifts.register();
         PonderIndex.addPlugin(new CCKPonderPlugin());

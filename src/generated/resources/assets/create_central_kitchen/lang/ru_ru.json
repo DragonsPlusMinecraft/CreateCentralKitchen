@@ -1,6 +1,5 @@
 {
-  "_comment.unlocalized": "Remove this line after finishing localization.",
-  "create_central_kitchen.ponder.chiller.header": "Автоматизацией с Create для духовки",
+  "create_central_kitchen.ponder.chiller.header": "Автоматизацией с Create для охладителя",
   "create_central_kitchen.ponder.chiller.text_1": "Также используйте механическую руку для помещения льда или снега в охладитель",
   "create_central_kitchen.ponder.cooking_pot.header": "Автоматизацией с Create для кухонного котла",
   "create_central_kitchen.ponder.cooking_pot.text_1": "Шлюз также может извлекать готовую еду",
@@ -21,7 +20,7 @@
   "create_central_kitchen.ponder.keg.pouring.header": "Автоматизацией с Create в производстве напитков",
   "create_central_kitchen.ponder.keg.pouring.text_1": "Используйте дозатор для наполнения кружки напитком",
   "create_central_kitchen.ponder.keg.pouring.text_2": "Слейте напиток из кружки через осушитель предметов",
-  "create_central_kitchen.ponder.oven.header": "Automating with Create: Oven",
+  "create_central_kitchen.ponder.oven.header": "Автоматизацией с Create для духовки",
   "create_central_kitchen.ponder.shared.arm_automate_container_insertion": "Механическая рука может помещать контейнеры с едой",
   "create_central_kitchen.ponder.shared.arm_take_out_food": "Механическая рука может извлекать готовую еду",
   "create_central_kitchen.ponder.shared.package_automate_ingredient_insertion": "Используйте упаковщик для автоматической подачи ингредиентов",
