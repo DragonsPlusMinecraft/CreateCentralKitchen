@@ -37,13 +37,14 @@ import plus.dragons.createcentralkitchen.data.CCKLang;
 public class CCKClient {
     public CCKClient(IEventBus modBus, ModContainer modContainer) {
         modBus.addListener(CCKClient::clientInit);
+        CCKLang.register();
         if (DatagenModLoader.isRunningDataGen()) {
             REGISTRATE.registerPonderLocalization(CCKPonderPlugin::new);
         }
     }
 
     public static void clientInit(final FMLClientSetupEvent event) {
-        CCKLang.register();
+
         CCKPartialModels.register();
         CCKSpriteShifts.register();
         PonderIndex.addPlugin(new CCKPonderPlugin());

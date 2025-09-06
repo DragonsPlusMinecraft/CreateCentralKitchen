@@ -33,5 +33,7 @@
   "create_central_kitchen.recipe.extradelight.automatic_juicing": "自动榨汁",
   "create_central_kitchen.recipe.extradelight.automatic_melting": "自动熔化",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "自动切制食物",
-  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "自动切制食物"
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "自动切制食物",
+  "pack.create_central_kitchen.runtime": "机械动力：中央厨房",
+  "pack.create_central_kitchen.runtime.description": "机械动力：中央厨房 - 运行时资源"
 }

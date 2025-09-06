@@ -34,5 +34,7 @@
   "create_central_kitchen.recipe.extradelight.automatic_juicing": "Automatic Juicing",
   "create_central_kitchen.recipe.extradelight.automatic_melting": "Automatic Melting",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Automatic Food Cutting",
-  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing"
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing",
+  "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
+  "pack.create_central_kitchen.runtime.description": "Create: Central Kitchen Runtime Generated Resources"
 }

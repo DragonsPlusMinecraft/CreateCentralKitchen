@@ -34,5 +34,7 @@
   "create_central_kitchen.recipe.extradelight.automatic_juicing": "Автоматическое отжимание сока",
   "create_central_kitchen.recipe.extradelight.automatic_melting": "Автоматическое плавление",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Автоматическая нарезка еды",
-  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Автоматическая распиловка еды"
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Автоматическая распиловка еды",
+  "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
+  "pack.create_central_kitchen.runtime.description": "Динамически сгенерированные ресурсы Create: Central Kitchen"
 }
