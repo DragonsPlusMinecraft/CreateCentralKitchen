@@ -6,7 +6,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CCKJeiPluginMixin",
-    "BasinOperatingBlockEntityMixin"
+    "MechanicalMixerBlockEntityAccessor",
+    "MechanicalPressBlockEntityAccessor",
+    "RecipeFinderMixin",
+    "SingleItemRecipeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

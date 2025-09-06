@@ -37,7 +37,7 @@ import plus.dragons.createcentralkitchen.data.CCKLang;
 public class CCKClient {
     public CCKClient(IEventBus modBus, ModContainer modContainer) {
         modBus.addListener(CCKClient::clientInit);
-        if(DatagenModLoader.isRunningDataGen()){
+        if (DatagenModLoader.isRunningDataGen()) {
             REGISTRATE.registerPonderLocalization(CCKPonderPlugin::new);
         }
     }

@@ -27,25 +27,25 @@ import com.lance5057.extradelight.workstations.mortar.recipes.MortarRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
 import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.content.kinetics.mixer.CompactingRecipe;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import java.awt.*;
-import java.util.function.Function;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.bus.api.SubscribeEvent;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.mixin.extradelight.SingleItemRecipeAccessor;
 import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 
 public class ExtraDelightRecipeConverters {
-    public static final Function<HolderLookup.Provider, RecipeConverter<MortarRecipe, BasinRecipe>> AUTOMATIC_GRINDING = registry -> RecipeConverter.cached(
+    public static final RecipeConverter<MortarRecipe, CompactingRecipe> AUTOMATIC_GRINDING = RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_press");
-                var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
+                var builder = new StandardProcessingRecipe.Builder<>(CompactingRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
-                var result = recipe.getResultItem(registry);
+                var result = ((SingleItemRecipeAccessor) recipe).getResult();
                 if (!result.isEmpty())
                     builder.output(result);
                 var fluid = recipe.getFluid();
@@ -54,29 +54,29 @@ public class ExtraDelightRecipeConverters {
                 return new RecipeHolder<>(id, builder.build());
             });
 
-    public static final Function<HolderLookup.Provider, RecipeConverter<JuicerRecipe, BasinRecipe>> AUTOMATIC_JUICING = registry -> RecipeConverter.cached(
+    public static final RecipeConverter<JuicerRecipe, CompactingRecipe> AUTOMATIC_JUICING = RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_press");
-                var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
+                var builder = new StandardProcessingRecipe.Builder<>(CompactingRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
-                builder.output(recipe.getChance(), recipe.getResultItem(registry));
+                builder.output(recipe.getChance(), ((SingleItemRecipeAccessor) recipe).getResult());
                 builder.output(recipe.getFluid());
                 return new RecipeHolder<>(id, builder.build());
             });
 
-    public static final Function<HolderLookup.Provider, RecipeConverter<MeltingPotRecipe, BasinRecipe>> AUTOMATIC_MELTING = registry -> RecipeConverter.cached(
+    public static final RecipeConverter<MeltingPotRecipe, MixingRecipe> AUTOMATIC_MELTING = RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_mixer");
-                var builder = new StandardProcessingRecipe.Builder<>(BasinRecipe::new, id)
+                var builder = new StandardProcessingRecipe.Builder<>(MixingRecipe::new, id)
                         .require(recipe.input);
                 builder.output(recipe.result);
                 builder.requiresHeat(HeatCondition.HEATED);
                 return new RecipeHolder<>(id, builder.build());
             });
 
-    public static final Function<HolderLookup.Provider, RecipeConverter<ToolOnBlockRecipe, DeployerApplicationRecipe>> AUTOMATIC_GINGERBREAD_DECORATING = registry -> RecipeConverter.cached(
+    public static final RecipeConverter<ToolOnBlockRecipe, DeployerApplicationRecipe> AUTOMATIC_GINGERBREAD_DECORATING = RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_deployer");
@@ -127,7 +127,7 @@ public class ExtraDelightRecipeConverters {
             event.addRecipe(() -> level.getRecipeManager()
                     .getAllRecipesFor(ExtraDelightRecipes.TOOL_ON_BLOCK.get())
                     .stream()
-                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GINGERBREAD_DECORATING.apply(level.registryAccess()))
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GINGERBREAD_DECORATING)
                     .filter(holder -> holder.value().matches(inventory, level))
                     .findFirst(), 50);
         }

@@ -28,6 +28,8 @@ import com.simibubi.create.compat.jei.category.DeployingCategory;
 import com.simibubi.create.compat.jei.category.MixingCategory;
 import com.simibubi.create.compat.jei.category.PackingCategory;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.mixer.CompactingRecipe;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -48,11 +50,11 @@ import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 @Mixin(CCKJeiPlugin.class)
 public abstract class CCKJeiPluginMixin {
     @Unique
-    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_GRINDING = RecipeType
+    private static final RecipeType<RecipeHolder<CompactingRecipe>> AUTOMATIC_GRINDING = RecipeType
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_grinding"));
-    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_JUICING = RecipeType
+    private static final RecipeType<RecipeHolder<CompactingRecipe>> AUTOMATIC_JUICING = RecipeType
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_juicing"));
-    private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MELTING = RecipeType
+    private static final RecipeType<RecipeHolder<MixingRecipe>> AUTOMATIC_MELTING = RecipeType
             .createRecipeHolderType(CCKCommon.asResource("extradelight.automatic_melting"));
     // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
     /*private static final RecipeType<RecipeHolder<BasinRecipe>> AUTOMATIC_MIXING = RecipeType
@@ -115,24 +117,23 @@ public abstract class CCKJeiPluginMixin {
 
     @Inject(method = "registerRecipes", at = @At("HEAD"))
     private void registerRecipes$extradelight(IRecipeRegistration registration, CallbackInfo ci) {
-        Level level = getLevel();
         RecipeManager recipeManager = getRecipeManager();
         var mortarRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MORTAR.get());
         if (CCKConfig.recipes().convertMortarGrindingRecipesToCompactingRecipes.get()) {
             registration.addRecipes(AUTOMATIC_GRINDING, mortarRecipes.stream()
-                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GRINDING.apply(level.registryAccess()))
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GRINDING)
                     .toList());
         }
         var juicerRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.JUICER.get());
         if (CCKConfig.recipes().convertJuicerRecipesToCompactingRecipes.get()) {
             registration.addRecipes(AUTOMATIC_JUICING, juicerRecipes.stream()
-                    .map(ExtraDelightRecipeConverters.AUTOMATIC_JUICING.apply(level.registryAccess()))
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_JUICING)
                     .toList());
         }
         var meltingPotRecipes = recipeManager.getAllRecipesFor(ExtraDelightRecipes.MELTING_POT.get());
         if (CCKConfig.recipes().convertMeltingPotRecipesToMixingRecipes.get()) {
             registration.addRecipes(AUTOMATIC_MELTING, meltingPotRecipes.stream()
-                    .map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING.apply(level.registryAccess()))
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING)
                     .toList());
         }
         // Extra Delight itself makes every mixing recipe to create-mixing recipe, so we don't need to do conversion for that.
@@ -146,7 +147,7 @@ public abstract class CCKJeiPluginMixin {
         if (CCKConfig.recipes().convertToolOnBlockRecipesToDeployingRecipes.get()) {
             registration.addRecipes(AUTOMATIC_GINGERBREAD_DECORATING, toolOnBlockRecipes.stream()
                     .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GINGERBREAD_DECORATING.apply(level.registryAccess()))
+                    .map(ExtraDelightRecipeConverters.AUTOMATIC_GINGERBREAD_DECORATING)
                     .toList());
         }
     }

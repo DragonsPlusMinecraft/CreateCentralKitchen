@@ -62,7 +62,7 @@ public class CCKCommon {
         modBus.register(this);
         modBus.register(new CCKConfig(modContainer));
 
-        if(DatagenModLoader.isRunningDataGen()){
+        if (DatagenModLoader.isRunningDataGen()) {
             REGISTRATE.registerBuiltinLocalization("interface");
             REGISTRATE.registerForeignLocalization();
         }
