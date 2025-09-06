@@ -33,6 +33,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +51,7 @@ public class CCKCommon {
     public static final String NAME = "Create: Central Kitchen";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     public static final CDPRegistrate REGISTRATE = new CDPRegistrate(ID)
-            .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE))
-            .registerForeignLocalization()
-            .registerBuiltinLocalization("interface");
+            .setTooltipModifier(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE));
     private final ModContainer modContainer;
 
     public CCKCommon(IEventBus modBus, ModContainer modContainer) {
@@ -62,6 +61,11 @@ public class CCKCommon {
 
         modBus.register(this);
         modBus.register(new CCKConfig(modContainer));
+
+        if(DatagenModLoader.isRunningDataGen()){
+            REGISTRATE.registerBuiltinLocalization("interface");
+            REGISTRATE.registerForeignLocalization();
+        }
     }
 
     @SubscribeEvent

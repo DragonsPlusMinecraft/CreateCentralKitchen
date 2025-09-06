@@ -1,4 +1,5 @@
 {
+  "_comment.unlocalized": "Remove this line after finishing localization.",
   "create_central_kitchen.ponder.cooking_pot.header": "Createによる自動化：鍋料理",
   "create_central_kitchen.ponder.cooking_pot.text_1": "ファンネルでも調理済みの食品を取り出すことができます",
   "create_central_kitchen.ponder.cutting_board.header": "Createによる自動化：食品カット",
@@ -18,7 +19,7 @@
   "create_central_kitchen.ponder.keg.pouring.header": "Createによる自動化：ドリンク製造",
   "create_central_kitchen.ponder.keg.pouring.text_1": "アイテム注液口を使ってタンカードに飲み物を注げます",
   "create_central_kitchen.ponder.keg.pouring.text_2": "アイテム排液口でタンカードから飲み物を回収出来ます",
-  "create_central_kitchen.ponder.oven.header": "Automating with Create: Oven",
+  "create_central_kitchen.ponder.oven.header": "Automating with Create: Chiller",
   "create_central_kitchen.ponder.oven.text_1": "Also, Use Mechanical Arm to insert ice or snow into Chiller",
   "create_central_kitchen.ponder.shared.arm_automate_container_insertion": "メカニカルアームを使用して食器を挿入できます",
   "create_central_kitchen.ponder.shared.arm_take_out_food": "メカニカルアームは調理済みの食品を取り出すことができます",
@@ -32,7 +33,5 @@
   "create_central_kitchen.recipe.extradelight.automatic_juicing": "Automatic Juicing",
   "create_central_kitchen.recipe.extradelight.automatic_melting": "Automatic Melting",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Automatic Food Cutting",
-  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing",
-  "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
-  "pack.create_central_kitchen.runtime.description": "Create: Central Kitchen Runtime Generated Resources"
+  "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Automatic Food Sawing"
 }

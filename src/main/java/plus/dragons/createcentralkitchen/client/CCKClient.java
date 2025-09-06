@@ -20,12 +20,13 @@ package plus.dragons.createcentralkitchen.client;
 
 import static plus.dragons.createcentralkitchen.common.CCKCommon.REGISTRATE;
 
-import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.client.registry.CCKPartialModels;
 import plus.dragons.createcentralkitchen.client.registry.CCKSpriteShifts;
@@ -35,12 +36,16 @@ import plus.dragons.createcentralkitchen.data.CCKLang;
 @Mod(value = CCKCommon.ID, dist = Dist.CLIENT)
 public class CCKClient {
     public CCKClient(IEventBus modBus, ModContainer modContainer) {
+        modBus.addListener(CCKClient::clientInit);
+        if(DatagenModLoader.isRunningDataGen()){
+            REGISTRATE.registerPonderLocalization(CCKPonderPlugin::new);
+        }
+    }
+
+    public static void clientInit(final FMLClientSetupEvent event) {
         CCKLang.register();
         CCKPartialModels.register();
         CCKSpriteShifts.register();
         PonderIndex.addPlugin(new CCKPonderPlugin());
-        REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> PonderIndex
-                .getLangAccess()
-                .provideLang(CCKCommon.ID, prov::add));
     }
 }
