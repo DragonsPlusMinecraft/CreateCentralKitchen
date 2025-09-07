@@ -34,6 +34,6 @@
   "create_central_kitchen.recipe.extradelight.automatic_melting": "Fusão Automática",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "Corte Automático de Comida",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "Serragem Automática de Comida",
-  "pack.create_central_kitchen.runtime": "Create: Cozinha Central",
+  "pack.create_central_kitchen.runtime": "Create: Central Kitchen",
   "pack.create_central_kitchen.runtime.description": "Recursos Gerados em Tempo de Execução do Create: Cozinha Central"
 }
