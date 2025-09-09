@@ -21,14 +21,12 @@ package plus.dragons.createcentralkitchen.mixin.extradelight;
 import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -36,35 +34,36 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.extradelight.ExtraDelightIntegration;
 import plus.dragons.createcentralkitchen.integration.extradelight.recipe.ExtraDelightRecipeConverters;
 
 @Mixin(RecipeFinder.class)
 public abstract class RecipeFinderMixin {
+    @Unique
+    @Nullable
+    private final static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_MIXING_RECIPE = new HashSet<>();
 
     @Unique
     @Nullable
-    private static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_MIXING_RECIPE;
-
-    @Unique
-    @Nullable
-    private static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_COMPACTING_RECIPE;
+    private final static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_COMPACTING_RECIPE = new HashSet<>();
 
     @ModifyReturnValue(method = "get", at = @At(value = "RETURN"))
     private static List<RecipeHolder<? extends Recipe<?>>> addRecipe(List<RecipeHolder<? extends Recipe<?>>> original, @Nullable Object cacheKey, Level level, Predicate<RecipeHolder<? extends Recipe<?>>> conditions) {
         if (cacheKey == MechanicalMixerBlockEntityAccessor.getShapelessOrMixingRecipesKey()) {
-            if(create_central_kitchen$CACHED_MIXING_RECIPE == null) {
+            if (create_central_kitchen$CACHED_MIXING_RECIPE.isEmpty()) {
+                ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_MIXING_RECIPE);
                 var recipeManager = level.getRecipeManager();
                 if (CCKConfig.recipes().convertMeltingPotRecipesToMixingRecipes.get()) {
-                    create_central_kitchen$CACHED_MIXING_RECIPE =
-                    recipeManager.getAllRecipesFor(ExtraDelightRecipes.MELTING_POT.get())
-                            .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING).filter(conditions).collect(Collectors.toSet());
+                    create_central_kitchen$CACHED_MIXING_RECIPE.addAll(
+                            recipeManager.getAllRecipesFor(ExtraDelightRecipes.MELTING_POT.get())
+                                    .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING).filter(conditions).collect(Collectors.toSet()));
                 }
-                original.addAll(create_central_kitchen$CACHED_MIXING_RECIPE);
             }
+            original.addAll(create_central_kitchen$CACHED_MIXING_RECIPE);
         } else if (cacheKey == MechanicalPressBlockEntityAccessor.getCompressingRecipesKey()) {
             var recipeManager = level.getRecipeManager();
-            if(create_central_kitchen$CACHED_COMPACTING_RECIPE == null) {
-                create_central_kitchen$CACHED_COMPACTING_RECIPE = new HashSet<>();
+            if (create_central_kitchen$CACHED_COMPACTING_RECIPE.isEmpty()) {
+                ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_COMPACTING_RECIPE);
                 if (CCKConfig.recipes().convertMortarGrindingRecipesToCompactingRecipes.get()) {
                     create_central_kitchen$CACHED_COMPACTING_RECIPE.addAll(recipeManager.getAllRecipesFor(ExtraDelightRecipes.MORTAR.get())
                             .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_GRINDING).filter(conditions).collect(Collectors.toSet()));
