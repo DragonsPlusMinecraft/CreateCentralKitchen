@@ -146,6 +146,7 @@ dependencies {
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
     // Fix incompatible issue
     implementation fg.deobf("curse.maven:botarium-704113:4831434")
+    implementation fg.deobf("curse.maven:selene-499980:6983934")
     implementation fg.deobf("curse.maven:sleep-tight-817564:6947504")
 
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
