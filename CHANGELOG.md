@@ -1,3 +1,4 @@
-## Create Central Kitchen 1.4.3
+## Create Central Kitchen 1.4.3b
 
-Update for Create 6.0.6
+### Fix
+* Fix mixin crashing issue
