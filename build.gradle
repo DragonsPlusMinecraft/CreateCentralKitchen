@@ -1,50 +1,98 @@
 plugins {
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.38'
+    id 'idea'
+    id 'maven-publish'
+    id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
+    id "net.neoforged.moddev.legacyforge" version "2.0.107"
+    id "com.diffplug.spotless" version "7.0.2"
 }
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
-version = mod_version
-group = 'plus.dragons.createcentralkitchen'
-archivesBaseName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
+base {
+    archivesName = "create_central_kitchen-${artifact_minecraft_version}-for-create-${create_version}"
+    group = 'plus.dragons.createcentralkitchen'
+    version = mod_version
+}
 
-jarJar.enable()
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+spotless {
+    java {
+        endWithNewline()
+        leadingTabsToSpaces()
+        removeUnusedImports()
+        toggleOffOn()
+        importOrder()
+        eclipse().configFile("codeformat/formatter-config.xml")
+    }
+}
+
+legacyForge {
+    version = "$minecraft_version-$forge_version"
+
+    // TODO - Try turning this on later see Create
+    validateAccessTransformers = false
+    accessTransformers.from(file("src/main/resources/META-INF/accesstransformer.cfg"))
+
+    parchment {
+        minecraftVersion = minecraft_version
+        mappingsVersion = parchment_version
+    }
+
+    mods {
+        create_central_kitchen {
+            sourceSet(sourceSets.main)
+        }
+    }
 
     runs {
+        // applies to all the run configs below
+        configureEach {
+            systemProperty('forge.logging.markers', '')
+            systemProperty('forge.logging.console.level', 'info')
+            jvmArguments = ["-XX:+IgnoreUnrecognizedVMOptions", "-XX:+AllowEnhancedClassRedefinition"]
+            //jvmArgs("-XX:-OmitStackTraceInFastThrow") // uncomment when you get exceptions with null messages etc
+            //jvmArgs '-XX:+UnlockCommercialFeatures' // uncomment for profiling
+
+            systemProperty('mixin.debug.export', 'true')
+            systemProperty('mixin.debug.verbose', 'true')
+
+            programArgument('-mixin.config=create_central_kitchen.mixins.json')
+        }
+
         client {
-            workingDirectory project.file('run')
-            arg '-mixin.config=create_central_kitchen.mixins.json'
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-            mods {
-                create_central_kitchen {
-                    source sourceSets.main
-                }
-            }
+            client()
+
+            gameDirectory = project.file('run')
         }
 
         server {
-            workingDirectory project.file('run')
-            arg '-mixin.config=create_central_kitchen.mixins.json'
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'create_central_kitchen'
-            mods {
-                create_central_kitchen {
-                    source sourceSets.main
-                }
-            }
+            server()
+
+            gameDirectory = project.file('run/server')
+        }
+
+        data {
+            data()
+
+            gameDirectory = project.file('run')
+            systemProperty('forge.logging.markers', 'REGISTRIES,REGISTRYDUMP')
+            systemProperty('forge.logging.console.level', 'debug')
+            programArguments.addAll("--mod", "create_central_kitchen", "--all", "--output", file("src/generated/resources/").getAbsolutePath(), "--existing", file("src/main/resources").getAbsolutePath())
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+
+            gameDirectory = project.file('run/gametest')
+            // setForceExit false <- FIXME 1.20  see Create
         }
     }
 }
@@ -52,125 +100,121 @@ minecraft {
 repositories {
     mavenLocal()
     maven {
-        name "create maven"
-        url "https://maven.createmod.net"
+        name = "create maven"
+        url = uri("https://maven.createmod.net")
     }
     maven {
-        name "Tterrag maven"
-        url "https://maven.tterrag.com/"
+        name = "Tterrag maven"
+        url = uri("https://maven.tterrag.com/")
     }
     maven {
-        name "Blamejared Maven"
-        url "https://maven.blamejared.com"
+        name = "Blamejared Maven"
+        url = uri("https://maven.blamejared.com")
     }
     maven {
-        name "Theillusivec4 Maven"
-        url "https://maven.theillusivec4.top/"
+        name = "Theillusivec4 Maven"
+        url = uri("https://maven.theillusivec4.top/")
     }
 /*    maven {
         name "Abnormals Maven"
         url  "https://maven.jaackson.me" // it's gone
     }*/
     maven {
-        name "Apple Skin"
-        url "https://maven.ryanliptak.com/"
+        name = "Apple Skin"
+        url = uri("https://maven.ryanliptak.com/")
     }
     maven {
-        name "JitPack"
-        url 'https://jitpack.io'
+        name = "JitPack"
+        url = uri("https://jitpack.io")
     }
     maven {
-        name "Curse Maven"
-        url "https://www.cursemaven.com"
+        name = "Curse Maven"
+        url = uri("https://www.cursemaven.com")
         content {
-            includeGroup "curse.maven"
+            includeGroup("curse.maven")
         }
     }
     maven {
-        name 'DragonsPlus Maven'
-        url "https://maven.dragons.plus/releases"
+        name = "DragonsPlus Maven"
+        url = uri("https://maven.dragons.plus/releases")
     }
     maven {
         name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
+        url = uri("https://api.modrinth.com/maven")
     }
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     //embedded dependencies
-    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
-    implementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
+    modCompileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
+    modImplementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
         transitive = false
-        jarJar.ranged(it, "[${mixin_extras_version},)")
+        version { strictly("[${mixin_extras_version},)") }
     }
     //mandatory dependencies
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_build}:slim") { transitive = false }
-    implementation fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") { transitive = false }
-    implementation fg.deobf("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    modImplementation("com.simibubi.create:create-${create_minecraft_version}:${create_version}-${create_version_number}:slim") { transitive = false }
+    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") { transitive = false }
+    modImplementation("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
     //create addons
-    implementation fg.deobf("maven.modrinth:createaddition:${create_addition_file}")
+    modImplementation("maven.modrinth:createaddition:${create_addition_file}")
     //farmers delight addons
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmers_delight_file}")
-    implementation fg.deobf("curse.maven:collectors-reap-807101:${collectors_reap_file}")
-    implementation fg.deobf("curse.maven:farmers-respite-551453:${farmers_respite_file}")
-    implementation fg.deobf("curse.maven:miners-delight-plus-689630:${miners_delight_file}")
-    implementation fg.deobf("curse.maven:nethers-delight-496394:${nethers_delight_file}")
-    implementation fg.deobf("curse.maven:corn-delight-577805:${corn_delight_file}")
-    implementation fg.deobf("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
-    implementation fg.deobf("curse.maven:ends-delight-662675:${ends_delight_file}")
+    modImplementation("maven.modrinth:farmers-delight:${farmers_delight_file}")
+    modImplementation("maven.modrinth:collectors-reap:${collectors_reap_file}")
+    modImplementation("curse.maven:farmers-respite-551453:${farmers_respite_file}")
+    modImplementation("maven.modrinth:miners-delight:${miners_delight_file}")
+    modImplementation("maven.modrinth:nethers-delight:${nethers_delight_file}")
+    modImplementation("curse.maven:corn-delight-577805:${corn_delight_file}")
+    modImplementation("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
+    modImplementation("maven.modrinth:ends-delight:${ends_delight_file}")
     ////abnormals mods addons
-    implementation fg.deobf("maven.modrinth:blueprint:${blueprint_version}")
-    implementation fg.deobf("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
-    implementation fg.deobf("curse.maven:atmospheric-362393:${atmospheric_file}")
-    implementation fg.deobf("curse.maven:autumnity-365045:${autumnity_file}")
-    implementation fg.deobf("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
-    implementation fg.deobf("curse.maven:gallery-1173553:6133771") // buzzier-bees dependencies
-    implementation fg.deobf("curse.maven:environmental-388992:${environmental_file}")
-    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_file}")
-    implementation fg.deobf("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
-    implementation fg.deobf("curse.maven:peculiars-418551:${peculiars_file}")
-    //implementation fg.deobf("curse.maven:respiteful-836471:${respiteful_file}")  TODO REGISTRATE PROBLEM
-    implementation fg.deobf("curse.maven:seasonals-416471:${seasonals_file}")
+    modImplementation("maven.modrinth:blueprint:${blueprint_version}")
+    modImplementation("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
+    modImplementation("curse.maven:atmospheric-362393:${atmospheric_file}")
+    modImplementation("curse.maven:autumnity-365045:${autumnity_file}")
+    modImplementation("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
+    modImplementation("curse.maven:gallery-1173553:6133771") // buzzier-bees dependencies
+    modImplementation("curse.maven:environmental-388992:${environmental_file}")
+    modImplementation("curse.maven:neapolitan-382016:${neapolitan_file}")
+    modImplementation("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
+    modImplementation("curse.maven:peculiars-418551:${peculiars_file}")
+    modImplementation("maven.modrinth:respiteful:${respiteful_file}")
+    modImplementation("curse.maven:seasonals-416471:${seasonals_file}")
     //independent mods
-    implementation fg.deobf("curse.maven:overweight-farming-591666:${overweight_farming_file}")
+    modImplementation("maven.modrinth:overweight-farming:${overweight_farming_file}")
     //utility dependencies
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
-    compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
-    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
+    modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
+    modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
+    modRuntimeOnly("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+    modCompileOnly("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}:api")
+    modRuntimeOnly("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
+    modCompileOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
+    modRuntimeOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
     // Fix incompatible issue
-    implementation fg.deobf("curse.maven:botarium-704113:4831434")
-    implementation fg.deobf("curse.maven:selene-499980:6983934")
-    implementation fg.deobf("curse.maven:sleep-tight-817564:6947504")
+    modImplementation("curse.maven:botarium-704113:4831434")
+    modImplementation("curse.maven:selene-499980:6983934")
+    modImplementation("curse.maven:sleep-tight-817564:6947504")
 
-    implementation fg.deobf("curse.maven:patchouli-306770:6164575")
-    implementation fg.deobf("curse.maven:botania-225643:6366547")
-    implementation fg.deobf("curse.maven:ars-nouveau-401955:5894609")
-    implementation fg.deobf("curse.maven:ars-botania-1194681:6453459")
+    modImplementation("curse.maven:patchouli-306770:6164575")
+    modImplementation("curse.maven:botania-225643:6366547")
+    modImplementation("curse.maven:ars-nouveau-401955:5894609")
+    modImplementation("curse.maven:ars-botania-1194681:6453459")
     // cc-tweaked create 6.0 is not supported yet.
-    compileOnly fg.deobf("curse.maven:cc-tweaked-282001:5714507")
+    modCompileOnly("curse.maven:cc-tweaked-282001:5714507")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.resources { srcDir('src/generated/resources') }
 
 mixin {
-    add sourceSets.main, 'create_central_kitchen.refmap.json'
-    config 'create_central_kitchen.mixins.json'
-
-    debug.verbose = true
-    debug.export = true
+    add(sourceSets.main, 'create_central_kitchen.refmap.json')
+    config('create_central_kitchen.mixins.json')
 }
 
 publishMods {
-    file = tasks.jarJar.archiveFile
-    changelog = new File("CHANGELOG.md").text
+    file = reobfJar.archiveFile
+    changelog = project.file("CHANGELOG.md").text
     version = mod_version
     type = STABLE
     displayName = "CCK ${mod_version} for Create ${minecraft_version}-${create_version}"
@@ -182,6 +226,8 @@ publishMods {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
         minecraftVersions.add(minecraft_version)
         requires("create")
+        client = true
+        server = true
     }
 
     modrinth {
@@ -215,12 +261,8 @@ void processJar(Jar jarTask) {
 }
 
 jar.finalizedBy('reobfJar')
-jar.setArchiveClassifier('slim')
-tasks.jarJar.setArchiveClassifier('')
-tasks.jarJar.finalizedBy('reobfJarJar')
 
 processJar(jar)
-processJar(tasks.jarJar)
 
 publishing {
     publications {
@@ -230,7 +272,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            url = uri("file://${project.projectDir}/mcmodsrepo")
         }
     }
 }

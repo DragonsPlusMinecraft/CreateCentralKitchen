@@ -1,3 +1,1 @@
-## Create Central Kitchen 1.4.3
-
-Update for Create 6.0.6
+## Create Central Kitchen 1.5.0
