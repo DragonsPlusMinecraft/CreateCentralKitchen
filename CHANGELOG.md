@@ -1,7 +1,4 @@
-## Create: Central Kitchen 2.2.3
+## Create: Central Kitchen 2.2.3b
 
 ### Fix
-* Fix Some of Extra Delight Compat Recipes are not reloadable
-
-### Translation
-* Add PT_BR localization by PrincessStellar
+* Fix a memory leak issue in Extra Delight Compat

@@ -47,11 +47,15 @@ public abstract class RecipeFinderMixin {
     @Nullable
     private final static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_COMPACTING_RECIPE = new HashSet<>();
 
+    static{
+        ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_MIXING_RECIPE);
+        ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_COMPACTING_RECIPE);
+    }
+
     @ModifyReturnValue(method = "get", at = @At(value = "RETURN"))
     private static List<RecipeHolder<? extends Recipe<?>>> addRecipe(List<RecipeHolder<? extends Recipe<?>>> original, @Nullable Object cacheKey, Level level, Predicate<RecipeHolder<? extends Recipe<?>>> conditions) {
         if (cacheKey == MechanicalMixerBlockEntityAccessor.getShapelessOrMixingRecipesKey()) {
             if (create_central_kitchen$CACHED_MIXING_RECIPE.isEmpty()) {
-                ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_MIXING_RECIPE);
                 var recipeManager = level.getRecipeManager();
                 if (CCKConfig.recipes().convertMeltingPotRecipesToMixingRecipes.get()) {
                     create_central_kitchen$CACHED_MIXING_RECIPE.addAll(
@@ -63,7 +67,6 @@ public abstract class RecipeFinderMixin {
         } else if (cacheKey == MechanicalPressBlockEntityAccessor.getCompressingRecipesKey()) {
             var recipeManager = level.getRecipeManager();
             if (create_central_kitchen$CACHED_COMPACTING_RECIPE.isEmpty()) {
-                ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_COMPACTING_RECIPE);
                 if (CCKConfig.recipes().convertMortarGrindingRecipesToCompactingRecipes.get()) {
                     create_central_kitchen$CACHED_COMPACTING_RECIPE.addAll(recipeManager.getAllRecipesFor(ExtraDelightRecipes.MORTAR.get())
                             .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_GRINDING).filter(conditions).collect(Collectors.toSet()));
