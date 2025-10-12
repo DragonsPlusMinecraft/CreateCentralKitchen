@@ -42,6 +42,8 @@ public class CookingPotBlockEntityMixin {
             heaterState = level.getBlockState(pos.below(2));
             heater = BoilerHeater.REGISTRY.get(heaterState);
         }
+        if (!heaterState.is(ModTags.HEAT_SOURCES))
+            return cookTime;
         if (heater != null) {
             float heat = heater.getHeat(level, heaterPos, heaterState);
             if (heat > 0)
