@@ -1,11 +1,10 @@
 {
   "required": true,
   "priority": 1000,
-  "package": "plus.dragons.createcentralkitchen.mixin.dungeonsdelight",
+  "package": "plus.dragons.createcentralkitchen.mixin.minersdelight",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "DungeonStoveBlockEntityMixin",
-    "MonsterPotBlockEntityMixin"
+    "CopperPotBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
