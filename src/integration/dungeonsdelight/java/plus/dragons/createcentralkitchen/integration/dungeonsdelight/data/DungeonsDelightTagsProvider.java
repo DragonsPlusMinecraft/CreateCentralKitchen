@@ -16,13 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin.trailandtalesdelight;
+package plus.dragons.createcentralkitchen.integration.dungeonsdelight.data;
 
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import org.spongepowered.asm.mixin.Mixin;
-import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
-import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import com.simibubi.create.AllBlocks;
+import net.yirmiri.dungeonsdelight.core.init.DDTags;
+import plus.dragons.createcentralkitchen.data.CCKBlockTags;
 
-@Condition(ModIntegration.Mods.TRAILANDTALESDELIGHT)
-@Mixin(targets = "show.tatd.mod.block.MudStoveBlock")
-public abstract class MudStoveBlockEntityMixin implements StoveBlockEntityAccess {}
+public class DungeonsDelightTagsProvider {
+    public static void register() {
+        CCKBlockTags.register(DDTags.BlockT.MONSTER_TRAY_HEAT_SOURCES, builder -> builder
+                .add(AllBlocks.BLAZE_BURNER.get())
+                .add(AllBlocks.LIT_BLAZE_BURNER.get()));
+    }
+}

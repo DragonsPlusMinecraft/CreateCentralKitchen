@@ -19,8 +19,11 @@
 package plus.dragons.createcentralkitchen.mixin.endsdelight;
 
 import cn.foggyhillside.ends_delight.block.entity.EndStoveBlockEntity;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
+@Condition(ModIntegration.Mods.ENDSDELIGHT)
 @Mixin(EndStoveBlockEntity.class)
 public abstract class EndStoveBlockEntityMixin implements StoveBlockEntityAccess {}

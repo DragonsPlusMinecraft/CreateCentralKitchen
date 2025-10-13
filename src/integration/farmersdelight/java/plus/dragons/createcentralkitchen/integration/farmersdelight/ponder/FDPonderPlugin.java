@@ -38,6 +38,8 @@ public class FDPonderPlugin {
     private static final ResourceLocation END_STOVE = ModIntegration.ENDSDELIGHT.asResource("end_stove");
     private static final ResourceLocation MAZE_STOVE = ModIntegration.TWILIGHTDELIGHT.asResource("maze_stove");
     private static final ResourceLocation MUD_STOVE = ModIntegration.TRAILANDTALESDELIGHT.asResource("mud_stove");
+    private static final ResourceLocation DUNGEON_STOVE = ModIntegration.DUNGEONSDELIGHT.asResource("dungeon_stove");
+    private static final ResourceLocation MONSTER_POT = ModIntegration.DUNGEONSDELIGHT.asResource("monster_pot");
     private static final ResourceLocation DRYING_RACK = ModIntegration.EXTRADELIGHT.asResource("drying_rack");
 
     public static void register() {
@@ -49,7 +51,7 @@ public class FDPonderPlugin {
         helper.forComponents(CUTTING_BOARD)
                 .addStoryBoard("farmersdelight/cutting_board", FDPonderScenes::cuttingBoard,
                         AllCreatePonderTags.ARM_TARGETS);
-        helper.forComponents(COOKING_POT, FIERY_COOKING_POT, POTTERY_COOKING_POT, COPPER_POT)
+        helper.forComponents(COOKING_POT, FIERY_COOKING_POT, POTTERY_COOKING_POT, COPPER_POT, MONSTER_POT)
                 .addStoryBoard("farmersdelight/cooking_pot", FDPonderScenes::cookingPot,
                         AllCreatePonderTags.ARM_TARGETS,
                         AllCreatePonderTags.HIGH_LOGISTICS)
@@ -58,7 +60,7 @@ public class FDPonderPlugin {
                 .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS)
                 .addStoryBoard("farmersdelight/heat_source", FDPonderScenes::heatSource);
-        helper.forComponents(STOVE, NETHER_BRICKS_STOVE, NETHER_BRICKS_SOUL_STOVE, END_STOVE, MAZE_STOVE, MUD_STOVE)
+        helper.forComponents(STOVE, NETHER_BRICKS_STOVE, NETHER_BRICKS_SOUL_STOVE, END_STOVE, MAZE_STOVE, MUD_STOVE, DUNGEON_STOVE)
                 .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS);
     }
@@ -77,6 +79,8 @@ public class FDPonderPlugin {
                 .add(END_STOVE)
                 .add(MAZE_STOVE)
                 .add(MUD_STOVE)
-                .add(DRYING_RACK);
+                .add(DRYING_RACK)
+                .add(DUNGEON_STOVE)
+                .add(MONSTER_POT);
     }
 }

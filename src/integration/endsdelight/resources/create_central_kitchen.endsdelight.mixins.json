@@ -2,7 +2,6 @@
   "required": true,
   "priority": 1000,
   "package": "plus.dragons.createcentralkitchen.mixin.endsdelight",
-  "plugin": "plus.dragons.createcentralkitchen.mixin.endsdelight.EDIntegrationMixinConfigPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EndStoveBlockEntityMixin"

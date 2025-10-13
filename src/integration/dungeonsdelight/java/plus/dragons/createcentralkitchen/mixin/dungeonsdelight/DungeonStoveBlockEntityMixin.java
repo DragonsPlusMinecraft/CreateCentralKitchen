@@ -16,13 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin.trailandtalesdelight;
+package plus.dragons.createcentralkitchen.mixin.dungeonsdelight;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import net.yirmiri.dungeonsdelight.common.block.entity.DungeonStoveBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
-@Condition(ModIntegration.Mods.TRAILANDTALESDELIGHT)
-@Mixin(targets = "show.tatd.mod.block.MudStoveBlock")
-public abstract class MudStoveBlockEntityMixin implements StoveBlockEntityAccess {}
+@Condition(ModIntegration.Mods.DUNGEONSDELIGHT)
+@Mixin(DungeonStoveBlockEntity.class)
+public abstract class DungeonStoveBlockEntityMixin implements StoveBlockEntityAccess {}

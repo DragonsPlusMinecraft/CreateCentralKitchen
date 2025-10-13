@@ -1,10 +1,10 @@
 {
   "required": true,
   "priority": 1000,
-  "package": "plus.dragons.createcentralkitchen.mixin.trailandtalesdelight",
+  "package": "plus.dragons.createcentralkitchen.mixin.dungeonsdelight",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MudStoveBlockEntityMixin"
+    "DungeonStoveBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

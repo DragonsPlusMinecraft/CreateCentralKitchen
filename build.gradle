@@ -31,7 +31,8 @@ var integrationMods = [
         ["twilightdelight","farmersdelight"],
         ["trailandtalesdelight","farmersdelight"],
         ["extradelight","farmersdelight"],
-        ["minersdelight","farmersdelight"]
+        ["minersdelight","farmersdelight"],
+        ["dungeonsdelight","farmersdelight"]
 ]
 
 integrationMods.forEach {integrationMod ->
@@ -173,9 +174,12 @@ dependencies {
     localImplementation("maven.modrinth:miners-delight:${miners_delight_version}")
 
     //localRuntime("curse.maven:the-twilight-forest-227639:6472889") // MC 1.21.1 - 4.7.3196
-    //localRuntime("maven.modrinth:twilight-delight:${twilight_delight_version}")  // Well its Registrate is still on MC1.21-1.3.0+55 when Create is on 63
+    //localRuntime("maven.modrinth:twilight-delight:${twilight_delight_version}")  // JiJ Registrate is still on MC1.21-1.3.0+55 when Create is on 63. Integration works fine so just leave it here.
 
     localImplementation("maven.modrinth:kaleidoscope-cookery:${kaleidoscope_cookery_version}")
+
+    localImplementation("maven.modrinth:runiclib:YLcPBAGS") // Requirement of Dungeon's Delight, 4.3.9
+    localImplementation("maven.modrinth:dungeons_delight:${dungeons_delight_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
