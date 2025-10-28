@@ -1,10 +1,6 @@
-## Create: Central Kitchen 2.2.4
+## Create: Central Kitchen 2.2.5
 
-**REQUIRE Create: Dragon Plus 1.8.1!**
-
-### Update
-* Support Dungeons Delight.
+Update for Create ***6.0.7***.
 
 ### Fix
-* Fix `farmersdelight:heat_sources` tag functions incorrectly when blaze burner is not included in the tag.
-* Boiler Heats now correctly speed-up cooking of Copper Pot
+* Fix ExtraDelight automatic juicing has wrong byproduct probability

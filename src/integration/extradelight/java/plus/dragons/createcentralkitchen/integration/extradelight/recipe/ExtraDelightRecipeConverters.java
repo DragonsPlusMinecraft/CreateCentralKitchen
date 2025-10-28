@@ -60,7 +60,7 @@ public class ExtraDelightRecipeConverters {
                 var id = holder.id().withSuffix("_using_press");
                 var builder = new StandardProcessingRecipe.Builder<>(CompactingRecipe::new, id)
                         .require(recipe.getIngredients().getFirst());
-                builder.output(recipe.getChance(), ((SingleItemRecipeAccessor) recipe).getResult());
+                builder.output(recipe.getChance() * 0.01f, ((SingleItemRecipeAccessor) recipe).getResult());
                 builder.output(recipe.getFluid());
                 return new RecipeHolder<>(id, builder.build());
             });

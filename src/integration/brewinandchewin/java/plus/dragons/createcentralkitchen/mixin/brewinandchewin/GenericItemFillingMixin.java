@@ -51,7 +51,7 @@ public class GenericItemFillingMixin {
                     .filter(recipe -> recipe.getFluidIngredients().getFirst().test(availableFluid))
                     .filter(recipe -> recipe.getIngredients().getFirst().test(stack))
                     .findFirst()
-                    .ifPresent(recipe -> cir.setReturnValue(recipe.getFluidIngredients().getFirst().getRequiredAmount()));
+                    .ifPresent(recipe -> cir.setReturnValue(recipe.getFluidIngredients().getFirst().amount()));
     }
 
     @Inject(method = "fillItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getCapability(Lnet/neoforged/neoforge/capabilities/ItemCapability;)Ljava/lang/Object;"), cancellable = true)

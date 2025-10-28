@@ -23,7 +23,6 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 import java.util.stream.Stream;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
@@ -32,6 +31,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 import umpaz.brewinandchewin.common.crafting.CreatePotionPouringRecipe;
 import umpaz.brewinandchewin.common.crafting.KegPouringRecipe;
@@ -46,7 +46,7 @@ public class KegPouringRecipeConverters {
                 var fluid = (FluidStack) recipe.getFluid(output).loaderSpecific();
                 var builder = new StandardProcessingRecipe.Builder<>(FillingRecipe::new, id)
                         .require(Ingredient.of(container))
-                        .require(FluidIngredient.fromFluidStack(fluid))
+                        .require(SizedFluidIngredient.of(fluid))
                         .output(output);
                 return new RecipeHolder<>(id, builder.build());
             });
