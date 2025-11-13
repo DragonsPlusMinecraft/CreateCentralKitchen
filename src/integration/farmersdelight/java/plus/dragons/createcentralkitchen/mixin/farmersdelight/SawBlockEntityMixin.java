@@ -24,6 +24,8 @@ import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import java.util.List;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -34,11 +36,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
+@Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(SawBlockEntity.class)
 public abstract class SawBlockEntityMixin extends BlockBreakingKineticBlockEntity {
     @Shadow

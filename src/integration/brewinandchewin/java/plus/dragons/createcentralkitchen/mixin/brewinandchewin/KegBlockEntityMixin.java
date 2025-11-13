@@ -27,16 +27,20 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.simibubi.create.api.boiler.BoilerHeater;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createdragonsplus.common.processing.freeze.BlockFreezer;
 import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
 import umpaz.brewinandchewin.common.tag.BnCTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+@Restriction(require = @Condition(ModIntegration.Mods.BREWINANDCHEWIN))
 @Mixin(KegBlockEntity.class)
 public class KegBlockEntityMixin {
     @WrapOperation(method = "updateTemperature", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"))

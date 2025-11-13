@@ -20,14 +20,18 @@ package plus.dragons.createcentralkitchen.mixin.dungeonsdelight;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.api.boiler.BoilerHeater;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.yirmiri.dungeonsdelight.common.block.monster_pot.MonsterPotBlockEntity;
 import net.yirmiri.dungeonsdelight.common.block.monster_pot.MonsterPotRecipe;
 import net.yirmiri.dungeonsdelight.core.init.DDTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+@Restriction(require = @Condition(ModIntegration.Mods.DUNGEONSDELIGHT))
 @Mixin(MonsterPotBlockEntity.class)
 public class MonsterPotBlockEntityMixin {
     @ModifyExpressionValue(method = "processCooking", at = @At(value = "FIELD", target = "Lnet/yirmiri/dungeonsdelight/common/block/monster_pot/MonsterPotBlockEntity;cookTime:I", ordinal = 0))

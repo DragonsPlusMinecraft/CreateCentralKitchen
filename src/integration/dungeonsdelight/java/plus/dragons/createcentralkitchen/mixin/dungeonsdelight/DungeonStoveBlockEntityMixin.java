@@ -19,11 +19,12 @@
 package plus.dragons.createcentralkitchen.mixin.dungeonsdelight;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.yirmiri.dungeonsdelight.common.block.entity.DungeonStoveBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
-@Condition(ModIntegration.Mods.DUNGEONSDELIGHT)
+@Restriction(require = @Condition(ModIntegration.Mods.DUNGEONSDELIGHT))
 @Mixin(DungeonStoveBlockEntity.class)
 public abstract class DungeonStoveBlockEntityMixin implements StoveBlockEntityAccess {}

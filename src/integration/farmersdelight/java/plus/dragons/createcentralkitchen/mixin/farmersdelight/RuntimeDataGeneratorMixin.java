@@ -29,6 +29,8 @@ import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.data.RuntimeDataGenerator;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.Optional;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.createmod.catnip.codecs.CatnipCodecUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -39,8 +41,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+@Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(RuntimeDataGenerator.class)
 public class RuntimeDataGeneratorMixin {
     @Shadow

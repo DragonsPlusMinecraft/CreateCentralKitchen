@@ -20,6 +20,8 @@ package plus.dragons.createcentralkitchen.mixin.brewinandchewin;
 
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -31,9 +33,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe.KegPouringRecipeConverters;
 import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 
+@Restriction(require = @Condition(ModIntegration.Mods.BREWINANDCHEWIN))
 @Mixin(CCKJeiPlugin.class)
 public abstract class CCKJeiPluginMixin {
     @Shadow

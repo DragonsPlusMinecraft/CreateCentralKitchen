@@ -20,12 +20,16 @@ package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.foundation.utility.BlockHelper;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
+@Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(BlockHelper.class)
 public class BlockHelperMixin {
     @ModifyReturnValue(method = "isNotUnheated", at = @At("TAIL"))

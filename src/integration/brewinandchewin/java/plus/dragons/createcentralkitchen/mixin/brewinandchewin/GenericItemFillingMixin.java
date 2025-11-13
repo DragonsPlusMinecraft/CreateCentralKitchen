@@ -20,6 +20,8 @@ package plus.dragons.createcentralkitchen.mixin.brewinandchewin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -29,8 +31,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe.KegPouringRecipeConverters;
 
+@Restriction(require = @Condition(ModIntegration.Mods.BREWINANDCHEWIN))
 @Mixin(GenericItemFilling.class)
 public class GenericItemFillingMixin {
     @Inject(method = "canItemBeFilled", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getCapability(Lnet/neoforged/neoforge/capabilities/ItemCapability;)Ljava/lang/Object;"), cancellable = true)

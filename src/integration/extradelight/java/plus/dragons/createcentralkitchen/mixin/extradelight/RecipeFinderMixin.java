@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -34,9 +36,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.extradelight.ExtraDelightIntegration;
 import plus.dragons.createcentralkitchen.integration.extradelight.recipe.ExtraDelightRecipeConverters;
 
+@Restriction(require = @Condition(ModIntegration.Mods.EXTRADELIGHT))
 @Mixin(RecipeFinder.class)
 public abstract class RecipeFinderMixin {
     @Unique
@@ -47,7 +51,7 @@ public abstract class RecipeFinderMixin {
     @Nullable
     private final static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_COMPACTING_RECIPE = new HashSet<>();
 
-    static{
+    static {
         ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_MIXING_RECIPE);
         ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_COMPACTING_RECIPE);
     }

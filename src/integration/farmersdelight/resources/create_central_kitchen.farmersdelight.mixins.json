@@ -2,7 +2,7 @@
   "required": true,
   "priority": 1000,
   "package": "plus.dragons.createcentralkitchen.mixin.farmersdelight",
-  "plugin": "plus.dragons.createcentralkitchen.mixin.farmersdelight.FDIntegrationMixinConfigPlugin",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.UniversalConditionalMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BlockHelperMixin",

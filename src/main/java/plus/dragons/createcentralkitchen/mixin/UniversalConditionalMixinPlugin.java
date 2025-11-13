@@ -16,34 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.mixin.farmersdelight;
+package plus.dragons.createcentralkitchen.mixin;
 
 import java.util.List;
 import java.util.Set;
-import net.neoforged.fml.loading.LoadingModList;
+import me.fallenbreath.conditionalmixin.api.mixin.RestrictiveMixinConfigPlugin;
 import org.jetbrains.annotations.Nullable;
-import org.objectweb.asm.tree.ClassNode;
-import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
-import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-import plus.dragons.createcentralkitchen.integration.ModIntegration.Mods;
 
-public class FDIntegrationMixinConfigPlugin implements IMixinConfigPlugin {
-    private boolean enabled;
-
-    @Override
-    public void onLoad(String mixinPackage) {
-        this.enabled = LoadingModList.get().getModFileById(Mods.FARMERSDELIGHT) != null;
-    }
-
+public class UniversalConditionalMixinPlugin extends RestrictiveMixinConfigPlugin {
     @Override
     @Nullable
     public String getRefMapperConfig() {
         return null;
-    }
-
-    @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return enabled;
     }
 
     @Override
@@ -54,10 +38,4 @@ public class FDIntegrationMixinConfigPlugin implements IMixinConfigPlugin {
     public List<String> getMixins() {
         return null;
     }
-
-    @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
-
-    @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
 }

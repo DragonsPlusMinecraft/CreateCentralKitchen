@@ -19,10 +19,11 @@
 package plus.dragons.createcentralkitchen.mixin.trailandtalesdelight;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
-@Condition(ModIntegration.Mods.TRAILANDTALESDELIGHT)
+@Restriction(require = @Condition(ModIntegration.Mods.TRAILANDTALESDELIGHT))
 @Mixin(targets = "show.tatd.mod.block.MudStoveBlock")
 public abstract class MudStoveBlockEntityMixin implements StoveBlockEntityAccess {}

@@ -18,11 +18,15 @@
 
 package plus.dragons.createcentralkitchen.mixin.extradelight;
 
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SingleItemRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
+@Restriction(require = @Condition(ModIntegration.Mods.EXTRADELIGHT))
 @Mixin(SingleItemRecipe.class)
 public interface SingleItemRecipeAccessor {
     @Accessor

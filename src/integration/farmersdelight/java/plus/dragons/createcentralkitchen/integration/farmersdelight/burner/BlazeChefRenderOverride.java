@@ -22,7 +22,6 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import javax.annotation.Nullable;
-
 import net.createmod.catnip.render.SpriteShiftEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -40,7 +39,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
     FIERY_COOKING_POT(ModIntegration.TWILIGHTDELIGHT.asResource("fiery_cooking_pot"), CCKPartialModels.FIERY_CHEF_HAT, CCKPartialModels.FIERY_CHEF_HAT_SMALL),
     POTTERY_COOKING_POT(ModIntegration.TRAILANDTALESDELIGHT.asResource("pottery_cooking_pot"), CCKPartialModels.POTTERY_CHEF_HAT, CCKPartialModels.POTTERY_CHEF_HAT_SMALL),
-    MONSTER_POT(ModIntegration.DUNGEONSDELIGHT.asResource("monster_pot"), CCKPartialModels.DUNGEON_CHEF_HAT, CCKPartialModels.DUNGEON_CHEF_HAT_SMALL){
+    MONSTER_POT(ModIntegration.DUNGEONSDELIGHT.asResource("monster_pot"), CCKPartialModels.DUNGEON_CHEF_HAT, CCKPartialModels.DUNGEON_CHEF_HAT_SMALL) {
         @Override
         public PartialModel getBlazeModel(BlazeBurnerBlock.HeatLevel heatLevel, boolean active) {
             if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {

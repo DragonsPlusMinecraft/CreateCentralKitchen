@@ -26,6 +26,8 @@ import com.simibubi.create.compat.jei.category.DeployingCategory;
 import com.simibubi.create.compat.jei.category.SawingCategory;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.world.item.ItemStack;
@@ -40,11 +42,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
 import plus.dragons.createcentralkitchen.integration.jei.CCKJeiPlugin;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
+@Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(CCKJeiPlugin.class)
 public abstract class CCKJeiPluginMixin {
     @Shadow

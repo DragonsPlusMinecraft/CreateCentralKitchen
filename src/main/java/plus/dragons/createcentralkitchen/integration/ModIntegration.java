@@ -70,6 +70,5 @@ public enum ModIntegration {
         public static final String EXTRADELIGHT = "extradelight";
         public static final String KALEIDOSCOPECOOKERY = "kaleidoscope_cookery";
         public static final String DUNGEONSDELIGHT = "dungeonsdelight";
-
     }
 }

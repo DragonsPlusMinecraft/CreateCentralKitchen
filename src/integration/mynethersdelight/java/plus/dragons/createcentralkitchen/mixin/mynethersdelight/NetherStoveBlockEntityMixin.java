@@ -19,10 +19,11 @@
 package plus.dragons.createcentralkitchen.mixin.mynethersdelight;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
-@Condition(ModIntegration.Mods.MYNETHERSDELIGHT)
+@Restriction(require = @Condition(ModIntegration.Mods.MYNETHERSDELIGHT))
 @Mixin(targets = "com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity")
 public abstract class NetherStoveBlockEntityMixin implements StoveBlockEntityAccess {}

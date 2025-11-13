@@ -2,6 +2,7 @@
   "required": true,
   "priority": 1000,
   "package": "plus.dragons.createcentralkitchen.mixin.twilightdelight",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.UniversalConditionalMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MazeStoveBlockEntityMixin"

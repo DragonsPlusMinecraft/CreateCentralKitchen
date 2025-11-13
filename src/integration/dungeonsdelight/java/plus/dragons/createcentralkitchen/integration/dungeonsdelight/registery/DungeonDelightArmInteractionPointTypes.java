@@ -18,12 +18,12 @@
 
 package plus.dragons.createcentralkitchen.integration.dungeonsdelight.registery;
 
+import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.holder;
+
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.dungeonsdelight.mechanicalArm.MonsterPotArmInteractionPoint;
-
-import static plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes.holder;
 
 public class DungeonDelightArmInteractionPointTypes {
     public static final DeferredHolder<ArmInteractionPointType, ArmInteractionPointType> MONSTER_POT = holder("monster_pot");

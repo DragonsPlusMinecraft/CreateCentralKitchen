@@ -22,6 +22,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
 import com.simibubi.create.api.boiler.BoilerHeater;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,7 +30,7 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-@Condition(ModIntegration.Mods.MINERSDELIGHT)
+@Restriction(require = @Condition(ModIntegration.Mods.MINERSDELIGHT))
 @Mixin(CopperPotBlockEntity.class)
 public class CopperPotBlockEntityMixin {
     @ModifyExpressionValue(method = "processCooking", at = @At(value = "FIELD", target = "Lcom/sammy/minersdelight/content/block/copper_pot/CopperPotBlockEntity;cookTime:I", ordinal = 0))

@@ -2,7 +2,7 @@
   "required": true,
   "priority": 1000,
   "package": "plus.dragons.createcentralkitchen.mixin.extradelight",
-  "plugin": "plus.dragons.createcentralkitchen.mixin.extradelight.ExtraDelightIntegrationMixinConfigPlugin",
+  "plugin": "plus.dragons.createcentralkitchen.mixin.UniversalConditionalMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CCKJeiPluginMixin",

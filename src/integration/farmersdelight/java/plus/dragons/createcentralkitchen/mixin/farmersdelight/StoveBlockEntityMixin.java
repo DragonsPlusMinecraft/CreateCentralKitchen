@@ -18,9 +18,13 @@
 
 package plus.dragons.createcentralkitchen.mixin.farmersdelight;
 
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
+@Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(StoveBlockEntity.class) // TO RaymondBlaze: 我把这玩意儿拆了是因为在log里刷一堆WARNING真的好难看 = =
 public abstract class StoveBlockEntityMixin implements StoveBlockEntityAccess {}

@@ -19,10 +19,11 @@
 package plus.dragons.createcentralkitchen.mixin.twilightdelight;
 
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
-@Condition(ModIntegration.Mods.TWILIGHTDELIGHT)
+@Restriction(require = @Condition(ModIntegration.Mods.TWILIGHTDELIGHT))
 @Mixin(targets = "dev.xkmc.twilightdelight.content.block.MazeStoveBlock")
 public abstract class MazeStoveBlockEntityMixin implements StoveBlockEntityAccess {}

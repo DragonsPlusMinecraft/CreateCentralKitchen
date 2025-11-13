@@ -19,9 +19,13 @@
 package plus.dragons.createcentralkitchen.mixin.extradelight;
 
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
+@Restriction(require = @Condition(ModIntegration.Mods.EXTRADELIGHT))
 @Mixin(MechanicalMixerBlockEntity.class)
 public interface MechanicalMixerBlockEntityAccessor {
     @Accessor
