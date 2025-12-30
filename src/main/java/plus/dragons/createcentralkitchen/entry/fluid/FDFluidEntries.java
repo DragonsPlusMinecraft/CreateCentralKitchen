@@ -39,7 +39,7 @@ public class FDFluidEntries {
             CentralKitchen.genRL("fluid/tomato_sauce_flow"),
             NoTintFluidType::new)
         .lang("Tomato Sauce")
-        .transform(OptionalTags.fluid(FluidTags.WATER))
+        // Removed water tag to prevent interchangeability with water in recipes
         .properties(b -> b
             .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
             .viscosity(2000)
