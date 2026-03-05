@@ -1,6 +1,6 @@
-## Create: Central Kitchen 2.2.6
+## Create: Central Kitchen 2.3.0
 
-Update for Create ***6.0.8***. Require Create: Dragon+ 1.8.4.
+Update for Create ***6.0.9***. Require Create: Dragon+ 1.8.7.
 
 ### Fix
-* Fix some messy mixin issues that might cause crash in certain situation.
+* Fix a mixin issue causing crash when FD is not installed.
