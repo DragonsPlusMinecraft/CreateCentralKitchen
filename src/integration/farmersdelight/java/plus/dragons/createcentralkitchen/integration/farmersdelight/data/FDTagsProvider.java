@@ -26,13 +26,13 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 public class FDTagsProvider {
     public static void register() {
         CCKBlockTags.register(AllBlockTags.PASSIVE_BOILER_HEATERS.tag, builder -> builder
-                .addTag(ModTags.HEAT_SOURCES));
-        CCKBlockTags.register(ModTags.HEAT_CONDUCTORS, builder -> builder
+                .addTag(ModTags.Blocks.HEAT_SOURCES));
+        CCKBlockTags.register(ModTags.Blocks.HEAT_CONDUCTORS, builder -> builder
                 .add(AllBlocks.CHUTE.get())
                 .add(AllBlocks.SMART_CHUTE.get())
                 .add(AllBlocks.PACKAGER.get())
                 .add(AllBlocks.REPACKAGER.get()));
-        CCKBlockTags.register(ModTags.TRAY_HEAT_SOURCES, builder -> builder
+        CCKBlockTags.register(ModTags.Blocks.TRAY_HEAT_SOURCES, builder -> builder
                 .add(AllBlocks.BLAZE_BURNER.get())
                 .add(AllBlocks.LIT_BLAZE_BURNER.get()));
     }

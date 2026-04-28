@@ -49,7 +49,7 @@ public class KegBlockEntityMixin {
             @Share("passiveFreeze") LocalIntRef passiveFreeze, @Share("activeFreeze") LocalIntRef activeFreeze) {
         var state = original.call(level, pos);
         float heat = BoilerHeater.findHeat(level, pos, state);
-        if (heat >= 0 && !state.is(ModTags.HEAT_SOURCES))
+        if (heat >= 0 && !state.is(ModTags.Blocks.HEAT_SOURCES))
             passiveHeat.set(passiveHeat.get() + 1);
         if (heat > 0)
             activeHeat.set(activeHeat.get() + (int) heat);

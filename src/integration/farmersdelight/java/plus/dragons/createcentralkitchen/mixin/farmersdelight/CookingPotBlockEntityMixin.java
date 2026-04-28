@@ -41,12 +41,12 @@ public class CookingPotBlockEntityMixin {
         var heaterPos = pos.below();
         var heaterState = level.getBlockState(heaterPos);
         BoilerHeater heater = BoilerHeater.REGISTRY.get(heaterState);
-        if (heater == null && !cookingPot.requiresDirectHeat() && heaterState.is(ModTags.HEAT_CONDUCTORS)) {
+        if (heater == null && !cookingPot.requiresDirectHeat() && heaterState.is(ModTags.Blocks.HEAT_CONDUCTORS)) {
             heaterPos = pos.below(2);
             heaterState = level.getBlockState(pos.below(2));
             heater = BoilerHeater.REGISTRY.get(heaterState);
         }
-        if (!heaterState.is(ModTags.HEAT_SOURCES))
+        if (!heaterState.is(ModTags.Blocks.HEAT_SOURCES))
             return cookTime;
         if (heater != null) {
             float heat = heater.getHeat(level, heaterPos, heaterState);

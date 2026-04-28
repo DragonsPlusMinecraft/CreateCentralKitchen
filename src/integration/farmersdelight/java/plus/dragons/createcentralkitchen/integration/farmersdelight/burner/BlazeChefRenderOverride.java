@@ -90,7 +90,7 @@ public enum BlazeChefRenderOverride implements BlazeBurnerRenderOverride {
         if (specialHatRenderHeatable == null) {
             if (level.getBlockEntity(pos.above()) instanceof HeatableBlockEntity)
                 return true;
-            return level.getBlockState(pos.above()).is(ModTags.HEAT_CONDUCTORS) &&
+            return level.getBlockState(pos.above()).is(ModTags.Blocks.HEAT_CONDUCTORS) &&
                     level.getBlockEntity(pos.above(2)) instanceof HeatableBlockEntity heatable &&
                     !heatable.requiresDirectHeat();
         } else {
