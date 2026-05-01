@@ -1,7 +1,8 @@
-## Create: Central Kitchen 2.3.1
+## Create: Central Kitchen 2.4.0
 
-Update for Farmer's Delight 1.21.1-1.3.0.
+Update for Farmer's Delight 1.21.1-1.3.0+ and Create Simulated series.
+Thank @jim139129 for fixing various issue with new Farmer's Delight
 
 ### Fix
-* Fix compatibility issues with Farmer's Delight 1.3.0 due to tag location changes (`ModTags.HEAT_SOURCES`, `ModTags.HEAT_CONDUCTORS`, `ModTags.TRAY_HEAT_SOURCES` moved to `ModTags.Blocks`).
-* Fix compatibility issue with `StoveBlockEntity.getInventory()` renamed to `getItems()` in Farmer's Delight 1.3.0.
+* Fix various compatibility issues with Farmer's Delight 1.3.0+. (by @jim139129)
+* Fix a failed mixin injection

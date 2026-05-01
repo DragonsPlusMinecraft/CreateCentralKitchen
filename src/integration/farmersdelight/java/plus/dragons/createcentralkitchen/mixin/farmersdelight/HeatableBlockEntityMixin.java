@@ -33,7 +33,7 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 
 @Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
-@Mixin(HeatableBlockEntity.class)
+@Mixin(value = HeatableBlockEntity.class, remap = false)
 public interface HeatableBlockEntityMixin {
     @Inject(method = "isHeated", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/tag/ModTags$Blocks;HEAT_SOURCES:Lnet/minecraft/tags/TagKey;", ordinal = 0), cancellable = true)
     private void isHeatedByBoilerHeaterBelow(Level level, BlockPos pos, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) BlockState stateBelow) {
