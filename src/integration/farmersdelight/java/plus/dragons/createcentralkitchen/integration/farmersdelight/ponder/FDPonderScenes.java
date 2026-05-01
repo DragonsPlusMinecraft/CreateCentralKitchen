@@ -272,7 +272,7 @@ public class FDPonderScenes {
         scene.idle(20);
         scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, Items.BEEF.getDefaultInstance(), 1);
         scene.idle(20);
-        scene.world().modifyBlockEntity(stovePos, StoveBlockEntity.class, be -> be.getInventory().insertItem(0, Items.BEEF.getDefaultInstance(), false));
+        scene.world().modifyBlockEntity(stovePos, StoveBlockEntity.class, be -> be.getItems().insertItem(0, Items.BEEF.getDefaultInstance(), false));
         scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, -1);
         scene.idle(10);
     }

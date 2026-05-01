@@ -97,7 +97,7 @@ public abstract class SkilletBlockEntityMixin extends SyncedBlockEntity implemen
         var heaterPos = pos.below();
         var heaterState = level.getBlockState(heaterPos);
         BoilerHeater heater = BoilerHeater.REGISTRY.get(heaterState);
-        if (heater == null && !this.requiresDirectHeat() && heaterState.is(ModTags.HEAT_CONDUCTORS)) {
+        if (heater == null && !this.requiresDirectHeat() && heaterState.is(ModTags.Blocks.HEAT_CONDUCTORS)) {
             heaterPos = pos.below(2);
             heaterState = level.getBlockState(pos.below(2));
             heater = BoilerHeater.REGISTRY.get(heaterState);

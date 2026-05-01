@@ -1,6 +1,7 @@
-## Create: Central Kitchen 2.3.0
+## Create: Central Kitchen 2.3.1
 
-Update for Create ***6.0.9***. Require Create: Dragon+ 1.8.7.
+Update for Farmer's Delight 1.21.1-1.3.0.
 
 ### Fix
-* Fix a mixin issue causing crash when FD is not installed.
+* Fix compatibility issues with Farmer's Delight 1.3.0 due to tag location changes (`ModTags.HEAT_SOURCES`, `ModTags.HEAT_CONDUCTORS`, `ModTags.TRAY_HEAT_SOURCES` moved to `ModTags.Blocks`).
+* Fix compatibility issue with `StoveBlockEntity.getInventory()` renamed to `getItems()` in Farmer's Delight 1.3.0.

@@ -35,14 +35,14 @@ import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 @Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(HeatableBlockEntity.class)
 public interface HeatableBlockEntityMixin {
-    @Inject(method = "isHeated", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/tag/ModTags;HEAT_SOURCES:Lnet/minecraft/tags/TagKey;", ordinal = 0), cancellable = true)
+    @Inject(method = "isHeated", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/tag/ModTags$Blocks;HEAT_SOURCES:Lnet/minecraft/tags/TagKey;", ordinal = 0), cancellable = true)
     private void isHeatedByBoilerHeaterBelow(Level level, BlockPos pos, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) BlockState stateBelow) {
         BoilerHeater heater = BoilerHeater.REGISTRY.get(stateBelow);
         if (heater != null)
             cir.setReturnValue(heater.getHeat(level, pos.below(), stateBelow) >= 0);
     }
 
-    @Inject(method = "isHeated", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/tag/ModTags;HEAT_SOURCES:Lnet/minecraft/tags/TagKey;", ordinal = 1), cancellable = true)
+    @Inject(method = "isHeated", at = @At(value = "FIELD", target = "Lvectorwing/farmersdelight/common/tag/ModTags$Blocks;HEAT_SOURCES:Lnet/minecraft/tags/TagKey;", ordinal = 1), cancellable = true)
     private void isHeatedByBoilerHeaterFurtherBelow(Level level, BlockPos pos, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 1) BlockState stateFurtherBelow) {
         BoilerHeater heater = BoilerHeater.REGISTRY.get(stateFurtherBelow);
         if (heater != null)
