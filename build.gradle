@@ -4,6 +4,7 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.141'
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
     id "com.diffplug.spotless" version "7.0.2"
+    id 'idea'
 }
 
 tasks.named('wrapper', Wrapper).configure {
