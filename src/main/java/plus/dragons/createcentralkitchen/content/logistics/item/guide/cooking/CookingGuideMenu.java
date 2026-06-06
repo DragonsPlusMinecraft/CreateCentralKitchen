@@ -8,7 +8,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeSt
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveGuideMenu;
 
 public class CookingGuideMenu extends BlazeStoveGuideMenu<CookingGuide> {
-
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
     }
@@ -16,16 +15,16 @@ public class CookingGuideMenu extends BlazeStoveGuideMenu<CookingGuide> {
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, ItemStack cookingGuide) {
         super(type, id, inv, cookingGuide);
     }
-    
+
     public CookingGuideMenu(MenuType<?> type, int id, Inventory inv, BlazeStoveBlockEntity blazeStove) {
         super(type, id, inv, blazeStove);
     }
-    
+
     @Override
     public CookingGuide createGuide(ItemStack contentHolder) {
         return CookingGuide.of(contentHolder);
     }
-    
+
     @Override
     protected void addSlots() {
         addPlayerSlots(52, 102);
@@ -36,5 +35,4 @@ public class CookingGuideMenu extends BlazeStoveGuideMenu<CookingGuide> {
         }
         this.addSlot(new DisplaySlot(6, 183, 41));
     }
-    
 }

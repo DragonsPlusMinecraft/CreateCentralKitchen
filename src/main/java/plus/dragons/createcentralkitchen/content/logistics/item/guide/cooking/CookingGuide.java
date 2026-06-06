@@ -13,16 +13,15 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 public class CookingGuide extends BlazeStoveGuide {
     private final LazyOptional<CookingGuide> capability = LazyOptional.of(() -> this);
-    
+
     public CookingGuide(ItemStack owner) {
         super(owner, 6);
     }
-    
+
     public static CookingGuide of(ItemStack stack) {
-        return stack.getCapability(FDCapabilityEntries.COOKING_GUIDE).orElseThrow(() ->
-            new UnsupportedOperationException("Requested Item " + stack.getItem() + " is not a Cooking Guide"));
+        return stack.getCapability(FDCapabilityEntries.COOKING_GUIDE).orElseThrow(() -> new UnsupportedOperationException("Requested Item " + stack.getItem() + " is not a Cooking Guide"));
     }
-    
+
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -31,19 +30,18 @@ public class CookingGuide extends BlazeStoveGuide {
         }
         return LazyOptional.empty();
     }
-    
+
     public void updateRecipe(Level level) {
         level.getRecipeManager()
-            .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
-            .ifPresentOrElse(
-                recipe -> {
-                    inventory.setStackInSlot(ingredientSize, recipe.getResultItem(level.registryAccess()));
-                    container = recipe.getOutputContainer();
-                },
-                () -> {
-                    inventory.setStackInSlot(ingredientSize, ItemStack.EMPTY);
-                    container = ItemStack.EMPTY;
-                });
+                .getRecipeFor(ModRecipeTypes.COOKING.get(), recipeWrapper, level)
+                .ifPresentOrElse(
+                        recipe -> {
+                            inventory.setStackInSlot(ingredientSize, recipe.getResultItem(level.registryAccess()));
+                            container = recipe.getOutputContainer();
+                        },
+                        () -> {
+                            inventory.setStackInSlot(ingredientSize, ItemStack.EMPTY);
+                            container = ItemStack.EMPTY;
+                        });
     }
-    
 }

@@ -8,9 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class DelegatingSmartTileEntity<BE extends BlockEntity> extends SmartBlockEntity {
-    
     protected final BE blockEntity;
-    
+
     public DelegatingSmartTileEntity(BE blockEntity) {
         super(blockEntity.getType(), blockEntity.getBlockPos(), blockEntity.getBlockState());
         this.blockEntity = blockEntity;
@@ -31,5 +30,4 @@ public abstract class DelegatingSmartTileEntity<BE extends BlockEntity> extends 
     public BlockState getBlockState() {
         return blockEntity.getBlockState();
     }
-
 }

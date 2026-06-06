@@ -1,6 +1,9 @@
 package plus.dragons.createcentralkitchen.entry;
 
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -13,10 +16,6 @@ import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.*
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-
 @Mod.EventBusSubscriber(modid = CentralKitchen.ID, bus = Bus.MOD)
 public class CentralKitchenArmInterationTypes {
     public static final List<PonderArmInteractionPointType> TYPES = new ArrayList<>();
@@ -28,12 +27,11 @@ public class CentralKitchenArmInterationTypes {
     public static final SkilletPoint.Type SKILLET = create("skillet", SkilletPoint.Type::new);
     public static final CopperPotPoint.Type COPPER_POT = create("copper_pot", CopperPotPoint.Type::new);
     // TODO public static final KettlePoint.Type KETTLE = create("kettel", KettlePoint.Type::new);
-    
+
     private static <T extends PonderArmInteractionPointType> T create(String name, Function<ResourceLocation, T> factory) {
         ResourceLocation id = CentralKitchen.genRL(name);
         return factory.apply(id);
     }
-
 
     private static void register(PonderArmInteractionPointType... types) {
         for (var type : types) {
@@ -41,6 +39,7 @@ public class CentralKitchenArmInterationTypes {
             TYPES.add(type);
         }
     }
+
     private static <T extends PonderArmInteractionPointType> void pRegister(T type) {
         Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, type.getID(), type);
     }
@@ -54,11 +53,10 @@ public class CentralKitchenArmInterationTypes {
             register(COPPER_POT);
         }
     }
-    
+
     public static void registerPonderTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
         //Consumer<ItemLike> consumer = PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS)::add;
         for (PonderArmInteractionPointType type : TYPES)
             type.addToPonderTag(helper);
     }
-    
 }

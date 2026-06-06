@@ -7,8 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(value = DeployerBlockEntity.class, remap = false)
 public interface DeployerBlockEntityAccessor {
-    
     @Accessor(value = "heldItem")
     ItemStack getHeldItem();
-    
 }

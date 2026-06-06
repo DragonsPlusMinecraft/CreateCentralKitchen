@@ -14,11 +14,10 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 @Mixin(value = CookingPotBlockEntity.class, remap = false)
 public abstract class CookingPotBlockEntityMixin extends SyncedBlockEntity {
-    
     private CookingPotBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn, pos, state);
     }
-    
+
     @Inject(method = "processCooking", at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/common/block/entity/CookingPotBlockEntity;setRecipeUsed(Lnet/minecraft/world/item/crafting/Recipe;)V", remap = true))
     private void cck$notifyBlazeStove(CookingPotRecipe recipe, CookingPotBlockEntity cookingPot, CallbackInfoReturnable<Boolean> cir) {
         assert this.level != null;
@@ -27,5 +26,4 @@ public abstract class CookingPotBlockEntityMixin extends SyncedBlockEntity {
             stove.startSignal(this.level, posBelow);
         }
     }
-    
 }

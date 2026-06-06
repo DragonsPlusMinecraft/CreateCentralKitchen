@@ -5,52 +5,45 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedDeployer;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import net.createmod.catnip.lang.Lang;
-import net.createmod.catnip.layout.LayoutHelper;
+import java.util.ArrayList;
+import java.util.List;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.layout.LayoutHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import plus.dragons.createcentralkitchen.content.contraptions.deployer.CuttingBoardDeployingRecipe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CuttingBoardDeployingCategory extends CreateRecipeCategory<CuttingBoardDeployingRecipe> {
-    
     private final AnimatedDeployer deployer = new AnimatedDeployer();
-    
+
     public CuttingBoardDeployingCategory(Info<CuttingBoardDeployingRecipe> info) {
         super(info);
     }
-    
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, CuttingBoardDeployingRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 27, 51)
-            .setBackground(getRenderedSlot(), -1, -1)
-            .addIngredients(recipe.getIngredients().get(0));
-        
-        builder.addSlot(RecipeIngredientRole.INPUT, 51, 5)
-            .setBackground(getRenderedSlot(), -1, -1)
-            .addIngredients(recipe.getIngredients().get(1))
-            .addRichTooltipCallback((view, tooltip) ->
-                tooltip.add(Lang.builder("create")
-                    .translate("recipe.deploying.not_consumed")
-                    .component()
-                    .withStyle(ChatFormatting.GOLD)
-                )
-            );
-    
-        layoutOutput(recipe).forEach(layoutEntry -> builder
-            .addSlot(RecipeIngredientRole.OUTPUT, 139 + layoutEntry.posX() + 1, 54 + layoutEntry.posY() + 1)
-            .setBackground(getRenderedSlot(layoutEntry.output()), -1, -1)
-            .addItemStack(layoutEntry.output().getStack())
-            .addRichTooltipCallback(addStochasticTooltip(layoutEntry.output()))
-        );
-    }
+                .setBackground(getRenderedSlot(), -1, -1)
+                .addIngredients(recipe.getIngredients().get(0));
 
+        builder.addSlot(RecipeIngredientRole.INPUT, 51, 5)
+                .setBackground(getRenderedSlot(), -1, -1)
+                .addIngredients(recipe.getIngredients().get(1))
+                .addRichTooltipCallback((view, tooltip) -> tooltip.add(Lang.builder("create")
+                        .translate("recipe.deploying.not_consumed")
+                        .component()
+                        .withStyle(ChatFormatting.GOLD)));
+
+        layoutOutput(recipe).forEach(layoutEntry -> builder
+                .addSlot(RecipeIngredientRole.OUTPUT, 139 + layoutEntry.posX() + 1, 54 + layoutEntry.posY() + 1)
+                .setBackground(getRenderedSlot(layoutEntry.output()), -1, -1)
+                .addItemStack(layoutEntry.output().getStack())
+                .addRichTooltipCallback(addStochasticTooltip(layoutEntry.output())));
+    }
 
     @Override
     public void draw(CuttingBoardDeployingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
@@ -58,20 +51,19 @@ public class CuttingBoardDeployingCategory extends CreateRecipeCategory<CuttingB
         AllGuiTextures.JEI_DOWN_ARROW.render(guiGraphics, 126, 29);
         deployer.draw(guiGraphics, getBackground().getWidth() / 2 - 13, 22);
     }
-    
+
     private List<LayoutEntry> layoutOutput(ProcessingRecipe<?> recipe) {
         int size = recipe.getRollableResults().size();
         List<LayoutEntry> positions = new ArrayList<>(size);
-        
+
         LayoutHelper layout = LayoutHelper.centeredHorizontal(size, 1, 18, 18, 1);
         for (ProcessingOutput result : recipe.getRollableResults()) {
             positions.add(new LayoutEntry(result, layout.getX(), layout.getY()));
             layout.next();
         }
-        
+
         return positions;
     }
-    
+
     record LayoutEntry(ProcessingOutput output, int posX, int posY) {}
-    
 }

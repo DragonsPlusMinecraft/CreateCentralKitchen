@@ -11,12 +11,10 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
 @ModLoadSubscriber(modid = Mods.FD)
 public class FDCapabilityEntries {
-    
     public static final Capability<CookingGuide> COOKING_GUIDE = CapabilityManager.get(new CapabilityToken<>() {});
-    
+
     @SubscribeEvent
     public static void register(RegisterCapabilitiesEvent event) {
         event.register(CookingGuide.class);
     }
-    
 }

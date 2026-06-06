@@ -19,7 +19,6 @@ import vectorwing.farmersdelight.common.block.entity.Basket;
 
 @Mixin(StickyBasketBlockEntity.class)
 public abstract class StickyBasketBlockEntityMixin extends RandomizableContainerBlockEntity implements Basket, SmartBlockEntityLike {
-
     @Unique
     private final SmartBlockEntity smartBlockEntity = new SmartStickyBasketBlockEntity((StickyBasketBlockEntity) (Object) this);
 
@@ -37,11 +36,9 @@ public abstract class StickyBasketBlockEntityMixin extends RandomizableContainer
 
     @Inject(method = "setTransferCooldown", at = @At(value = "HEAD"), cancellable = true, remap = false)
     private void cck$triggerConsumeItem(int ticks, CallbackInfo ci) {
-        if(CentralKitchenConfigs.COMMON.integration.disableTransferCooldownForFarmersDelightBasket.get()){
+        if (CentralKitchenConfigs.COMMON.integration.disableTransferCooldownForFarmersDelightBasket.get()) {
             transferCooldown = -1;
             ci.cancel();
         }
     }
-
-
 }

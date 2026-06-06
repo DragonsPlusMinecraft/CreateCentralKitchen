@@ -6,8 +6,6 @@ import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 
 @Mixin(value = BasketBlockEntity.class, remap = false)
 public interface BasketBlockEntityAccessor {
-    
     @Invoker("isOnTransferCooldown")
     boolean invokeIsOnTransferCooldown();
-    
 }

@@ -8,7 +8,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeSt
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveGuideMenu;
 
 public class MinersCookingGuideMenu extends BlazeStoveGuideMenu<MinersCookingGuide> {
-
     public MinersCookingGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
     }
@@ -36,5 +35,4 @@ public class MinersCookingGuideMenu extends BlazeStoveGuideMenu<MinersCookingGui
         }
         this.addSlot(new DisplaySlot(4, 175, 41));
     }
-
 }

@@ -11,14 +11,9 @@ import plus.dragons.createcentralkitchen.api.block.entity.SmartBlockEntityLike;
 
 @Mixin(value = BlockEntityBehaviour.class, remap = false)
 public class BlockEntityBehaviourMixin {
-    
-    @Inject(
-        method = "get(Lnet/minecraft/world/level/block/entity/BlockEntity;Lcom/simibubi/create/foundation/blockEntity/behaviour/BehaviourType;)Lcom/simibubi/create/foundation/blockEntity/behaviour/BlockEntityBehaviour;",
-        at = @At(value = "RETURN", ordinal = 1),
-        cancellable = true)
+    @Inject(method = "get(Lnet/minecraft/world/level/block/entity/BlockEntity;Lcom/simibubi/create/foundation/blockEntity/behaviour/BehaviourType;)Lcom/simibubi/create/foundation/blockEntity/behaviour/BlockEntityBehaviour;", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
     private static <T extends BlockEntityBehaviour> void checkSmartBlockEntityLike(BlockEntity be, BehaviourType<T> type, CallbackInfoReturnable<T> cir) {
         if (be instanceof SmartBlockEntityLike like)
             cir.setReturnValue(like.asSmartBlockEntity().getBehaviour(type));
     }
-    
 }

@@ -3,6 +3,8 @@ package plus.dragons.createcentralkitchen.foundation.data.recipe;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.mojang.logging.LogUtils;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.ItemStack;
@@ -16,9 +18,6 @@ import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.data.tag.IntegrationItemTags;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 @Mod.EventBusSubscriber(modid = CentralKitchen.ID)
 public class IgnoreAutomaticShapelessRecipe {
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -28,28 +27,28 @@ public class IgnoreAutomaticShapelessRecipe {
         CACHED_IGNORED_RECIPES.invalidateAll();
         LOGGER.debug("Invalidated IgnoreAutoShapelessRecipe's cache of size: {}", size);
     };
-    
+
     @SubscribeEvent
     public static void addReloadListener(AddReloadListenerEvent event) {
         event.addListener(LISTENER);
     }
-    
+
     @SubscribeEvent
     public static void onRecipesUpdated(RecipesUpdatedEvent event) {
         long size = CACHED_IGNORED_RECIPES.size();
         CACHED_IGNORED_RECIPES.invalidateAll();
         LOGGER.debug("Invalidated IgnoreAutoShapelessRecipe's cache of size: {}", size);
     }
-    
+
     public static boolean get(Recipe<?> recipe, RegistryAccess access) {
         try {
-            return CACHED_IGNORED_RECIPES.get(recipe, () -> shouldIgnoreShapelessRecipe(recipe,access));
+            return CACHED_IGNORED_RECIPES.get(recipe, () -> shouldIgnoreShapelessRecipe(recipe, access));
         } catch (ExecutionException exception) {
             LOGGER.warn("Exception while computing if recipe {} should be ignored in automation", recipe.getId(), exception);
             return false;
         }
     }
-    
+
     private static boolean shouldIgnoreShapelessRecipe(Recipe<?> recipe, RegistryAccess access) {
         if (shouldIgnoreItemInAutomation(recipe.getResultItem(access))) {
             return true;
@@ -67,7 +66,7 @@ public class IgnoreAutomaticShapelessRecipe {
         }
         return false;
     }
-    
+
     private static boolean shouldIgnoreIngredientInAutomation(Ingredient ingredient) {
         ItemStack[] items = ingredient.getItems();
         if (items.length == 0) {
@@ -81,11 +80,10 @@ public class IgnoreAutomaticShapelessRecipe {
         }
         return true;
     }
-    
+
     private static boolean shouldIgnoreItemInAutomation(ItemStack item) {
         return item.is(IntegrationItemTags.IGNORED_IN_AUTOMATIC_SHAPELESS.tag) ||
-            (item.hasCraftingRemainingItem() &&
-             item.getCraftingRemainingItem().is(IntegrationItemTags.IGNORED_IN_AUTOMATIC_SHAPELESS.tag));
+                (item.hasCraftingRemainingItem() &&
+                        item.getCraftingRemainingItem().is(IntegrationItemTags.IGNORED_IN_AUTOMATIC_SHAPELESS.tag));
     }
-    
 }

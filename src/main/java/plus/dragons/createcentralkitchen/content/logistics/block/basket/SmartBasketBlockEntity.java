@@ -3,6 +3,7 @@ package plus.dragons.createcentralkitchen.content.logistics.block.basket;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import java.util.List;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -14,22 +15,18 @@ import plus.dragons.createcentralkitchen.foundation.mixin.common.farmersdelight.
 import vectorwing.farmersdelight.common.block.BasketBlock;
 import vectorwing.farmersdelight.common.block.entity.BasketBlockEntity;
 
-import java.util.List;
-
 public class SmartBasketBlockEntity extends DelegatingSmartTileEntity<BasketBlockEntity> {
-    
     public SmartBasketBlockEntity(BasketBlockEntity basketBlockEntity) {
         super(basketBlockEntity);
     }
-    
+
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         behaviours.add(new DirectBeltInputBehaviour(this)
-            .onlyInsertWhen(this::canInsert)
-            .setInsertionHandler(this::tryInsertingFromSide)
-        );
+                .onlyInsertWhen(this::canInsert)
+                .setInsertionHandler(this::tryInsertingFromSide));
     }
-    
+
     private boolean canInsert(Direction direction) {
         Direction facing = this.getBlockState().getValue(BasketBlock.FACING);
         boolean match = switch (facing) {
@@ -37,9 +34,9 @@ public class SmartBasketBlockEntity extends DelegatingSmartTileEntity<BasketBloc
             case DOWN -> direction == Direction.UP;
             default -> direction == facing.getOpposite();
         };
-        return match && !((BasketBlockEntityAccessor)this.blockEntity).invokeIsOnTransferCooldown();
+        return match && !((BasketBlockEntityAccessor) this.blockEntity).invokeIsOnTransferCooldown();
     }
-    
+
     private ItemStack tryInsertingFromSide(TransportedItemStack inserted, Direction side, boolean simulate) {
         LazyOptional<IItemHandler> lazy = this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, side);
         if (!lazy.isPresent())
@@ -51,5 +48,4 @@ public class SmartBasketBlockEntity extends DelegatingSmartTileEntity<BasketBloc
         }
         return ret;
     }
-    
 }

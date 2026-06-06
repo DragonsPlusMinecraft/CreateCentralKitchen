@@ -14,7 +14,6 @@ import plus.dragons.createcentralkitchen.foundation.data.recipe.IgnoreAutomaticS
 
 @Mixin(value = MechanicalMixerBlockEntity.class, priority = 900, remap = false)
 public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBlockEntity {
-
     public MechanicalMixerBlockEntityMixin(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
     }
@@ -23,14 +22,13 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
      * For removing recipes that has tag create:ignored_in_automatic_shapeless in their ingredients/result.
      * Item that has a container will inherit this behavior from its container.
      *
-     * @param recipe the recipe to check
+     * @param recipe   the recipe to check
      * @param original the original method call
      * @see IgnoreAutomaticShapelessRecipe
      * @author LimonBlaze
      */
     @WrapOperation(method = "matchStaticFilters", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;shouldIgnoreInAutomation(Lnet/minecraft/world/item/crafting/Recipe;)Z"))
     private boolean cck$shouldIgnoreShapelessRecipe(Recipe<?> recipe, Operation<Boolean> original) {
-        return IgnoreAutomaticShapelessRecipe.get(recipe,getLevel().registryAccess()) || original.call(recipe);
+        return IgnoreAutomaticShapelessRecipe.get(recipe, getLevel().registryAccess()) || original.call(recipe);
     }
-    
 }

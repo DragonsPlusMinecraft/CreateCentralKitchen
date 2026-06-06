@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.integration.jei.transfer;
 
 import com.sammy.minersdelight.jei.CopperPotCookingRecipeCategory;
+import java.util.Optional;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
@@ -15,25 +16,22 @@ import plus.dragons.createcentralkitchen.entry.menu.MDMenuEntries;
 import plus.dragons.createcentralkitchen.entry.network.FDNetworkEntries;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
-import java.util.Optional;
-
 public class MinersCookingGuideTransferHandler implements IRecipeTransferHandler<MinersCookingGuideMenu, CookingPotRecipe> {
-
     @Override
     public Class<MinersCookingGuideMenu> getContainerClass() {
         return MinersCookingGuideMenu.class;
     }
-    
+
     @Override
     public Optional<MenuType<MinersCookingGuideMenu>> getMenuType() {
         return Optional.of(MDMenuEntries.MINERS_COOKING_GUIDE.get());
     }
-    
+
     @Override
     public RecipeType<CookingPotRecipe> getRecipeType() {
         return CopperPotCookingRecipeCategory.COOKING;
     }
-    
+
     @Override
     @Nullable
     public IRecipeTransferError transferRecipe(MinersCookingGuideMenu container, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer) {
@@ -51,5 +49,4 @@ public class MinersCookingGuideTransferHandler implements IRecipeTransferHandler
         FDNetworkEntries.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;
     }
-
 }

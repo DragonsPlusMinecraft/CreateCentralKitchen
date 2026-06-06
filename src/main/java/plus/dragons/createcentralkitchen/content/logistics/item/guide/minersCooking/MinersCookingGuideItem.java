@@ -12,7 +12,6 @@ import plus.dragons.createcentralkitchen.entry.capability.MDCapabilityEntries;
 import plus.dragons.createcentralkitchen.entry.menu.MDMenuEntries;
 
 public class MinersCookingGuideItem extends BlazeStoveGuideItem<MinersCookingGuide> {
-
     public MinersCookingGuideItem(Properties properties) {
         super(properties);
     }
@@ -37,5 +36,4 @@ public class MinersCookingGuideItem extends BlazeStoveGuideItem<MinersCookingGui
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new MinersCookingGuide(stack);
     }
-
 }

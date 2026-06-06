@@ -8,7 +8,6 @@ import plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCook
 import plus.dragons.createcentralkitchen.integration.jei.transfer.MinersCookingGuideTransferHandler;
 
 public class MDSubJeiPlugin extends AbstractJeiPlugin {
-
     @Override
     public ResourceLocation getPluginUid() {
         return CentralKitchenJeiPlugin.ID;
@@ -24,5 +23,4 @@ public class MDSubJeiPlugin extends AbstractJeiPlugin {
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         registration.addRecipeTransferHandler(new MinersCookingGuideTransferHandler(), CopperPotCookingRecipeCategory.COOKING);
     }
-
 }

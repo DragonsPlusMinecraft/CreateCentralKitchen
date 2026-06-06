@@ -15,20 +15,19 @@ import umpaz.farmersrespite.common.block.SmallTeaBushBlock;
 
 @Mixin(SmallTeaBushBlock.class)
 public abstract class SmallTeaBushBlockMixin extends BushBlock implements BonemealableBlock {
-
     public SmallTeaBushBlockMixin(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        if(CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) return Shapes.empty();
-        return super.getCollisionShape(pState,pLevel,pPos,pContext);
+        if (CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) return Shapes.empty();
+        return super.getCollisionShape(pState, pLevel, pPos, pContext);
     }
 
     @Deprecated
     public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        if(CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) return Shapes.empty();
-        return super.getOcclusionShape(pState,pLevel,pPos);
+        if (CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) return Shapes.empty();
+        return super.getOcclusionShape(pState, pLevel, pPos);
     }
 }

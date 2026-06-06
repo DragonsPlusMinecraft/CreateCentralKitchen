@@ -24,10 +24,9 @@ import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-
 public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
     private final RecipeWrapper recipeWrapper = new RecipeWrapper(new ItemStackHandler(1));
-    
+
     public CuttingBoardPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
     }
@@ -36,7 +35,7 @@ public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyAr
     protected Vec3 getInteractionPositionVector() {
         return Vec3.upFromBottomCenterOf(pos, .125);
     }
-    
+
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -53,9 +52,8 @@ public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyAr
             cuttingBoard.addItem(input);
         return input;
     }
-    
-    public static class Type extends PonderArmInteractionPointType {
 
+    public static class Type extends PonderArmInteractionPointType {
         public Type(ResourceLocation id) {
             super(id);
         }
@@ -70,18 +68,17 @@ public class CuttingBoardPoint extends AllArmInteractionPointTypes.DepositOnlyAr
         public CuttingBoardPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new CuttingBoardPoint(this, level, pos, state);
         }
-    
+
         @Override
         public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
             ForgeRegisteredObjectsHelper forgeRegisteredObjectsHelper = new ForgeRegisteredObjectsHelper();
             MultiTagBuilder.Tag<Item> builder = helper.withKeyFunction((Item s) -> forgeRegisteredObjectsHelper.getKeyOrThrow(s)).addToTag(AllCreatePonderTags.ARM_TARGETS);
             //var builder = PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS);
             ForgeRegistries.ITEMS
-                .getValues()
-                .stream()
-                .filter(item -> item instanceof BlockItem blockItem && blockItem.getBlock() instanceof CuttingBoardBlock)
-                .forEach(builder::add);
+                    .getValues()
+                    .stream()
+                    .filter(item -> item instanceof BlockItem blockItem && blockItem.getBlock() instanceof CuttingBoardBlock)
+                    .forEach(builder::add);
         }
-
     }
 }

@@ -4,6 +4,7 @@ import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPoint
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import java.util.Optional;
 import net.createmod.catnip.platform.ForgeRegisteredObjectsHelper;
 import net.createmod.ponder.api.registration.MultiTagBuilder;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
@@ -24,19 +25,16 @@ import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionP
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.item.SkilletItem;
 
-import java.util.Optional;
-
 public class SkilletPoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
-    
     public SkilletPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
     }
-    
+
     @Override
     protected Vec3 getInteractionPositionVector() {
         return Vec3.upFromBottomCenterOf(pos, .125);
     }
-    
+
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -44,43 +42,40 @@ public class SkilletPoint extends AllArmInteractionPointTypes.DepositOnlyArmInte
             return stack;
         ItemStack cookingStack = skillet.getStoredStack();
         if (cookingStack.isEmpty()) {
-            Optional<CampfireCookingRecipe> recipe = ((SkilletBlockEntityAccessor)skillet).callGetMatchingRecipe(new SimpleContainer(stack));
+            Optional<CampfireCookingRecipe> recipe = ((SkilletBlockEntityAccessor) skillet).callGetMatchingRecipe(new SimpleContainer(stack));
             if (recipe.isEmpty()) return stack;
         }
         ItemStack remainder = stack.copy();
         if (simulate) return skillet.getInventory().insertItem(0, remainder, true);
         return skillet.addItemToCook(remainder, null);
     }
-    
+
     public static class Type extends PonderArmInteractionPointType {
-        
         public Type(ResourceLocation id) {
             super(id);
         }
-        
+
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
             return level.getBlockEntity(pos) instanceof SkilletBlockEntity;
         }
-        
+
         @Nullable
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new SkilletPoint(this, level, pos, state);
         }
-    
+
         @Override
         public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
             ForgeRegisteredObjectsHelper forgeRegisteredObjectsHelper = new ForgeRegisteredObjectsHelper();
             MultiTagBuilder.Tag<Item> builder = helper.withKeyFunction((Item s) -> forgeRegisteredObjectsHelper.getKeyOrThrow(s)).addToTag(AllCreatePonderTags.ARM_TARGETS);
 //            var builder = PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS);
             ForgeRegistries.ITEMS
-                .getValues()
-                .stream()
-                .filter(item -> item instanceof SkilletItem)
-                .forEach(builder::add);
+                    .getValues()
+                    .stream()
+                    .filter(item -> item instanceof SkilletItem)
+                    .forEach(builder::add);
         }
-        
     }
-    
 }

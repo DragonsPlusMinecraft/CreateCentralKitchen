@@ -12,7 +12,7 @@ import plus.dragons.createcentralkitchen.api.block.entity.DelegatingSmartTileEnt
 public class ModEventsMixin {
     @Inject(method = "shouldHaveBedData", at = @At("HEAD"), cancellable = true)
     private static void injected(BlockEntity blockEntity, CallbackInfoReturnable<Boolean> cir) {
-        if(blockEntity instanceof DelegatingSmartTileEntity){
+        if (blockEntity instanceof DelegatingSmartTileEntity) {
             cir.setReturnValue(false);
         }
     }

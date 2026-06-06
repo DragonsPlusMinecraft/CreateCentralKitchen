@@ -1,5 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.actor;
 
+import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
+
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
@@ -19,37 +21,33 @@ import umpaz.nethersdelight.common.block.FungusColonyBlock;
 import umpaz.nethersdelight.common.registry.NDBlocks;
 import umpaz.nethersdelight.common.registry.NDItems;
 
-import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
-
 @ModLoadSubscriber(modid = Mods.ND)
 public class NDHarvesterMovementBehaviorExtensions {
-    
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             REGISTRY.put(NDBlocks.CRIMSON_FUNGUS_COLONY.get(),
-                NDHarvesterMovementBehaviorExtensions::harvestFungusColony);
+                    NDHarvesterMovementBehaviorExtensions::harvestFungusColony);
             REGISTRY.put(NDBlocks.WARPED_FUNGUS_COLONY.get(),
-                NDHarvesterMovementBehaviorExtensions::harvestFungusColony);
+                    NDHarvesterMovementBehaviorExtensions::harvestFungusColony);
             REGISTRY.put(NDBlocks.PROPELPLANT_BERRY_STEM.get(),
-                NDHarvesterMovementBehaviorExtensions::harvestPropelplantStem);
+                    NDHarvesterMovementBehaviorExtensions::harvestPropelplantStem);
             REGISTRY.put(NDBlocks.PROPELPLANT_CANE.get(),
-                NDHarvesterMovementBehaviorExtensions::harvestPropelplantCane);
+                    NDHarvesterMovementBehaviorExtensions::harvestPropelplantCane);
             REGISTRY.put(NDBlocks.PROPELPLANT_BERRY_CANE.get(),
-                NDHarvesterMovementBehaviorExtensions::harvestPropelplantCane);
+                    NDHarvesterMovementBehaviorExtensions::harvestPropelplantCane);
         });
     }
-    
+
     public static void harvestFungusColony(HarvesterMovementBehaviour behaviour,
-                                           MovementContext context,
-                                           BlockPos pos, BlockState state,
-                                           boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (!(state.getBlock() instanceof FungusColonyBlock colony))
             return;
         var ageProp = colony.getAgeProperty();
         int age = state.getValue(ageProp);
-    
+
         if (age <= 0)
             return;
         if (!partial && age < colony.getMaxAge())
@@ -61,18 +59,15 @@ public class NDHarvesterMovementBehaviorExtensions {
         } else {
             BlockHelper.destroyBlock(level, pos, 1, $ -> {});
         }
-        behaviour.dropItem(context, age < colony.getMaxAge()?
-                new ItemStack(colony.mushroomType.get(), age):
-                new ItemStack(colony.asItem()));
+        behaviour.dropItem(context, age < colony.getMaxAge() ? new ItemStack(colony.mushroomType.get(), age) : new ItemStack(colony.asItem()));
     }
-    
+
     private static final BooleanProperty PEARL = BooleanProperty.create("pearl");
-    
+
     public static void harvestPropelplantStem(HarvesterMovementBehaviour behaviour,
-                                              MovementContext context,
-                                              BlockPos pos, BlockState state,
-                                              boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         Block block = state.getBlock();
         Level level = context.world;
         if (state.getValue(PEARL)) {
@@ -81,18 +76,17 @@ public class NDHarvesterMovementBehaviorExtensions {
             level.setBlock(pos, state.setValue(PEARL, Boolean.FALSE), 2);
         }
     }
-    
+
     public static void harvestPropelplantCane(HarvesterMovementBehaviour behaviour,
-                                              MovementContext context,
-                                              BlockPos pos, BlockState state,
-                                              boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         Level level = context.world;
         BlockPos posAbove = pos.above();
         BlockState stateAbove = level.getBlockState(posAbove);
         if (stateAbove.is(NDBlocks.PROPELPLANT_CANE.get()) || stateAbove.is(NDBlocks.PROPELPLANT_BERRY_CANE.get()))
             harvestPropelplantCane(behaviour, context, posAbove, stateAbove, false, partial);
-        
+
         if (state.hasProperty(PEARL)) {
             if (state.getValue(PEARL)) {
                 behaviour.dropItem(context, new ItemStack(NDItems.PROPELPEARL.get(), 1 + level.random.nextInt(2)));
@@ -112,5 +106,4 @@ public class NDHarvesterMovementBehaviorExtensions {
             }
         }
     }
-    
 }

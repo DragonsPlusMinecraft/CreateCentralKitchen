@@ -14,7 +14,6 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 @Mixin(value = CopperPotBlockEntity.class, remap = false)
 public abstract class CopperPotBlockEntityMixin extends SyncedBlockEntity {
-
     private CopperPotBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn, pos, state);
     }
@@ -27,5 +26,4 @@ public abstract class CopperPotBlockEntityMixin extends SyncedBlockEntity {
             stove.startSignal(this.level, posBelow);
         }
     }
-
 }

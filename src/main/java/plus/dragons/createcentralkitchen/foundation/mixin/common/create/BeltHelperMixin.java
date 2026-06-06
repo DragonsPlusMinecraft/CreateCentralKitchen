@@ -10,12 +10,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = BeltHelper.class, remap = false, priority = 900)
 public class BeltHelperMixin {
-
     @Inject(method = "isItemUpright", at = @At("RETURN"), cancellable = true)
     private static void cck$isItemUpright(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if(stack.hasCraftingRemainingItem() && stack.getCraftingRemainingItem().is(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag)){
+        if (stack.hasCraftingRemainingItem() && stack.getCraftingRemainingItem().is(AllTags.AllItemTags.UPRIGHT_ON_BELT.tag)) {
             cir.setReturnValue(true);
         }
     }
-    
 }

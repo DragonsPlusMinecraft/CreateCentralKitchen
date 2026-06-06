@@ -30,7 +30,6 @@ public class BasketPoint extends ArmInteractionPoint {
     }
 
     public static class Type extends PonderArmInteractionPointType {
-
         public Type(ResourceLocation id) {
             super(id);
         }
@@ -45,7 +44,7 @@ public class BasketPoint extends ArmInteractionPoint {
         public BasketPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new BasketPoint(this, level, pos, state);
         }
-    
+
         @Override
         public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
             ForgeRegisteredObjectsHelper forgeRegisteredObjectsHelper = new ForgeRegisteredObjectsHelper();
@@ -53,11 +52,10 @@ public class BasketPoint extends ArmInteractionPoint {
             //var builder = PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS);
 
             ForgeRegistries.ITEMS
-                .getValues()
-                .stream()
-                .filter(item -> item instanceof BlockItem blockItem && blockItem.getBlock() instanceof BasketBlock)
-                .forEach(builder::add);
+                    .getValues()
+                    .stream()
+                    .filter(item -> item instanceof BlockItem blockItem && blockItem.getBlock() instanceof BasketBlock)
+                    .forEach(builder::add);
         }
-        
     }
 }

@@ -1,11 +1,17 @@
 package plus.dragons.createcentralkitchen.entry.creativetab;
 
+import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
+
 import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,16 +22,8 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
-import net.minecraft.network.chat.Component;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 public class CckCreativeModeTab {
-
     public static final ItemEntry<Item> ICON = REGISTRATE.item("creative_tab_icon", Item::new)
             .lang("CreativeTabIcon")
             .properties(prop -> prop.stacksTo(1))
@@ -43,7 +41,7 @@ public class CckCreativeModeTab {
         REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CentralKitchen.ID);
         CREATIVE_TAB = REGISTER.register("base", () -> {
             return CreativeModeTab.builder().title(Component.literal("CCK"))
-                    .withTabsBefore(AllCreativeModeTabs.BASE_CREATIVE_TAB.getKey(),AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
+                    .withTabsBefore(AllCreativeModeTabs.BASE_CREATIVE_TAB.getKey(), AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                     .icon(ICON::asStack)
                     .displayItems(new DisplayItemsGenerator())
                     .build();
@@ -51,7 +49,6 @@ public class CckCreativeModeTab {
     }
 
     private static class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
-
         @Override
         public void accept(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
             List<Item> items = new LinkedList();
@@ -65,8 +62,8 @@ public class CckCreativeModeTab {
             List<Item> items = new ReferenceArrayList();
             Iterator var3 = REGISTRATE.getAll(Registries.BLOCK).iterator();
 
-            while(var3.hasNext()) {
-                RegistryEntry<Block> entry = (RegistryEntry)var3.next();
+            while (var3.hasNext()) {
+                RegistryEntry<Block> entry = (RegistryEntry) var3.next();
                 Item item = entry.get().asItem();
                 if (item != Items.AIR) {
                     items.add(item);
@@ -81,8 +78,8 @@ public class CckCreativeModeTab {
             List<Item> items = new ReferenceArrayList();
             Iterator var3 = REGISTRATE.getAll(Registries.ITEM).iterator();
 
-            while(var3.hasNext()) {
-                RegistryEntry<Item> entry = (RegistryEntry)var3.next();
+            while (var3.hasNext()) {
+                RegistryEntry<Item> entry = (RegistryEntry) var3.next();
                 Item item = entry.get();
                 if (!(item instanceof BlockItem) && !(item instanceof BucketItem)) {
                     items.add(item);
@@ -96,10 +93,10 @@ public class CckCreativeModeTab {
             List<Item> items = new ReferenceArrayList();
             Iterator var3 = REGISTRATE.getAll(Registries.FLUID).iterator();
 
-            while(var3.hasNext()) {
-                RegistryEntry<ForgeFlowingFluid> entry = (RegistryEntry)var3.next();
+            while (var3.hasNext()) {
+                RegistryEntry<ForgeFlowingFluid> entry = (RegistryEntry) var3.next();
                 ForgeFlowingFluid fluid = entry.get();
-                if (fluid.getBucket()!=Items.AIR && !items.contains(fluid.getBucket())) {
+                if (fluid.getBucket() != Items.AIR && !items.contains(fluid.getBucket())) {
                     items.add(fluid.getBucket());
                 }
             }
@@ -109,12 +106,12 @@ public class CckCreativeModeTab {
 
         private static void filterAndOutput(CreativeModeTab.Output output, List<Item> items) {
             Iterator var4 = items.iterator();
-            while(var4.hasNext()) {
-                Item item = (Item)var4.next();
-                if(item.toString().contains("incomplete")) continue;
-                if(item.toString().contains("guide")) continue;
-                if(item.toString().contains("blaze_burner")) continue;
-                if(item.toString().contains("creative_tab_icon")) continue;
+            while (var4.hasNext()) {
+                Item item = (Item) var4.next();
+                if (item.toString().contains("incomplete")) continue;
+                if (item.toString().contains("guide")) continue;
+                if (item.toString().contains("blaze_burner")) continue;
+                if (item.toString().contains("creative_tab_icon")) continue;
                 output.accept(item);
             }
             if (Mods.isLoaded(Mods.FD))

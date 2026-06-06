@@ -3,8 +3,8 @@ package plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm;
 import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
-import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
@@ -20,16 +20,15 @@ import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
 
 public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmInteractionPoint {
-
     public BlazeStovePoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
         super(type, level, pos, state);
     }
-    
+
     @Override
     protected Vec3 getInteractionPositionVector() {
         return Vec3.upFromBottomCenterOf(pos, 1);
     }
-    
+
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
         ItemStack input = stack.copy();
@@ -43,30 +42,27 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
             return input;
         }
     }
-    
+
     public static class Type extends PonderArmInteractionPointType {
-        
         public Type(ResourceLocation id) {
             super(id);
         }
-        
+
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
             return level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity;
         }
-        
+
         @Nullable
         @Override
         public ArmInteractionPoint createPoint(Level level, BlockPos pos, BlockState state) {
             return new BlazeStovePoint(this, level, pos, state);
         }
-    
+
         @Override
         public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
             helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(FDBlockEntries.BLAZE_STOVE.getId());
 //            PonderRegistry.TAGS.forTag(AllCreatePonderTags.ARM_TARGETS).add(FDBlockEntries.BLAZE_STOVE.get());
         }
-        
     }
-    
 }

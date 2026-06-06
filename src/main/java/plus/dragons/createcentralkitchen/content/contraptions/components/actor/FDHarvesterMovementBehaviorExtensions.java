@@ -1,5 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.actor;
 
+import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
+
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
@@ -16,26 +18,22 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
-
 @ModLoadSubscriber(modid = Mods.FD)
 public class FDHarvesterMovementBehaviorExtensions {
-    
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             REGISTRY.put(ModBlocks.RED_MUSHROOM_COLONY.get(),
-                FDHarvesterMovementBehaviorExtensions::harvestMushroomColony);
+                    FDHarvesterMovementBehaviorExtensions::harvestMushroomColony);
             REGISTRY.put(ModBlocks.BROWN_MUSHROOM_COLONY.get(),
-                FDHarvesterMovementBehaviorExtensions::harvestMushroomColony);
+                    FDHarvesterMovementBehaviorExtensions::harvestMushroomColony);
         });
     }
-    
+
     public static void harvestMushroomColony(HarvesterMovementBehaviour behaviour,
-                                             MovementContext context,
-                                             BlockPos pos, BlockState state,
-                                             boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (!(state.getBlock() instanceof MushroomColonyBlock colony))
             return;
         var ageProp = colony.getAgeProperty();
@@ -51,9 +49,6 @@ public class FDHarvesterMovementBehaviorExtensions {
         } else {
             BlockHelper.destroyBlock(level, pos, 1, $ -> {});
         }
-        behaviour.dropItem(context, age < colony.getMaxAge()?
-                new ItemStack(colony.mushroomType.get(), age):
-                new ItemStack(colony.asItem()));
+        behaviour.dropItem(context, age < colony.getMaxAge() ? new ItemStack(colony.mushroomType.get(), age) : new ItemStack(colony.asItem()));
     }
-    
 }

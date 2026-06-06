@@ -1,9 +1,14 @@
 package plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking;
 
+import static com.simibubi.create.foundation.gui.AllGuiTextures.PLAYER_INVENTORY;
+
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.createmod.catnip.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,12 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import vectorwing.farmersdelight.common.utility.TextUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static com.simibubi.create.foundation.gui.AllGuiTextures.PLAYER_INVENTORY;
 
 public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<MinersCookingGuideMenu> {
     private static final ResourceLocation TEXTURE = CentralKitchen.genRL("textures/gui/miners_cooking_guide.png");
@@ -43,9 +42,8 @@ public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<Miners
         int guideX = getLeftOfCentered(WINDOW_WIDTH);
         int guideY = topPos;
         extraAreas = ImmutableList.of(
-            new Rect2i(guideX + WINDOW_WIDTH + 16, guideY + 16, ICON_SIZE, ICON_SIZE),
-            new Rect2i(guideX, guideY, imageWidth, imageHeight)
-        );
+                new Rect2i(guideX + WINDOW_WIDTH + 16, guideY + 16, ICON_SIZE, ICON_SIZE),
+                new Rect2i(guideX, guideY, imageWidth, imageHeight));
     }
 
     @Override
@@ -61,10 +59,9 @@ public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<Miners
         //Title
         pGuiGraphics.drawCenteredString(font, title, guideX + WINDOW_WIDTH / 2, guideY + 5, 0xFFFFFF);
         //Guide Icon
-        GuiGameElement.of(menu.contentHolder)
-            .<GuiGameElement.GuiRenderBuilder>at(guideX + WINDOW_WIDTH + 16, guideY + 16, -200)
-            .scale(3)
-            .render(pGuiGraphics);
+        GuiGameElement.of(menu.contentHolder).<GuiGameElement.GuiRenderBuilder>at(guideX + WINDOW_WIDTH + 16, guideY + 16, -200)
+                .scale(3)
+                .render(pGuiGraphics);
     }
 
     private void renderGuide(@NotNull GuiGraphics pGuiGraphics, int x, int y) {
@@ -88,12 +85,12 @@ public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<Miners
             if (this.hoveredSlot.index == 4) {
                 List<Component> tooltip = new ArrayList<>();
                 ItemStack mealStack = this.hoveredSlot.getItem();
-                tooltip.add(((MutableComponent)mealStack.getItem().getDescription())
-                    .withStyle(mealStack.getRarity().getStyleModifier()));
+                tooltip.add(((MutableComponent) mealStack.getItem().getDescription())
+                        .withStyle(mealStack.getRarity().getStyleModifier()));
                 ItemStack containerStack = this.getMenu().getContainerItem();
                 String container = !containerStack.isEmpty() ? containerStack.getItem().getDescription().getString() : "";
                 tooltip.add(TextUtils.getTranslation("container.cooking_pot.served_on", container)
-                    .withStyle(ChatFormatting.GRAY));
+                        .withStyle(ChatFormatting.GRAY));
                 pGuiGraphics.renderComponentTooltip(font, tooltip, x, y);
             } else {
                 pGuiGraphics.renderTooltip(font, this.hoveredSlot.getItem(), x, y);
@@ -105,5 +102,4 @@ public class MinersCookingGuideScreen extends AbstractSimiContainerScreen<Miners
     public List<Rect2i> getExtraAreas() {
         return extraAreas;
     }
-
 }

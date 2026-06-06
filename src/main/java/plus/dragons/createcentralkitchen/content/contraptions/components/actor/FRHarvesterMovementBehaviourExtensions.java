@@ -1,5 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.actor;
 
+import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
+
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
@@ -23,15 +25,12 @@ import umpaz.farmersrespite.common.block.TeaBushBlock;
 import umpaz.farmersrespite.common.registry.FRBlocks;
 import umpaz.farmersrespite.common.registry.FRItems;
 
-import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
-
 @ModLoadSubscriber(modid = Mods.FR)
 public class FRHarvesterMovementBehaviourExtensions {
-    
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            if(CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()){
+            if (CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) {
                 REGISTRY.put(FRBlocks.SMALL_TEA_BUSH.get(),
                         FRHarvesterMovementBehaviourExtensions::ignoreSmallTeaBush);
                 REGISTRY.put(FRBlocks.TEA_BUSH.get(),
@@ -47,45 +46,44 @@ public class FRHarvesterMovementBehaviourExtensions {
     }
 
     public static void ignoreSmallTeaBush(HarvesterMovementBehaviour behaviour,
-                                      MovementContext context,
-                                      BlockPos pos, BlockState state,
-                                      boolean replant, boolean partial) {
-    }
-    
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {}
+
     public static void harvestTeaBush(HarvesterMovementBehaviour behaviour,
-                                      MovementContext context,
-                                      BlockPos pos, BlockState state,
-                                      boolean replant, boolean partial) {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         Level level = context.world;
         var half = state.getValue(TeaBushBlock.HALF);
         if (replant) {
             switch (state.getValue(TeaBushBlock.AGE)) {
                 case 0 -> behaviour.dropItem(context,
-                    new ItemStack(FRItems.GREEN_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
+                        new ItemStack(FRItems.GREEN_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
                 case 1 -> behaviour.dropItem(context,
-                    new ItemStack(FRItems.YELLOW_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
+                        new ItemStack(FRItems.YELLOW_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
                 case 2 -> {
                     behaviour.dropItem(context,
-                        new ItemStack(FRItems.YELLOW_TEA_LEAVES.get(), 1 + level.random.nextInt(2)));
+                            new ItemStack(FRItems.YELLOW_TEA_LEAVES.get(), 1 + level.random.nextInt(2)));
                     behaviour.dropItem(context,
-                        new ItemStack(FRItems.BLACK_TEA_LEAVES.get(), 1 + level.random.nextInt(2)));
+                            new ItemStack(FRItems.BLACK_TEA_LEAVES.get(), 1 + level.random.nextInt(2)));
                 }
                 case 3 -> behaviour.dropItem(context,
-                    new ItemStack(FRItems.BLACK_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
+                        new ItemStack(FRItems.BLACK_TEA_LEAVES.get(), 2 + level.random.nextInt(2)));
             }
             behaviour.dropItem(context, new ItemStack(Items.STICK, 2 + level.random.nextInt(2)));
-            level.setBlockAndUpdate(half == DoubleBlockHalf.UPPER? pos.below(): pos, FRBlocks.SMALL_TEA_BUSH.get().defaultBlockState());
+            level.setBlockAndUpdate(half == DoubleBlockHalf.UPPER ? pos.below() : pos, FRBlocks.SMALL_TEA_BUSH.get().defaultBlockState());
         } else {
             var destroyPos = half == DoubleBlockHalf.UPPER ? pos.below() : pos;
             BlockHelper.destroyBlock(level, destroyPos, 1, stack -> behaviour.dropItem(context, stack));
         }
     }
-    
+
     private static void destroyCoffeeStems(HarvesterMovementBehaviour behaviour,
-                                           MovementContext context,
-                                           BlockPos rootPos, BlockState rootState,
-                                           BlockPos middlePos, BlockState middleState,
-                                           boolean partial) {
+            MovementContext context,
+            BlockPos rootPos, BlockState rootState,
+            BlockPos middlePos, BlockState middleState,
+            boolean partial) {
         Level level = context.world;
         int rootAge0 = rootState.getValue(CoffeeDoubleStemBlock.AGE);
         int rootAge1 = rootState.getValue(CoffeeDoubleStemBlock.AGE1);
@@ -99,28 +97,28 @@ public class FRHarvesterMovementBehaviourExtensions {
         BlockHelper.destroyBlock(level, middlePos, 1, stack -> behaviour.dropItem(context, stack));
         BlockHelper.destroyBlock(level, rootPos, 1, stack -> behaviour.dropItem(context, stack));
     }
-    
+
     public static void harvestCoffeeStem(HarvesterMovementBehaviour behaviour,
-                                         MovementContext context,
-                                         BlockPos pos, BlockState state,
-                                         boolean replant, boolean partial) {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (state.getValue(BlockStateProperties.AGE_2) < 2)
             return;
         Level level = context.world;
         if (replant) {
             behaviour.dropItem(context, new ItemStack(FRItems.COFFEE_BERRIES.get(), 1));
             level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
-                            1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                    1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.AGE_2, 0));
         } else {
             BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
         }
     }
-    
+
     public static void harvestCoffeeMiddleStem(HarvesterMovementBehaviour behaviour,
-                                               MovementContext context,
-                                               BlockPos pos, BlockState state,
-                                               boolean replant, boolean partial) {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (replant) {
             harvestCoffeeStem(behaviour, context, pos, state, true, partial);
         } else {
@@ -131,12 +129,11 @@ public class FRHarvesterMovementBehaviourExtensions {
             }
         }
     }
-    
+
     public static void harvestCoffeeDoubleStem(HarvesterMovementBehaviour behaviour,
-                                               MovementContext context,
-                                               BlockPos pos, BlockState state,
-                                               boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (replant) {
             int count0 = state.getValue(CoffeeDoubleStemBlock.AGE) == 2 ? 1 : 0;
             int count1 = state.getValue(CoffeeDoubleStemBlock.AGE1) == 2 ? 1 : 0;
@@ -151,7 +148,7 @@ public class FRHarvesterMovementBehaviourExtensions {
             if (count1 == 1)
                 newState = state.setValue(CoffeeDoubleStemBlock.AGE1, 0);
             level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
-                1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                    1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             level.setBlockAndUpdate(pos, newState);
         } else {
             BlockPos posAbove = pos.above();
@@ -161,5 +158,4 @@ public class FRHarvesterMovementBehaviourExtensions {
             }
         }
     }
-    
 }

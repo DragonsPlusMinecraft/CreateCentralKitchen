@@ -1,8 +1,7 @@
 package plus.dragons.createcentralkitchen.foundation.mixin.common.create;
 
-import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
-//import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
+import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
@@ -17,7 +16,6 @@ import plus.dragons.createcentralkitchen.content.contraptions.components.actor.H
 
 @Mixin(value = HarvesterMovementBehaviour.class, remap = false)
 public abstract class HarvesterMovementBehaviorMixin implements MovementBehaviour {
-    
     @Inject(method = "visitNewPosition", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/contraptions/actors/harvester/HarvesterMovementBehaviour;isValidCrop(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), cancellable = true)
     private void cck$handleMovementBehaviorExtension(MovementContext context, BlockPos pos, CallbackInfo ci) {
         Level level = context.world;
@@ -27,9 +25,8 @@ public abstract class HarvesterMovementBehaviorMixin implements MovementBehaviou
             boolean replant = AllConfigs.server().kinetics.harvesterReplants.get();
             boolean partial = AllConfigs.server().kinetics.harvestPartiallyGrown.get();
             HarvesterMovementBehaviourExtension.REGISTRY.get(block)
-                .harvest(((HarvesterMovementBehaviour)(Object)this), context, pos, state, replant, partial);
+                    .harvest(((HarvesterMovementBehaviour) (Object) this), context, pos, state, replant, partial);
             ci.cancel();
         }
     }
-    
 }

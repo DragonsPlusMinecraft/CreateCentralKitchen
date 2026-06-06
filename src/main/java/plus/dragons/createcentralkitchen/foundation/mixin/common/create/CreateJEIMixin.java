@@ -11,12 +11,11 @@ import plus.dragons.createcentralkitchen.foundation.data.recipe.IgnoreAutomaticS
 
 @Mixin(value = CreateJEI.class, priority = 900, remap = false)
 public class CreateJEIMixin {
-    
     /**
      * For removing recipes that has tag create:ignored_in_automatic_shapeless in their ingredients/result.
      * Item that has a container will inherit this behavior from its container.
      *
-     * @param recipe the recipe to check
+     * @param recipe   the recipe to check
      * @param original the original method call
      * @see IgnoreAutomaticShapelessRecipe
      * @author LimonBlaze
@@ -25,5 +24,4 @@ public class CreateJEIMixin {
     private static boolean cck$shouldIgnoreShapelessRecipe(Recipe<?> recipe, Operation<Boolean> original) {
         return IgnoreAutomaticShapelessRecipe.get(recipe, Minecraft.getInstance().level.registryAccess()) || original.call(recipe);
     }
-    
 }

@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen.integration.jei.transfer;
 
+import java.util.Optional;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
@@ -15,25 +16,22 @@ import plus.dragons.createcentralkitchen.entry.network.FDNetworkEntries;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
-import java.util.Optional;
-
 public class CookingGuideTransferHandler implements IRecipeTransferHandler<CookingGuideMenu, CookingPotRecipe> {
-    
     @Override
     public Class<CookingGuideMenu> getContainerClass() {
         return CookingGuideMenu.class;
     }
-    
+
     @Override
     public Optional<MenuType<CookingGuideMenu>> getMenuType() {
         return Optional.of(FDMenuEntries.COOKING_GUIDE.get());
     }
-    
+
     @Override
     public RecipeType<CookingPotRecipe> getRecipeType() {
         return FDRecipeTypes.COOKING;
     }
-    
+
     @Override
     @Nullable
     public IRecipeTransferError transferRecipe(CookingGuideMenu container, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer) {
@@ -51,5 +49,4 @@ public class CookingGuideTransferHandler implements IRecipeTransferHandler<Cooki
         FDNetworkEntries.CHANNEL.sendToServer(new BlazeStoveGuideSyncPacket(container));
         return null;
     }
-    
 }

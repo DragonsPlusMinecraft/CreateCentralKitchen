@@ -72,9 +72,8 @@ public class CopperPotPoint extends ArmInteractionPoint {
         int neededSlotCount = 0;
         for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
             if (inventory.getStackInSlot(slot).isEmpty() &&
-                guide.needIngredient(slot) &&
-                guide.isIngredient(slot, stack))
-            {
+                    guide.needIngredient(slot) &&
+                    guide.isIngredient(slot, stack)) {
                 neededSlots[slot] = true;
                 neededSlotCount++;
             }
@@ -120,7 +119,7 @@ public class CopperPotPoint extends ArmInteractionPoint {
             ItemStack ingredient = inventory.getStackInSlot(slot);
             if (!ingredient.isEmpty() && !guide.isIngredient(slot, ingredient))
                 return inventory.extractItem(slot, amount, simulate);
-        } else if(slot == CONTAINER_SLOT) {
+        } else if (slot == CONTAINER_SLOT) {
             ItemStack container = inventory.getStackInSlot(slot);
             if (!container.isEmpty() && !guide.isContainer(container))
                 return inventory.extractItem(slot, amount, simulate);
@@ -130,7 +129,6 @@ public class CopperPotPoint extends ArmInteractionPoint {
     }
 
     public static class Type extends PonderArmInteractionPointType {
-
         public Type(ResourceLocation id) {
             super(id);
         }
@@ -138,7 +136,7 @@ public class CopperPotPoint extends ArmInteractionPoint {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
             return level.getBlockEntity(pos) instanceof CopperPotBlockEntity &&
-                level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
+                    level.getBlockEntity(pos.below()) instanceof BlazeStoveBlockEntity;
         }
 
         @Nullable
@@ -151,7 +149,5 @@ public class CopperPotPoint extends ArmInteractionPoint {
         public void addToPonderTag(PonderTagRegistrationHelper<ResourceLocation> helper) {
             helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(MDBlocks.COPPER_POT.getId());
         }
-
     }
-
 }

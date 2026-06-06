@@ -6,8 +6,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(value = StickyBasketBlockEntity.class, remap = false)
 public interface StickyBasketBlockEntityAccessor {
-    
     @Invoker("isOnTransferCooldown")
     boolean invokeIsOnTransferCooldown();
-    
 }

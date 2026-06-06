@@ -21,65 +21,65 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
     @Nullable
     protected BlazeStoveBlockEntity blazeStove;
     protected int inputSize;
-    
+
     public BlazeStoveGuideMenu(MenuType<?> type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
     }
-    
+
     public BlazeStoveGuideMenu(MenuType<?> type, int id, Inventory inv, ItemStack cookingGuide) {
         super(type, id, inv, cookingGuide);
     }
-    
+
     public BlazeStoveGuideMenu(MenuType<?> type, int id, Inventory inv, BlazeStoveBlockEntity blazeStove) {
         super(type, id, inv, blazeStove.getGuide());
         this.blazeStove = blazeStove;
     }
-    
+
     public abstract G createGuide(ItemStack contentHolder);
-    
+
     public void updateRecipe() {
         guide.updateRecipe(this.player.level());
         this.getSlot(guide.getIngredientSize()).setChanged();
     }
-    
+
     public int getInputSize() {
         return inputSize;
     }
-    
+
     public int getBlazeStatus() {
         return blazeStove == null ? 0 : blazeStove.getBlazeStatusCode();
     }
-    
+
     public ItemStack getContainerItem() {
         return guide.container;
     }
-    
+
     public CompoundTag writeGuideToTag() {
         return guide.serializeNBT();
     }
-    
+
     public void updateGuideFromTag(CompoundTag tag) {
         guide.deserializeNBT(tag);
     }
-    
+
     @Override
     protected void init(Inventory inv, ItemStack contentHolderIn) {
         super.init(inv, contentHolderIn);
         updateRecipe();
     }
-    
+
     @Override
     protected ItemStackHandler createGhostInventory() {
         return guide.inventory;
     }
-    
+
     @Override
     protected void initAndReadInventory(ItemStack contentHolder) {
         this.guide = createGuide(contentHolder);
         this.inputSize = guide.inventory.getSlots() - 1;
         super.initAndReadInventory(contentHolder);
     }
-    
+
     @Override
     protected ItemStack createOnClient(FriendlyByteBuf extraData) {
         ItemStack item = extraData.readItem();
@@ -94,17 +94,17 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         }
         return item;
     }
-    
+
     @Override
     protected void saveData(ItemStack contentHolder) {
         contentHolder.setTag(guide.serializeNBT());
     }
-    
+
     @Override
     public boolean stillValid(Player player) {
         return super.stillValid(player) && (blazeStove == null || blazeStove.stillValid(player));
     }
-    
+
     @Override
     public void removed(Player playerIn) {
         super.removed(playerIn);
@@ -114,12 +114,12 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
             playerIn.getCooldowns().addCooldown(guide.getOwner().getItem(), 5);
         }
     }
-    
+
     @Override
     protected boolean allowRepeats() {
         return true;
     }
-    
+
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
         if (slotId == 36 + inputSize)
@@ -130,7 +130,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         }
         if (clickTypeIn == ClickType.THROW)
             return;
-        
+
         ItemStack held = getCarried().copy();
         held.setCount(1);
         if (clickTypeIn == ClickType.CLONE) {
@@ -144,7 +144,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
             getSlot(slotId).setChanged();
         }
     }
-    
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         if (index < 36) {
@@ -163,43 +163,42 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         }
         return ItemStack.EMPTY;
     }
-    
+
     protected class CookingIngredientSlot extends SlotItemHandler {
         public CookingIngredientSlot(int index, int xPosition, int yPosition) {
             super(ghostInventory, index, xPosition, yPosition);
         }
-        
+
         @Override
         public int getMaxStackSize() {
             return super.getMaxStackSize();
         }
-        
+
         @Override
         public void setChanged() {
             super.setChanged();
             updateRecipe();
         }
     }
-    
+
     protected class DisplaySlot extends SlotItemHandler {
         public DisplaySlot(int index, int xPosition, int yPosition) {
             super(ghostInventory, index, xPosition, yPosition);
         }
-    
+
 //        @Override
 //        public boolean isActive() {
 //            return false;
 //        }
-    
+
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
             return false;
         }
-        
+
         @Override
         public boolean mayPickup(Player playerIn) {
             return false;
         }
     }
-    
 }

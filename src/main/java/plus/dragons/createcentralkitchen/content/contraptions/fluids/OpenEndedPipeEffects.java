@@ -1,12 +1,8 @@
 package plus.dragons.createcentralkitchen.content.contraptions.fluids;
 
 import com.simibubi.create.api.effect.OpenPipeEffectHandler;
-import com.simibubi.create.api.registry.SimpleRegistry;
-import com.simibubi.create.content.fluids.OpenEndedPipe;
-import com.simibubi.create.impl.effect.WaterEffectHandler;
 import net.createmod.ponder.api.level.PonderLevel;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,5 +43,4 @@ public class OpenEndedPipeEffects {
 //            }
 //        });
     }
-
 }

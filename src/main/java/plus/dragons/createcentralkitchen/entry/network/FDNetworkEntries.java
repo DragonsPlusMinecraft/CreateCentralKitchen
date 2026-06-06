@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.entry.network;
 
 import com.simibubi.create.foundation.networking.SimplePacketBase;
+import java.util.function.Function;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,28 +15,26 @@ import plus.dragons.createcentralkitchen.foundation.network.LoadedPacket;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-import java.util.function.Function;
-
 @ModLoadSubscriber(modid = Mods.FD)
 public enum FDNetworkEntries {
     BLAZE_STOVE_GUIDE_SYNC(BlazeStoveGuideSyncPacket.class, BlazeStoveGuideSyncPacket::new, NetworkDirection.PLAY_TO_SERVER);
-    
+
     public static final ResourceLocation CHANNEL_NAME = CentralKitchen.genRL(Mods.FD);
     public static final String NETWORK_VERSION = "1.3.0";
     public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(CHANNEL_NAME)
-        .serverAcceptedVersions(NETWORK_VERSION::equals)
-        .clientAcceptedVersions(NETWORK_VERSION::equals)
-        .networkProtocolVersion(() -> NETWORK_VERSION)
-        .simpleChannel();
-    
+            .serverAcceptedVersions(NETWORK_VERSION::equals)
+            .clientAcceptedVersions(NETWORK_VERSION::equals)
+            .networkProtocolVersion(() -> NETWORK_VERSION)
+            .simpleChannel();
+
     private final LoadedPacket<?> packet;
 
     <T extends SimplePacketBase> FDNetworkEntries(Class<T> type,
-                                                  Function<FriendlyByteBuf, T> factory,
-                                                  NetworkDirection direction) {
+            Function<FriendlyByteBuf, T> factory,
+            NetworkDirection direction) {
         packet = new LoadedPacket<>(type, factory, direction);
     }
-    
+
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         FDNetworkEntries[] entries = FDNetworkEntries.values();
@@ -44,5 +43,4 @@ public enum FDNetworkEntries {
         }
         CentralKitchen.LOGGER.debug("Registered {} network messages to channel {}", entries.length, CHANNEL_NAME);
     }
-    
 }

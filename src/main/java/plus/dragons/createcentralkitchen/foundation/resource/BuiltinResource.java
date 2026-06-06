@@ -1,8 +1,9 @@
 package plus.dragons.createcentralkitchen.foundation.resource;
 
 import com.simibubi.create.foundation.pack.ModFilePackResources;
-import net.minecraft.network.chat.Component;
+import java.util.Locale;
 import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
@@ -15,8 +16,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.forgespi.locating.IModFile;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
-
-import java.util.Locale;
 
 @Mod.EventBusSubscriber(modid = CentralKitchen.ID, bus = Bus.MOD)
 public enum BuiltinResource {
@@ -33,13 +32,12 @@ public enum BuiltinResource {
     AUTUMNITY(PackType.SERVER_DATA, true, false),
     BUILTIN_RESOURCE(PackType.SERVER_DATA, true, false);
 
-
     private final String path;
     private final String mod;
     private final PackType type;
     private final boolean required;
     private final boolean hidden;
-    
+
     BuiltinResource(PackType type, String mod, boolean required, boolean hidden) {
         this.path = name().toLowerCase(Locale.ROOT);
         this.mod = mod;
@@ -47,11 +45,11 @@ public enum BuiltinResource {
         this.required = required;
         this.hidden = hidden;
     }
-    
+
     BuiltinResource(PackType type, String mod) {
         this(type, mod, false, false);
     }
-    
+
     BuiltinResource(PackType type, boolean required, boolean hidden) {
         this.path = name().toLowerCase(Locale.ROOT);
         this.mod = this.path;
@@ -59,15 +57,15 @@ public enum BuiltinResource {
         this.required = required;
         this.hidden = hidden;
     }
-    
+
     BuiltinResource(PackType type) {
         this(type, false, false);
     }
-    
+
     public boolean enabled() {
         return Mods.isLoaded(mod);
     }
-    
+
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event) {
         PackType type = event.getPackType();
@@ -85,10 +83,9 @@ public enum BuiltinResource {
             String titleKey = Util.makeDescriptionId(typeId, packId);
             //String descriptionKey = Util.makeDescriptionId(typeId, packId) + ".desc";
             event.addRepositorySource(consumer -> consumer.accept(
-                Pack.readMetaAndCreate(packId.toString(), Component.translatable(titleKey), pack.required,
-                    id -> new ModFilePackResources(packId.toString(), modFile, dir + "/" + path), type,
-                    Pack.Position.TOP, PackSource.BUILT_IN)));
+                    Pack.readMetaAndCreate(packId.toString(), Component.translatable(titleKey), pack.required,
+                            id -> new ModFilePackResources(packId.toString(), modFile, dir + "/" + path), type,
+                            Pack.Position.TOP, PackSource.BUILT_IN)));
         }
     }
-    
 }

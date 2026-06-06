@@ -14,11 +14,10 @@ import vectorwing.farmersdelight.common.block.entity.SyncedBlockEntity;
 
 @Mixin(value = KettleBlockEntity.class, remap = false)
 public abstract class KettleBlockEntityMixin extends SyncedBlockEntity {
-    
     private KettleBlockEntityMixin(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn, pos, state);
     }
-    
+
     @Inject(method = "processBrewing", at = @At(value = "INVOKE", target = "Lumpaz/farmersrespite/common/block/entity/KettleBlockEntity;setRecipeUsed(Lnet/minecraft/world/item/crafting/Recipe;)V", remap = true))
     private void cck$notifyBlazeStove(KettleRecipe recipe, KettleBlockEntity kettle, CallbackInfoReturnable<Boolean> cir) {
         assert this.level != null;
@@ -27,5 +26,4 @@ public abstract class KettleBlockEntityMixin extends SyncedBlockEntity {
             stove.startSignal(this.level, posBelow);
         }
     }
-    
 }

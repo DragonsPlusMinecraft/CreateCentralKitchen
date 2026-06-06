@@ -1,5 +1,7 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.actor;
 
+import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
+
 import cn.mcmod.corn_delight.block.BlockRegistry;
 import cn.mcmod.corn_delight.block.CornCrop;
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
@@ -16,11 +18,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
-
 @ModLoadSubscriber(modid = Mods.CORN_DELIGHT)
 public class CornDelightMovementBehaviorExtensions {
-
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
@@ -32,10 +31,9 @@ public class CornDelightMovementBehaviorExtensions {
     public static final BooleanProperty UPPER = BooleanProperty.create("upper");
 
     public static void harvestCorn(HarvesterMovementBehaviour behaviour,
-                                              MovementContext context,
-                                              BlockPos pos, BlockState state,
-                                              boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         Level level = context.world;
 
         if (state.getValue(UPPER)) {
@@ -56,5 +54,4 @@ public class CornDelightMovementBehaviorExtensions {
             }
         }
     }
-
 }

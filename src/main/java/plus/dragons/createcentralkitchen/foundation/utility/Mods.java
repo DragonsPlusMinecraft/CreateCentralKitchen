@@ -35,11 +35,11 @@ public class Mods {
     public static final String JEI = "jei";
     public static final String CURIOS = "curios";
     public static final String APPLESKIN = "appleskin";
-    
+
     public static boolean isLoaded(String modId) {
         return ModList.get().isLoaded(modId);
     }
-    
+
     public static boolean isLoaded(String... modIds) {
         ModList modList = ModList.get();
         for (String modId : modIds)
@@ -47,93 +47,92 @@ public class Mods {
                 return false;
         return true;
     }
-    
+
     public static ResourceLocation create(String path) {
         return new ResourceLocation(CREATE, path);
     }
-    
+
     public static ResourceLocation ca(String path) {
         return new ResourceLocation(CA, path);
     }
-    
+
     public static ResourceLocation fd(String path) {
         return new ResourceLocation(FD, path);
     }
-    
+
     public static ResourceLocation bnc(String path) {
         return new ResourceLocation(BNC, path);
     }
-    
+
     public static ResourceLocation cr(String path) {
         return new ResourceLocation(CR, path);
     }
-    
+
     public static ResourceLocation fr(String path) {
         return new ResourceLocation(FR, path);
     }
-    
+
     public static ResourceLocation md(String path) {
         return new ResourceLocation(MD, path);
     }
-    
+
     public static ResourceLocation nd(String path) {
         return new ResourceLocation(ND, path);
     }
-    
+
     public static ResourceLocation ad(String path) {
         return new ResourceLocation(AD, path);
     }
-    
+
     public static ResourceLocation atmospheric(String path) {
         return new ResourceLocation(ATMOSPHERIC, path);
     }
-    
+
     public static ResourceLocation autumnity(String path) {
         return new ResourceLocation(AUTUMNITY, path);
     }
-    
+
     public static ResourceLocation bb(String path) {
         return new ResourceLocation(BB, path);
     }
-    
+
     public static ResourceLocation environmental(String path) {
         return new ResourceLocation(ENVIRONMENTAL, path);
     }
-    
+
     public static ResourceLocation neapolitan(String path) {
         return new ResourceLocation(NEAPOLITAN, path);
     }
-    
+
     public static ResourceLocation ua(String path) {
         return new ResourceLocation(UA, path);
     }
-    
+
     public static ResourceLocation respiteful(String path) {
         return new ResourceLocation(RESPITEFUL, path);
     }
-    
+
     public static ResourceLocation peculiars(String path) {
         return new ResourceLocation(PECULIARS, path);
     }
-    
+
     public static ResourceLocation seasonals(String path) {
         return new ResourceLocation(SEASONALS, path);
     }
-    
+
     public static ResourceLocation cookielicious(String path) {
         return new ResourceLocation(COOKIELICIOUS, path);
     }
-    
+
     public static ResourceLocation jei(String path) {
         return new ResourceLocation(JEI, path);
     }
-    
+
     public static ResourceLocation curios(String path) {
         return new ResourceLocation(CURIOS, path);
     }
-    
+
     public static ResourceLocation appleskin(String path) {
         return new ResourceLocation(APPLESKIN, path);
     }
-
 }

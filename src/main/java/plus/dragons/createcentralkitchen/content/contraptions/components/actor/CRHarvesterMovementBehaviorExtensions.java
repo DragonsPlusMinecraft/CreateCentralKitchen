@@ -1,5 +1,9 @@
 package plus.dragons.createcentralkitchen.content.contraptions.components.actor;
 
+import static net.brdle.collectorsreap.common.block.FruitBushBlock.AGE;
+import static net.brdle.collectorsreap.common.block.FruitBushBlock.MAX_AGE;
+import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
+
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
@@ -19,30 +23,24 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-import static net.brdle.collectorsreap.common.block.FruitBushBlock.AGE;
-import static net.brdle.collectorsreap.common.block.FruitBushBlock.MAX_AGE;
-import static plus.dragons.createcentralkitchen.content.contraptions.components.actor.HarvesterMovementBehaviourExtension.REGISTRY;
-
 @ModLoadSubscriber(modid = Mods.CR)
 public class CRHarvesterMovementBehaviorExtensions {
-    
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             REGISTRY.put(CRBlocks.PORTOBELLO_COLONY.get(),
-                FDHarvesterMovementBehaviorExtensions::harvestMushroomColony);
+                    FDHarvesterMovementBehaviorExtensions::harvestMushroomColony);
             REGISTRY.put(CRBlocks.LIME_BUSH.get(),
-                CRHarvesterMovementBehaviorExtensions::harvestLimeBush);
+                    CRHarvesterMovementBehaviorExtensions::harvestLimeBush);
             REGISTRY.put(CRBlocks.POMEGRANATE_BUSH.get(),
-                CRHarvesterMovementBehaviorExtensions::harvestPomegranateBush);
+                    CRHarvesterMovementBehaviorExtensions::harvestPomegranateBush);
         });
     }
-    
+
     public static void harvestLimeBush(HarvesterMovementBehaviour behaviour,
-                                       MovementContext context,
-                                       BlockPos pos, BlockState state,
-                                       boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (!(state.getBlock() instanceof LimeBushBlock))
             return;
         if (state.getValue(LimeBushBlock.STUNTED))
@@ -54,7 +52,7 @@ public class CRHarvesterMovementBehaviorExtensions {
             behaviour.dropItem(context, new ItemStack(CRItems.LIME.get(), 2 + level.random.nextInt(2)));
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
-                    1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                        1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 level.setBlockAndUpdate(pos, state.setValue(AGE, 2));
                 level.setBlockAndUpdate(isLowerHalf ? pos.above() : pos.below(), state.setValue(AGE, 2));
                 return;
@@ -66,12 +64,11 @@ public class CRHarvesterMovementBehaviorExtensions {
             BlockHelper.destroyBlock(level, isLowerHalf ? pos : pos.below(), 1, stack -> behaviour.dropItem(context, stack));
         }
     }
-    
+
     public static void harvestPomegranateBush(HarvesterMovementBehaviour behaviour,
-                                              MovementContext context,
-                                              BlockPos pos, BlockState state,
-                                              boolean replant, boolean partial)
-    {
+            MovementContext context,
+            BlockPos pos, BlockState state,
+            boolean replant, boolean partial) {
         if (!(state.getBlock() instanceof PomegranateBushBlock))
             return;
         if (state.getValue(PomegranateBushBlock.STUNTED))
@@ -83,7 +80,7 @@ public class CRHarvesterMovementBehaviorExtensions {
             behaviour.dropItem(context, new ItemStack(CRItems.POMEGRANATE.get(), 1 + level.random.nextInt(2)));
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
-                    1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                        1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 level.setBlockAndUpdate(pos, state.setValue(AGE, 2));
                 level.setBlockAndUpdate(isLowerHalf ? pos.above() : pos.below(), state.setValue(AGE, 2));
                 return;
@@ -95,5 +92,4 @@ public class CRHarvesterMovementBehaviorExtensions {
             BlockHelper.destroyBlock(level, isLowerHalf ? pos : pos.below(), 1, stack -> behaviour.dropItem(context, stack));
         }
     }
-    
 }

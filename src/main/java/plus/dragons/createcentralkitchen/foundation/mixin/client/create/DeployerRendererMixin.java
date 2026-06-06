@@ -12,16 +12,8 @@ import plus.dragons.createcentralkitchen.foundation.mixin.common.create.Deployer
 
 @Mixin(value = DeployerRenderer.class, remap = false)
 public class DeployerRendererMixin {
-    
-    @ModifyVariable(
-        method = "renderItem",
-        at = @At(value = "INVOKE", target = "Lnet/createmod/catnip/math/AngleHelper;horizontalAngle(Lnet/minecraft/core/Direction;)F"),
-        ordinal = 0,
-        index = 10,
-        name = "punching"
-    )
+    @ModifyVariable(method = "renderItem", at = @At(value = "INVOKE", target = "Lnet/createmod/catnip/math/AngleHelper;horizontalAngle(Lnet/minecraft/core/Direction;)F"), ordinal = 0, index = 10, name = "punching")
     private boolean cck$isUprightOnDeployer(boolean original, DeployerBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         return original || ((DeployerBlockEntityAccessor) te).getHeldItem().is(IntegrationItemTags.UPRIGHT_ON_DEPLOYER.tag);
     }
-
 }

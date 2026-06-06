@@ -25,23 +25,21 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 public class PieBlockMixin extends Block {
     @Unique
     private static final RegistryObject<Item> ENVIRONMENTAL_APPLE_PIE = RegistryObject
-        .create(Mods.environmental("apple_pie"), ForgeRegistries.ITEMS);
-    
+            .create(Mods.environmental("apple_pie"), ForgeRegistries.ITEMS);
+
     private PieBlockMixin(Properties properties) {
         super(properties);
     }
-    
+
     @Inject(method = "consumeBite", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z", remap = true))
     private void cck$triggerConsumeItem(Level level, BlockPos pos, BlockState state, Player playerIn, CallbackInfoReturnable<InteractionResult> cir) {
         if (playerIn instanceof ServerPlayer serverPlayer) {
             if (this.equals(ModBlocks.APPLE_PIE.get()) &&
-                ENVIRONMENTAL_APPLE_PIE.isPresent() &&
-                FDBlockEntries.isPieOverhaulEnabled(ENVIRONMENTAL_APPLE_PIE.getId()))
-            {
+                    ENVIRONMENTAL_APPLE_PIE.isPresent() &&
+                    FDBlockEntries.isPieOverhaulEnabled(ENVIRONMENTAL_APPLE_PIE.getId())) {
                 CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, ENVIRONMENTAL_APPLE_PIE.get().getDefaultInstance());
             }
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, this.asItem().getDefaultInstance());
         }
     }
-    
 }

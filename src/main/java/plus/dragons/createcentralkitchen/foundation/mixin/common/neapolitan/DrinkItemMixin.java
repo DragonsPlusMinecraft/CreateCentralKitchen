@@ -9,10 +9,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(DrinkItem.class)
 public class DrinkItemMixin {
-    
     @ModifyArg(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;<init>(Lnet/minecraft/world/item/Item$Properties;)V"))
     private static Item.Properties cck$setCraftRemainder(Item.Properties properties) {
         return properties.craftRemainder(Items.GLASS_BOTTLE);
     }
-    
 }

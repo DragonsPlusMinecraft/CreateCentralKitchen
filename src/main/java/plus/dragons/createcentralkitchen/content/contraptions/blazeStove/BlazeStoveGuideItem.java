@@ -1,8 +1,12 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
+import static plus.dragons.createcentralkitchen.CentralKitchen.ID;
+
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
+import java.util.List;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,46 +27,37 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
-import net.createmod.catnip.lang.LangBuilder;
-
-
-
-import java.util.List;
-
-import static plus.dragons.createcentralkitchen.CentralKitchen.ID;
-import static plus.dragons.createcentralkitchen.CentralKitchen.LANG;
 
 public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Item implements MenuProvider {
-    
     public BlazeStoveGuideItem(Properties properties) {
         super(properties);
     }
-    
+
     protected abstract Capability<G> getGuideCapability();
-    
+
     protected abstract BlazeStoveGuideMenu<G> createGuideMenu(int syncId, Inventory inventory, ItemStack guide);
-    
+
     protected abstract BlazeStoveGuideMenu<G> createGuideMenu(int syncId, Inventory inventory, BlazeStoveBlockEntity stove);
-    
+
     public void appendGuideTooltip(ItemStack stack, List<Component> tooltip, boolean goggle) {
         ItemStack result = stack
-            .getCapability(getGuideCapability())
-            .map(BlazeStoveGuide::getResult)
-            .orElse(ItemStack.EMPTY);
+                .getCapability(getGuideCapability())
+                .map(BlazeStoveGuide::getResult)
+                .orElse(ItemStack.EMPTY);
         if (result.isEmpty()) {
-			LangBuilder text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.no_result").style(ChatFormatting.RED);
+            LangBuilder text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.no_result").style(ChatFormatting.RED);
             if (goggle)
                 text.forGoggles(tooltip);
             else
                 text.addTo(tooltip);
         } else {
-			LangBuilder text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.recipe_result");
-			LangBuilder itemName = new LangBuilder(ID).add(result.getDisplayName()).style(ChatFormatting.GRAY);
+            LangBuilder text = new LangBuilder(ID).translate("gui.goggles.blaze_stove.recipe_result");
+            LangBuilder itemName = new LangBuilder(ID).add(result.getDisplayName()).style(ChatFormatting.GRAY);
             text.forGoggles(tooltip);
             itemName.forGoggles(tooltip);
         }
     }
-    
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         var level = context.getLevel();
@@ -75,15 +70,14 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
             var blockState = level.getBlockState(blockPos);
             var blockEntity = level.getBlockEntity(blockPos);
             if (blockState.getBlock() instanceof BlazeBurnerBlock &&
-                blockEntity instanceof BlazeBurnerBlockEntity)
-            {
+                    blockEntity instanceof BlazeBurnerBlockEntity) {
                 if (!level.isClientSide()) {
                     level.setBlockAndUpdate(blockPos, FDBlockEntries.BLAZE_STOVE.getDefaultState()
-                        .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
+                            .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
                     if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove)
                         blazeStove.setGuide(itemStack.copy());
                     AdvancementBehaviour.setPlacedBy(context.getLevel(), blockPos, player);
-            
+
                     if (!player.getAbilities().instabuild)
                         player.setItemInHand(context.getHand(), ItemStack.EMPTY);
                 }
@@ -92,7 +86,7 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
         }
         return InteractionResult.PASS;
     }
-    
+
     @Override
     @NotNull
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
@@ -107,19 +101,19 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
         }
         return InteractionResultHolder.pass(heldItem);
     }
-    
+
     @Override
     @NotNull
     public Component getDisplayName() {
         return getDescription();
     }
-    
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
         appendGuideTooltip(stack, tooltip, false);
     }
-    
+
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inventory, Player player) {
@@ -128,5 +122,4 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
             return null;
         return createGuideMenu(syncId, inventory, cookingGuide);
     }
-    
 }
