@@ -7,3 +7,4 @@ Hope it's final update.
 
 ### Fix
 * Fixed incorrect seq recipe of Hamburger.
+* Fixed CCK overrides Farmer's Delight wheat_dough_from_water with stale shapeless recipe.
