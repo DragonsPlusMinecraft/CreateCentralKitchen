@@ -281,7 +281,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
     }
     
     public void dropAll() {
-        if (!ItemUtils.isInventoryEmpty(inventory)) {
+        if (ItemUtils.doesInventoryHaveItems(inventory)) {
             ItemUtils.dropItems(level, getBlockPos(), inventory);
             notifyUpdate();
         }
@@ -448,7 +448,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
         BlockPos pos = getBlockPos().above();
         BlockState state = level.getBlockState(pos);
         
-        if (state.is(ModTags.HEAT_CONDUCTORS))
+        if (state.is(ModTags.Blocks.HEAT_CONDUCTORS))
             pos = pos.above();
         
         BlockEntity blockEntity = level.getBlockEntity(pos);

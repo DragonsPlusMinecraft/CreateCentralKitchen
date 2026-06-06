@@ -22,6 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
 import vectorwing.farmersdelight.common.block.StoveBlock;
+import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 
 import java.util.Optional;
@@ -40,13 +41,13 @@ public class StovePoint extends AllArmInteractionPointTypes.DepositOnlyArmIntera
     @Override
     public ItemStack insert(ItemStack stack, boolean simulate) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (!(blockEntity instanceof StoveBlockEntity stove))
+        if (!(blockEntity instanceof AbstractStoveBlockEntity stove))
             return stack;
         int slot = stove.getNextEmptySlot();
-        if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isStoveBlockedAbove()) {
+        if (slot < 0) {
             return stack;
         }
-        Optional<CampfireCookingRecipe> recipe = stove.getMatchingRecipe(new SimpleContainer(stack), slot);
+        Optional<?> recipe = stove.getCookingRecipe(stack);
         if (recipe.isEmpty())
             return stack;
         ItemStack remainder = stack.copy();
@@ -54,7 +55,7 @@ public class StovePoint extends AllArmInteractionPointTypes.DepositOnlyArmIntera
             remainder.shrink(1);
             return remainder;
         }
-        stove.addItem(remainder, recipe.get(), slot);
+        stove.placeFood(null, remainder, slot);
         return remainder;
     }
     
@@ -66,7 +67,7 @@ public class StovePoint extends AllArmInteractionPointTypes.DepositOnlyArmIntera
         
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return level.getBlockEntity(pos) instanceof StoveBlockEntity;
+            return level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity;
         }
         
         @Nullable

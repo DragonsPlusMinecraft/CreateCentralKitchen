@@ -149,7 +149,7 @@ public class BasketScenes {
         scene.idle(10);
         scene.world().setBlock(
             basketPos,
-            ModBlocks.BASKET.get()
+            ModBlocks.BAMBOO_BASKET.get()
                 .defaultBlockState()
                 .setValue(BasketBlock.FACING, Direction.EAST),
             true);

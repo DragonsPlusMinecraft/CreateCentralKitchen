@@ -32,19 +32,15 @@ public class FDPonderEntries {
         CentralKitchenPonders.create("blaze_stove/heat_source", BlazeStoveScenes::heat_source);
 
     public static void register() {
-        //ok
         BASKET_INTRO
-            .addComponent(ModItems.BASKET)
+            .addComponent(ModItems.WOODEN_BASKET, ModItems.BAMBOO_BASKET)
             .addTag(AllCreatePonderTags.LOGISTICS);
-        //ok
         BASKET_BELT_INTERACTION
-            .addComponent(ModItems.BASKET)
+            .addComponent(ModItems.WOODEN_BASKET, ModItems.BAMBOO_BASKET)
             .addTag(AllCreatePonderTags.LOGISTICS);
-        //ok
         BLAZE_STOVE_INTRO
             .addComponent(AllBlocks.BLAZE_BURNER, FDItemEntries.COOKING_GUIDE)
             .addTag(FDPonderTags.COOKING);
-        //ok
         BLAZE_STOVE_CONFIGURE
             .addComponent(AllBlocks.BLAZE_BURNER, FDItemEntries.COOKING_GUIDE)
             .addComponent(ModItems.COOKING_POT)
