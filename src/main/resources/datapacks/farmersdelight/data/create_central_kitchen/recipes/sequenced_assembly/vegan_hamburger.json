@@ -6,7 +6,7 @@
   "loops": 1,
   "results": [
     {
-      "item": "farmersdelight:hamburger"
+      "item": "miners_delight:vegan_hamburger"
     }
   ],
   "sequence": [
@@ -14,7 +14,7 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "farmersdelight:beef_patty"
+          "item": "miners_delight:vegan_patty"
         }
       ],
       "results": [
