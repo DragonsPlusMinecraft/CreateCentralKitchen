@@ -28,7 +28,6 @@ def allIntegrationSourceSets = [
         brewinandchewin     : ["farmersdelight"],
         mynethersdelight    : ["farmersdelight"],
         endsdelight         : ["farmersdelight"],
-        kelaidoscopecookery : [],
         twilightdelight     : ["farmersdelight"],
         trailandtalesdelight: ["farmersdelight"],
         extradelight        : ["farmersdelight"],
@@ -239,10 +238,6 @@ dependencies {
 
     //localRuntime("curse.maven:the-twilight-forest-227639:6472889") // MC 1.21.1 - 4.7.3196
     //localRuntime("maven.modrinth:twilight-delight:${twilight_delight_version}")  // JiJ Registrate is still on MC1.21-1.3.0+55 when Create is on 63. Integration works fine so just leave it here.
-
-    if (hasIntegration("kelaidoscopecookery")) {
-        kelaidoscopecookeryLocalImplementation("maven.modrinth:kaleidoscope-cookery:${kaleidoscope_cookery_version}")
-    }
 
     if (hasIntegration("dungeonsdelight")) {
         dungeonsdelightLocalImplementation("maven.modrinth:runiclib:YLcPBAGS") // Requirement of Dungeon's Delight, 4.3.9
