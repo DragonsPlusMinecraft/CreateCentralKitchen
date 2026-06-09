@@ -18,7 +18,6 @@
 
 package plus.dragons.createcentralkitchen.integration.dungeonsdelight.mechanicalArm;
 
-import com.sammy.minersdelight.content.block.copper_pot.CopperPotBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
@@ -36,7 +35,7 @@ public class MonsterPotArmInteractionPoint extends ArmInteractionPoint {
 
     @Override
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
-        if (level.getBlockEntity(pos) instanceof CopperPotBlockEntity cookingPot) {
+        if (level.getBlockEntity(pos) instanceof MonsterPotBlockEntity cookingPot) {
             var inventory = cookingPot.getInventory();
             return inventory.insertItem(7, stack, simulate);
         }
