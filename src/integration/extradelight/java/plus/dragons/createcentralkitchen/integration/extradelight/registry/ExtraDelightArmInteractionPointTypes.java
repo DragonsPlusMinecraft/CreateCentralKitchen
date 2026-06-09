@@ -23,6 +23,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import plus.dragons.createcentralkitchen.common.registry.CCKArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.extradelight.mechanicalArm.ChillerArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.extradelight.mechanicalArm.DryingRackArmInteractionPoint;
+import plus.dragons.createcentralkitchen.integration.extradelight.mechanicalArm.EvaporatorArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.extradelight.mechanicalArm.OvenArmInteractionPoint;
 
 public class ExtraDelightArmInteractionPointTypes {
@@ -30,12 +31,14 @@ public class ExtraDelightArmInteractionPointTypes {
     // spotless:off
             DRYING_RACK = CCKArmInteractionPointTypes.holder("drying_rack"),
             OVEN = CCKArmInteractionPointTypes.holder("oven"),
-            CHILLER = CCKArmInteractionPointTypes.holder("chiller");
+            CHILLER = CCKArmInteractionPointTypes.holder("chiller"),
+            EVAPORATOR = CCKArmInteractionPointTypes.holder("evaporator");
     // spotless:on
 
     public static void register() {
         CCKArmInteractionPointTypes.register(DRYING_RACK, DryingRackArmInteractionPoint.Type::new);
         CCKArmInteractionPointTypes.register(OVEN, OvenArmInteractionPoint.Type::new);
         CCKArmInteractionPointTypes.register(CHILLER, ChillerArmInteractionPoint.Type::new);
+        CCKArmInteractionPointTypes.register(EVAPORATOR, EvaporatorArmInteractionPoint.Type::new);
     }
 }
