@@ -38,7 +38,6 @@ public class FDPonderPlugin {
     private static final ResourceLocation COPPER_POT = ModIntegration.MINERSDELIGHT.asResource("copper_pot");
     private static final ResourceLocation SKILLET = ModIntegration.FARMERSDELIGHT.asResource("skillet");
     private static final ResourceLocation MONSTER_POT = ModIntegration.DUNGEONSDELIGHT.asResource("monster_pot");
-    private static final ResourceLocation DRYING_RACK = ModIntegration.EXTRADELIGHT.asResource("drying_rack");
 
     public static void register() {
         CCKPonderPlugin.SCENES.add(FDPonderPlugin::registerScenes);
@@ -64,6 +63,12 @@ public class FDPonderPlugin {
                     .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                             AllCreatePonderTags.ARM_TARGETS);
         }
+        var portionableFoods = portionableFoods();
+        if (!portionableFoods.isEmpty()) {
+            helper.forComponents(portionableFoods)
+                    .addStoryBoard("farmersdelight/portionable_foods", FDPonderScenes::portionableFoods,
+                            AllCreatePonderTags.ARM_TARGETS);
+        }
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
@@ -74,7 +79,6 @@ public class FDPonderPlugin {
                 .add(POTTERY_COOKING_POT)
                 .add(COPPER_POT)
                 .add(SKILLET)
-                .add(DRYING_RACK)
                 .add(MONSTER_POT);
         abstractStoves().forEach(armTargets::add);
         portionableFoods().forEach(armTargets::add);

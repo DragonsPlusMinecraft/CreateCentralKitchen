@@ -18,25 +18,38 @@
 
 package plus.dragons.createcentralkitchen.integration.endsdelight;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.fml.loading.FMLLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.endsdelight.ponder.EndsDelightPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.endsdelight.registry.EndsDelightArmInteractionPointTypes;
 
 @Mod(CCKCommon.ID)
 public class EndsDelightIntegration {
     public EndsDelightIntegration(IEventBus modBus) {
-        if (ModIntegration.ENDSDELIGHT.enabled())
+        if (ModIntegration.ENDSDELIGHT.enabled()) {
             modBus.register(new Common());
+            if (FMLLoader.getDist() == Dist.CLIENT)
+                modBus.register(new Client());
+        }
     }
 
     public static class Common {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
             EndsDelightArmInteractionPointTypes.register();
+        }
+    }
+
+    public static class Client {
+        @SubscribeEvent
+        public void construct(final FMLConstructModEvent event) {
+            EndsDelightPonderPlugin.register();
         }
     }
 }

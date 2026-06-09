@@ -239,10 +239,11 @@ dependencies {
     if (hasIntegration("twilightdelight")) {
         twilightdelightLocalImplementation("curse.maven:the-twilight-forest-227639:7797302") //4.8.3345
         twilightdelightLocalImplementation("maven.modrinth:twilight-delight:${twilight_delight_version}")
+        localRuntime("maven.modrinth:cuisine-delight:gdWm3nOx") // java.lang.NoClassDefFoundError: dev/xkmc/cuisinedelight/content/logic/IngredientConfig TODO wait for fix
     }
 
     if (hasIntegration("dungeonsdelight")) {
-        dungeonsdelightLocalImplementation("maven.modrinth:runiclib:YLcPBAGS") // Requirement of Dungeon's Delight, 4.3.9
+        dungeonsdelightLocalImplementation("maven.modrinth:runiclib:tk5EQpUG") // Requirement of Dungeon's Delight, 5.0.7
         dungeonsdelightLocalImplementation("maven.modrinth:dungeons_delight:${dungeons_delight_version}")
     }
 }

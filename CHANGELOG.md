@@ -9,6 +9,9 @@ Farmer's Delight integration now requires Farmer's Delight 1.3.2 or newer.
 * Mechanical Arms now supports My Nether's Delight Blazier.
 * Mechanical Arms now supports Extra Delight Evaporator.
 * Mechanical Arm support for Farmer's Delight stove-like blocks now should be widened.
+* Added Ponder for serving feasts and pie slices.
+
+### Localization
 * Added Bulgarian localization by @Boris Valkov.
 * Added Italian localization by @Carmine Calabrese.
 

@@ -40,6 +40,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
+import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
@@ -47,6 +49,110 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FDPonderScenes {
+    public static void portionableFoods(SceneBuilder builder, SceneBuildingUtil util) {
+        CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+        scene.title("portionable_foods", "Automating with Create: Servings");
+        scene.configureBasePlate(0, 0, 5);
+        scene.showBasePlate();
+        scene.idle(10);
+
+        var armPos = util.grid().at(1, 1, 2);
+        var arm = util.select().position(1, 1, 2);
+        var armPos2 = util.grid().at(3, 1, 2);
+        var arm2 = util.select().position(3, 1, 2);
+        var input = util.select().position(4, 1, 2);
+        var inputPos = util.grid().at(4, 1, 2);
+        var output = util.select().position(0, 1, 2);
+        var outputPos = util.grid().at(0, 1, 2);
+        var feast = util.select().position(2, 1, 4);
+        var feastPos = util.grid().at(2, 1, 4);
+        var pie = util.select().position(2, 1, 0);
+        var piePos = util.grid().at(2, 1, 0);
+
+        scene.world().showSection(feast.add(pie).add(output), Direction.DOWN);
+        scene.world().setKineticSpeed(arm, 64);
+        scene.overlay().showText(90)
+                .text("Mechanical Arms can take servings from feasts and slices from pies")
+                .independent()
+                .placeNearTarget();
+        scene.idle(10);
+        scene.world().showSection(arm, Direction.DOWN);
+        scene.idle(10);
+        scene.world().setKineticSpeed(arm, 64);
+        scene.overlay().showOutline(PonderPalette.INPUT, feast, feast, 40);
+        scene.overlay().showOutline(PonderPalette.OUTPUT, output, output, 40);
+        scene.idle(40);
+
+        var roastChicken = ModItems.ROAST_CHICKEN.get().getDefaultInstance();
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 1);
+        scene.idle(24);
+        scene.world().modifyBlock(feastPos, state -> state.setValue(FeastBlock.SERVINGS, 3), false);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, roastChicken, -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, roastChicken, 0);
+        scene.idle(24);
+        scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(roastChicken));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+        scene.idle(20);
+
+        scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        scene.overlay().showOutline(PonderPalette.INPUT, pie, pie, 40);
+        scene.overlay().showOutline(PonderPalette.OUTPUT, output, output, 40);
+        var pieSlice = ModItems.APPLE_PIE_SLICE.get().getDefaultInstance();
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
+        scene.idle(24);
+        scene.world().modifyBlock(piePos, state -> state.setValue(PieBlock.BITES, 1), false);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, pieSlice, -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, pieSlice, 0);
+        scene.idle(24);
+        scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(pieSlice));
+        scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+        scene.idle(20);
+
+        scene.rotateCameraY(180);
+        scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        scene.world().modifyBlock(feastPos, state -> state.setValue(FeastBlock.SERVINGS, 1), false);
+        scene.overlay().showText(60)
+                .text("The last serving is kept in place")
+                .pointAt(util.vector().centerOf(2, 1, 4))
+                .attachKeyFrame()
+                .placeNearTarget();
+        scene.idle(65);
+
+        scene.rotateCameraY(-180);
+        scene.world().hideSection(arm.add(pie), Direction.UP);
+        scene.world().showSection(input.add(arm2), Direction.DOWN);
+        scene.idle(10);
+        scene.world().setKineticSpeed(arm2, -64);
+        scene.idle(10);
+        var roastChickenBlock = ModItems.ROAST_CHICKEN_BLOCK.get().getDefaultInstance();
+        scene.world().modifyBlockEntity(inputPos, DepotBlockEntity.class, be -> be.setHeldItem(roastChickenBlock));
+        scene.overlay().showText(70)
+                .text("A fresh whole food can replace it and return the last serving")
+                .independent()
+                .attachKeyFrame()
+                .placeNearTarget();
+        scene.overlay().showOutline(PonderPalette.INPUT, input, input.add(feast), 50);
+        scene.overlay().showOutline(PonderPalette.OUTPUT, output, output, 50);
+        scene.idle(30);
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 1);
+        scene.idle(24);
+        scene.world().modifyBlockEntity(inputPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.SEARCH_INPUTS, roastChickenBlock, -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_INPUT, roastChickenBlock, 0);
+        scene.idle(24);
+        scene.world().modifyBlock(feastPos, state -> state.setValue(FeastBlock.SERVINGS, 4), false);
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.SEARCH_OUTPUTS, roastChicken, -1);
+        scene.idle(20);
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, roastChicken, 0);
+        scene.idle(24);
+        scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(roastChicken));
+        scene.world().instructArm(armPos2, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+        scene.idle(20);
+    }
+
     public static void cookingPot(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("cooking_pot", "Automating with Create: Cooking Pot");

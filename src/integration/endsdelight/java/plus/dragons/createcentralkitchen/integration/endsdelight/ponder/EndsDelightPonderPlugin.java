@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package plus.dragons.createcentralkitchen.integration.extradelight.ponder;
+package plus.dragons.createcentralkitchen.integration.endsdelight.ponder;
 
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
@@ -25,33 +25,21 @@ import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 
-public class ExtraDelightPonderPlugin {
-    private static final ResourceLocation DRYING_RACK = ModIntegration.EXTRADELIGHT.asResource("drying_rack");
-    private static final ResourceLocation OVEN = ModIntegration.EXTRADELIGHT.asResource("oven");
-    private static final ResourceLocation CHILLER = ModIntegration.EXTRADELIGHT.asResource("chiller");
-    private static final ResourceLocation EVAPORATOR = ModIntegration.EXTRADELIGHT.asResource("evaporator");
+public class EndsDelightPonderPlugin {
+    private static final ResourceLocation DRAGON_LEG = ModIntegration.ENDSDELIGHT.asResource("dragon_leg_with_sauce_block");
 
     public static void register() {
-        CCKPonderPlugin.SCENES.add(ExtraDelightPonderPlugin::registerScenes);
-        CCKPonderPlugin.TAGS.add(ExtraDelightPonderPlugin::registerTags);
+        CCKPonderPlugin.SCENES.add(EndsDelightPonderPlugin::registerScenes);
+        CCKPonderPlugin.TAGS.add(EndsDelightPonderPlugin::registerTags);
     }
 
     private static void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(OVEN)
-                .addStoryBoard("extradelight/oven", ExtraDelightPonderScenes::oven,
-                        AllCreatePonderTags.ARM_TARGETS,
-                        AllCreatePonderTags.HIGH_LOGISTICS);
-        helper.forComponents(CHILLER)
-                .addStoryBoard("extradelight/chiller", ExtraDelightPonderScenes::chiller,
-                        AllCreatePonderTags.ARM_TARGETS,
-                        AllCreatePonderTags.HIGH_LOGISTICS);
+        helper.forComponents(DRAGON_LEG)
+                .addStoryBoard("endsdelight/dragon_leg", EndsDelightPonderScenes::dragonLeg,
+                        AllCreatePonderTags.ARM_TARGETS);
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        helper.addToTag(AllCreatePonderTags.ARM_TARGETS)
-                .add(DRYING_RACK)
-                .add(OVEN)
-                .add(CHILLER)
-                .add(EVAPORATOR);
+        helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(DRAGON_LEG);
     }
 }
