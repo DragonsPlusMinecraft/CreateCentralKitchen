@@ -30,8 +30,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import plus.dragons.createcentralkitchen.client.burner.BlazeBurnerClientExtension;
+import plus.dragons.createcentralkitchen.client.burner.BlazeBurnerRenderOverride;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
-import plus.dragons.createcentralkitchen.integration.farmersdelight.burner.BlazeChefRenderOverride;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.burner.BlazeChefRenderOverrides;
 
 @Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
 @Mixin(BlazeBurnerBlockEntity.class)
@@ -44,7 +45,7 @@ public abstract class BlazeBurnerBlockEntityMixin extends SmartBlockEntity imple
     private void tickAnimation$updateRenderOverride(CallbackInfo ci) {
         assert level != null;
         boolean overriden = false;
-        for (BlazeChefRenderOverride override : BlazeChefRenderOverride.values()) {
+        for (BlazeBurnerRenderOverride override : BlazeChefRenderOverrides.values()) {
             if (override.isValid(level, worldPosition, (BlazeBurnerBlockEntity) (Object) this)) {
                 this.setRenderOverride(override);
                 overriden = true;

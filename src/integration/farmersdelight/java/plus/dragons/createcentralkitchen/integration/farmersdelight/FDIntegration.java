@@ -29,6 +29,7 @@ import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.burner.BlazeChefRenderOverrides;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.data.FDTagsProvider;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.packager.CookingPotUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderPlugin;
@@ -69,6 +70,7 @@ public class FDIntegration {
     public static class Client {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
+            BlazeChefRenderOverrides.registerDefaults();
             FDPonderPlugin.register();
         }
     }

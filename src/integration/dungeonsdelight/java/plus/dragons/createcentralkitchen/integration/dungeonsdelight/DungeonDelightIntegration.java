@@ -19,23 +19,29 @@
 package plus.dragons.createcentralkitchen.integration.dungeonsdelight;
 
 import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.fml.loading.FMLLoader;
 import net.yirmiri.dungeonsdelight.core.registry.DDBlockEntities;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.dungeonsdelight.burner.DungeonBlazeChefRenderOverride;
 import plus.dragons.createcentralkitchen.integration.dungeonsdelight.data.DungeonsDelightTagsProvider;
 import plus.dragons.createcentralkitchen.integration.dungeonsdelight.handler.MonsterPotUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.dungeonsdelight.registery.DungeonDelightArmInteractionPointTypes;
+import plus.dragons.createcentralkitchen.integration.farmersdelight.burner.BlazeChefRenderOverrides;
 
 @Mod(CCKCommon.ID)
 public class DungeonDelightIntegration {
     public DungeonDelightIntegration(IEventBus modBus) {
         if (ModIntegration.DUNGEONSDELIGHT.enabled()) {
             modBus.register(new DungeonDelightIntegration.Common());
+            if (FMLLoader.getDist() == Dist.CLIENT)
+                modBus.register(new Client());
         }
     }
 
@@ -55,6 +61,13 @@ public class DungeonDelightIntegration {
             DDBlockEntities.MONSTER_COOKING_POT.get()
                     .getValidBlocks()
                     .forEach(block -> UnpackingHandler.REGISTRY.register(block, new MonsterPotUnpackingHandler()));
+        }
+    }
+
+    public static class Client {
+        @SubscribeEvent
+        public void construct(final FMLConstructModEvent event) {
+            BlazeChefRenderOverrides.register(BlazeChefRenderOverrides.SPECIAL_PRIORITY, new DungeonBlazeChefRenderOverride());
         }
     }
 }
