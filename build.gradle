@@ -215,11 +215,11 @@ dependencies {
     }
 
     if (hasIntegration("mynethersdelight")) {
-        localRuntime("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}") // Stove only
+        mynethersdelightLocalImplementation("maven.modrinth:my-nethers-delight:${my_nethers_delight_version}")
     }
 
     if (hasIntegration("endsdelight")) {
-        endsdelightLocalImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
+        localRuntime("maven.modrinth:ends-delight:${ends_delight_version}") // Stove only
     }
 
     if (hasIntegration("trailandtalesdelight")) {

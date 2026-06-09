@@ -27,6 +27,8 @@ import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
+import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
 
 public class FDPonderPlugin {
     private static final ResourceLocation CUTTING_BOARD = ModIntegration.FARMERSDELIGHT.asResource("cutting_board");
@@ -75,12 +77,21 @@ public class FDPonderPlugin {
                 .add(DRYING_RACK)
                 .add(MONSTER_POT);
         abstractStoves().forEach(armTargets::add);
+        portionableFoods().forEach(armTargets::add);
     }
 
     private static List<ResourceLocation> abstractStoves() {
         return BuiltInRegistries.BLOCK.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() instanceof AbstractStoveBlock)
+                .map(entry -> entry.getKey().location())
+                .toList();
+    }
+
+    private static List<ResourceLocation> portionableFoods() {
+        return BuiltInRegistries.BLOCK.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() instanceof FeastBlock || entry.getValue() instanceof PieBlock)
                 .map(entry -> entry.getKey().location())
                 .toList();
     }
