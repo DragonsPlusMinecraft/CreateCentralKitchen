@@ -28,7 +28,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import plus.dragons.createcentralkitchen.access.farmersdelight.StoveBlockEntityAccess;
+import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
+import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
 
 public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     public StoveArmInteractionPoint(ArmInteractionPointType type, Level level, BlockPos pos, BlockState state) {
@@ -37,12 +38,12 @@ public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
 
     @Override
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
-        if (level.getBlockEntity(pos) instanceof StoveBlockEntityAccess stove) {
+        if (level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stove) {
             int slot = stove.getNextEmptySlot();
-            if (slot < 0 || slot >= stove.getInventory().getSlots() || stove.isStoveBlockedAbove()) {
+            if (slot < 0 || slot >= stove.getItems().getSlots() || isStoveBlockedAbove(stove)) {
                 return stack;
             }
-            var recipe = stove.getMatchingRecipe(stack);
+            var recipe = stove.getCookingRecipe(stack);
             if (recipe.isEmpty())
                 return stack;
             var remainder = stack.copy();
@@ -50,10 +51,14 @@ public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
                 remainder.shrink(1);
                 return remainder;
             }
-            stove.addItem(remainder, recipe.get(), slot);
+            stove.placeFood(null, remainder, recipe.get());
             return remainder;
         }
         return stack;
+    }
+
+    private boolean isStoveBlockedAbove(AbstractStoveBlockEntity stove) {
+        return AbstractStoveBlock.isStoveTopCovered(level, stove.getBlockPos(), stove.getBlockState());
     }
 
     @Override
@@ -64,7 +69,7 @@ public class StoveArmInteractionPoint extends DepositOnlyArmInteractionPoint {
     public static class Type extends ArmInteractionPointType {
         @Override
         public boolean canCreatePoint(Level level, BlockPos pos, BlockState state) {
-            return level.getBlockEntity(pos) instanceof StoveBlockEntityAccess;
+            return level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity;
         }
 
         @Nullable

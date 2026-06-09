@@ -49,3 +49,5 @@ ${integration_mixin_blocks}
     versionRange="${create_dragons_plus_version_range}"
     ordering="AFTER"
     side="BOTH"
+
+${integration_dependency_blocks}

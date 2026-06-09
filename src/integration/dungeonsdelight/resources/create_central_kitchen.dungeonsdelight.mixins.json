@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "plus.dragons.createcentralkitchen.mixin.UniversalConditionalMixinPlugin",
   "mixins": [
-    "DungeonStoveBlockEntityMixin",
     "MonsterPotBlockEntityMixin"
   ],
   "injectors": {

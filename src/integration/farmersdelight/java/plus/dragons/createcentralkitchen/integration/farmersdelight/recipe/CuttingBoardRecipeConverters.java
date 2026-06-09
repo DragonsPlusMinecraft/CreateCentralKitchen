@@ -25,11 +25,14 @@ import com.simibubi.create.content.kinetics.deployer.DeployerRecipeSearchEvent;
 import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
 import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.bus.api.SubscribeEvent;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createdragonsplus.common.recipe.RecipeConverter;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 public class CuttingBoardRecipeConverters {
@@ -54,6 +57,18 @@ public class CuttingBoardRecipeConverters {
                     builder.output(result.chance(), result.stack());
                 return new RecipeHolder<>(id, builder.build());
             });
+
+    public static ItemStack sawAsKnife() {
+        return new ItemStack(ModItems.IRON_KNIFE.get());
+    }
+
+    public static CuttingBoardRecipeInput sawInput(ItemStack input) {
+        return new CuttingBoardRecipeInput(input, sawAsKnife());
+    }
+
+    public static boolean canSaw(RecipeHolder<CuttingBoardRecipe> holder) {
+        return holder.value().getTool().test(sawAsKnife());
+    }
 
     @SubscribeEvent
     public static void onDeployerRecipeSearch(final DeployerRecipeSearchEvent event) {

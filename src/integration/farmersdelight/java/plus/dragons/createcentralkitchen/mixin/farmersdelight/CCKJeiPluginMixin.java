@@ -30,7 +30,6 @@ import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -95,10 +94,9 @@ public abstract class CCKJeiPluginMixin {
         RecipeManager recipeManager = getRecipeManager();
         var cuttingBoardRecipes = recipeManager.getAllRecipesFor(ModRecipeTypes.CUTTING.get());
         if (CCKConfig.recipes().convertCuttingBoardRecipesToSawingRecipes.get()) {
-            ItemStack knife = new ItemStack(ModItems.IRON_KNIFE.get());
             registration.addRecipes(SAWING, cuttingBoardRecipes.stream()
                     .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
-                    .filter(holder -> holder.value().getTool().test(knife))
+                    .filter(CuttingBoardRecipeConverters::canSaw)
                     .map(CuttingBoardRecipeConverters.SAWING)
                     .toList());
         }

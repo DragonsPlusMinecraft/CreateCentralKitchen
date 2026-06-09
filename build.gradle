@@ -236,8 +236,10 @@ dependencies {
         minersdelightLocalImplementation("maven.modrinth:miners-delight:${miners_delight_version}")
     }
 
-    //localRuntime("curse.maven:the-twilight-forest-227639:6472889") // MC 1.21.1 - 4.7.3196
-    //localRuntime("maven.modrinth:twilight-delight:${twilight_delight_version}")  // JiJ Registrate is still on MC1.21-1.3.0+55 when Create is on 63. Integration works fine so just leave it here.
+    if (hasIntegration("twilightdelight")) {
+        twilightdelightLocalImplementation("curse.maven:the-twilight-forest-227639:7797302") //4.8.3345
+        twilightdelightLocalImplementation("maven.modrinth:twilight-delight:${twilight_delight_version}")
+    }
 
     if (hasIntegration("dungeonsdelight")) {
         dungeonsdelightLocalImplementation("maven.modrinth:runiclib:YLcPBAGS") // Requirement of Dungeon's Delight, 4.3.9
@@ -247,11 +249,7 @@ dependencies {
 
 def integrationMixinConfigs = [
         brewinandchewin     : "${mod_id}.brewinandchewin.mixins.json",
-        endsdelight         : "${mod_id}.endsdelight.mixins.json",
         farmersdelight      : "${mod_id}.farmersdelight.mixins.json",
-        mynethersdelight    : "${mod_id}.mynethersdelight.mixins.json",
-        trailandtalesdelight: "${mod_id}.trailandtalesdelight.mixins.json",
-        twilightdelight     : "${mod_id}.twilightdelight.mixins.json",
         extradelight        : "${mod_id}.extradelight.mixins.json",
         dungeonsdelight     : "${mod_id}.dungeonsdelight.mixins.json"
 ]
@@ -263,6 +261,21 @@ def integrationMixinBlocks = enabledIntegrationSourceSets
             "[[mixins]]\n    config=\"${config}\""
         }
         .join("\n")
+
+def integrationDependencyBlocks = [
+        farmersdelight: """[[dependencies."${mod_id}"]]
+    modId="farmersdelight"
+    type="optional"
+    versionRange="${farmers_delight_version_range}"
+    ordering="AFTER"
+    side="BOTH"
+"""
+]
+
+def enabledIntegrationDependencyBlocks = enabledIntegrationSourceSets
+        .collect { name -> integrationDependencyBlocks[name] }
+        .findAll { it != null }
+        .join("\n\n")
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
@@ -281,7 +294,8 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_logo                            : mod_logo,
             create_version_range                : create_version_range,
             create_dragons_plus_version_range   : create_dragons_plus_version_range,
-            integration_mixin_blocks            : integrationMixinBlocks
+            integration_mixin_blocks            : integrationMixinBlocks,
+            integration_dependency_blocks        : enabledIntegrationDependencyBlocks
     ]
     inputs.properties replaceProperties
     expand replaceProperties

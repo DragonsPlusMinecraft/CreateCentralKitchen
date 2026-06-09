@@ -19,11 +19,14 @@
 package plus.dragons.createcentralkitchen.integration.farmersdelight.ponder;
 
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import java.util.List;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
 
 public class FDPonderPlugin {
     private static final ResourceLocation CUTTING_BOARD = ModIntegration.FARMERSDELIGHT.asResource("cutting_board");
@@ -32,13 +35,6 @@ public class FDPonderPlugin {
     private static final ResourceLocation POTTERY_COOKING_POT = ModIntegration.TRAILANDTALESDELIGHT.asResource("pottery_cooking_pot");
     private static final ResourceLocation COPPER_POT = ModIntegration.MINERSDELIGHT.asResource("copper_pot");
     private static final ResourceLocation SKILLET = ModIntegration.FARMERSDELIGHT.asResource("skillet");
-    private static final ResourceLocation STOVE = ModIntegration.FARMERSDELIGHT.asResource("stove");
-    private static final ResourceLocation NETHER_BRICKS_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_stove");
-    private static final ResourceLocation NETHER_BRICKS_SOUL_STOVE = ModIntegration.MYNETHERSDELIGHT.asResource("nether_bricks_soul_stove");
-    private static final ResourceLocation END_STOVE = ModIntegration.ENDSDELIGHT.asResource("end_stove");
-    private static final ResourceLocation MAZE_STOVE = ModIntegration.TWILIGHTDELIGHT.asResource("maze_stove");
-    private static final ResourceLocation MUD_STOVE = ModIntegration.TRAILANDTALESDELIGHT.asResource("mud_stove");
-    private static final ResourceLocation DUNGEON_STOVE = ModIntegration.DUNGEONSDELIGHT.asResource("dungeon_stove");
     private static final ResourceLocation MONSTER_POT = ModIntegration.DUNGEONSDELIGHT.asResource("monster_pot");
     private static final ResourceLocation DRYING_RACK = ModIntegration.EXTRADELIGHT.asResource("drying_rack");
 
@@ -60,27 +56,32 @@ public class FDPonderPlugin {
                 .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
                         AllCreatePonderTags.ARM_TARGETS)
                 .addStoryBoard("farmersdelight/heat_source", FDPonderScenes::heatSource);
-        helper.forComponents(STOVE, NETHER_BRICKS_STOVE, NETHER_BRICKS_SOUL_STOVE, END_STOVE, MAZE_STOVE, MUD_STOVE, DUNGEON_STOVE)
-                .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
-                        AllCreatePonderTags.ARM_TARGETS);
+        var stoves = abstractStoves();
+        if (!stoves.isEmpty()) {
+            helper.forComponents(stoves)
+                    .addStoryBoard("farmersdelight/stove_and_skillet", FDPonderScenes::stoveAndSkillet,
+                            AllCreatePonderTags.ARM_TARGETS);
+        }
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        helper.addToTag(AllCreatePonderTags.ARM_TARGETS)
+        var armTargets = helper.addToTag(AllCreatePonderTags.ARM_TARGETS)
                 .add(CUTTING_BOARD)
                 .add(COOKING_POT)
                 .add(FIERY_COOKING_POT)
                 .add(POTTERY_COOKING_POT)
                 .add(COPPER_POT)
                 .add(SKILLET)
-                .add(STOVE)
-                .add(NETHER_BRICKS_STOVE)
-                .add(NETHER_BRICKS_SOUL_STOVE)
-                .add(END_STOVE)
-                .add(MAZE_STOVE)
-                .add(MUD_STOVE)
                 .add(DRYING_RACK)
-                .add(DUNGEON_STOVE)
                 .add(MONSTER_POT);
+        abstractStoves().forEach(armTargets::add);
+    }
+
+    private static List<ResourceLocation> abstractStoves() {
+        return BuiltInRegistries.BLOCK.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() instanceof AbstractStoveBlock)
+                .map(entry -> entry.getKey().location())
+                .toList();
     }
 }

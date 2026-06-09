@@ -27,7 +27,6 @@ import java.util.List;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -38,8 +37,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import plus.dragons.createcentralkitchen.config.CCKConfig;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
-import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 @Restriction(require = @Condition(ModIntegration.Mods.FARMERSDELIGHT))
@@ -55,7 +52,7 @@ public abstract class SawBlockEntityMixin extends BlockBreakingKineticBlockEntit
     @ModifyReturnValue(method = "getRecipes", at = @At("TAIL"))
     private List<RecipeHolder<? extends Recipe<?>>> addCuttingBoardRecipe(List<RecipeHolder<? extends Recipe<?>>> recipes) {
         if (CCKConfig.recipes().convertCuttingBoardRecipesToSawingRecipes.get()) {
-            var input = new CuttingBoardRecipeInput(inventory.getStackInSlot(0), new ItemStack(ModItems.IRON_KNIFE.get()));
+            var input = CuttingBoardRecipeConverters.sawInput(inventory.getStackInSlot(0));
             assert level != null;
             level.getRecipeManager()
                     .getRecipeFor(ModRecipeTypes.CUTTING.get(), input, level)
