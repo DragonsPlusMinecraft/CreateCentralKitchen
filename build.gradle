@@ -219,7 +219,7 @@ dependencies {
     }
 
     if (hasIntegration("endsdelight")) {
-        localRuntime("maven.modrinth:ends-delight:${ends_delight_version}") // Stove only
+        endsdelightLocalImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
     }
 
     if (hasIntegration("trailandtalesdelight")) {
@@ -251,6 +251,7 @@ def integrationMixinConfigs = [
         brewinandchewin     : "${mod_id}.brewinandchewin.mixins.json",
         farmersdelight      : "${mod_id}.farmersdelight.mixins.json",
         extradelight        : "${mod_id}.extradelight.mixins.json",
+        minersdelight       : "${mod_id}.minersdelight.mixins.json",
         dungeonsdelight     : "${mod_id}.dungeonsdelight.mixins.json"
 ]
 

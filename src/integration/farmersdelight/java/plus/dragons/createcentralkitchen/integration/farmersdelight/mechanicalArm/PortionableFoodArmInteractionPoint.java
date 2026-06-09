@@ -120,14 +120,8 @@ public class PortionableFoodArmInteractionPoint extends ArmInteractionPoint {
     private ItemStack replaceAndReturnLastServing(ItemStack stack, ItemStack serving, BlockState replacementState, SoundEvent sound, boolean simulate) {
         if (serving.isEmpty())
             return stack;
-        if (stack.getCount() > 1) {
-            if (simulate) {
-                var remainder = stack.copy();
-                remainder.shrink(1);
-                return remainder;
-            }
+        if (stack.getCount() > 1)
             return stack;
-        }
         if (simulate)
             return serving;
         if (!level.setBlock(pos, replacementState, 3))
