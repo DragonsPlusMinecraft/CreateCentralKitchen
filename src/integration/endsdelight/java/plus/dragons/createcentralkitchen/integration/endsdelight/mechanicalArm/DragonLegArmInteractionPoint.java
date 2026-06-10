@@ -69,11 +69,6 @@ public class DragonLegArmInteractionPoint extends ArmInteractionPoint {
     }
 
     @Override
-    public ItemStack extract(ArmBlockEntity armBlockEntity, int slot, int amount, boolean simulate) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
     public int getSlotCount(ArmBlockEntity armBlockEntity) {
         return 1;
     }
