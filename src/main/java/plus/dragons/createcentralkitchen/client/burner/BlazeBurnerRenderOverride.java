@@ -74,6 +74,14 @@ public interface BlazeBurnerRenderOverride {
         return null;
     }
 
+    static boolean isModelLoaded(@Nullable PartialModel model) {
+        return model != null && model.get() != null;
+    }
+
+    static PartialModel loadedOrFallback(PartialModel model, PartialModel fallback) {
+        return isModelLoaded(model) ? model : fallback;
+    }
+
     @CodeReference(value = BlazeBurnerRenderer.class, targets = "renderShared", source = "create", license = "mit")
     default void render(PoseStack poseStack, @Nullable PoseStack modelTransform, MultiBufferSource bufferSource,
             Level level, BlockState blockState, HeatLevel heatLevel, float animation, float horizontalAngle,
@@ -89,7 +97,9 @@ public interface BlazeBurnerRenderOverride {
 
         poseStack.pushPose();
 
-        var blazeModel = this.getBlazeModel(heatLevel, blockAbove);
+        var blazeModel = loadedOrFallback(
+                this.getBlazeModel(heatLevel, blockAbove),
+                BlazeBurnerRenderer.getBlazeModel(heatLevel, blockAbove));
 
         SuperByteBuffer blazeBuffer = CachedBuffers.partial(blazeModel, blockState);
         if (modelTransform != null)
@@ -114,7 +124,7 @@ public interface BlazeBurnerRenderOverride {
 
         if (drawHat == null)
             drawHat = getHatModel(small);
-        if (drawHat != null) {
+        if (isModelLoaded(drawHat)) {
             SuperByteBuffer hatBuffer = CachedBuffers.partial(drawHat, blockState);
             if (modelTransform != null)
                 hatBuffer.transform(modelTransform);
@@ -128,8 +138,12 @@ public interface BlazeBurnerRenderOverride {
 
         boolean superHeated = heatLevel == HeatLevel.SEETHING;
         if (heatLevel.isAtLeast(HeatLevel.FADING)) {
-            var smallRodsModel = getSmallRodsModel(superHeated);
-            var largeRodsModel = getLargeRodsModel(superHeated);
+            var smallRodsModel = loadedOrFallback(
+                    getSmallRodsModel(superHeated),
+                    superHeated ? AllPartialModels.BLAZE_BURNER_SUPER_RODS : AllPartialModels.BLAZE_BURNER_RODS);
+            var largeRodsModel = loadedOrFallback(
+                    getLargeRodsModel(superHeated),
+                    superHeated ? AllPartialModels.BLAZE_BURNER_SUPER_RODS_2 : AllPartialModels.BLAZE_BURNER_RODS_2);
 
             SuperByteBuffer rodsBuffer = CachedBuffers.partial(smallRodsModel, blockState);
             if (modelTransform != null)

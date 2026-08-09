@@ -77,6 +77,8 @@ public abstract class BlazeBurnerVisualMixin extends AbstractBlockEntityVisual<B
         PartialModel hatModelOverride = renderOverride == null
                 ? null
                 : renderOverride.getHatModel(heatLevel == HeatLevel.SMOULDERING);
+        if (!BlazeBurnerRenderOverride.isModelLoaded(hatModelOverride))
+            hatModelOverride = null;
         if (hatPresent || hatModelOverride == null) {
             if (this.hatModelOverride != null && hat != null) {
                 hat.delete();
@@ -111,18 +113,27 @@ public abstract class BlazeBurnerVisualMixin extends AbstractBlockEntityVisual<B
             PartialModel headModel = renderOverride != null
                     ? renderOverride.getBlazeModel(heatLevel, validBlockAbove)
                     : BlazeBurnerRenderer.getBlazeModel(heatLevel, validBlockAbove);
+            headModel = BlazeBurnerRenderOverride.loadedOrFallback(
+                    headModel,
+                    BlazeBurnerRenderer.getBlazeModel(heatLevel, validBlockAbove));
             instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(headModel)).stealInstance(head);
             boolean superHeated = heatLevel == BlazeBurnerBlock.HeatLevel.SEETHING;
             if (smallRods != null) {
                 PartialModel smallRodsModel = renderOverride != null
                         ? renderOverride.getSmallRodsModel(superHeated)
                         : (superHeated ? AllPartialModels.BLAZE_BURNER_SUPER_RODS : AllPartialModels.BLAZE_BURNER_RODS);
+                smallRodsModel = BlazeBurnerRenderOverride.loadedOrFallback(
+                        smallRodsModel,
+                        superHeated ? AllPartialModels.BLAZE_BURNER_SUPER_RODS : AllPartialModels.BLAZE_BURNER_RODS);
                 instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(smallRodsModel)).stealInstance(smallRods);
             }
             if (largeRods != null) {
                 PartialModel largeRodsModel = renderOverride != null
                         ? renderOverride.getLargeRodsModel(superHeated)
                         : (superHeated ? AllPartialModels.BLAZE_BURNER_SUPER_RODS_2 : AllPartialModels.BLAZE_BURNER_RODS_2);
+                largeRodsModel = BlazeBurnerRenderOverride.loadedOrFallback(
+                        largeRodsModel,
+                        superHeated ? AllPartialModels.BLAZE_BURNER_SUPER_RODS_2 : AllPartialModels.BLAZE_BURNER_RODS_2);
                 instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(largeRodsModel)).stealInstance(largeRods);
             }
             if (flame != null) {
