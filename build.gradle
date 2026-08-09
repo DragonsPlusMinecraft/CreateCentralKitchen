@@ -1,9 +1,9 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'net.neoforged.moddev' version '2.0.143'
     id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
-    id "com.diffplug.spotless" version "7.0.2"
+    id "com.diffplug.spotless" version "8.9.0"
     id 'idea'
 }
 
@@ -232,14 +232,14 @@ dependencies {
     }
 
     if (hasIntegration("minersdelight")) {
-        minersdelightLocalImplementation("maven.modrinth:lodestonelib:1.7.1") // Requirement of Miner's Delight
+        minersdelightLocalImplementation("maven.modrinth:lodestonelib:1.8.2") // Requirement of Miner's Delight
         minersdelightLocalImplementation("maven.modrinth:miners-delight:${miners_delight_version}")
     }
 
     if (hasIntegration("twilightdelight")) {
         twilightdelightLocalImplementation("curse.maven:the-twilight-forest-227639:7797302") //4.8.3345
         twilightdelightLocalImplementation("maven.modrinth:twilight-delight:${twilight_delight_version}")
-        localRuntime("maven.modrinth:cuisine-delight:gdWm3nOx") // java.lang.NoClassDefFoundError: dev/xkmc/cuisinedelight/content/logic/IngredientConfig TODO wait for fix
+        localRuntime("maven.modrinth:cuisine-delight:1.2.10") // Runtime requirement of Twilight's Delight
     }
 
     if (hasIntegration("dungeonsdelight")) {
