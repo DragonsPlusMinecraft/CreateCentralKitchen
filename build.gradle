@@ -33,7 +33,8 @@ def allIntegrationSourceSets = [
         extradelight        : ["farmersdelight"],
         minersdelight       : ["farmersdelight"],
         dungeonsdelight     : ["farmersdelight"],
-        culturaldelights    : ["farmersdelight"]
+        culturaldelights    : ["farmersdelight"],
+        rusticdelight       : ["farmersdelight"]
 ]
 
 def isIntegrationRequested = { name ->
@@ -251,6 +252,10 @@ dependencies {
     if (hasIntegration("culturaldelights")) {
         culturaldelightsLocalImplementation("maven.modrinth:cultural-delights:${cultural_delights_version}")
     }
+
+    if (hasIntegration("rusticdelight")) {
+        rusticdelightLocalImplementation("maven.modrinth:rustic-delight:${rustic_delight_version}")
+    }
 }
 
 def integrationMixinConfigs = [
@@ -281,6 +286,13 @@ def integrationDependencyBlocks = [
     modId="culturaldelights"
     type="optional"
     versionRange="${cultural_delights_version_range}"
+    ordering="AFTER"
+    side="BOTH"
+""",
+        rusticdelight: """[[dependencies."${mod_id}"]]
+    modId="rusticdelight"
+    type="optional"
+    versionRange="${rustic_delight_version_range}"
     ordering="AFTER"
     side="BOTH"
 """
