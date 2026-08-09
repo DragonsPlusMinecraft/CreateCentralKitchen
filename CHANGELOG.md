@@ -1,22 +1,21 @@
-## Create: Central Kitchen 2.5.0
+## Create: Central Kitchen 2.6.0
 
-Farmer's Delight integration now requires Farmer's Delight 1.3.2 or newer.
+This release requires Create 6.0.10, Create: Dragons Plus 1.11.4, and Farmer's Delight 1.3.2 or newer.
 
-### Update
-* Mechanical Arms can now add matching items to Farmer's Delight Cutting Boards in stacks.
-* Mechanical Arms can now take servings from Farmer's Delight feasts and slices from pies, and can replace the last portion with a fresh one.
-* Mechanical Arms can now take servings from Ends Delight Dragon Legs with Bowls (specify this since it's not standard implementation...really?).
-* Mechanical Arms now supports My Nether's Delight Blazier.
-* Mechanical Arms now supports Extra Delight Evaporator.
-* Mechanical Arm support for Farmer's Delight stove-like blocks now should be widened.
-* Added Ponder for serving feasts and pie slices.
+### Fixed
+
+* Extra Delight recipe conversions no longer modify shared cached recipe results during fallback searches.
+* Sawing recipes on Farmer's Delight Cutting Boards now use the intended processing duration.
+* Cutting Board recipes no longer consume reusable tools that cannot take durability damage.
+* Create boilers now respect removals from the `farmersdelight:heat_sources` tag.
+* Create Packagers can now unpack ingredients into Extra Delight Ovens.
+* Blaze Burner chef rendering now falls back safely when optional baked model assets are unavailable.
+
+### Updated
+
+* Updated NeoForge, Create: Dragons Plus, JEI, Curios, and the supported Delight integrations.
+* Added automated coverage for Packager interactions with Farmer's Delight Cooking Pots and Extra Delight appliances.
 
 ### Localization
-* Added Bulgarian localization by @Boris Valkov.
-* Added Italian localization by @Carmine Calabrese.
 
-### Fix
-* Fixed Monster Pot Arm Interaction cannot work properly.
-
-### Remove
-* Removed Kaleidoscope Cookery Compat since there are 2 mods `Kaleidoscope Compat` and `Kaleidoscope Cookery: Automation` providing much more complete integration.
+* Added Ukrainian localization by @Ch1sho.
