@@ -92,6 +92,7 @@ legacyForge {
             type = "gameTestServer"
 
             gameDirectory = project.file('run/gametest')
+            systemProperty('forge.enabledGameTestNamespaces', 'create_central_kitchen')
             // setForceExit false <- FIXME 1.20  see Create
         }
     }

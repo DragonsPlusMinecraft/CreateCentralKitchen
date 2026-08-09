@@ -53,16 +53,13 @@ public class CRHarvesterMovementBehaviorExtensions {
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                         1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlockAndUpdate(pos, state.setValue(AGE, 2));
-                level.setBlockAndUpdate(isLowerHalf ? pos.above() : pos.below(), state.setValue(AGE, 2));
+                resetFruitBush(level, pos, state, isLowerHalf);
                 return;
             }
             destroy = true;
         }
-        if (destroy) {
-            BlockHelper.destroyBlock(level, isLowerHalf ? pos.above() : pos, 1, stack -> behaviour.dropItem(context, stack));
-            BlockHelper.destroyBlock(level, isLowerHalf ? pos : pos.below(), 1, stack -> behaviour.dropItem(context, stack));
-        }
+        if (destroy)
+            destroyFruitBush(behaviour, context, pos, state, isLowerHalf);
     }
 
     public static void harvestPomegranateBush(HarvesterMovementBehaviour behaviour,
@@ -81,15 +78,36 @@ public class CRHarvesterMovementBehaviorExtensions {
             if (replant) {
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                         1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlockAndUpdate(pos, state.setValue(AGE, 2));
-                level.setBlockAndUpdate(isLowerHalf ? pos.above() : pos.below(), state.setValue(AGE, 2));
+                resetFruitBush(level, pos, state, isLowerHalf);
                 return;
             }
             destroy = true;
         }
-        if (destroy) {
-            BlockHelper.destroyBlock(level, isLowerHalf ? pos.above() : pos, 1, stack -> behaviour.dropItem(context, stack));
-            BlockHelper.destroyBlock(level, isLowerHalf ? pos : pos.below(), 1, stack -> behaviour.dropItem(context, stack));
-        }
+        if (destroy)
+            destroyFruitBush(behaviour, context, pos, state, isLowerHalf);
+    }
+
+    static void resetFruitBush(Level level, BlockPos pos, BlockState state, boolean isLowerHalf) {
+        var lowerPos = isLowerHalf ? pos : pos.below();
+        var lowerState = level.getBlockState(lowerPos);
+        if (!lowerState.is(state.getBlock()) || lowerState.getValue(LimeBushBlock.HALF) != DoubleBlockHalf.LOWER)
+            return;
+        var pickedState = lowerState.setValue(AGE, MAX_AGE - 2);
+        level.setBlock(lowerPos, pickedState, 2);
+        level.setBlock(lowerPos.above(), pickedState.setValue(LimeBushBlock.HALF, DoubleBlockHalf.UPPER), 2);
+    }
+
+    private static void destroyFruitBush(HarvesterMovementBehaviour behaviour, MovementContext context,
+            BlockPos pos, BlockState state, boolean isLowerHalf) {
+        var lowerPos = isLowerHalf ? pos : pos.below();
+        var upperPos = lowerPos.above();
+        var level = context.world;
+        var lowerState = level.getBlockState(lowerPos);
+        var upperState = level.getBlockState(upperPos);
+        if (!lowerState.is(state.getBlock()) || lowerState.getValue(LimeBushBlock.HALF) != DoubleBlockHalf.LOWER ||
+                !upperState.is(state.getBlock()) || upperState.getValue(LimeBushBlock.HALF) != DoubleBlockHalf.UPPER)
+            return;
+        BlockHelper.destroyBlock(level, upperPos, 1, stack -> behaviour.dropItem(context, stack));
+        BlockHelper.destroyBlock(level, lowerPos, 1, stack -> behaviour.dropItem(context, stack));
     }
 }
