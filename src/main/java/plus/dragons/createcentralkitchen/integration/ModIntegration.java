@@ -36,7 +36,8 @@ public enum ModIntegration {
     DUNGEONSDELIGHT(Mods.DUNGEONSDELIGHT),
     CULTURALDELIGHTS(Mods.CULTURALDELIGHTS),
     RUSTICDELIGHT(Mods.RUSTICDELIGHT),
-    FESTIVEDELIGHT(Mods.FESTIVEDELIGHT),;
+    FESTIVEDELIGHT(Mods.FESTIVEDELIGHT),
+    HEARTHANDHARVEST(Mods.HEARTHANDHARVEST),;
 
     private static final Logger LOGGER = LogUtils.getLogger();
     private final String id;
@@ -74,5 +75,6 @@ public enum ModIntegration {
         public static final String CULTURALDELIGHTS = "culturaldelights";
         public static final String RUSTICDELIGHT = "rusticdelight";
         public static final String FESTIVEDELIGHT = "festive_delight";
+        public static final String HEARTHANDHARVEST = "hearthandharvest";
     }
 }

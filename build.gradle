@@ -35,7 +35,8 @@ def allIntegrationSourceSets = [
         dungeonsdelight     : ["farmersdelight"],
         culturaldelights    : ["farmersdelight"],
         rusticdelight       : ["farmersdelight"],
-        festivedelight      : ["farmersdelight"]
+        festivedelight      : ["farmersdelight"],
+        hearthandharvest    : ["farmersdelight"]
 ]
 
 def isIntegrationRequested = { name ->
@@ -261,6 +262,10 @@ dependencies {
     if (hasIntegration("festivedelight")) {
         festivedelightLocalImplementation("maven.modrinth:festive-delight:${festive_delight_version}")
     }
+
+    if (hasIntegration("hearthandharvest")) {
+        hearthandharvestLocalImplementation("maven.modrinth:hearth-and-harvest:${hearth_and_harvest_version}")
+    }
 }
 
 def integrationMixinConfigs = [
@@ -305,6 +310,13 @@ def integrationDependencyBlocks = [
     modId="festive_delight"
     type="optional"
     versionRange="${festive_delight_version_range}"
+    ordering="AFTER"
+    side="BOTH"
+""",
+        hearthandharvest: """[[dependencies."${mod_id}"]]
+    modId="hearthandharvest"
+    type="optional"
+    versionRange="${hearth_and_harvest_version_range}"
     ordering="AFTER"
     side="BOTH"
 """
