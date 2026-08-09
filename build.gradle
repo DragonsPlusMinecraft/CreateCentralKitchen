@@ -188,15 +188,15 @@ enabledIntegrationSourceSets.each { name ->
 }
 
 repositories {
-    maven { url "https://maven.dragons.plus/releases" } // Ponder, Flywheel
-    maven { url "https://maven.createmod.net" } // Ponder, Flywheel
-    maven { url "https://mvn.devos.one/snapshots" } // Registrate
-    maven { url "https://maven.blamejared.com" } // JEI
-    maven { url "https://maven.theillusivec4.top/" } // Curios API
-    maven { url 'https://maven.fallenbreath.me/releases' } // Conditional Mixin
-    maven { url "https://www.cursemaven.com" }
-    maven { url "https://api.modrinth.com/maven" }
-    maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // NeoForge config api port, needed by ponder
+    maven { url = "https://maven.dragons.plus/releases" } // Ponder, Flywheel
+    maven { url = "https://maven.createmod.net" } // Ponder, Flywheel
+    maven { url = "https://mvn.devos.one/snapshots" } // Registrate
+    maven { url = "https://maven.blamejared.com" } // JEI
+    maven { url = "https://maven.theillusivec4.top/" } // Curios API
+    maven { url = 'https://maven.fallenbreath.me/releases' } // Conditional Mixin
+    maven { url = "https://www.cursemaven.com" }
+    maven { url = "https://api.modrinth.com/maven" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // NeoForge config api port, needed by ponder
 }
 
 dependencies {
@@ -387,8 +387,8 @@ publishing {
     }
     repositories {
         maven {
-            name "DragonsPlus"
-            url "https://maven.dragons.plus/releases"
+            name = "DragonsPlus"
+            url = "https://maven.dragons.plus/releases"
             credentials(PasswordCredentials)
             authentication {
                 basic(BasicAuthentication)
@@ -413,6 +413,7 @@ publishMods {
         minecraftVersions.add(minecraft_version)
         requires("create")
         requires("create-dragons-plus")
+        optional("cultural-delights", "rustic-delight", "festive-delight", "hearth-and-harvest")
         client = true
         server = true
     }
@@ -424,6 +425,7 @@ publishMods {
         environment = CLIENT_AND_SERVER
         requires("create")
         requires("create-dragons-plus")
+        optional("cultural-delights", "rustic-delight", "festive-delight", "hearth-and-harvest")
     }
 }
 
