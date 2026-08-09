@@ -12,6 +12,8 @@
   "create_central_kitchen.ponder.dragon_leg.header": "自动化：龙腿分份",
   "create_central_kitchen.ponder.dragon_leg.text_1": "动力臂可以用碗从龙腿上取下一份",
   "create_central_kitchen.ponder.dragon_leg.text_2": "最后一份会保留在原位",
+  "create_central_kitchen.ponder.festive_delight_chicken.header": "自动化：节庆烤鸡",
+  "create_central_kitchen.ponder.festive_delight_chicken.text_1": "动力臂会依次取走四份盛盘烤鸡，并留下最终残余物",
   "create_central_kitchen.ponder.heat_source.header": "烹饪热源",
   "create_central_kitchen.ponder.heat_source.text_1": "这是一个烈焰人燃烧室，常见的锅炉热源",
   "create_central_kitchen.ponder.heat_source.text_2": "锅炉热源是烹饪工具的合适热源",

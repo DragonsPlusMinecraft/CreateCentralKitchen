@@ -14,6 +14,8 @@
   "create_central_kitchen.ponder.dragon_leg.header": "Automating with Create: Serving Dragon Leg",
   "create_central_kitchen.ponder.dragon_leg.text_1": "Dragon Legs can be served by Mechanical Arms with Bowls",
   "create_central_kitchen.ponder.dragon_leg.text_2": "The last serving is kept in place",
+  "create_central_kitchen.ponder.festive_delight_chicken.header": "Automating Festive Chicken",
+  "create_central_kitchen.ponder.festive_delight_chicken.text_1": "Mechanical Arms take four plated servings and leave the final leftovers",
   "create_central_kitchen.ponder.heat_source.header": "Heat sources for Cooking",
   "create_central_kitchen.ponder.heat_source.text_1": "This is a Blaze Burner, a common boiler heater",
   "create_central_kitchen.ponder.heat_source.text_2": "Boiler heaters are valid heat sources for cooking utensils",
