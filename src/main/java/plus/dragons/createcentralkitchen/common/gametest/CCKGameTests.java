@@ -29,6 +29,8 @@ import plus.dragons.createcentralkitchen.integration.ModIntegration;
 @EventBusSubscriber(modid = CCKCommon.ID)
 public class CCKGameTests {
     private static final Map<ModIntegration, String> INTEGRATION_TEST_CLASSES = Map.of(
+            ModIntegration.FARMERSDELIGHT,
+            "plus.dragons.createcentralkitchen.integration.farmersdelight.FarmersDelightRecipeGameTests",
             ModIntegration.EXTRADELIGHT,
             "plus.dragons.createcentralkitchen.integration.extradelight.ExtraDelightRecipeCacheGameTests");
 

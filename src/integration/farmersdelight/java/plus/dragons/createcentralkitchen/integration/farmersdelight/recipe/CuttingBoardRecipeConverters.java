@@ -36,12 +36,15 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 public class CuttingBoardRecipeConverters {
+    private static final int SAWING_DURATION = 50;
+
     public static final RecipeConverter<CuttingBoardRecipe, CuttingRecipe> SAWING = RecipeConverter.cached(
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_saw");
                 var builder = new StandardProcessingRecipe.Builder<>(CuttingRecipe::new, id)
-                        .require(recipe.getIngredients().getFirst());
+                        .require(recipe.getIngredients().getFirst())
+                        .duration(SAWING_DURATION);
                 for (var result : recipe.getRollableResults())
                     builder.output(result.chance(), result.stack());
                 return new RecipeHolder<>(id, builder.build());
