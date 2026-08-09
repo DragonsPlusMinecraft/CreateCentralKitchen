@@ -28,6 +28,7 @@ import com.simibubi.create.content.logistics.factoryBoard.FactoryPanelPosition;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import com.simibubi.create.infrastructure.ponder.scenes.highLogistics.PonderHilo;
 import java.util.List;
+import java.util.Optional;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.scene.SceneBuilder;
@@ -37,6 +38,7 @@ import net.createmod.ponder.foundation.instruction.FadeOutOfSceneInstruction;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
@@ -49,6 +51,104 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FDPonderScenes {
+    public record StatefulPortionScene(
+            String id,
+            String title,
+            BlockState initialState,
+            List<BlockState> extractionStates,
+            ItemStack serving,
+            String extractionText,
+            Optional<InsertionDemo> insertion) {}
+
+    public record InsertionDemo(
+            BlockState beforeState,
+            ItemStack input,
+            BlockState afterState,
+            ItemStack returned,
+            String text) {}
+
+    /** Shared scene for addon foods represented by several block states instead of Farmer's Delight base classes. */
+    public static void statefulPortionableFood(SceneBuilder builder, SceneBuildingUtil util, StatefulPortionScene config) {
+        CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+        scene.title(config.id(), config.title());
+        scene.configureBasePlate(0, 0, 5);
+        scene.showBasePlate();
+        scene.idle(10);
+
+        var armPos = util.grid().at(1, 1, 2);
+        var arm = util.select().position(1, 1, 2);
+        var secondArmPos = util.grid().at(3, 1, 2);
+        var secondArm = util.select().position(3, 1, 2);
+        var input = util.select().position(4, 1, 2);
+        var inputPos = util.grid().at(4, 1, 2);
+        var output = util.select().position(0, 1, 2);
+        var outputPos = util.grid().at(0, 1, 2);
+        var food = util.select().position(2, 1, 4);
+        var foodPos = util.grid().at(2, 1, 4);
+
+        scene.world().setBlock(foodPos, config.initialState(), false);
+        scene.world().showSection(food.add(output), Direction.DOWN);
+        scene.world().setKineticSpeed(arm, 64);
+        scene.overlay().showText(80)
+                .text(config.extractionText())
+                .pointAt(util.vector().centerOf(foodPos))
+                .placeNearTarget();
+        scene.idle(10);
+        scene.world().showSection(arm, Direction.DOWN);
+        scene.idle(10);
+        scene.overlay().showOutline(PonderPalette.INPUT, food, food, 50);
+        scene.overlay().showOutline(PonderPalette.OUTPUT, output, output, 50);
+        scene.idle(40);
+
+        for (var nextState : config.extractionStates()) {
+            scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 1);
+            scene.idle(24);
+            scene.world().setBlock(foodPos, nextState, false);
+            scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, config.serving().copy(), -1);
+            scene.idle(20);
+            scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, config.serving().copy(), 0);
+            scene.idle(24);
+            scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(config.serving().copy()));
+            scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+            scene.idle(20);
+            scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+        }
+
+        config.insertion().ifPresent(insertion -> {
+            scene.rotateCameraY(180);
+            scene.world().hideSection(arm, Direction.UP);
+            scene.world().showSection(input.add(secondArm), Direction.DOWN);
+            scene.world().setBlock(foodPos, insertion.beforeState(), false);
+            scene.world().setKineticSpeed(secondArm, -64);
+            scene.world().modifyBlockEntity(inputPos, DepotBlockEntity.class, be -> be.setHeldItem(insertion.input().copy()));
+            scene.overlay().showText(80)
+                    .text(insertion.text())
+                    .pointAt(util.vector().centerOf(foodPos))
+                    .attachKeyFrame()
+                    .placeNearTarget();
+            scene.idle(30);
+            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 1);
+            scene.idle(24);
+            scene.world().modifyBlockEntity(inputPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
+            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, insertion.input().copy(), -1);
+            scene.idle(20);
+            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, insertion.input().copy(), 0);
+            scene.idle(24);
+            scene.world().setBlock(foodPos, insertion.afterState(), false);
+            if (insertion.returned().isEmpty()) {
+                scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+            } else {
+                scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, insertion.returned().copy(), -1);
+                scene.idle(20);
+                scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, insertion.returned().copy(), 0);
+                scene.idle(24);
+                scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(insertion.returned().copy()));
+                scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
+            }
+            scene.idle(20);
+        });
+    }
+
     public static void portionableFoods(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("portionable_foods", "Automating with Create: Servings");

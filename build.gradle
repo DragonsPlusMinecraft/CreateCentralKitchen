@@ -32,7 +32,8 @@ def allIntegrationSourceSets = [
         trailandtalesdelight: ["farmersdelight"],
         extradelight        : ["farmersdelight"],
         minersdelight       : ["farmersdelight"],
-        dungeonsdelight     : ["farmersdelight"]
+        dungeonsdelight     : ["farmersdelight"],
+        culturaldelights    : ["farmersdelight"]
 ]
 
 def isIntegrationRequested = { name ->
@@ -246,6 +247,10 @@ dependencies {
         dungeonsdelightLocalImplementation("maven.modrinth:runiclib:tk5EQpUG") // Requirement of Dungeon's Delight, 5.0.7
         dungeonsdelightLocalImplementation("maven.modrinth:dungeons_delight:${dungeons_delight_version}")
     }
+
+    if (hasIntegration("culturaldelights")) {
+        culturaldelightsLocalImplementation("maven.modrinth:cultural-delights:${cultural_delights_version}")
+    }
 }
 
 def integrationMixinConfigs = [
@@ -269,6 +274,13 @@ def integrationDependencyBlocks = [
     modId="farmersdelight"
     type="optional"
     versionRange="${farmers_delight_version_range}"
+    ordering="AFTER"
+    side="BOTH"
+""",
+        culturaldelights: """[[dependencies."${mod_id}"]]
+    modId="culturaldelights"
+    type="optional"
+    versionRange="${cultural_delights_version_range}"
     ordering="AFTER"
     side="BOTH"
 """

@@ -32,7 +32,9 @@ public class CCKGameTests {
             ModIntegration.FARMERSDELIGHT,
             "plus.dragons.createcentralkitchen.integration.farmersdelight.FarmersDelightRecipeGameTests",
             ModIntegration.EXTRADELIGHT,
-            "plus.dragons.createcentralkitchen.integration.extradelight.ExtraDelightRecipeCacheGameTests");
+            "plus.dragons.createcentralkitchen.integration.extradelight.ExtraDelightRecipeCacheGameTests",
+            ModIntegration.CULTURALDELIGHTS,
+            "plus.dragons.createcentralkitchen.integration.culturaldelights.CulturalDelightsGameTests");
 
     @SuppressWarnings("deprecation")
     @SubscribeEvent

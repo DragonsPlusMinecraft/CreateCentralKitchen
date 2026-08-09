@@ -1,6 +1,9 @@
 {
   "create_central_kitchen.ponder.cooking_pot.header": "自动化：厨锅",
   "create_central_kitchen.ponder.cooking_pot.text_1": "烹饪好的食物也可以通过漏斗取出",
+  "create_central_kitchen.ponder.cultural_delights_portioning.header": "自动化：茄子帕尔马干酪",
+  "create_central_kitchen.ponder.cultural_delights_portioning.text_1": "动力臂无需提供碗即可直接取走盛盘的一份",
+  "create_central_kitchen.ponder.cultural_delights_portioning.text_2": "最后一份会保留，直到一份新的完整盛宴替换它",
   "create_central_kitchen.ponder.cutting_board.header": "自动化：切菜",
   "create_central_kitchen.ponder.cutting_board.text_1": "这是一块砧板。先前，切菜可以通过机械手实现半自动化",
   "create_central_kitchen.ponder.cutting_board.text_2": "现在，动力臂能将原材料放在砧板上",
