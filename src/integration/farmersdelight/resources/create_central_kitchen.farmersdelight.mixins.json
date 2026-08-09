@@ -5,6 +5,7 @@
   "plugin": "plus.dragons.createcentralkitchen.mixin.UniversalConditionalMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BeltDeployerCallbacksMixin",
     "BlockHelperMixin",
     "CCKJeiPluginMixin",
     "CookingPotBlockEntityMixin",

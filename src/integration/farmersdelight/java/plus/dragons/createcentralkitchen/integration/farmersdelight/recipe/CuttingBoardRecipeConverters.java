@@ -53,12 +53,13 @@ public class CuttingBoardRecipeConverters {
             CacheBuilder.newBuilder(), holder -> {
                 var recipe = holder.value();
                 var id = holder.id().withSuffix("_using_deployer");
-                var builder = new ItemApplicationRecipe.Builder<>(DeployerApplicationRecipe::new, id)
+                var builder = new ItemApplicationRecipe.Builder<>(CuttingBoardDeployerRecipe::new, id)
                         .require(recipe.getIngredients().getFirst())
-                        .require(recipe.getTool());
+                        .require(recipe.getTool())
+                        .toolNotConsumed();
                 for (var result : recipe.getRollableResults())
                     builder.output(result.chance(), result.stack());
-                return new RecipeHolder<>(id, builder.build());
+                return new RecipeHolder<DeployerApplicationRecipe>(id, builder.build());
             });
 
     public static ItemStack sawAsKnife() {
