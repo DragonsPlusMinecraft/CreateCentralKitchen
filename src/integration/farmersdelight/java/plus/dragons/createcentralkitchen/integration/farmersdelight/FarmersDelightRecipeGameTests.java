@@ -18,20 +18,30 @@
 
 package plus.dragons.createcentralkitchen.integration.farmersdelight;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.deployer.BeltDeployerCallbacks;
+import com.simibubi.create.content.logistics.box.PackageItem;
+import com.simibubi.create.content.logistics.packager.PackagerBlock;
+import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
+import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Unbreakable;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardDeployerRecipe;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
+import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 @GameTestHolder(CCKCommon.ID)
@@ -96,6 +106,45 @@ public class FarmersDelightRecipeGameTests {
         var nonDamageableTool = new ItemStack(Items.PAPER);
         helper.assertTrue(!nonDamageableTool.isDamageableItem(), "The test sheet substitute must have no durability");
         helper.assertTrue(converted.shouldKeepHeldTool(nonDamageableTool), "A tool without durability must be retained");
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = Create.ID, template = "gametest/processing/iron_compacting")
+    public static void packagersUnpackCookingIngredientsFromEveryUsableSide(GameTestHelper helper) {
+        var potPosition = new BlockPos(1, 2, 1);
+        helper.setBlock(potPosition, ModBlocks.COOKING_POT.get().defaultBlockState());
+        var cookingPot = helper.getBlockEntity(potPosition);
+        helper.assertTrue(cookingPot instanceof CookingPotBlockEntity, "The test cooking pot must have a block entity");
+
+        var ingredients = List.of(
+                new ItemStack(Items.CARROT),
+                new ItemStack(Items.POTATO),
+                new ItemStack(Items.BEETROOT),
+                new ItemStack(Items.WHEAT),
+                new ItemStack(Items.BROWN_MUSHROOM),
+                new ItemStack(Items.RED_MUSHROOM));
+        for (var side : List.of(Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
+            var packagerPosition = potPosition.relative(side);
+            helper.setBlock(
+                    packagerPosition,
+                    AllBlocks.PACKAGER.getDefaultState().setValue(PackagerBlock.FACING, side));
+            var packager = helper.getBlockEntity(packagerPosition);
+            helper.assertTrue(packager instanceof PackagerBlockEntity, "The test packager must have a block entity");
+
+            var remainder = ((PackagerBlockEntity) packager).inventory
+                    .insertItem(0, PackageItem.containing(ingredients), false);
+            helper.assertTrue(remainder.isEmpty(), "Packager failed to unpack a complete recipe from side " + side);
+            for (int slot = 0; slot < ingredients.size(); slot++) {
+                helper.assertTrue(
+                        ItemStack.isSameItemSameComponents(
+                                ((CookingPotBlockEntity) cookingPot).getInventory().getStackInSlot(slot),
+                                ingredients.get(slot)),
+                        "Cooking pot ingredient slot " + slot + " was not filled from side " + side);
+            }
+
+            ((CookingPotBlockEntity) cookingPot).clearContent();
+            helper.setBlock(packagerPosition, Blocks.AIR);
+        }
         helper.succeed();
     }
 }
