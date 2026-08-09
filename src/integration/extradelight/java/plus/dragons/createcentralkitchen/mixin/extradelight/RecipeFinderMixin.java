@@ -21,9 +21,11 @@ package plus.dragons.createcentralkitchen.mixin.extradelight;
 import com.lance5057.extradelight.ExtraDelightRecipes;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -44,12 +46,10 @@ import plus.dragons.createcentralkitchen.integration.extradelight.recipe.ExtraDe
 @Mixin(RecipeFinder.class)
 public abstract class RecipeFinderMixin {
     @Unique
-    @Nullable
-    private final static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_MIXING_RECIPE = new HashSet<>();
+    private static final Set<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_MIXING_RECIPE = new HashSet<>();
 
     @Unique
-    @Nullable
-    private final static Collection<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_COMPACTING_RECIPE = new HashSet<>();
+    private static final Set<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$CACHED_COMPACTING_RECIPE = new HashSet<>();
 
     static {
         ExtraDelightIntegration.Common.RELOADABLE_RECIPES.add(create_central_kitchen$CACHED_MIXING_RECIPE);
@@ -67,7 +67,7 @@ public abstract class RecipeFinderMixin {
                                     .stream().map(ExtraDelightRecipeConverters.AUTOMATIC_MELTING).filter(conditions).collect(Collectors.toSet()));
                 }
             }
-            original.addAll(create_central_kitchen$CACHED_MIXING_RECIPE);
+            return create_central_kitchen$merge(original, create_central_kitchen$CACHED_MIXING_RECIPE);
         } else if (cacheKey == MechanicalPressBlockEntityAccessor.getCompressingRecipesKey()) {
             var recipeManager = level.getRecipeManager();
             if (create_central_kitchen$CACHED_COMPACTING_RECIPE.isEmpty()) {
@@ -82,8 +82,20 @@ public abstract class RecipeFinderMixin {
 
                 }
             }
-            original.addAll(create_central_kitchen$CACHED_COMPACTING_RECIPE);
+            return create_central_kitchen$merge(original, create_central_kitchen$CACHED_COMPACTING_RECIPE);
         }
         return original;
+    }
+
+    @Unique
+    private static List<RecipeHolder<? extends Recipe<?>>> create_central_kitchen$merge(
+            List<RecipeHolder<? extends Recipe<?>>> original,
+            Collection<RecipeHolder<? extends Recipe<?>>> converted) {
+        if (converted.isEmpty())
+            return original;
+        var merged = new ArrayList<RecipeHolder<? extends Recipe<?>>>(original.size() + converted.size());
+        merged.addAll(original);
+        merged.addAll(converted);
+        return merged;
     }
 }
