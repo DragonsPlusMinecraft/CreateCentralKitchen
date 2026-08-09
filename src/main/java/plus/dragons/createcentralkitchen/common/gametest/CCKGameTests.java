@@ -40,7 +40,9 @@ public class CCKGameTests {
             ModIntegration.FESTIVEDELIGHT,
             "plus.dragons.createcentralkitchen.integration.festivedelight.FestiveDelightGameTests",
             ModIntegration.HEARTHANDHARVEST,
-            "plus.dragons.createcentralkitchen.integration.hearthandharvest.HearthAndHarvestGameTests");
+            "plus.dragons.createcentralkitchen.integration.hearthandharvest.HearthAndHarvestGameTests",
+            ModIntegration.BREWINANDCHEWIN,
+            "plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe.KegPouringRecipeConvertersGameTests");
 
     @SuppressWarnings("deprecation")
     @SubscribeEvent
