@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.143'
-    id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
+    id "me.modmuss50.mod-publish-plugin" version "2.2.0"
     id "com.diffplug.spotless" version "8.9.0"
     id 'idea'
 }
@@ -357,6 +357,7 @@ publishMods {
     type = STABLE
     displayName = "Create: Central Kitchen ${mod_version} for Create ${minecraft_version}-${create_version_production}"
     modLoaders.add("neoforge")
+    dryRun = providers.gradleProperty("modPublishDryRun").map { it.toBoolean() }.getOrElse(false)
 
     curseforge {
         projectId = "820977"
@@ -372,6 +373,7 @@ publishMods {
         projectId = "btq68HMO"
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         minecraftVersions.add(minecraft_version)
+        environment = CLIENT_AND_SERVER
         requires("create")
         requires("create-dragons-plus")
     }
