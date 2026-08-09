@@ -21,10 +21,12 @@ package plus.dragons.createcentralkitchen.integration.farmersdelight;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
+import com.simibubi.create.api.boiler.BoilerHeater;
 import com.simibubi.create.content.kinetics.deployer.BeltDeployerCallbacks;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,6 +45,7 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.Cutti
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 @GameTestHolder(CCKCommon.ID)
 @PrefixGameTestTemplate(false)
@@ -145,6 +148,36 @@ public class FarmersDelightRecipeGameTests {
             ((CookingPotBlockEntity) cookingPot).clearContent();
             helper.setBlock(packagerPosition, Blocks.AIR);
         }
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = Create.ID, template = "gametest/processing/iron_compacting")
+    public static void untaggedBoilerHeatersDoNotHeatCookingPots(GameTestHelper helper) {
+        var potPosition = new BlockPos(1, 2, 1);
+        var heaterPosition = potPosition.below();
+        helper.setBlock(potPosition, ModBlocks.COOKING_POT.get().defaultBlockState());
+        var cookingPot = helper.getBlockEntity(potPosition);
+        helper.assertTrue(cookingPot instanceof CookingPotBlockEntity, "The test cooking pot must have a block entity");
+
+        var activeBurner = AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED);
+        helper.setBlock(heaterPosition, activeBurner);
+        helper.assertTrue(
+                helper.getBlockState(heaterPosition).is(ModTags.Blocks.HEAT_SOURCES),
+                "CCK must add Blaze Burners to Farmer's Delight heat sources");
+        helper.assertTrue(
+                ((CookingPotBlockEntity) cookingPot).isHeated(helper.getLevel(), helper.absolutePos(potPosition)),
+                "An active tagged Blaze Burner must heat a cooking pot");
+
+        helper.setBlock(heaterPosition, Blocks.DIAMOND_BLOCK.defaultBlockState());
+        helper.assertTrue(
+                !helper.getBlockState(heaterPosition).is(ModTags.Blocks.HEAT_SOURCES),
+                "The synthetic boiler heater must not be a Farmer's Delight heat source");
+        BoilerHeater.REGISTRY.register(Blocks.DIAMOND_BLOCK, (level, position, state) -> BoilerHeater.PASSIVE_HEAT);
+
+        helper.assertTrue(
+                !((CookingPotBlockEntity) cookingPot).isHeated(helper.getLevel(), helper.absolutePos(potPosition)),
+                "A boiler heater removed from farmersdelight:heat_sources must not heat a cooking pot");
         helper.succeed();
     }
 }
