@@ -23,6 +23,7 @@ import com.phantomwing.rusticdelight.block.custom.PancakeBlock;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +31,7 @@ import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderScenes;
 import plus.dragons.createcentralkitchen.integration.rusticdelight.mechanicalArm.PancakeArmInteractionPoint;
+import plus.dragons.createcentralkitchen.integration.rusticdelight.registry.RusticDelightArmInteractionPointTypes;
 
 public class RusticDelightPonderPlugin {
     private static final List<ResourceLocation> PANCAKES = List.of(
@@ -50,11 +52,22 @@ public class RusticDelightPonderPlugin {
     }
 
     private static void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(PANCAKES)
+        registerScene(helper, "pancakes", () -> (PancakeBlock) ModBlocks.PANCAKES.get());
+        registerScene(helper, "honey_pancakes", () -> (PancakeBlock) ModBlocks.HONEY_PANCAKES.get());
+        registerScene(helper, "chocolate_pancakes", () -> (PancakeBlock) ModBlocks.CHOCOLATE_PANCAKES.get());
+        registerScene(helper, "cherry_blossom_pancakes", () -> (PancakeBlock) ModBlocks.CHERRY_BLOSSOM_PANCAKES.get());
+        registerScene(helper, "vegetable_pancakes", () -> (PancakeBlock) ModBlocks.VEGETABLE_PANCAKES.get());
+        registerScene(helper, "pumpkin_pancakes", () -> (PancakeBlock) ModBlocks.PUMPKIN_PANCAKES.get());
+        registerScene(helper, "coffee_pancakes", () -> (PancakeBlock) ModBlocks.COFFEE_PANCAKES.get());
+    }
+
+    private static void registerScene(
+            PonderSceneRegistrationHelper<ResourceLocation> helper, String id, Supplier<PancakeBlock> pancakeSupplier) {
+        helper.forComponents(ModIntegration.RUSTICDELIGHT.asResource(id))
                 .addStoryBoard(
-                        "farmersdelight/portionable_foods",
+                        "farmersdelight/stateful_portionable_food",
                         (builder, util) -> {
-                            var pancakes = (PancakeBlock) ModBlocks.PANCAKES.get();
+                            var pancakes = pancakeSupplier.get();
                             var six = PancakeArmInteractionPoint.stateForCount(pancakes.defaultBlockState(), 6);
                             var five = PancakeArmInteractionPoint.stateForCount(six, 5);
                             var eleven = PancakeArmInteractionPoint.stateForCount(six, 11);
@@ -65,6 +78,7 @@ public class RusticDelightPonderPlugin {
                                     new FDPonderScenes.StatefulPortionScene(
                                             "rustic_delight_pancakes",
                                             "Automating Pancake Stacks",
+                                            RusticDelightArmInteractionPointTypes.PANCAKE.getId(),
                                             six,
                                             List.of(five),
                                             pancakes.getServingItem(),

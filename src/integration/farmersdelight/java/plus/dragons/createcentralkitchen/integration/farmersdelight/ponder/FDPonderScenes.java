@@ -35,7 +35,12 @@ import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.createmod.ponder.foundation.instruction.DisplayWorldSectionInstruction;
 import net.createmod.ponder.foundation.instruction.FadeOutOfSceneInstruction;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,6 +59,7 @@ public class FDPonderScenes {
     public record StatefulPortionScene(
             String id,
             String title,
+            ResourceLocation interactionPointType,
             BlockState initialState,
             List<BlockState> extractionStates,
             ItemStack serving,
@@ -66,6 +72,10 @@ public class FDPonderScenes {
             BlockState afterState,
             ItemStack returned,
             String text) {}
+
+    private record ArmPoint(ResourceLocation type, BlockPos relativePosition, String mode) {}
+
+    private static final ResourceLocation DEPOT_ARM_POINT = ResourceLocation.fromNamespaceAndPath("create", "depot");
 
     /** Shared scene for addon foods represented by several block states instead of Farmer's Delight base classes. */
     public static void statefulPortionableFood(SceneBuilder builder, SceneBuildingUtil util, StatefulPortionScene config) {
@@ -87,6 +97,15 @@ public class FDPonderScenes {
         var foodPos = util.grid().at(2, 1, 4);
 
         scene.world().setBlock(foodPos, config.initialState(), false);
+        scene.world().modifyBlockEntityNBT(arm, ArmBlockEntity.class, nbt -> setArmPoints(
+                nbt,
+                new ArmPoint(config.interactionPointType(), new BlockPos(1, 0, 2), "TAKE"),
+                new ArmPoint(DEPOT_ARM_POINT, new BlockPos(-1, 0, 0), "DEPOSIT")));
+        scene.world().modifyBlockEntityNBT(secondArm, ArmBlockEntity.class, nbt -> setArmPoints(
+                nbt,
+                new ArmPoint(DEPOT_ARM_POINT, new BlockPos(1, 0, 0), "TAKE"),
+                new ArmPoint(config.interactionPointType(), new BlockPos(-1, 0, 2), "DEPOSIT"),
+                new ArmPoint(DEPOT_ARM_POINT, new BlockPos(-3, 0, 0), "DEPOSIT")));
         scene.world().showSection(food.add(output), Direction.DOWN);
         scene.world().setKineticSpeed(arm, 64);
         scene.overlay().showText(80)
@@ -101,7 +120,7 @@ public class FDPonderScenes {
         scene.idle(40);
 
         for (var nextState : config.extractionStates()) {
-            scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 1);
+            scene.world().instructArm(armPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
             scene.idle(24);
             scene.world().setBlock(foodPos, nextState, false);
             scene.world().instructArm(armPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, config.serving().copy(), -1);
@@ -115,7 +134,6 @@ public class FDPonderScenes {
         }
 
         config.insertion().ifPresent(insertion -> {
-            scene.rotateCameraY(180);
             scene.world().hideSection(arm, Direction.UP);
             scene.world().showSection(input.add(secondArm), Direction.DOWN);
             scene.world().setBlock(foodPos, insertion.beforeState(), false);
@@ -126,13 +144,15 @@ public class FDPonderScenes {
                     .pointAt(util.vector().centerOf(foodPos))
                     .attachKeyFrame()
                     .placeNearTarget();
+            scene.overlay().showOutline(PonderPalette.INPUT, input, input, 60);
+            scene.overlay().showOutline(PonderPalette.OUTPUT, food, food, 60);
             scene.idle(30);
-            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 1);
+            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, ItemStack.EMPTY, 0);
             scene.idle(24);
             scene.world().modifyBlockEntity(inputPos, DepotBlockEntity.class, be -> be.setHeldItem(ItemStack.EMPTY));
-            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, insertion.input().copy(), -1);
+            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, insertion.input().copy(), -1);
             scene.idle(20);
-            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_INPUT, insertion.input().copy(), 0);
+            scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, insertion.input().copy(), 0);
             scene.idle(24);
             scene.world().setBlock(foodPos, insertion.afterState(), false);
             if (insertion.returned().isEmpty()) {
@@ -140,13 +160,26 @@ public class FDPonderScenes {
             } else {
                 scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_OUTPUTS, insertion.returned().copy(), -1);
                 scene.idle(20);
-                scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, insertion.returned().copy(), 0);
+                scene.overlay().showOutline(PonderPalette.OUTPUT, output, output, 40);
+                scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.MOVE_TO_OUTPUT, insertion.returned().copy(), 1);
                 scene.idle(24);
                 scene.world().modifyBlockEntity(outputPos, DepotBlockEntity.class, be -> be.setHeldItem(insertion.returned().copy()));
                 scene.world().instructArm(secondArmPos, ArmBlockEntity.Phase.SEARCH_INPUTS, ItemStack.EMPTY, -1);
             }
             scene.idle(20);
         });
+    }
+
+    private static void setArmPoints(CompoundTag nbt, ArmPoint... points) {
+        var interactionPoints = new ListTag();
+        for (var point : points) {
+            var pointNbt = new CompoundTag();
+            pointNbt.putString("Type", point.type().toString());
+            pointNbt.put("Pos", NbtUtils.writeBlockPos(point.relativePosition()));
+            pointNbt.putString("Mode", point.mode());
+            interactionPoints.add(pointNbt);
+        }
+        nbt.put("InteractionPoints", interactionPoints);
     }
 
     public static void portionableFoods(SceneBuilder builder, SceneBuildingUtil util) {

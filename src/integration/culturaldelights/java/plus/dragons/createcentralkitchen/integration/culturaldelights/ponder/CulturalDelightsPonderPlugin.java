@@ -30,6 +30,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
+import plus.dragons.createcentralkitchen.integration.culturaldelights.registry.CulturalDelightsArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderScenes;
 
 public class CulturalDelightsPonderPlugin {
@@ -43,7 +44,7 @@ public class CulturalDelightsPonderPlugin {
     private static void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         helper.forComponents(EGGPLANT_PARMESAN)
                 .addStoryBoard(
-                        "farmersdelight/portionable_foods",
+                        "farmersdelight/stateful_portionable_food",
                         (builder, util) -> {
                             var feast = (EggplantFeastBlock) ModBlocks.EGGPLANT_PARMESAN_BLOCK.get();
                             var full = feast.defaultBlockState();
@@ -54,6 +55,7 @@ public class CulturalDelightsPonderPlugin {
                                     new FDPonderScenes.StatefulPortionScene(
                                             "cultural_delights_portioning",
                                             "Automating Eggplant Parmesan",
+                                            CulturalDelightsArmInteractionPointTypes.EGGPLANT_PARMESAN.getId(),
                                             full,
                                             List.of(full.setValue(servings, feast.getMaxServings() - 1)),
                                             new ItemStack(ModItems.EGGPLANT_PARMESAN.get()),

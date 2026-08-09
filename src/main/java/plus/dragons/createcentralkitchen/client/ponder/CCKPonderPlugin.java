@@ -56,5 +56,6 @@ public class CCKPonderPlugin implements PonderPlugin {
         helper.registerSharedText("arm_automate_container_insertion", "Use Mechanical Arm to insert food container.");
         helper.registerSharedText("arm_take_out_food", "Mechanical Arm can take out cooked food.");
         helper.registerSharedText("pipe_insert_liquid_ingredient", "Use Pipe to insert liquid ingredient.");
+        helper.registerSharedText("cask_recipe_panel", "A recipe panel requests one Salt and three separate Raw Meat ingredients.");
     }
 }

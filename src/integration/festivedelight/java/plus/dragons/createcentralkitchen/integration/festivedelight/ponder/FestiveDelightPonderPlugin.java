@@ -30,9 +30,11 @@ import net.toopa.festivedelight.init.FestiveDelightModItems;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderScenes;
+import plus.dragons.createcentralkitchen.integration.festivedelight.registry.FestiveDelightArmInteractionPointTypes;
 
 public class FestiveDelightPonderPlugin {
-    private static final List<ResourceLocation> FESTIVE_CHICKEN_STAGES = List.of(
+    private static final List<ResourceLocation> FESTIVE_CHICKEN_COMPONENTS = List.of(
+            "festive_chicken_block",
             "festive_chicken_stage_0",
             "festive_chicken_stage_1",
             "festive_chicken_stage_2",
@@ -48,15 +50,16 @@ public class FestiveDelightPonderPlugin {
     }
 
     private static void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(FESTIVE_CHICKEN_STAGES)
+        helper.forComponents(FESTIVE_CHICKEN_COMPONENTS)
                 .addStoryBoard(
-                        "farmersdelight/portionable_foods",
+                        "farmersdelight/stateful_portionable_food",
                         (builder, util) -> FDPonderScenes.statefulPortionableFood(
                                 builder,
                                 util,
                                 new FDPonderScenes.StatefulPortionScene(
                                         "festive_delight_chicken",
                                         "Automating Festive Chicken",
+                                        FestiveDelightArmInteractionPointTypes.FESTIVE_CHICKEN.getId(),
                                         FestiveDelightModBlocks.FESTIVE_CHICKEN_STAGE_0.get().defaultBlockState(),
                                         List.of(
                                                 FestiveDelightModBlocks.FESTIVE_CHICKEN_STAGE_1.get().defaultBlockState(),
@@ -71,6 +74,6 @@ public class FestiveDelightPonderPlugin {
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
         var armTargets = helper.addToTag(AllCreatePonderTags.ARM_TARGETS);
-        FESTIVE_CHICKEN_STAGES.forEach(armTargets::add);
+        FESTIVE_CHICKEN_COMPONENTS.forEach(armTargets::add);
     }
 }

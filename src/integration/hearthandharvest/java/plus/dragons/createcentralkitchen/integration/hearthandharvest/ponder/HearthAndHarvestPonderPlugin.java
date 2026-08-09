@@ -36,7 +36,7 @@ public class HearthAndHarvestPonderPlugin {
     private static void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         helper.forComponents(CASK)
                 .addStoryBoard(
-                        "farmersdelight/cooking_pot",
+                        "hearthandharvest/cask",
                         HearthAndHarvestPonderScenes::cask,
                         AllCreatePonderTags.ARM_TARGETS,
                         AllCreatePonderTags.HIGH_LOGISTICS);
