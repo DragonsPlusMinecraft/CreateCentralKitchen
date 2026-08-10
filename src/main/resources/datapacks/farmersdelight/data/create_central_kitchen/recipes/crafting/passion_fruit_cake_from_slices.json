@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "peculiars"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    },
+    {
+      "item": "create_central_kitchen:passion_fruit_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "peculiars:passion_fruit_cake"
+  }
+}

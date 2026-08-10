@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen.foundation.resource;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.gametest.framework.GameTest;
@@ -36,9 +37,20 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("filling/aloe_gel_bucket"),
             CentralKitchen.genRL("mixing/aloe_gel_from_block"),
             CentralKitchen.genRL("mixing/yucca_gateau"));
+    private static final List<ResourceLocation> FARMERS_DELIGHT_RECIPES = List.of(
+            CentralKitchen.genRL("crafting/passion_fruit_cake_from_slices"),
+            CentralKitchen.genRL("sequenced_assembly/apple_pie"),
+            CentralKitchen.genRL("sequenced_assembly/mulberry_pie"),
+            CentralKitchen.genRL("sequenced_assembly/pumpkin_pie"),
+            CentralKitchen.genRL("sequenced_assembly/sweet_berry_cheesecake"));
     private static final Map<String, List<ResourceLocation>> BUILTIN_RECIPES = Map.of(
             Mods.AD, ABNORMALS_DELIGHT_RECIPES,
             Mods.ATMOSPHERIC, ATMOSPHERIC_RECIPES);
+    private static final Map<String, List<ResourceLocation>> RESTORED_RECIPES = new LinkedHashMap<>();
+
+    static {
+        RESTORED_RECIPES.put(Mods.FD, FARMERS_DELIGHT_RECIPES);
+    }
 
     @SuppressWarnings("deprecation")
     @SubscribeEvent
@@ -50,6 +62,13 @@ public class BuiltinResourceGameTests {
     public static void loadsEveryBuiltinRecipe(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
         BUILTIN_RECIPES.forEach((modId, recipeIds) -> {
+            if (!Mods.isLoaded(modId))
+                return;
+            for (ResourceLocation recipeId : recipeIds)
+                helper.assertTrue(recipes.byKey(recipeId).isPresent(),
+                        "The " + modId + " built-in pack did not load " + recipeId);
+        });
+        RESTORED_RECIPES.forEach((modId, recipeIds) -> {
             if (!Mods.isLoaded(modId))
                 return;
             for (ResourceLocation recipeId : recipeIds)
