@@ -36,8 +36,7 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 @ModLoadSubscriber(modid = Mods.OF)
 public class OFHarvesterMovementBehaviorExtensions {
     private static final Map<Block, BlockState> FARMLAND_REVERT_MAP = new HashMap<>();
-    private static final String SNOWY_SPIRIT_MODID = "snowyspirit";
-    private static final ResourceLocation GINGER = ResourceLocation.fromNamespaceAndPath(SNOWY_SPIRIT_MODID, "ginger");
+    private static final ResourceLocation GINGER = Mods.snowySpirit("ginger");
 
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
@@ -58,7 +57,7 @@ public class OFHarvesterMovementBehaviorExtensions {
                     REGISTRY.put(OFBlocks.OVERWEIGHT_CABBAGE.get(), (behaviour, context, pos, state, replant, partial) -> OFHarvesterMovementBehaviorExtensions.harvest(behaviour, context, pos, state, replant, ofPlant(Mods.fd("cabbages"))));
                     REGISTRY.put(OFBlocks.OVERWEIGHT_ONION.get(), (behaviour, context, pos, state, replant, partial) -> OFHarvesterMovementBehaviorExtensions.harvest(behaviour, context, pos, state, replant, ofPlant(Mods.fd("onions"))));
                 }
-                if (ModList.get().isLoaded("bewitchment")) {
+                if (Mods.isLoaded(Mods.SNOWY_SPIRIT)) {
                     REGISTRY.put(OFBlocks.OVERWEIGHT_GINGER.get(), (behaviour, context, pos, state, replant, partial) -> OFHarvesterMovementBehaviorExtensions.harvest(behaviour, context, pos, state, replant, ofPlant(GINGER)));
                 }
             }

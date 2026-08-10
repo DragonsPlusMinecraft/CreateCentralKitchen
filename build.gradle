@@ -168,6 +168,7 @@ dependencies {
     add(integrationConfiguration, "maven.modrinth:seasonals:${seasonals_version}")
     //independent mods
     add(integrationConfiguration, "maven.modrinth:overweight-farming:${overweight_farming_version}")
+    add(integrationConfiguration, "maven.modrinth:snowy-spirit:${snowy_spirit_version}")
     //utility dependencies
     modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")

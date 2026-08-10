@@ -31,6 +31,7 @@ public class Mods {
     public static final String COOKIELICIOUS = "cookielicious";
     // Standole mods
     public static final String OF = "overweight_farming";
+    public static final String SNOWY_SPIRIT = "snowyspirit";
     //Utility mods
     public static final String JEI = "jei";
     public static final String CURIOS = "curios";
@@ -122,6 +123,10 @@ public class Mods {
 
     public static ResourceLocation cookielicious(String path) {
         return ResourceLocation.fromNamespaceAndPath(COOKIELICIOUS, path);
+    }
+
+    public static ResourceLocation snowySpirit(String path) {
+        return ResourceLocation.fromNamespaceAndPath(SNOWY_SPIRIT, path);
     }
 
     public static ResourceLocation jei(String path) {
