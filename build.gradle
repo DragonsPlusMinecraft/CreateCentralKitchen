@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 plugins {
     id 'idea'
     id 'maven-publish'
@@ -258,4 +260,36 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+def resourceJsonFiles = fileTree('src/main/resources') {
+    include '**/*.json'
+    include '**/pack.mcmeta'
+}
+
+tasks.register('validateResources') {
+    group = 'verification'
+    description = 'Validates manually maintained JSON resources and Minecraft 1.20.1 pack metadata.'
+    inputs.files(resourceJsonFiles)
+
+    doLast {
+        def failures = []
+        resourceJsonFiles.files.sort().each { resource ->
+            try {
+                def parsed = new JsonSlurper().parse(resource, 'UTF-8')
+                if (resource.name == 'pack.mcmeta' && parsed?.pack?.pack_format != 15) {
+                    failures.add("${project.relativePath(resource)}: expected pack_format 15, found ${parsed?.pack?.pack_format}")
+                }
+            } catch (Exception exception) {
+                failures.add("${project.relativePath(resource)}: ${exception.message}")
+            }
+        }
+        if (!failures.isEmpty()) {
+            throw new GradleException("Invalid manually maintained resources:\n" + failures.join('\n'))
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('validateResources')
 }

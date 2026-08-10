@@ -164,6 +164,8 @@
 
 	"datapack.create_central_kitchen.atmospheric": "Create: Central Kitchen - Atmospheric",
 	"datapack.create_central_kitchen.atmospheric.desc": "Provides support for Atmospheric",
+	"datapack.create_central_kitchen.abnormals_delight": "Create: Central Kitchen - Abnormals Delight",
+	"datapack.create_central_kitchen.abnormals_delight.desc": "Provides support for Abnormals Delight",
 	"datapack.create_central_kitchen.autumnity": "Create: Central Kitchen - Autumnity",
 	"datapack.create_central_kitchen.autumnity.desc": "Provides support for Autumnity",
 	"datapack.create_central_kitchen.buzzier_bees": "Create: Central Kitchen - Buzzier Bees",
