@@ -1,0 +1,150 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "farmersdelight:pie_crust"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "ends_delight:chorus_fruit_pie"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:wheat"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:wheat"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:wheat"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:poppy"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        [
+          {
+            "item": "minecraft:chorus_fruit"
+          },
+          {
+            "item": "ends_delight:chorus_fruit_grain"
+          }
+        ]
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:chorus_flower"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_chorus_fruit_pie"
+  }
+}

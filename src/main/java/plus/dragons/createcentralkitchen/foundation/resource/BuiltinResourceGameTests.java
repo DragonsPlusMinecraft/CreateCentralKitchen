@@ -43,6 +43,25 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("sequenced_assembly/mulberry_pie"),
             CentralKitchen.genRL("sequenced_assembly/pumpkin_pie"),
             CentralKitchen.genRL("sequenced_assembly/sweet_berry_cheesecake"));
+    private static final List<ResourceLocation> ENDS_DELIGHT_RECIPES = List.of(
+            CentralKitchen.genRL("compacting/chorus_cookie"),
+            CentralKitchen.genRL("emptying/bubble_tea"),
+            CentralKitchen.genRL("emptying/chorus_flower_tea"),
+            CentralKitchen.genRL("emptying/chorus_fruit_milk_tea"),
+            CentralKitchen.genRL("emptying/chorus_fruit_wine"),
+            CentralKitchen.genRL("filling/bubble_tea"),
+            CentralKitchen.genRL("filling/chorus_flower_tea"),
+            CentralKitchen.genRL("filling/chorus_fruit_milk_tea"),
+            CentralKitchen.genRL("filling/chorus_fruit_wine"),
+            CentralKitchen.genRL("filling/dragon_breath_soda"),
+            CentralKitchen.genRL("mixing/chorus_flower_tea"),
+            CentralKitchen.genRL("mixing/chorus_fruit_bubble_tea"),
+            CentralKitchen.genRL("mixing/chorus_fruit_milk_tea"),
+            CentralKitchen.genRL("mixing/chorus_fruit_wine"),
+            CentralKitchen.genRL("mixing/dragon_breath_soda"),
+            CentralKitchen.genRL("mixing/upgrade_to_chorus_fruit_bubble_tea"),
+            CentralKitchen.genRL("sequenced_assembly/chorus_flower_pie"),
+            CentralKitchen.genRL("sequenced_assembly/chorus_fruit_pie"));
     private static final Map<String, List<ResourceLocation>> BUILTIN_RECIPES = Map.of(
             Mods.AD, ABNORMALS_DELIGHT_RECIPES,
             Mods.ATMOSPHERIC, ATMOSPHERIC_RECIPES);
@@ -50,6 +69,7 @@ public class BuiltinResourceGameTests {
 
     static {
         RESTORED_RECIPES.put(Mods.FD, FARMERS_DELIGHT_RECIPES);
+        RESTORED_RECIPES.put(Mods.ED, ENDS_DELIGHT_RECIPES);
     }
 
     @SuppressWarnings("deprecation")

@@ -1,0 +1,23 @@
+{
+  "type": "create:emptying",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ends_delight"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "ends_delight:bubble_tea"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:chorus_fruit_bubble_tea"
+    }
+  ]
+}

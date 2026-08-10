@@ -1,0 +1,81 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "farmersdelight:wheat_dough"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "ends_delight:chorus_flower_pie"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        },
+        {
+          "item": "ends_delight:dried_chorus_flower"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        },
+        {
+          "item": "ends_delight:dried_chorus_flower"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        },
+        {
+          "item": "minecraft:poppy"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_chorus_flower_pie"
+  }
+}
