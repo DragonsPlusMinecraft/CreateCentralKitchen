@@ -1,9 +1,9 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
-    id "net.neoforged.moddev.legacyforge" version "2.0.107"
-    id "com.diffplug.spotless" version "7.0.2"
+    id "me.modmuss50.mod-publish-plugin" version "2.2.0"
+    id "net.neoforged.moddev.legacyforge" version "2.0.143"
+    id "com.diffplug.spotless" version "8.9.0"
 }
 
 base {
@@ -99,7 +99,6 @@ legacyForge {
 }
 
 repositories {
-    mavenLocal()
     maven {
         name = "create maven"
         url = uri("https://maven.createmod.net")
@@ -116,28 +115,9 @@ repositories {
         name = "Theillusivec4 Maven"
         url = uri("https://maven.theillusivec4.top/")
     }
-/*    maven {
-        name "Abnormals Maven"
-        url  "https://maven.jaackson.me" // it's gone
-    }*/
     maven {
         name = "Apple Skin"
         url = uri("https://maven.ryanliptak.com/")
-    }
-    maven {
-        name = "JitPack"
-        url = uri("https://jitpack.io")
-    }
-    maven {
-        name = "Curse Maven"
-        url = uri("https://www.cursemaven.com")
-        content {
-            includeGroup("curse.maven")
-        }
-    }
-    maven {
-        name = "DragonsPlus Maven"
-        url = uri("https://maven.dragons.plus/releases")
     }
     maven {
         name = "Modrinth"
@@ -147,8 +127,8 @@ repositories {
 
 dependencies {
     //embedded dependencies
-    modCompileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
-    modImplementation(jarJar("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")) {
+    modCompileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    modImplementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
         transitive = false
         version { strictly("[${mixin_extras_version},)") }
     }
@@ -159,31 +139,31 @@ dependencies {
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
     //create addons
-    modImplementation("maven.modrinth:createaddition:${create_addition_file}")
+    modImplementation("maven.modrinth:createaddition:${create_addition_version}")
     //farmers delight addons
-    modImplementation("maven.modrinth:farmers-delight:${farmers_delight_file}")
-    modImplementation("maven.modrinth:collectors-reap:${collectors_reap_file}")
-    modImplementation("curse.maven:farmers-respite-551453:${farmers_respite_file}")
-    modImplementation("maven.modrinth:miners-delight:${miners_delight_file}")
-    modImplementation("maven.modrinth:nethers-delight:${nethers_delight_file}")
-    modImplementation("curse.maven:corn-delight-577805:${corn_delight_file}")
-    modImplementation("curse.maven:corn-delight-lib-368098:${corn_delight_lib_file}")
-    modImplementation("maven.modrinth:ends-delight:${ends_delight_file}")
+    modImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
+    modImplementation("maven.modrinth:collectors-reap:${collectors_reap_version}")
+    modImplementation("maven.modrinth:farmers-respite:${farmers_respite_version}")
+    modImplementation("maven.modrinth:miners-delight:${miners_delight_version}")
+    modImplementation("maven.modrinth:nethers-delight:${nethers_delight_version}")
+    modImplementation("maven.modrinth:corn-delight:${corn_delight_version}")
+    modImplementation("maven.modrinth:mmlib:${corn_delight_lib_version}")
+    modImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
     ////abnormals mods addons
     modImplementation("maven.modrinth:blueprint:${blueprint_version}")
-    modImplementation("curse.maven:abnormals-delight-442719:${abnormals_delight_file}")
-    modImplementation("curse.maven:atmospheric-362393:${atmospheric_file}")
-    modImplementation("curse.maven:autumnity-365045:${autumnity_file}")
-    modImplementation("curse.maven:buzzier-bees-355458:${buzzier_bees_file}")
-    modImplementation("curse.maven:gallery-1173553:6133771") // buzzier-bees dependencies
-    modImplementation("curse.maven:environmental-388992:${environmental_file}")
-    modImplementation("curse.maven:neapolitan-382016:${neapolitan_file}")
-    modImplementation("curse.maven:upgrade-aquatic-326895:${upgrade_aquatic_file}")
-    modImplementation("curse.maven:peculiars-418551:${peculiars_file}")
-    modImplementation("maven.modrinth:respiteful:${respiteful_file}")
-    modImplementation("curse.maven:seasonals-416471:${seasonals_file}")
+    modImplementation("maven.modrinth:abnormals-delight:${abnormals_delight_version}")
+    modImplementation("maven.modrinth:atmospheric:${atmospheric_version}")
+    modImplementation("maven.modrinth:autumnity:${autumnity_version}")
+    modImplementation("maven.modrinth:buzzier-bees:${buzzier_bees_version}")
+    modImplementation("maven.modrinth:gallery:${gallery_version}")
+    modImplementation("maven.modrinth:environmental:${environmental_version}")
+    modImplementation("maven.modrinth:neapolitan:${neapolitan_version}")
+    modImplementation("maven.modrinth:upgrade-aquatic:${upgrade_aquatic_version}")
+    modImplementation("maven.modrinth:peculiars:${peculiars_version}")
+    modImplementation("maven.modrinth:respiteful:${respiteful_version}")
+    modImplementation("maven.modrinth:seasonals:${seasonals_version}")
     //independent mods
-    modImplementation("maven.modrinth:overweight-farming:${overweight_farming_file}")
+    modImplementation("maven.modrinth:overweight-farming:${overweight_farming_version}")
     //utility dependencies
     modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
@@ -192,17 +172,15 @@ dependencies {
     modRuntimeOnly("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
     modCompileOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
     modRuntimeOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
-    // Fix incompatible issue
-    modImplementation("curse.maven:botarium-704113:4831434")
-    modImplementation("curse.maven:selene-499980:6983934")
-    modImplementation("curse.maven:sleep-tight-817564:6947504")
+    modImplementation("maven.modrinth:botarium:${botarium_version}")
+    modImplementation("maven.modrinth:moonlight:${moonlight_version}")
+    modImplementation("maven.modrinth:sleep-tight:${sleep_tight_version}")
 
-    modImplementation("curse.maven:patchouli-306770:6164575")
-    modImplementation("curse.maven:botania-225643:6366547")
-    modImplementation("curse.maven:ars-nouveau-401955:5894609")
-    modImplementation("curse.maven:ars-botania-1194681:6453459")
-    // cc-tweaked create 6.0 is not supported yet.
-    modCompileOnly("curse.maven:cc-tweaked-282001:5714507")
+    modImplementation("maven.modrinth:patchouli:${patchouli_version}")
+    modImplementation("maven.modrinth:botania:${botania_version}")
+    modImplementation("maven.modrinth:ars-nouveau:${ars_nouveau_version}")
+    modImplementation("maven.modrinth:ars-botania:${ars_botania_version}")
+    modCompileOnly("maven.modrinth:cc-tweaked:${cc_tweaked_version}")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
@@ -273,7 +251,7 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("file://${project.projectDir}/mcmodsrepo")
+            url = layout.projectDirectory.dir("mcmodsrepo")
         }
     }
 }

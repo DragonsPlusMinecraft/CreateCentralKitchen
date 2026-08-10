@@ -8,7 +8,6 @@
   "mixins": [
     "common.arsbotania.CapEventMixin",
     "common.botarium.BotariumForgeMixin",
-    "common.computercraft.MoreRedIntegrationMixin",
     "common.create.BeltHelperMixin",
     "common.create.BlockEntityBehaviourMixin",
     "common.create.CreateJEIMixin",

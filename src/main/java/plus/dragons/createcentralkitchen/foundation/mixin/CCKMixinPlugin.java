@@ -36,8 +36,6 @@ public class CCKMixinPlugin implements IMixinConfigPlugin {
             return LoadingModList.get().getModFileById("ars_botania") != null;
         if (mixinClassName.contains("botarium"))
             return LoadingModList.get().getModFileById("botarium") != null;
-        if (mixinClassName.contains("computercraft"))
-            return LoadingModList.get().getModFileById("computercraft") != null;
         return true;
     }
 
