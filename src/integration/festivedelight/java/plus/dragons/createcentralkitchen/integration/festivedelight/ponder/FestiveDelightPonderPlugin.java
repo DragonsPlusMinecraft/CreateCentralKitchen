@@ -58,7 +58,7 @@ public class FestiveDelightPonderPlugin {
                                 util,
                                 new FDPonderScenes.StatefulPortionScene(
                                         "festive_delight_chicken",
-                                        "Automating Festive Chicken",
+                                        "Automatic(not really) Festive Chicken",
                                         FestiveDelightArmInteractionPointTypes.FESTIVE_CHICKEN.getId(),
                                         FestiveDelightModBlocks.FESTIVE_CHICKEN_STAGE_0.get().defaultBlockState(),
                                         List.of(

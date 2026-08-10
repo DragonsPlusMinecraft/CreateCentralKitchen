@@ -36,7 +36,6 @@ import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import plus.dragons.createcentralkitchen.common.CCKCommon;
 
 public class HearthAndHarvestPonderScenes {
     public static void cask(SceneBuilder builder, SceneBuildingUtil util) {
@@ -94,7 +93,7 @@ public class HearthAndHarvestPonderScenes {
                     new FactoryPanelPosition(util.grid().at(6, 3, 1), FactoryPanelBlock.PanelSlot.TOP_RIGHT));
         });
         scene.overlay().showText(70)
-                .sharedText(CCKCommon.asResource("cask_recipe_panel"))
+                .text("A recipe panel requests one Salt and three separate Raw Meat ingredients.")
                 .pointAt(util.vector().centerOf(outputPanelPos))
                 .attachKeyFrame()
                 .placeNearTarget();
@@ -131,11 +130,11 @@ public class HearthAndHarvestPonderScenes {
                 .attachKeyFrame()
                 .placeNearTarget();
         scene.overlay()
-                .showControls(util.vector().topOf(caskPos).add(-0.25, 0, 0), Pointing.DOWN, 60)
+                .showControls(util.vector().topOf(caskPos).add(-0.55, 0, 0), Pointing.DOWN, 60)
                 .withItem(salt);
         scene.overlay()
-                .showControls(util.vector().topOf(caskPos).add(0.25, 0, 0), Pointing.DOWN, 60)
-                .withItem(meat.copyWithCount(3));
+                .showControls(util.vector().topOf(caskPos).add(0.55, 0, 0), Pointing.DOWN, 60)
+                .withItem(meat);
         scene.idle(80);
 
         scene.overlay().showText(80)

@@ -18,10 +18,6 @@ This release requires Create 6.0.10, Create: Dragons Plus 1.11.4, and Farmer's D
 * Create Packagers can now unpack ingredients into Extra Delight Ovens.
 * Blaze Burner chef rendering now falls back safely when optional baked model assets are unavailable.
 
-### Updated
-
-* Updated NeoForge, Create: Dragons Plus, JEI, Curios, and the supported Delight integrations to their current 1.21.1 compatibility baselines.
-
 ### Localization
 
 * Added Ukrainian localization by @Ch1sho.
