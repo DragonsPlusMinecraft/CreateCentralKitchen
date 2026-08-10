@@ -79,7 +79,9 @@ legacyForge {
         client {
             client()
 
-            gameDirectory = project.file('run')
+            gameDirectory = project.file(integrationRuntimeProfile == 'full'
+                    ? 'run'
+                    : "run/client-${integrationRuntimeProfile}")
         }
 
         server {
@@ -269,6 +271,18 @@ def resourceJsonFiles = fileTree('src/main/resources') {
     include '**/pack.mcmeta'
 }
 
+def englishLangFile = file('src/main/resources/assets/create_central_kitchen/lang/en_us.json')
+def localizedLangFiles = fileTree('src/main/resources/assets/create_central_kitchen/lang') {
+    include '*.json'
+}
+def defaultLangFiles = fileTree('src/main/resources/assets/create_central_kitchen/lang/default') {
+    include '*.json'
+}
+def builtinPackRoots = [
+        datapack    : file('src/main/resources/datapacks'),
+        resourcepack: file('src/main/resources/resourcepacks')
+]
+
 tasks.register('validateResources') {
     group = 'verification'
     description = 'Validates manually maintained JSON resources and Minecraft 1.20.1 pack metadata.'
@@ -284,6 +298,43 @@ tasks.register('validateResources') {
                 }
             } catch (Exception exception) {
                 failures.add("${project.relativePath(resource)}: ${exception.message}")
+            }
+        }
+
+        def english = new JsonSlurper().parse(englishLangFile, 'UTF-8')
+        def validateTranslations = { resource, translations ->
+            if (!(translations instanceof Map)) {
+                failures.add("${project.relativePath(resource)}: expected a JSON object")
+                return
+            }
+            translations.each { key, value ->
+                if (!(value instanceof String) || value.trim().isEmpty())
+                    failures.add("${project.relativePath(resource)}: '${key}' must have a non-empty string value")
+            }
+        }
+        validateTranslations(englishLangFile, english)
+
+        localizedLangFiles.files.sort().findAll { it != englishLangFile }.each { resource ->
+            def translations = new JsonSlurper().parse(resource, 'UTF-8')
+            validateTranslations(resource, translations)
+            translations.keySet().findAll { !english.containsKey(it) }.sort().each { key ->
+                failures.add("${project.relativePath(resource)}: '${key}' is missing from en_us.json")
+            }
+        }
+
+        defaultLangFiles.files.sort().each { resource ->
+            def translations = new JsonSlurper().parse(resource, 'UTF-8')
+            validateTranslations(resource, translations)
+            translations.keySet().findAll { !english.containsKey(it) }.sort().each { key ->
+                failures.add("${project.relativePath(resource)}: '${key}' is missing from en_us.json")
+            }
+        }
+
+        builtinPackRoots.each { type, root ->
+            root.listFiles()?.findAll { it.isDirectory() && new File(it, 'pack.mcmeta').isFile() }?.sort()?.each { pack ->
+                def titleKey = "${type}.create_central_kitchen.${pack.name}".toString()
+                if (!english.containsKey(titleKey))
+                    failures.add("${project.relativePath(pack)}: missing English pack title '${titleKey}'")
             }
         }
         if (!failures.isEmpty()) {

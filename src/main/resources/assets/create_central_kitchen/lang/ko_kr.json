@@ -151,6 +151,7 @@
 "create_central_kitchen.ponder.blaze_stove.intro.text_3": "요리 안내서를 회수하려면, 렌치를 들고 웅크린 채로 블레이즈 난로를 우클릭하세요.",
 "_": "->------------------------]  UI & Messages  [------------------------<-",
 "datapack.create_central_kitchen.atmospheric": "Create: Central Kitchen - Atmospheric",
+"datapack.create_central_kitchen.abnormals_delight": "Create: Central Kitchen - Abnormals Delight",
 "datapack.create_central_kitchen.buzzier_bees": "Create: Central Kitchen - Buzzier Bees",
 "datapack.create_central_kitchen.farmersdelight": "Create: Central Kitchen - Farmer's Delight",
 "datapack.create_central_kitchen.miners_delight": "Create: Central Kitchen - Miner's Delight",
