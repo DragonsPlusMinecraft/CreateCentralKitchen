@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "atmospheric:roasted_yucca_fruit"
+    },
+    {
+      "item": "atmospheric:roasted_yucca_fruit"
+    },
+    {
+      "item": "atmospheric:yucca_flower"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:aloe_gel",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "atmospheric:yucca_gateau"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen.foundation.resource;
 
 import java.util.List;
+import java.util.Map;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.GameTestRegistry;
@@ -12,7 +13,7 @@ import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-@ModLoadSubscriber(modid = Mods.AD)
+@ModLoadSubscriber
 @PrefixGameTestTemplate(false)
 public class BuiltinResourceGameTests {
     private static final List<ResourceLocation> ABNORMALS_DELIGHT_RECIPES = List.of(
@@ -22,6 +23,22 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("compacting/cherry_cookie"),
             CentralKitchen.genRL("compacting/mulberry_cookie"),
             CentralKitchen.genRL("filling/maple_glazed_bacon"));
+    private static final List<ResourceLocation> ATMOSPHERIC_RECIPES = List.of(
+            CentralKitchen.genRL("compacting/aloe_gel"),
+            CentralKitchen.genRL("compacting/aloe_gel_block"),
+            CentralKitchen.genRL("compacting/passionfruit_tart"),
+            CentralKitchen.genRL("crafting/aloe_gel_block_from_bucket"),
+            CentralKitchen.genRL("crafting/aloe_gel_bottles_from_bucket"),
+            CentralKitchen.genRL("crafting/aloe_gel_bucket"),
+            CentralKitchen.genRL("crafting/aloe_gel_bucket_from_block"),
+            CentralKitchen.genRL("emptying/aloe_gel_bottle"),
+            CentralKitchen.genRL("filling/aloe_gel_bottle"),
+            CentralKitchen.genRL("filling/aloe_gel_bucket"),
+            CentralKitchen.genRL("mixing/aloe_gel_from_block"),
+            CentralKitchen.genRL("mixing/yucca_gateau"));
+    private static final Map<String, List<ResourceLocation>> BUILTIN_RECIPES = Map.of(
+            Mods.AD, ABNORMALS_DELIGHT_RECIPES,
+            Mods.ATMOSPHERIC, ATMOSPHERIC_RECIPES);
 
     @SuppressWarnings("deprecation")
     @SubscribeEvent
@@ -30,11 +47,15 @@ public class BuiltinResourceGameTests {
     }
 
     @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
-    public static void loadsEveryAbnormalsDelightRecipe(GameTestHelper helper) {
+    public static void loadsEveryBuiltinRecipe(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
-        for (ResourceLocation recipeId : ABNORMALS_DELIGHT_RECIPES)
-            helper.assertTrue(recipes.byKey(recipeId).isPresent(),
-                    "The Abnormals Delight built-in pack did not load " + recipeId);
+        BUILTIN_RECIPES.forEach((modId, recipeIds) -> {
+            if (!Mods.isLoaded(modId))
+                return;
+            for (ResourceLocation recipeId : recipeIds)
+                helper.assertTrue(recipes.byKey(recipeId).isPresent(),
+                        "The " + modId + " built-in pack did not load " + recipeId);
+        });
         helper.succeed();
     }
 }

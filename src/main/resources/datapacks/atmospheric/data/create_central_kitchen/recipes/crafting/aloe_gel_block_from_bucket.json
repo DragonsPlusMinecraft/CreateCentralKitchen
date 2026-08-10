@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:aloe_gel_bucket"
+    }
+  ],
+  "result": {
+    "item": "atmospheric:aloe_gel_block"
+  }
+}

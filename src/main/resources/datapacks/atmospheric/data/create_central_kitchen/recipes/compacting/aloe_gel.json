@@ -1,0 +1,23 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "atmospheric:aloe_leaves"
+    },
+    {
+      "item": "atmospheric:aloe_leaves"
+    },
+    {
+      "item": "atmospheric:aloe_leaves"
+    },
+    {
+      "item": "atmospheric:aloe_leaves"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:aloe_gel"
+    }
+  ]
+}
