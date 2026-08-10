@@ -87,6 +87,26 @@ public class BlazeStoveGuideSecurityGameTests {
         helper.succeed();
     }
 
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void shiftClickClearsTheSelectedGuideSlot(GameTestHelper helper) {
+        var player = helper.makeMockPlayer();
+        CookingGuideMenu menu = new CookingGuideMenu(FDMenuEntries.COOKING_GUIDE.get(), 24,
+                new Inventory(player), FDItemEntries.COOKING_GUIDE.asStack());
+
+        for (int selectedSlot = 0; selectedSlot < menu.getInputSize(); selectedSlot++) {
+            menu.getSlot(36).set(new ItemStack(Items.BEDROCK));
+            menu.getSlot(36 + selectedSlot).set(new ItemStack(Items.STONE));
+            menu.quickMoveStack(player, 36 + selectedSlot);
+
+            helper.assertTrue(menu.getSlot(36 + selectedSlot).getItem().isEmpty(),
+                    "Shift-click did not clear guide input " + selectedSlot);
+            if (selectedSlot > 0)
+                helper.assertTrue(menu.getSlot(36).getItem().is(Items.BEDROCK),
+                        "Shift-click on guide input " + selectedSlot + " cleared input 0 instead");
+        }
+        helper.succeed();
+    }
+
     private static CompoundTag forgedGuideTag() {
         CompoundTag tag = new CompoundTag();
         ListTag ingredients = new ListTag();

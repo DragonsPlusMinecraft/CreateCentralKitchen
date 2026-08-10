@@ -75,7 +75,7 @@ public class IgnoreAutomaticShapelessRecipe {
             return shouldIgnoreItemInAutomation(items[0]);
         } else {
             for (ItemStack stack : items)
-                if (!shouldIgnoreItemInAutomation(items[0]))
+                if (!shouldIgnoreItemInAutomation(stack))
                     return false;
         }
         return true;

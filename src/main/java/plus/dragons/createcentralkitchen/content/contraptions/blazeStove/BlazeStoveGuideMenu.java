@@ -181,7 +181,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
                 }
             }
         } else if (index < 36 + inputSize) {
-            ghostInventory.extractItem(0, 1, false);
+            ghostInventory.extractItem(index - 36, 1, false);
             getSlot(index).setChanged();
         }
         return ItemStack.EMPTY;
