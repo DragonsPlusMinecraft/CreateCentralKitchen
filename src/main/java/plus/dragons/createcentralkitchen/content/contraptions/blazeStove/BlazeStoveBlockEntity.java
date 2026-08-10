@@ -401,7 +401,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
             ItemStack stack = inventory.getStackInSlot(i);
             if (stack.isEmpty()) continue;
             totalUncooked += Math.max(0, cookingTimesTotal[i] - cookingTimes[i]);
-            cookingTimesTotal[i] = cookingTimes[0] = 0;
+            cookingTimesTotal[i] = cookingTimes[i] = 0;
             inventory.setStackInSlot(i, ItemStack.EMPTY);
             addSmokeAtItem(i, 5);
             didInventoryChange = true;
