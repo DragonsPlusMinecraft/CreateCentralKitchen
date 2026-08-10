@@ -18,6 +18,13 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
+def integrationRuntimeProfile = providers.gradleProperty('integration_runtime_profile').getOrElse('full')
+def supportedIntegrationRuntimeProfiles = ['full', 'farmersdelight', 'minimal']
+if (!supportedIntegrationRuntimeProfiles.contains(integrationRuntimeProfile))
+    throw new GradleException("Unsupported integration_runtime_profile '${integrationRuntimeProfile}'. Expected one of ${supportedIntegrationRuntimeProfiles}.")
+def integrationConfiguration = integrationRuntimeProfile == 'full' ? 'modImplementation' : 'modCompileOnly'
+def farmersDelightConfiguration = integrationRuntimeProfile == 'minimal' ? 'modCompileOnly' : 'modImplementation'
+
 idea {
     module {
         downloadJavadoc = true
@@ -84,7 +91,9 @@ legacyForge {
         gameTestServer {
             type = "gameTestServer"
 
-            gameDirectory = project.file('run/gametest')
+            gameDirectory = project.file(integrationRuntimeProfile == 'full'
+                    ? 'run/gametest'
+                    : "run/gametest-${integrationRuntimeProfile}")
             systemProperty('forge.enabledGameTestNamespaces', 'create_central_kitchen')
             // setForceExit false <- FIXME 1.20  see Create
         }
@@ -132,47 +141,50 @@ dependencies {
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
     //integration dependencies
     //create addons
-    modImplementation("maven.modrinth:createaddition:${create_addition_version}")
+    add(integrationConfiguration, "maven.modrinth:createaddition:${create_addition_version}")
     //farmers delight addons
-    modImplementation("maven.modrinth:farmers-delight:${farmers_delight_version}")
-    modImplementation("maven.modrinth:collectors-reap:${collectors_reap_version}")
-    modImplementation("maven.modrinth:farmers-respite:${farmers_respite_version}")
-    modImplementation("maven.modrinth:miners-delight:${miners_delight_version}")
-    modImplementation("maven.modrinth:nethers-delight:${nethers_delight_version}")
-    modImplementation("maven.modrinth:corn-delight:${corn_delight_version}")
-    modImplementation("maven.modrinth:mmlib:${corn_delight_lib_version}")
-    modImplementation("maven.modrinth:ends-delight:${ends_delight_version}")
+    add(farmersDelightConfiguration, "maven.modrinth:farmers-delight:${farmers_delight_version}")
+    add(integrationConfiguration, "maven.modrinth:collectors-reap:${collectors_reap_version}")
+    add(integrationConfiguration, "maven.modrinth:farmers-respite:${farmers_respite_version}")
+    add(integrationConfiguration, "maven.modrinth:miners-delight:${miners_delight_version}")
+    add(integrationConfiguration, "maven.modrinth:nethers-delight:${nethers_delight_version}")
+    add(integrationConfiguration, "maven.modrinth:corn-delight:${corn_delight_version}")
+    add(integrationConfiguration, "maven.modrinth:mmlib:${corn_delight_lib_version}")
+    add(integrationConfiguration, "maven.modrinth:ends-delight:${ends_delight_version}")
     ////abnormals mods addons
-    modImplementation("maven.modrinth:blueprint:${blueprint_version}")
-    modImplementation("maven.modrinth:abnormals-delight:${abnormals_delight_version}")
-    modImplementation("maven.modrinth:atmospheric:${atmospheric_version}")
-    modImplementation("maven.modrinth:autumnity:${autumnity_version}")
-    modImplementation("maven.modrinth:buzzier-bees:${buzzier_bees_version}")
-    modImplementation("maven.modrinth:gallery:${gallery_version}")
-    modImplementation("maven.modrinth:environmental:${environmental_version}")
-    modImplementation("maven.modrinth:neapolitan:${neapolitan_version}")
-    modImplementation("maven.modrinth:upgrade-aquatic:${upgrade_aquatic_version}")
-    modImplementation("maven.modrinth:peculiars:${peculiars_version}")
-    modImplementation("maven.modrinth:respiteful:${respiteful_version}")
-    modImplementation("maven.modrinth:seasonals:${seasonals_version}")
+    add(integrationConfiguration, "maven.modrinth:blueprint:${blueprint_version}")
+    add(integrationConfiguration, "maven.modrinth:abnormals-delight:${abnormals_delight_version}")
+    add(integrationConfiguration, "maven.modrinth:atmospheric:${atmospheric_version}")
+    add(integrationConfiguration, "maven.modrinth:autumnity:${autumnity_version}")
+    add(integrationConfiguration, "maven.modrinth:buzzier-bees:${buzzier_bees_version}")
+    add(integrationConfiguration, "maven.modrinth:gallery:${gallery_version}")
+    add(integrationConfiguration, "maven.modrinth:environmental:${environmental_version}")
+    add(integrationConfiguration, "maven.modrinth:neapolitan:${neapolitan_version}")
+    add(integrationConfiguration, "maven.modrinth:upgrade-aquatic:${upgrade_aquatic_version}")
+    add(integrationConfiguration, "maven.modrinth:peculiars:${peculiars_version}")
+    add(integrationConfiguration, "maven.modrinth:respiteful:${respiteful_version}")
+    add(integrationConfiguration, "maven.modrinth:seasonals:${seasonals_version}")
     //independent mods
-    modImplementation("maven.modrinth:overweight-farming:${overweight_farming_version}")
+    add(integrationConfiguration, "maven.modrinth:overweight-farming:${overweight_farming_version}")
     //utility dependencies
     modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
-    modRuntimeOnly("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+    if (integrationConfiguration == 'modImplementation')
+        modRuntimeOnly("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
     modCompileOnly("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}:api")
-    modRuntimeOnly("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
+    if (integrationConfiguration == 'modImplementation')
+        modRuntimeOnly("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
     modCompileOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}:api")
-    modRuntimeOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
-    modImplementation("maven.modrinth:botarium:${botarium_version}")
-    modImplementation("maven.modrinth:moonlight:${moonlight_version}")
-    modImplementation("maven.modrinth:sleep-tight:${sleep_tight_version}")
+    if (integrationConfiguration == 'modImplementation')
+        modRuntimeOnly("squeek.appleskin:appleskin-forge:mc${appleskin_minecraft_version}-${appleskin_version}")
+    add(integrationConfiguration, "maven.modrinth:botarium:${botarium_version}")
+    add(integrationConfiguration, "maven.modrinth:moonlight:${moonlight_version}")
+    add(integrationConfiguration, "maven.modrinth:sleep-tight:${sleep_tight_version}")
 
-    modImplementation("maven.modrinth:patchouli:${patchouli_version}")
-    modImplementation("maven.modrinth:botania:${botania_version}")
-    modImplementation("maven.modrinth:ars-nouveau:${ars_nouveau_version}")
-    modImplementation("maven.modrinth:ars-botania:${ars_botania_version}")
+    add(integrationConfiguration, "maven.modrinth:patchouli:${patchouli_version}")
+    add(integrationConfiguration, "maven.modrinth:botania:${botania_version}")
+    add(integrationConfiguration, "maven.modrinth:ars-nouveau:${ars_nouveau_version}")
+    add(integrationConfiguration, "maven.modrinth:ars-botania:${ars_botania_version}")
     modCompileOnly("maven.modrinth:cc-tweaked:${cc_tweaked_version}")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }

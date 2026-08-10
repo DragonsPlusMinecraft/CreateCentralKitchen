@@ -8,15 +8,14 @@ import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.*;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
+import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-@Mod.EventBusSubscriber(modid = CentralKitchen.ID, bus = Bus.MOD)
+@ModLoadSubscriber(modid = Mods.FD)
 public class CentralKitchenArmInterationTypes {
     public static final List<PonderArmInteractionPointType> TYPES = new ArrayList<>();
     public static final CuttingBoardPoint.Type CUTTING_BOARD = create("cutting_board", CuttingBoardPoint.Type::new);
@@ -25,7 +24,6 @@ public class CentralKitchenArmInterationTypes {
     public static final BlazeStovePoint.Type BLAZE_STOVE = create("blaze_stove", BlazeStovePoint.Type::new);
     public static final CookingPotPoint.Type COOKING_POT = create("cooking_pot", CookingPotPoint.Type::new);
     public static final SkilletPoint.Type SKILLET = create("skillet", SkilletPoint.Type::new);
-    public static final CopperPotPoint.Type COPPER_POT = create("copper_pot", CopperPotPoint.Type::new);
     // TODO public static final KettlePoint.Type KETTLE = create("kettel", KettlePoint.Type::new);
 
     private static <T extends PonderArmInteractionPointType> T create(String name, Function<ResourceLocation, T> factory) {
@@ -33,7 +31,7 @@ public class CentralKitchenArmInterationTypes {
         return factory.apply(id);
     }
 
-    private static void register(PonderArmInteractionPointType... types) {
+    public static void register(PonderArmInteractionPointType... types) {
         for (var type : types) {
             pRegister(type);
             TYPES.add(type);
@@ -46,12 +44,7 @@ public class CentralKitchenArmInterationTypes {
 
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
-        if (Mods.isLoaded(Mods.FD)) {
-            register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET/*, KETTLE TODO*/);
-        }
-        if (Mods.isLoaded(Mods.MD)) {
-            register(COPPER_POT);
-        }
+        register(STOVE, BLAZE_STOVE, COOKING_POT, SKILLET, CUTTING_BOARD, BASKET/*, KETTLE TODO*/);
     }
 
     public static void registerPonderTags(PonderTagRegistrationHelper<ResourceLocation> helper) {

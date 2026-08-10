@@ -49,8 +49,10 @@ public class FDBlockEntriesGameTests {
         });
 
         assertRegisteredEntry(helper, entriesById, ResourceLocation.withDefaultNamespace("pumpkin_pie"));
-        assertRegisteredEntry(helper, entriesById, Mods.environmental("apple_pie"));
-        assertRegisteredEntry(helper, entriesById, Mods.ua("mulberry_pie"));
+        if (Mods.isLoaded(Mods.ENVIRONMENTAL))
+            assertRegisteredEntry(helper, entriesById, Mods.environmental("apple_pie"));
+        if (Mods.isLoaded(Mods.UA))
+            assertRegisteredEntry(helper, entriesById, Mods.ua("mulberry_pie"));
         helper.succeed();
     }
 

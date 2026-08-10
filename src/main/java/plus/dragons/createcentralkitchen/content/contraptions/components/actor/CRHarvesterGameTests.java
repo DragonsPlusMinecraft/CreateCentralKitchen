@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
-import plus.dragons.createcentralkitchen.CentralKitchen;
+import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
+import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 
-@Mod.EventBusSubscriber(modid = CentralKitchen.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@ModLoadSubscriber(modid = Mods.CR)
 @PrefixGameTestTemplate(false)
 public class CRHarvesterGameTests {
     @SuppressWarnings("deprecation")

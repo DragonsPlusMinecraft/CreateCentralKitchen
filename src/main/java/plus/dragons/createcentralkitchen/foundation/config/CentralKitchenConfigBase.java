@@ -5,16 +5,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryModifiable;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Unmodifiable;
 
@@ -197,7 +194,6 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
     }
 
     public class ConfigRegistryObjectList<V> extends ConfigList<String> implements ConfigReloadListener {
-        private static final Map<IForgeRegistry<?>, Predicate<Object>> VALIDATORS = new ConcurrentHashMap<>();
         private final IForgeRegistry<V> registry;
         private List<RegistryObject<V>> objects;
 
@@ -209,21 +205,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
         }
 
         public ConfigRegistryObjectList(String name, IForgeRegistry<V> registry, List<RegistryObject<V>> def, String... comments) {
-            this(name, registry, def, validator(registry), comments);
-        }
-
-        private static Predicate<Object> validator(IForgeRegistry<?> registry) {
-            return VALIDATORS.computeIfAbsent(registry, reg -> value -> {
-                if (!(value instanceof String string))
-                    return false;
-                if (!ResourceLocation.isValidResourceLocation(string))
-                    return false;
-                if (reg instanceof IForgeRegistryModifiable<?> && ((IForgeRegistryModifiable<?>) reg).isLocked()) {
-                    ResourceLocation id = ResourceLocation.parse(string);
-                    return reg.containsKey(id);
-                }
-                return true;
-            });
+            this(name, registry, def, CentralKitchenConfigBase::isValidResourceLocation, comments);
         }
 
         private void updateObjects(List<? extends String> list) {

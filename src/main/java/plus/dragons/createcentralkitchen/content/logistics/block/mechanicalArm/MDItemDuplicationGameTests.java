@@ -15,7 +15,7 @@ import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import net.minecraftforge.items.IItemHandler;
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlockEntity;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.minersCooking.MinersCookingGuide;
-import plus.dragons.createcentralkitchen.entry.CentralKitchenArmInterationTypes;
+import plus.dragons.createcentralkitchen.entry.MDArmInteractionTypes;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.entry.item.MDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
@@ -52,7 +52,7 @@ public class MDItemDuplicationGameTests {
         helper.assertTrue(potBlockEntity instanceof CopperPotBlockEntity,
                 "Expected a Miner's Delight copper pot block entity");
         CopperPotBlockEntity pot = (CopperPotBlockEntity) potBlockEntity;
-        CopperPotPoint point = new CopperPotPoint(CentralKitchenArmInterationTypes.COPPER_POT,
+        CopperPotPoint point = new CopperPotPoint(MDArmInteractionTypes.COPPER_POT,
                 level, helper.absolutePos(POT_POS), potState);
 
         ItemStack simulatedInput = new ItemStack(Items.CARROT);
