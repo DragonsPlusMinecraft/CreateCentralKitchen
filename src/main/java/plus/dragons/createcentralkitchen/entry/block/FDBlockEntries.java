@@ -10,7 +10,6 @@ import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -50,6 +49,7 @@ public class FDBlockEntries {
             .register();
 
     public static BlockItem APPLE_PIE_ITEM;
+    public static BlockItem MULBERRY_PIE_ITEM;
 
     private static BlockBuilder<PieBlock, CreateRegistrate> pie(String name, NonNullSupplier<Item> slice, boolean defaultTexture) {
         return REGISTRATE
@@ -95,22 +95,15 @@ public class FDBlockEntries {
             registry.register(apple_pie, APPLE_PIE_ITEM);
         }
 
-        Map<ResourceLocation, Block> entries = new HashMap<>();
-        // Removed due to Environmental no longer has them
-/*        entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
-entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());*/
-        entries.put(Mods.ua("mulberry_pie"), MULBERRY_PIE.get());
-        entries.forEach((id, block) -> {
-            if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {
-                BlockItem blockItem = new ItemNameBlockItem(block,
-                        new Item.Properties());
-                registry.register(id, blockItem);
-            }
-        });
+        ResourceLocation mulberryPie = Mods.ua("mulberry_pie");
+        if (isPieOverhaulEnabled(mulberryPie) && Mods.isLoaded(Mods.UA)) {
+            MULBERRY_PIE_ITEM = new ItemNameBlockItem(MULBERRY_PIE.get(), new Item.Properties());
+            registry.register(mulberryPie, MULBERRY_PIE_ITEM);
+        }
     }
 
     @SubscribeEvent
-    public void buildContents(BuildCreativeModeTabContentsEvent event) {
+    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             if (isPieOverhaulEnabled(new ResourceLocation("pumpkin_pie"))) {
                 event.accept(PUMPKIN_PIE.get());
@@ -118,18 +111,9 @@ entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());*/
             if (isPieOverhaulEnabled(Mods.environmental("apple_pie")) && Mods.isLoaded(Mods.ENVIRONMENTAL) && APPLE_PIE_ITEM != null) {
                 event.accept(APPLE_PIE_ITEM);
             }
-            Map<ResourceLocation, Block> entries = new HashMap<>();
-            // Removed due to Environmental no longer has them
-/*            entries.put(Mods.environmental("cherry_pie"), CHERRY_PIE.get());
-entries.put(Mods.environmental("truffle_pie"), TRUFFLE_PIE.get());*/
-            entries.put(Mods.ua("mulberry_pie"), MULBERRY_PIE.get());
-            entries.forEach((id, block) -> {
-                if (isPieOverhaulEnabled(id) && Mods.isLoaded(id.getNamespace())) {
-                    BlockItem blockItem = new ItemNameBlockItem(block,
-                            new Item.Properties());
-                    event.accept(blockItem);
-                }
-            });
+            if (isPieOverhaulEnabled(Mods.ua("mulberry_pie")) && Mods.isLoaded(Mods.UA) && MULBERRY_PIE_ITEM != null) {
+                event.accept(MULBERRY_PIE_ITEM);
+            }
         }
     }
 }
