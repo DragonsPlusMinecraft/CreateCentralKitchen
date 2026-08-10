@@ -29,6 +29,7 @@ public enum BuiltinResource {
     UPGRADE_AQUATIC(PackType.SERVER_DATA, true, false),
     NEAPOLITAN(PackType.SERVER_DATA, true, false),
     BUZZIER_BEES(PackType.SERVER_DATA, true, false),
+    ATMOSPHERIC(PackType.SERVER_DATA, true, false),
     AUTUMNITY(PackType.SERVER_DATA, true, false),
     BUILTIN_RESOURCE(PackType.SERVER_DATA, true, false);
 
