@@ -47,7 +47,7 @@ public class BlazeStoveGuideSyncPacket extends SimplePacketBase {
     public boolean handle(NetworkEvent.Context context) {
         context.enqueueWork(() -> {
             var player = context.getSender();
-            if (player != null && player.containerMenu instanceof BlazeStoveGuideMenu menu &&
+            if (player != null && player.containerMenu instanceof BlazeStoveGuideMenu<?> menu &&
                     menu.containerId == containerId)
                 menu.updateGuideInputs(inputIds);
         });

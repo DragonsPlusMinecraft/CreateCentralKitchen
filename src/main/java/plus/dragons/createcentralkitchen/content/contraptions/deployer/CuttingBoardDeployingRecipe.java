@@ -34,7 +34,7 @@ public class CuttingBoardDeployingRecipe extends ProcessingRecipe<RecipeWrapper>
 
     public static CuttingBoardDeployingRecipe fromCuttingBoard(CuttingBoardRecipe recipe) {
         var builder = new ProcessingRecipeBuilder<>(CuttingBoardDeployingRecipe::new,
-                new ResourceLocation(
+                ResourceLocation.fromNamespaceAndPath(
                         recipe.getId().getNamespace(),
                         recipe.getId().getPath() + "_using_deployer"))
                                 .require(recipe.getIngredients().get(0))

@@ -44,7 +44,7 @@ public class FDItemEntries {
             INCOMPLETE_PUMPKIN_PIE = sequencedFood("pumpkin_pie", FoodValues.PIE_CRUST),
             INCOMPLETE_MULBERRY_PIE = sequencedFood("mulberry_pie", FoodValues.PIE_CRUST);
 
-    public static final ItemEntry<ConditionedItem> PUMPKIN_PIE_SLICE = pieSlice(new ResourceLocation("pumpkin_pie"))
+    public static final ItemEntry<ConditionedItem> PUMPKIN_PIE_SLICE = pieSlice(ResourceLocation.parse("pumpkin_pie"))
             .model((ctx, prov) -> prov.getBuilder(ctx.getId().toString())
                     .parent(new ModelFile.UncheckedModelFile("item/generated"))
                     .texture("layer0", Mods.fd("item/" + ctx.getName())))

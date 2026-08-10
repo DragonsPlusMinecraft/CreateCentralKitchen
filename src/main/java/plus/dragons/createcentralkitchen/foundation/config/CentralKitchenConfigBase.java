@@ -107,7 +107,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
 
     protected ConfigIdList idListAllowDefaultsOnly(List<ResourceLocation> current, String name, String... comments) {
         return new ConfigIdList(name, current,
-                value -> isValidResourceLocation(value) && current.contains(new ResourceLocation(value.toString())),
+                value -> isValidResourceLocation(value) && current.contains(ResourceLocation.parse(value.toString())),
                 comments);
     }
 
@@ -157,7 +157,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
         private void updateIdList(List<? extends String> list) {
             this.idList = list.stream()
                     .filter(CentralKitchenConfigBase::isValidResourceLocation)
-                    .map(ResourceLocation::new)
+                    .map(ResourceLocation::parse)
                     .toList();
         }
 
@@ -219,7 +219,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
                 if (!ResourceLocation.isValidResourceLocation(string))
                     return false;
                 if (reg instanceof IForgeRegistryModifiable<?> && ((IForgeRegistryModifiable<?>) reg).isLocked()) {
-                    ResourceLocation id = new ResourceLocation(string);
+                    ResourceLocation id = ResourceLocation.parse(string);
                     return reg.containsKey(id);
                 }
                 return true;
@@ -229,7 +229,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
         private void updateObjects(List<? extends String> list) {
             this.objects = createRegistryObjects(registry, list.stream()
                     .filter(CentralKitchenConfigBase::isValidResourceLocation)
-                    .map(ResourceLocation::new)
+                    .map(ResourceLocation::parse)
                     .toList());
         }
 

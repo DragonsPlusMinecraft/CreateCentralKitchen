@@ -19,6 +19,7 @@ public abstract class CoffeeMiddleStemBlockMixin extends BushBlock implements Bo
         super(pProperties);
     }
 
+    @Deprecated
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         if (CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) return Shapes.empty();

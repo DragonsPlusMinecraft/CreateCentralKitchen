@@ -8,7 +8,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -35,15 +34,15 @@ public class CentralKitchen {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
 
-    public CentralKitchen() {
-        CentralKitchenConfigs.register(ModLoadingContext.get());
+    public CentralKitchen(FMLJavaModLoadingContext context) {
+        FMLModContainer container = context.getContainer();
+        CentralKitchenConfigs.register(container);
 
         CckFluidEntries.register();
 
-        FMLModContainer container = (FMLModContainer) ModLoadingContext.get().getActiveContainer();
         AutomaticModLoadSubscriber.load(container, CentralKitchen.class);
 
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modBus = context.getModEventBus();
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::clientSetup);
         CckCreativeModeTab.register(modBus);
@@ -63,6 +62,6 @@ public class CentralKitchen {
     }
 
     public static ResourceLocation genRL(String path) {
-        return new ResourceLocation(ID, path);
+        return ResourceLocation.fromNamespaceAndPath(ID, path);
     }
 }

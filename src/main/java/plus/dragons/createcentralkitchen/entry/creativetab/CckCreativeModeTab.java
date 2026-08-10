@@ -7,15 +7,14 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
@@ -51,7 +50,7 @@ public class CckCreativeModeTab {
     private static class DisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
         @Override
         public void accept(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
-            List<Item> items = new LinkedList();
+            List<Item> items = new LinkedList<>();
             items.addAll(this.collectItems());
             items.addAll(this.collectBlocks());
             items.addAll(this.collectFluid());
@@ -59,27 +58,21 @@ public class CckCreativeModeTab {
         }
 
         private List<Item> collectBlocks() {
-            List<Item> items = new ReferenceArrayList();
-            Iterator var3 = REGISTRATE.getAll(Registries.BLOCK).iterator();
-
-            while (var3.hasNext()) {
-                RegistryEntry<Block> entry = (RegistryEntry) var3.next();
+            List<Item> items = new ReferenceArrayList<>();
+            for (RegistryEntry<Block> entry : REGISTRATE.getAll(Registries.BLOCK)) {
                 Item item = entry.get().asItem();
                 if (item != Items.AIR) {
                     items.add(item);
                 }
             }
 
-            items = new ReferenceArrayList(new ReferenceLinkedOpenHashSet(items));
+            items = new ReferenceArrayList<>(new ReferenceLinkedOpenHashSet<>(items));
             return items;
         }
 
         private List<Item> collectItems() {
-            List<Item> items = new ReferenceArrayList();
-            Iterator var3 = REGISTRATE.getAll(Registries.ITEM).iterator();
-
-            while (var3.hasNext()) {
-                RegistryEntry<Item> entry = (RegistryEntry) var3.next();
+            List<Item> items = new ReferenceArrayList<>();
+            for (RegistryEntry<Item> entry : REGISTRATE.getAll(Registries.ITEM)) {
                 Item item = entry.get();
                 if (!(item instanceof BlockItem) && !(item instanceof BucketItem)) {
                     items.add(item);
@@ -90,12 +83,9 @@ public class CckCreativeModeTab {
         }
 
         private List<Item> collectFluid() {
-            List<Item> items = new ReferenceArrayList();
-            Iterator var3 = REGISTRATE.getAll(Registries.FLUID).iterator();
-
-            while (var3.hasNext()) {
-                RegistryEntry<ForgeFlowingFluid> entry = (RegistryEntry) var3.next();
-                ForgeFlowingFluid fluid = entry.get();
+            List<Item> items = new ReferenceArrayList<>();
+            for (RegistryEntry<Fluid> entry : REGISTRATE.getAll(Registries.FLUID)) {
+                Fluid fluid = entry.get();
                 if (fluid.getBucket() != Items.AIR && !items.contains(fluid.getBucket())) {
                     items.add(fluid.getBucket());
                 }
@@ -105,9 +95,7 @@ public class CckCreativeModeTab {
         }
 
         private static void filterAndOutput(CreativeModeTab.Output output, List<Item> items) {
-            Iterator var4 = items.iterator();
-            while (var4.hasNext()) {
-                Item item = (Item) var4.next();
+            for (Item item : items) {
                 if (item.toString().contains("incomplete")) continue;
                 if (item.toString().contains("guide")) continue;
                 if (item.toString().contains("blaze_burner")) continue;

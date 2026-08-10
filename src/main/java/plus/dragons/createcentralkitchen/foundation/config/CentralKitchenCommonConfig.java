@@ -19,9 +19,9 @@ public class CentralKitchenCommonConfig extends CentralKitchenConfigBase {
                 "boostingCookerList",
                 ForgeRegistries.BLOCK_ENTITY_TYPES,
                 createRegistryObjects(ForgeRegistries.BLOCK_ENTITY_TYPES, List.of(
-                        new ResourceLocation("farmersdelight", "cooking_pot"),
-                        new ResourceLocation("farmersdelight", "skillet"),
-                        new ResourceLocation("miners_delight", "copper_pot"))),
+                        ResourceLocation.fromNamespaceAndPath("farmersdelight", "cooking_pot"),
+                        ResourceLocation.fromNamespaceAndPath("farmersdelight", "skillet"),
+                        ResourceLocation.fromNamespaceAndPath("miners_delight", "copper_pot"))),
                 "List of Block Entities that can be boosted when placed on Blaze Stove");
 
         @Override

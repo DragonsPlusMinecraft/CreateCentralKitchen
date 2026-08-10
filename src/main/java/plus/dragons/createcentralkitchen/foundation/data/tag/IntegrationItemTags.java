@@ -13,11 +13,11 @@ public enum IntegrationItemTags {
     public final TagKey<Item> tag;
 
     IntegrationItemTags(String modid, String path) {
-        this.tag = TagKey.create(Registries.ITEM, new ResourceLocation(modid, path));
+        this.tag = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(modid, path));
     }
 
     IntegrationItemTags(String modid) {
         String path = name().toLowerCase(Locale.ROOT).replace("__", "/");
-        this.tag = TagKey.create(Registries.ITEM, new ResourceLocation(modid, path));
+        this.tag = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(modid, path));
     }
 }

@@ -43,96 +43,96 @@ public class Mods {
     public static boolean isLoaded(String... modIds) {
         ModList modList = ModList.get();
         for (String modId : modIds)
-            if (!ModList.get().isLoaded(modId))
+            if (!modList.isLoaded(modId))
                 return false;
         return true;
     }
 
     public static ResourceLocation create(String path) {
-        return new ResourceLocation(CREATE, path);
+        return ResourceLocation.fromNamespaceAndPath(CREATE, path);
     }
 
     public static ResourceLocation ca(String path) {
-        return new ResourceLocation(CA, path);
+        return ResourceLocation.fromNamespaceAndPath(CA, path);
     }
 
     public static ResourceLocation fd(String path) {
-        return new ResourceLocation(FD, path);
+        return ResourceLocation.fromNamespaceAndPath(FD, path);
     }
 
     public static ResourceLocation bnc(String path) {
-        return new ResourceLocation(BNC, path);
+        return ResourceLocation.fromNamespaceAndPath(BNC, path);
     }
 
     public static ResourceLocation cr(String path) {
-        return new ResourceLocation(CR, path);
+        return ResourceLocation.fromNamespaceAndPath(CR, path);
     }
 
     public static ResourceLocation fr(String path) {
-        return new ResourceLocation(FR, path);
+        return ResourceLocation.fromNamespaceAndPath(FR, path);
     }
 
     public static ResourceLocation md(String path) {
-        return new ResourceLocation(MD, path);
+        return ResourceLocation.fromNamespaceAndPath(MD, path);
     }
 
     public static ResourceLocation nd(String path) {
-        return new ResourceLocation(ND, path);
+        return ResourceLocation.fromNamespaceAndPath(ND, path);
     }
 
     public static ResourceLocation ad(String path) {
-        return new ResourceLocation(AD, path);
+        return ResourceLocation.fromNamespaceAndPath(AD, path);
     }
 
     public static ResourceLocation atmospheric(String path) {
-        return new ResourceLocation(ATMOSPHERIC, path);
+        return ResourceLocation.fromNamespaceAndPath(ATMOSPHERIC, path);
     }
 
     public static ResourceLocation autumnity(String path) {
-        return new ResourceLocation(AUTUMNITY, path);
+        return ResourceLocation.fromNamespaceAndPath(AUTUMNITY, path);
     }
 
     public static ResourceLocation bb(String path) {
-        return new ResourceLocation(BB, path);
+        return ResourceLocation.fromNamespaceAndPath(BB, path);
     }
 
     public static ResourceLocation environmental(String path) {
-        return new ResourceLocation(ENVIRONMENTAL, path);
+        return ResourceLocation.fromNamespaceAndPath(ENVIRONMENTAL, path);
     }
 
     public static ResourceLocation neapolitan(String path) {
-        return new ResourceLocation(NEAPOLITAN, path);
+        return ResourceLocation.fromNamespaceAndPath(NEAPOLITAN, path);
     }
 
     public static ResourceLocation ua(String path) {
-        return new ResourceLocation(UA, path);
+        return ResourceLocation.fromNamespaceAndPath(UA, path);
     }
 
     public static ResourceLocation respiteful(String path) {
-        return new ResourceLocation(RESPITEFUL, path);
+        return ResourceLocation.fromNamespaceAndPath(RESPITEFUL, path);
     }
 
     public static ResourceLocation peculiars(String path) {
-        return new ResourceLocation(PECULIARS, path);
+        return ResourceLocation.fromNamespaceAndPath(PECULIARS, path);
     }
 
     public static ResourceLocation seasonals(String path) {
-        return new ResourceLocation(SEASONALS, path);
+        return ResourceLocation.fromNamespaceAndPath(SEASONALS, path);
     }
 
     public static ResourceLocation cookielicious(String path) {
-        return new ResourceLocation(COOKIELICIOUS, path);
+        return ResourceLocation.fromNamespaceAndPath(COOKIELICIOUS, path);
     }
 
     public static ResourceLocation jei(String path) {
-        return new ResourceLocation(JEI, path);
+        return ResourceLocation.fromNamespaceAndPath(JEI, path);
     }
 
     public static ResourceLocation curios(String path) {
-        return new ResourceLocation(CURIOS, path);
+        return ResourceLocation.fromNamespaceAndPath(CURIOS, path);
     }
 
     public static ResourceLocation appleskin(String path) {
-        return new ResourceLocation(APPLESKIN, path);
+        return ResourceLocation.fromNamespaceAndPath(APPLESKIN, path);
     }
 }

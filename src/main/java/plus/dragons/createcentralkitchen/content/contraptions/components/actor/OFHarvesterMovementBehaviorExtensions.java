@@ -37,7 +37,7 @@ import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 public class OFHarvesterMovementBehaviorExtensions {
     private static final Map<Block, BlockState> FARMLAND_REVERT_MAP = new HashMap<>();
     private static final String SNOWY_SPIRIT_MODID = "snowyspirit";
-    private static final ResourceLocation GINGER = new ResourceLocation(SNOWY_SPIRIT_MODID, "ginger");
+    private static final ResourceLocation GINGER = ResourceLocation.fromNamespaceAndPath(SNOWY_SPIRIT_MODID, "ginger");
 
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {

@@ -64,7 +64,7 @@ public class FDBlockEntries {
             return;
 
         IForgeRegistry<Item> registry = Objects.requireNonNull(event.getForgeRegistry());
-        ResourceLocation pumpkin_pie = new ResourceLocation("pumpkin_pie");
+        ResourceLocation pumpkin_pie = ResourceLocation.parse("pumpkin_pie");
         if (isPieOverhaulEnabled(pumpkin_pie)) {
             //Need to unregister and re-register compostable as vanilla data was assigned before this
             ComposterBlock.COMPOSTABLES.removeFloat(Items.PUMPKIN_PIE);
@@ -101,7 +101,7 @@ public class FDBlockEntries {
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
-            if (isPieOverhaulEnabled(new ResourceLocation("pumpkin_pie"))) {
+            if (isPieOverhaulEnabled(ResourceLocation.parse("pumpkin_pie"))) {
                 event.accept(PUMPKIN_PIE.get());
             }
             if (isPieOverhaulEnabled(Mods.environmental("apple_pie")) && Mods.isLoaded(Mods.ENVIRONMENTAL) && APPLE_PIE_ITEM != null) {

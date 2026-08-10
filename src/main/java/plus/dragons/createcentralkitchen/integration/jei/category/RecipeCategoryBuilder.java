@@ -194,7 +194,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
         } else {
             recipesSupplier = Collections::emptyList;
         }
-        ResourceLocation id = new ResourceLocation(modid, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modid, name);
         CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
                 new mezz.jei.api.recipe.RecipeType<>(id, recipeClass),
                 Component.translatable(Util.makeDescriptionId("recipe", id)),

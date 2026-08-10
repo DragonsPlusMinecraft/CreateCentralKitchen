@@ -20,8 +20,8 @@ import net.minecraftforge.registries.RegistryObject;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 
 public class VirtualFluidFromItem {
-    public static final ResourceLocation WATER_STILL = new ResourceLocation("block/water_still");
-    public static final ResourceLocation WATER_FLOW = new ResourceLocation("block/water_flow");
+    public static final ResourceLocation WATER_STILL = ResourceLocation.parse("block/water_still");
+    public static final ResourceLocation WATER_FLOW = ResourceLocation.parse("block/water_flow");
     public static final ResourceLocation MILK_STILL = Create.asResource("fluid/milk_still");
     public static final ResourceLocation MILK_FLOW = Create.asResource("fluid/milk_flow");
 

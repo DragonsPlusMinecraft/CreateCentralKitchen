@@ -19,6 +19,7 @@ public abstract class SmallTeaBushBlockMixin extends BushBlock implements Boneme
         super(pProperties);
     }
 
+    @Deprecated
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         if (CentralKitchenConfigs.COMMON.integration.enableHarvesterSupportForFarmersRespite.get()) return Shapes.empty();

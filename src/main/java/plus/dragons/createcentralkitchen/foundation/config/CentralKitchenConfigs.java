@@ -5,7 +5,6 @@ import java.util.Map;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.IConfigSpec;
@@ -38,8 +37,7 @@ public class CentralKitchenConfigs {
         CONFIGS.put(COMMON_SPEC, COMMON);
     }
 
-    public static void register(ModLoadingContext context) {
-        var container = context.getActiveContainer();
+    public static void register(ModContainer container) {
         var common = new ModConfig(ModConfig.Type.COMMON, COMMON_SPEC, container);
         container.addConfig(common);
         earlyLoadConfig(COMMON, COMMON_SPEC, container, common);
