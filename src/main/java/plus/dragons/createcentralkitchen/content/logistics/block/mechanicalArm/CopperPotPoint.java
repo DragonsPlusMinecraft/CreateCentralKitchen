@@ -68,30 +68,8 @@ public class CopperPotPoint extends ArmInteractionPoint {
         if (inventory.getStackInSlot(CONTAINER_SLOT).isEmpty() && guide.isContainer(stack))
             return inventory.insertItem(CONTAINER_SLOT, stack, simulate);
 
-        boolean[] neededSlots = new boolean[INPUT_SLOT_COUNT];
-        int neededSlotCount = 0;
-        for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
-            if (inventory.getStackInSlot(slot).isEmpty() &&
-                    guide.needIngredient(slot) &&
-                    guide.isIngredient(slot, stack)) {
-                neededSlots[slot] = true;
-                neededSlotCount++;
-            }
-        }
-
-        if (neededSlotCount == 0)
-            return stack;
-
-        ItemStack ret = stack.copy();
-        ret.shrink(neededSlotCount);
-        for (int slot = 0; slot < INPUT_SLOT_COUNT; slot++) {
-            if (neededSlots[slot]) {
-                ItemStack inserted = stack.copy();
-                inserted.setCount(1);
-                inventory.insertItem(slot, inserted, simulate);
-            }
-        }
-        return ret;
+        return GuidedPotInsertion.insertIntoMatchingSlots(inventory, stack, simulate, INPUT_SLOT_COUNT,
+                slot -> guide.needIngredient(slot) && guide.isIngredient(slot, stack));
     }
 
     @Override

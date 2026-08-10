@@ -122,9 +122,13 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
         if (stack.getItem() instanceof BlazeStoveGuideItem<?>) {
             var original = stove.getGuide();
             if (!level.isClientSide()) {
-                ItemStack guide = stack.copy().split(1);
-                if (!simulate)
+                ItemStack guide = stack.copy();
+                guide.setCount(1);
+                if (!simulate) {
                     stove.setGuide(guide);
+                    if (!noConsume)
+                        stack.shrink(1);
+                }
             }
             return InteractionResultHolder.success(original);
         }
