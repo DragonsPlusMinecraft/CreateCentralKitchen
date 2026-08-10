@@ -1,6 +1,7 @@
 package plus.dragons.createcentralkitchen;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,8 +18,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.content.contraptions.fluids.OpenEndedPipeEffects;
-import plus.dragons.createcentralkitchen.dragonLibLegacy.init.SafeRegistrate;
-import plus.dragons.createcentralkitchen.dragonLibLegacy.lang.Lang;
 import plus.dragons.createcentralkitchen.entry.creativetab.CckCreativeModeTab;
 import plus.dragons.createcentralkitchen.entry.fluid.CckFluidEntries;
 import plus.dragons.createcentralkitchen.foundation.config.CentralKitchenConfigs;
@@ -32,9 +31,7 @@ public class CentralKitchen {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String ID = "create_central_kitchen";
     public static final String NAME = "Create: Central Kitchen";
-    public static final Lang LANG = new Lang(ID);
-
-    public static final SafeRegistrate REGISTRATE = new SafeRegistrate(ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ID);
 

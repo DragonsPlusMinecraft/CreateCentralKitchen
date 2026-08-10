@@ -1,6 +1,5 @@
 package plus.dragons.createcentralkitchen.entry.recipe;
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.LANG;
 import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -34,7 +33,7 @@ public enum FDRecipeEntries implements IRecipeTypeInfo {
     private final Supplier<RecipeType<?>> type;
 
     FDRecipeEntries(Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
-        String name = LANG.asId(name());
+        String name = net.createmod.catnip.lang.Lang.asId(name());
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.RECIPE_SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = registerType
@@ -46,7 +45,7 @@ public enum FDRecipeEntries implements IRecipeTypeInfo {
     }
 
     FDRecipeEntries(Supplier<RecipeSerializer<?>> serializerSupplier) {
-        String name = LANG.asId(name());
+        String name = net.createmod.catnip.lang.Lang.asId(name());
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.RECIPE_SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = CentralKitchen.RECIPE_TYPE_REGISTER.register(name, () -> simpleType(id));

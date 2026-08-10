@@ -20,8 +20,6 @@ package plus.dragons.createcentralkitchen.integration.jei.category;
  * SOFTWARE.
  */
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.LANG;
-
 import com.simibubi.create.compat.jei.CreateJEI;
 import com.simibubi.create.compat.jei.DoubleItemIcon;
 import com.simibubi.create.compat.jei.EmptyBackground;
@@ -40,6 +38,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.createmod.catnip.config.ConfigBase;
+import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -197,7 +197,7 @@ public class RecipeCategoryBuilder<T extends Recipe<?>> {
         ResourceLocation id = new ResourceLocation(modid, name);
         CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
                 new mezz.jei.api.recipe.RecipeType<>(id, recipeClass),
-                LANG.fromRL("recipe", id).component(),
+                Component.translatable(Util.makeDescriptionId("recipe", id)),
                 background, icon, recipesSupplier, catalysts);
         return factory.create(info);
     }
