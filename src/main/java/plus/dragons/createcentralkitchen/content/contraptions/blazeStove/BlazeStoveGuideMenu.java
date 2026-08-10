@@ -1,18 +1,23 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
 import com.simibubi.create.foundation.gui.menu.GhostItemMenu;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +44,7 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
 
     public void updateRecipe() {
         guide.updateRecipe(this.player.level());
-        this.getSlot(guide.getIngredientSize()).setChanged();
+        this.getSlot(36 + guide.getIngredientSize()).setChanged();
     }
 
     public int getInputSize() {
@@ -54,12 +59,30 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         return guide.container;
     }
 
-    public CompoundTag writeGuideToTag() {
-        return guide.serializeNBT();
+    public List<ResourceLocation> getGuideInputIds() {
+        List<ResourceLocation> inputs = new ArrayList<>(inputSize);
+        ResourceLocation airId = ForgeRegistries.ITEMS.getKey(Items.AIR);
+        for (int slot = 0; slot < inputSize; slot++) {
+            ItemStack stack = guide.inventory.getStackInSlot(slot);
+            ResourceLocation id = ForgeRegistries.ITEMS.getKey(stack.getItem());
+            inputs.add(id == null ? airId : id);
+        }
+        return List.copyOf(inputs);
     }
 
-    public void updateGuideFromTag(CompoundTag tag) {
-        guide.deserializeNBT(tag);
+    public boolean updateGuideInputs(List<ResourceLocation> inputIds) {
+        if (inputIds.size() != inputSize)
+            return false;
+
+        List<ItemStack> inputs = new ArrayList<>(inputSize);
+        for (ResourceLocation id : inputIds) {
+            Item item = ForgeRegistries.ITEMS.getValue(id);
+            inputs.add(item == null || item == Items.AIR ? ItemStack.EMPTY : new ItemStack(item));
+        }
+        if (!guide.replaceIngredients(inputs))
+            return false;
+        updateRecipe();
+        return true;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
+import java.util.List;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -71,6 +72,21 @@ public abstract class BlazeStoveGuide implements ICapabilitySerializable<Compoun
         container = tag.contains("Container", Tag.TAG_COMPOUND)
                 ? ItemStack.of(tag.getCompound("Container"))
                 : ItemStack.EMPTY;
+    }
+
+    boolean replaceIngredients(List<ItemStack> ingredients) {
+        if (ingredients.size() != ingredientSize)
+            return false;
+
+        for (int slot = 0; slot < ingredientSize; slot++) {
+            ItemStack ingredient = ingredients.get(slot).copy();
+            if (!ingredient.isEmpty())
+                ingredient.setCount(1);
+            inventory.setStackInSlot(slot, ingredient);
+        }
+        inventory.setStackInSlot(ingredientSize, ItemStack.EMPTY);
+        container = ItemStack.EMPTY;
+        return true;
     }
 
     public final int getIngredientSize() {
