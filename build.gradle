@@ -81,15 +81,6 @@ legacyForge {
             gameDirectory = project.file('run/server')
         }
 
-        data {
-            data()
-
-            gameDirectory = project.file('run')
-            systemProperty('forge.logging.markers', 'REGISTRIES,REGISTRYDUMP')
-            systemProperty('forge.logging.console.level', 'debug')
-            programArguments.addAll("--mod", "create_central_kitchen", "--all", "--output", file("src/generated/resources/").getAbsolutePath(), "--existing", file("src/main/resources").getAbsolutePath())
-        }
-
         gameTestServer {
             type = "gameTestServer"
 
@@ -185,8 +176,6 @@ dependencies {
     modCompileOnly("maven.modrinth:cc-tweaked:${cc_tweaked_version}")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
-
-sourceSets.main.resources { srcDir('src/generated/resources') }
 
 mixin {
     add(sourceSets.main, 'create_central_kitchen.refmap.json')

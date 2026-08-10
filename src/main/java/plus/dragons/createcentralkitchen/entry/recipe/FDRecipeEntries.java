@@ -1,15 +1,10 @@
 package plus.dragons.createcentralkitchen.entry.recipe;
 
-import static plus.dragons.createcentralkitchen.CentralKitchen.REGISTRATE;
-
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import java.util.function.Supplier;
-import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -39,9 +34,6 @@ public enum FDRecipeEntries implements IRecipeTypeInfo {
         type = registerType
                 ? CentralKitchen.RECIPE_TYPE_REGISTER.register(name, typeSupplier)
                 : NonNullSupplier.lazy(typeSupplier);
-        REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> prov.add(
-                Util.makeDescriptionId("recipe", id),
-                RegistrateLangProvider.toEnglishName(id.getPath())));
     }
 
     FDRecipeEntries(Supplier<RecipeSerializer<?>> serializerSupplier) {
@@ -49,9 +41,6 @@ public enum FDRecipeEntries implements IRecipeTypeInfo {
         id = CentralKitchen.genRL(name);
         serializer = CentralKitchen.RECIPE_SERIALIZER_REGISTER.register(name, serializerSupplier);
         type = CentralKitchen.RECIPE_TYPE_REGISTER.register(name, () -> simpleType(id));
-        REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> prov.add(
-                Util.makeDescriptionId("recipe", id),
-                RegistrateLangProvider.toEnglishName(id.getPath())));
     }
 
     FDRecipeEntries(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
