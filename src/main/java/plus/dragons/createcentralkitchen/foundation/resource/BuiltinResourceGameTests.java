@@ -94,6 +94,13 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("filling/syrup_bottle"),
             CentralKitchen.genRL("mixing/pumpkin_bread_from_pumpkin_slice"),
             CentralKitchen.genRL("mixing/syrup"));
+    private static final List<ResourceLocation> CORN_DELIGHT_RECIPES = List.of(
+            CentralKitchen.genRL("emptying/corn_soup"),
+            CentralKitchen.genRL("emptying/creamy_corn_drink"),
+            CentralKitchen.genRL("filling/corn_soup"),
+            CentralKitchen.genRL("filling/creamy_corn_drink"),
+            CentralKitchen.genRL("mixing/corn_soup"),
+            CentralKitchen.genRL("mixing/creamy_corn_drink"));
     private static final Map<String, List<ResourceLocation>> BUILTIN_RECIPES = Map.of(
             Mods.AD, ABNORMALS_DELIGHT_RECIPES,
             Mods.ATMOSPHERIC, ATMOSPHERIC_RECIPES);
@@ -104,6 +111,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.ED, ENDS_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.UA, UPGRADE_AQUATIC_RECIPES);
         RESTORED_RECIPES.put(Mods.AUTUMNITY, AUTUMNITY_RECIPES);
+        RESTORED_RECIPES.put(Mods.CORN_DELIGHT, CORN_DELIGHT_RECIPES);
     }
 
     @SuppressWarnings("deprecation")
