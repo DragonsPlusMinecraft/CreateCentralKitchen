@@ -1,14 +1,12 @@
 modLoader="javafml"
 loaderVersion="[47,48)"
 license="MIT"
+issueTrackerURL="https://github.com/DragonsPlusMinecraft/CreateCentralKitchen/issues"
 [[mods]]
 modId="create_central_kitchen" #mandatory
 version="${file.jarVersion}" #mandatory
 displayName="Create: Central Kitchen"
-#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
-#logoFile="logo.png"
-#credits="Thanks for this example mod goes to Java"
+displayURL="https://github.com/DragonsPlusMinecraft/CreateCentralKitchen"
 authors="LimonBlaze, MarbleGate and Etherwood"
 description='''
 An add-on for Create, providing automation support for Farmer's Delight and its add-ons.
