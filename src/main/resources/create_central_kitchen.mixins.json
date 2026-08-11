@@ -10,7 +10,6 @@
     "common.botarium.BotariumForgeMixin",
     "common.create.BeltHelperMixin",
     "common.create.BlockEntityBehaviourMixin",
-    "common.create.CreateJEIMixin",
     "common.create.DeployerBlockEntityAccessor",
     "common.create.GhostItemSubmitPacketMixin",
     "common.create.HarvesterMovementBehaviorMixin",
@@ -37,6 +36,7 @@
     "common.sleeptight.ModEventsMixin"
   ],
   "client": [
+    "client.create.CreateJEIMixin",
     "client.create.DeployerRendererMixin"
   ],
   "injectors": {

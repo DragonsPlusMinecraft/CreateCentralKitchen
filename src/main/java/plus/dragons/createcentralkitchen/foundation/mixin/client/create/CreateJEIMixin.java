@@ -1,4 +1,4 @@
-package plus.dragons.createcentralkitchen.foundation.mixin.common.create;
+package plus.dragons.createcentralkitchen.foundation.mixin.client.create;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -22,6 +22,9 @@ public class CreateJEIMixin {
      */
     @WrapOperation(method = "lambda$loadCategories$6", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/AllRecipeTypes;shouldIgnoreInAutomation(Lnet/minecraft/world/item/crafting/Recipe;)Z"), require = 0)
     private static boolean cck$shouldIgnoreShapelessRecipe(Recipe<?> recipe, Operation<Boolean> original) {
-        return IgnoreAutomaticShapelessRecipe.get(recipe, Minecraft.getInstance().level.registryAccess()) || original.call(recipe);
+        var level = Minecraft.getInstance().level;
+        if (level != null && IgnoreAutomaticShapelessRecipe.get(recipe, level.registryAccess()))
+            return true;
+        return original.call(recipe);
     }
 }
