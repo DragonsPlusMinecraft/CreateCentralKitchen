@@ -16,6 +16,7 @@ Final maintenance release for the Minecraft 1.20.1 line, updated for Create 6.0.
 
 * Restored missing processing recipes for Atmospheric, Autumnity, Corn Delight, End's Delight, Farmer's Delight, Farmer's Respite, Collector's Reap, Peculiars, Respiteful, Seasonals, and Upgrade Aquatic.
 * Restored missing recipe unlock advancements for the manually maintained built-in packs.
+* Restored the Blaze Stove loot table so breaking it returns the Blaze Burner.
 * Restored missing Farmer's Delight sequenced assemblies, fixed the Hamburger assembly, and corrected the Mutton Wrap recipe identifier.
 * Corrected the stale Farmer's Delight wheat dough override and conditional cross-mod recipe loading.
 * Corrected registered pie items in the creative tab and removed recipes and assets for content no longer registered on 1.20.1.

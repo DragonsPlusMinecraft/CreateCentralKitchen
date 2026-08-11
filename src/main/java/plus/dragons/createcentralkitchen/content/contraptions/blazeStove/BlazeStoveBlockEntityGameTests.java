@@ -41,6 +41,17 @@ public class BlazeStoveBlockEntityGameTests {
     }
 
     @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void breakingDropsBlazeBurner(GameTestHelper helper) {
+        var level = helper.getLevel();
+        BlockPos stovePos = helper.absolutePos(STOVE_POS);
+        level.setBlock(stovePos, FDBlockEntries.BLAZE_STOVE.getDefaultState(), 3);
+        helper.assertTrue(level.destroyBlock(stovePos, true),
+                "Failed to destroy the Blaze Stove");
+        helper.assertItemEntityPresent(AllBlocks.BLAZE_BURNER.get().asItem(), STOVE_POS, 2.0);
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
     public static void burningResetsEveryOccupiedCookingSlot(GameTestHelper helper) {
         var level = helper.getLevel();
         level.setBlock(helper.absolutePos(STOVE_POS), FDBlockEntries.BLAZE_STOVE.getDefaultState(), 3);
