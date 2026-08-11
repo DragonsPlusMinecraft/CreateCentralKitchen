@@ -22,6 +22,7 @@ import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import net.minecraftforge.items.ItemStackHandler;
+import plus.dragons.createcentralkitchen.content.logistics.item.guide.cooking.CookingGuide;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
@@ -208,6 +209,68 @@ public class BlazeStoveBlockEntityGameTests {
         helper.assertBlockProperty(STOVE_POS, BlazeStoveBlock.LIT, false);
         helper.assertTrue(!indirectHeat.isHeated(level, cookingPos),
                 "An inactive Blaze Stove heated through a conductor");
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void nbtLoadsClearMissingStateAndRefreshGuide(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var stovePos = helper.absolutePos(STOVE_POS);
+        level.setBlock(stovePos, FDBlockEntries.BLAZE_STOVE.getDefaultState(), 3);
+        BlockEntity blockEntity = level.getBlockEntity(stovePos);
+        helper.assertTrue(blockEntity instanceof BlazeStoveBlockEntity,
+                "Expected a Blaze Stove block entity");
+        BlazeStoveBlockEntity stove = (BlazeStoveBlockEntity) blockEntity;
+        int slots = stove.getInventory().getSlots();
+
+        ItemStackHandler inventory = new ItemStackHandler(slots);
+        inventory.setStackInSlot(0, new ItemStack(Items.BEEF));
+        int[] cookingTimes = new int[slots];
+        int[] cookingTimesTotal = new int[slots];
+        cookingTimes[0] = 12;
+        cookingTimesTotal[0] = 120;
+        CompoundTag populated = new CompoundTag();
+        populated.put("Inventory", inventory.serializeNBT());
+        populated.putIntArray("CookingTimes", cookingTimes);
+        populated.putIntArray("CookingTotalTimes", cookingTimesTotal);
+        populated.put("Guide", FDItemEntries.COOKING_GUIDE.asStack().serializeNBT());
+        stove.read(populated, false);
+        helper.assertTrue(stove.getInventory().getStackInSlot(0).is(Items.BEEF),
+                "The populated inventory fixture did not load");
+        helper.assertTrue(!stove.getGuide().isEmpty(),
+                "The populated guide fixture did not load");
+
+        stove.read(new CompoundTag(), false);
+        helper.assertTrue(stove.getInventory().getSlots() == slots,
+                "Loading legacy burner NBT changed the Blaze Stove inventory size");
+        for (int slot = 0; slot < slots; slot++)
+            helper.assertTrue(stove.getInventory().getStackInSlot(slot).isEmpty(),
+                    "Loading NBT without an inventory retained item slot " + slot);
+        helper.assertTrue(stove.getGuide().isEmpty(),
+                "Loading NBT without a guide retained the previous guide");
+
+        CompoundTag cleared = new CompoundTag();
+        stove.write(cleared, false);
+        for (int slot = 0; slot < slots; slot++) {
+            helper.assertTrue(cleared.getIntArray("CookingTimes")[slot] == 0,
+                    "Loading NBT without cooking progress retained slot " + slot);
+            helper.assertTrue(cleared.getIntArray("CookingTotalTimes")[slot] == 0,
+                    "Loading NBT without total cooking time retained slot " + slot);
+        }
+
+        ItemStack guideStack = FDItemEntries.COOKING_GUIDE.asStack();
+        stove.setGuide(guideStack);
+        CompoundTag forgedGuide = new CompoundTag();
+        forgedGuide.put("Result", new ItemStack(Items.DIAMOND).serializeNBT());
+        CookingGuide.of(stove.getGuide()).deserializeNBT(forgedGuide);
+        helper.assertTrue(CookingGuide.of(stove.getGuide()).getResult().is(Items.DIAMOND),
+                "The stale guide result fixture did not load");
+
+        CompoundTag saved = new CompoundTag();
+        stove.write(saved, false);
+        ItemStack savedGuide = ItemStack.of(saved.getCompound("Guide"));
+        helper.assertTrue(CookingGuide.of(savedGuide).getResult().isEmpty(),
+                "Saving persisted a stale derived guide result");
         helper.succeed();
     }
 }

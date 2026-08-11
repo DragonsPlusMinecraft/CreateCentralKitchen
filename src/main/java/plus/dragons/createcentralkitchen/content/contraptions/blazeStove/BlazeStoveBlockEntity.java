@@ -7,6 +7,7 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -139,33 +140,38 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         if (!clientPacket) {
+            Arrays.fill(cookingTimes, 0);
+            Arrays.fill(cookingTimesTotal, 0);
+            Arrays.fill(lastRecipeIDs, null);
             int[] array;
             array = compound.getIntArray("CookingTimes");
-            System.arraycopy(array, 0, cookingTimes, 0, Math.min(cookingTimesTotal.length, array.length));
+            System.arraycopy(array, 0, cookingTimes, 0, Math.min(cookingTimes.length, array.length));
             array = compound.getIntArray("CookingTotalTimes");
             System.arraycopy(array, 0, cookingTimesTotal, 0, Math.min(cookingTimesTotal.length, array.length));
         }
         inventory.deserializeNBT(compound.getCompound("Inventory"));
         String guideKey = compound.contains("Guide") ? "Guide" : "CookingGuide"; //For backwards compatibility
-        setGuide(ItemStack.of(compound.getCompound(guideKey)));
+        ItemStack loadedGuide = ItemStack.of(compound.getCompound(guideKey));
+        guide = loadedGuide.getItem() instanceof BlazeStoveGuideItem<?> ? loadedGuide : ItemStack.EMPTY;
         updateGuide();
         super.read(compound, clientPacket);
     }
 
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
+        updateGuide();
         if (!clientPacket) {
             compound.putIntArray("CookingTimes", cookingTimes);
             compound.putIntArray("CookingTotalTimes", cookingTimesTotal);
         }
         compound.put("Inventory", inventory.serializeNBT());
         compound.put("Guide", guide.serializeNBT());
-        updateGuide();
         super.write(compound, clientPacket);
     }
 
     @Override
     public void writeSafe(CompoundTag compound) {
+        updateGuide();
         compound.put("Guide", guide.serializeNBT());
         super.writeSafe(compound);
     }
@@ -219,7 +225,7 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
     }
 
     public void setGuide(ItemStack stack) {
-        if (!(stack.getItem() instanceof BlazeStoveGuideItem<?>)) {
+        if (!stack.isEmpty() && !(stack.getItem() instanceof BlazeStoveGuideItem<?>)) {
             return;
         }
         guide = stack;
