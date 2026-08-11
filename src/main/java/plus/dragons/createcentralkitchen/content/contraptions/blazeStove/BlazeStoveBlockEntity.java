@@ -358,22 +358,28 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
 
             cookingTimes[i] += speed;
             if (cookingTimes[i] >= cookingTimesTotal[i]) {
-                Container inventoryWrapper = new SimpleContainer(stack);
-                Optional<CampfireCookingRecipe> recipe = findRecipe(inventoryWrapper, i);
-                if (recipe.isPresent()) {
-                    ItemStack resultStack = recipe.get().getResultItem(level.registryAccess());
-                    if (!resultStack.isEmpty()) {
-                        ItemUtils.spawnItemEntity(level, resultStack.copy(),
-                                worldPosition.getX() + 0.5D,
-                                worldPosition.getY() + 1.0D,
-                                worldPosition.getZ() + 0.5D,
-                                level.random.nextGaussian() * 0.001D,
-                                0.1D,
-                                level.random.nextGaussian() * 0.001D);
-                    }
+                Optional<CampfireCookingRecipe> recipe = findRecipe(new SimpleContainer(stack), i);
+                ItemStack resultStack = recipe
+                        .map(value -> value.getResultItem(level.registryAccess()))
+                        .orElse(ItemStack.EMPTY);
+                if (resultStack.isEmpty()) {
+                    cookingTimes[i] = 0;
+                    lastRecipeIDs[i] = null;
+                    didInventoryChange = true;
+                    continue;
                 }
 
+                ItemUtils.spawnItemEntity(level, resultStack.copy(),
+                        worldPosition.getX() + 0.5D,
+                        worldPosition.getY() + 1.0D,
+                        worldPosition.getZ() + 0.5D,
+                        level.random.nextGaussian() * 0.001D,
+                        0.1D,
+                        level.random.nextGaussian() * 0.001D);
                 inventory.setStackInSlot(i, ItemStack.EMPTY);
+                cookingTimes[i] = 0;
+                cookingTimesTotal[i] = 0;
+                lastRecipeIDs[i] = null;
                 didInventoryChange = true;
             }
         }

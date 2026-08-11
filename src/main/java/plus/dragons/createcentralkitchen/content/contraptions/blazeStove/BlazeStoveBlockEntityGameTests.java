@@ -73,6 +73,41 @@ public class BlazeStoveBlockEntityGameTests {
     }
 
     @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void missingRecipesDoNotDestroyCookingInputs(GameTestHelper helper) {
+        var level = helper.getLevel();
+        level.setBlock(helper.absolutePos(STOVE_POS), FDBlockEntries.BLAZE_STOVE.getDefaultState(), 3);
+        BlockEntity blockEntity = level.getBlockEntity(helper.absolutePos(STOVE_POS));
+        helper.assertTrue(blockEntity instanceof BlazeStoveBlockEntity,
+                "Expected a Blaze Stove block entity");
+        BlazeStoveBlockEntity stove = (BlazeStoveBlockEntity) blockEntity;
+
+        int slots = stove.getInventory().getSlots();
+        ItemStackHandler inventory = new ItemStackHandler(slots);
+        inventory.setStackInSlot(0, new ItemStack(Items.BEDROCK));
+        int[] cookingTimes = new int[slots];
+        int[] cookingTimesTotal = new int[slots];
+        cookingTimes[0] = 1;
+        cookingTimesTotal[0] = 1;
+
+        CompoundTag before = new CompoundTag();
+        before.put("Inventory", inventory.serializeNBT());
+        before.putIntArray("CookingTimes", cookingTimes);
+        before.putIntArray("CookingTotalTimes", cookingTimesTotal);
+        stove.read(before, false);
+        stove.processCooking(1);
+
+        helper.assertTrue(stove.getInventory().getStackInSlot(0).is(Items.BEDROCK),
+                "A missing campfire recipe destroyed its cooking input");
+        CompoundTag after = new CompoundTag();
+        stove.write(after, false);
+        helper.assertTrue(after.getIntArray("CookingTimes")[0] == 0,
+                "A missing campfire recipe did not reset cooking progress");
+        helper.assertTrue(after.getIntArray("CookingTotalTimes")[0] == 1,
+                "A missing campfire recipe discarded the retry duration");
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
     public static void createHeatLevelsControlFarmersDelightHeating(GameTestHelper helper) {
         var level = helper.getLevel();
         var stovePos = helper.absolutePos(STOVE_POS);
