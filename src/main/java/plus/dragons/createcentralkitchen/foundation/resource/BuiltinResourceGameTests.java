@@ -101,6 +101,29 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("filling/creamy_corn_drink"),
             CentralKitchen.genRL("mixing/corn_soup"),
             CentralKitchen.genRL("mixing/creamy_corn_drink"));
+    private static final List<ResourceLocation> SEASONALS_RECIPES = List.of(
+            CentralKitchen.genRL("compacting/pumpkin_cake"),
+            CentralKitchen.genRL("compacting/sweet_berry_cake"),
+            CentralKitchen.genRL("crafting/chocolate_pumpkin_muffin_from_dough"),
+            CentralKitchen.genRL("crafting/pumpkin_cake_from_dough"),
+            CentralKitchen.genRL("crafting/sweet_berry_cake_from_dough"),
+            CentralKitchen.genRL("emptying/pumpkin_ice_cream"),
+            CentralKitchen.genRL("emptying/pumpkin_milkshake"),
+            CentralKitchen.genRL("emptying/sweet_berry_ice_cream"),
+            CentralKitchen.genRL("emptying/sweet_berry_milkshake"),
+            CentralKitchen.genRL("filling/pumpkin_ice_cream"),
+            CentralKitchen.genRL("filling/pumpkin_milkshake"),
+            CentralKitchen.genRL("filling/sweet_berry_ice_cream"),
+            CentralKitchen.genRL("filling/sweet_berry_milkshake"),
+            CentralKitchen.genRL("mixing/chocolate_pumpkin_muffin"),
+            CentralKitchen.genRL("mixing/pumpkin_ice_cream"),
+            CentralKitchen.genRL("mixing/pumpkin_milkshake"),
+            CentralKitchen.genRL("mixing/pumpkin_milkshake_from_ice_cream"),
+            CentralKitchen.genRL("mixing/sweet_berry_ice_cream"),
+            CentralKitchen.genRL("mixing/sweet_berry_milkshake"),
+            CentralKitchen.genRL("mixing/sweet_berry_milkshake_from_ice_cream"));
+    private static final List<ResourceLocation> SEASONALS_ADVANCEMENTS = List.of(
+            CentralKitchen.genRL("recipes/crafting/chocolate_pumpkin_muffin_from_dough"));
     private static final List<ResourceLocation> ATMOSPHERIC_ADVANCEMENTS = List.of(
             CentralKitchen.genRL("recipes/crafting/aloe_gel_block_from_bucket"),
             CentralKitchen.genRL("recipes/crafting/aloe_gel_bottles_from_bucket"),
@@ -129,6 +152,7 @@ public class BuiltinResourceGameTests {
     private static final Map<String, List<ResourceLocation>> RESTORED_ADVANCEMENTS = Map.of(
             Mods.ATMOSPHERIC, ATMOSPHERIC_ADVANCEMENTS,
             Mods.AUTUMNITY, AUTUMNITY_ADVANCEMENTS,
+            Mods.SEASONALS, SEASONALS_ADVANCEMENTS,
             Mods.UA, UPGRADE_AQUATIC_ADVANCEMENTS);
 
     static {
@@ -137,6 +161,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.UA, UPGRADE_AQUATIC_RECIPES);
         RESTORED_RECIPES.put(Mods.AUTUMNITY, AUTUMNITY_RECIPES);
         RESTORED_RECIPES.put(Mods.CORN_DELIGHT, CORN_DELIGHT_RECIPES);
+        RESTORED_RECIPES.put(Mods.SEASONALS, SEASONALS_RECIPES);
     }
 
     @SuppressWarnings("deprecation")

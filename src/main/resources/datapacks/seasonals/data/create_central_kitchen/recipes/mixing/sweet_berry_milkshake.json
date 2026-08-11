@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sweet_berries"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:vanilla_ice_cream",
+      "nbt": {}
+    },
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 750,
+      "fluid": "create_central_kitchen:sweet_berry_milkshake"
+    }
+  ]
+}
