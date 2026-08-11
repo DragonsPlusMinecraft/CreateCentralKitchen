@@ -1,0 +1,28 @@
+{
+  "type": "create:compacting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "abnormals_delight"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "amount": 250,
+      "fluid": "create_central_kitchen:syrup",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "count": 8,
+      "item": "abnormals_delight:maple_cookie"
+    }
+  ]
+}

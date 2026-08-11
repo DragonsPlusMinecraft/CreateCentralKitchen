@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "autumnity:sap_bottle"
+    },
+    {
+      "item": "autumnity:sap_bottle"
+    },
+    {
+      "item": "autumnity:sap_bottle"
+    },
+    {
+      "item": "autumnity:sap_bottle"
+    }
+  ],
+  "result": {
+    "item": "create_central_kitchen:sap_bucket"
+  }
+}

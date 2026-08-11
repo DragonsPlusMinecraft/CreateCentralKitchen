@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "autumnity:syrup_bottle"
+    },
+    {
+      "item": "autumnity:syrup_bottle"
+    },
+    {
+      "item": "autumnity:syrup_bottle"
+    },
+    {
+      "item": "autumnity:syrup_bottle"
+    }
+  ],
+  "result": {
+    "item": "create_central_kitchen:syrup_bucket"
+  }
+}

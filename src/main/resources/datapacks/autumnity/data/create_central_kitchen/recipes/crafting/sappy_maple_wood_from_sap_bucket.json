@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_central_kitchen:sap_bucket"
+    },
+    {
+      "item": "autumnity:maple_wood"
+    },
+    {
+      "item": "autumnity:maple_wood"
+    },
+    {
+      "item": "autumnity:maple_wood"
+    },
+    {
+      "item": "autumnity:maple_wood"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "autumnity:sappy_maple_wood"
+  }
+}

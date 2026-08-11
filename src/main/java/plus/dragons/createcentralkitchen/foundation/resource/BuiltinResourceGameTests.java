@@ -70,6 +70,30 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("emptying/mulberry_jam_bottle"),
             CentralKitchen.genRL("filling/mulberry_jam_bottle"),
             CentralKitchen.genRL("filling/mulberry_jam_bucket"));
+    private static final List<ResourceLocation> AUTUMNITY_RECIPES = List.of(
+            CentralKitchen.genRL("syrup_bucket_from_sap_bucket_campfire"),
+            CentralKitchen.genRL("syrup_bucket_from_sap_bucket_smelting"),
+            CentralKitchen.genRL("syrup_bucket_from_sap_bucket_smoking"),
+            CentralKitchen.genRL("compacting/maple_cookie"),
+            CentralKitchen.genRL("compacting/pancake"),
+            CentralKitchen.genRL("compacting/pancake_from_dough"),
+            CentralKitchen.genRL("crafting/pancake_from_dough"),
+            CentralKitchen.genRL("crafting/pumpkin_bread_from_dough_and_pumpkin_slice"),
+            CentralKitchen.genRL("crafting/sappy_maple_log_from_sap_bucket"),
+            CentralKitchen.genRL("crafting/sappy_maple_wood_from_sap_bucket"),
+            CentralKitchen.genRL("crafting/sap_bottles_from_bucket"),
+            CentralKitchen.genRL("crafting/sap_bucket_from_bottles"),
+            CentralKitchen.genRL("crafting/syrup_bottles_from_bucket"),
+            CentralKitchen.genRL("crafting/syrup_bucket_from_bottles"),
+            CentralKitchen.genRL("emptying/sap_bottle"),
+            CentralKitchen.genRL("emptying/syrup_bottle"),
+            CentralKitchen.genRL("filling/pancake"),
+            CentralKitchen.genRL("filling/sappy_maple_log"),
+            CentralKitchen.genRL("filling/sappy_maple_wood"),
+            CentralKitchen.genRL("filling/sap_bottle"),
+            CentralKitchen.genRL("filling/syrup_bottle"),
+            CentralKitchen.genRL("mixing/pumpkin_bread_from_pumpkin_slice"),
+            CentralKitchen.genRL("mixing/syrup"));
     private static final Map<String, List<ResourceLocation>> BUILTIN_RECIPES = Map.of(
             Mods.AD, ABNORMALS_DELIGHT_RECIPES,
             Mods.ATMOSPHERIC, ATMOSPHERIC_RECIPES);
@@ -79,6 +103,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.FD, FARMERS_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.ED, ENDS_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.UA, UPGRADE_AQUATIC_RECIPES);
+        RESTORED_RECIPES.put(Mods.AUTUMNITY, AUTUMNITY_RECIPES);
     }
 
     @SuppressWarnings("deprecation")

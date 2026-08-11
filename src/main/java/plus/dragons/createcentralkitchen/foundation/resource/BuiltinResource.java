@@ -30,6 +30,7 @@ public enum BuiltinResource {
     NEAPOLITAN(PackType.SERVER_DATA, true, false),
     BUZZIER_BEES(PackType.SERVER_DATA, true, false),
     ATMOSPHERIC(PackType.SERVER_DATA, true, false),
+    AUTUMNITY(PackType.SERVER_DATA, true, false),
     ABNORMALS_DELIGHT(PackType.SERVER_DATA, true, false);
 
     private final String path;
