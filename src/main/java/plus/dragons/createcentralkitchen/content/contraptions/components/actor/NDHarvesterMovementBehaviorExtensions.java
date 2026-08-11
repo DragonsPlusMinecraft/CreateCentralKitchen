@@ -10,14 +10,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import umpaz.nethersdelight.common.block.FungusColonyBlock;
+import umpaz.nethersdelight.common.block.PropelplantBerryStemBlock;
+import umpaz.nethersdelight.common.block.util.PropelplantBlock;
 import umpaz.nethersdelight.common.registry.NDBlocks;
 import umpaz.nethersdelight.common.registry.NDItems;
 
@@ -62,18 +62,15 @@ public class NDHarvesterMovementBehaviorExtensions {
         behaviour.dropItem(context, age < colony.getMaxAge() ? new ItemStack(colony.mushroomType.get(), age) : new ItemStack(colony.asItem()));
     }
 
-    private static final BooleanProperty PEARL = BooleanProperty.create("pearl");
-
     public static void harvestPropelplantStem(HarvesterMovementBehaviour behaviour,
             MovementContext context,
             BlockPos pos, BlockState state,
             boolean replant, boolean partial) {
-        Block block = state.getBlock();
         Level level = context.world;
-        if (state.getValue(PEARL)) {
+        if (state.getValue(PropelplantBerryStemBlock.PEARL)) {
             behaviour.dropItem(context, new ItemStack(NDItems.PROPELPEARL.get(), 1 + level.random.nextInt(2)));
             level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(PEARL, Boolean.FALSE), 2);
+            level.setBlock(pos, state.setValue(PropelplantBerryStemBlock.PEARL, Boolean.FALSE), 2);
         }
     }
 
@@ -87,12 +84,12 @@ public class NDHarvesterMovementBehaviorExtensions {
         if (stateAbove.is(NDBlocks.PROPELPLANT_CANE.get()) || stateAbove.is(NDBlocks.PROPELPLANT_BERRY_CANE.get()))
             harvestPropelplantCane(behaviour, context, posAbove, stateAbove, false, partial);
 
-        if (state.hasProperty(PEARL)) {
-            if (state.getValue(PEARL)) {
+        if (state.hasProperty(PropelplantBlock.PEARL)) {
+            if (state.getValue(PropelplantBlock.PEARL)) {
                 behaviour.dropItem(context, new ItemStack(NDItems.PROPELPEARL.get(), 1 + level.random.nextInt(2)));
                 if (replant) {
                     level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                    level.setBlock(pos, state.setValue(PEARL, Boolean.FALSE), 2);
+                    level.setBlock(pos, state.setValue(PropelplantBlock.PEARL, Boolean.FALSE), 2);
                     return;
                 }
             }
