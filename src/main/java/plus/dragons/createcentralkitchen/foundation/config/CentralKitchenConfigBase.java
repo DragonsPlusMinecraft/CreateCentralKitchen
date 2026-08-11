@@ -142,7 +142,7 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
 
         public ConfigIdList(String name, List<ResourceLocation> def, Predicate<Object> validator, String... comments) {
             super(name, def.stream().map(Object::toString).toList(),
-                    CentralKitchenConfigBase::isValidResourceLocation, comments);
+                    validator, comments);
             this.idList = def;
             CentralKitchenConfigBase.this.reloadListeners.add(this);
         }
