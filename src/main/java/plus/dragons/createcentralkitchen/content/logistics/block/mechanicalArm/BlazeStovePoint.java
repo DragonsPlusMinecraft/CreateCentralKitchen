@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlock;
 import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveBlockEntity;
+import plus.dragons.createcentralkitchen.content.contraptions.blazeStove.BlazeStoveGuideItem;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.foundation.ponder.PonderArmInteractionPointType;
 
@@ -34,6 +35,8 @@ public class BlazeStovePoint extends AllArmInteractionPointTypes.DepositOnlyArmI
         ItemStack input = stack.copy();
         InteractionResultHolder<ItemStack> res = BlazeStoveBlock.tryInsert(level, pos, input, false, false, simulate);
         ItemStack remainder = res.getObject();
+        if (simulate && stack.getItem() instanceof BlazeStoveGuideItem<?> && res.getResult().consumesAction())
+            return remainder;
         if (input.isEmpty()) {
             return remainder;
         } else {

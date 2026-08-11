@@ -118,6 +118,44 @@ public class FDItemDuplicationGameTests {
         helper.succeed();
     }
 
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void blazeStovePointSimulatesGuideInsertion(GameTestHelper helper) {
+        BlazeStoveBlockEntity stove = placeBlazeStove(helper);
+        var level = helper.getLevel();
+        BlockPos absolutePos = helper.absolutePos(STOVE_POS);
+        BlazeStovePoint point = new BlazeStovePoint(CentralKitchenArmInterationTypes.BLAZE_STOVE,
+                level, absolutePos, level.getBlockState(absolutePos));
+
+        ItemStack first = namedGuide("arm_first");
+        ItemStack expectedFirst = first.copy();
+        ItemStack simulatedFirstRemainder = point.insert(first, true);
+        helper.assertTrue(simulatedFirstRemainder.isEmpty(),
+                "A mechanical arm must see that an empty stove accepts a guide");
+        helper.assertTrue(first.getCount() == 1, "Mechanical arm simulation mutated its input guide");
+        helper.assertTrue(stove.getGuide().isEmpty(), "Mechanical arm simulation installed the guide");
+
+        ItemStack firstRemainder = point.insert(first, false);
+        helper.assertTrue(firstRemainder.isEmpty(), "An empty stove returned a guide to the mechanical arm");
+        helper.assertTrue(first.getCount() == 1, "Mechanical arm insertion mutated its caller-owned guide");
+        helper.assertTrue(ItemStack.isSameItemSameTags(stove.getGuide(), expectedFirst),
+                "The mechanical arm did not install the first guide");
+
+        ItemStack second = namedGuide("arm_second");
+        ItemStack expectedSecond = second.copy();
+        ItemStack simulatedSecondRemainder = point.insert(second, true);
+        helper.assertTrue(ItemStack.isSameItemSameTags(simulatedSecondRemainder, expectedFirst),
+                "Mechanical arm simulation did not expose the installed guide");
+        helper.assertTrue(ItemStack.isSameItemSameTags(stove.getGuide(), expectedFirst),
+                "Mechanical arm simulation replaced the installed guide");
+
+        ItemStack secondRemainder = point.insert(second, false);
+        helper.assertTrue(ItemStack.isSameItemSameTags(secondRemainder, expectedFirst),
+                "Mechanical arm replacement did not return the installed guide");
+        helper.assertTrue(ItemStack.isSameItemSameTags(stove.getGuide(), expectedSecond),
+                "The mechanical arm did not install the replacement guide");
+        helper.succeed();
+    }
+
     static CompoundTag repeatedIngredientGuide(Item ingredient, int ingredientSlots) {
         CompoundTag tag = new CompoundTag();
         ListTag ingredients = new ListTag();
