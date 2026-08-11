@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "pomegranate_cake"
+    }
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:fruits/pomegranate"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "m": {
+      "tag": "forge:milk"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "w": {
+      "tag": "forge:dough/wheat"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "ses",
+    "#w#"
+  ],
+  "result": {
+    "item": "collectorsreap:pomegranate_cake"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "collectorsreap"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:pomegranate_ice_cream",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:pomegranate_ice_cream"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "create:compacting",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "lime_cookie"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:fruits/lime"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    },
+    {
+      "tag": "forge:flour/wheat"
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:lime_cookie"
+    }
+  ]
+}

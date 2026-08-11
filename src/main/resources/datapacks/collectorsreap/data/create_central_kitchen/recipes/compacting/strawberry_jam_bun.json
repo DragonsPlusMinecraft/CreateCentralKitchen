@@ -1,0 +1,29 @@
+{
+  "type": "create:compacting",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "strawberry_jam_bun"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "neapolitan:strawberries"
+    },
+    {
+      "tag": "collectorsreap:lime_or_slice"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:strawberry_jam_bun"
+    }
+  ]
+}

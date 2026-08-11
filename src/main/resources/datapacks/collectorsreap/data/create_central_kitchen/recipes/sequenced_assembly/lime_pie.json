@@ -1,0 +1,88 @@
+{
+  "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "lime_pie"
+    }
+  ],
+  "ingredient": {
+    "item": "farmersdelight:pie_crust"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "collectorsreap:lime_pie"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        },
+        {
+          "tag": "forge:fruits/lime"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        },
+        {
+          "tag": "forge:eggs"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        },
+        {
+          "amount": 250,
+          "fluidTag": "forge:milk"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_lime_pie"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_lime_pie"
+  }
+}

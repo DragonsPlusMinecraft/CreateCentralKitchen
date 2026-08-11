@@ -1,0 +1,23 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "candied_lime"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "collectorsreap:lime_slice"
+    },
+    {
+      "amount": 50,
+      "fluidTag": "forge:honey"
+    }
+  ],
+  "results": [
+    {
+      "item": "collectorsreap:candied_lime"
+    }
+  ]
+}

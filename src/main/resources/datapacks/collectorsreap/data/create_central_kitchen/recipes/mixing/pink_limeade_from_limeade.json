@@ -1,0 +1,35 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "pink_limeade"
+    },
+    {
+      "type": "collectorsreap:enabled",
+      "value": "limeade"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:fruits/pomegranate"
+    },
+    {
+      "tag": "forge:fruits/pomegranate"
+    },
+    {
+      "tag": "forge:fruits/pomegranate"
+    },
+    {
+      "amount": 250,
+      "fluid": "collectorsreap:lime_juice",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "collectorsreap:pink_limeade"
+    }
+  ]
+}

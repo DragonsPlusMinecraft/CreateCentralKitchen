@@ -1,0 +1,88 @@
+{
+  "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "collectorsreap:enabled",
+      "value": "portobello_quiche"
+    }
+  ],
+  "ingredient": {
+    "item": "farmersdelight:pie_crust"
+  },
+  "loops": 2,
+  "results": [
+    {
+      "item": "collectorsreap:portobello_quiche"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        },
+        {
+          "item": "collectorsreap:baked_portobello_cap"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        },
+        {
+          "tag": "forge:crops/onion"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        },
+        {
+          "tag": "forge:eggs"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        },
+        {
+          "amount": 250,
+          "fluidTag": "forge:milk"
+        }
+      ],
+      "results": [
+        {
+          "item": "create_central_kitchen:incomplete_portobello_quiche"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "create_central_kitchen:incomplete_portobello_quiche"
+  }
+}

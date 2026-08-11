@@ -101,6 +101,55 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("filling/creamy_corn_drink"),
             CentralKitchen.genRL("mixing/corn_soup"),
             CentralKitchen.genRL("mixing/creamy_corn_drink"));
+    private static final List<ResourceLocation> COLLECTORS_REAP_RECIPES = List.of(
+            CentralKitchen.genRL("compacting/lime_cake"),
+            CentralKitchen.genRL("compacting/lime_cookie"),
+            CentralKitchen.genRL("compacting/pomegranate_cake"),
+            CentralKitchen.genRL("compacting/strawberry_jam_bun"),
+            CentralKitchen.genRL("crafting/lime_cake_from_dough"),
+            CentralKitchen.genRL("crafting/pomegranate_cake_from_dough"),
+            CentralKitchen.genRL("emptying/berry_limeade"),
+            CentralKitchen.genRL("emptying/lime_ice_cream"),
+            CentralKitchen.genRL("emptying/lime_milkshake"),
+            CentralKitchen.genRL("emptying/limeade"),
+            CentralKitchen.genRL("emptying/mint_limeade"),
+            CentralKitchen.genRL("emptying/pink_limeade"),
+            CentralKitchen.genRL("emptying/pomegranate_ice_cream"),
+            CentralKitchen.genRL("emptying/pomegranate_milkshake"),
+            CentralKitchen.genRL("emptying/pomegranate_smoothie"),
+            CentralKitchen.genRL("filling/berry_limeade"),
+            CentralKitchen.genRL("filling/candied_lime"),
+            CentralKitchen.genRL("filling/lime_ice_cream"),
+            CentralKitchen.genRL("filling/lime_milkshake"),
+            CentralKitchen.genRL("filling/limeade"),
+            CentralKitchen.genRL("filling/mint_limeade"),
+            CentralKitchen.genRL("filling/pink_limeade"),
+            CentralKitchen.genRL("filling/pomegranate_ice_cream"),
+            CentralKitchen.genRL("filling/pomegranate_milkshake"),
+            CentralKitchen.genRL("filling/pomegranate_smoothie"),
+            CentralKitchen.genRL("mixing/berry_limeade"),
+            CentralKitchen.genRL("mixing/berry_limeade_from_limeade"),
+            CentralKitchen.genRL("mixing/lime_green_tea"),
+            CentralKitchen.genRL("mixing/lime_ice_cream"),
+            CentralKitchen.genRL("mixing/lime_milkshake"),
+            CentralKitchen.genRL("mixing/lime_milkshake_from_ice_cream"),
+            CentralKitchen.genRL("mixing/limeade"),
+            CentralKitchen.genRL("mixing/mint_limeade"),
+            CentralKitchen.genRL("mixing/mint_limeade_from_limeade"),
+            CentralKitchen.genRL("mixing/pink_limeade"),
+            CentralKitchen.genRL("mixing/pink_limeade_from_limeade"),
+            CentralKitchen.genRL("mixing/pomegranate_black_tea"),
+            CentralKitchen.genRL("mixing/pomegranate_ice_cream"),
+            CentralKitchen.genRL("mixing/pomegranate_milkshake"),
+            CentralKitchen.genRL("mixing/pomegranate_milkshake_from_ice_cream"),
+            CentralKitchen.genRL("mixing/pomegranate_smoothie"),
+            CentralKitchen.genRL("sequenced_assembly/lime_pie"),
+            CentralKitchen.genRL("sequenced_assembly/portobello_burger"),
+            CentralKitchen.genRL("sequenced_assembly/portobello_quiche"),
+            Mods.cr("integration/create/emptying/lime_green_tea"),
+            Mods.cr("integration/create/emptying/pomegranate_black_tea"),
+            Mods.cr("integration/create/filling/lime_green_tea"),
+            Mods.cr("integration/create/filling/pomegranate_black_tea"));
     private static final List<ResourceLocation> PECULIARS_RECIPES = List.of(
             CentralKitchen.genRL("compacting/aloe_cake"),
             CentralKitchen.genRL("compacting/passion_fruit_cake"),
@@ -192,6 +241,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.CORN_DELIGHT, CORN_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.SEASONALS, SEASONALS_RECIPES);
         RESTORED_RECIPES.put(Mods.PECULIARS, PECULIARS_RECIPES);
+        RESTORED_RECIPES.put(Mods.CR, COLLECTORS_REAP_RECIPES);
     }
 
     @SuppressWarnings("deprecation")
@@ -217,6 +267,9 @@ public class BuiltinResourceGameTests {
                 helper.assertTrue(recipes.byKey(recipeId).isPresent(),
                         "The " + modId + " built-in pack did not load " + recipeId);
         });
+        if (!Mods.isLoaded("culturaldelights"))
+            helper.assertTrue(recipes.byKey(CentralKitchen.genRL("sequenced_assembly/veggie_wrap")).isEmpty(),
+                    "The Collector's Reap pack loaded its Cultural Delights recipe without Cultural Delights");
         var advancements = helper.getLevel().getServer().getAdvancements();
         RESTORED_ADVANCEMENTS.forEach((modId, advancementIds) -> {
             if (!Mods.isLoaded(modId))
