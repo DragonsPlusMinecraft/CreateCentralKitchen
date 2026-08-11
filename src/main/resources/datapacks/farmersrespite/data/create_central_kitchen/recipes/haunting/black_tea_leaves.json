@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "farmersrespite:yellow_tea_leaves"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersrespite:black_tea_leaves"
+    }
+  ]
+}

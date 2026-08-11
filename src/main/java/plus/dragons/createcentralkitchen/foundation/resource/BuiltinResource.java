@@ -23,6 +23,7 @@ public enum BuiltinResource {
     CREATE_STYLED(PackType.CLIENT_RESOURCES, CentralKitchen.ID),
     //Data Packs
     FARMERSDELIGHT(PackType.SERVER_DATA, true, false),
+    FARMERSRESPITE(PackType.SERVER_DATA, true, false),
     MINERS_DELIGHT(PackType.SERVER_DATA, true, false),
     OVERWEIGHT_FARMING(PackType.SERVER_DATA, true, false),
     ENDS_DELIGHT(PackType.SERVER_DATA, true, false),

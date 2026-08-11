@@ -1,0 +1,16 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "farmersrespite:coffee_berries"
+    }
+  ],
+  "results": [
+    {
+      "item": "farmersrespite:coffee_beans"
+    },
+    {
+      "item": "minecraft:red_dye"
+    }
+  ]
+}

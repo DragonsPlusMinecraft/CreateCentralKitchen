@@ -150,6 +150,24 @@ public class BuiltinResourceGameTests {
             Mods.cr("integration/create/emptying/pomegranate_black_tea"),
             Mods.cr("integration/create/filling/lime_green_tea"),
             Mods.cr("integration/create/filling/pomegranate_black_tea"));
+    private static final List<ResourceLocation> FARMERS_RESPITE_RECIPES = List.of(
+            CentralKitchen.genRL("brewing/builders_tea"),
+            CentralKitchen.genRL("compacting/green_tea_cookie"),
+            CentralKitchen.genRL("crafting/coffee_cake_from_dough"),
+            CentralKitchen.genRL("haunting/black_tea_leaves"),
+            CentralKitchen.genRL("haunting/yellow_tea_leaves"),
+            CentralKitchen.genRL("milling/coffee_berries"),
+            CentralKitchen.genRL("milling/wild_tea_bush"),
+            CentralKitchen.genRL("mixing/black_tea"),
+            CentralKitchen.genRL("mixing/builders_tea_from_tea_leaves"),
+            CentralKitchen.genRL("mixing/coffee"),
+            CentralKitchen.genRL("mixing/coffee_cake"),
+            CentralKitchen.genRL("mixing/dandelion_tea"),
+            CentralKitchen.genRL("mixing/green_tea"),
+            CentralKitchen.genRL("mixing/purulent_tea"),
+            CentralKitchen.genRL("mixing/rose_hip_tea"),
+            CentralKitchen.genRL("mixing/yellow_tea"));
+
     private static final List<ResourceLocation> PECULIARS_RECIPES = List.of(
             CentralKitchen.genRL("compacting/aloe_cake"),
             CentralKitchen.genRL("compacting/passion_fruit_cake"),
@@ -241,6 +259,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.CORN_DELIGHT, CORN_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.SEASONALS, SEASONALS_RECIPES);
         RESTORED_RECIPES.put(Mods.PECULIARS, PECULIARS_RECIPES);
+        RESTORED_RECIPES.put(Mods.FR, FARMERS_RESPITE_RECIPES);
         RESTORED_RECIPES.put(Mods.CR, COLLECTORS_REAP_RECIPES);
     }
 
