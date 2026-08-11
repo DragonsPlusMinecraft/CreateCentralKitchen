@@ -104,8 +104,6 @@ public class CckCreativeModeTab {
             }
             if (Mods.isLoaded(Mods.FD))
                 output.accept(FDItemEntries.COOKING_GUIDE.asStack());
-//            if (Mods.isLoaded(Mods.FR))
-//                output.accept(FRItemEntries.BREWING_GUIDE.asStack());
             if (Mods.isLoaded(Mods.MD))
                 output.accept(MDItemEntries.MINERS_COOKING_GUIDE.asStack());
         }
