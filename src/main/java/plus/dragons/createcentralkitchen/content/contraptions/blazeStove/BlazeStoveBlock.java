@@ -185,6 +185,14 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
         }
     }
 
+    public static void notifyCookingComplete(@Nullable LevelAccessor level, BlockPos cookingPos) {
+        if (level == null)
+            return;
+        BlockPos stovePos = cookingPos.below();
+        if (level.getBlockState(stovePos).getBlock() instanceof BlazeStoveBlock stove)
+            stove.startSignal(level, stovePos);
+    }
+
     protected void updateNeighborsInFront(Level level, BlockPos pos, BlockState state) {
         Direction facing = state.getValue(FACING);
         BlockPos posFront = pos.relative(facing.getOpposite());

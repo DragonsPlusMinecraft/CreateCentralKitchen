@@ -20,10 +20,6 @@ public abstract class KettleBlockEntityMixin extends SyncedBlockEntity {
 
     @Inject(method = "processBrewing", at = @At(value = "INVOKE", target = "Lumpaz/farmersrespite/common/block/entity/KettleBlockEntity;setRecipeUsed(Lnet/minecraft/world/item/crafting/Recipe;)V", remap = true))
     private void cck$notifyBlazeStove(KettleRecipe recipe, KettleBlockEntity kettle, CallbackInfoReturnable<Boolean> cir) {
-        assert this.level != null;
-        BlockPos posBelow = this.worldPosition.below();
-        if (this.level.getBlockState(posBelow).getBlock() instanceof BlazeStoveBlock stove) {
-            stove.startSignal(this.level, posBelow);
-        }
+        BlazeStoveBlock.notifyCookingComplete(this.level, this.worldPosition);
     }
 }

@@ -20,10 +20,6 @@ public abstract class CopperPotBlockEntityMixin extends SyncedBlockEntity {
 
     @Inject(method = "processCooking", at = @At(value = "INVOKE", target = "Lcom/sammy/minersdelight/content/block/copper_pot/CopperPotBlockEntity;setRecipeUsed(Lnet/minecraft/world/item/crafting/Recipe;)V", remap = true))
     private void cck$notifyBlazeStove(CookingPotRecipe recipe, CopperPotBlockEntity cookingPot, CallbackInfoReturnable<Boolean> cir) {
-        assert this.level != null;
-        BlockPos posBelow = this.worldPosition.below();
-        if (this.level.getBlockState(posBelow).getBlock() instanceof BlazeStoveBlock stove) {
-            stove.startSignal(this.level, posBelow);
-        }
+        BlazeStoveBlock.notifyCookingComplete(this.level, this.worldPosition);
     }
 }

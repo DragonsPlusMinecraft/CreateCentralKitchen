@@ -20,10 +20,6 @@ public abstract class CookingPotBlockEntityMixin extends SyncedBlockEntity {
 
     @Inject(method = "processCooking", at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/common/block/entity/CookingPotBlockEntity;setRecipeUsed(Lnet/minecraft/world/item/crafting/Recipe;)V", remap = true))
     private void cck$notifyBlazeStove(CookingPotRecipe recipe, CookingPotBlockEntity cookingPot, CallbackInfoReturnable<Boolean> cir) {
-        assert this.level != null;
-        BlockPos posBelow = this.worldPosition.below();
-        if (this.level.getBlockState(posBelow).getBlock() instanceof BlazeStoveBlock stove) {
-            stove.startSignal(this.level, posBelow);
-        }
+        BlazeStoveBlock.notifyCookingComplete(this.level, this.worldPosition);
     }
 }
