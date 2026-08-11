@@ -40,6 +40,7 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("mixing/yucca_gateau"));
     private static final List<ResourceLocation> FARMERS_DELIGHT_RECIPES = List.of(
             CentralKitchen.genRL("sequenced_assembly/apple_pie"),
+            CentralKitchen.genRL("sequenced_assembly/mutton_wrap"),
             CentralKitchen.genRL("sequenced_assembly/pumpkin_pie"),
             CentralKitchen.genRL("sequenced_assembly/sweet_berry_cheesecake"));
     private static final List<ResourceLocation> FARMERS_DELIGHT_PECULIARS_RECIPES = List.of(CentralKitchen.genRL("crafting/passion_fruit_cake_from_slices"));
