@@ -8,8 +8,6 @@ import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMoveme
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -34,24 +32,17 @@ public class CornDelightMovementBehaviorExtensions {
             MovementContext context,
             BlockPos pos, BlockState state,
             boolean replant, boolean partial) {
-        Level level = context.world;
+        if (!(state.getBlock() instanceof CornCrop crop))
+            return;
+        int age = crop.getAge(state);
+        if (age <= 0)
+            return;
+        if (!partial && age < crop.getMaxAge())
+            return;
 
-        if (state.getValue(UPPER)) {
-            BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
-        } else {
-            if (!(state.getBlock() instanceof CornCrop crop))
-                return;
-            int age = crop.getAge(state);
-            if (age <= 0)
-                return;
-            if (!partial && age < crop.getMaxAge())
-                return;
-            if (replant) {
-                level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-                level.setBlock(pos, crop.getStateForAge(0), 2);
-            } else {
-                BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
-            }
-        }
+        Level level = context.world;
+        BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
+        if (replant && !state.getValue(UPPER))
+            level.setBlock(pos, crop.getStateForAge(0), 2);
     }
 }
