@@ -19,13 +19,10 @@ public class ItemHandlerModifiableView implements IItemHandlerModifiable {
 
     @Override
     public void setStackInSlot(int slot, @NotNull ItemStack stack) {
-        if (slot < size) {
-            int index = start + slot;
-            if (index <= end)
-                inv.setStackInSlot(index, stack);
-        } else {
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + size + ")");
-        }
+        validateSlot(slot);
+        int index = start + slot;
+        if (index <= end)
+            inv.setStackInSlot(index, stack);
     }
 
     @Override
@@ -36,65 +33,43 @@ public class ItemHandlerModifiableView implements IItemHandlerModifiable {
     @NotNull
     @Override
     public ItemStack getStackInSlot(int slot) {
-        if (slot < size) {
-            int index = start + slot;
-            if (index <= end)
-                return inv.getStackInSlot(index);
-            else
-                return ItemStack.EMPTY;
-        } else {
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + size + ")");
-        }
+        validateSlot(slot);
+        int index = start + slot;
+        return index <= end ? inv.getStackInSlot(index) : ItemStack.EMPTY;
     }
 
     @NotNull
     @Override
     public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        if (slot < size) {
-            int index = start + slot;
-            if (index <= end)
-                return inv.insertItem(index, stack, simulate);
-            else
-                return stack;
-        } else {
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + size + ")");
-        }
+        validateSlot(slot);
+        int index = start + slot;
+        return index <= end ? inv.insertItem(index, stack, simulate) : stack;
     }
 
     @NotNull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        if (slot < size) {
-            int index = start + slot;
-            if (index <= end)
-                return inv.extractItem(index, amount, simulate);
-            else
-                return ItemStack.EMPTY;
-        } else {
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + size + ")");
-        }
+        validateSlot(slot);
+        int index = start + slot;
+        return index <= end ? inv.extractItem(index, amount, simulate) : ItemStack.EMPTY;
     }
 
     @Override
     public int getSlotLimit(int slot) {
-        if (slot < size) {
-            int index = start + slot;
-            if (index <= end)
-                return inv.getSlotLimit(index);
-            else
-                return 0;
-        } else {
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + size + ")");
-        }
+        validateSlot(slot);
+        int index = start + slot;
+        return index <= end ? inv.getSlotLimit(index) : 0;
     }
 
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        if (slot < size) {
-            int index = start + slot;
-            return index <= end;
-        } else {
-            throw new RuntimeException("Slot " + slot + " not in valid range - [0," + size + ")");
-        }
+        validateSlot(slot);
+        int index = start + slot;
+        return index <= end && inv.isItemValid(index, stack);
+    }
+
+    private void validateSlot(int slot) {
+        if (slot < 0 || slot >= size)
+            throw new IndexOutOfBoundsException("Slot " + slot + " not in valid range - [0," + size + ")");
     }
 }
