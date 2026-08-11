@@ -7,7 +7,9 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.GameTestRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -104,6 +106,38 @@ public class BlazeStoveGuideSecurityGameTests {
                 helper.assertTrue(menu.getSlot(36).getItem().is(Items.BEDROCK),
                         "Shift-click on guide input " + selectedSlot + " cleared input 0 instead");
         }
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void savingGuideDataPreservesOtherItemTags(GameTestHelper helper) {
+        var player = helper.makeMockPlayer();
+        ItemStack guideStack = FDItemEntries.COOKING_GUIDE.asStack();
+        guideStack.setHoverName(Component.literal("Preserved Guide"));
+        guideStack.getOrCreateTag().putString("AuditMarker", "preserve");
+        CookingGuideMenu menu = new CookingGuideMenu(FDMenuEntries.COOKING_GUIDE.get(), 25,
+                new Inventory(player), guideStack);
+
+        menu.getSlot(36).set(new ItemStack(Items.STONE));
+        menu.saveData(guideStack);
+
+        CompoundTag saved = guideStack.getTag();
+        helper.assertTrue(saved != null, "Saving guide data removed the entire item tag");
+        helper.assertTrue(guideStack.hasCustomHoverName() &&
+                "Preserved Guide".equals(guideStack.getHoverName().getString()),
+                "Saving guide data removed the custom item name");
+        helper.assertTrue("preserve".equals(saved.getString("AuditMarker")),
+                "Saving guide data removed an unrelated item tag");
+        helper.assertTrue(saved.contains("Ingredients", Tag.TAG_LIST),
+                "Saving guide data did not persist the selected ingredient");
+
+        menu.getSlot(36).set(ItemStack.EMPTY);
+        menu.saveData(guideStack);
+        saved = guideStack.getTag();
+        helper.assertTrue(saved != null && !saved.contains("Ingredients"),
+                "Clearing the guide left stale ingredient data");
+        helper.assertTrue("preserve".equals(saved.getString("AuditMarker")),
+                "Clearing the guide removed an unrelated item tag");
         helper.succeed();
     }
 

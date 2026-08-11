@@ -6,6 +6,8 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -22,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends GhostItemMenu<ItemStack> {
+    private static final List<String> GUIDE_DATA_KEYS = List.of("Ingredients", "Result", "Container");
     protected G guide;
     @Nullable
     protected BlazeStoveBlockEntity blazeStove;
@@ -120,7 +123,17 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
 
     @Override
     protected void saveData(ItemStack contentHolder) {
-        contentHolder.setTag(guide.serializeNBT());
+        CompoundTag guideData = guide.serializeNBT();
+        CompoundTag itemData = contentHolder.getOrCreateTag();
+        for (String key : GUIDE_DATA_KEYS) {
+            Tag value = guideData.get(key);
+            if (value == null)
+                itemData.remove(key);
+            else
+                itemData.put(key, value.copy());
+        }
+        if (itemData.isEmpty())
+            contentHolder.setTag(null);
     }
 
     @Override
