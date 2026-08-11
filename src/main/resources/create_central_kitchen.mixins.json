@@ -17,7 +17,6 @@
     "common.farmersdelight.BasketBlockEntityAccessor",
     "common.farmersdelight.BasketBlockEntityMixin",
     "common.farmersdelight.CookingPotBlockEntityMixin",
-    "common.farmersdelight.HeatableBlockEntityMixin",
     "common.farmersdelight.PieBlockMixin",
     "common.farmersdelight.SkilletBlockEntityAccessor",
     "common.farmersrespite.CoffeeBushBlockMixin",

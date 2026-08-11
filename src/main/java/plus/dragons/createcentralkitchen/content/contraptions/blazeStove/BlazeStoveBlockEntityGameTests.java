@@ -1,5 +1,6 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -7,6 +8,7 @@ import net.minecraft.gametest.framework.GameTestRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
+import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
 
 @ModLoadSubscriber(modid = Mods.FD)
 @PrefixGameTestTemplate(false)
@@ -66,6 +69,45 @@ public class BlazeStoveBlockEntityGameTests {
             helper.assertTrue(stove.getInventory().getStackInSlot(slot).isEmpty(),
                     "Burning left an item in slot " + slot);
         }
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void createHeatLevelsControlFarmersDelightHeating(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var stovePos = helper.absolutePos(STOVE_POS);
+        level.setBlock(stovePos, FDBlockEntries.BLAZE_STOVE.getDefaultState(), 3);
+        BlockEntity blockEntity = level.getBlockEntity(stovePos);
+        helper.assertTrue(blockEntity instanceof BlazeStoveBlockEntity,
+                "Expected a Blaze Stove block entity");
+        BlazeStoveBlockEntity stove = (BlazeStoveBlockEntity) blockEntity;
+        HeatableBlockEntity indirectHeat = new HeatableBlockEntity() {};
+        HeatableBlockEntity directHeat = new HeatableBlockEntity() {
+            @Override
+            public boolean requiresDirectHeat() {
+                return true;
+            }
+        };
+
+        stove.setBlockHeat(BlazeBurnerBlock.HeatLevel.NONE);
+        helper.assertBlockProperty(STOVE_POS, BlazeStoveBlock.LIT, false);
+        helper.assertTrue(!indirectHeat.isHeated(level, stovePos.above()),
+                "An inactive Blaze Stove was accepted as a direct heat source");
+        stove.setBlockHeat(BlazeBurnerBlock.HeatLevel.SMOULDERING);
+        helper.assertBlockProperty(STOVE_POS, BlazeStoveBlock.LIT, true);
+        helper.assertTrue(indirectHeat.isHeated(level, stovePos.above()),
+                "An active Blaze Stove was rejected as a direct heat source");
+
+        level.setBlock(stovePos.above(), Blocks.HOPPER.defaultBlockState(), 3);
+        var cookingPos = stovePos.above(2);
+        helper.assertTrue(indirectHeat.isHeated(level, cookingPos),
+                "An active Blaze Stove did not heat through a conductor");
+        helper.assertTrue(!directHeat.isHeated(level, cookingPos),
+                "A direct-only appliance accepted heat through a conductor");
+        stove.setBlockHeat(BlazeBurnerBlock.HeatLevel.NONE);
+        helper.assertBlockProperty(STOVE_POS, BlazeStoveBlock.LIT, false);
+        helper.assertTrue(!indirectHeat.isHeated(level, cookingPos),
+                "An inactive Blaze Stove heated through a conductor");
         helper.succeed();
     }
 }

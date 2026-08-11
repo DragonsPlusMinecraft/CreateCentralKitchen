@@ -289,11 +289,14 @@ public class BlazeStoveBlockEntity extends BlazeBurnerBlockEntity implements Men
     @Override
     protected void setBlockHeat(BlazeBurnerBlock.HeatLevel newHeat) {
         BlazeBurnerBlock.HeatLevel originalHeat = getHeatLevelFromBlock();
-        if (originalHeat == newHeat)
+        boolean lit = newHeat.isAtLeast(BlazeBurnerBlock.HeatLevel.SMOULDERING);
+        if (originalHeat == newHeat && getBlockState().getValue(BlazeStoveBlock.LIT) == lit)
             return;
-        assert level != null;
+        if (level == null)
+            return;
         level.setBlockAndUpdate(worldPosition, getBlockState()
-                .setValue(BlazeBurnerBlock.HEAT_LEVEL, newHeat));
+                .setValue(BlazeBurnerBlock.HEAT_LEVEL, newHeat)
+                .setValue(BlazeStoveBlock.LIT, lit));
         notifyUpdate();
     }
 

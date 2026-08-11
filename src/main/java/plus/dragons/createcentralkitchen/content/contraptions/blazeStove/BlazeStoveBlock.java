@@ -52,6 +52,7 @@ import vectorwing.farmersdelight.common.registry.ModDamageTypes;
 @SuppressWarnings("deprecation")
 public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<BlazeStoveBlockEntity>, IWrenchable {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final EnumProperty<BlazeBurnerBlock.HeatLevel> HEAT_LEVEL = BlazeBurnerBlock.HEAT_LEVEL;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(2, 0, 2, 14, 5, 14),
@@ -63,6 +64,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
         registerDefaultState(defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(POWERED, false)
+                .setValue(LIT, true)
                 .setValue(HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
     }
 
@@ -74,7 +76,7 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, POWERED, HEAT_LEVEL);
+        builder.add(FACING, POWERED, LIT, HEAT_LEVEL);
     }
 
     @Override
