@@ -62,6 +62,14 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("mixing/upgrade_to_chorus_fruit_bubble_tea"),
             CentralKitchen.genRL("sequenced_assembly/chorus_flower_pie"),
             CentralKitchen.genRL("sequenced_assembly/chorus_fruit_pie"));
+    private static final List<ResourceLocation> UPGRADE_AQUATIC_RECIPES = List.of(
+            CentralKitchen.genRL("crafting/mulberry_jam_block_from_bucket"),
+            CentralKitchen.genRL("crafting/mulberry_jam_bottles_from_bucket"),
+            CentralKitchen.genRL("crafting/mulberry_jam_bucket"),
+            CentralKitchen.genRL("crafting/mulberry_jam_bucket_from_block"),
+            CentralKitchen.genRL("emptying/mulberry_jam_bottle"),
+            CentralKitchen.genRL("filling/mulberry_jam_bottle"),
+            CentralKitchen.genRL("filling/mulberry_jam_bucket"));
     private static final Map<String, List<ResourceLocation>> BUILTIN_RECIPES = Map.of(
             Mods.AD, ABNORMALS_DELIGHT_RECIPES,
             Mods.ATMOSPHERIC, ATMOSPHERIC_RECIPES);
@@ -70,6 +78,7 @@ public class BuiltinResourceGameTests {
     static {
         RESTORED_RECIPES.put(Mods.FD, FARMERS_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.ED, ENDS_DELIGHT_RECIPES);
+        RESTORED_RECIPES.put(Mods.UA, UPGRADE_AQUATIC_RECIPES);
     }
 
     @SuppressWarnings("deprecation")

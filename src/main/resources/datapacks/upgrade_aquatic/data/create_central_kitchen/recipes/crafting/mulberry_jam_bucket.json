@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "upgrade_aquatic:mulberry_jam_bottle"
+    },
+    {
+      "item": "upgrade_aquatic:mulberry_jam_bottle"
+    },
+    {
+      "item": "upgrade_aquatic:mulberry_jam_bottle"
+    },
+    {
+      "item": "upgrade_aquatic:mulberry_jam_bottle"
+    }
+  ],
+  "result": {
+    "item": "create_central_kitchen:mulberry_jam_bucket"
+  }
+}
