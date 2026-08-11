@@ -20,10 +20,10 @@ public enum FDNetworkEntries {
     BLAZE_STOVE_GUIDE_SYNC(BlazeStoveGuideSyncPacket.class, BlazeStoveGuideSyncPacket::new, NetworkDirection.PLAY_TO_SERVER);
 
     public static final ResourceLocation CHANNEL_NAME = CentralKitchen.genRL(Mods.FD);
-    public static final String NETWORK_VERSION = "1.3.0";
+    public static final String NETWORK_VERSION = "1.5.0";
     public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(CHANNEL_NAME)
-            .serverAcceptedVersions(NETWORK_VERSION::equals)
-            .clientAcceptedVersions(NETWORK_VERSION::equals)
+            .serverAcceptedVersions(FDNetworkEntries::acceptsNetworkVersion)
+            .clientAcceptedVersions(FDNetworkEntries::acceptsNetworkVersion)
             .networkProtocolVersion(() -> NETWORK_VERSION)
             .simpleChannel();
 
@@ -42,5 +42,9 @@ public enum FDNetworkEntries {
             entries[i].packet.register(CHANNEL, i);
         }
         CentralKitchen.LOGGER.debug("Registered {} network messages to channel {}", entries.length, CHANNEL_NAME);
+    }
+
+    static boolean acceptsNetworkVersion(String remoteVersion) {
+        return NETWORK_VERSION.equals(remoteVersion);
     }
 }
