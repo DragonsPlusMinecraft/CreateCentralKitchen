@@ -74,6 +74,35 @@ public class NDHarvesterGameTests {
         helper.succeed();
     }
 
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void nonReplantingHarvestRemovesPropelplantStems(GameTestHelper helper) {
+        var level = helper.getLevel();
+        var ripePos = helper.absolutePos(CROP_POS);
+        BlockState ripe = NDBlocks.PROPELPLANT_BERRY_STEM.get().defaultBlockState()
+                .setValue(PropelplantBerryStemBlock.PEARL, true);
+        level.setBlock(ripePos, ripe, 2);
+        List<ItemStack> drops = new ArrayList<>();
+
+        NDHarvesterMovementBehaviorExtensions.harvestPropelplantStem(
+                collectingBehaviour(drops), context(level, ripe), ripePos, ripe, false, false);
+
+        assertPropelpearlDrop(helper, drops);
+        helper.assertTrue(level.getBlockState(ripePos).isAir(),
+                "Disabling replanting did not remove a ripe propelplant berry stem");
+
+        var unripePos = ripePos.east();
+        BlockState unripe = NDBlocks.PROPELPLANT_BERRY_STEM.get().defaultBlockState()
+                .setValue(PropelplantBerryStemBlock.PEARL, false);
+        level.setBlock(unripePos, unripe, 2);
+
+        NDHarvesterMovementBehaviorExtensions.harvestPropelplantStem(
+                collectingBehaviour(drops), context(level, unripe), unripePos, unripe, false, false);
+
+        helper.assertTrue(level.getBlockState(unripePos).isAir(),
+                "Disabling replanting did not remove an unripe propelplant berry stem");
+        helper.succeed();
+    }
+
     private static HarvesterMovementBehaviour collectingBehaviour(List<ItemStack> drops) {
         return new HarvesterMovementBehaviour() {
             @Override

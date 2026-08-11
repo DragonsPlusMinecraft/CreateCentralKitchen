@@ -69,9 +69,14 @@ public class NDHarvesterMovementBehaviorExtensions {
         Level level = context.world;
         if (state.getValue(PropelplantBerryStemBlock.PEARL)) {
             behaviour.dropItem(context, new ItemStack(NDItems.PROPELPEARL.get(), 1 + level.random.nextInt(2)));
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(PropelplantBerryStemBlock.PEARL, Boolean.FALSE), 2);
+            if (replant) {
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.setBlock(pos, state.setValue(PropelplantBerryStemBlock.PEARL, Boolean.FALSE), 2);
+                return;
+            }
         }
+        if (!replant)
+            BlockHelper.destroyBlock(level, pos, 1, stack -> behaviour.dropItem(context, stack));
     }
 
     public static void harvestPropelplantCane(HarvesterMovementBehaviour behaviour,
