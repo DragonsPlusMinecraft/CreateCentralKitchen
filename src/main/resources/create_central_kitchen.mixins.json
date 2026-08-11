@@ -12,6 +12,7 @@
     "common.create.BlockEntityBehaviourMixin",
     "common.create.CreateJEIMixin",
     "common.create.DeployerBlockEntityAccessor",
+    "common.create.GhostItemSubmitPacketMixin",
     "common.create.HarvesterMovementBehaviorMixin",
     "common.create.MechanicalMixerBlockEntityMixin",
     "common.farmersdelight.BasketBlockEntityAccessor",

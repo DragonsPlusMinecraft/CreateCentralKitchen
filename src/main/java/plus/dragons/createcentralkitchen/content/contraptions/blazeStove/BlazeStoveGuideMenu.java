@@ -54,6 +54,23 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         return inputSize;
     }
 
+    public boolean submitGhostItem(int slotIndex, ItemStack item) {
+        if (slotIndex < 0 || slotIndex >= inputSize)
+            return false;
+
+        ItemStack normalized = item.copy();
+        if (!normalized.isEmpty())
+            normalized.setCount(1);
+
+        var menuSlot = getSlot(36 + slotIndex);
+        if (!normalized.isEmpty() && !menuSlot.mayPlace(normalized))
+            return false;
+
+        ghostInventory.setStackInSlot(slotIndex, normalized);
+        menuSlot.setChanged();
+        return true;
+    }
+
     public int getBlazeStatus() {
         return blazeStove == null ? 0 : blazeStove.getBlazeStatusCode();
     }

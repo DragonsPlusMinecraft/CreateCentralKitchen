@@ -110,6 +110,34 @@ public class BlazeStoveGuideSecurityGameTests {
     }
 
     @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void ghostSubmissionsValidateSlotsAndStacks(GameTestHelper helper) {
+        var player = helper.makeMockPlayer();
+        CookingGuideMenu menu = new CookingGuideMenu(FDMenuEntries.COOKING_GUIDE.get(), 26,
+                new Inventory(player), FDItemEntries.COOKING_GUIDE.asStack());
+        menu.guide.deserializeNBT(forgedGuideTag());
+
+        ItemStack submitted = new ItemStack(Items.STONE);
+        submitted.setCount(submitted.getMaxStackSize());
+        helper.assertTrue(!menu.submitGhostItem(-1, submitted), "A negative ghost slot was accepted");
+        helper.assertTrue(!menu.submitGhostItem(menu.getInputSize(), submitted),
+                "The derived result slot was accepted as a ghost input");
+        helper.assertTrue(menu.getSlot(36).getItem().is(Items.BEDROCK),
+                "An invalid ghost slot changed a valid ingredient");
+        helper.assertTrue(menu.getSlot(36 + menu.getInputSize()).getItem().is(Items.DIAMOND),
+                "An invalid ghost slot changed the derived result");
+
+        helper.assertTrue(menu.submitGhostItem(0, submitted), "A valid ghost input was rejected");
+        helper.assertTrue(submitted.getCount() == submitted.getMaxStackSize(),
+                "Ghost submission mutated its caller-owned stack");
+        helper.assertTrue(menu.getSlot(36).getItem().is(Items.STONE) &&
+                menu.getSlot(36).getItem().getCount() == 1,
+                "Ghost submission did not normalize the ingredient to one item");
+        helper.assertTrue(menu.submitGhostItem(0, ItemStack.EMPTY), "Clearing a ghost input was rejected");
+        helper.assertTrue(menu.getSlot(36).getItem().isEmpty(), "Clearing a ghost input left an item behind");
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
     public static void savingGuideDataPreservesOtherItemTags(GameTestHelper helper) {
         var player = helper.makeMockPlayer();
         ItemStack guideStack = FDItemEntries.COOKING_GUIDE.asStack();
