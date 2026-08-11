@@ -101,6 +101,35 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("filling/creamy_corn_drink"),
             CentralKitchen.genRL("mixing/corn_soup"),
             CentralKitchen.genRL("mixing/creamy_corn_drink"));
+    private static final List<ResourceLocation> PECULIARS_RECIPES = List.of(
+            CentralKitchen.genRL("compacting/aloe_cake"),
+            CentralKitchen.genRL("compacting/passion_fruit_cake"),
+            CentralKitchen.genRL("compacting/yucca_cake"),
+            CentralKitchen.genRL("crafting/aloe_cake_from_dough"),
+            CentralKitchen.genRL("crafting/passion_fruit_cake_from_dough"),
+            CentralKitchen.genRL("crafting/yucca_cake_from_dough"),
+            CentralKitchen.genRL("emptying/aloe_ice_cream"),
+            CentralKitchen.genRL("emptying/aloe_milkshake"),
+            CentralKitchen.genRL("emptying/passion_fruit_ice_cream"),
+            CentralKitchen.genRL("emptying/passion_fruit_milkshake"),
+            CentralKitchen.genRL("emptying/yucca_ice_cream"),
+            CentralKitchen.genRL("emptying/yucca_milkshake"),
+            CentralKitchen.genRL("filling/aloe_ice_cream"),
+            CentralKitchen.genRL("filling/aloe_milkshake"),
+            CentralKitchen.genRL("filling/passion_fruit_ice_cream"),
+            CentralKitchen.genRL("filling/passion_fruit_milkshake"),
+            CentralKitchen.genRL("filling/yucca_fudge"),
+            CentralKitchen.genRL("filling/yucca_ice_cream"),
+            CentralKitchen.genRL("filling/yucca_milkshake"),
+            CentralKitchen.genRL("mixing/aloe_ice_cream"),
+            CentralKitchen.genRL("mixing/aloe_milkshake"),
+            CentralKitchen.genRL("mixing/aloe_milkshake_from_ice_cream"),
+            CentralKitchen.genRL("mixing/passion_fruit_ice_cream"),
+            CentralKitchen.genRL("mixing/passion_fruit_milkshake"),
+            CentralKitchen.genRL("mixing/passion_fruit_milkshake_from_ice_cream"),
+            CentralKitchen.genRL("mixing/yucca_ice_cream"),
+            CentralKitchen.genRL("mixing/yucca_milkshake"),
+            CentralKitchen.genRL("mixing/yucca_milkshake_from_ice_cream"));
     private static final List<ResourceLocation> SEASONALS_RECIPES = List.of(
             CentralKitchen.genRL("compacting/pumpkin_cake"),
             CentralKitchen.genRL("compacting/sweet_berry_cake"),
@@ -162,6 +191,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.AUTUMNITY, AUTUMNITY_RECIPES);
         RESTORED_RECIPES.put(Mods.CORN_DELIGHT, CORN_DELIGHT_RECIPES);
         RESTORED_RECIPES.put(Mods.SEASONALS, SEASONALS_RECIPES);
+        RESTORED_RECIPES.put(Mods.PECULIARS, PECULIARS_RECIPES);
     }
 
     @SuppressWarnings("deprecation")

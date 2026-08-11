@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "peculiars"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:aloe_ice_cream",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "peculiars:aloe_ice_cream"
+    }
+  ]
+}

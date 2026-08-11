@@ -32,6 +32,7 @@ public enum BuiltinResource {
     ATMOSPHERIC(PackType.SERVER_DATA, true, false),
     CORN_DELIGHT(PackType.SERVER_DATA, true, false),
     AUTUMNITY(PackType.SERVER_DATA, true, false),
+    PECULIARS(PackType.SERVER_DATA, true, false),
     SEASONALS(PackType.SERVER_DATA, true, false),
     ABNORMALS_DELIGHT(PackType.SERVER_DATA, true, false);
 
