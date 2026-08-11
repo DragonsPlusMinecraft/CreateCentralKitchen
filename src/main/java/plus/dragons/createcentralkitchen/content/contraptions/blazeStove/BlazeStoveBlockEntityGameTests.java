@@ -1,20 +1,29 @@
 package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.GameTestRegistry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import net.minecraftforge.items.ItemStackHandler;
 import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
+import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
 import vectorwing.farmersdelight.common.block.entity.HeatableBlockEntity;
@@ -105,6 +114,62 @@ public class BlazeStoveBlockEntityGameTests {
         helper.assertTrue(after.getIntArray("CookingTotalTimes")[0] == 1,
                 "A missing campfire recipe discarded the retry duration");
         helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void burnerConversionsPreserveFuelState(GameTestHelper helper) {
+        var level = helper.getLevel();
+        BlockPos stovePos = helper.absolutePos(STOVE_POS);
+        var burnerState = AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(BlazeBurnerBlock.FACING, Direction.EAST)
+                .setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.KINDLED);
+        level.setBlock(stovePos, burnerState, 3);
+        BlockEntity originalBlockEntity = level.getBlockEntity(stovePos);
+        helper.assertTrue(originalBlockEntity instanceof BlazeBurnerBlockEntity,
+                "Expected a Blaze Burner block entity");
+        BlazeBurnerBlockEntity original = (BlazeBurnerBlockEntity) originalBlockEntity;
+        CompoundTag burnerData = new CompoundTag();
+        burnerData.putInt("fuelLevel", BlazeBurnerBlockEntity.FuelType.NORMAL.ordinal());
+        burnerData.putInt("burnTimeRemaining", 2345);
+        burnerData.putBoolean("Goggles", true);
+        burnerData.putBoolean("TrainHat", true);
+        original.load(burnerData);
+
+        var player = helper.makeMockPlayer();
+        player.setShiftKeyDown(true);
+        ItemStack guide = FDItemEntries.COOKING_GUIDE.asStack();
+        player.setItemInHand(InteractionHand.MAIN_HAND, guide);
+        BlockHitResult hit = new BlockHitResult(Vec3.atCenterOf(stovePos), Direction.UP, stovePos, false);
+        UseOnContext context = new UseOnContext(player, InteractionHand.MAIN_HAND, hit);
+        InteractionResult installResult = guide.getItem().useOn(context);
+        helper.assertTrue(installResult.consumesAction(), "Installing the cooking guide failed");
+        assertBurnerState(helper, stovePos, BlazeStoveBlockEntity.class);
+
+        BlockEntity installedBlockEntity = level.getBlockEntity(stovePos);
+        BlazeStoveBlock stoveBlock = (BlazeStoveBlock) level.getBlockState(stovePos).getBlock();
+        InteractionResult wrenchResult = stoveBlock.onSneakWrenched(level.getBlockState(stovePos), context);
+        helper.assertTrue(wrenchResult.consumesAction(), "Removing the cooking guide failed");
+        helper.assertTrue(installedBlockEntity.isRemoved(), "The replaced Blaze Stove remained active");
+        assertBurnerState(helper, stovePos, BlazeBurnerBlockEntity.class);
+        helper.succeed();
+    }
+
+    private static void assertBurnerState(GameTestHelper helper, BlockPos pos,
+            Class<? extends BlazeBurnerBlockEntity> expectedType) {
+        BlockEntity blockEntity = helper.getLevel().getBlockEntity(pos);
+        helper.assertTrue(expectedType.isInstance(blockEntity),
+                "Expected " + expectedType.getSimpleName());
+        BlazeBurnerBlockEntity burner = (BlazeBurnerBlockEntity) blockEntity;
+        helper.assertTrue(burner.getActiveFuel() == BlazeBurnerBlockEntity.FuelType.NORMAL,
+                "Blaze Burner fuel type was reset during conversion");
+        helper.assertTrue(burner.getRemainingBurnTime() == 2345,
+                "Blaze Burner burn time was reset during conversion");
+        helper.assertTrue(burner.goggles, "Blaze Burner goggles were lost during conversion");
+        helper.assertTrue(burner.hat, "Blaze Burner train hat was lost during conversion");
+        helper.assertTrue(burner.getBlockState().getValue(BlazeBurnerBlock.HEAT_LEVEL) == BlazeBurnerBlock.HeatLevel.KINDLED,
+                "Blaze Burner heat level was reset during conversion");
+        helper.assertTrue(burner.getBlockState().getValue(BlazeBurnerBlock.FACING) == Direction.EAST,
+                "Blaze Burner facing was reset during conversion");
     }
 
     @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")

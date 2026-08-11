@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import java.util.List;
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -72,10 +73,16 @@ public abstract class BlazeStoveGuideItem<G extends BlazeStoveGuide> extends Ite
             if (blockState.getBlock() instanceof BlazeBurnerBlock &&
                     blockEntity instanceof BlazeBurnerBlockEntity) {
                 if (!level.isClientSide()) {
+                    CompoundTag burnerData = blockEntity.saveWithoutMetadata();
+                    BlazeBurnerBlock.HeatLevel heat = blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL);
                     level.setBlockAndUpdate(blockPos, FDBlockEntries.BLAZE_STOVE.getDefaultState()
-                            .setValue(BlazeStoveBlock.FACING, level.getBlockState(blockPos).getValue(BlazeBurnerBlock.FACING)));
-                    if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove)
+                            .setValue(BlazeStoveBlock.FACING, blockState.getValue(BlazeBurnerBlock.FACING))
+                            .setValue(BlazeStoveBlock.HEAT_LEVEL, heat)
+                            .setValue(BlazeStoveBlock.LIT, heat.isAtLeast(BlazeBurnerBlock.HeatLevel.SMOULDERING)));
+                    if (level.getBlockEntity(blockPos) instanceof BlazeStoveBlockEntity blazeStove) {
+                        blazeStove.load(burnerData);
                         blazeStove.setGuide(itemStack.copy());
+                    }
                     AdvancementBehaviour.setPlacedBy(context.getLevel(), blockPos, player);
 
                     if (!player.getAbilities().instabuild)

@@ -4,10 +4,12 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -267,9 +269,16 @@ public class BlazeStoveBlock extends HorizontalDirectionalBlock implements IBE<B
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         if (level instanceof ServerLevel serverLevel) {
+            CompoundTag burnerData = level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity stove
+                    ? stove.saveWithoutMetadata()
+                    : new CompoundTag();
             serverLevel.setBlockAndUpdate(pos, AllBlocks.BLAZE_BURNER.getDefaultState()
                     .setValue(BlazeBurnerBlock.FACING, state.getValue(FACING))
-                    .setValue(HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SMOULDERING));
+                    .setValue(HEAT_LEVEL, state.getValue(HEAT_LEVEL)));
+            if (serverLevel.getBlockEntity(pos) instanceof BlazeBurnerBlockEntity burner) {
+                burner.load(burnerData);
+                burner.notifyUpdate();
+            }
         }
         return InteractionResult.SUCCESS;
     }
