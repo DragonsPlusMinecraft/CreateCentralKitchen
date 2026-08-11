@@ -39,11 +39,11 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("mixing/aloe_gel_from_block"),
             CentralKitchen.genRL("mixing/yucca_gateau"));
     private static final List<ResourceLocation> FARMERS_DELIGHT_RECIPES = List.of(
-            CentralKitchen.genRL("crafting/passion_fruit_cake_from_slices"),
             CentralKitchen.genRL("sequenced_assembly/apple_pie"),
-            CentralKitchen.genRL("sequenced_assembly/mulberry_pie"),
             CentralKitchen.genRL("sequenced_assembly/pumpkin_pie"),
             CentralKitchen.genRL("sequenced_assembly/sweet_berry_cheesecake"));
+    private static final List<ResourceLocation> FARMERS_DELIGHT_PECULIARS_RECIPES = List.of(CentralKitchen.genRL("crafting/passion_fruit_cake_from_slices"));
+    private static final List<ResourceLocation> FARMERS_DELIGHT_UPGRADE_AQUATIC_RECIPES = List.of(CentralKitchen.genRL("sequenced_assembly/mulberry_pie"));
     private static final List<ResourceLocation> ENDS_DELIGHT_RECIPES = List.of(
             CentralKitchen.genRL("compacting/chorus_cookie"),
             CentralKitchen.genRL("emptying/bubble_tea"),
@@ -324,6 +324,8 @@ public class BuiltinResourceGameTests {
                 helper.assertTrue(recipes.byKey(recipeId).isPresent(),
                         "The " + modId + " built-in pack did not load " + recipeId);
         });
+        assertConditionalRecipes(helper, Mods.PECULIARS, FARMERS_DELIGHT_PECULIARS_RECIPES);
+        assertConditionalRecipes(helper, Mods.UA, FARMERS_DELIGHT_UPGRADE_AQUATIC_RECIPES);
         if (Mods.isLoaded(Mods.RESPITEFUL)) {
             for (ResourceLocation fluidId : RESPITEFUL_FLUIDS)
                 helper.assertTrue(ForgeRegistries.FLUIDS.containsKey(fluidId),
@@ -350,5 +352,19 @@ public class BuiltinResourceGameTests {
                         "The " + modId + " built-in pack did not load " + advancementId);
         });
         helper.succeed();
+    }
+
+    private static void assertConditionalRecipes(
+            GameTestHelper helper, String integrationModId, List<ResourceLocation> recipeIds) {
+        var recipes = helper.getLevel().getRecipeManager();
+        boolean shouldLoad = Mods.isLoaded(Mods.FD, integrationModId);
+        for (ResourceLocation recipeId : recipeIds) {
+            if (shouldLoad)
+                helper.assertTrue(recipes.byKey(recipeId).isPresent(),
+                        "The farmersdelight built-in pack did not load " + recipeId + " with " + integrationModId);
+            else
+                helper.assertTrue(recipes.byKey(recipeId).isEmpty(),
+                        "The farmersdelight built-in pack loaded " + recipeId + " without " + integrationModId);
+        }
     }
 }
