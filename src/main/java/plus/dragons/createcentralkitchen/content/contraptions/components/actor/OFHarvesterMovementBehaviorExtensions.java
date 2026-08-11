@@ -75,7 +75,9 @@ public class OFHarvesterMovementBehaviorExtensions {
 
         Level level = context.world;
         behaviour.dropItem(context, new ItemStack(state.getBlock(), 1));
-        if (replant) {
+        if (!replant) {
+            level.destroyBlock(pos, false);
+        } else {
             if (FARMLAND_REVERT_MAP.containsKey(level.getBlockState(pos.below()).getBlock())) {
                 level.setBlock(pos.below(), FARMLAND_REVERT_MAP.get(level.getBlockState(pos.below()).getBlock()), 2);
             }
