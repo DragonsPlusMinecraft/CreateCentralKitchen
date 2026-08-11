@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
+import net.minecraftforge.registries.ForgeRegistries;
 import plus.dragons.createcentralkitchen.CentralKitchen;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
 import plus.dragons.createcentralkitchen.foundation.utility.Mods;
@@ -168,6 +169,42 @@ public class BuiltinResourceGameTests {
             CentralKitchen.genRL("mixing/rose_hip_tea"),
             CentralKitchen.genRL("mixing/yellow_tea"));
 
+    private static final List<ResourceLocation> RESPITEFUL_RECIPES = List.of(
+            CentralKitchen.genRL("compacting/black_tea_cake"),
+            CentralKitchen.genRL("compacting/green_tea_cake"),
+            CentralKitchen.genRL("compacting/yellow_tea_cake"),
+            CentralKitchen.genRL("crafting/black_tea_cake_from_dough"),
+            CentralKitchen.genRL("crafting/green_tea_cake_from_dough"),
+            CentralKitchen.genRL("crafting/yellow_tea_cake_from_dough"),
+            CentralKitchen.genRL("emptying/black_tea_ice_cream"),
+            CentralKitchen.genRL("emptying/coffee_ice_cream"),
+            CentralKitchen.genRL("emptying/green_tea_ice_cream"),
+            CentralKitchen.genRL("emptying/yellow_tea_ice_cream"),
+            CentralKitchen.genRL("filling/black_tea_ice_cream"),
+            CentralKitchen.genRL("filling/coffee_ice_cream"),
+            CentralKitchen.genRL("filling/green_tea_ice_cream"),
+            CentralKitchen.genRL("filling/snow_top_black_tea"),
+            CentralKitchen.genRL("filling/snow_top_coffee"),
+            CentralKitchen.genRL("filling/snow_top_green_tea"),
+            CentralKitchen.genRL("filling/snow_top_yellow_tea"),
+            CentralKitchen.genRL("filling/yellow_tea_ice_cream"),
+            CentralKitchen.genRL("mixing/adzuki_milk_tea"),
+            CentralKitchen.genRL("mixing/black_tea_ice_cream"),
+            CentralKitchen.genRL("mixing/coffee_ice_cream"),
+            CentralKitchen.genRL("mixing/green_tea_ice_cream"),
+            CentralKitchen.genRL("mixing/mocha_coffee"),
+            CentralKitchen.genRL("mixing/yellow_tea_ice_cream"),
+            Mods.fr("emptying/adzuki_milk_tea"),
+            Mods.fr("emptying/mocha_coffee"),
+            Mods.fr("filling/adzuki_milk_tea"),
+            Mods.fr("filling/mocha_coffee"));
+
+    private static final List<ResourceLocation> RESPITEFUL_FLUIDS = List.of(
+            CentralKitchen.genRL("green_tea_ice_cream"),
+            CentralKitchen.genRL("yellow_tea_ice_cream"),
+            CentralKitchen.genRL("black_tea_ice_cream"),
+            CentralKitchen.genRL("coffee_ice_cream"));
+
     private static final List<ResourceLocation> PECULIARS_RECIPES = List.of(
             CentralKitchen.genRL("compacting/aloe_cake"),
             CentralKitchen.genRL("compacting/passion_fruit_cake"),
@@ -260,6 +297,7 @@ public class BuiltinResourceGameTests {
         RESTORED_RECIPES.put(Mods.SEASONALS, SEASONALS_RECIPES);
         RESTORED_RECIPES.put(Mods.PECULIARS, PECULIARS_RECIPES);
         RESTORED_RECIPES.put(Mods.FR, FARMERS_RESPITE_RECIPES);
+        RESTORED_RECIPES.put(Mods.RESPITEFUL, RESPITEFUL_RECIPES);
         RESTORED_RECIPES.put(Mods.CR, COLLECTORS_REAP_RECIPES);
     }
 
@@ -286,6 +324,20 @@ public class BuiltinResourceGameTests {
                 helper.assertTrue(recipes.byKey(recipeId).isPresent(),
                         "The " + modId + " built-in pack did not load " + recipeId);
         });
+        if (Mods.isLoaded(Mods.RESPITEFUL)) {
+            for (ResourceLocation fluidId : RESPITEFUL_FLUIDS)
+                helper.assertTrue(ForgeRegistries.FLUIDS.containsKey(fluidId),
+                        "The Respiteful integration did not register " + fluidId);
+            helper.assertTrue(ForgeRegistries.FLUIDS.containsKey(Mods.respiteful("adzuki_milk_tea")),
+                    "Respiteful did not register its native adzuki milk tea fluid");
+            helper.assertTrue(ForgeRegistries.FLUIDS.containsKey(Mods.respiteful("mocha_coffee")),
+                    "Respiteful did not register its native mocha coffee fluid");
+            helper.assertTrue(!ForgeRegistries.FLUIDS.containsKey(CentralKitchen.genRL("adzuki_milk_tea")),
+                    "The Respiteful integration duplicated the native adzuki milk tea fluid");
+            helper.assertTrue(!ForgeRegistries.FLUIDS.containsKey(CentralKitchen.genRL("mocha_coffee")),
+                    "The Respiteful integration duplicated the native mocha coffee fluid");
+        }
+
         if (!Mods.isLoaded("culturaldelights"))
             helper.assertTrue(recipes.byKey(CentralKitchen.genRL("sequenced_assembly/veggie_wrap")).isEmpty(),
                     "The Collector's Reap pack loaded its Cultural Delights recipe without Cultural Delights");

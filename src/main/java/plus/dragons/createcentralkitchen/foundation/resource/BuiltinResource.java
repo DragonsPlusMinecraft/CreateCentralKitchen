@@ -24,6 +24,7 @@ public enum BuiltinResource {
     //Data Packs
     FARMERSDELIGHT(PackType.SERVER_DATA, true, false),
     FARMERSRESPITE(PackType.SERVER_DATA, true, false),
+    RESPITEFUL(PackType.SERVER_DATA, true, false),
     MINERS_DELIGHT(PackType.SERVER_DATA, true, false),
     OVERWEIGHT_FARMING(PackType.SERVER_DATA, true, false),
     ENDS_DELIGHT(PackType.SERVER_DATA, true, false),

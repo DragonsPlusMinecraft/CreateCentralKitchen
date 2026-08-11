@@ -1,0 +1,24 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "respiteful"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "amount": 500,
+      "fluid": "create_central_kitchen:yellow_tea_ice_cream",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "respiteful:yellow_tea_ice_cream"
+    }
+  ]
+}

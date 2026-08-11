@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "farmersrespite:black_tea_leaves"
+    },
+    "e": {
+      "tag": "forge:eggs"
+    },
+    "m": {
+      "tag": "forge:milk"
+    },
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "w": {
+      "tag": "forge:dough/wheat"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "ses",
+    "#w#"
+  ],
+  "result": {
+    "item": "respiteful:black_tea_cake"
+  }
+}

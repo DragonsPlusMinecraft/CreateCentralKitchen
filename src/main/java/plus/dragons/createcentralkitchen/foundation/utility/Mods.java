@@ -10,6 +10,7 @@ public class Mods {
     public static final String FD = "farmersdelight";
     public static final String CR = "collectorsreap";
     public static final String FR = "farmersrespite";
+    public static final String RESPITEFUL = "respiteful";
     public static final String MD = "miners_delight";
     public static final String ND = "nethersdelight";
     public static final String ED = "ends_delight";
@@ -50,6 +51,14 @@ public class Mods {
 
     public static ResourceLocation cr(String path) {
         return ResourceLocation.fromNamespaceAndPath(CR, path);
+    }
+
+    public static ResourceLocation fr(String path) {
+        return ResourceLocation.fromNamespaceAndPath(FR, path);
+    }
+
+    public static ResourceLocation respiteful(String path) {
+        return ResourceLocation.fromNamespaceAndPath(RESPITEFUL, path);
     }
 
     public static ResourceLocation ad(String path) {
