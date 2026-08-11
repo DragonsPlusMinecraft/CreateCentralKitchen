@@ -144,9 +144,9 @@ public class FRHarvesterMovementBehaviourExtensions {
             behaviour.dropItem(context, new ItemStack(FRItems.COFFEE_BERRIES.get(), count));
             var newState = state;
             if (count0 == 1)
-                newState = state.setValue(CoffeeDoubleStemBlock.AGE, 0);
+                newState = newState.setValue(CoffeeDoubleStemBlock.AGE, 0);
             if (count1 == 1)
-                newState = state.setValue(CoffeeDoubleStemBlock.AGE1, 0);
+                newState = newState.setValue(CoffeeDoubleStemBlock.AGE1, 0);
             level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS,
                     1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             level.setBlockAndUpdate(pos, newState);
