@@ -2,6 +2,7 @@ package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.DecoderException;
+import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.GameTestRegistry;
@@ -14,11 +15,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import net.minecraftforge.registries.ForgeRegistries;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.cooking.CookingGuideMenu;
+import plus.dragons.createcentralkitchen.entry.block.FDBlockEntries;
 import plus.dragons.createcentralkitchen.entry.item.FDItemEntries;
 import plus.dragons.createcentralkitchen.entry.menu.FDMenuEntries;
 import plus.dragons.createcentralkitchen.foundation.utility.ModLoadSubscriber;
@@ -134,6 +137,22 @@ public class BlazeStoveGuideSecurityGameTests {
                 "Ghost submission did not normalize the ingredient to one item");
         helper.assertTrue(menu.submitGhostItem(0, ItemStack.EMPTY), "Clearing a ghost input was rejected");
         helper.assertTrue(menu.getSlot(36).getItem().isEmpty(), "Clearing a ghost input left an item behind");
+        helper.succeed();
+    }
+
+    @GameTest(templateNamespace = "create", template = "gametest/processing/iron_compacting")
+    public static void clientStoveLookupToleratesMissingBlockEntities(GameTestHelper helper) {
+        BlockPos stovePos = helper.absolutePos(new BlockPos(1, 2, 1));
+        helper.getLevel().setBlock(stovePos, Blocks.STONE.defaultBlockState(), 3);
+
+        helper.assertTrue(BlazeStoveGuideMenu.findBlazeStove(null, stovePos) == null,
+                "A missing client level produced a blaze stove");
+        helper.assertTrue(BlazeStoveGuideMenu.findBlazeStove(helper.getLevel(), stovePos) == null,
+                "A non-stove block entity produced a blaze stove");
+
+        helper.getLevel().setBlock(stovePos, FDBlockEntries.BLAZE_STOVE.getDefaultState(), 3);
+        helper.assertTrue(BlazeStoveGuideMenu.findBlazeStove(helper.getLevel(), stovePos) != null,
+                "A loaded blaze stove block entity was not resolved");
         helper.succeed();
     }
 

@@ -3,8 +3,6 @@ package plus.dragons.createcentralkitchen.content.contraptions.blazeStove;
 import com.simibubi.create.foundation.gui.menu.GhostItemMenu;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -17,6 +15,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -129,13 +128,16 @@ public abstract class BlazeStoveGuideMenu<G extends BlazeStoveGuide> extends Gho
         boolean fromItemStack = extraData.readBoolean();
         if (!fromItemStack) {
             BlockPos pos = extraData.readBlockPos();
-            ClientLevel level = Minecraft.getInstance().level;
-            assert level != null;
-            if (level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove)
-                this.blazeStove = blazeStove;
-            else throw new RuntimeException("Expected Blaze Stove at " + pos + " but found none");
+            this.blazeStove = BlazeStoveGuideClient.findBlazeStove(pos);
         }
         return item;
+    }
+
+    @Nullable
+    static BlazeStoveBlockEntity findBlazeStove(@Nullable Level level, BlockPos pos) {
+        return level != null && level.getBlockEntity(pos) instanceof BlazeStoveBlockEntity blazeStove
+                ? blazeStove
+                : null;
     }
 
     @Override
