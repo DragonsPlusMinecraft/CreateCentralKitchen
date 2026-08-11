@@ -240,9 +240,6 @@ public abstract class CentralKitchenConfigBase extends ConfigBase {
         }
 
         @Override
-        public void onLoad() {}
-
-        @Override
         public void onReload() {
             this.updateObjects(this.get());
         }
