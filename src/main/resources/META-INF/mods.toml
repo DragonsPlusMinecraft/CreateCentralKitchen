@@ -32,3 +32,10 @@ An add-on for Create, providing automation support for Farmer's Delight and its 
     versionRange="[6.0.8,6.1.0)"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.create_central_kitchen]]
+    modId="ends_delight"
+    mandatory=false
+    versionRange="[2.6.1,)"
+    ordering="AFTER"
+    side="BOTH"
