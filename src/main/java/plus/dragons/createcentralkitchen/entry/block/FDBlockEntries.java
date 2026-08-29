@@ -78,16 +78,7 @@ public class FDBlockEntries {
         if (isPieOverhaulEnabled(apple_pie) && Mods.isLoaded(Mods.ENVIRONMENTAL)) {
             //Need to override BlockItem#registerBlocks and BlockItem#removeFromBlockToItemMap
             //So Farmer's Delight's apple pie won't get overridden
-            APPLE_PIE_ITEM = new ItemNameBlockItem(ModBlocks.APPLE_PIE.get(),
-                    new Item.Properties()) {
-                @Override
-                @ParametersAreNonnullByDefault
-                public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {}
-
-                @Override
-                @ParametersAreNonnullByDefault
-                public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item item) {}
-            };
+            APPLE_PIE_ITEM = new ApplePieBlockItem(ModBlocks.APPLE_PIE.get(), new Item.Properties());
             registry.register(apple_pie, APPLE_PIE_ITEM);
         }
 
@@ -111,5 +102,19 @@ public class FDBlockEntries {
                 event.accept(MULBERRY_PIE_ITEM);
             }
         }
+    }
+
+    private static class ApplePieBlockItem extends ItemNameBlockItem {
+        private ApplePieBlockItem(Block block, Item.Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        @ParametersAreNonnullByDefault
+        public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {}
+
+        @Override
+        @ParametersAreNonnullByDefault
+        public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item item) {}
     }
 }
