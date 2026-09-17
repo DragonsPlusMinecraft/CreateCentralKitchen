@@ -29,9 +29,12 @@ import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
+import plus.dragons.createcentralkitchen.data.CCKLang;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.culturaldelights.registry.CulturalDelightsArmInteractionPointTypes;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderScenes;
+import plus.dragons.createdragonsplus.client.ponder.PonderTagGroups;
 
 public class CulturalDelightsPonderPlugin {
     private static final ResourceLocation EGGPLANT_PARMESAN = ModIntegration.CULTURALDELIGHTS.asResource("eggplant_parmesan_block");
@@ -71,6 +74,9 @@ public class CulturalDelightsPonderPlugin {
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        helper.addToTag(AllCreatePonderTags.ARM_TARGETS).add(EGGPLANT_PARMESAN);
+        var group = CCKCommon.asResource("eggplant_parmesan");
+        PonderTagGroups.registerGroup(AllCreatePonderTags.ARM_TARGETS, group,
+                CCKLang.translate("ponder.group.eggplant_parmesan").component());
+        PonderTagGroups.addToGroup(helper, AllCreatePonderTags.ARM_TARGETS, group).add(EGGPLANT_PARMESAN);
     }
 }

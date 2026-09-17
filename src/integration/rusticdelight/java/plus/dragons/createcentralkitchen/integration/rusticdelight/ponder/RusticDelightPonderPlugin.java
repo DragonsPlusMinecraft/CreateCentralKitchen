@@ -28,10 +28,13 @@ import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.registration.PonderTagRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
+import plus.dragons.createcentralkitchen.data.CCKLang;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderScenes;
 import plus.dragons.createcentralkitchen.integration.rusticdelight.mechanicalArm.PancakeArmInteractionPoint;
 import plus.dragons.createcentralkitchen.integration.rusticdelight.registry.RusticDelightArmInteractionPointTypes;
+import plus.dragons.createdragonsplus.client.ponder.PonderTagGroups;
 
 public class RusticDelightPonderPlugin {
     private static final List<ResourceLocation> PANCAKES = List.of(
@@ -94,7 +97,9 @@ public class RusticDelightPonderPlugin {
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        var armTargets = helper.addToTag(AllCreatePonderTags.ARM_TARGETS);
-        PANCAKES.forEach(armTargets::add);
+        var group = CCKCommon.asResource("pancakes");
+        PonderTagGroups.registerGroup(AllCreatePonderTags.ARM_TARGETS, group,
+                CCKLang.translate("ponder.group.pancakes").component());
+        PonderTagGroups.addToGroup(helper, AllCreatePonderTags.ARM_TARGETS, group).addAll(PANCAKES);
     }
 }

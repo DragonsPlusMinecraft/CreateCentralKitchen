@@ -39,7 +39,13 @@ public class CCKLang {
     public static final Component RUNTIME_PACK_DESCRIPTION = REGISTRATE
             .addLang("pack", CCKCommon.asResource("runtime"), "description", CCKCommon.NAME + " Runtime Generated Resources");
 
-    public static void register() {}
+    public static void register() {
+        REGISTRATE.addRawLang("create_central_kitchen.ponder.group.portionable_foods", "Feasts and Pies");
+        REGISTRATE.addRawLang("create_central_kitchen.ponder.group.pancakes", "Pancake Stacks");
+        REGISTRATE.addRawLang("create_central_kitchen.ponder.group.festive_chicken", "Festive Chicken");
+        REGISTRATE.addRawLang("create_central_kitchen.ponder.group.eggplant_parmesan", "Eggplant Parmesan Feasts");
+        REGISTRATE.addRawLang("create_central_kitchen.ponder.group.dragon_leg", "Dragon Leg");
+    }
 
     public static LangBuilder builder() {
         return new LangBuilder(CCKCommon.ID);

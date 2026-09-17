@@ -28,9 +28,12 @@ import net.minecraft.world.item.ItemStack;
 import net.toopa.festivedelight.init.FestiveDelightModBlocks;
 import net.toopa.festivedelight.init.FestiveDelightModItems;
 import plus.dragons.createcentralkitchen.client.ponder.CCKPonderPlugin;
+import plus.dragons.createcentralkitchen.common.CCKCommon;
+import plus.dragons.createcentralkitchen.data.CCKLang;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.farmersdelight.ponder.FDPonderScenes;
 import plus.dragons.createcentralkitchen.integration.festivedelight.registry.FestiveDelightArmInteractionPointTypes;
+import plus.dragons.createdragonsplus.client.ponder.PonderTagGroups;
 
 public class FestiveDelightPonderPlugin {
     private static final List<ResourceLocation> FESTIVE_CHICKEN_COMPONENTS = List.of(
@@ -73,7 +76,11 @@ public class FestiveDelightPonderPlugin {
     }
 
     private static void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        var armTargets = helper.addToTag(AllCreatePonderTags.ARM_TARGETS);
-        FESTIVE_CHICKEN_COMPONENTS.forEach(armTargets::add);
+        var group = CCKCommon.asResource("festive_chicken");
+        PonderTagGroups.registerGroup(AllCreatePonderTags.ARM_TARGETS, group,
+                CCKLang.translate("ponder.group.festive_chicken").component());
+        PonderTagGroups.addToGroup(helper, AllCreatePonderTags.ARM_TARGETS, group)
+                .addHiddenAll(FESTIVE_CHICKEN_COMPONENTS)
+                .add(ModIntegration.FESTIVEDELIGHT.asResource("festive_chicken_block"));
     }
 }

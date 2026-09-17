@@ -20,6 +20,7 @@ package plus.dragons.createcentralkitchen.integration.brewinandchewin;
 
 import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
 import com.simibubi.create.api.registry.SimpleRegistry;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -28,10 +29,17 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import plus.dragons.createcentralkitchen.common.CCKCommon;
 import plus.dragons.createcentralkitchen.integration.ModIntegration;
 import plus.dragons.createcentralkitchen.integration.brewinandchewin.packager.KegUnpackingHandler;
 import plus.dragons.createcentralkitchen.integration.brewinandchewin.ponder.BnCPonderPlugin;
+import plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe.KegPouringRecipeConverters;
 import plus.dragons.createdragonsplus.common.processing.freeze.BlockFreezer;
 import umpaz.brewinandchewin.common.registry.BnCBlocks;
 import umpaz.brewinandchewin.common.tag.BnCTags;
@@ -47,6 +55,17 @@ public class BnCIntegration {
     }
 
     public static class Common {
+        @SubscribeEvent
+        public void construct(final FMLConstructModEvent event) {
+            NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent reload) -> reload.addListener(
+                    (ResourceManagerReloadListener) resources -> KegPouringRecipeConverters.invalidateCaches()));
+            NeoForge.EVENT_BUS.addListener((TagsUpdatedEvent tags) -> {
+                if (tags.shouldUpdateStaticData())
+                    KegPouringRecipeConverters.invalidateCaches();
+            });
+            NeoForge.EVENT_BUS.addListener((ServerStoppedEvent stopped) -> KegPouringRecipeConverters.invalidateCaches());
+        }
+
         @SubscribeEvent
         public void setup(final FMLCommonSetupEvent event) {
             event.enqueueWork(this::registerUnpackingHandlers);
@@ -72,6 +91,8 @@ public class BnCIntegration {
         @SubscribeEvent
         public void construct(final FMLConstructModEvent event) {
             BnCPonderPlugin.register();
+            NeoForge.EVENT_BUS.addListener((RecipesUpdatedEvent recipes) -> KegPouringRecipeConverters.invalidateCaches());
+            NeoForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut logout) -> KegPouringRecipeConverters.invalidateCaches());
         }
     }
 }

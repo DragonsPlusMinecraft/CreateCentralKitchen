@@ -19,17 +19,20 @@
 package plus.dragons.createcentralkitchen.integration.brewinandchewin.recipe;
 
 import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.foundation.recipe.RecipeFinder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities.FluidHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -67,47 +70,57 @@ public class KegPouringRecipeConverters {
                 return new RecipeHolder<>(id, builder.build());
             });
 
-    @SuppressWarnings("unchecked")
+    private static final LoadingCache<RecipeManager, ConvertedRecipes> RECIPES = CacheBuilder.newBuilder()
+            .weakKeys()
+            .build(CacheLoader.from(KegPouringRecipeConverters::buildRecipes));
+
     public static Stream<RecipeHolder<FillingRecipe>> getKegFillingRecipes(Level level) {
-        var nativeRecipes = findNativeFillingRecipes(level);
-        return RecipeFinder
-                .get(FILLING, level, holder -> holder.value() instanceof KegPouringRecipe &&
-                        canConvertToFilling((RecipeHolder<KegPouringRecipe>) holder))
-                .stream()
-                .map(holder -> (RecipeHolder<KegPouringRecipe>) holder)
-                .filter(holder -> nativeRecipes.stream()
-                        .noneMatch(nativeRecipe -> isEquivalentFilling(nativeRecipe, holder.value())))
-                .map(FILLING);
+        return getRecipes(level.getRecipeManager()).filling().stream();
+    }
+
+    public static Stream<RecipeHolder<EmptyingRecipe>> getKegEmptyingRecipes(Level level) {
+        return getRecipes(level.getRecipeManager()).emptying().stream();
+    }
+
+    public static void invalidateCaches() {
+        RECIPES.invalidateAll();
+        RecipeConverter.CACHE_INVALIDATORS.get(FILLING).run();
+        RecipeConverter.CACHE_INVALIDATORS.get(EMPTYING).run();
+    }
+
+    static ConvertedRecipes getRecipes(RecipeManager manager) {
+        return RECIPES.getUnchecked(manager);
     }
 
     @SuppressWarnings("unchecked")
-    public static Stream<RecipeHolder<EmptyingRecipe>> getKegEmptyingRecipes(Level level) {
-        var nativeRecipes = findNativeEmptyingRecipes(level);
-        return RecipeFinder
-                .get(EMPTYING, level, holder -> holder.value() instanceof KegPouringRecipe &&
-                        canConvertToEmptying((RecipeHolder<KegPouringRecipe>) holder))
-                .stream()
-                .map(holder -> (RecipeHolder<KegPouringRecipe>) holder)
-                .filter(holder -> nativeRecipes.stream()
-                        .noneMatch(nativeRecipe -> isEquivalentEmptying(nativeRecipe, holder.value())))
-                .map(EMPTYING);
+    private static ConvertedRecipes buildRecipes(RecipeManager manager) {
+        var nativeFilling = new ArrayList<FillingRecipe>();
+        var nativeEmptying = new ArrayList<EmptyingRecipe>();
+        var kegRecipes = new ArrayList<RecipeHolder<KegPouringRecipe>>();
+        // Partition once per recipe manager/reload, including when there are no Keg fallbacks.
+        for (var holder : manager.getRecipes()) {
+            if (holder.value() instanceof FillingRecipe recipe)
+                nativeFilling.add(recipe);
+            if (holder.value() instanceof EmptyingRecipe recipe)
+                nativeEmptying.add(recipe);
+            if (holder.value() instanceof KegPouringRecipe)
+                kegRecipes.add((RecipeHolder<KegPouringRecipe>) holder);
+        }
+
+        var filling = new ArrayList<RecipeHolder<FillingRecipe>>();
+        var emptying = new ArrayList<RecipeHolder<EmptyingRecipe>>();
+        for (var holder : kegRecipes) {
+            if (canConvertToFilling(holder) && nativeFilling.stream()
+                    .noneMatch(nativeRecipe -> isEquivalentFilling(nativeRecipe, holder.value())))
+                filling.add(FILLING.apply(holder));
+            if (canConvertToEmptying(holder) && nativeEmptying.stream()
+                    .noneMatch(nativeRecipe -> isEquivalentEmptying(nativeRecipe, holder.value())))
+                emptying.add(EMPTYING.apply(holder));
+        }
+        return new ConvertedRecipes(List.copyOf(filling), List.copyOf(emptying));
     }
 
-    private static List<FillingRecipe> findNativeFillingRecipes(Level level) {
-        return level.getRecipeManager().getRecipes().stream()
-                .map(RecipeHolder::value)
-                .filter(FillingRecipe.class::isInstance)
-                .map(FillingRecipe.class::cast)
-                .toList();
-    }
-
-    private static List<EmptyingRecipe> findNativeEmptyingRecipes(Level level) {
-        return level.getRecipeManager().getRecipes().stream()
-                .map(RecipeHolder::value)
-                .filter(EmptyingRecipe.class::isInstance)
-                .map(EmptyingRecipe.class::cast)
-                .toList();
-    }
+    record ConvertedRecipes(List<RecipeHolder<FillingRecipe>> filling, List<RecipeHolder<EmptyingRecipe>> emptying) {}
 
     static boolean isEquivalentFilling(FillingRecipe nativeRecipe, KegPouringRecipe kegRecipe) {
         if (nativeRecipe.getIngredients().size() != 1 || nativeRecipe.getFluidIngredients().size() != 1 ||

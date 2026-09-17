@@ -56,5 +56,10 @@
   "create_central_kitchen.recipe.farmersdelight.automatic_food_cutting": "自动切制食物",
   "create_central_kitchen.recipe.farmersdelight.automatic_food_sawing": "自动切制食物",
   "pack.create_central_kitchen.runtime": "机械动力：中央厨房",
-  "pack.create_central_kitchen.runtime.description": "机械动力：中央厨房 - 运行时资源"
+  "pack.create_central_kitchen.runtime.description": "机械动力：中央厨房 - 运行时资源",
+  "create_central_kitchen.ponder.group.dragon_leg": "龙腿",
+  "create_central_kitchen.ponder.group.eggplant_parmesan": "茄子帕尔马干酪盛宴",
+  "create_central_kitchen.ponder.group.festive_chicken": "节庆烤鸡",
+  "create_central_kitchen.ponder.group.pancakes": "煎饼堆",
+  "create_central_kitchen.ponder.group.portionable_foods": "盛宴与派"
 }
