@@ -20,9 +20,11 @@ package plus.dragons.createcentralkitchen.integration.dungeonsdelight.handler;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities.ItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.yirmiri.dungeonsdelight.core.registry.DDRecipeRegistries;
 import org.jetbrains.annotations.Nullable;
 import plus.dragons.createcentralkitchen.common.packager.ShapelessUnpackingHandler;
 
@@ -34,5 +36,10 @@ public class MonsterPotUnpackingHandler extends ShapelessUnpackingHandler {
     @Override
     protected @Nullable IItemHandler getInventory(Level level, BlockPos pos, Direction side) {
         return level.getCapability(ItemHandler.BLOCK, pos, Direction.UP);
+    }
+
+    @Override
+    protected RecipeType<?> getRecipeType() {
+        return DDRecipeRegistries.MONSTER_COOKING_RECIPE_TYPE.get();
     }
 }

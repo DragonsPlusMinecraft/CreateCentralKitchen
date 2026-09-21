@@ -21,9 +21,12 @@ package plus.dragons.createcentralkitchen.common.packager;
 import com.simibubi.create.api.packager.unpacking.UnpackingHandler;
 import com.simibubi.create.content.logistics.stockTicker.PackageOrderWithCrafts;
 import java.util.List;
+import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -43,18 +46,22 @@ public abstract class ShapelessUnpackingHandler implements UnpackingHandler {
         var inventory = getInventory(level, pos, side);
         if (inventory == null)
             return false;
-        for (int slot = slotStart; slot < slotStart + slotCount; slot++) {
-            var item = items.getFirst();
-            if (inventory.getStackInSlot(slot).isEmpty() && inventory.insertItem(slot, item.split(1), simulate).isEmpty()) {
-                if (item.isEmpty()) {
-                    items.removeFirst();
-                    if (items.isEmpty())
-                        return true;
-                }
-            } else return false;
-        }
-        return false;
+        var device = new DeviceAdapter(inventory, slotStart, slotCount,
+                UnpackingRecipeCache.get(level.getRecipeManager(), getRecipeType()),
+                recipe -> acceptsRecipe(level, pos, recipe));
+        var plan = RecipeUnpacking.plan(device, items, orderContext);
+        return plan != null && plan.apply(inventory, simulate);
     }
 
     protected abstract @Nullable IItemHandler getInventory(Level level, BlockPos pos, Direction side);
+
+    protected abstract RecipeType<?> getRecipeType();
+
+    protected boolean acceptsRecipe(Level level, BlockPos pos, Recipe<?> recipe) {
+        // Fuel, fluid, molds and serving containers remain the machine's responsibility.
+        return true;
+    }
+
+    private record DeviceAdapter(IItemHandler inventory, int slotStart, int slotCount,
+            List<RecipeUnpacking.Candidate> recipes, Predicate<Recipe<?>> acceptsRecipe) implements RecipeUnpacking.Device {}
 }

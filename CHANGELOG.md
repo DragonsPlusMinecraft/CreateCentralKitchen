@@ -1,13 +1,14 @@
-## Create: Central Kitchen 2.6.1
+## Create: Central Kitchen 2.6.2
 
 Requires Create 6.0.10 and Create: Dragons Plus 1.11.9 or newer. Farmer's Delight integration requires Farmer's Delight 1.3.2 or newer.
 
-### Fixed
+### Added
 
-* Fixed severe server tick lag when Spouts repeatedly check items on Depots, including empty and filled buckets. Brewin' and Chewin' Filling and Emptying fallbacks now cache their complete recipe selection and refresh after recipe or tag reloads. Native Create recipes retain priority. (#203)
-* Condensed food variants in the Mechanical Arm's Ponder target list using Create: Dragons Plus's grouped tag cards. The stacked cards cycle between whole foods with a fade transition. Hover to pause, scroll to select a variant, and left-click to open its Ponder scenes. Partially served foods stay out of the carousel and retain their individual Ponder access. (#202)
-* Corrected Ponder demonstrations for Cultural Delights feasts, Rustic Delight pancake stacks, Festive Delight chicken, and Hearth and Harvest Casks, including serving states and packaging instructions. (#197)
+* Packagers can now refill machines processing the same recipe with complete single-serving or multi-serving packages.
+* Added batch unpacking for packages containing a whole number of servings of one recipe. Supported machines are Farmer's Delight Cooking Pots, Brewin' and Chewin' Kegs, Miner's Delight Copper Pots, Dungeon's Delight Monster Pots, Extra Delight Ovens and Chillers, and Hearth and Harvest Casks.
 
-### Localization
+### Changed
 
-* Added English and Simplified Chinese names for food groups. Shared controls and tooltips use Create: Dragons Plus's localization.
+* Unpacking keeps repeated ingredients in separate recipe slots and preserves existing slots and item components when refilling. Mixed recipes and incomplete or unbalanced input inventories are not accepted.
+* Capacity is checked for every input slot against both the slot limit and the item's actual stack limit, including component overrides. If any slot would overflow, the entire package is rejected without inserting items or using extra slots to bypass the limit.
+* Recipe candidates are cached and refreshed after recipe or tag reloads. Machines retain their existing fuel, fluid, container, mold, and output handling; auxiliary supplies can be provided as processing continues.

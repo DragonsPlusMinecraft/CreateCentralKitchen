@@ -30,14 +30,16 @@ import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.packager.PackagerBlock;
 import com.simibubi.create.content.logistics.packager.PackagerBlockEntity;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Blocks;
@@ -81,16 +83,11 @@ public class ExtraDelightRecipeCacheGameTests {
                 UnpackingHandler.REGISTRY.get(helper.getBlockState(ovenPosition)) instanceof OvenUnpackingHandler,
                 "Extra Delight's oven must have CCK's unpacking handler registered");
 
-        var ingredients = List.of(
-                new ItemStack(Items.CARROT),
-                new ItemStack(Items.POTATO),
-                new ItemStack(Items.BEETROOT),
-                new ItemStack(Items.WHEAT),
-                new ItemStack(Items.BROWN_MUSHROOM),
-                new ItemStack(Items.RED_MUSHROOM),
-                new ItemStack(Items.APPLE),
-                new ItemStack(Items.SUGAR),
-                new ItemStack(Items.EGG));
+        var ingredients = helper.getLevel().getRecipeManager()
+                .byKey(ResourceLocation.parse("extradelight:cooking/oven/apple_chips")).orElseThrow()
+                .value().getIngredients().stream()
+                .map(ingredient -> ingredient.getItems()[0].copyWithCount(1))
+                .sorted(Comparator.comparing(stack -> BuiltInRegistries.ITEM.getKey(stack.getItem()).toString())).toList();
         for (var side : List.of(Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
             var packagerPosition = ovenPosition.relative(side);
             helper.setBlock(
@@ -100,7 +97,7 @@ public class ExtraDelightRecipeCacheGameTests {
             helper.assertTrue(packager instanceof PackagerBlockEntity, "The test packager must have a block entity");
 
             var remainder = ((PackagerBlockEntity) packager).inventory
-                    .insertItem(0, PackageItem.containing(ingredients), false);
+                    .insertItem(0, PackageItem.containing(ingredients.stream().map(ItemStack::copy).toList()), false);
             helper.assertTrue(remainder.isEmpty(), "Packager failed to unpack a complete oven recipe from side " + side);
             for (int slot = 0; slot < ingredients.size(); slot++) {
                 helper.assertTrue(
@@ -126,11 +123,10 @@ public class ExtraDelightRecipeCacheGameTests {
                 UnpackingHandler.REGISTRY.get(helper.getBlockState(chillerPosition)) instanceof ChillerUnpackingHandler,
                 "Extra Delight's chiller must have CCK's unpacking handler registered");
 
-        var ingredients = List.of(
-                new ItemStack(Items.CARROT),
-                new ItemStack(Items.POTATO),
-                new ItemStack(Items.BEETROOT),
-                new ItemStack(Items.WHEAT));
+        var ingredients = helper.getLevel().getRecipeManager()
+                .byKey(ResourceLocation.parse("extradelight:chilling/dark_chocolate_filled_bar")).orElseThrow()
+                .value().getIngredients().stream()
+                .map(ingredient -> ingredient.getItems()[0].copyWithCount(1)).toList();
         for (var side : List.of(Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
             var packagerPosition = chillerPosition.relative(side);
             helper.setBlock(
@@ -140,7 +136,7 @@ public class ExtraDelightRecipeCacheGameTests {
             helper.assertTrue(packager instanceof PackagerBlockEntity, "The test packager must have a block entity");
 
             var remainder = ((PackagerBlockEntity) packager).inventory
-                    .insertItem(0, PackageItem.containing(ingredients), false);
+                    .insertItem(0, PackageItem.containing(ingredients.stream().map(ItemStack::copy).toList()), false);
             helper.assertTrue(remainder.isEmpty(), "Packager failed to unpack a complete chiller recipe from side " + side);
             for (int slot = 0; slot < ingredients.size(); slot++) {
                 helper.assertTrue(

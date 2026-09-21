@@ -44,6 +44,7 @@ import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.Cutti
 import plus.dragons.createcentralkitchen.integration.farmersdelight.recipe.CuttingBoardRecipeConverters;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -123,9 +124,7 @@ public class FarmersDelightRecipeGameTests {
                 new ItemStack(Items.CARROT),
                 new ItemStack(Items.POTATO),
                 new ItemStack(Items.BEETROOT),
-                new ItemStack(Items.WHEAT),
-                new ItemStack(Items.BROWN_MUSHROOM),
-                new ItemStack(Items.RED_MUSHROOM));
+                new ItemStack(ModItems.CABBAGE_LEAF.get()));
         for (var side : List.of(Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
             var packagerPosition = potPosition.relative(side);
             helper.setBlock(
