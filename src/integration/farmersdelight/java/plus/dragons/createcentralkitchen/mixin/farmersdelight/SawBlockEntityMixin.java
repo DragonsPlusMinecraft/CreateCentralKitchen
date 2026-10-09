@@ -23,6 +23,8 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.saw.SawBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
+import com.simibubi.create.foundation.recipe.RecipeConditions;
 import java.util.List;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
@@ -45,6 +47,9 @@ public abstract class SawBlockEntityMixin extends BlockBreakingKineticBlockEntit
     @Shadow
     public ProcessingInventory inventory;
 
+    @Shadow
+    private FilteringBehaviour filtering;
+
     public SawBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -55,10 +60,12 @@ public abstract class SawBlockEntityMixin extends BlockBreakingKineticBlockEntit
             var input = CuttingBoardRecipeConverters.sawInput(inventory.getStackInSlot(0));
             assert level != null;
             level.getRecipeManager()
-                    .getRecipeFor(ModRecipeTypes.CUTTING.get(), input, level)
+                    .getRecipesFor(ModRecipeTypes.CUTTING.get(), input, level)
+                    .stream()
                     .filter(AllRecipeTypes.CAN_BE_AUTOMATED)
                     .map(CuttingBoardRecipeConverters.SAWING)
-                    .ifPresent(recipes::add);
+                    .filter(RecipeConditions.outputMatchesFilter(filtering))
+                    .forEach(recipes::add);
         }
         return recipes;
     }
